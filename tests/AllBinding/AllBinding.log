@@ -83,24 +83,24 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/AllBinding/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               8
+Constant                                              11
 Design                                                 1
 EnumConst                                              3
 EnumTypespec                                           1
 Identifier                                             2
 IntTypespec                                            2
-LogicTypespec                                          7
+LogicTypespec                                         10
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
 Port                                                   1
 Range                                                  1
-RefTypespec                                           13
+RefTypespec                                           16
 SourceFile                                             2
 TypedefTypespec                                        1
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                50
+Total:                                                59
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -188,25 +188,61 @@ Design: (unnamed)
     |vpiParent:
     \_EnumTypespec: , line:1:9, endln:5:23
     |vpiName:SCR1_MEM_RESP_NOTRDY
-    |BIN:00
-    |vpiDecompile:2'b00
-    |vpiSize:2
+    |vpiValue:
+    \_Constant: 
+      |vpiParent:
+      \_EnumConst: (SCR1_MEM_RESP_NOTRDY), line:2:5, endln:2:36
+      |vpiTypespec:
+      \_RefTypespec: (SCR1_MEM_RESP_NOTRDY), line:2:31, endln:2:36
+        |vpiParent:
+        \_Constant: 
+        |vpiFullName:SCR1_MEM_RESP_NOTRDY
+        |vpiActual:
+        \_LogicTypespec: 
+      |vpiConstType:1
+      |vpiSize:2
+      |vpiDecompile:2'b00
+      |BIN:00
   |vpiEnumConst:
   \_EnumConst: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:36
     |vpiParent:
     \_EnumTypespec: , line:1:9, endln:5:23
     |vpiName:SCR1_MEM_RESP_RDY_OK
-    |BIN:01
-    |vpiDecompile:2'b01
-    |vpiSize:2
+    |vpiValue:
+    \_Constant: 
+      |vpiParent:
+      \_EnumConst: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:36
+      |vpiTypespec:
+      \_RefTypespec: (SCR1_MEM_RESP_RDY_OK), line:3:31, endln:3:36
+        |vpiParent:
+        \_Constant: 
+        |vpiFullName:SCR1_MEM_RESP_RDY_OK
+        |vpiActual:
+        \_LogicTypespec: 
+      |vpiConstType:1
+      |vpiSize:2
+      |vpiDecompile:2'b01
+      |BIN:01
   |vpiEnumConst:
   \_EnumConst: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:36
     |vpiParent:
     \_EnumTypespec: , line:1:9, endln:5:23
     |vpiName:SCR1_MEM_RESP_RDY_ER
-    |BIN:10
-    |vpiDecompile:2'b10
-    |vpiSize:2
+    |vpiValue:
+    \_Constant: 
+      |vpiParent:
+      \_EnumConst: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:36
+      |vpiTypespec:
+      \_RefTypespec: (SCR1_MEM_RESP_RDY_ER), line:4:31, endln:4:36
+        |vpiParent:
+        \_Constant: 
+        |vpiFullName:SCR1_MEM_RESP_RDY_ER
+        |vpiActual:
+        \_LogicTypespec: 
+      |vpiConstType:1
+      |vpiSize:2
+      |vpiDecompile:2'b10
+      |BIN:10
 |vpiTypespec:
 \_LogicTypespec: , line:1:14, endln:1:19
   |vpiParent:
@@ -219,9 +255,6 @@ Design: (unnamed)
     \_Constant: , line:1:20, endln:1:21
       |vpiParent:
       \_Range: , line:1:19, endln:1:24
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: , line:1:20, endln:1:21
         |vpiParent:
@@ -229,13 +262,13 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
     |vpiRightRange:
     \_Constant: , line:1:22, endln:1:23
       |vpiParent:
       \_Range: , line:1:19, endln:1:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: , line:1:22, endln:1:23
         |vpiParent:
@@ -243,6 +276,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
 |vpiTypespec:
 \_IntTypespec: 
   |vpiParent:

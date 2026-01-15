@@ -44,7 +44,7 @@ Begin                                                  6
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              62
+Constant                                              67
 DelayControl                                           8
 Design                                                 1
 EnumConst                                              5
@@ -55,7 +55,7 @@ IODecl                                                15
 Identifier                                            56
 IfStmt                                                 3
 Initial                                                1
-IntTypespec                                           62
+IntTypespec                                           67
 LogicTypespec                                         14
 Module                                                 6
 ModuleTypespec                                         6
@@ -66,7 +66,7 @@ PreprocMacroDefinition                                17
 PreprocMacroInstance                                   6
 Range                                                 10
 RefObj                                                52
-RefTypespec                                           89
+RefTypespec                                           94
 SourceFile                                             6
 StringTypespec                                         9
 SysFuncCall                                           14
@@ -75,7 +75,7 @@ TaskCall                                               6
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                               549
+Total:                                               564
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleTask/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -203,9 +203,6 @@ Design: (unnamed)
         \_Constant: , line:11:9, endln:11:10
           |vpiParent:
           \_Range: , line:11:8, endln:11:13
-          |vpiDecompile:7
-          |vpiSize:64
-          |UINT:7
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task), line:11:9, endln:11:10
             |vpiParent:
@@ -214,13 +211,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:7
+          |UINT:7
         |vpiRightRange:
         \_Constant: , line:11:11, endln:11:12
           |vpiParent:
           \_Range: , line:11:8, endln:11:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task), line:11:11, endln:11:12
             |vpiParent:
@@ -229,6 +226,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
     |vpiObject:
     \_Range: , line:11:8, endln:11:13
     |vpiObject:
@@ -598,15 +598,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:3:23, endln:3:28
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:3:31, endln:3:32
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
             |vpiParent:
@@ -615,6 +612,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -664,8 +664,8 @@ Design: (unnamed)
       \_IODecl: (message), line:9:15, endln:9:22
         |vpiParent:
         \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
       |vpiParent:
@@ -695,8 +695,8 @@ Design: (unnamed)
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
       |vpiParent:
@@ -713,8 +713,8 @@ Design: (unnamed)
       \_IODecl: (message), line:15:19, endln:15:26
         |vpiParent:
         \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
       |vpiParent:
@@ -745,8 +745,8 @@ Design: (unnamed)
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
       |vpiParent:
@@ -763,8 +763,8 @@ Design: (unnamed)
       \_IODecl: (message), line:21:20, endln:21:27
         |vpiParent:
         \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
       |vpiParent:
@@ -795,8 +795,8 @@ Design: (unnamed)
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiImportTypespec:
@@ -936,41 +936,106 @@ Design: (unnamed)
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::FINISHED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:0
+          |INT:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::RUNNING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:1
+          |INT:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
-        |INT:2
-        |vpiDecompile:2
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::WAITING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:2
+          |INT:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::SUSPENDED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:3
+          |INT:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
-        |INT:4
-        |vpiDecompile:4
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::KILLED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:4
+          |INT:4
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/SimpleTask/builtin.sv, line:30:3, endln:52:11
+      |vpiSigned:1
     |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
@@ -989,6 +1054,8 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -1053,15 +1120,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:57:22, endln:57:30
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:57:33, endln:57:34
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
             |vpiParent:
@@ -1070,6 +1134,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -1106,15 +1173,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:60:18, endln:60:26
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:60:29, endln:60:30
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
             |vpiParent:
@@ -1123,6 +1187,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -1159,15 +1226,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:63:18, endln:63:26
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:63:29, endln:63:30
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
             |vpiParent:
@@ -1176,6 +1240,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -1219,15 +1286,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:66:41, endln:66:42
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
             |vpiParent:
@@ -1236,6 +1300,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1403,13 +1470,15 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:42:7, endln:42:71
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
+        |vpiName:
+        \_Identifier: ($display), line:42:8, endln:42:15
+          |vpiParent:
+          \_SysFuncCall: ($display), line:42:7, endln:42:71
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:42:17, endln:42:54
           |vpiParent:
           \_SysFuncCall: ($display), line:42:7, endln:42:71
-          |vpiDecompile:"%g CPU Read  task with address : %h"
-          |vpiSize:280
-          |STRING:%g CPU Read  task with address : %h
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:42:17, endln:42:54
             |vpiParent:
@@ -1418,6 +1487,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:280
+          |vpiDecompile:"%g CPU Read  task with address : %h"
+          |STRING:%g CPU Read  task with address : %h
         |vpiArgument:
         \_SysFuncCall: ($time), line:42:56, endln:42:61
           |vpiParent:
@@ -1435,22 +1507,19 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.address
           |vpiActual:
           \_IODecl: (address), line:39:18, endln:39:25
-        |vpiName:
-        \_Identifier: ($display), line:42:8, endln:42:15
-          |vpiParent:
-          \_SysFuncCall: ($display), line:42:7, endln:42:71
-          |vpiName:$display
       |vpiStmt:
       \_SysFuncCall: ($display), line:43:7, endln:43:70
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
+        |vpiName:
+        \_Identifier: ($display), line:43:8, endln:43:15
+          |vpiParent:
+          \_SysFuncCall: ($display), line:43:7, endln:43:70
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:43:17, endln:43:62
           |vpiParent:
           \_SysFuncCall: ($display), line:43:7, endln:43:70
-          |vpiDecompile:"%g  -> Driving CE, RD and ADDRESS on to bus"
-          |vpiSize:344
-          |STRING:%g  -> Driving CE, RD and ADDRESS on to bus
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:43:17, endln:43:62
             |vpiParent:
@@ -1459,6 +1528,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:344
+          |vpiDecompile:"%g  -> Driving CE, RD and ADDRESS on to bus"
+          |STRING:%g  -> Driving CE, RD and ADDRESS on to bus
         |vpiArgument:
         \_SysFuncCall: ($time), line:43:64, endln:43:69
           |vpiParent:
@@ -1468,11 +1540,6 @@ Design: (unnamed)
             |vpiParent:
             \_SysFuncCall: ($time), line:43:64, endln:43:69
             |vpiName:$time
-        |vpiName:
-        \_Identifier: ($display), line:43:8, endln:43:15
-          |vpiParent:
-          \_SysFuncCall: ($display), line:43:7, endln:43:70
-          |vpiName:$display
       |vpiStmt:
       \_EventControl: , line:44:7, endln:44:22
         |vpiParent:
@@ -1496,14 +1563,6 @@ Design: (unnamed)
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_RefObj: (work@bus_wr_rd_task.cpu_read.address), line:45:14, endln:45:21
-          |vpiParent:
-          \_Assignment: , line:45:7, endln:45:21
-          |vpiName:address
-          |vpiFullName:work@bus_wr_rd_task.cpu_read.address
-          |vpiActual:
-          \_IODecl: (address), line:39:18, endln:39:25
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_read.addr), line:45:7, endln:45:11
           |vpiParent:
@@ -1512,27 +1571,20 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.addr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.addr), line:11:15, endln:11:19
+        |vpiRhs:
+        \_RefObj: (work@bus_wr_rd_task.cpu_read.address), line:45:14, endln:45:21
+          |vpiParent:
+          \_Assignment: , line:45:7, endln:45:21
+          |vpiName:address
+          |vpiFullName:work@bus_wr_rd_task.cpu_read.address
+          |vpiActual:
+          \_IODecl: (address), line:39:18, endln:39:25
       |vpiStmt:
       \_Assignment: , line:46:7, endln:46:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:46:12, endln:46:13
-          |vpiParent:
-          \_Assignment: , line:46:7, endln:46:13
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:46:12, endln:46:13
-            |vpiParent:
-            \_Constant: , line:46:12, endln:46:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_read
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_read.ce), line:46:7, endln:46:9
           |vpiParent:
@@ -1541,27 +1593,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.ce
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.ce), line:10:18, endln:10:20
+        |vpiRhs:
+        \_Constant: , line:46:12, endln:46:13
+          |vpiParent:
+          \_Assignment: , line:46:7, endln:46:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:46:12, endln:46:13
+            |vpiParent:
+            \_Constant: , line:46:12, endln:46:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_read
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiStmt:
       \_Assignment: , line:47:7, endln:47:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:47:12, endln:47:13
-          |vpiParent:
-          \_Assignment: , line:47:7, endln:47:13
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:47:12, endln:47:13
-            |vpiParent:
-            \_Constant: , line:47:12, endln:47:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_read
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_read.rd), line:47:7, endln:47:9
           |vpiParent:
@@ -1570,6 +1622,21 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.rd
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.rd), line:10:12, endln:10:14
+        |vpiRhs:
+        \_Constant: , line:47:12, endln:47:13
+          |vpiParent:
+          \_Assignment: , line:47:7, endln:47:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:47:12, endln:47:13
+            |vpiParent:
+            \_Constant: , line:47:12, endln:47:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_read
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiStmt:
       \_EventControl: , line:48:7, endln:48:22
         |vpiParent:
@@ -1593,14 +1660,6 @@ Design: (unnamed)
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_RefObj: (work@bus_wr_rd_task.cpu_read.data_rd), line:49:14, endln:49:21
-          |vpiParent:
-          \_Assignment: , line:49:7, endln:49:21
-          |vpiName:data_rd
-          |vpiFullName:work@bus_wr_rd_task.cpu_read.data_rd
-          |vpiActual:
-          \_Net: (work@bus_wr_rd_task.data_rd), line:11:28, endln:11:35
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_read.data), line:49:7, endln:49:11
           |vpiParent:
@@ -1609,6 +1668,14 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.data
           |vpiActual:
           \_IODecl: (data), line:40:18, endln:40:22
+        |vpiRhs:
+        \_RefObj: (work@bus_wr_rd_task.cpu_read.data_rd), line:49:14, endln:49:21
+          |vpiParent:
+          \_Assignment: , line:49:7, endln:49:21
+          |vpiName:data_rd
+          |vpiFullName:work@bus_wr_rd_task.cpu_read.data_rd
+          |vpiActual:
+          \_Net: (work@bus_wr_rd_task.data_rd), line:11:28, endln:11:35
       |vpiStmt:
       \_EventControl: , line:50:7, endln:50:22
         |vpiParent:
@@ -1632,21 +1699,6 @@ Design: (unnamed)
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:51:14, endln:51:15
-          |vpiParent:
-          \_Assignment: , line:51:7, endln:51:15
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:51:14, endln:51:15
-            |vpiParent:
-            \_Constant: , line:51:14, endln:51:15
-            |vpiFullName:work@bus_wr_rd_task.cpu_read
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_read.addr), line:51:7, endln:51:11
           |vpiParent:
@@ -1655,27 +1707,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.addr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.addr), line:11:15, endln:11:19
+        |vpiRhs:
+        \_Constant: , line:51:14, endln:51:15
+          |vpiParent:
+          \_Assignment: , line:51:7, endln:51:15
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:51:14, endln:51:15
+            |vpiParent:
+            \_Constant: , line:51:14, endln:51:15
+            |vpiFullName:work@bus_wr_rd_task.cpu_read
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:52:7, endln:52:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:52:12, endln:52:13
-          |vpiParent:
-          \_Assignment: , line:52:7, endln:52:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:52:12, endln:52:13
-            |vpiParent:
-            \_Constant: , line:52:12, endln:52:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_read
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_read.ce), line:52:7, endln:52:9
           |vpiParent:
@@ -1684,27 +1736,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.ce
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.ce), line:10:18, endln:10:20
+        |vpiRhs:
+        \_Constant: , line:52:12, endln:52:13
+          |vpiParent:
+          \_Assignment: , line:52:7, endln:52:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:52:12, endln:52:13
+            |vpiParent:
+            \_Constant: , line:52:12, endln:52:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_read
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:53:7, endln:53:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:53:12, endln:53:13
-          |vpiParent:
-          \_Assignment: , line:53:7, endln:53:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:53:12, endln:53:13
-            |vpiParent:
-            \_Constant: , line:53:12, endln:53:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_read
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_read.rd), line:53:7, endln:53:9
           |vpiParent:
@@ -1713,17 +1765,34 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.rd
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.rd), line:10:12, endln:10:14
+        |vpiRhs:
+        \_Constant: , line:53:12, endln:53:13
+          |vpiParent:
+          \_Assignment: , line:53:7, endln:53:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:53:12, endln:53:13
+            |vpiParent:
+            \_Constant: , line:53:12, endln:53:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_read
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_SysFuncCall: ($display), line:54:7, endln:54:68
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
+        |vpiName:
+        \_Identifier: ($display), line:54:8, endln:54:15
+          |vpiParent:
+          \_SysFuncCall: ($display), line:54:7, endln:54:68
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:54:17, endln:54:54
           |vpiParent:
           \_SysFuncCall: ($display), line:54:7, endln:54:68
-          |vpiDecompile:"%g CPU Read  data              : %h"
-          |vpiSize:280
-          |STRING:%g CPU Read  data              : %h
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:54:17, endln:54:54
             |vpiParent:
@@ -1732,6 +1801,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:280
+          |vpiDecompile:"%g CPU Read  data              : %h"
+          |STRING:%g CPU Read  data              : %h
         |vpiArgument:
         \_SysFuncCall: ($time), line:54:56, endln:54:61
           |vpiParent:
@@ -1749,22 +1821,19 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_read.data
           |vpiActual:
           \_IODecl: (data), line:40:18, endln:40:22
-        |vpiName:
-        \_Identifier: ($display), line:54:8, endln:54:15
-          |vpiParent:
-          \_SysFuncCall: ($display), line:54:7, endln:54:68
-          |vpiName:$display
       |vpiStmt:
       \_SysFuncCall: ($display), line:55:7, endln:55:42
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_read), line:41:5, endln:56:8
+        |vpiName:
+        \_Identifier: ($display), line:55:8, endln:55:15
+          |vpiParent:
+          \_SysFuncCall: ($display), line:55:7, endln:55:42
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:55:17, endln:55:41
           |vpiParent:
           \_SysFuncCall: ($display), line:55:7, endln:55:42
-          |vpiDecompile:"======================"
-          |vpiSize:176
-          |STRING:======================
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:55:17, endln:55:41
             |vpiParent:
@@ -1773,11 +1842,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
-        |vpiName:
-        \_Identifier: ($display), line:55:8, endln:55:15
-          |vpiParent:
-          \_SysFuncCall: ($display), line:55:7, endln:55:42
-          |vpiName:$display
+          |vpiSize:176
+          |vpiDecompile:"======================"
+          |STRING:======================
     |vpiTypespec:
     \_LogicTypespec: , line:39:11, endln:39:16
       |vpiParent:
@@ -1790,9 +1857,6 @@ Design: (unnamed)
         \_Constant: , line:39:12, endln:39:13
           |vpiParent:
           \_Range: , line:39:11, endln:39:16
-          |vpiDecompile:7
-          |vpiSize:64
-          |UINT:7
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:39:12, endln:39:13
             |vpiParent:
@@ -1801,13 +1865,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:7
+          |UINT:7
         |vpiRightRange:
         \_Constant: , line:39:14, endln:39:15
           |vpiParent:
           \_Range: , line:39:11, endln:39:16
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_read), line:39:14, endln:39:15
             |vpiParent:
@@ -1816,6 +1880,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -1829,8 +1896,8 @@ Design: (unnamed)
     \_IODecl: (address), line:39:18, endln:39:25
       |vpiParent:
       \_Task: (work@bus_wr_rd_task.cpu_read), line:38:3, endln:57:10
-      |vpiDirection:1
       |vpiName:address
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@bus_wr_rd_task.cpu_read.address), line:39:11, endln:39:16
         |vpiParent:
@@ -1842,8 +1909,8 @@ Design: (unnamed)
     \_IODecl: (data), line:40:18, endln:40:22
       |vpiParent:
       \_Task: (work@bus_wr_rd_task.cpu_read), line:38:3, endln:57:10
-      |vpiDirection:2
       |vpiName:data
+      |vpiDirection:2
       |vpiTypespec:
       \_RefTypespec: (work@bus_wr_rd_task.cpu_read.data), line:40:12, endln:40:17
         |vpiParent:
@@ -1884,13 +1951,15 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:63:7, endln:64:29
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
+        |vpiName:
+        \_Identifier: ($display), line:63:8, endln:63:15
+          |vpiParent:
+          \_SysFuncCall: ($display), line:63:7, endln:64:29
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:63:17, endln:63:64
           |vpiParent:
           \_SysFuncCall: ($display), line:63:7, endln:64:29
-          |vpiDecompile:"%g CPU Write task with address : %h Data : %h"
-          |vpiSize:360
-          |STRING:%g CPU Write task with address : %h Data : %h
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:63:17, endln:63:64
             |vpiParent:
@@ -1899,6 +1968,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:360
+          |vpiDecompile:"%g CPU Write task with address : %h Data : %h"
+          |STRING:%g CPU Write task with address : %h Data : %h
         |vpiArgument:
         \_SysFuncCall: ($time), line:64:9, endln:64:14
           |vpiParent:
@@ -1924,22 +1996,19 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.data
           |vpiActual:
           \_IODecl: (data), line:61:17, endln:61:21
-        |vpiName:
-        \_Identifier: ($display), line:63:8, endln:63:15
-          |vpiParent:
-          \_SysFuncCall: ($display), line:63:7, endln:64:29
-          |vpiName:$display
       |vpiStmt:
       \_SysFuncCall: ($display), line:65:7, endln:66:15
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
+        |vpiName:
+        \_Identifier: ($display), line:65:8, endln:65:15
+          |vpiParent:
+          \_SysFuncCall: ($display), line:65:7, endln:66:15
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:65:17, endln:65:71
           |vpiParent:
           \_SysFuncCall: ($display), line:65:7, endln:66:15
-          |vpiDecompile:"%g  -> Driving CE, WR, WR data and ADDRESS on to bus"
-          |vpiSize:416
-          |STRING:%g  -> Driving CE, WR, WR data and ADDRESS on to bus
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:65:17, endln:65:71
             |vpiParent:
@@ -1948,6 +2017,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:416
+          |vpiDecompile:"%g  -> Driving CE, WR, WR data and ADDRESS on to bus"
+          |STRING:%g  -> Driving CE, WR, WR data and ADDRESS on to bus
         |vpiArgument:
         \_SysFuncCall: ($time), line:66:9, endln:66:14
           |vpiParent:
@@ -1957,11 +2029,6 @@ Design: (unnamed)
             |vpiParent:
             \_SysFuncCall: ($time), line:66:9, endln:66:14
             |vpiName:$time
-        |vpiName:
-        \_Identifier: ($display), line:65:8, endln:65:15
-          |vpiParent:
-          \_SysFuncCall: ($display), line:65:7, endln:66:15
-          |vpiName:$display
       |vpiStmt:
       \_EventControl: , line:67:7, endln:67:22
         |vpiParent:
@@ -1985,14 +2052,6 @@ Design: (unnamed)
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_RefObj: (work@bus_wr_rd_task.cpu_write.address), line:68:14, endln:68:21
-          |vpiParent:
-          \_Assignment: , line:68:7, endln:68:21
-          |vpiName:address
-          |vpiFullName:work@bus_wr_rd_task.cpu_write.address
-          |vpiActual:
-          \_IODecl: (address), line:60:18, endln:60:25
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_write.addr), line:68:7, endln:68:11
           |vpiParent:
@@ -2001,27 +2060,20 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.addr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.addr), line:11:15, endln:11:19
+        |vpiRhs:
+        \_RefObj: (work@bus_wr_rd_task.cpu_write.address), line:68:14, endln:68:21
+          |vpiParent:
+          \_Assignment: , line:68:7, endln:68:21
+          |vpiName:address
+          |vpiFullName:work@bus_wr_rd_task.cpu_write.address
+          |vpiActual:
+          \_IODecl: (address), line:60:18, endln:60:25
       |vpiStmt:
       \_Assignment: , line:69:7, endln:69:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:69:12, endln:69:13
-          |vpiParent:
-          \_Assignment: , line:69:7, endln:69:13
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:69:12, endln:69:13
-            |vpiParent:
-            \_Constant: , line:69:12, endln:69:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_write
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_write.ce), line:69:7, endln:69:9
           |vpiParent:
@@ -2030,27 +2082,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.ce
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.ce), line:10:18, endln:10:20
+        |vpiRhs:
+        \_Constant: , line:69:12, endln:69:13
+          |vpiParent:
+          \_Assignment: , line:69:7, endln:69:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:69:12, endln:69:13
+            |vpiParent:
+            \_Constant: , line:69:12, endln:69:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_write
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiStmt:
       \_Assignment: , line:70:7, endln:70:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:70:12, endln:70:13
-          |vpiParent:
-          \_Assignment: , line:70:7, endln:70:13
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:70:12, endln:70:13
-            |vpiParent:
-            \_Constant: , line:70:12, endln:70:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_write
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_write.wr), line:70:7, endln:70:9
           |vpiParent:
@@ -2059,20 +2111,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.wr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.wr), line:10:15, endln:10:17
+        |vpiRhs:
+        \_Constant: , line:70:12, endln:70:13
+          |vpiParent:
+          \_Assignment: , line:70:7, endln:70:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:70:12, endln:70:13
+            |vpiParent:
+            \_Constant: , line:70:12, endln:70:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_write
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiStmt:
       \_Assignment: , line:71:7, endln:71:21
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_RefObj: (work@bus_wr_rd_task.cpu_write.data), line:71:17, endln:71:21
-          |vpiParent:
-          \_Assignment: , line:71:7, endln:71:21
-          |vpiName:data
-          |vpiFullName:work@bus_wr_rd_task.cpu_write.data
-          |vpiActual:
-          \_IODecl: (data), line:61:17, endln:61:21
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_write.data_wr), line:71:7, endln:71:14
           |vpiParent:
@@ -2081,6 +2140,14 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.data_wr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.data_wr), line:11:20, endln:11:27
+        |vpiRhs:
+        \_RefObj: (work@bus_wr_rd_task.cpu_write.data), line:71:17, endln:71:21
+          |vpiParent:
+          \_Assignment: , line:71:7, endln:71:21
+          |vpiName:data
+          |vpiFullName:work@bus_wr_rd_task.cpu_write.data
+          |vpiActual:
+          \_IODecl: (data), line:61:17, endln:61:21
       |vpiStmt:
       \_EventControl: , line:72:7, endln:72:22
         |vpiParent:
@@ -2104,21 +2171,6 @@ Design: (unnamed)
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:73:14, endln:73:15
-          |vpiParent:
-          \_Assignment: , line:73:7, endln:73:15
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:73:14, endln:73:15
-            |vpiParent:
-            \_Constant: , line:73:14, endln:73:15
-            |vpiFullName:work@bus_wr_rd_task.cpu_write
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_write.addr), line:73:7, endln:73:11
           |vpiParent:
@@ -2127,27 +2179,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.addr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.addr), line:11:15, endln:11:19
+        |vpiRhs:
+        \_Constant: , line:73:14, endln:73:15
+          |vpiParent:
+          \_Assignment: , line:73:7, endln:73:15
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:73:14, endln:73:15
+            |vpiParent:
+            \_Constant: , line:73:14, endln:73:15
+            |vpiFullName:work@bus_wr_rd_task.cpu_write
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:74:7, endln:74:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:74:12, endln:74:13
-          |vpiParent:
-          \_Assignment: , line:74:7, endln:74:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:74:12, endln:74:13
-            |vpiParent:
-            \_Constant: , line:74:12, endln:74:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_write
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_write.ce), line:74:7, endln:74:9
           |vpiParent:
@@ -2156,27 +2208,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.ce
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.ce), line:10:18, endln:10:20
+        |vpiRhs:
+        \_Constant: , line:74:12, endln:74:13
+          |vpiParent:
+          \_Assignment: , line:74:7, endln:74:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:74:12, endln:74:13
+            |vpiParent:
+            \_Constant: , line:74:12, endln:74:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_write
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:75:7, endln:75:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:75:12, endln:75:13
-          |vpiParent:
-          \_Assignment: , line:75:7, endln:75:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:75:12, endln:75:13
-            |vpiParent:
-            \_Constant: , line:75:12, endln:75:13
-            |vpiFullName:work@bus_wr_rd_task.cpu_write
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.cpu_write.wr), line:75:7, endln:75:9
           |vpiParent:
@@ -2185,17 +2237,34 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.cpu_write.wr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.wr), line:10:15, endln:10:17
+        |vpiRhs:
+        \_Constant: , line:75:12, endln:75:13
+          |vpiParent:
+          \_Assignment: , line:75:7, endln:75:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:75:12, endln:75:13
+            |vpiParent:
+            \_Constant: , line:75:12, endln:75:13
+            |vpiFullName:work@bus_wr_rd_task.cpu_write
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_SysFuncCall: ($display), line:76:7, endln:76:42
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task.cpu_write), line:62:5, endln:77:8
+        |vpiName:
+        \_Identifier: ($display), line:76:8, endln:76:15
+          |vpiParent:
+          \_SysFuncCall: ($display), line:76:7, endln:76:42
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:76:17, endln:76:41
           |vpiParent:
           \_SysFuncCall: ($display), line:76:7, endln:76:42
-          |vpiDecompile:"======================"
-          |vpiSize:176
-          |STRING:======================
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:76:17, endln:76:41
             |vpiParent:
@@ -2204,11 +2273,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
-        |vpiName:
-        \_Identifier: ($display), line:76:8, endln:76:15
-          |vpiParent:
-          \_SysFuncCall: ($display), line:76:7, endln:76:42
-          |vpiName:$display
+          |vpiSize:176
+          |vpiDecompile:"======================"
+          |STRING:======================
     |vpiTypespec:
     \_LogicTypespec: , line:60:11, endln:60:16
       |vpiParent:
@@ -2221,9 +2288,6 @@ Design: (unnamed)
         \_Constant: , line:60:12, endln:60:13
           |vpiParent:
           \_Range: , line:60:11, endln:60:16
-          |vpiDecompile:7
-          |vpiSize:64
-          |UINT:7
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:60:12, endln:60:13
             |vpiParent:
@@ -2232,13 +2296,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:7
+          |UINT:7
         |vpiRightRange:
         \_Constant: , line:60:14, endln:60:15
           |vpiParent:
           \_Range: , line:60:11, endln:60:16
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task.cpu_write), line:60:14, endln:60:15
             |vpiParent:
@@ -2247,6 +2311,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -2260,8 +2327,8 @@ Design: (unnamed)
     \_IODecl: (address), line:60:18, endln:60:25
       |vpiParent:
       \_Task: (work@bus_wr_rd_task.cpu_write), line:59:3, endln:78:10
-      |vpiDirection:1
       |vpiName:address
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@bus_wr_rd_task.cpu_write.address), line:60:11, endln:60:16
         |vpiParent:
@@ -2273,8 +2340,8 @@ Design: (unnamed)
     \_IODecl: (data), line:61:17, endln:61:21
       |vpiParent:
       \_Task: (work@bus_wr_rd_task.cpu_write), line:59:3, endln:78:10
-      |vpiDirection:1
       |vpiName:data
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@bus_wr_rd_task.cpu_write.data), line:61:11, endln:61:16
         |vpiParent:
@@ -2305,9 +2372,6 @@ Design: (unnamed)
       \_Constant: , line:81:18, endln:81:19
         |vpiParent:
         \_Range: , line:81:17, endln:81:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@bus_wr_rd_task), line:81:18, endln:81:19
           |vpiParent:
@@ -2316,13 +2380,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
       |vpiRightRange:
       \_Constant: , line:81:20, endln:81:23
         |vpiParent:
         \_Range: , line:81:17, endln:81:24
-        |vpiDecompile:255
-        |vpiSize:64
-        |UINT:255
         |vpiTypespec:
         \_RefTypespec: (work@bus_wr_rd_task), line:81:20, endln:81:23
           |vpiParent:
@@ -2331,6 +2395,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:255
+        |UINT:255
     |vpiElemTypespec:
     \_RefTypespec: (work@bus_wr_rd_task), line:81:3, endln:81:12
       |vpiParent:
@@ -2430,21 +2497,6 @@ Design: (unnamed)
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:16:12, endln:16:13
-          |vpiParent:
-          \_Assignment: , line:16:6, endln:16:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:16:12, endln:16:13
-            |vpiParent:
-            \_Constant: , line:16:12, endln:16:13
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.clk), line:16:6, endln:16:9
           |vpiParent:
@@ -2453,27 +2505,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.clk
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.clk), line:10:8, endln:10:11
+        |vpiRhs:
+        \_Constant: , line:16:12, endln:16:13
+          |vpiParent:
+          \_Assignment: , line:16:6, endln:16:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:16:12, endln:16:13
+            |vpiParent:
+            \_Constant: , line:16:12, endln:16:13
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:17:6, endln:17:19
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:17:18, endln:17:19
-          |vpiParent:
-          \_Assignment: , line:17:6, endln:17:19
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:17:18, endln:17:19
-            |vpiParent:
-            \_Constant: , line:17:18, endln:17:19
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.read_data), line:17:6, endln:17:15
           |vpiParent:
@@ -2482,17 +2534,34 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.read_data
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.read_data), line:12:15, endln:12:24
+        |vpiRhs:
+        \_Constant: , line:17:18, endln:17:19
+          |vpiParent:
+          \_Assignment: , line:17:6, endln:17:19
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:17:18, endln:17:19
+            |vpiParent:
+            \_Constant: , line:17:18, endln:17:19
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_SysFuncCall: ($display), line:18:4, endln:18:124
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
+        |vpiName:
+        \_Identifier: ($display), line:18:5, endln:18:12
+          |vpiParent:
+          \_SysFuncCall: ($display), line:18:4, endln:18:124
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:18:13, endln:18:58
           |vpiParent:
           \_SysFuncCall: ($display), line:18:4, endln:18:124
-          |vpiDecompile:"Internal error: null handle at %s, line %d."
-          |vpiSize:344
-          |STRING:Internal error: null handle at %s, line %d.
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task), line:18:13, endln:18:58
             |vpiParent:
@@ -2501,13 +2570,13 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:344
+          |vpiDecompile:"Internal error: null handle at %s, line %d."
+          |STRING:Internal error: null handle at %s, line %d.
         |vpiArgument:
         \_Constant: , line:18:59, endln:18:119
           |vpiParent:
           \_SysFuncCall: ($display), line:18:4, endln:18:124
-          |vpiDecompile:"${SURELOG_DIR}/tests/SimpleTask/top_1.v"
-          |vpiSize:464
-          |STRING:${SURELOG_DIR}/tests/SimpleTask/top_1.v
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task), line:18:59, endln:18:119
             |vpiParent:
@@ -2516,13 +2585,13 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:464
+          |vpiDecompile:"${SURELOG_DIR}/tests/SimpleTask/top_1.v"
+          |STRING:${SURELOG_DIR}/tests/SimpleTask/top_1.v
         |vpiArgument:
         \_Constant: , line:18:121, endln:18:123
           |vpiParent:
           \_SysFuncCall: ($display), line:18:4, endln:18:124
-          |vpiDecompile:18
-          |vpiSize:64
-          |UINT:18
           |vpiTypespec:
           \_RefTypespec: (work@bus_wr_rd_task), line:18:121, endln:18:123
             |vpiParent:
@@ -2531,32 +2600,15 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-        |vpiName:
-        \_Identifier: ($display), line:18:5, endln:18:12
-          |vpiParent:
-          \_SysFuncCall: ($display), line:18:4, endln:18:124
-          |vpiName:$display
+          |vpiSize:64
+          |vpiDecompile:18
+          |UINT:18
       |vpiStmt:
       \_Assignment: , line:19:5, endln:19:11
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:19:10, endln:19:11
-          |vpiParent:
-          \_Assignment: , line:19:5, endln:19:11
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:19:10, endln:19:11
-            |vpiParent:
-            \_Constant: , line:19:10, endln:19:11
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.rd), line:19:5, endln:19:7
           |vpiParent:
@@ -2565,27 +2617,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.rd
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.rd), line:10:12, endln:10:14
+        |vpiRhs:
+        \_Constant: , line:19:10, endln:19:11
+          |vpiParent:
+          \_Assignment: , line:19:5, endln:19:11
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:19:10, endln:19:11
+            |vpiParent:
+            \_Constant: , line:19:10, endln:19:11
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:20:5, endln:20:11
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:20:10, endln:20:11
-          |vpiParent:
-          \_Assignment: , line:20:5, endln:20:11
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:20:10, endln:20:11
-            |vpiParent:
-            \_Constant: , line:20:10, endln:20:11
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.wr), line:20:5, endln:20:7
           |vpiParent:
@@ -2594,27 +2646,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.wr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.wr), line:10:15, endln:10:17
+        |vpiRhs:
+        \_Constant: , line:20:10, endln:20:11
+          |vpiParent:
+          \_Assignment: , line:20:5, endln:20:11
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:20:10, endln:20:11
+            |vpiParent:
+            \_Constant: , line:20:10, endln:20:11
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:21:5, endln:21:11
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:21:10, endln:21:11
-          |vpiParent:
-          \_Assignment: , line:21:5, endln:21:11
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:21:10, endln:21:11
-            |vpiParent:
-            \_Constant: , line:21:10, endln:21:11
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.ce), line:21:5, endln:21:7
           |vpiParent:
@@ -2623,27 +2675,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.ce
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.ce), line:10:18, endln:10:20
+        |vpiRhs:
+        \_Constant: , line:21:10, endln:21:11
+          |vpiParent:
+          \_Assignment: , line:21:5, endln:21:11
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:21:10, endln:21:11
+            |vpiParent:
+            \_Constant: , line:21:10, endln:21:11
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:22:5, endln:22:13
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:22:12, endln:22:13
-          |vpiParent:
-          \_Assignment: , line:22:5, endln:22:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:22:12, endln:22:13
-            |vpiParent:
-            \_Constant: , line:22:12, endln:22:13
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.addr), line:22:5, endln:22:9
           |vpiParent:
@@ -2652,27 +2704,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.addr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.addr), line:11:15, endln:11:19
+        |vpiRhs:
+        \_Constant: , line:22:12, endln:22:13
+          |vpiParent:
+          \_Assignment: , line:22:5, endln:22:13
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:22:12, endln:22:13
+            |vpiParent:
+            \_Constant: , line:22:12, endln:22:13
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:23:5, endln:23:16
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:23:15, endln:23:16
-          |vpiParent:
-          \_Assignment: , line:23:5, endln:23:16
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:23:15, endln:23:16
-            |vpiParent:
-            \_Constant: , line:23:15, endln:23:16
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.data_wr), line:23:5, endln:23:12
           |vpiParent:
@@ -2681,27 +2733,27 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.data_wr
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.data_wr), line:11:20, endln:11:27
+        |vpiRhs:
+        \_Constant: , line:23:15, endln:23:16
+          |vpiParent:
+          \_Assignment: , line:23:5, endln:23:16
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:23:15, endln:23:16
+            |vpiParent:
+            \_Constant: , line:23:15, endln:23:16
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:24:5, endln:24:16
         |vpiParent:
         \_Begin: (work@bus_wr_rd_task), line:15:12, endln:33:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:24:15, endln:24:16
-          |vpiParent:
-          \_Assignment: , line:24:5, endln:24:16
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@bus_wr_rd_task), line:24:15, endln:24:16
-            |vpiParent:
-            \_Constant: , line:24:15, endln:24:16
-            |vpiFullName:work@bus_wr_rd_task
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@bus_wr_rd_task.data_rd), line:24:5, endln:24:12
           |vpiParent:
@@ -2710,6 +2762,21 @@ Design: (unnamed)
           |vpiFullName:work@bus_wr_rd_task.data_rd
           |vpiActual:
           \_Net: (work@bus_wr_rd_task.data_rd), line:11:28, endln:11:35
+        |vpiRhs:
+        \_Constant: , line:24:15, endln:24:16
+          |vpiParent:
+          \_Assignment: , line:24:5, endln:24:16
+          |vpiTypespec:
+          \_RefTypespec: (work@bus_wr_rd_task), line:24:15, endln:24:16
+            |vpiParent:
+            \_Constant: , line:24:15, endln:24:16
+            |vpiFullName:work@bus_wr_rd_task
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:26:6, endln:26:32
         |vpiParent:
@@ -2719,15 +2786,17 @@ Design: (unnamed)
         \_TaskCall: (cpu_write), line:26:10, endln:26:32
           |vpiParent:
           \_DelayControl: , line:26:6, endln:26:32
+          |vpiName:
+          \_Identifier: (cpu_write), line:26:10, endln:26:19
+            |vpiParent:
+            \_TaskCall: (cpu_write), line:26:10, endln:26:32
+            |vpiName:cpu_write
           |vpiTaskFunc:
           \_Task: (work@bus_wr_rd_task.cpu_write), line:59:3, endln:78:10
           |vpiArgument:
           \_Constant: , line:26:20, endln:26:25
             |vpiParent:
             \_TaskCall: (cpu_write), line:26:10, endln:26:32
-            |vpiDecompile:8'h11
-            |vpiSize:8
-            |HEX:11
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:26:20, endln:26:25
               |vpiParent:
@@ -2736,13 +2805,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
+            |vpiSize:8
+            |vpiDecompile:8'h11
+            |HEX:11
           |vpiArgument:
           \_Constant: , line:26:26, endln:26:31
             |vpiParent:
             \_TaskCall: (cpu_write), line:26:10, endln:26:32
-            |vpiDecompile:8'hAA
-            |vpiSize:8
-            |HEX:AA
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:26:26, endln:26:31
               |vpiParent:
@@ -2751,11 +2820,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
-          |vpiName:
-          \_Identifier: (cpu_write), line:26:10, endln:26:19
-            |vpiParent:
-            \_TaskCall: (cpu_write), line:26:10, endln:26:32
-            |vpiName:cpu_write
+            |vpiSize:8
+            |vpiDecompile:8'hAA
+            |HEX:AA
       |vpiStmt:
       \_DelayControl: , line:27:6, endln:27:35
         |vpiParent:
@@ -2765,15 +2832,17 @@ Design: (unnamed)
         \_TaskCall: (cpu_read), line:27:10, endln:27:35
           |vpiParent:
           \_DelayControl: , line:27:6, endln:27:35
+          |vpiName:
+          \_Identifier: (cpu_read), line:27:10, endln:27:18
+            |vpiParent:
+            \_TaskCall: (cpu_read), line:27:10, endln:27:35
+            |vpiName:cpu_read
           |vpiTaskFunc:
           \_Task: (work@bus_wr_rd_task.cpu_read), line:38:3, endln:57:10
           |vpiArgument:
           \_Constant: , line:27:19, endln:27:24
             |vpiParent:
             \_TaskCall: (cpu_read), line:27:10, endln:27:35
-            |vpiDecompile:8'h11
-            |vpiSize:8
-            |HEX:11
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:27:19, endln:27:24
               |vpiParent:
@@ -2782,6 +2851,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
+            |vpiSize:8
+            |vpiDecompile:8'h11
+            |HEX:11
           |vpiArgument:
           \_RefObj: (work@bus_wr_rd_task.read_data), line:27:25, endln:27:34
             |vpiParent:
@@ -2790,11 +2862,6 @@ Design: (unnamed)
             |vpiFullName:work@bus_wr_rd_task.read_data
             |vpiActual:
             \_Net: (work@bus_wr_rd_task.read_data), line:12:15, endln:12:24
-          |vpiName:
-          \_Identifier: (cpu_read), line:27:10, endln:27:18
-            |vpiParent:
-            \_TaskCall: (cpu_read), line:27:10, endln:27:35
-            |vpiName:cpu_read
       |vpiStmt:
       \_DelayControl: , line:28:6, endln:28:32
         |vpiParent:
@@ -2804,15 +2871,17 @@ Design: (unnamed)
         \_TaskCall: (cpu_write), line:28:10, endln:28:32
           |vpiParent:
           \_DelayControl: , line:28:6, endln:28:32
+          |vpiName:
+          \_Identifier: (cpu_write), line:28:10, endln:28:19
+            |vpiParent:
+            \_TaskCall: (cpu_write), line:28:10, endln:28:32
+            |vpiName:cpu_write
           |vpiTaskFunc:
           \_Task: (work@bus_wr_rd_task.cpu_write), line:59:3, endln:78:10
           |vpiArgument:
           \_Constant: , line:28:20, endln:28:25
             |vpiParent:
             \_TaskCall: (cpu_write), line:28:10, endln:28:32
-            |vpiDecompile:8'h12
-            |vpiSize:8
-            |HEX:12
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:28:20, endln:28:25
               |vpiParent:
@@ -2821,13 +2890,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
+            |vpiSize:8
+            |vpiDecompile:8'h12
+            |HEX:12
           |vpiArgument:
           \_Constant: , line:28:26, endln:28:31
             |vpiParent:
             \_TaskCall: (cpu_write), line:28:10, endln:28:32
-            |vpiDecompile:8'hAB
-            |vpiSize:8
-            |HEX:AB
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:28:26, endln:28:31
               |vpiParent:
@@ -2836,11 +2905,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
-          |vpiName:
-          \_Identifier: (cpu_write), line:28:10, endln:28:19
-            |vpiParent:
-            \_TaskCall: (cpu_write), line:28:10, endln:28:32
-            |vpiName:cpu_write
+            |vpiSize:8
+            |vpiDecompile:8'hAB
+            |HEX:AB
       |vpiStmt:
       \_DelayControl: , line:29:6, endln:29:35
         |vpiParent:
@@ -2850,15 +2917,17 @@ Design: (unnamed)
         \_TaskCall: (cpu_read), line:29:10, endln:29:35
           |vpiParent:
           \_DelayControl: , line:29:6, endln:29:35
+          |vpiName:
+          \_Identifier: (cpu_read), line:29:10, endln:29:18
+            |vpiParent:
+            \_TaskCall: (cpu_read), line:29:10, endln:29:35
+            |vpiName:cpu_read
           |vpiTaskFunc:
           \_Task: (work@bus_wr_rd_task.cpu_read), line:38:3, endln:57:10
           |vpiArgument:
           \_Constant: , line:29:19, endln:29:24
             |vpiParent:
             \_TaskCall: (cpu_read), line:29:10, endln:29:35
-            |vpiDecompile:8'h12
-            |vpiSize:8
-            |HEX:12
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:29:19, endln:29:24
               |vpiParent:
@@ -2867,6 +2936,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
+            |vpiSize:8
+            |vpiDecompile:8'h12
+            |HEX:12
           |vpiArgument:
           \_RefObj: (work@bus_wr_rd_task.read_data), line:29:25, endln:29:34
             |vpiParent:
@@ -2875,11 +2947,6 @@ Design: (unnamed)
             |vpiFullName:work@bus_wr_rd_task.read_data
             |vpiActual:
             \_Net: (work@bus_wr_rd_task.read_data), line:12:15, endln:12:24
-          |vpiName:
-          \_Identifier: (cpu_read), line:29:10, endln:29:18
-            |vpiParent:
-            \_TaskCall: (cpu_read), line:29:10, endln:29:35
-            |vpiName:cpu_read
       |vpiStmt:
       \_DelayControl: , line:30:6, endln:30:32
         |vpiParent:
@@ -2889,15 +2956,17 @@ Design: (unnamed)
         \_TaskCall: (cpu_write), line:30:10, endln:30:32
           |vpiParent:
           \_DelayControl: , line:30:6, endln:30:32
+          |vpiName:
+          \_Identifier: (cpu_write), line:30:10, endln:30:19
+            |vpiParent:
+            \_TaskCall: (cpu_write), line:30:10, endln:30:32
+            |vpiName:cpu_write
           |vpiTaskFunc:
           \_Task: (work@bus_wr_rd_task.cpu_write), line:59:3, endln:78:10
           |vpiArgument:
           \_Constant: , line:30:20, endln:30:25
             |vpiParent:
             \_TaskCall: (cpu_write), line:30:10, endln:30:32
-            |vpiDecompile:8'h13
-            |vpiSize:8
-            |HEX:13
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:30:20, endln:30:25
               |vpiParent:
@@ -2906,13 +2975,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
+            |vpiSize:8
+            |vpiDecompile:8'h13
+            |HEX:13
           |vpiArgument:
           \_Constant: , line:30:26, endln:30:31
             |vpiParent:
             \_TaskCall: (cpu_write), line:30:10, endln:30:32
-            |vpiDecompile:8'h0A
-            |vpiSize:8
-            |HEX:0A
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:30:26, endln:30:31
               |vpiParent:
@@ -2921,11 +2990,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
-          |vpiName:
-          \_Identifier: (cpu_write), line:30:10, endln:30:19
-            |vpiParent:
-            \_TaskCall: (cpu_write), line:30:10, endln:30:32
-            |vpiName:cpu_write
+            |vpiSize:8
+            |vpiDecompile:8'h0A
+            |HEX:0A
       |vpiStmt:
       \_DelayControl: , line:31:6, endln:31:35
         |vpiParent:
@@ -2935,15 +3002,17 @@ Design: (unnamed)
         \_TaskCall: (cpu_read), line:31:10, endln:31:35
           |vpiParent:
           \_DelayControl: , line:31:6, endln:31:35
+          |vpiName:
+          \_Identifier: (cpu_read), line:31:10, endln:31:18
+            |vpiParent:
+            \_TaskCall: (cpu_read), line:31:10, endln:31:35
+            |vpiName:cpu_read
           |vpiTaskFunc:
           \_Task: (work@bus_wr_rd_task.cpu_read), line:38:3, endln:57:10
           |vpiArgument:
           \_Constant: , line:31:19, endln:31:24
             |vpiParent:
             \_TaskCall: (cpu_read), line:31:10, endln:31:35
-            |vpiDecompile:8'h13
-            |vpiSize:8
-            |HEX:13
             |vpiTypespec:
             \_RefTypespec: (work@bus_wr_rd_task), line:31:19, endln:31:24
               |vpiParent:
@@ -2952,6 +3021,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:5
+            |vpiSize:8
+            |vpiDecompile:8'h13
+            |HEX:13
           |vpiArgument:
           \_RefObj: (work@bus_wr_rd_task.read_data), line:31:25, endln:31:34
             |vpiParent:
@@ -2960,11 +3032,6 @@ Design: (unnamed)
             |vpiFullName:work@bus_wr_rd_task.read_data
             |vpiActual:
             \_Net: (work@bus_wr_rd_task.read_data), line:12:15, endln:12:24
-          |vpiName:
-          \_Identifier: (cpu_read), line:31:10, endln:31:18
-            |vpiParent:
-            \_TaskCall: (cpu_read), line:31:10, endln:31:35
-            |vpiName:cpu_read
       |vpiStmt:
       \_DelayControl: , line:32:6, endln:32:19
         |vpiParent:
@@ -2994,6 +3061,14 @@ Design: (unnamed)
         \_DelayControl: , line:36:6, endln:36:20
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@bus_wr_rd_task.clk), line:36:10, endln:36:13
+          |vpiParent:
+          \_Assignment: , line:36:10, endln:36:20
+          |vpiName:clk
+          |vpiFullName:work@bus_wr_rd_task.clk
+          |vpiActual:
+          \_Net: (work@bus_wr_rd_task.clk), line:10:8, endln:10:11
         |vpiRhs:
         \_Operation: , line:36:16, endln:36:20
           |vpiParent:
@@ -3007,14 +3082,6 @@ Design: (unnamed)
             |vpiFullName:work@bus_wr_rd_task.clk
             |vpiActual:
             \_Net: (work@bus_wr_rd_task.clk), line:10:8, endln:10:11
-        |vpiLhs:
-        \_RefObj: (work@bus_wr_rd_task.clk), line:36:10, endln:36:13
-          |vpiParent:
-          \_Assignment: , line:36:10, endln:36:20
-          |vpiName:clk
-          |vpiFullName:work@bus_wr_rd_task.clk
-          |vpiActual:
-          \_Net: (work@bus_wr_rd_task.clk), line:10:8, endln:10:11
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:83:3, endln:91:6
@@ -3124,14 +3191,6 @@ Design: (unnamed)
                 \_Begin: (work@bus_wr_rd_task), line:85:13, endln:87:8
                 |vpiOpType:82
                 |vpiBlocking:1
-                |vpiRhs:
-                \_RefObj: (work@bus_wr_rd_task.data_wr), line:86:19, endln:86:26
-                  |vpiParent:
-                  \_Assignment: , line:86:7, endln:86:26
-                  |vpiName:data_wr
-                  |vpiFullName:work@bus_wr_rd_task.data_wr
-                  |vpiActual:
-                  \_Net: (work@bus_wr_rd_task.data_wr), line:11:20, endln:11:27
                 |vpiLhs:
                 \_BitSelect: (work@bus_wr_rd_task.mem), line:86:10, endln:86:16
                   |vpiParent:
@@ -3148,6 +3207,14 @@ Design: (unnamed)
                     |vpiFullName:work@bus_wr_rd_task.addr
                     |vpiActual:
                     \_Net: (work@bus_wr_rd_task.addr), line:11:15, endln:11:19
+                |vpiRhs:
+                \_RefObj: (work@bus_wr_rd_task.data_wr), line:86:19, endln:86:26
+                  |vpiParent:
+                  \_Assignment: , line:86:7, endln:86:26
+                  |vpiName:data_wr
+                  |vpiFullName:work@bus_wr_rd_task.data_wr
+                  |vpiActual:
+                  \_Net: (work@bus_wr_rd_task.data_wr), line:11:20, endln:11:27
           |vpiStmt:
           \_IfStmt: , line:88:5, endln:90:8
             |vpiParent:
@@ -3171,6 +3238,14 @@ Design: (unnamed)
                 \_Begin: (work@bus_wr_rd_task), line:88:13, endln:90:8
                 |vpiOpType:82
                 |vpiBlocking:1
+                |vpiLhs:
+                \_RefObj: (work@bus_wr_rd_task.data_rd), line:89:7, endln:89:14
+                  |vpiParent:
+                  \_Assignment: , line:89:7, endln:89:26
+                  |vpiName:data_rd
+                  |vpiFullName:work@bus_wr_rd_task.data_rd
+                  |vpiActual:
+                  \_Net: (work@bus_wr_rd_task.data_rd), line:11:28, endln:11:35
                 |vpiRhs:
                 \_BitSelect: (work@bus_wr_rd_task.mem), line:89:20, endln:89:26
                   |vpiParent:
@@ -3187,14 +3262,6 @@ Design: (unnamed)
                     |vpiFullName:work@bus_wr_rd_task.addr
                     |vpiActual:
                     \_Net: (work@bus_wr_rd_task.addr), line:11:15, endln:11:19
-                |vpiLhs:
-                \_RefObj: (work@bus_wr_rd_task.data_rd), line:89:7, endln:89:14
-                  |vpiParent:
-                  \_Assignment: , line:89:7, endln:89:26
-                  |vpiName:data_rd
-                  |vpiFullName:work@bus_wr_rd_task.data_rd
-                  |vpiActual:
-                  \_Net: (work@bus_wr_rd_task.data_rd), line:11:28, endln:11:35
     |vpiAlwaysType:1
 |vpiTypespec:
 \_ModuleTypespec: (work@bus_wr_rd_task)

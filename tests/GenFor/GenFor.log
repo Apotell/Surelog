@@ -148,21 +148,6 @@ Design: (unnamed)
       \_ContAssign: , line:5:14, endln:5:27
         |vpiParent:
         \_Begin: (work@top), line:4:35, endln:6:7
-        |vpiRhs:
-        \_Constant: , line:5:23, endln:5:27
-          |vpiParent:
-          \_ContAssign: , line:5:14, endln:5:27
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiTypespec:
-          \_RefTypespec: (work@top), line:5:23, endln:5:27
-            |vpiParent:
-            \_Constant: , line:5:23, endln:5:27
-            |vpiFullName:work@top
-            |vpiActual:
-            \_BitTypespec: 
-          |vpiConstType:3
         |vpiLhs:
         \_BitSelect: (work@top.tmp), line:5:17, endln:5:20
           |vpiParent:
@@ -179,6 +164,21 @@ Design: (unnamed)
             |vpiFullName:work@top.i
             |vpiActual:
             \_Variable: (work@top.i), line:4:9, endln:4:10
+        |vpiRhs:
+        \_Constant: , line:5:23, endln:5:27
+          |vpiParent:
+          \_ContAssign: , line:5:14, endln:5:27
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:5:23, endln:5:27
+            |vpiParent:
+            \_Constant: , line:5:23, endln:5:27
+            |vpiFullName:work@top
+            |vpiActual:
+            \_BitTypespec: 
+          |vpiConstType:3
+          |vpiSize:1
+          |vpiDecompile:1'b1
+          |BIN:1
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -191,13 +191,12 @@ Design: (unnamed)
     \_Assignment: , line:4:9, endln:4:14
       |vpiParent:
       \_GenFor: (work@top), line:4:4, endln:6:7
+      |vpiLhs:
+      \_Variable: (work@top.i), line:4:9, endln:4:10
       |vpiRhs:
       \_Constant: , line:4:13, endln:4:14
         |vpiParent:
         \_Assignment: , line:4:9, endln:4:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:4:13, endln:4:14
           |vpiParent:
@@ -206,8 +205,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-      |vpiLhs:
-      \_Variable: (work@top.i), line:4:9, endln:4:10
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiCondition:
     \_Operation: , line:4:16, endln:4:21
       |vpiParent:
@@ -225,9 +225,6 @@ Design: (unnamed)
       \_Constant: , line:4:20, endln:4:21
         |vpiParent:
         \_Operation: , line:4:16, endln:4:21
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
         |vpiTypespec:
         \_RefTypespec: (work@top), line:4:20, endln:4:21
           |vpiParent:
@@ -236,11 +233,22 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:3
+        |UINT:3
     |vpiForIncStmt:
     \_Assignment: , line:4:24, endln:4:33
       |vpiParent:
       \_GenFor: (work@top), line:4:4, endln:6:7
       |vpiOpType:82
+      |vpiLhs:
+      \_RefObj: (work@top.i), line:4:24, endln:4:25
+        |vpiParent:
+        \_Assignment: , line:4:24, endln:4:33
+        |vpiName:i
+        |vpiFullName:work@top.i
+        |vpiActual:
+        \_Variable: (work@top.i), line:4:9, endln:4:10
       |vpiRhs:
       \_Operation: , line:4:28, endln:4:33
         |vpiParent:
@@ -258,9 +266,6 @@ Design: (unnamed)
         \_Constant: , line:4:32, endln:4:33
           |vpiParent:
           \_Operation: , line:4:28, endln:4:33
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@top), line:4:32, endln:4:33
             |vpiParent:
@@ -269,14 +274,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-      |vpiLhs:
-      \_RefObj: (work@top.i), line:4:24, endln:4:25
-        |vpiParent:
-        \_Assignment: , line:4:24, endln:4:33
-        |vpiName:i
-        |vpiFullName:work@top.i
-        |vpiActual:
-        \_Variable: (work@top.i), line:4:9, endln:4:10
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
     |vpiStmt:
     \_Begin: (work@top), line:4:35, endln:6:7
   |vpiDefName:work@top

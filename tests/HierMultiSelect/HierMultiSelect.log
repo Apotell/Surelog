@@ -277,6 +277,7 @@ Design: (unnamed)
     \_HierPath: (b), line:7:12, endln:7:17
       |vpiParent:
       \_Variable: (work@dm_csrs.o), line:7:8, endln:7:9
+      |vpiName:b
       |vpiActual:
       \_RefObj: (work@dm_csrs.o.b), line:7:12, endln:7:13
         |vpiParent:
@@ -294,7 +295,6 @@ Design: (unnamed)
           |vpiParent:
           \_MethodFuncCall: (and), line:7:14, endln:7:17
           |vpiName:and
-      |vpiName:b
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -445,10 +445,30 @@ Design: (unnamed)
   \_ContAssign: , line:2:10, endln:2:43
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiLhs:
+    \_HierPath: (dmi_req_i.addr1), line:2:19, endln:2:25
+      |vpiParent:
+      \_ContAssign: , line:2:10, endln:2:43
+      |vpiName:dmi_req_i.addr1
+      |vpiActual:
+      \_RefObj: (dmi_req_i), line:2:19, endln:2:25
+        |vpiParent:
+        \_HierPath: (dmi_req_i.addr1), line:2:19, endln:2:25
+        |vpiName:dmi_req_i
+        |vpiActual:
+        \_Net: (work@dm_csrs.dmi_req_i), line:2:19, endln:2:25
+      |vpiActual:
+      \_RefObj: (addr1), line:2:20, endln:2:25
+        |vpiParent:
+        \_HierPath: (dmi_req_i.addr1), line:2:19, endln:2:25
+        |vpiName:addr1
+        |vpiActual:
+        \_Net: (work@dm_csrs.addr1), line:2:20, endln:2:25
     |vpiRhs:
     \_HierPath: (dmi_req_i.addr2), line:2:28, endln:2:43
       |vpiParent:
       \_ContAssign: , line:2:10, endln:2:43
+      |vpiName:dmi_req_i.addr2
       |vpiActual:
       \_RefObj: (dmi_req_i), line:2:28, endln:2:37
         |vpiParent:
@@ -464,30 +484,64 @@ Design: (unnamed)
         |vpiFullName:work@dm_csrs.addr2
         |vpiActual:
         \_Net: (work@dm_csrs.addr2), line:2:38, endln:2:43
-      |vpiName:dmi_req_i.addr2
-    |vpiLhs:
-    \_HierPath: (dmi_req_i.addr1), line:2:19, endln:2:25
-      |vpiParent:
-      \_ContAssign: , line:2:10, endln:2:43
-      |vpiActual:
-      \_RefObj: (dmi_req_i), line:2:19, endln:2:25
-        |vpiParent:
-        \_HierPath: (dmi_req_i.addr1), line:2:19, endln:2:25
-        |vpiName:dmi_req_i
-        |vpiActual:
-        \_Net: (work@dm_csrs.dmi_req_i), line:2:19, endln:2:25
-      |vpiActual:
-      \_RefObj: (addr1), line:2:20, endln:2:25
-        |vpiParent:
-        \_HierPath: (dmi_req_i.addr1), line:2:19, endln:2:25
-        |vpiName:addr1
-        |vpiActual:
-        \_Net: (work@dm_csrs.addr1), line:2:20, endln:2:25
-      |vpiName:dmi_req_i.addr1
   |vpiContAssign:
   \_ContAssign: , line:3:10, endln:3:58
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiLhs:
+    \_IndexedPartSelect: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
+      |vpiParent:
+      \_ContAssign: , line:3:10, endln:3:58
+      |vpiName:kmac_mask_o
+      |vpiFullName:work@dm_csrs.kmac_mask_o
+      |vpiDefName:kmac_mask_o
+      |vpiActual:
+      \_Net: (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
+      |vpiConstantSelect:1
+      |vpiIndexedPartSelectType:1
+      |vpiBaseExpr:
+      \_Operation: , line:3:22, endln:3:25
+        |vpiParent:
+        \_IndexedPartSelect: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
+        |vpiOpType:25
+        |vpiOperand:
+        \_Constant: , line:3:22, endln:3:23
+          |vpiParent:
+          \_Operation: , line:3:22, endln:3:25
+          |vpiTypespec:
+          \_RefTypespec: (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:23
+            |vpiParent:
+            \_Constant: , line:3:22, endln:3:23
+            |vpiFullName:work@dm_csrs.kmac_mask_o
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:8
+          |UINT:8
+        |vpiOperand:
+        \_RefObj: (work@dm_csrs.kmac_mask_o.i), line:3:24, endln:3:25
+          |vpiParent:
+          \_Operation: , line:3:22, endln:3:25
+          |vpiName:i
+          |vpiFullName:work@dm_csrs.kmac_mask_o.i
+          |vpiActual:
+          \_Net: (work@dm_csrs.i), line:3:24, endln:3:25
+      |vpiWidthExpr:
+      \_Constant: , line:3:27, endln:3:28
+        |vpiParent:
+        \_IndexedPartSelect: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
+        |vpiTypespec:
+        \_RefTypespec: (work@dm_csrs.kmac_mask_o), line:3:27, endln:3:28
+          |vpiParent:
+          \_Constant: , line:3:27, endln:3:28
+          |vpiFullName:work@dm_csrs.kmac_mask_o
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:8
+        |UINT:8
     |vpiRhs:
     \_Operation: , line:3:32, endln:3:58
       |vpiParent:
@@ -497,9 +551,6 @@ Design: (unnamed)
       \_Constant: , line:3:33, endln:3:34
         |vpiParent:
         \_Operation: , line:3:32, endln:3:58
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
         |vpiTypespec:
         \_RefTypespec: (work@dm_csrs), line:3:33, endln:3:34
           |vpiParent:
@@ -508,6 +559,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:8
+        |UINT:8
       |vpiOperand:
       \_Operation: , line:3:34, endln:3:57
         |vpiParent:
@@ -517,6 +571,7 @@ Design: (unnamed)
         \_HierPath: (keymgr_data_i.strb[i]), line:3:35, endln:3:56
           |vpiParent:
           \_Operation: , line:3:34, endln:3:57
+          |vpiName:keymgr_data_i.strb[i]
           |vpiActual:
           \_RefObj: (keymgr_data_i), line:3:35, endln:3:48
             |vpiParent:
@@ -540,69 +595,23 @@ Design: (unnamed)
               |vpiFullName:work@dm_csrs.keymgr_data_i.strb[i].i
               |vpiActual:
               \_Net: (work@dm_csrs.i), line:3:24, endln:3:25
-          |vpiName:keymgr_data_i.strb[i]
-    |vpiLhs:
-    \_IndexedPartSelect: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
-      |vpiParent:
-      \_ContAssign: , line:3:10, endln:3:58
-      |vpiName:kmac_mask_o
-      |vpiFullName:work@dm_csrs.kmac_mask_o
-      |vpiDefName:kmac_mask_o
-      |vpiActual:
-      \_Net: (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
-      |vpiConstantSelect:1
-      |vpiIndexedPartSelectType:1
-      |vpiBaseExpr:
-      \_Operation: , line:3:22, endln:3:25
-        |vpiParent:
-        \_IndexedPartSelect: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
-        |vpiOpType:25
-        |vpiOperand:
-        \_Constant: , line:3:22, endln:3:23
-          |vpiParent:
-          \_Operation: , line:3:22, endln:3:25
-          |vpiDecompile:8
-          |vpiSize:64
-          |UINT:8
-          |vpiTypespec:
-          \_RefTypespec: (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:23
-            |vpiParent:
-            \_Constant: , line:3:22, endln:3:23
-            |vpiFullName:work@dm_csrs.kmac_mask_o
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
-        |vpiOperand:
-        \_RefObj: (work@dm_csrs.kmac_mask_o.i), line:3:24, endln:3:25
-          |vpiParent:
-          \_Operation: , line:3:22, endln:3:25
-          |vpiName:i
-          |vpiFullName:work@dm_csrs.kmac_mask_o.i
-          |vpiActual:
-          \_Net: (work@dm_csrs.i), line:3:24, endln:3:25
-      |vpiWidthExpr:
-      \_Constant: , line:3:27, endln:3:28
-        |vpiParent:
-        \_IndexedPartSelect: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
-        |vpiTypespec:
-        \_RefTypespec: (work@dm_csrs.kmac_mask_o), line:3:27, endln:3:28
-          |vpiParent:
-          \_Constant: , line:3:27, endln:3:28
-          |vpiFullName:work@dm_csrs.kmac_mask_o
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
   |vpiContAssign:
   \_ContAssign: , line:4:10, endln:4:47
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiLhs:
+    \_RefObj: (work@dm_csrs.o), line:4:10, endln:4:11
+      |vpiParent:
+      \_ContAssign: , line:4:10, endln:4:47
+      |vpiName:o
+      |vpiFullName:work@dm_csrs.o
+      |vpiActual:
+      \_Variable: (work@dm_csrs.o), line:7:8, endln:7:9
     |vpiRhs:
     \_HierPath: (keymgr_key_i.key[0][1 * 32+:32]), line:4:14, endln:4:47
       |vpiParent:
       \_ContAssign: , line:4:10, endln:4:47
+      |vpiName:keymgr_key_i.key[0][1 * 32+:32]
       |vpiActual:
       \_RefObj: (keymgr_key_i), line:4:14, endln:4:26
         |vpiParent:
@@ -622,9 +631,6 @@ Design: (unnamed)
         \_Constant: , line:4:31, endln:4:32
           |vpiParent:
           \_VarSelect: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:27, endln:4:47
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:31, endln:4:32
             |vpiParent:
@@ -633,6 +639,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiIndex:
         \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
           |vpiParent:
@@ -653,9 +662,6 @@ Design: (unnamed)
             \_Constant: , line:4:34, endln:4:35
               |vpiParent:
               \_Operation: , line:4:34, endln:4:40
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
               |vpiTypespec:
               \_RefTypespec: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:35
                 |vpiParent:
@@ -664,13 +670,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:1
+              |UINT:1
             |vpiOperand:
             \_Constant: , line:4:38, endln:4:40
               |vpiParent:
               \_Operation: , line:4:34, endln:4:40
-              |vpiDecompile:32
-              |vpiSize:64
-              |UINT:32
               |vpiTypespec:
               \_RefTypespec: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:38, endln:4:40
                 |vpiParent:
@@ -679,13 +685,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:32
+              |UINT:32
           |vpiWidthExpr:
           \_Constant: , line:4:44, endln:4:46
             |vpiParent:
             \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
-            |vpiDecompile:32
-            |vpiSize:64
-            |UINT:32
             |vpiTypespec:
             \_RefTypespec: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:44, endln:4:46
               |vpiParent:
@@ -694,38 +700,18 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-      |vpiName:keymgr_key_i.key[0][1 * 32+:32]
-    |vpiLhs:
-    \_RefObj: (work@dm_csrs.o), line:4:10, endln:4:11
-      |vpiParent:
-      \_ContAssign: , line:4:10, endln:4:47
-      |vpiName:o
-      |vpiFullName:work@dm_csrs.o
-      |vpiActual:
-      \_Variable: (work@dm_csrs.o), line:7:8, endln:7:9
+            |vpiSize:64
+            |vpiDecompile:32
+            |UINT:32
   |vpiContAssign:
   \_ContAssign: , line:5:10, endln:5:39
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
-    |vpiRhs:
-    \_Constant: , line:5:38, endln:5:39
-      |vpiParent:
-      \_ContAssign: , line:5:10, endln:5:39
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiTypespec:
-      \_RefTypespec: (work@dm_csrs), line:5:38, endln:5:39
-        |vpiParent:
-        \_Constant: , line:5:38, endln:5:39
-        |vpiFullName:work@dm_csrs
-        |vpiActual:
-        \_IntTypespec: 
-      |vpiConstType:9
     |vpiLhs:
     \_HierPath: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:35
       |vpiParent:
       \_ContAssign: , line:5:10, endln:5:39
+      |vpiName:sram_otp_key_o[2 - 2].nonce
       |vpiActual:
       \_BitSelect: (sram_otp_key_o[2 - 2]), line:5:10, endln:5:24
         |vpiParent:
@@ -743,9 +729,6 @@ Design: (unnamed)
           \_Constant: , line:5:25, endln:5:26
             |vpiParent:
             \_Operation: , line:5:25, endln:5:28
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
             |vpiTypespec:
             \_RefTypespec: (work@dm_csrs.sram_otp_key_o[2 - 2].nonce.sram_otp_key_o), line:5:25, endln:5:26
               |vpiParent:
@@ -754,13 +737,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:2
+            |UINT:2
           |vpiOperand:
           \_Constant: , line:5:27, endln:5:28
             |vpiParent:
             \_Operation: , line:5:25, endln:5:28
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
             |vpiTypespec:
             \_RefTypespec: (work@dm_csrs.sram_otp_key_o[2 - 2].nonce.sram_otp_key_o), line:5:27, endln:5:28
               |vpiParent:
@@ -769,6 +752,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:2
+            |UINT:2
       |vpiActual:
       \_RefObj: (sram_otp_key_o[2 - 2].nonce), line:5:30, endln:5:35
         |vpiParent:
@@ -777,7 +763,21 @@ Design: (unnamed)
         |vpiFullName:sram_otp_key_o[2 - 2].nonce
         |vpiActual:
         \_Net: (work@dm_csrs.nonce), line:5:30, endln:5:35
-      |vpiName:sram_otp_key_o[2 - 2].nonce
+    |vpiRhs:
+    \_Constant: , line:5:38, endln:5:39
+      |vpiParent:
+      \_ContAssign: , line:5:10, endln:5:39
+      |vpiTypespec:
+      \_RefTypespec: (work@dm_csrs), line:5:38, endln:5:39
+        |vpiParent:
+        \_Constant: , line:5:38, endln:5:39
+        |vpiFullName:work@dm_csrs
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
 |vpiTypespec:
 \_ModuleTypespec: (work@dm_csrs)
   |vpiParent:

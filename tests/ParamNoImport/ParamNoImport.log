@@ -187,6 +187,8 @@ Design: (unnamed)
   \_ParamAssign: , line:9:25, endln:11:2
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    |vpiLhs:
+    \_Parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:11:2
     |vpiRhs:
     \_Operation: , line:9:47, endln:11:2
       |vpiParent:
@@ -200,9 +202,6 @@ Design: (unnamed)
         \_Constant: , line:10:17, endln:10:22
           |vpiParent:
           \_TaggedPattern: , line:10:3, endln:10:22
-          |vpiDecompile:2'b10
-          |vpiSize:2
-          |BIN:10
           |vpiTypespec:
           \_RefTypespec: (pkg), line:10:17, endln:10:22
             |vpiParent:
@@ -211,6 +210,9 @@ Design: (unnamed)
             |vpiActual:
             \_LogicTypespec: 
           |vpiConstType:3
+          |vpiSize:2
+          |vpiDecompile:2'b10
+          |BIN:10
         |vpiTypespec:
         \_RefTypespec: (pkg::slow_clk_val), line:10:3, endln:10:15
           |vpiParent:
@@ -219,8 +221,6 @@ Design: (unnamed)
           |vpiFullName:pkg::slow_clk_val
           |vpiActual:
           \_StringTypespec: , line:10:3, endln:10:15
-    |vpiLhs:
-    \_Parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:11:2
   |vpiTypespec:
   \_TypedefTypespec: (pkg::pwr_ast_rsp_t), line:8:3, endln:8:16
     |vpiParent:
@@ -266,9 +266,6 @@ Design: (unnamed)
       \_Constant: , line:7:10, endln:7:11
         |vpiParent:
         \_Range: , line:7:9, endln:7:14
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (pkg), line:7:10, endln:7:11
           |vpiParent:
@@ -277,13 +274,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:7:12, endln:7:13
         |vpiParent:
         \_Range: , line:7:9, endln:7:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (pkg), line:7:12, endln:7:13
           |vpiParent:
@@ -292,6 +289,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -355,20 +355,18 @@ Design: (unnamed)
   \_Parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:42
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:1:1, endln:3:10
-    |BIN:0
     |vpiName:PWR_AST_RSP
     |vpiFullName:work@test.PWR_AST_RSP
   |vpiParamAssign:
   \_ParamAssign: , line:1:26, endln:1:42
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:1:1, endln:3:10
+    |vpiLhs:
+    \_Parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:42
     |vpiRhs:
     \_Constant: , line:1:40, endln:1:42
       |vpiParent:
       \_ParamAssign: , line:1:26, endln:1:42
-      |vpiDecompile:'0
-      |vpiSize:-1
-      |BIN:0
       |vpiTypespec:
       \_RefTypespec: (work@test), line:1:40, endln:1:42
         |vpiParent:
@@ -377,8 +375,9 @@ Design: (unnamed)
         |vpiActual:
         \_BitTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:42
+      |vpiSize:-1
+      |vpiDecompile:'0
+      |BIN:0
   |vpiTypespec:
   \_BitTypespec: 
     |vpiParent:

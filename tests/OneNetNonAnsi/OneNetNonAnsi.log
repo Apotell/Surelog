@@ -129,14 +129,6 @@ Design: (unnamed)
   \_ContAssign: , line:6:10, endln:6:15
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetNonAnsi/dut.v, line:1:1, endln:7:10
-    |vpiRhs:
-    \_RefObj: (work@dut.i), line:6:14, endln:6:15
-      |vpiParent:
-      \_ContAssign: , line:6:10, endln:6:15
-      |vpiName:i
-      |vpiFullName:work@dut.i
-      |vpiActual:
-      \_Net: (work@dut.i), line:1:13, endln:1:14
     |vpiLhs:
     \_RefObj: (work@dut.o), line:6:10, endln:6:11
       |vpiParent:
@@ -145,6 +137,14 @@ Design: (unnamed)
       |vpiFullName:work@dut.o
       |vpiActual:
       \_Net: (work@dut.o), line:1:16, endln:1:17
+    |vpiRhs:
+    \_RefObj: (work@dut.i), line:6:14, endln:6:15
+      |vpiParent:
+      \_ContAssign: , line:6:10, endln:6:15
+      |vpiName:i
+      |vpiFullName:work@dut.i
+      |vpiActual:
+      \_Net: (work@dut.i), line:1:13, endln:1:14
 |vpiAllModules:
 \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
   |vpiParent:
@@ -217,13 +217,15 @@ Design: (unnamed)
       \_SysFuncCall: ($dumpfile), line:5:5, endln:5:26
         |vpiParent:
         \_Begin: (work@tb), line:4:11, endln:9:6
+        |vpiName:
+        \_Identifier: ($dumpfile), line:5:6, endln:5:14
+          |vpiParent:
+          \_SysFuncCall: ($dumpfile), line:5:5, endln:5:26
+          |vpiName:$dumpfile
         |vpiArgument:
         \_Constant: , line:5:15, endln:5:25
           |vpiParent:
           \_SysFuncCall: ($dumpfile), line:5:5, endln:5:26
-          |vpiDecompile:"test.vcd"
-          |vpiSize:64
-          |STRING:test.vcd
           |vpiTypespec:
           \_RefTypespec: (work@tb), line:5:15, endln:5:25
             |vpiParent:
@@ -232,11 +234,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
-        |vpiName:
-        \_Identifier: ($dumpfile), line:5:6, endln:5:14
-          |vpiParent:
-          \_SysFuncCall: ($dumpfile), line:5:5, endln:5:26
-          |vpiName:$dumpfile
+          |vpiSize:64
+          |vpiDecompile:"test.vcd"
+          |STRING:test.vcd
       |vpiStmt:
       \_SysFuncCall: ($dumpvars), line:6:5, endln:6:14
         |vpiParent:
@@ -250,13 +250,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:7:5, endln:7:51
         |vpiParent:
         \_Begin: (work@tb), line:4:11, endln:9:6
+        |vpiName:
+        \_Identifier: ($monitor), line:7:6, endln:7:13
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:7:5, endln:7:51
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:7:14, endln:7:39
           |vpiParent:
           \_SysFuncCall: ($monitor), line:7:5, endln:7:51
-          |vpiDecompile:"@%0dns i = %0d, o = %0d"
-          |vpiSize:184
-          |STRING:@%0dns i = %0d, o = %0d
           |vpiTypespec:
           \_RefTypespec: (work@tb), line:7:14, endln:7:39
             |vpiParent:
@@ -265,6 +267,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:184
+          |vpiDecompile:"@%0dns i = %0d, o = %0d"
+          |STRING:@%0dns i = %0d, o = %0d
         |vpiArgument:
         \_SysFuncCall: ($time), line:7:40, endln:7:45
           |vpiParent:
@@ -290,11 +295,6 @@ Design: (unnamed)
           |vpiFullName:work@tb.o
           |vpiActual:
           \_Net: (work@tb.o), line:2:12, endln:2:13
-        |vpiName:
-        \_Identifier: ($monitor), line:7:6, endln:7:13
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:7:5, endln:7:51
-          |vpiName:$monitor
       |vpiStmt:
       \_DelayControl: , line:8:5, endln:8:19
         |vpiParent:
@@ -357,13 +357,15 @@ Design: (unnamed)
         \_SysFuncCall: ($display), line:14:23, endln:14:38
           |vpiParent:
           \_ImmediateAssert: , line:14:8, endln:14:66
+          |vpiName:
+          \_Identifier: ($display), line:14:24, endln:14:31
+            |vpiParent:
+            \_SysFuncCall: ($display), line:14:23, endln:14:38
+            |vpiName:$display
           |vpiArgument:
           \_Constant: , line:14:32, endln:14:37
             |vpiParent:
             \_SysFuncCall: ($display), line:14:23, endln:14:38
-            |vpiDecompile:"OK!"
-            |vpiSize:24
-            |STRING:OK!
             |vpiTypespec:
             \_RefTypespec: (work@tb), line:14:32, endln:14:37
               |vpiParent:
@@ -372,22 +374,22 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
-          |vpiName:
-          \_Identifier: ($display), line:14:24, endln:14:31
-            |vpiParent:
-            \_SysFuncCall: ($display), line:14:23, endln:14:38
-            |vpiName:$display
+            |vpiSize:24
+            |vpiDecompile:"OK!"
+            |STRING:OK!
         |vpiElseStmt:
         \_SysFuncCall: ($fatal), line:14:45, endln:14:65
           |vpiParent:
           \_ImmediateAssert: , line:14:8, endln:14:66
+          |vpiName:
+          \_Identifier: ($fatal), line:14:46, endln:14:51
+            |vpiParent:
+            \_SysFuncCall: ($fatal), line:14:45, endln:14:65
+            |vpiName:$fatal
           |vpiArgument:
           \_Constant: , line:14:52, endln:14:53
             |vpiParent:
             \_SysFuncCall: ($fatal), line:14:45, endln:14:65
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (work@tb), line:14:52, endln:14:53
               |vpiParent:
@@ -396,13 +398,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
           |vpiArgument:
           \_Constant: , line:14:55, endln:14:64
             |vpiParent:
             \_SysFuncCall: ($fatal), line:14:45, endln:14:65
-            |vpiDecompile:"i != o!"
-            |vpiSize:56
-            |STRING:i != o!
             |vpiTypespec:
             \_RefTypespec: (work@tb), line:14:55, endln:14:64
               |vpiParent:
@@ -411,11 +413,9 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
-          |vpiName:
-          \_Identifier: ($fatal), line:14:46, endln:14:51
-            |vpiParent:
-            \_SysFuncCall: ($fatal), line:14:45, endln:14:65
-            |vpiName:$fatal
+            |vpiSize:56
+            |vpiDecompile:"i != o!"
+            |STRING:i != o!
       |vpiImportTypespec:
       \_StringTypespec: 
       |vpiImportTypespec:
@@ -447,13 +447,15 @@ Design: (unnamed)
         \_SysFuncCall: ($display), line:16:23, endln:16:38
           |vpiParent:
           \_ImmediateAssert: , line:16:8, endln:16:66
+          |vpiName:
+          \_Identifier: ($display), line:16:24, endln:16:31
+            |vpiParent:
+            \_SysFuncCall: ($display), line:16:23, endln:16:38
+            |vpiName:$display
           |vpiArgument:
           \_Constant: , line:16:32, endln:16:37
             |vpiParent:
             \_SysFuncCall: ($display), line:16:23, endln:16:38
-            |vpiDecompile:"OK!"
-            |vpiSize:24
-            |STRING:OK!
             |vpiTypespec:
             \_RefTypespec: (work@tb), line:16:32, endln:16:37
               |vpiParent:
@@ -462,22 +464,22 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
-          |vpiName:
-          \_Identifier: ($display), line:16:24, endln:16:31
-            |vpiParent:
-            \_SysFuncCall: ($display), line:16:23, endln:16:38
-            |vpiName:$display
+            |vpiSize:24
+            |vpiDecompile:"OK!"
+            |STRING:OK!
         |vpiElseStmt:
         \_SysFuncCall: ($fatal), line:16:45, endln:16:65
           |vpiParent:
           \_ImmediateAssert: , line:16:8, endln:16:66
+          |vpiName:
+          \_Identifier: ($fatal), line:16:46, endln:16:51
+            |vpiParent:
+            \_SysFuncCall: ($fatal), line:16:45, endln:16:65
+            |vpiName:$fatal
           |vpiArgument:
           \_Constant: , line:16:52, endln:16:53
             |vpiParent:
             \_SysFuncCall: ($fatal), line:16:45, endln:16:65
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (work@tb), line:16:52, endln:16:53
               |vpiParent:
@@ -486,13 +488,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
           |vpiArgument:
           \_Constant: , line:16:55, endln:16:64
             |vpiParent:
             \_SysFuncCall: ($fatal), line:16:45, endln:16:65
-            |vpiDecompile:"i != o!"
-            |vpiSize:56
-            |STRING:i != o!
             |vpiTypespec:
             \_RefTypespec: (work@tb), line:16:55, endln:16:64
               |vpiParent:
@@ -501,32 +503,15 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
-          |vpiName:
-          \_Identifier: ($fatal), line:16:46, endln:16:51
-            |vpiParent:
-            \_SysFuncCall: ($fatal), line:16:45, endln:16:65
-            |vpiName:$fatal
+            |vpiSize:56
+            |vpiDecompile:"i != o!"
+            |STRING:i != o!
       |vpiStmt:
       \_Assignment: , line:13:5, endln:13:10
         |vpiParent:
         \_Begin: (work@tb), line:12:3, endln:17:6
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:13:9, endln:13:10
-          |vpiParent:
-          \_Assignment: , line:13:5, endln:13:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@tb), line:13:9, endln:13:10
-            |vpiParent:
-            \_Constant: , line:13:9, endln:13:10
-            |vpiFullName:work@tb
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb.i), line:13:5, endln:13:6
           |vpiParent:
@@ -535,6 +520,21 @@ Design: (unnamed)
           |vpiFullName:work@tb.i
           |vpiActual:
           \_Net: (work@tb.i), line:2:9, endln:2:10
+        |vpiRhs:
+        \_Constant: , line:13:9, endln:13:10
+          |vpiParent:
+          \_Assignment: , line:13:5, endln:13:10
+          |vpiTypespec:
+          \_RefTypespec: (work@tb), line:13:9, endln:13:10
+            |vpiParent:
+            \_Constant: , line:13:9, endln:13:10
+            |vpiFullName:work@tb
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:14:5, endln:14:66
         |vpiParent:
@@ -553,21 +553,6 @@ Design: (unnamed)
           \_DelayControl: , line:15:5, endln:15:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:15:12, endln:15:13
-            |vpiParent:
-            \_Assignment: , line:15:8, endln:15:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@tb), line:15:12, endln:15:13
-              |vpiParent:
-              \_Constant: , line:15:12, endln:15:13
-              |vpiFullName:work@tb
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@tb.i), line:15:8, endln:15:9
             |vpiParent:
@@ -576,6 +561,21 @@ Design: (unnamed)
             |vpiFullName:work@tb.i
             |vpiActual:
             \_Net: (work@tb.i), line:2:9, endln:2:10
+          |vpiRhs:
+          \_Constant: , line:15:12, endln:15:13
+            |vpiParent:
+            \_Assignment: , line:15:8, endln:15:13
+            |vpiTypespec:
+            \_RefTypespec: (work@tb), line:15:12, endln:15:13
+              |vpiParent:
+              \_Constant: , line:15:12, endln:15:13
+              |vpiFullName:work@tb
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:16:5, endln:16:66
         |vpiParent:

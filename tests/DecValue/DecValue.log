@@ -164,14 +164,12 @@ Design: (unnamed)
   \_Parameter: (work@top.A), line:2:14, endln:2:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
-    |BIN:X
     |vpiName:A
     |vpiFullName:work@top.A
   |vpiParameter:
   \_Parameter: (work@top.B), line:3:14, endln:3:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
-    |BIN:X
     |vpiName:B
     |vpiFullName:work@top.B
   |vpiParameter:
@@ -185,20 +183,19 @@ Design: (unnamed)
       |vpiFullName:work@top.C
       |vpiActual:
       \_IntTypespec: , line:4:15, endln:4:18
-    |vpiLocalParam:1
     |vpiName:C
     |vpiFullName:work@top.C
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:2:14, endln:2:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
+    |vpiLhs:
+    \_Parameter: (work@top.A), line:2:14, endln:2:20
     |vpiRhs:
     \_Constant: , line:2:18, endln:2:20
       |vpiParent:
       \_ParamAssign: , line:2:14, endln:2:20
-      |vpiDecompile:'X
-      |vpiSize:-1
-      |BIN:X
       |vpiTypespec:
       \_RefTypespec: (work@top), line:2:18, endln:2:20
         |vpiParent:
@@ -207,19 +204,19 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@top.A), line:2:14, endln:2:20
+      |vpiSize:-1
+      |vpiDecompile:'X
+      |BIN:X
   |vpiParamAssign:
   \_ParamAssign: , line:3:14, endln:3:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
+    |vpiLhs:
+    \_Parameter: (work@top.B), line:3:14, endln:3:20
     |vpiRhs:
     \_Constant: , line:3:18, endln:3:20
       |vpiParent:
       \_ParamAssign: , line:3:14, endln:3:20
-      |vpiDecompile:'X
-      |vpiSize:-1
-      |BIN:X
       |vpiTypespec:
       \_RefTypespec: (work@top), line:3:18, endln:3:20
         |vpiParent:
@@ -228,12 +225,15 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@top.B), line:3:14, endln:3:20
+      |vpiSize:-1
+      |vpiDecompile:'X
+      |BIN:X
   |vpiParamAssign:
   \_ParamAssign: , line:4:19, endln:4:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
+    |vpiLhs:
+    \_Parameter: (work@top.C), line:4:19, endln:4:28
     |vpiRhs:
     \_Operation: , line:4:23, endln:4:28
       |vpiParent:
@@ -255,8 +255,6 @@ Design: (unnamed)
         |vpiFullName:work@top.B
         |vpiActual:
         \_Parameter: (work@top.B), line:3:14, endln:3:20
-    |vpiLhs:
-    \_Parameter: (work@top.C), line:4:19, endln:4:28
   |vpiTypespec:
   \_LogicTypespec: 
     |vpiParent:
@@ -290,6 +288,14 @@ Design: (unnamed)
   \_ContAssign: , line:6:11, endln:6:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
+    |vpiLhs:
+    \_RefObj: (work@top.o), line:6:11, endln:6:12
+      |vpiParent:
+      \_ContAssign: , line:6:11, endln:6:22
+      |vpiName:o
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_Variable: (work@top.o), line:1:23, endln:1:24
     |vpiRhs:
     \_Operation: , line:6:15, endln:6:22
       |vpiParent:
@@ -303,14 +309,6 @@ Design: (unnamed)
         |vpiFullName:work@top.C
         |vpiActual:
         \_Parameter: (work@top.C), line:4:19, endln:4:28
-    |vpiLhs:
-    \_RefObj: (work@top.o), line:6:11, endln:6:12
-      |vpiParent:
-      \_ContAssign: , line:6:11, endln:6:22
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_Variable: (work@top.o), line:1:23, endln:1:24
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

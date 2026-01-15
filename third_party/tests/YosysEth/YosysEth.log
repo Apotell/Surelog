@@ -29,14 +29,14 @@
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                             310
+Constant                                             315
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
 Identifier                                            29
-IntTypespec                                          319
+IntTypespec                                          324
 LogicTypespec                                        253
 Module                                                 1
 ModuleTypespec                                         2
@@ -49,13 +49,13 @@ Port                                                 252
 Range                                                148
 RefModule                                              1
 RefObj                                               126
-RefTypespec                                          575
+RefTypespec                                          580
 SourceFile                                            20
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                              2233
+Total:                                              2248
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysEth/slpp_unit/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v:170:1: Null Actual: id:69, type:RefModule, name:top.
@@ -260,15 +260,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:3:23, endln:3:28
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:3:31, endln:3:32
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
             |vpiParent:
@@ -277,6 +274,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -326,8 +326,8 @@ Design: (unnamed)
       \_IODecl: (message), line:9:15, endln:9:22
         |vpiParent:
         \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
       |vpiParent:
@@ -357,8 +357,8 @@ Design: (unnamed)
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
       |vpiParent:
@@ -375,8 +375,8 @@ Design: (unnamed)
       \_IODecl: (message), line:15:19, endln:15:26
         |vpiParent:
         \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
       |vpiParent:
@@ -407,8 +407,8 @@ Design: (unnamed)
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
       |vpiParent:
@@ -425,8 +425,8 @@ Design: (unnamed)
       \_IODecl: (message), line:21:20, endln:21:27
         |vpiParent:
         \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
       |vpiParent:
@@ -457,8 +457,8 @@ Design: (unnamed)
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiImportTypespec:
@@ -598,41 +598,106 @@ Design: (unnamed)
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::FINISHED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:0
+          |INT:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::RUNNING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:1
+          |INT:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
-        |INT:2
-        |vpiDecompile:2
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::WAITING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:2
+          |INT:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::SUSPENDED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:3
+          |INT:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
-        |INT:4
-        |vpiDecompile:4
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::KILLED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:4
+          |INT:4
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/YosysEth/builtin.sv, line:30:3, endln:52:11
+      |vpiSigned:1
     |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
@@ -651,6 +716,8 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -715,15 +782,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:57:22, endln:57:30
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:57:33, endln:57:34
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
             |vpiParent:
@@ -732,6 +796,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -768,15 +835,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:60:18, endln:60:26
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:60:29, endln:60:30
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
             |vpiParent:
@@ -785,6 +849,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -821,15 +888,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:63:18, endln:63:26
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:63:29, endln:63:30
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
             |vpiParent:
@@ -838,6 +902,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -881,15 +948,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:66:41, endln:66:42
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
             |vpiParent:
@@ -898,6 +962,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1038,14 +1105,12 @@ Design: (unnamed)
   \_Parameter: (work@udp_complete_64_top.ARP_CACHE_ADDR_WIDTH), line:2:15, endln:2:39
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
-    |UINT:9
     |vpiName:ARP_CACHE_ADDR_WIDTH
     |vpiFullName:work@udp_complete_64_top.ARP_CACHE_ADDR_WIDTH
   |vpiParameter:
   \_Parameter: (work@udp_complete_64_top.ARP_REQUEST_RETRY_COUNT), line:3:15, endln:3:42
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
-    |UINT:4
     |vpiName:ARP_REQUEST_RETRY_COUNT
     |vpiFullName:work@udp_complete_64_top.ARP_REQUEST_RETRY_COUNT
   |vpiParameter:
@@ -1064,34 +1129,30 @@ Design: (unnamed)
   \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_GEN_ENABLE), line:6:15, endln:6:42
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
-    |UINT:1
     |vpiName:UDP_CHECKSUM_GEN_ENABLE
     |vpiFullName:work@udp_complete_64_top.UDP_CHECKSUM_GEN_ENABLE
   |vpiParameter:
   \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_PAYLOAD_FIFO_ADDR_WIDTH), line:7:15, endln:7:56
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
-    |UINT:11
     |vpiName:UDP_CHECKSUM_PAYLOAD_FIFO_ADDR_WIDTH
     |vpiFullName:work@udp_complete_64_top.UDP_CHECKSUM_PAYLOAD_FIFO_ADDR_WIDTH
   |vpiParameter:
   \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_HEADER_FIFO_ADDR_WIDTH), line:8:15, endln:8:54
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
-    |UINT:3
     |vpiName:UDP_CHECKSUM_HEADER_FIFO_ADDR_WIDTH
     |vpiFullName:work@udp_complete_64_top.UDP_CHECKSUM_HEADER_FIFO_ADDR_WIDTH
   |vpiParamAssign:
   \_ParamAssign: , line:2:15, endln:2:39
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
+    |vpiLhs:
+    \_Parameter: (work@udp_complete_64_top.ARP_CACHE_ADDR_WIDTH), line:2:15, endln:2:39
     |vpiRhs:
     \_Constant: , line:2:38, endln:2:39
       |vpiParent:
       \_ParamAssign: , line:2:15, endln:2:39
-      |vpiDecompile:9
-      |vpiSize:64
-      |UINT:9
       |vpiTypespec:
       \_RefTypespec: (work@udp_complete_64_top), line:2:38, endln:2:39
         |vpiParent:
@@ -1100,19 +1161,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@udp_complete_64_top.ARP_CACHE_ADDR_WIDTH), line:2:15, endln:2:39
+      |vpiSize:64
+      |vpiDecompile:9
+      |UINT:9
   |vpiParamAssign:
   \_ParamAssign: , line:3:15, endln:3:42
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
+    |vpiLhs:
+    \_Parameter: (work@udp_complete_64_top.ARP_REQUEST_RETRY_COUNT), line:3:15, endln:3:42
     |vpiRhs:
     \_Constant: , line:3:41, endln:3:42
       |vpiParent:
       \_ParamAssign: , line:3:15, endln:3:42
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
       |vpiTypespec:
       \_RefTypespec: (work@udp_complete_64_top), line:3:41, endln:3:42
         |vpiParent:
@@ -1121,12 +1182,15 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@udp_complete_64_top.ARP_REQUEST_RETRY_COUNT), line:3:15, endln:3:42
+      |vpiSize:64
+      |vpiDecompile:4
+      |UINT:4
   |vpiParamAssign:
   \_ParamAssign: , line:4:15, endln:4:55
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
+    |vpiLhs:
+    \_Parameter: (work@udp_complete_64_top.ARP_REQUEST_RETRY_INTERVAL), line:4:15, endln:4:55
     |vpiRhs:
     \_Operation: , line:4:44, endln:4:55
       |vpiParent:
@@ -1136,9 +1200,6 @@ Design: (unnamed)
       \_Constant: , line:4:44, endln:4:53
         |vpiParent:
         \_Operation: , line:4:44, endln:4:55
-        |vpiDecompile:125000000
-        |vpiSize:64
-        |UINT:125000000
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:4:44, endln:4:53
           |vpiParent:
@@ -1147,13 +1208,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:125000000
+        |UINT:125000000
       |vpiOperand:
       \_Constant: , line:4:54, endln:4:55
         |vpiParent:
         \_Operation: , line:4:44, endln:4:55
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:4:54, endln:4:55
           |vpiParent:
@@ -1162,12 +1223,15 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@udp_complete_64_top.ARP_REQUEST_RETRY_INTERVAL), line:4:15, endln:4:55
+        |vpiSize:64
+        |vpiDecompile:2
+        |UINT:2
   |vpiParamAssign:
   \_ParamAssign: , line:5:15, endln:5:49
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
+    |vpiLhs:
+    \_Parameter: (work@udp_complete_64_top.ARP_REQUEST_TIMEOUT), line:5:15, endln:5:49
     |vpiRhs:
     \_Operation: , line:5:37, endln:5:49
       |vpiParent:
@@ -1177,9 +1241,6 @@ Design: (unnamed)
       \_Constant: , line:5:37, endln:5:46
         |vpiParent:
         \_Operation: , line:5:37, endln:5:49
-        |vpiDecompile:125000000
-        |vpiSize:64
-        |UINT:125000000
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:5:37, endln:5:46
           |vpiParent:
@@ -1188,13 +1249,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:125000000
+        |UINT:125000000
       |vpiOperand:
       \_Constant: , line:5:47, endln:5:49
         |vpiParent:
         \_Operation: , line:5:37, endln:5:49
-        |vpiDecompile:30
-        |vpiSize:64
-        |UINT:30
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:5:47, endln:5:49
           |vpiParent:
@@ -1203,19 +1264,19 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@udp_complete_64_top.ARP_REQUEST_TIMEOUT), line:5:15, endln:5:49
+        |vpiSize:64
+        |vpiDecompile:30
+        |UINT:30
   |vpiParamAssign:
   \_ParamAssign: , line:6:15, endln:6:42
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
+    |vpiLhs:
+    \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_GEN_ENABLE), line:6:15, endln:6:42
     |vpiRhs:
     \_Constant: , line:6:41, endln:6:42
       |vpiParent:
       \_ParamAssign: , line:6:15, endln:6:42
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@udp_complete_64_top), line:6:41, endln:6:42
         |vpiParent:
@@ -1224,19 +1285,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_GEN_ENABLE), line:6:15, endln:6:42
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:7:15, endln:7:56
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
+    |vpiLhs:
+    \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_PAYLOAD_FIFO_ADDR_WIDTH), line:7:15, endln:7:56
     |vpiRhs:
     \_Constant: , line:7:54, endln:7:56
       |vpiParent:
       \_ParamAssign: , line:7:15, endln:7:56
-      |vpiDecompile:11
-      |vpiSize:64
-      |UINT:11
       |vpiTypespec:
       \_RefTypespec: (work@udp_complete_64_top), line:7:54, endln:7:56
         |vpiParent:
@@ -1245,19 +1306,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_PAYLOAD_FIFO_ADDR_WIDTH), line:7:15, endln:7:56
+      |vpiSize:64
+      |vpiDecompile:11
+      |UINT:11
   |vpiParamAssign:
   \_ParamAssign: , line:8:15, endln:8:54
     |vpiParent:
     \_Module: work@udp_complete_64_top (work@udp_complete_64_top), file:${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v, line:1:1, endln:315:10
+    |vpiLhs:
+    \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_HEADER_FIFO_ADDR_WIDTH), line:8:15, endln:8:54
     |vpiRhs:
     \_Constant: , line:8:53, endln:8:54
       |vpiParent:
       \_ParamAssign: , line:8:15, endln:8:54
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
       |vpiTypespec:
       \_RefTypespec: (work@udp_complete_64_top), line:8:53, endln:8:54
         |vpiParent:
@@ -1266,8 +1327,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@udp_complete_64_top.UDP_CHECKSUM_HEADER_FIFO_ADDR_WIDTH), line:8:15, endln:8:54
+      |vpiSize:64
+      |vpiDecompile:3
+      |UINT:3
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -1293,9 +1355,6 @@ Design: (unnamed)
       \_Constant: , line:19:18, endln:19:20
         |vpiParent:
         \_Range: , line:19:17, endln:19:23
-        |vpiDecompile:47
-        |vpiSize:64
-        |UINT:47
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:19:18, endln:19:20
           |vpiParent:
@@ -1304,13 +1363,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:47
+        |UINT:47
       |vpiRightRange:
       \_Constant: , line:19:21, endln:19:22
         |vpiParent:
         \_Range: , line:19:17, endln:19:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:19:21, endln:19:22
           |vpiParent:
@@ -1319,6 +1378,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:21:12, endln:21:16
     |vpiParent:
@@ -1331,9 +1393,6 @@ Design: (unnamed)
       \_Constant: , line:21:18, endln:21:20
         |vpiParent:
         \_Range: , line:21:17, endln:21:23
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:21:18, endln:21:20
           |vpiParent:
@@ -1342,13 +1401,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:15
+        |UINT:15
       |vpiRightRange:
       \_Constant: , line:21:21, endln:21:22
         |vpiParent:
         \_Range: , line:21:17, endln:21:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:21:21, endln:21:22
           |vpiParent:
@@ -1357,6 +1416,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:22:12, endln:22:16
     |vpiParent:
@@ -1369,9 +1431,6 @@ Design: (unnamed)
       \_Constant: , line:22:18, endln:22:20
         |vpiParent:
         \_Range: , line:22:17, endln:22:23
-        |vpiDecompile:63
-        |vpiSize:64
-        |UINT:63
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:22:18, endln:22:20
           |vpiParent:
@@ -1380,13 +1439,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:63
+        |UINT:63
       |vpiRightRange:
       \_Constant: , line:22:21, endln:22:22
         |vpiParent:
         \_Range: , line:22:17, endln:22:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:22:21, endln:22:22
           |vpiParent:
@@ -1395,6 +1454,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:23:12, endln:23:16
     |vpiParent:
@@ -1407,9 +1469,6 @@ Design: (unnamed)
       \_Constant: , line:23:18, endln:23:19
         |vpiParent:
         \_Range: , line:23:17, endln:23:22
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:23:18, endln:23:19
           |vpiParent:
@@ -1418,13 +1477,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:7
+        |UINT:7
       |vpiRightRange:
       \_Constant: , line:23:20, endln:23:21
         |vpiParent:
         \_Range: , line:23:17, endln:23:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:23:20, endln:23:21
           |vpiParent:
@@ -1433,6 +1492,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:49:12, endln:49:16
     |vpiParent:
@@ -1445,9 +1507,6 @@ Design: (unnamed)
       \_Constant: , line:49:18, endln:49:19
         |vpiParent:
         \_Range: , line:49:17, endln:49:22
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:49:18, endln:49:19
           |vpiParent:
@@ -1456,13 +1515,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:5
+        |UINT:5
       |vpiRightRange:
       \_Constant: , line:49:20, endln:49:21
         |vpiParent:
         \_Range: , line:49:17, endln:49:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:49:20, endln:49:21
           |vpiParent:
@@ -1471,6 +1530,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:50:12, endln:50:16
     |vpiParent:
@@ -1483,9 +1545,6 @@ Design: (unnamed)
       \_Constant: , line:50:18, endln:50:19
         |vpiParent:
         \_Range: , line:50:17, endln:50:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:50:18, endln:50:19
           |vpiParent:
@@ -1494,13 +1553,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:50:20, endln:50:21
         |vpiParent:
         \_Range: , line:50:17, endln:50:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:50:20, endln:50:21
           |vpiParent:
@@ -1509,6 +1568,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:54:12, endln:54:16
     |vpiParent:
@@ -1521,9 +1583,6 @@ Design: (unnamed)
       \_Constant: , line:54:18, endln:54:20
         |vpiParent:
         \_Range: , line:54:17, endln:54:23
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:54:18, endln:54:20
           |vpiParent:
@@ -1532,13 +1591,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:54:21, endln:54:22
         |vpiParent:
         \_Range: , line:54:17, endln:54:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:54:21, endln:54:22
           |vpiParent:
@@ -1547,6 +1606,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:71:12, endln:71:16
     |vpiParent:
@@ -1559,9 +1621,6 @@ Design: (unnamed)
       \_Constant: , line:71:18, endln:71:19
         |vpiParent:
         \_Range: , line:71:17, endln:71:22
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:71:18, endln:71:19
           |vpiParent:
@@ -1570,13 +1629,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:3
+        |UINT:3
       |vpiRightRange:
       \_Constant: , line:71:20, endln:71:21
         |vpiParent:
         \_Range: , line:71:17, endln:71:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:71:20, endln:71:21
           |vpiParent:
@@ -1585,6 +1644,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:77:12, endln:77:16
     |vpiParent:
@@ -1597,9 +1659,6 @@ Design: (unnamed)
       \_Constant: , line:77:18, endln:77:19
         |vpiParent:
         \_Range: , line:77:17, endln:77:22
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:77:18, endln:77:19
           |vpiParent:
@@ -1608,13 +1667,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:2
+        |UINT:2
       |vpiRightRange:
       \_Constant: , line:77:20, endln:77:21
         |vpiParent:
         \_Range: , line:77:17, endln:77:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:77:20, endln:77:21
           |vpiParent:
@@ -1623,6 +1682,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:78:12, endln:78:16
     |vpiParent:
@@ -1635,9 +1697,6 @@ Design: (unnamed)
       \_Constant: , line:78:18, endln:78:20
         |vpiParent:
         \_Range: , line:78:17, endln:78:23
-        |vpiDecompile:12
-        |vpiSize:64
-        |UINT:12
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:78:18, endln:78:20
           |vpiParent:
@@ -1646,13 +1705,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:12
+        |UINT:12
       |vpiRightRange:
       \_Constant: , line:78:21, endln:78:22
         |vpiParent:
         \_Range: , line:78:17, endln:78:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@udp_complete_64_top), line:78:21, endln:78:22
           |vpiParent:
@@ -1661,6 +1720,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:

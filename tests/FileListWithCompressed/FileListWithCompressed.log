@@ -296,8 +296,8 @@ Design: (unnamed)
     \_IODecl: (value), line:3:43, endln:3:48
       |vpiParent:
       \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
-      |vpiDirection:1
       |vpiName:value
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (prim_util_pkg::vbits::value), line:3:35, endln:3:42
         |vpiParent:
@@ -331,9 +331,6 @@ Design: (unnamed)
           \_Constant: , line:4:22, endln:4:23
             |vpiParent:
             \_Operation: , line:4:13, endln:4:23
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (prim_util_pkg::vbits), line:4:22, endln:4:23
               |vpiParent:
@@ -342,13 +339,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
         |vpiOperand:
         \_Constant: , line:4:27, endln:4:28
           |vpiParent:
           \_Operation: , line:4:12, endln:4:44
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (prim_util_pkg::vbits), line:4:27, endln:4:28
             |vpiParent:
@@ -357,10 +354,18 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiOperand:
         \_SysFuncCall: ($clog2), line:4:31, endln:4:44
           |vpiParent:
           \_Operation: , line:4:12, endln:4:44
+          |vpiName:
+          \_Identifier: ($clog2), line:4:32, endln:4:37
+            |vpiParent:
+            \_SysFuncCall: ($clog2), line:4:31, endln:4:44
+            |vpiName:$clog2
           |vpiArgument:
           \_RefObj: (prim_util_pkg::vbits::value), line:4:38, endln:4:43
             |vpiParent:
@@ -369,11 +374,6 @@ Design: (unnamed)
             |vpiFullName:prim_util_pkg::vbits::value
             |vpiActual:
             \_IODecl: (value), line:3:43, endln:3:48
-          |vpiName:
-          \_Identifier: ($clog2), line:4:32, endln:4:37
-            |vpiParent:
-            \_SysFuncCall: ($clog2), line:4:31, endln:4:44
-            |vpiName:$clog2
     |vpiInstance:
     \_Package: prim_util_pkg (prim_util_pkg), file:${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv, line:1:1, endln:7:11
   |vpiImportTypespec:
@@ -403,9 +403,6 @@ Design: (unnamed)
     \_Constant: , line:5:23, endln:5:28
       |vpiParent:
       \_ImportTypespec: (prim_util_pkg), line:5:8, endln:5:28
-      |vpiDecompile:vbits
-      |vpiSize:40
-      |STRING:vbits
       |vpiTypespec:
       \_RefTypespec: (work@foo.prim_util_pkg), line:5:23, endln:5:28
         |vpiParent:
@@ -414,6 +411,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:40
+      |vpiDecompile:vbits
+      |STRING:vbits
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -439,15 +439,17 @@ Design: (unnamed)
         \_FuncCall: (vbits), line:6:8, endln:6:15
           |vpiParent:
           \_Operation: , line:6:8, endln:6:18
+          |vpiName:
+          \_Identifier: (vbits), line:6:8, endln:6:13
+            |vpiParent:
+            \_FuncCall: (vbits), line:6:8, endln:6:15
+            |vpiName:vbits
           |vpiTaskFunc:
           \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
           |vpiArgument:
           \_Constant: , line:6:14, endln:6:15
             |vpiParent:
             \_FuncCall: (vbits), line:6:8, endln:6:15
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
             |vpiTypespec:
             \_RefTypespec: (work@foo), line:6:14, endln:6:15
               |vpiParent:
@@ -456,18 +458,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiName:
-          \_Identifier: (vbits), line:6:8, endln:6:13
-            |vpiParent:
-            \_FuncCall: (vbits), line:6:8, endln:6:15
-            |vpiName:vbits
+            |vpiSize:64
+            |vpiDecompile:4
+            |UINT:4
         |vpiOperand:
         \_Constant: , line:6:17, endln:6:18
           |vpiParent:
           \_Operation: , line:6:8, endln:6:18
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@foo), line:6:17, endln:6:18
             |vpiParent:
@@ -476,13 +473,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:6:19, endln:6:20
         |vpiParent:
         \_Range: , line:6:7, endln:6:21
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@foo), line:6:19, endln:6:20
           |vpiParent:
@@ -491,6 +488,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_ImportTypespec: (prim_util_pkg), line:5:8, endln:5:28
   |vpiImportTypespec:
@@ -580,6 +580,14 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@foo), line:7:23, endln:9:4
           |vpiOpType:82
+          |vpiLhs:
+          \_RefObj: (work@foo.a), line:8:5, endln:8:6
+            |vpiParent:
+            \_Assignment: , line:8:5, endln:8:18
+            |vpiName:a
+            |vpiFullName:work@foo.a
+            |vpiActual:
+            \_Net: (work@foo.a), line:6:22, endln:6:23
           |vpiRhs:
           \_Operation: , line:8:10, endln:8:18
             |vpiParent:
@@ -597,9 +605,6 @@ Design: (unnamed)
             \_Constant: , line:8:14, endln:8:18
               |vpiParent:
               \_Operation: , line:8:10, endln:8:18
-              |vpiDecompile:1'b1
-              |vpiSize:1
-              |BIN:1
               |vpiTypespec:
               \_RefTypespec: (work@foo), line:8:14, endln:8:18
                 |vpiParent:
@@ -608,19 +613,22 @@ Design: (unnamed)
                 |vpiActual:
                 \_BitTypespec: 
               |vpiConstType:3
-          |vpiLhs:
-          \_RefObj: (work@foo.a), line:8:5, endln:8:6
-            |vpiParent:
-            \_Assignment: , line:8:5, endln:8:18
-            |vpiName:a
-            |vpiFullName:work@foo.a
-            |vpiActual:
-            \_Net: (work@foo.a), line:6:22, endln:6:23
+              |vpiSize:1
+              |vpiDecompile:1'b1
+              |BIN:1
     |vpiAlwaysType:1
   |vpiContAssign:
   \_ContAssign: , line:10:8, endln:10:18
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
+    |vpiLhs:
+    \_RefObj: (work@foo.out), line:10:8, endln:10:11
+      |vpiParent:
+      \_ContAssign: , line:10:8, endln:10:18
+      |vpiName:out
+      |vpiFullName:work@foo.out
+      |vpiActual:
+      \_Net: (work@foo.out), line:3:12, endln:3:15
     |vpiRhs:
     \_BitSelect: (work@foo.a), line:10:15, endln:10:18
       |vpiParent:
@@ -633,9 +641,6 @@ Design: (unnamed)
       \_Constant: , line:10:16, endln:10:17
         |vpiParent:
         \_BitSelect: (work@foo.a), line:10:15, endln:10:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@foo.a), line:10:16, endln:10:17
           |vpiParent:
@@ -644,14 +649,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_RefObj: (work@foo.out), line:10:8, endln:10:11
-      |vpiParent:
-      \_ContAssign: , line:10:8, endln:10:18
-      |vpiName:out
-      |vpiFullName:work@foo.out
-      |vpiActual:
-      \_Net: (work@foo.out), line:3:12, endln:3:15
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
 |vpiTypespec:
 \_ModuleTypespec: (work@foo)
   |vpiParent:

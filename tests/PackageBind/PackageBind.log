@@ -250,6 +250,14 @@ Design: (unnamed)
             \_Begin: (prim_util_pkg::_clog2), line:5:45, endln:7:10
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (prim_util_pkg::_clog2::value), line:6:3, endln:6:8
+              |vpiParent:
+              \_Assignment: , line:6:3, endln:6:21
+              |vpiName:value
+              |vpiFullName:prim_util_pkg::_clog2::value
+              |vpiActual:
+              \_IODecl: (value), line:2:46, endln:2:51
             |vpiRhs:
             \_Operation: , line:6:11, endln:6:21
               |vpiParent:
@@ -267,9 +275,6 @@ Design: (unnamed)
               \_Constant: , line:6:20, endln:6:21
                 |vpiParent:
                 \_Operation: , line:6:11, endln:6:21
-                |vpiDecompile:1
-                |vpiSize:64
-                |UINT:1
                 |vpiTypespec:
                 \_RefTypespec: (prim_util_pkg::_clog2), line:6:20, endln:6:21
                   |vpiParent:
@@ -278,33 +283,13 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:9
-            |vpiLhs:
-            \_RefObj: (prim_util_pkg::_clog2::value), line:6:3, endln:6:8
-              |vpiParent:
-              \_Assignment: , line:6:3, endln:6:21
-              |vpiName:value
-              |vpiFullName:prim_util_pkg::_clog2::value
-              |vpiActual:
-              \_IODecl: (value), line:2:46, endln:2:51
+                |vpiSize:64
+                |vpiDecompile:1
+                |UINT:1
         |vpiForInitStmt:
         \_Assignment: , line:5:12, endln:5:22
           |vpiParent:
           \_ForStmt: (prim_util_pkg::_clog2), line:5:7, endln:7:10
-          |vpiRhs:
-          \_Constant: , line:5:21, endln:5:22
-            |vpiParent:
-            \_Assignment: , line:5:12, endln:5:22
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (prim_util_pkg::_clog2), line:5:21, endln:5:22
-              |vpiParent:
-              \_Constant: , line:5:21, endln:5:22
-              |vpiFullName:prim_util_pkg::_clog2
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (prim_util_pkg::_clog2::result), line:5:12, endln:5:18
             |vpiParent:
@@ -313,6 +298,21 @@ Design: (unnamed)
             |vpiFullName:prim_util_pkg::_clog2::result
             |vpiActual:
             \_Variable: (prim_util_pkg::_clog2::result), line:3:15, endln:3:21
+          |vpiRhs:
+          \_Constant: , line:5:21, endln:5:22
+            |vpiParent:
+            \_Assignment: , line:5:12, endln:5:22
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::_clog2), line:5:21, endln:5:22
+              |vpiParent:
+              \_Constant: , line:5:21, endln:5:22
+              |vpiFullName:prim_util_pkg::_clog2
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiForIncStmt:
         \_Operation: , line:5:35, endln:5:43
           |vpiParent:
@@ -343,9 +343,6 @@ Design: (unnamed)
           \_Constant: , line:5:32, endln:5:33
             |vpiParent:
             \_Operation: , line:5:24, endln:5:33
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (prim_util_pkg::_clog2), line:5:32, endln:5:33
               |vpiParent:
@@ -354,6 +351,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
         |vpiStmt:
         \_Begin: (prim_util_pkg::_clog2), line:5:45, endln:7:10
       |vpiTypespec:
@@ -405,8 +405,8 @@ Design: (unnamed)
     \_IODecl: (value), line:2:46, endln:2:51
       |vpiParent:
       \_Function: (prim_util_pkg::_clog2), line:2:4, endln:9:15
-      |vpiDirection:1
       |vpiName:value
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (prim_util_pkg::_clog2::value), line:2:38, endln:2:45
         |vpiParent:
@@ -478,32 +478,6 @@ Design: (unnamed)
   \_ContAssign: , line:13:11, endln:13:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageBind/dut.sv, line:12:1, endln:14:10
-    |vpiRhs:
-    \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
-      |vpiParent:
-      \_ContAssign: , line:13:11, endln:13:40
-      |vpiTaskFunc:
-      \_Function: (prim_util_pkg::_clog2), line:2:4, endln:9:15
-      |vpiArgument:
-      \_Constant: , line:13:37, endln:13:39
-        |vpiParent:
-        \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
-        |vpiTypespec:
-        \_RefTypespec: (work@top), line:13:37, endln:13:39
-          |vpiParent:
-          \_Constant: , line:13:37, endln:13:39
-          |vpiFullName:work@top
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-      |vpiName:
-      \_Identifier: (prim_util_pkg::_clog2), line:13:15, endln:13:36
-        |vpiParent:
-        \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
-        |vpiName:prim_util_pkg::_clog2
     |vpiLhs:
     \_RefObj: (work@top.o), line:13:11, endln:13:12
       |vpiParent:
@@ -512,6 +486,32 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_Net: (work@top.o), line:12:27, endln:12:28
+    |vpiRhs:
+    \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
+      |vpiParent:
+      \_ContAssign: , line:13:11, endln:13:40
+      |vpiName:
+      \_Identifier: (prim_util_pkg::_clog2), line:13:15, endln:13:36
+        |vpiParent:
+        \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
+        |vpiName:prim_util_pkg::_clog2
+      |vpiTaskFunc:
+      \_Function: (prim_util_pkg::_clog2), line:2:4, endln:9:15
+      |vpiArgument:
+      \_Constant: , line:13:37, endln:13:39
+        |vpiParent:
+        \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:13:37, endln:13:39
+          |vpiParent:
+          \_Constant: , line:13:37, endln:13:39
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:15
+        |UINT:15
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

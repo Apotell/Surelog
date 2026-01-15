@@ -712,7 +712,7 @@ Begin                                                  3
 BitTypespec                                            3
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              48
+Constant                                              53
 ContAssign                                             6
 Design                                                 1
 EnumConst                                              5
@@ -723,7 +723,7 @@ Function                                               9
 IODecl                                                11
 Identifier                                            30
 IfElse                                                 1
-IntTypespec                                           61
+IntTypespec                                           66
 LogicTypespec                                         17
 Module                                                 1
 ModuleTypespec                                         1
@@ -734,14 +734,14 @@ PartSelect                                             3
 Port                                                  12
 Range                                                 14
 RefObj                                                27
-RefTypespec                                           84
+RefTypespec                                           89
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 Variable                                               7
 ------------------------------------------------------------
-Total:                                               400
+Total:                                               415
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DelayAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -850,15 +850,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:3:23, endln:3:28
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:3:31, endln:3:32
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
             |vpiParent:
@@ -867,6 +864,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -916,8 +916,8 @@ Design: (unnamed)
       \_IODecl: (message), line:9:15, endln:9:22
         |vpiParent:
         \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
       |vpiParent:
@@ -947,8 +947,8 @@ Design: (unnamed)
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
       |vpiParent:
@@ -965,8 +965,8 @@ Design: (unnamed)
       \_IODecl: (message), line:15:19, endln:15:26
         |vpiParent:
         \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
       |vpiParent:
@@ -997,8 +997,8 @@ Design: (unnamed)
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
       |vpiParent:
@@ -1015,8 +1015,8 @@ Design: (unnamed)
       \_IODecl: (message), line:21:20, endln:21:27
         |vpiParent:
         \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
       |vpiParent:
@@ -1047,8 +1047,8 @@ Design: (unnamed)
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiImportTypespec:
@@ -1188,41 +1188,106 @@ Design: (unnamed)
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::FINISHED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:0
+          |INT:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::RUNNING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:1
+          |INT:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
-        |INT:2
-        |vpiDecompile:2
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::WAITING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:2
+          |INT:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::SUSPENDED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:3
+          |INT:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
-        |INT:4
-        |vpiDecompile:4
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::KILLED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:4
+          |INT:4
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/DelayAssign/builtin.sv, line:30:3, endln:52:11
+      |vpiSigned:1
     |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
@@ -1241,6 +1306,8 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -1305,15 +1372,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:57:22, endln:57:30
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:57:33, endln:57:34
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
             |vpiParent:
@@ -1322,6 +1386,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -1358,15 +1425,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:60:18, endln:60:26
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:60:29, endln:60:30
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
             |vpiParent:
@@ -1375,6 +1439,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -1411,15 +1478,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:63:18, endln:63:26
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:63:29, endln:63:30
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
             |vpiParent:
@@ -1428,6 +1492,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -1471,15 +1538,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:66:41, endln:66:42
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
             |vpiParent:
@@ -1488,6 +1552,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1745,9 +1812,6 @@ Design: (unnamed)
       \_Constant: , line:22:12, endln:22:13
         |vpiParent:
         \_Range: , line:22:10, endln:22:16
-        |vpiDecompile:6
-        |vpiSize:64
-        |UINT:6
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM), line:22:12, endln:22:13
           |vpiParent:
@@ -1756,13 +1820,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:6
+        |UINT:6
       |vpiRightRange:
       \_Constant: , line:22:14, endln:22:15
         |vpiParent:
         \_Range: , line:22:10, endln:22:16
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM), line:22:14, endln:22:15
           |vpiParent:
@@ -1771,6 +1835,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:23:10, endln:23:16
     |vpiParent:
@@ -1783,9 +1850,6 @@ Design: (unnamed)
       \_Constant: , line:23:12, endln:23:13
         |vpiParent:
         \_Range: , line:23:10, endln:23:16
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM), line:23:12, endln:23:13
           |vpiParent:
@@ -1794,13 +1858,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:23:14, endln:23:15
         |vpiParent:
         \_Range: , line:23:10, endln:23:16
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM), line:23:14, endln:23:15
           |vpiParent:
@@ -1809,6 +1873,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:24:10, endln:24:16
     |vpiParent:
@@ -1821,9 +1888,6 @@ Design: (unnamed)
       \_Constant: , line:24:11, endln:24:13
         |vpiParent:
         \_Range: , line:24:10, endln:24:16
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM), line:24:11, endln:24:13
           |vpiParent:
@@ -1832,13 +1896,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:24:14, endln:24:15
         |vpiParent:
         \_Range: , line:24:10, endln:24:16
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM), line:24:14, endln:24:15
           |vpiParent:
@@ -1847,6 +1911,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_BitTypespec: , line:34:3, endln:34:6
     |vpiParent:
@@ -2236,14 +2303,6 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@SimDTM), line:56:3, endln:78:6
           |vpiOpType:82
-          |vpiRhs:
-          \_RefObj: (work@SimDTM.reset), line:57:16, endln:57:21
-            |vpiParent:
-            \_Assignment: , line:57:5, endln:57:21
-            |vpiName:reset
-            |vpiFullName:work@SimDTM.reset
-            |vpiActual:
-            \_Net: (work@SimDTM.reset), line:18:9, endln:18:14
           |vpiLhs:
           \_RefObj: (work@SimDTM.r_reset), line:57:5, endln:57:12
             |vpiParent:
@@ -2252,6 +2311,14 @@ Design: (unnamed)
             |vpiFullName:work@SimDTM.r_reset
             |vpiActual:
             \_Variable: (work@SimDTM.r_reset), line:34:7, endln:34:14
+          |vpiRhs:
+          \_RefObj: (work@SimDTM.reset), line:57:16, endln:57:21
+            |vpiParent:
+            \_Assignment: , line:57:5, endln:57:21
+            |vpiName:reset
+            |vpiFullName:work@SimDTM.reset
+            |vpiActual:
+            \_Net: (work@SimDTM.reset), line:18:9, endln:18:14
         |vpiStmt:
         \_IfElse: , line:58:5, endln:77:8
           |vpiParent:
@@ -2294,21 +2361,6 @@ Design: (unnamed)
               \_Begin: (work@SimDTM), line:59:5, endln:63:8
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:60:27, endln:60:28
-                |vpiParent:
-                \_Assignment: , line:60:7, endln:60:28
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
-                |vpiTypespec:
-                \_RefTypespec: (work@SimDTM), line:60:27, endln:60:28
-                  |vpiParent:
-                  \_Constant: , line:60:27, endln:60:28
-                  |vpiFullName:work@SimDTM
-                  |vpiActual:
-                  \_IntTypespec: 
-                |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@SimDTM.__debug_req_valid), line:60:7, endln:60:24
                 |vpiParent:
@@ -2317,27 +2369,27 @@ Design: (unnamed)
                 |vpiFullName:work@SimDTM.__debug_req_valid
                 |vpiActual:
                 \_Variable: (work@SimDTM.__debug_req_valid), line:41:7, endln:41:24
+              |vpiRhs:
+              \_Constant: , line:60:27, endln:60:28
+                |vpiParent:
+                \_Assignment: , line:60:7, endln:60:28
+                |vpiTypespec:
+                \_RefTypespec: (work@SimDTM), line:60:27, endln:60:28
+                  |vpiParent:
+                  \_Constant: , line:60:27, endln:60:28
+                  |vpiFullName:work@SimDTM
+                  |vpiActual:
+                  \_IntTypespec: 
+                |vpiConstType:9
+                |vpiSize:64
+                |vpiDecompile:0
+                |UINT:0
             |vpiStmt:
             \_Assignment: , line:61:7, endln:61:29
               |vpiParent:
               \_Begin: (work@SimDTM), line:59:5, endln:63:8
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:61:28, endln:61:29
-                |vpiParent:
-                \_Assignment: , line:61:7, endln:61:29
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
-                |vpiTypespec:
-                \_RefTypespec: (work@SimDTM), line:61:28, endln:61:29
-                  |vpiParent:
-                  \_Constant: , line:61:28, endln:61:29
-                  |vpiFullName:work@SimDTM
-                  |vpiActual:
-                  \_IntTypespec: 
-                |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@SimDTM.__debug_resp_ready), line:61:7, endln:61:25
                 |vpiParent:
@@ -2346,27 +2398,27 @@ Design: (unnamed)
                 |vpiFullName:work@SimDTM.__debug_resp_ready
                 |vpiActual:
                 \_Variable: (work@SimDTM.__debug_resp_ready), line:45:7, endln:45:25
+              |vpiRhs:
+              \_Constant: , line:61:28, endln:61:29
+                |vpiParent:
+                \_Assignment: , line:61:7, endln:61:29
+                |vpiTypespec:
+                \_RefTypespec: (work@SimDTM), line:61:28, endln:61:29
+                  |vpiParent:
+                  \_Constant: , line:61:28, endln:61:29
+                  |vpiFullName:work@SimDTM
+                  |vpiActual:
+                  \_IntTypespec: 
+                |vpiConstType:9
+                |vpiSize:64
+                |vpiDecompile:0
+                |UINT:0
             |vpiStmt:
             \_Assignment: , line:62:7, endln:62:17
               |vpiParent:
               \_Begin: (work@SimDTM), line:59:5, endln:63:8
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:62:16, endln:62:17
-                |vpiParent:
-                \_Assignment: , line:62:7, endln:62:17
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
-                |vpiTypespec:
-                \_RefTypespec: (work@SimDTM), line:62:16, endln:62:17
-                  |vpiParent:
-                  \_Constant: , line:62:16, endln:62:17
-                  |vpiFullName:work@SimDTM
-                  |vpiActual:
-                  \_IntTypespec: 
-                |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@SimDTM.__exit), line:62:7, endln:62:13
                 |vpiParent:
@@ -2375,6 +2427,21 @@ Design: (unnamed)
                 |vpiFullName:work@SimDTM.__exit
                 |vpiActual:
                 \_Variable: (work@SimDTM.__exit), line:46:7, endln:46:13
+              |vpiRhs:
+              \_Constant: , line:62:16, endln:62:17
+                |vpiParent:
+                \_Assignment: , line:62:7, endln:62:17
+                |vpiTypespec:
+                \_RefTypespec: (work@SimDTM), line:62:16, endln:62:17
+                  |vpiParent:
+                  \_Constant: , line:62:16, endln:62:17
+                  |vpiFullName:work@SimDTM
+                  |vpiActual:
+                  \_IntTypespec: 
+                |vpiConstType:9
+                |vpiSize:64
+                |vpiDecompile:0
+                |UINT:0
           |vpiElseStmt:
           \_Begin: (work@SimDTM), line:65:5, endln:77:8
             |vpiParent:
@@ -2386,10 +2453,23 @@ Design: (unnamed)
               \_Begin: (work@SimDTM), line:65:5, endln:77:8
               |vpiOpType:82
               |vpiBlocking:1
+              |vpiLhs:
+              \_RefObj: (work@SimDTM.__exit), line:66:7, endln:66:13
+                |vpiParent:
+                \_Assignment: , line:66:7, endln:76:8
+                |vpiName:__exit
+                |vpiFullName:work@SimDTM.__exit
+                |vpiActual:
+                \_Variable: (work@SimDTM.__exit), line:46:7, endln:46:13
               |vpiRhs:
               \_FuncCall: (debug_tick), line:66:16, endln:76:8
                 |vpiParent:
                 \_Assignment: , line:66:7, endln:76:8
+                |vpiName:
+                \_Identifier: (debug_tick), line:66:16, endln:66:26
+                  |vpiParent:
+                  \_FuncCall: (debug_tick), line:66:16, endln:76:8
+                  |vpiName:debug_tick
                 |vpiArgument:
                 \_RefObj: (work@SimDTM.__debug_req_valid), line:67:9, endln:67:26
                   |vpiParent:
@@ -2462,19 +2542,6 @@ Design: (unnamed)
                   |vpiFullName:work@SimDTM.__debug_resp_bits_data
                   |vpiActual:
                   \_Net: (work@SimDTM.__debug_resp_bits_data), line:39:20, endln:39:42
-                |vpiName:
-                \_Identifier: (debug_tick), line:66:16, endln:66:26
-                  |vpiParent:
-                  \_FuncCall: (debug_tick), line:66:16, endln:76:8
-                  |vpiName:debug_tick
-              |vpiLhs:
-              \_RefObj: (work@SimDTM.__exit), line:66:7, endln:66:13
-                |vpiParent:
-                \_Assignment: , line:66:7, endln:76:8
-                |vpiName:__exit
-                |vpiFullName:work@SimDTM.__exit
-                |vpiActual:
-                \_Variable: (work@SimDTM.__exit), line:46:7, endln:46:13
     |vpiAlwaysType:1
   |vpiContAssign:
   \_ContAssign: , line:48:10, endln:48:50
@@ -2484,9 +2551,6 @@ Design: (unnamed)
     \_Constant: , line:48:10, endln:48:14
       |vpiParent:
       \_ContAssign: , line:48:10, endln:48:50
-      |vpiDecompile:#0.1
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@SimDTM), line:48:10, endln:48:14
         |vpiParent:
@@ -2495,14 +2559,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiRhs:
-    \_RefObj: (work@SimDTM.__debug_req_valid), line:48:33, endln:48:50
-      |vpiParent:
-      \_ContAssign: , line:48:10, endln:48:50
-      |vpiName:__debug_req_valid
-      |vpiFullName:work@SimDTM.__debug_req_valid
-      |vpiActual:
-      \_Variable: (work@SimDTM.__debug_req_valid), line:41:7, endln:41:24
+      |vpiSize:64
+      |vpiDecompile:#0.1
+      |UINT:0
     |vpiLhs:
     \_RefObj: (work@SimDTM.debug_req_valid), line:48:15, endln:48:30
       |vpiParent:
@@ -2511,6 +2570,14 @@ Design: (unnamed)
       |vpiFullName:work@SimDTM.debug_req_valid
       |vpiActual:
       \_Net: (work@SimDTM.debug_req_valid), line:20:17, endln:20:32
+    |vpiRhs:
+    \_RefObj: (work@SimDTM.__debug_req_valid), line:48:33, endln:48:50
+      |vpiParent:
+      \_ContAssign: , line:48:10, endln:48:50
+      |vpiName:__debug_req_valid
+      |vpiFullName:work@SimDTM.__debug_req_valid
+      |vpiActual:
+      \_Variable: (work@SimDTM.__debug_req_valid), line:41:7, endln:41:24
   |vpiContAssign:
   \_ContAssign: , line:49:10, endln:49:63
     |vpiParent:
@@ -2519,9 +2586,6 @@ Design: (unnamed)
     \_Constant: , line:49:10, endln:49:14
       |vpiParent:
       \_ContAssign: , line:49:10, endln:49:63
-      |vpiDecompile:#0.1
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@SimDTM), line:49:10, endln:49:14
         |vpiParent:
@@ -2530,6 +2594,17 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:#0.1
+      |UINT:0
+    |vpiLhs:
+    \_RefObj: (work@SimDTM.debug_req_bits_addr), line:49:15, endln:49:34
+      |vpiParent:
+      \_ContAssign: , line:49:10, endln:49:63
+      |vpiName:debug_req_bits_addr
+      |vpiFullName:work@SimDTM.debug_req_bits_addr
+      |vpiActual:
+      \_Net: (work@SimDTM.debug_req_bits_addr), line:22:17, endln:22:36
     |vpiRhs:
     \_PartSelect: __debug_req_bits_addr (work@SimDTM.__debug_req_bits_addr), line:49:37, endln:49:63
       |vpiParent:
@@ -2544,9 +2619,6 @@ Design: (unnamed)
       \_Constant: , line:49:59, endln:49:60
         |vpiParent:
         \_PartSelect: __debug_req_bits_addr (work@SimDTM.__debug_req_bits_addr), line:49:37, endln:49:63
-        |vpiDecompile:6
-        |vpiSize:64
-        |UINT:6
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM.__debug_req_bits_addr), line:49:59, endln:49:60
           |vpiParent:
@@ -2555,13 +2627,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:6
+        |UINT:6
       |vpiRightRange:
       \_Constant: , line:49:61, endln:49:62
         |vpiParent:
         \_PartSelect: __debug_req_bits_addr (work@SimDTM.__debug_req_bits_addr), line:49:37, endln:49:63
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM.__debug_req_bits_addr), line:49:61, endln:49:62
           |vpiParent:
@@ -2570,14 +2642,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_RefObj: (work@SimDTM.debug_req_bits_addr), line:49:15, endln:49:34
-      |vpiParent:
-      \_ContAssign: , line:49:10, endln:49:63
-      |vpiName:debug_req_bits_addr
-      |vpiFullName:work@SimDTM.debug_req_bits_addr
-      |vpiActual:
-      \_Net: (work@SimDTM.debug_req_bits_addr), line:22:17, endln:22:36
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiContAssign:
   \_ContAssign: , line:50:10, endln:50:59
     |vpiParent:
@@ -2586,9 +2653,6 @@ Design: (unnamed)
     \_Constant: , line:50:10, endln:50:14
       |vpiParent:
       \_ContAssign: , line:50:10, endln:50:59
-      |vpiDecompile:#0.1
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@SimDTM), line:50:10, endln:50:14
         |vpiParent:
@@ -2597,6 +2661,17 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:#0.1
+      |UINT:0
+    |vpiLhs:
+    \_RefObj: (work@SimDTM.debug_req_bits_op), line:50:15, endln:50:32
+      |vpiParent:
+      \_ContAssign: , line:50:10, endln:50:59
+      |vpiName:debug_req_bits_op
+      |vpiFullName:work@SimDTM.debug_req_bits_op
+      |vpiActual:
+      \_Net: (work@SimDTM.debug_req_bits_op), line:23:17, endln:23:34
     |vpiRhs:
     \_PartSelect: __debug_req_bits_op (work@SimDTM.__debug_req_bits_op), line:50:35, endln:50:59
       |vpiParent:
@@ -2611,9 +2686,6 @@ Design: (unnamed)
       \_Constant: , line:50:55, endln:50:56
         |vpiParent:
         \_PartSelect: __debug_req_bits_op (work@SimDTM.__debug_req_bits_op), line:50:35, endln:50:59
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM.__debug_req_bits_op), line:50:55, endln:50:56
           |vpiParent:
@@ -2622,13 +2694,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:50:57, endln:50:58
         |vpiParent:
         \_PartSelect: __debug_req_bits_op (work@SimDTM.__debug_req_bits_op), line:50:35, endln:50:59
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM.__debug_req_bits_op), line:50:57, endln:50:58
           |vpiParent:
@@ -2637,14 +2709,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_RefObj: (work@SimDTM.debug_req_bits_op), line:50:15, endln:50:32
-      |vpiParent:
-      \_ContAssign: , line:50:10, endln:50:59
-      |vpiName:debug_req_bits_op
-      |vpiFullName:work@SimDTM.debug_req_bits_op
-      |vpiActual:
-      \_Net: (work@SimDTM.debug_req_bits_op), line:23:17, endln:23:34
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiContAssign:
   \_ContAssign: , line:51:10, endln:51:64
     |vpiParent:
@@ -2653,9 +2720,6 @@ Design: (unnamed)
     \_Constant: , line:51:10, endln:51:14
       |vpiParent:
       \_ContAssign: , line:51:10, endln:51:64
-      |vpiDecompile:#0.1
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@SimDTM), line:51:10, endln:51:14
         |vpiParent:
@@ -2664,6 +2728,17 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:#0.1
+      |UINT:0
+    |vpiLhs:
+    \_RefObj: (work@SimDTM.debug_req_bits_data), line:51:15, endln:51:34
+      |vpiParent:
+      \_ContAssign: , line:51:10, endln:51:64
+      |vpiName:debug_req_bits_data
+      |vpiFullName:work@SimDTM.debug_req_bits_data
+      |vpiActual:
+      \_Net: (work@SimDTM.debug_req_bits_data), line:24:17, endln:24:36
     |vpiRhs:
     \_PartSelect: __debug_req_bits_data (work@SimDTM.__debug_req_bits_data), line:51:37, endln:51:64
       |vpiParent:
@@ -2678,9 +2753,6 @@ Design: (unnamed)
       \_Constant: , line:51:59, endln:51:61
         |vpiParent:
         \_PartSelect: __debug_req_bits_data (work@SimDTM.__debug_req_bits_data), line:51:37, endln:51:64
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM.__debug_req_bits_data), line:51:59, endln:51:61
           |vpiParent:
@@ -2689,13 +2761,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:51:62, endln:51:63
         |vpiParent:
         \_PartSelect: __debug_req_bits_data (work@SimDTM.__debug_req_bits_data), line:51:37, endln:51:64
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@SimDTM.__debug_req_bits_data), line:51:62, endln:51:63
           |vpiParent:
@@ -2704,14 +2776,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_RefObj: (work@SimDTM.debug_req_bits_data), line:51:15, endln:51:34
-      |vpiParent:
-      \_ContAssign: , line:51:10, endln:51:64
-      |vpiName:debug_req_bits_data
-      |vpiFullName:work@SimDTM.debug_req_bits_data
-      |vpiActual:
-      \_Net: (work@SimDTM.debug_req_bits_data), line:24:17, endln:24:36
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiContAssign:
   \_ContAssign: , line:52:10, endln:52:52
     |vpiParent:
@@ -2720,9 +2787,6 @@ Design: (unnamed)
     \_Constant: , line:52:10, endln:52:14
       |vpiParent:
       \_ContAssign: , line:52:10, endln:52:52
-      |vpiDecompile:#0.1
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@SimDTM), line:52:10, endln:52:14
         |vpiParent:
@@ -2731,14 +2795,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiRhs:
-    \_RefObj: (work@SimDTM.__debug_resp_ready), line:52:34, endln:52:52
-      |vpiParent:
-      \_ContAssign: , line:52:10, endln:52:52
-      |vpiName:__debug_resp_ready
-      |vpiFullName:work@SimDTM.__debug_resp_ready
-      |vpiActual:
-      \_Variable: (work@SimDTM.__debug_resp_ready), line:45:7, endln:45:25
+      |vpiSize:64
+      |vpiDecompile:#0.1
+      |UINT:0
     |vpiLhs:
     \_RefObj: (work@SimDTM.debug_resp_ready), line:52:15, endln:52:31
       |vpiParent:
@@ -2747,6 +2806,14 @@ Design: (unnamed)
       |vpiFullName:work@SimDTM.debug_resp_ready
       |vpiActual:
       \_Net: (work@SimDTM.debug_resp_ready), line:27:17, endln:27:33
+    |vpiRhs:
+    \_RefObj: (work@SimDTM.__debug_resp_ready), line:52:34, endln:52:52
+      |vpiParent:
+      \_ContAssign: , line:52:10, endln:52:52
+      |vpiName:__debug_resp_ready
+      |vpiFullName:work@SimDTM.__debug_resp_ready
+      |vpiActual:
+      \_Variable: (work@SimDTM.__debug_resp_ready), line:45:7, endln:45:25
   |vpiContAssign:
   \_ContAssign: , line:53:10, endln:53:28
     |vpiParent:
@@ -2755,9 +2822,6 @@ Design: (unnamed)
     \_Constant: , line:53:10, endln:53:14
       |vpiParent:
       \_ContAssign: , line:53:10, endln:53:28
-      |vpiDecompile:#0.1
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@SimDTM), line:53:10, endln:53:14
         |vpiParent:
@@ -2766,14 +2830,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiRhs:
-    \_RefObj: (work@SimDTM.__exit), line:53:22, endln:53:28
-      |vpiParent:
-      \_ContAssign: , line:53:10, endln:53:28
-      |vpiName:__exit
-      |vpiFullName:work@SimDTM.__exit
-      |vpiActual:
-      \_Variable: (work@SimDTM.__exit), line:46:7, endln:46:13
+      |vpiSize:64
+      |vpiDecompile:#0.1
+      |UINT:0
     |vpiLhs:
     \_RefObj: (work@SimDTM.exit), line:53:15, endln:53:19
       |vpiParent:
@@ -2782,6 +2841,14 @@ Design: (unnamed)
       |vpiFullName:work@SimDTM.exit
       |vpiActual:
       \_Net: (work@SimDTM.exit), line:31:17, endln:31:21
+    |vpiRhs:
+    \_RefObj: (work@SimDTM.__exit), line:53:22, endln:53:28
+      |vpiParent:
+      \_ContAssign: , line:53:10, endln:53:28
+      |vpiName:__exit
+      |vpiFullName:work@SimDTM.__exit
+      |vpiActual:
+      \_Variable: (work@SimDTM.__exit), line:46:7, endln:46:13
 |vpiTypespec:
 \_ModuleTypespec: (work@SimDTM)
   |vpiParent:

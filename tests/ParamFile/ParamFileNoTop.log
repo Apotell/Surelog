@@ -277,8 +277,6 @@ Design: (unnamed)
     \_Constant: , line:1:20, endln:1:22
       |vpiParent:
       \_ParamAssign: , line:4:14, endln:4:40
-      |vpiDecompile:""
-      |STRING:
       |vpiTypespec:
       \_RefTypespec: (work@dut), line:1:20, endln:1:22
         |vpiParent:
@@ -287,6 +285,8 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:6
+      |vpiDecompile:""
+      |STRING:
     |vpiObject:
     \_RefTypespec: (work@dut), line:1:20, endln:1:22
 |vpiAllModules:
@@ -302,17 +302,16 @@ Design: (unnamed)
   \_Parameter: (work@dut.SRAMInitFile), line:4:14, endln:4:40
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
-    |STRING:
     |vpiName:SRAMInitFile
     |vpiFullName:work@dut.SRAMInitFile
   |vpiParamAssign:
   \_ParamAssign: , line:4:14, endln:4:40
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
-    |vpiRhs:
-    \_Constant: , line:1:20, endln:1:22
     |vpiLhs:
     \_Parameter: (work@dut.SRAMInitFile), line:4:14, endln:4:40
+    |vpiRhs:
+    \_Constant: , line:1:20, endln:1:22
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -396,19 +395,18 @@ Design: (unnamed)
   \_Parameter: (work@ram_1p.MemInitFile), line:13:23, endln:13:39
     |vpiParent:
     \_Module: work@ram_1p (work@ram_1p), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:12:1, endln:30:10
-    |STRING:
     |vpiName:MemInitFile
     |vpiFullName:work@ram_1p.MemInitFile
   |vpiParamAssign:
   \_ParamAssign: , line:13:23, endln:13:39
     |vpiParent:
     \_Module: work@ram_1p (work@ram_1p), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:12:1, endln:30:10
+    |vpiLhs:
+    \_Parameter: (work@ram_1p.MemInitFile), line:13:23, endln:13:39
     |vpiRhs:
     \_Constant: , line:13:37, endln:13:39
       |vpiParent:
       \_ParamAssign: , line:13:23, endln:13:39
-      |vpiDecompile:""
-      |STRING:
       |vpiTypespec:
       \_RefTypespec: (work@ram_1p), line:13:37, endln:13:39
         |vpiParent:
@@ -417,8 +415,8 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:6
-    |vpiLhs:
-    \_Parameter: (work@ram_1p.MemInitFile), line:13:23, endln:13:39
+      |vpiDecompile:""
+      |STRING:
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -497,8 +495,6 @@ Design: (unnamed)
           \_Constant: , line:19:22, endln:19:24
             |vpiParent:
             \_Operation: , line:19:7, endln:19:24
-            |vpiDecompile:""
-            |STRING:
             |vpiTypespec:
             \_RefTypespec: (work@ram_1p), line:19:22, endln:19:24
               |vpiParent:
@@ -507,6 +503,8 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
+            |vpiDecompile:""
+            |STRING:
         |vpiStmt:
         \_Begin: (work@ram_1p.gen_meminit), line:19:26, endln:22:6
           |vpiParent:
@@ -533,13 +531,15 @@ Design: (unnamed)
           \_SysFuncCall: ($display), line:20:7, endln:20:70
             |vpiParent:
             \_Begin: (work@ram_1p.gen_meminit), line:19:26, endln:22:6
+            |vpiName:
+            \_Identifier: ($display), line:20:8, endln:20:15
+              |vpiParent:
+              \_SysFuncCall: ($display), line:20:7, endln:20:70
+              |vpiName:$display
             |vpiArgument:
             \_Constant: , line:20:16, endln:20:56
               |vpiParent:
               \_SysFuncCall: ($display), line:20:7, endln:20:70
-              |vpiDecompile:"Initializing memory %m from file '%s'."
-              |vpiSize:304
-              |STRING:Initializing memory %m from file '%s'.
               |vpiTypespec:
               \_RefTypespec: (work@ram_1p.gen_meminit), line:20:16, endln:20:56
                 |vpiParent:
@@ -548,6 +548,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_StringTypespec: 
               |vpiConstType:6
+              |vpiSize:304
+              |vpiDecompile:"Initializing memory %m from file '%s'."
+              |STRING:Initializing memory %m from file '%s'.
             |vpiArgument:
             \_RefObj: (work@ram_1p.gen_meminit.MemInitFile), line:20:58, endln:20:69
               |vpiParent:
@@ -556,30 +559,10 @@ Design: (unnamed)
               |vpiFullName:work@ram_1p.gen_meminit.MemInitFile
               |vpiActual:
               \_Parameter: (work@ram_1p.MemInitFile), line:13:23, endln:13:39
-            |vpiName:
-            \_Identifier: ($display), line:20:8, endln:20:15
-              |vpiParent:
-              \_SysFuncCall: ($display), line:20:7, endln:20:70
-              |vpiName:$display
           |vpiStmt:
           \_AssignStmt: , line:21:7, endln:21:24
             |vpiParent:
             \_Begin: (work@ram_1p.gen_meminit), line:19:26, endln:22:6
-            |vpiRhs:
-            \_Constant: , line:21:20, endln:21:24
-              |vpiParent:
-              \_AssignStmt: , line:21:7, endln:21:24
-              |vpiDecompile:1'b1
-              |vpiSize:1
-              |BIN:1
-              |vpiTypespec:
-              \_RefTypespec: (work@ram_1p.gen_meminit), line:21:20, endln:21:24
-                |vpiParent:
-                \_Constant: , line:21:20, endln:21:24
-                |vpiFullName:work@ram_1p.gen_meminit
-                |vpiActual:
-                \_BitTypespec: 
-              |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@ram_1p.gen_meminit.out), line:21:14, endln:21:17
               |vpiParent:
@@ -588,6 +571,21 @@ Design: (unnamed)
               |vpiFullName:work@ram_1p.gen_meminit.out
               |vpiActual:
               \_Net: (work@ram_1p.out), line:15:22, endln:15:25
+            |vpiRhs:
+            \_Constant: , line:21:20, endln:21:24
+              |vpiParent:
+              \_AssignStmt: , line:21:7, endln:21:24
+              |vpiTypespec:
+              \_RefTypespec: (work@ram_1p.gen_meminit), line:21:20, endln:21:24
+                |vpiParent:
+                \_Constant: , line:21:20, endln:21:24
+                |vpiFullName:work@ram_1p.gen_meminit
+                |vpiActual:
+                \_BitTypespec: 
+              |vpiConstType:3
+              |vpiSize:1
+              |vpiDecompile:1'b1
+              |BIN:1
       |vpiStmt:
       \_IfStmt: , line:24:3, endln:27:6
         |vpiParent:
@@ -609,8 +607,6 @@ Design: (unnamed)
           \_Constant: , line:24:22, endln:24:24
             |vpiParent:
             \_Operation: , line:24:7, endln:24:24
-            |vpiDecompile:""
-            |STRING:
             |vpiTypespec:
             \_RefTypespec: (work@ram_1p), line:24:22, endln:24:24
               |vpiParent:
@@ -619,6 +615,8 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
+            |vpiDecompile:""
+            |STRING:
         |vpiStmt:
         \_Begin: (work@ram_1p.gen_nomeminit), line:24:26, endln:27:6
           |vpiParent:
@@ -645,13 +643,15 @@ Design: (unnamed)
           \_SysFuncCall: ($display), line:25:7, endln:25:53
             |vpiParent:
             \_Begin: (work@ram_1p.gen_nomeminit), line:24:26, endln:27:6
+            |vpiName:
+            \_Identifier: ($display), line:25:8, endln:25:15
+              |vpiParent:
+              \_SysFuncCall: ($display), line:25:7, endln:25:53
+              |vpiName:$display
             |vpiArgument:
             \_Constant: , line:25:16, endln:25:52
               |vpiParent:
               \_SysFuncCall: ($display), line:25:7, endln:25:53
-              |vpiDecompile:"Initializing memory file is empty."
-              |vpiSize:272
-              |STRING:Initializing memory file is empty.
               |vpiTypespec:
               \_RefTypespec: (work@ram_1p.gen_nomeminit), line:25:16, endln:25:52
                 |vpiParent:
@@ -660,30 +660,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_StringTypespec: 
               |vpiConstType:6
-            |vpiName:
-            \_Identifier: ($display), line:25:8, endln:25:15
-              |vpiParent:
-              \_SysFuncCall: ($display), line:25:7, endln:25:53
-              |vpiName:$display
+              |vpiSize:272
+              |vpiDecompile:"Initializing memory file is empty."
+              |STRING:Initializing memory file is empty.
           |vpiStmt:
           \_AssignStmt: , line:26:7, endln:26:24
             |vpiParent:
             \_Begin: (work@ram_1p.gen_nomeminit), line:24:26, endln:27:6
-            |vpiRhs:
-            \_Constant: , line:26:20, endln:26:24
-              |vpiParent:
-              \_AssignStmt: , line:26:7, endln:26:24
-              |vpiDecompile:1'b0
-              |vpiSize:1
-              |BIN:0
-              |vpiTypespec:
-              \_RefTypespec: (work@ram_1p.gen_nomeminit), line:26:20, endln:26:24
-                |vpiParent:
-                \_Constant: , line:26:20, endln:26:24
-                |vpiFullName:work@ram_1p.gen_nomeminit
-                |vpiActual:
-                \_BitTypespec: 
-              |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@ram_1p.gen_nomeminit.out), line:26:14, endln:26:17
               |vpiParent:
@@ -692,6 +675,21 @@ Design: (unnamed)
               |vpiFullName:work@ram_1p.gen_nomeminit.out
               |vpiActual:
               \_Net: (work@ram_1p.out), line:15:22, endln:15:25
+            |vpiRhs:
+            \_Constant: , line:26:20, endln:26:24
+              |vpiParent:
+              \_AssignStmt: , line:26:7, endln:26:24
+              |vpiTypespec:
+              \_RefTypespec: (work@ram_1p.gen_nomeminit), line:26:20, endln:26:24
+                |vpiParent:
+                \_Constant: , line:26:20, endln:26:24
+                |vpiFullName:work@ram_1p.gen_nomeminit
+                |vpiActual:
+                \_BitTypespec: 
+              |vpiConstType:3
+              |vpiSize:1
+              |vpiDecompile:1'b0
+              |BIN:0
 |vpiTypespec:
 \_ModuleTypespec: (work@dut)
   |vpiParent:

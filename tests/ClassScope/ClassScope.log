@@ -10044,20 +10044,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:36
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.E), line:44:35, endln:44:36
             |vpiParent:
@@ -10066,12 +10068,12 @@ Design: (unnamed)
             |vpiFullName:work@top.E
             |vpiActual:
             \_Parameter: (work@top.E), line:39:16, endln:39:21
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:41
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefObj: (work@top.T), line:45:40, endln:45:41
             |vpiParent:
@@ -10080,8 +10082,6 @@ Design: (unnamed)
             |vpiFullName:work@top.T
             |vpiActual:
             \_Net: (work@top.T), line:45:40, endln:45:41
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
           |vpiParent:
@@ -10146,9 +10146,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:0
-                |vpiSize:64
-                |INT:0
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -10157,17 +10154,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:0
+                |INT:0
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:53
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:53
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:39
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:53
-                |vpiDecompile:"E = %0d %0d"
-                |vpiSize:88
-                |STRING:E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:39
                   |vpiParent:
@@ -10176,6 +10178,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:88
+                |vpiDecompile:"E = %0d %0d"
+                |STRING:E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:41, endln:48:49
                 |vpiParent:
@@ -10192,22 +10197,19 @@ Design: (unnamed)
                 |vpiFullName:work@top.E
                 |vpiActual:
                 \_Parameter: (work@top.E), line:39:16, endln:39:21
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:53
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:74
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:74
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:46
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:74
-                |vpiDecompile:"$bits(E) = %0d %0d"
-                |vpiSize:144
-                |STRING:$bits(E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:46
                   |vpiParent:
@@ -10216,10 +10218,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:144
+                |vpiDecompile:"$bits(E) = %0d %0d"
+                |STRING:$bits(E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:48, endln:49:63
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:74
+                |vpiName:
+                \_Identifier: ($bits), line:49:49, endln:49:53
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:48, endln:49:63
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:54, endln:49:62
                   |vpiParent:
@@ -10228,15 +10238,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:49, endln:49:53
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:48, endln:49:63
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:65, endln:49:73
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:74
+                |vpiName:
+                \_Identifier: ($bits), line:49:66, endln:49:70
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:65, endln:49:73
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.E), line:49:71, endln:49:72
                   |vpiParent:
@@ -10245,27 +10255,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.E
                   |vpiActual:
                   \_Parameter: (work@top.E), line:39:16, endln:39:21
-                |vpiName:
-                \_Identifier: ($bits), line:49:66, endln:49:70
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:65, endln:49:73
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:74
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:74
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:74
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:46
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:74
-                |vpiDecompile:"$bits(T) = %0d %0d"
-                |vpiSize:144
-                |STRING:$bits(T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:46
                   |vpiParent:
@@ -10274,10 +10276,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:144
+                |vpiDecompile:"$bits(T) = %0d %0d"
+                |STRING:$bits(T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:48, endln:50:63
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:74
+                |vpiName:
+                \_Identifier: ($bits), line:50:49, endln:50:53
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:48, endln:50:63
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:54, endln:50:62
                   |vpiParent:
@@ -10286,15 +10296,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:49, endln:50:53
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:48, endln:50:63
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:65, endln:50:73
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:74
+                |vpiName:
+                \_Identifier: ($bits), line:50:66, endln:50:70
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:65, endln:50:73
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.T), line:50:71, endln:50:72
                   |vpiParent:
@@ -10303,27 +10313,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.T
                   |vpiActual:
                   \_Net: (work@top.T), line:45:40, endln:45:41
-                |vpiName:
-                \_Identifier: ($bits), line:50:66, endln:50:70
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:65, endln:50:73
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:74
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:53
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:53
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:42
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:53
-                |vpiDecompile:"$left(E) = %0d"
-                |vpiSize:112
-                |STRING:$left(E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:42
                   |vpiParent:
@@ -10332,10 +10334,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:112
+                |vpiDecompile:"$left(E) = %0d"
+                |STRING:$left(E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:44, endln:51:52
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:53
+                |vpiName:
+                \_Identifier: ($left), line:51:45, endln:51:49
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:44, endln:51:52
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.E), line:51:50, endln:51:51
                   |vpiParent:
@@ -10344,27 +10354,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.E
                   |vpiActual:
                   \_Parameter: (work@top.E), line:39:16, endln:39:21
-                |vpiName:
-                \_Identifier: ($left), line:51:45, endln:51:49
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:44, endln:51:52
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:53
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:53
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:53
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:42
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:53
-                |vpiDecompile:"$left(T) = %0d"
-                |vpiSize:112
-                |STRING:$left(T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:42
                   |vpiParent:
@@ -10373,10 +10375,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:112
+                |vpiDecompile:"$left(T) = %0d"
+                |STRING:$left(T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:44, endln:52:52
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:53
+                |vpiName:
+                \_Identifier: ($left), line:52:45, endln:52:49
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:44, endln:52:52
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.T), line:52:50, endln:52:51
                   |vpiParent:
@@ -10385,27 +10395,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.T
                   |vpiActual:
                   \_Net: (work@top.T), line:45:40, endln:45:41
-                |vpiName:
-                \_Identifier: ($left), line:52:45, endln:52:49
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:44, endln:52:52
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:53
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:48
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:48
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:39
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:48
-                |vpiDecompile:"E'('z) = %b"
-                |vpiSize:88
-                |STRING:E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:39
                   |vpiParent:
@@ -10414,6 +10416,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:88
+                |vpiDecompile:"E'('z) = %b"
+                |STRING:E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:41, endln:53:47
                 |vpiParent:
@@ -10423,9 +10428,6 @@ Design: (unnamed)
                 \_Constant: , line:53:44, endln:53:46
                   |vpiParent:
                   \_Operation: , line:53:41, endln:53:47
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:44, endln:53:46
                     |vpiParent:
@@ -10434,22 +10436,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:48
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:48
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:48
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:39
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:48
-                |vpiDecompile:"T'('z) = %b"
-                |vpiSize:88
-                |STRING:T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:39
                   |vpiParent:
@@ -10458,6 +10460,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:88
+                |vpiDecompile:"T'('z) = %b"
+                |STRING:T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:41, endln:54:47
                 |vpiParent:
@@ -10467,9 +10472,6 @@ Design: (unnamed)
                 \_Constant: , line:54:44, endln:54:46
                   |vpiParent:
                   \_Operation: , line:54:41, endln:54:47
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:44, endln:54:46
                     |vpiParent:
@@ -10478,11 +10480,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:48
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -10713,20 +10713,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:39
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.P::E), line:44:35, endln:44:39
             |vpiParent:
@@ -10735,12 +10737,12 @@ Design: (unnamed)
             |vpiFullName:work@top.P::E
             |vpiActual:
             \_Parameter: (P::E), line:10:16, endln:10:21
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:44
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefTypespec: (work@top.P::T), line:45:40, endln:45:44
             |vpiParent:
@@ -10749,8 +10751,6 @@ Design: (unnamed)
             |vpiFullName:work@top.P::T
             |vpiActual:
             \_TypeParameter: (P::T), line:11:21, endln:11:22
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
         |vpiTypespec:
@@ -10794,9 +10794,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:1
-                |vpiSize:64
-                |INT:1
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -10805,17 +10802,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:1
+                |INT:1
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:59
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:59
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:42
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:59
-                |vpiDecompile:"P::E = %0d %0d"
-                |vpiSize:112
-                |STRING:P::E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:42
                   |vpiParent:
@@ -10824,6 +10826,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:112
+                |vpiDecompile:"P::E = %0d %0d"
+                |STRING:P::E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:44, endln:48:52
                 |vpiParent:
@@ -10836,9 +10841,6 @@ Design: (unnamed)
               \_Constant: , line:48:57, endln:48:58
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:59
-                |vpiDecompile:2
-                |vpiSize:64
-                |UINT:2
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:57, endln:48:58
                   |vpiParent:
@@ -10847,22 +10849,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:19
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:59
-                |vpiName:$display
+                |vpiSize:64
+                |vpiDecompile:2
+                |UINT:2
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:80
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:80
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:49
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:80
-                |vpiDecompile:"$bits(P::E) = %0d %0d"
-                |vpiSize:168
-                |STRING:$bits(P::E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:49
                   |vpiParent:
@@ -10871,10 +10873,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:168
+                |vpiDecompile:"$bits(P::E) = %0d %0d"
+                |STRING:$bits(P::E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:51, endln:49:66
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:80
+                |vpiName:
+                \_Identifier: ($bits), line:49:52, endln:49:56
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:51, endln:49:66
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:57, endln:49:65
                   |vpiParent:
@@ -10883,22 +10893,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:52, endln:49:56
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:51, endln:49:66
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:68, endln:49:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:80
+                |vpiName:
+                \_Identifier: ($bits), line:49:69, endln:49:73
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:68, endln:49:79
+                  |vpiName:$bits
                 |vpiArgument:
                 \_Constant: , line:49:77, endln:49:78
                   |vpiParent:
                   \_SysFuncCall: ($bits), line:49:68, endln:49:79
-                  |vpiDecompile:2
-                  |vpiSize:64
-                  |UINT:2
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:49:77, endln:49:78
                     |vpiParent:
@@ -10907,27 +10914,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_IntTypespec: 
                   |vpiConstType:19
-                |vpiName:
-                \_Identifier: ($bits), line:49:69, endln:49:73
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:68, endln:49:79
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:80
-                |vpiName:$display
+                  |vpiSize:64
+                  |vpiDecompile:2
+                  |UINT:2
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:80
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:80
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:49
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:80
-                |vpiDecompile:"$bits(P::T) = %0d %0d"
-                |vpiSize:168
-                |STRING:$bits(P::T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:49
                   |vpiParent:
@@ -10936,10 +10938,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:168
+                |vpiDecompile:"$bits(P::T) = %0d %0d"
+                |STRING:$bits(P::T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:51, endln:50:66
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:80
+                |vpiName:
+                \_Identifier: ($bits), line:50:52, endln:50:56
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:51, endln:50:66
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:57, endln:50:65
                   |vpiParent:
@@ -10948,15 +10958,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:52, endln:50:56
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:51, endln:50:66
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:68, endln:50:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:80
+                |vpiName:
+                \_Identifier: ($bits), line:50:69, endln:50:73
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:68, endln:50:79
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (P::T), line:50:74, endln:50:77
                   |vpiParent:
@@ -10964,27 +10974,19 @@ Design: (unnamed)
                   |vpiName:P::T
                   |vpiActual:
                   \_TypeParameter: (P::T), line:11:21, endln:11:22
-                |vpiName:
-                \_Identifier: ($bits), line:50:69, endln:50:73
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:68, endln:50:79
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:80
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:59
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:59
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:45
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:59
-                |vpiDecompile:"$left(P::E) = %0d"
-                |vpiSize:136
-                |STRING:$left(P::E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:45
                   |vpiParent:
@@ -10993,17 +10995,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:136
+                |vpiDecompile:"$left(P::E) = %0d"
+                |STRING:$left(P::E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:47, endln:51:58
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:59
+                |vpiName:
+                \_Identifier: ($left), line:51:48, endln:51:52
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:47, endln:51:58
+                  |vpiName:$left
                 |vpiArgument:
                 \_Constant: , line:51:56, endln:51:57
                   |vpiParent:
                   \_SysFuncCall: ($left), line:51:47, endln:51:58
-                  |vpiDecompile:2
-                  |vpiSize:64
-                  |UINT:2
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:51:56, endln:51:57
                     |vpiParent:
@@ -11012,27 +11019,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_IntTypespec: 
                   |vpiConstType:19
-                |vpiName:
-                \_Identifier: ($left), line:51:48, endln:51:52
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:47, endln:51:58
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:59
-                |vpiName:$display
+                  |vpiSize:64
+                  |vpiDecompile:2
+                  |UINT:2
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:59
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:59
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:45
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:59
-                |vpiDecompile:"$left(P::T) = %0d"
-                |vpiSize:136
-                |STRING:$left(P::T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:45
                   |vpiParent:
@@ -11041,10 +11043,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:136
+                |vpiDecompile:"$left(P::T) = %0d"
+                |STRING:$left(P::T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:47, endln:52:58
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:59
+                |vpiName:
+                \_Identifier: ($left), line:52:48, endln:52:52
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:47, endln:52:58
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (P::T), line:52:53, endln:52:56
                   |vpiParent:
@@ -11052,27 +11062,19 @@ Design: (unnamed)
                   |vpiName:P::T
                   |vpiActual:
                   \_TypeParameter: (P::T), line:11:21, endln:11:22
-                |vpiName:
-                \_Identifier: ($left), line:52:48, endln:52:52
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:47, endln:52:58
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:59
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:54
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:54
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:42
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:54
-                |vpiDecompile:"P::E'('z) = %b"
-                |vpiSize:112
-                |STRING:P::E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:42
                   |vpiParent:
@@ -11081,6 +11083,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:112
+                |vpiDecompile:"P::E'('z) = %b"
+                |STRING:P::E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:44, endln:53:53
                 |vpiParent:
@@ -11090,9 +11095,6 @@ Design: (unnamed)
                 \_Constant: , line:53:50, endln:53:52
                   |vpiParent:
                   \_Operation: , line:53:44, endln:53:53
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:50, endln:53:52
                     |vpiParent:
@@ -11101,22 +11103,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:54
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:54
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:54
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:42
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:54
-                |vpiDecompile:"P::T'('z) = %b"
-                |vpiSize:112
-                |STRING:P::T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:42
                   |vpiParent:
@@ -11125,6 +11127,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:112
+                |vpiDecompile:"P::T'('z) = %b"
+                |STRING:P::T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:44, endln:54:53
                 |vpiParent:
@@ -11134,9 +11139,6 @@ Design: (unnamed)
                 \_Constant: , line:54:50, endln:54:52
                   |vpiParent:
                   \_Operation: , line:54:44, endln:54:53
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:50, endln:54:52
                     |vpiParent:
@@ -11145,11 +11147,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:54
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -11386,20 +11386,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:42
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.C::E), line:44:35, endln:44:41
             |vpiParent:
@@ -11408,12 +11410,12 @@ Design: (unnamed)
             |vpiFullName:work@top.C::E
             |vpiActual:
             \_Parameter: (work@C::E), line:5:16, endln:5:44
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:47
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefTypespec: (work@top.C::T), line:45:40, endln:45:46
             |vpiParent:
@@ -11422,8 +11424,6 @@ Design: (unnamed)
             |vpiFullName:work@top.C::T
             |vpiActual:
             \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
         |vpiTypespec:
@@ -11467,9 +11467,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:2
-                |vpiSize:64
-                |INT:2
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -11478,17 +11475,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:2
+                |INT:2
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:65
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:65
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:45
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:65
-                |vpiDecompile:"C#()::E = %0d %0d"
-                |vpiSize:136
-                |STRING:C#()::E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:45
                   |vpiParent:
@@ -11497,6 +11499,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:136
+                |vpiDecompile:"C#()::E = %0d %0d"
+                |STRING:C#()::E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:47, endln:48:55
                 |vpiParent:
@@ -11513,22 +11518,19 @@ Design: (unnamed)
                 |vpiFullName:work@top.C::E
                 |vpiActual:
                 \_Parameter: (work@C::E), line:5:16, endln:5:44
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:65
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:86
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:86
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:52
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:86
-                |vpiDecompile:"$bits(C#()::E) = %0d %0d"
-                |vpiSize:192
-                |STRING:$bits(C#()::E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:52
                   |vpiParent:
@@ -11537,10 +11539,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:192
+                |vpiDecompile:"$bits(C#()::E) = %0d %0d"
+                |STRING:$bits(C#()::E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:54, endln:49:69
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:86
+                |vpiName:
+                \_Identifier: ($bits), line:49:55, endln:49:59
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:54, endln:49:69
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:60, endln:49:68
                   |vpiParent:
@@ -11549,15 +11559,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:55, endln:49:59
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:54, endln:49:69
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:71, endln:49:85
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:86
+                |vpiName:
+                \_Identifier: ($bits), line:49:72, endln:49:76
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:71, endln:49:85
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:49:77, endln:49:83
                   |vpiParent:
@@ -11566,27 +11576,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($bits), line:49:72, endln:49:76
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:71, endln:49:85
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:86
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:86
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:86
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:52
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:86
-                |vpiDecompile:"$bits(C#()::T) = %0d %0d"
-                |vpiSize:192
-                |STRING:$bits(C#()::T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:52
                   |vpiParent:
@@ -11595,10 +11597,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:192
+                |vpiDecompile:"$bits(C#()::T) = %0d %0d"
+                |STRING:$bits(C#()::T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:54, endln:50:69
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:86
+                |vpiName:
+                \_Identifier: ($bits), line:50:55, endln:50:59
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:54, endln:50:69
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:60, endln:50:68
                   |vpiParent:
@@ -11607,15 +11617,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:55, endln:50:59
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:54, endln:50:69
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:71, endln:50:85
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:86
+                |vpiName:
+                \_Identifier: ($bits), line:50:72, endln:50:76
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:71, endln:50:85
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:50:77, endln:50:83
                   |vpiParent:
@@ -11624,27 +11634,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($bits), line:50:72, endln:50:76
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:71, endln:50:85
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:86
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:65
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:65
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:48
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:65
-                |vpiDecompile:"$left(C#()::E) = %0d"
-                |vpiSize:160
-                |STRING:$left(C#()::E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:48
                   |vpiParent:
@@ -11653,10 +11655,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:160
+                |vpiDecompile:"$left(C#()::E) = %0d"
+                |STRING:$left(C#()::E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:50, endln:51:64
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:65
+                |vpiName:
+                \_Identifier: ($left), line:51:51, endln:51:55
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:50, endln:51:64
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:51:56, endln:51:62
                   |vpiParent:
@@ -11665,27 +11675,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($left), line:51:51, endln:51:55
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:50, endln:51:64
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:65
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:65
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:65
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:48
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:65
-                |vpiDecompile:"$left(C#()::T) = %0d"
-                |vpiSize:160
-                |STRING:$left(C#()::T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:48
                   |vpiParent:
@@ -11694,10 +11696,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:160
+                |vpiDecompile:"$left(C#()::T) = %0d"
+                |STRING:$left(C#()::T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:50, endln:52:64
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:65
+                |vpiName:
+                \_Identifier: ($left), line:52:51, endln:52:55
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:50, endln:52:64
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:52:56, endln:52:62
                   |vpiParent:
@@ -11706,27 +11716,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($left), line:52:51, endln:52:55
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:50, endln:52:64
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:65
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:60
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:60
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:45
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:60
-                |vpiDecompile:"C#()::E'('z) = %b"
-                |vpiSize:136
-                |STRING:C#()::E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:45
                   |vpiParent:
@@ -11735,6 +11737,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:136
+                |vpiDecompile:"C#()::E'('z) = %b"
+                |STRING:C#()::E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:47, endln:53:59
                 |vpiParent:
@@ -11744,9 +11749,6 @@ Design: (unnamed)
                 \_Constant: , line:53:56, endln:53:58
                   |vpiParent:
                   \_Operation: , line:53:47, endln:53:59
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:56, endln:53:58
                     |vpiParent:
@@ -11755,22 +11757,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:60
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:60
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:60
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:45
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:60
-                |vpiDecompile:"C#()::T'('z) = %b"
-                |vpiSize:136
-                |STRING:C#()::T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:45
                   |vpiParent:
@@ -11779,6 +11781,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:136
+                |vpiDecompile:"C#()::T'('z) = %b"
+                |STRING:C#()::T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:47, endln:54:59
                 |vpiParent:
@@ -11788,9 +11793,6 @@ Design: (unnamed)
                 \_Constant: , line:54:56, endln:54:58
                   |vpiParent:
                   \_Operation: , line:54:47, endln:54:59
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:56, endln:54:58
                     |vpiParent:
@@ -11799,11 +11801,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:60
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -12034,20 +12034,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:46
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.C::E), line:44:35, endln:44:45
             |vpiParent:
@@ -12056,12 +12058,12 @@ Design: (unnamed)
             |vpiFullName:work@top.C::E
             |vpiActual:
             \_Parameter: (work@C::E), line:5:16, endln:5:44
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:51
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefTypespec: (work@top.C::T), line:45:40, endln:45:50
             |vpiParent:
@@ -12070,8 +12072,6 @@ Design: (unnamed)
             |vpiFullName:work@top.C::T
             |vpiActual:
             \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
         |vpiTypespec:
@@ -12115,9 +12115,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:3
-                |vpiSize:64
-                |INT:3
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -12126,17 +12123,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:3
+                |INT:3
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:73
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:73
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:49
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:73
-                |vpiDecompile:"C#(E, T)::E = %0d %0d"
-                |vpiSize:168
-                |STRING:C#(E, T)::E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:49
                   |vpiParent:
@@ -12145,6 +12147,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:168
+                |vpiDecompile:"C#(E, T)::E = %0d %0d"
+                |STRING:C#(E, T)::E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:51, endln:48:59
                 |vpiParent:
@@ -12161,22 +12166,19 @@ Design: (unnamed)
                 |vpiFullName:work@top.C::E
                 |vpiActual:
                 \_Parameter: (work@C::E), line:5:16, endln:5:44
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:73
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:94
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:94
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:56
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:94
-                |vpiDecompile:"$bits(C#(E, T)::E) = %0d %0d"
-                |vpiSize:224
-                |STRING:$bits(C#(E, T)::E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:56
                   |vpiParent:
@@ -12185,10 +12187,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:224
+                |vpiDecompile:"$bits(C#(E, T)::E) = %0d %0d"
+                |STRING:$bits(C#(E, T)::E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:58, endln:49:73
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:94
+                |vpiName:
+                \_Identifier: ($bits), line:49:59, endln:49:63
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:58, endln:49:73
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:64, endln:49:72
                   |vpiParent:
@@ -12197,15 +12207,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:59, endln:49:63
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:58, endln:49:73
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:75, endln:49:93
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:94
+                |vpiName:
+                \_Identifier: ($bits), line:49:76, endln:49:80
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:75, endln:49:93
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:49:81, endln:49:91
                   |vpiParent:
@@ -12214,27 +12224,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($bits), line:49:76, endln:49:80
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:75, endln:49:93
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:94
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:94
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:94
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:56
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:94
-                |vpiDecompile:"$bits(C#(E, T)::T) = %0d %0d"
-                |vpiSize:224
-                |STRING:$bits(C#(E, T)::T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:56
                   |vpiParent:
@@ -12243,10 +12245,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:224
+                |vpiDecompile:"$bits(C#(E, T)::T) = %0d %0d"
+                |STRING:$bits(C#(E, T)::T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:58, endln:50:73
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:94
+                |vpiName:
+                \_Identifier: ($bits), line:50:59, endln:50:63
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:58, endln:50:73
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:64, endln:50:72
                   |vpiParent:
@@ -12255,15 +12265,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:59, endln:50:63
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:58, endln:50:73
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:75, endln:50:93
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:94
+                |vpiName:
+                \_Identifier: ($bits), line:50:76, endln:50:80
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:75, endln:50:93
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:50:81, endln:50:91
                   |vpiParent:
@@ -12272,27 +12282,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($bits), line:50:76, endln:50:80
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:75, endln:50:93
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:94
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:73
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:73
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:52
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:73
-                |vpiDecompile:"$left(C#(E, T)::E) = %0d"
-                |vpiSize:192
-                |STRING:$left(C#(E, T)::E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:52
                   |vpiParent:
@@ -12301,10 +12303,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:192
+                |vpiDecompile:"$left(C#(E, T)::E) = %0d"
+                |STRING:$left(C#(E, T)::E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:54, endln:51:72
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:73
+                |vpiName:
+                \_Identifier: ($left), line:51:55, endln:51:59
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:54, endln:51:72
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:51:60, endln:51:70
                   |vpiParent:
@@ -12313,27 +12323,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($left), line:51:55, endln:51:59
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:54, endln:51:72
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:73
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:73
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:73
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:52
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:73
-                |vpiDecompile:"$left(C#(E, T)::T) = %0d"
-                |vpiSize:192
-                |STRING:$left(C#(E, T)::T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:52
                   |vpiParent:
@@ -12342,10 +12344,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:192
+                |vpiDecompile:"$left(C#(E, T)::T) = %0d"
+                |STRING:$left(C#(E, T)::T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:54, endln:52:72
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:73
+                |vpiName:
+                \_Identifier: ($left), line:52:55, endln:52:59
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:54, endln:52:72
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:52:60, endln:52:70
                   |vpiParent:
@@ -12354,27 +12364,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($left), line:52:55, endln:52:59
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:54, endln:52:72
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:73
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:68
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:68
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:49
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:68
-                |vpiDecompile:"C#(E, T)::E'('z) = %b"
-                |vpiSize:168
-                |STRING:C#(E, T)::E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:49
                   |vpiParent:
@@ -12383,6 +12385,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:168
+                |vpiDecompile:"C#(E, T)::E'('z) = %b"
+                |STRING:C#(E, T)::E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:51, endln:53:67
                 |vpiParent:
@@ -12392,9 +12397,6 @@ Design: (unnamed)
                 \_Constant: , line:53:64, endln:53:66
                   |vpiParent:
                   \_Operation: , line:53:51, endln:53:67
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:64, endln:53:66
                     |vpiParent:
@@ -12403,22 +12405,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:68
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:68
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:68
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:49
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:68
-                |vpiDecompile:"C#(E, T)::T'('z) = %b"
-                |vpiSize:168
-                |STRING:C#(E, T)::T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:49
                   |vpiParent:
@@ -12427,6 +12429,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:168
+                |vpiDecompile:"C#(E, T)::T'('z) = %b"
+                |STRING:C#(E, T)::T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:51, endln:54:67
                 |vpiParent:
@@ -12436,9 +12441,6 @@ Design: (unnamed)
                 \_Constant: , line:54:64, endln:54:66
                   |vpiParent:
                   \_Operation: , line:54:51, endln:54:67
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:64, endln:54:66
                     |vpiParent:
@@ -12447,11 +12449,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:68
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -12682,20 +12682,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:52
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.C::E), line:44:35, endln:44:51
             |vpiParent:
@@ -12704,12 +12706,12 @@ Design: (unnamed)
             |vpiFullName:work@top.C::E
             |vpiActual:
             \_Parameter: (work@C::E), line:5:16, endln:5:44
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:57
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefTypespec: (work@top.C::T), line:45:40, endln:45:56
             |vpiParent:
@@ -12718,8 +12720,6 @@ Design: (unnamed)
             |vpiFullName:work@top.C::T
             |vpiActual:
             \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
         |vpiTypespec:
@@ -12763,9 +12763,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:4
-                |vpiSize:64
-                |INT:4
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -12774,17 +12771,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:4
+                |INT:4
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:85
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:85
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:55
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:85
-                |vpiDecompile:"C#(P::E, P::T)::E = %0d %0d"
-                |vpiSize:216
-                |STRING:C#(P::E, P::T)::E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:55
                   |vpiParent:
@@ -12793,6 +12795,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:216
+                |vpiDecompile:"C#(P::E, P::T)::E = %0d %0d"
+                |STRING:C#(P::E, P::T)::E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:57, endln:48:65
                 |vpiParent:
@@ -12809,22 +12814,19 @@ Design: (unnamed)
                 |vpiFullName:work@top.C::E
                 |vpiActual:
                 \_Parameter: (work@C::E), line:5:16, endln:5:44
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:85
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:106
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:106
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:62
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:106
-                |vpiDecompile:"$bits(C#(P::E, P::T)::E) = %0d %0d"
-                |vpiSize:272
-                |STRING:$bits(C#(P::E, P::T)::E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:62
                   |vpiParent:
@@ -12833,10 +12835,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:272
+                |vpiDecompile:"$bits(C#(P::E, P::T)::E) = %0d %0d"
+                |STRING:$bits(C#(P::E, P::T)::E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:64, endln:49:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:106
+                |vpiName:
+                \_Identifier: ($bits), line:49:65, endln:49:69
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:64, endln:49:79
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:70, endln:49:78
                   |vpiParent:
@@ -12845,15 +12855,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:65, endln:49:69
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:64, endln:49:79
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:81, endln:49:105
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:106
+                |vpiName:
+                \_Identifier: ($bits), line:49:82, endln:49:86
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:81, endln:49:105
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:49:87, endln:49:103
                   |vpiParent:
@@ -12862,27 +12872,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($bits), line:49:82, endln:49:86
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:81, endln:49:105
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:106
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:106
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:106
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:62
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:106
-                |vpiDecompile:"$bits(C#(P::E, P::T)::T) = %0d %0d"
-                |vpiSize:272
-                |STRING:$bits(C#(P::E, P::T)::T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:62
                   |vpiParent:
@@ -12891,10 +12893,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:272
+                |vpiDecompile:"$bits(C#(P::E, P::T)::T) = %0d %0d"
+                |STRING:$bits(C#(P::E, P::T)::T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:64, endln:50:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:106
+                |vpiName:
+                \_Identifier: ($bits), line:50:65, endln:50:69
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:64, endln:50:79
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:70, endln:50:78
                   |vpiParent:
@@ -12903,15 +12913,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:65, endln:50:69
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:64, endln:50:79
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:81, endln:50:105
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:106
+                |vpiName:
+                \_Identifier: ($bits), line:50:82, endln:50:86
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:81, endln:50:105
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:50:87, endln:50:103
                   |vpiParent:
@@ -12920,27 +12930,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($bits), line:50:82, endln:50:86
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:81, endln:50:105
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:106
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:85
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:85
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:58
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:85
-                |vpiDecompile:"$left(C#(P::E, P::T)::E) = %0d"
-                |vpiSize:240
-                |STRING:$left(C#(P::E, P::T)::E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:58
                   |vpiParent:
@@ -12949,10 +12951,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:240
+                |vpiDecompile:"$left(C#(P::E, P::T)::E) = %0d"
+                |STRING:$left(C#(P::E, P::T)::E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:60, endln:51:84
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:85
+                |vpiName:
+                \_Identifier: ($left), line:51:61, endln:51:65
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:60, endln:51:84
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:51:66, endln:51:82
                   |vpiParent:
@@ -12961,27 +12971,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($left), line:51:61, endln:51:65
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:60, endln:51:84
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:85
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:85
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:85
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:58
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:85
-                |vpiDecompile:"$left(C#(P::E, P::T)::T) = %0d"
-                |vpiSize:240
-                |STRING:$left(C#(P::E, P::T)::T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:58
                   |vpiParent:
@@ -12990,10 +12992,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:240
+                |vpiDecompile:"$left(C#(P::E, P::T)::T) = %0d"
+                |STRING:$left(C#(P::E, P::T)::T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:60, endln:52:84
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:85
+                |vpiName:
+                \_Identifier: ($left), line:52:61, endln:52:65
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:60, endln:52:84
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:52:66, endln:52:82
                   |vpiParent:
@@ -13002,27 +13012,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($left), line:52:61, endln:52:65
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:60, endln:52:84
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:85
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:80
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:80
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:55
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:80
-                |vpiDecompile:"C#(P::E, P::T)::E'('z) = %b"
-                |vpiSize:216
-                |STRING:C#(P::E, P::T)::E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:55
                   |vpiParent:
@@ -13031,6 +13033,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:216
+                |vpiDecompile:"C#(P::E, P::T)::E'('z) = %b"
+                |STRING:C#(P::E, P::T)::E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:57, endln:53:79
                 |vpiParent:
@@ -13040,9 +13045,6 @@ Design: (unnamed)
                 \_Constant: , line:53:76, endln:53:78
                   |vpiParent:
                   \_Operation: , line:53:57, endln:53:79
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:76, endln:53:78
                     |vpiParent:
@@ -13051,22 +13053,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:80
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:80
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:80
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:55
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:80
-                |vpiDecompile:"C#(P::E, P::T)::T'('z) = %b"
-                |vpiSize:216
-                |STRING:C#(P::E, P::T)::T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:55
                   |vpiParent:
@@ -13075,6 +13077,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:216
+                |vpiDecompile:"C#(P::E, P::T)::T'('z) = %b"
+                |STRING:C#(P::E, P::T)::T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:57, endln:54:79
                 |vpiParent:
@@ -13084,9 +13089,6 @@ Design: (unnamed)
                 \_Constant: , line:54:76, endln:54:78
                   |vpiParent:
                   \_Operation: , line:54:57, endln:54:79
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:76, endln:54:78
                     |vpiParent:
@@ -13095,11 +13097,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:80
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -13330,20 +13330,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:66
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.C::E), line:44:35, endln:44:65
             |vpiParent:
@@ -13352,12 +13354,12 @@ Design: (unnamed)
             |vpiFullName:work@top.C::E
             |vpiActual:
             \_Parameter: (work@C::E), line:5:16, endln:5:44
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:71
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefTypespec: (work@top.C::T), line:45:40, endln:45:70
             |vpiParent:
@@ -13366,8 +13368,6 @@ Design: (unnamed)
             |vpiFullName:work@top.C::T
             |vpiActual:
             \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
         |vpiTypespec:
@@ -13411,9 +13411,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:5
-                |vpiSize:64
-                |INT:5
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -13422,17 +13419,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:5
+                |INT:5
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:113
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:113
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:69
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:113
-                |vpiDecompile:"C#(C#(E, T)::E, C#(E, T)::T)::E = %0d %0d"
-                |vpiSize:328
-                |STRING:C#(C#(E, T)::E, C#(E, T)::T)::E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:69
                   |vpiParent:
@@ -13441,6 +13443,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:328
+                |vpiDecompile:"C#(C#(E, T)::E, C#(E, T)::T)::E = %0d %0d"
+                |STRING:C#(C#(E, T)::E, C#(E, T)::T)::E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:71, endln:48:79
                 |vpiParent:
@@ -13457,22 +13462,19 @@ Design: (unnamed)
                 |vpiFullName:work@top.C::E
                 |vpiActual:
                 \_Parameter: (work@C::E), line:5:16, endln:5:44
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:113
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:134
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:134
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:76
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:134
-                |vpiDecompile:"$bits(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d %0d"
-                |vpiSize:384
-                |STRING:$bits(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:76
                   |vpiParent:
@@ -13481,10 +13483,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:384
+                |vpiDecompile:"$bits(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d %0d"
+                |STRING:$bits(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:78, endln:49:93
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:134
+                |vpiName:
+                \_Identifier: ($bits), line:49:79, endln:49:83
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:78, endln:49:93
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:84, endln:49:92
                   |vpiParent:
@@ -13493,15 +13503,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:79, endln:49:83
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:78, endln:49:93
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:95, endln:49:133
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:134
+                |vpiName:
+                \_Identifier: ($bits), line:49:96, endln:49:100
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:95, endln:49:133
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:49:101, endln:49:131
                   |vpiParent:
@@ -13510,27 +13520,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($bits), line:49:96, endln:49:100
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:95, endln:49:133
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:134
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:134
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:134
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:76
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:134
-                |vpiDecompile:"$bits(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d %0d"
-                |vpiSize:384
-                |STRING:$bits(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:76
                   |vpiParent:
@@ -13539,10 +13541,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:384
+                |vpiDecompile:"$bits(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d %0d"
+                |STRING:$bits(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:78, endln:50:93
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:134
+                |vpiName:
+                \_Identifier: ($bits), line:50:79, endln:50:83
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:78, endln:50:93
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:84, endln:50:92
                   |vpiParent:
@@ -13551,15 +13561,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:79, endln:50:83
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:78, endln:50:93
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:95, endln:50:133
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:134
+                |vpiName:
+                \_Identifier: ($bits), line:50:96, endln:50:100
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:95, endln:50:133
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:50:101, endln:50:131
                   |vpiParent:
@@ -13568,27 +13578,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($bits), line:50:96, endln:50:100
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:95, endln:50:133
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:134
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:113
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:113
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:72
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:113
-                |vpiDecompile:"$left(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d"
-                |vpiSize:352
-                |STRING:$left(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:72
                   |vpiParent:
@@ -13597,10 +13599,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:352
+                |vpiDecompile:"$left(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d"
+                |STRING:$left(C#(C#(E, T)::E, C#(E, T)::T)::E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:74, endln:51:112
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:113
+                |vpiName:
+                \_Identifier: ($left), line:51:75, endln:51:79
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:74, endln:51:112
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:51:80, endln:51:110
                   |vpiParent:
@@ -13609,27 +13619,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($left), line:51:75, endln:51:79
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:74, endln:51:112
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:113
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:113
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:113
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:72
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:113
-                |vpiDecompile:"$left(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d"
-                |vpiSize:352
-                |STRING:$left(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:72
                   |vpiParent:
@@ -13638,10 +13640,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:352
+                |vpiDecompile:"$left(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d"
+                |STRING:$left(C#(C#(E, T)::E, C#(E, T)::T)::T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:74, endln:52:112
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:113
+                |vpiName:
+                \_Identifier: ($left), line:52:75, endln:52:79
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:74, endln:52:112
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:52:80, endln:52:110
                   |vpiParent:
@@ -13650,27 +13660,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($left), line:52:75, endln:52:79
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:74, endln:52:112
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:113
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:108
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:108
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:69
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:108
-                |vpiDecompile:"C#(C#(E, T)::E, C#(E, T)::T)::E'('z) = %b"
-                |vpiSize:328
-                |STRING:C#(C#(E, T)::E, C#(E, T)::T)::E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:69
                   |vpiParent:
@@ -13679,6 +13681,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:328
+                |vpiDecompile:"C#(C#(E, T)::E, C#(E, T)::T)::E'('z) = %b"
+                |STRING:C#(C#(E, T)::E, C#(E, T)::T)::E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:71, endln:53:107
                 |vpiParent:
@@ -13688,9 +13693,6 @@ Design: (unnamed)
                 \_Constant: , line:53:104, endln:53:106
                   |vpiParent:
                   \_Operation: , line:53:71, endln:53:107
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:104, endln:53:106
                     |vpiParent:
@@ -13699,22 +13701,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:108
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:108
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:108
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:69
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:108
-                |vpiDecompile:"C#(C#(E, T)::E, C#(E, T)::T)::T'('z) = %b"
-                |vpiSize:328
-                |STRING:C#(C#(E, T)::E, C#(E, T)::T)::T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:69
                   |vpiParent:
@@ -13723,6 +13725,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:328
+                |vpiDecompile:"C#(C#(E, T)::E, C#(E, T)::T)::T'('z) = %b"
+                |STRING:C#(C#(E, T)::E, C#(E, T)::T)::T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:71, endln:54:107
                 |vpiParent:
@@ -13732,9 +13737,6 @@ Design: (unnamed)
                 \_Constant: , line:54:104, endln:54:106
                   |vpiParent:
                   \_Operation: , line:54:71, endln:54:107
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:104, endln:54:106
                     |vpiParent:
@@ -13743,11 +13745,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:108
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -13978,20 +13978,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:52
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.C::E), line:44:35, endln:44:51
             |vpiParent:
@@ -14000,12 +14002,12 @@ Design: (unnamed)
             |vpiFullName:work@top.C::E
             |vpiActual:
             \_Parameter: (work@C::E), line:5:16, endln:5:44
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:57
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefTypespec: (work@top.C::T), line:45:40, endln:45:56
             |vpiParent:
@@ -14014,8 +14016,6 @@ Design: (unnamed)
             |vpiFullName:work@top.C::T
             |vpiActual:
             \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
         |vpiTypespec:
@@ -14059,9 +14059,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:6
-                |vpiSize:64
-                |INT:6
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -14070,17 +14067,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:6
+                |INT:6
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:85
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:85
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:55
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:85
-                |vpiDecompile:"C#(E[1], T[2])::E = %0d %0d"
-                |vpiSize:216
-                |STRING:C#(E[1], T[2])::E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:55
                   |vpiParent:
@@ -14089,6 +14091,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:216
+                |vpiDecompile:"C#(E[1], T[2])::E = %0d %0d"
+                |STRING:C#(E[1], T[2])::E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:57, endln:48:65
                 |vpiParent:
@@ -14105,22 +14110,19 @@ Design: (unnamed)
                 |vpiFullName:work@top.C::E
                 |vpiActual:
                 \_Parameter: (work@C::E), line:5:16, endln:5:44
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:85
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:106
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:106
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:62
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:106
-                |vpiDecompile:"$bits(C#(E[1], T[2])::E) = %0d %0d"
-                |vpiSize:272
-                |STRING:$bits(C#(E[1], T[2])::E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:62
                   |vpiParent:
@@ -14129,10 +14131,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:272
+                |vpiDecompile:"$bits(C#(E[1], T[2])::E) = %0d %0d"
+                |STRING:$bits(C#(E[1], T[2])::E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:64, endln:49:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:106
+                |vpiName:
+                \_Identifier: ($bits), line:49:65, endln:49:69
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:64, endln:49:79
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:70, endln:49:78
                   |vpiParent:
@@ -14141,15 +14151,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:65, endln:49:69
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:64, endln:49:79
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:81, endln:49:105
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:106
+                |vpiName:
+                \_Identifier: ($bits), line:49:82, endln:49:86
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:81, endln:49:105
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:49:87, endln:49:103
                   |vpiParent:
@@ -14158,27 +14168,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($bits), line:49:82, endln:49:86
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:81, endln:49:105
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:106
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:106
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:106
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:62
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:106
-                |vpiDecompile:"$bits(C#(E[1], T[2])::T) = %0d %0d"
-                |vpiSize:272
-                |STRING:$bits(C#(E[1], T[2])::T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:62
                   |vpiParent:
@@ -14187,10 +14189,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:272
+                |vpiDecompile:"$bits(C#(E[1], T[2])::T) = %0d %0d"
+                |STRING:$bits(C#(E[1], T[2])::T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:64, endln:50:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:106
+                |vpiName:
+                \_Identifier: ($bits), line:50:65, endln:50:69
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:64, endln:50:79
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:70, endln:50:78
                   |vpiParent:
@@ -14199,15 +14209,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:65, endln:50:69
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:64, endln:50:79
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:81, endln:50:105
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:106
+                |vpiName:
+                \_Identifier: ($bits), line:50:82, endln:50:86
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:81, endln:50:105
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:50:87, endln:50:103
                   |vpiParent:
@@ -14216,27 +14226,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($bits), line:50:82, endln:50:86
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:81, endln:50:105
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:106
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:85
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:85
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:58
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:85
-                |vpiDecompile:"$left(C#(E[1], T[2])::E) = %0d"
-                |vpiSize:240
-                |STRING:$left(C#(E[1], T[2])::E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:58
                   |vpiParent:
@@ -14245,10 +14247,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:240
+                |vpiDecompile:"$left(C#(E[1], T[2])::E) = %0d"
+                |STRING:$left(C#(E[1], T[2])::E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:60, endln:51:84
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:85
+                |vpiName:
+                \_Identifier: ($left), line:51:61, endln:51:65
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:60, endln:51:84
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:51:66, endln:51:82
                   |vpiParent:
@@ -14257,27 +14267,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($left), line:51:61, endln:51:65
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:60, endln:51:84
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:85
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:85
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:85
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:58
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:85
-                |vpiDecompile:"$left(C#(E[1], T[2])::T) = %0d"
-                |vpiSize:240
-                |STRING:$left(C#(E[1], T[2])::T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:58
                   |vpiParent:
@@ -14286,10 +14288,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:240
+                |vpiDecompile:"$left(C#(E[1], T[2])::T) = %0d"
+                |STRING:$left(C#(E[1], T[2])::T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:60, endln:52:84
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:85
+                |vpiName:
+                \_Identifier: ($left), line:52:61, endln:52:65
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:60, endln:52:84
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:52:66, endln:52:82
                   |vpiParent:
@@ -14298,27 +14308,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($left), line:52:61, endln:52:65
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:60, endln:52:84
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:85
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:80
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:80
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:55
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:80
-                |vpiDecompile:"C#(E[1], T[2])::E'('z) = %b"
-                |vpiSize:216
-                |STRING:C#(E[1], T[2])::E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:55
                   |vpiParent:
@@ -14327,6 +14329,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:216
+                |vpiDecompile:"C#(E[1], T[2])::E'('z) = %b"
+                |STRING:C#(E[1], T[2])::E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:57, endln:53:79
                 |vpiParent:
@@ -14336,9 +14341,6 @@ Design: (unnamed)
                 \_Constant: , line:53:76, endln:53:78
                   |vpiParent:
                   \_Operation: , line:53:57, endln:53:79
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:76, endln:53:78
                     |vpiParent:
@@ -14347,22 +14349,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:80
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:80
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:80
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:55
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:80
-                |vpiDecompile:"C#(E[1], T[2])::T'('z) = %b"
-                |vpiSize:216
-                |STRING:C#(E[1], T[2])::T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:55
                   |vpiParent:
@@ -14371,6 +14373,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:216
+                |vpiDecompile:"C#(E[1], T[2])::T'('z) = %b"
+                |STRING:C#(E[1], T[2])::T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:57, endln:54:79
                 |vpiParent:
@@ -14380,9 +14385,6 @@ Design: (unnamed)
                 \_Constant: , line:54:76, endln:54:78
                   |vpiParent:
                   \_Operation: , line:54:57, endln:54:79
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:76, endln:54:78
                     |vpiParent:
@@ -14391,11 +14393,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:80
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -14626,20 +14626,22 @@ Design: (unnamed)
         \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_expr
           |vpiFullName:work@top.the_expr
+          |vpiLocalParam:1
         |vpiParameter:
         \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
-          |vpiLocalParam:1
           |vpiName:the_type
           |vpiFullName:work@top.the_type
+          |vpiLocalParam:1
         |vpiParamAssign:
         \_ParamAssign: , line:44:24, endln:44:56
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
           |vpiRhs:
           \_RefObj: (work@top.C::E), line:44:35, endln:44:55
             |vpiParent:
@@ -14648,12 +14650,12 @@ Design: (unnamed)
             |vpiFullName:work@top.C::E
             |vpiActual:
             \_Parameter: (work@C::E), line:5:16, endln:5:44
-          |vpiLhs:
-          \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
         |vpiParamAssign:
         \_ParamAssign: , line:45:29, endln:45:61
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiLhs:
+          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
           |vpiRhs:
           \_RefTypespec: (work@top.C::T), line:45:40, endln:45:60
             |vpiParent:
@@ -14662,8 +14664,6 @@ Design: (unnamed)
             |vpiFullName:work@top.C::T
             |vpiActual:
             \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-          |vpiLhs:
-          \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypespec:
         \_InterfaceTypespec: (work@I)
         |vpiTypespec:
@@ -14707,9 +14707,6 @@ Design: (unnamed)
               \_Constant: , line:47:19, endln:47:20
                 |vpiParent:
                 \_DelayControl: , line:47:17, endln:47:26
-                |vpiDecompile:7
-                |vpiSize:64
-                |INT:7
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:47:19, endln:47:20
                   |vpiParent:
@@ -14718,17 +14715,22 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:7
+                |vpiSize:64
+                |vpiDecompile:7
+                |INT:7
             |vpiStmt:
             \_SysFuncCall: ($display), line:48:17, endln:48:93
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:48:18, endln:48:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:48:17, endln:48:93
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:48:26, endln:48:59
                 |vpiParent:
                 \_SysFuncCall: ($display), line:48:17, endln:48:93
-                |vpiDecompile:"C#(E[2:0], T[2:0])::E = %0d %0d"
-                |vpiSize:248
-                |STRING:C#(E[2:0], T[2:0])::E = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:48:26, endln:48:59
                   |vpiParent:
@@ -14737,6 +14739,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:248
+                |vpiDecompile:"C#(E[2:0], T[2:0])::E = %0d %0d"
+                |STRING:C#(E[2:0], T[2:0])::E = %0d %0d
               |vpiArgument:
               \_RefObj: (work@top.the_expr), line:48:61, endln:48:69
                 |vpiParent:
@@ -14753,22 +14758,19 @@ Design: (unnamed)
                 |vpiFullName:work@top.C::E
                 |vpiActual:
                 \_Parameter: (work@C::E), line:5:16, endln:5:44
-              |vpiName:
-              \_Identifier: ($display), line:48:18, endln:48:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:48:17, endln:48:93
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:49:17, endln:49:114
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:49:18, endln:49:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:49:17, endln:49:114
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:49:26, endln:49:66
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:114
-                |vpiDecompile:"$bits(C#(E[2:0], T[2:0])::E) = %0d %0d"
-                |vpiSize:304
-                |STRING:$bits(C#(E[2:0], T[2:0])::E) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:49:26, endln:49:66
                   |vpiParent:
@@ -14777,10 +14779,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:304
+                |vpiDecompile:"$bits(C#(E[2:0], T[2:0])::E) = %0d %0d"
+                |STRING:$bits(C#(E[2:0], T[2:0])::E) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:68, endln:49:83
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:114
+                |vpiName:
+                \_Identifier: ($bits), line:49:69, endln:49:73
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:68, endln:49:83
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_expr), line:49:74, endln:49:82
                   |vpiParent:
@@ -14789,15 +14799,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_expr
                   |vpiActual:
                   \_Parameter: (work@top.the_expr), line:44:24, endln:44:32
-                |vpiName:
-                \_Identifier: ($bits), line:49:69, endln:49:73
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:68, endln:49:83
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:49:85, endln:49:113
                 |vpiParent:
                 \_SysFuncCall: ($display), line:49:17, endln:49:114
+                |vpiName:
+                \_Identifier: ($bits), line:49:86, endln:49:90
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:49:85, endln:49:113
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:49:91, endln:49:111
                   |vpiParent:
@@ -14806,27 +14816,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($bits), line:49:86, endln:49:90
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:49:85, endln:49:113
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:49:18, endln:49:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:49:17, endln:49:114
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:50:17, endln:50:114
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:50:18, endln:50:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:50:17, endln:50:114
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:50:26, endln:50:66
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:114
-                |vpiDecompile:"$bits(C#(E[2:0], T[2:0])::T) = %0d %0d"
-                |vpiSize:304
-                |STRING:$bits(C#(E[2:0], T[2:0])::T) = %0d %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:50:26, endln:50:66
                   |vpiParent:
@@ -14835,10 +14837,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:304
+                |vpiDecompile:"$bits(C#(E[2:0], T[2:0])::T) = %0d %0d"
+                |STRING:$bits(C#(E[2:0], T[2:0])::T) = %0d %0d
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:68, endln:50:83
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:114
+                |vpiName:
+                \_Identifier: ($bits), line:50:69, endln:50:73
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:68, endln:50:83
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefObj: (work@top.the_type), line:50:74, endln:50:82
                   |vpiParent:
@@ -14847,15 +14857,15 @@ Design: (unnamed)
                   |vpiFullName:work@top.the_type
                   |vpiActual:
                   \_Parameter: (work@top.the_type), line:45:29, endln:45:37
-                |vpiName:
-                \_Identifier: ($bits), line:50:69, endln:50:73
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:68, endln:50:83
-                  |vpiName:$bits
               |vpiArgument:
               \_SysFuncCall: ($bits), line:50:85, endln:50:113
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:114
+                |vpiName:
+                \_Identifier: ($bits), line:50:86, endln:50:90
+                  |vpiParent:
+                  \_SysFuncCall: ($bits), line:50:85, endln:50:113
+                  |vpiName:$bits
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:50:91, endln:50:111
                   |vpiParent:
@@ -14864,27 +14874,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($bits), line:50:86, endln:50:90
-                  |vpiParent:
-                  \_SysFuncCall: ($bits), line:50:85, endln:50:113
-                  |vpiName:$bits
-              |vpiName:
-              \_Identifier: ($display), line:50:18, endln:50:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:50:17, endln:50:114
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:51:17, endln:51:93
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:51:18, endln:51:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:51:17, endln:51:93
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:51:26, endln:51:62
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:93
-                |vpiDecompile:"$left(C#(E[2:0], T[2:0])::E) = %0d"
-                |vpiSize:272
-                |STRING:$left(C#(E[2:0], T[2:0])::E) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:51:26, endln:51:62
                   |vpiParent:
@@ -14893,10 +14895,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:272
+                |vpiDecompile:"$left(C#(E[2:0], T[2:0])::E) = %0d"
+                |STRING:$left(C#(E[2:0], T[2:0])::E) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:51:64, endln:51:92
                 |vpiParent:
                 \_SysFuncCall: ($display), line:51:17, endln:51:93
+                |vpiName:
+                \_Identifier: ($left), line:51:65, endln:51:69
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:51:64, endln:51:92
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefObj: (work@top.C::E), line:51:70, endln:51:90
                   |vpiParent:
@@ -14905,27 +14915,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::E
                   |vpiActual:
                   \_Parameter: (work@C::E), line:5:16, endln:5:44
-                |vpiName:
-                \_Identifier: ($left), line:51:65, endln:51:69
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:51:64, endln:51:92
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:51:18, endln:51:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:51:17, endln:51:93
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:52:17, endln:52:93
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:52:18, endln:52:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:52:17, endln:52:93
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:52:26, endln:52:62
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:93
-                |vpiDecompile:"$left(C#(E[2:0], T[2:0])::T) = %0d"
-                |vpiSize:272
-                |STRING:$left(C#(E[2:0], T[2:0])::T) = %0d
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:52:26, endln:52:62
                   |vpiParent:
@@ -14934,10 +14936,18 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:272
+                |vpiDecompile:"$left(C#(E[2:0], T[2:0])::T) = %0d"
+                |STRING:$left(C#(E[2:0], T[2:0])::T) = %0d
               |vpiArgument:
               \_SysFuncCall: ($left), line:52:64, endln:52:92
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:93
+                |vpiName:
+                \_Identifier: ($left), line:52:65, endln:52:69
+                  |vpiParent:
+                  \_SysFuncCall: ($left), line:52:64, endln:52:92
+                  |vpiName:$left
                 |vpiArgument:
                 \_RefTypespec: (work@top.C::T), line:52:70, endln:52:90
                   |vpiParent:
@@ -14946,27 +14956,19 @@ Design: (unnamed)
                   |vpiFullName:work@top.C::T
                   |vpiActual:
                   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
-                |vpiName:
-                \_Identifier: ($left), line:52:65, endln:52:69
-                  |vpiParent:
-                  \_SysFuncCall: ($left), line:52:64, endln:52:92
-                  |vpiName:$left
-              |vpiName:
-              \_Identifier: ($display), line:52:18, endln:52:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:52:17, endln:52:93
-                |vpiName:$display
             |vpiStmt:
             \_SysFuncCall: ($display), line:53:17, endln:53:88
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:53:18, endln:53:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:53:17, endln:53:88
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:53:26, endln:53:59
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:88
-                |vpiDecompile:"C#(E[2:0], T[2:0])::E'('z) = %b"
-                |vpiSize:248
-                |STRING:C#(E[2:0], T[2:0])::E'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:53:26, endln:53:59
                   |vpiParent:
@@ -14975,6 +14977,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:248
+                |vpiDecompile:"C#(E[2:0], T[2:0])::E'('z) = %b"
+                |STRING:C#(E[2:0], T[2:0])::E'('z) = %b
               |vpiArgument:
               \_Operation: , line:53:61, endln:53:87
                 |vpiParent:
@@ -14984,9 +14989,6 @@ Design: (unnamed)
                 \_Constant: , line:53:84, endln:53:86
                   |vpiParent:
                   \_Operation: , line:53:61, endln:53:87
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:53:84, endln:53:86
                     |vpiParent:
@@ -14995,22 +14997,22 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:53:18, endln:53:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:53:17, endln:53:88
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
             |vpiStmt:
             \_SysFuncCall: ($display), line:54:17, endln:54:88
               |vpiParent:
               \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:
+              \_Identifier: ($display), line:54:18, endln:54:25
+                |vpiParent:
+                \_SysFuncCall: ($display), line:54:17, endln:54:88
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:54:26, endln:54:59
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:88
-                |vpiDecompile:"C#(E[2:0], T[2:0])::T'('z) = %b"
-                |vpiSize:248
-                |STRING:C#(E[2:0], T[2:0])::T'('z) = %b
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:54:26, endln:54:59
                   |vpiParent:
@@ -15019,6 +15021,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
+                |vpiSize:248
+                |vpiDecompile:"C#(E[2:0], T[2:0])::T'('z) = %b"
+                |STRING:C#(E[2:0], T[2:0])::T'('z) = %b
               |vpiArgument:
               \_Operation: , line:54:61, endln:54:87
                 |vpiParent:
@@ -15028,9 +15033,6 @@ Design: (unnamed)
                 \_Constant: , line:54:84, endln:54:86
                   |vpiParent:
                   \_Operation: , line:54:61, endln:54:87
-                  |vpiDecompile:'Z
-                  |vpiSize:-1
-                  |BIN:Z
                   |vpiTypespec:
                   \_RefTypespec: (work@top), line:54:84, endln:54:86
                     |vpiParent:
@@ -15039,11 +15041,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_LogicTypespec: 
                   |vpiConstType:3
-              |vpiName:
-              \_Identifier: ($display), line:54:18, endln:54:25
-                |vpiParent:
-                \_SysFuncCall: ($display), line:54:17, endln:54:88
-                |vpiName:$display
+                  |vpiSize:-1
+                  |vpiDecompile:'Z
+                  |BIN:Z
         |vpiStmt:
         \_RefModule: work@I (i1), line:56:13, endln:56:14
           |vpiParent:
@@ -15249,10 +15249,9 @@ Design: (unnamed)
   \_Parameter: (P::E), line:10:16, endln:10:21
     |vpiParent:
     \_Package: P (P), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:9:1, endln:12:11
-    |UINT:2
-    |vpiLocalParam:1
     |vpiName:E
     |vpiFullName:P::E
+    |vpiLocalParam:1
   |vpiParameter:
   \_TypeParameter: (P::T), line:11:21, endln:11:22
     |vpiParent:
@@ -15271,13 +15270,12 @@ Design: (unnamed)
   \_ParamAssign: , line:10:16, endln:10:21
     |vpiParent:
     \_Package: P (P), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:9:1, endln:12:11
+    |vpiLhs:
+    \_Parameter: (P::E), line:10:16, endln:10:21
     |vpiRhs:
     \_Constant: , line:10:20, endln:10:21
       |vpiParent:
       \_ParamAssign: , line:10:16, endln:10:21
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
       |vpiTypespec:
       \_RefTypespec: (P), line:10:20, endln:10:21
         |vpiParent:
@@ -15286,8 +15284,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (P::E), line:10:16, endln:10:21
+      |vpiSize:64
+      |vpiDecompile:2
+      |UINT:2
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -15319,9 +15318,6 @@ Design: (unnamed)
         \_Constant: , line:11:36, endln:11:37
           |vpiParent:
           \_Operation: , line:11:32, endln:11:37
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (P), line:11:36, endln:11:37
             |vpiParent:
@@ -15330,13 +15326,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:11:38, endln:11:39
         |vpiParent:
         \_Range: , line:11:31, endln:11:40
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (P), line:11:38, endln:11:39
           |vpiParent:
@@ -15345,6 +15341,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -15365,7 +15364,6 @@ Design: (unnamed)
   \_Parameter: (work@C::PARAM_E), line:2:15, endln:2:26
     |vpiParent:
     \_ClassDefn: (work@C), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:1:1, endln:7:9
-    |UINT:1
     |vpiName:PARAM_E
     |vpiFullName:work@C::PARAM_E
   |vpiParameter:
@@ -15385,9 +15383,9 @@ Design: (unnamed)
   \_Parameter: (work@C::E), line:5:16, endln:5:44
     |vpiParent:
     \_ClassDefn: (work@C), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:1:1, endln:7:9
-    |vpiLocalParam:1
     |vpiName:E
     |vpiFullName:work@C::E
+    |vpiLocalParam:1
   |vpiParameter:
   \_TypeParameter: (work@C::T), line:6:21, endln:6:22
     |vpiParent:
@@ -15407,13 +15405,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:15, endln:2:26
     |vpiParent:
     \_ClassDefn: (work@C), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:1:1, endln:7:9
+    |vpiLhs:
+    \_Parameter: (work@C::PARAM_E), line:2:15, endln:2:26
     |vpiRhs:
     \_Constant: , line:2:25, endln:2:26
       |vpiParent:
       \_ParamAssign: , line:2:15, endln:2:26
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@C), line:2:25, endln:2:26
         |vpiParent:
@@ -15422,12 +15419,15 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@C::PARAM_E), line:2:15, endln:2:26
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:5:16, endln:5:44
     |vpiParent:
     \_ClassDefn: (work@C), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:1:1, endln:7:9
+    |vpiLhs:
+    \_Parameter: (work@C::E), line:5:16, endln:5:44
     |vpiRhs:
     \_Operation: , line:5:20, endln:5:44
       |vpiParent:
@@ -15445,6 +15445,11 @@ Design: (unnamed)
       \_SysFuncCall: ($bits), line:5:30, endln:5:44
         |vpiParent:
         \_Operation: , line:5:20, endln:5:44
+        |vpiName:
+        \_Identifier: ($bits), line:5:31, endln:5:35
+          |vpiParent:
+          \_SysFuncCall: ($bits), line:5:30, endln:5:44
+          |vpiName:$bits
         |vpiArgument:
         \_RefTypespec: (work@C::PARAM_T), line:5:36, endln:5:43
           |vpiParent:
@@ -15453,13 +15458,6 @@ Design: (unnamed)
           |vpiFullName:work@C::PARAM_T
           |vpiActual:
           \_TypeParameter: (work@C::PARAM_T), line:3:20, endln:3:27
-        |vpiName:
-        \_Identifier: ($bits), line:5:31, endln:5:35
-          |vpiParent:
-          \_SysFuncCall: ($bits), line:5:30, endln:5:44
-          |vpiName:$bits
-    |vpiLhs:
-    \_Parameter: (work@C::E), line:5:16, endln:5:44
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -15566,13 +15564,15 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:32:20, endln:33:53
         |vpiParent:
         \_DelayControl: , line:32:13, endln:33:53
+        |vpiName:
+        \_Identifier: ($display), line:32:21, endln:32:28
+          |vpiParent:
+          \_SysFuncCall: ($display), line:32:20, endln:33:53
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:32:29, endln:32:60
           |vpiParent:
           \_SysFuncCall: ($display), line:32:20, endln:33:53
-          |vpiDecompile:"I: %sE%s=%0d $bits(%sT%s)=%0d"
-          |vpiSize:232
-          |STRING:I: %sE%s=%0d $bits(%sT%s)=%0d
           |vpiTypespec:
           \_RefTypespec: (work@I), line:32:29, endln:32:60
             |vpiParent:
@@ -15581,6 +15581,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:232
+          |vpiDecompile:"I: %sE%s=%0d $bits(%sT%s)=%0d"
+          |STRING:I: %sE%s=%0d $bits(%sT%s)=%0d
         |vpiArgument:
         \_RefObj: (work@I.PREFIX), line:33:9, endln:33:15
           |vpiParent:
@@ -15625,6 +15628,11 @@ Design: (unnamed)
         \_SysFuncCall: ($bits), line:33:44, endln:33:52
           |vpiParent:
           \_SysFuncCall: ($display), line:32:20, endln:33:53
+          |vpiName:
+          \_Identifier: ($bits), line:33:45, endln:33:49
+            |vpiParent:
+            \_SysFuncCall: ($bits), line:33:44, endln:33:52
+            |vpiName:$bits
           |vpiArgument:
           \_RefTypespec: (work@I.T), line:33:50, endln:33:51
             |vpiParent:
@@ -15633,16 +15641,6 @@ Design: (unnamed)
             |vpiFullName:work@I.T
             |vpiActual:
             \_TypeParameter: (work@I.T), line:30:20, endln:30:21
-          |vpiName:
-          \_Identifier: ($bits), line:33:45, endln:33:49
-            |vpiParent:
-            \_SysFuncCall: ($bits), line:33:44, endln:33:52
-            |vpiName:$bits
-        |vpiName:
-        \_Identifier: ($display), line:32:21, endln:32:28
-          |vpiParent:
-          \_SysFuncCall: ($display), line:32:20, endln:33:53
-          |vpiName:$display
       |vpiDelay:
       \_RefObj: (work@I.DELAY), line:32:14, endln:32:19
         |vpiParent:
@@ -15737,13 +15735,15 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:21:20, endln:22:53
         |vpiParent:
         \_DelayControl: , line:21:13, endln:22:53
+        |vpiName:
+        \_Identifier: ($display), line:21:21, endln:21:28
+          |vpiParent:
+          \_SysFuncCall: ($display), line:21:20, endln:22:53
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:21:29, endln:21:60
           |vpiParent:
           \_SysFuncCall: ($display), line:21:20, endln:22:53
-          |vpiDecompile:"M: %sE%s=%0d $bits(%sT%s)=%0d"
-          |vpiSize:232
-          |STRING:M: %sE%s=%0d $bits(%sT%s)=%0d
           |vpiTypespec:
           \_RefTypespec: (work@M), line:21:29, endln:21:60
             |vpiParent:
@@ -15752,6 +15752,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:232
+          |vpiDecompile:"M: %sE%s=%0d $bits(%sT%s)=%0d"
+          |STRING:M: %sE%s=%0d $bits(%sT%s)=%0d
         |vpiArgument:
         \_RefObj: (work@M.PREFIX), line:22:9, endln:22:15
           |vpiParent:
@@ -15796,6 +15799,11 @@ Design: (unnamed)
         \_SysFuncCall: ($bits), line:22:44, endln:22:52
           |vpiParent:
           \_SysFuncCall: ($display), line:21:20, endln:22:53
+          |vpiName:
+          \_Identifier: ($bits), line:22:45, endln:22:49
+            |vpiParent:
+            \_SysFuncCall: ($bits), line:22:44, endln:22:52
+            |vpiName:$bits
           |vpiArgument:
           \_RefTypespec: (work@M.T), line:22:50, endln:22:51
             |vpiParent:
@@ -15804,16 +15812,6 @@ Design: (unnamed)
             |vpiFullName:work@M.T
             |vpiActual:
             \_TypeParameter: (work@M.T), line:19:20, endln:19:21
-          |vpiName:
-          \_Identifier: ($bits), line:22:45, endln:22:49
-            |vpiParent:
-            \_SysFuncCall: ($bits), line:22:44, endln:22:52
-            |vpiName:$bits
-        |vpiName:
-        \_Identifier: ($display), line:21:21, endln:21:28
-          |vpiParent:
-          \_SysFuncCall: ($display), line:21:20, endln:22:53
-          |vpiName:$display
       |vpiDelay:
       \_RefObj: (work@M.DELAY), line:21:14, endln:21:19
         |vpiParent:
@@ -15835,17 +15833,15 @@ Design: (unnamed)
   \_Parameter: (work@top.FLAG), line:37:15, endln:37:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:36:1, endln:74:10
-    |UINT:1
     |vpiName:FLAG
     |vpiFullName:work@top.FLAG
   |vpiParameter:
   \_Parameter: (work@top.E), line:39:16, endln:39:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:36:1, endln:74:10
-    |UINT:3
-    |vpiLocalParam:1
     |vpiName:E
     |vpiFullName:work@top.E
+    |vpiLocalParam:1
   |vpiParameter:
   \_TypeParameter: (work@top.T), line:40:21, endln:40:22
     |vpiParent:
@@ -15864,13 +15860,12 @@ Design: (unnamed)
   \_ParamAssign: , line:37:15, endln:37:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:36:1, endln:74:10
+    |vpiLhs:
+    \_Parameter: (work@top.FLAG), line:37:15, endln:37:23
     |vpiRhs:
     \_Constant: , line:37:22, endln:37:23
       |vpiParent:
       \_ParamAssign: , line:37:15, endln:37:23
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@top), line:37:22, endln:37:23
         |vpiParent:
@@ -15879,19 +15874,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.FLAG), line:37:15, endln:37:23
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:39:16, endln:39:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:36:1, endln:74:10
+    |vpiLhs:
+    \_Parameter: (work@top.E), line:39:16, endln:39:21
     |vpiRhs:
     \_Constant: , line:39:20, endln:39:21
       |vpiParent:
       \_ParamAssign: , line:39:16, endln:39:21
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
       |vpiTypespec:
       \_RefTypespec: (work@top), line:39:20, endln:39:21
         |vpiParent:
@@ -15900,8 +15895,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.E), line:39:16, endln:39:21
+      |vpiSize:64
+      |vpiDecompile:3
+      |UINT:3
   |vpiInternalScope:
   \_Begin: (work@top), line:43:19, endln:62:12
   |vpiInternalScope:
@@ -15954,9 +15950,6 @@ Design: (unnamed)
           \_Constant: , line:40:36, endln:40:37
             |vpiParent:
             \_Operation: , line:40:32, endln:40:37
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
             |vpiTypespec:
             \_RefTypespec: (work@top), line:40:36, endln:40:37
               |vpiParent:
@@ -15965,13 +15958,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:2
+            |UINT:2
         |vpiOperand:
         \_Constant: , line:40:40, endln:40:41
           |vpiParent:
           \_Operation: , line:40:32, endln:40:41
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@top), line:40:40, endln:40:41
             |vpiParent:
@@ -15980,13 +15973,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:40:42, endln:40:43
         |vpiParent:
         \_Range: , line:40:31, endln:40:44
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:40:42, endln:40:43
           |vpiParent:
@@ -15995,6 +15988,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:

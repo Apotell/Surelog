@@ -70,22 +70,22 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitTypespec                                            4
-Constant                                              10
+Constant                                              12
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             2
 IntTypespec                                            6
-LogicTypespec                                          1
+LogicTypespec                                          3
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              4
 Range                                                  1
-RefTypespec                                           12
+RefTypespec                                           14
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                49
+Total:                                                55
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConst/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -122,17 +122,41 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:2:9, endln:5:14
       |vpiName:EXC_CAUSE_IRQ_SOFTWARE_M
-      |BIN:100011
-      |vpiDecompile:{1'b1, 5'd03}
-      |vpiSize:6
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (EXC_CAUSE_IRQ_SOFTWARE_M), line:3:3, endln:3:47
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.EXC_CAUSE_IRQ_SOFTWARE_M), line:3:34, endln:3:47
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@dut.EXC_CAUSE_IRQ_SOFTWARE_M
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:6
+        |vpiDecompile:{1'b1, 5'd03}
+        |BIN:100011
     |vpiEnumConst:
     \_EnumConst: (EXC_CAUSE_IRQ_TIMER_M), line:4:3, endln:4:47
       |vpiParent:
       \_EnumTypespec: , line:2:9, endln:5:14
       |vpiName:EXC_CAUSE_IRQ_TIMER_M
-      |BIN:100111
-      |vpiDecompile:{1'b1, 5'd07}
-      |vpiSize:6
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (EXC_CAUSE_IRQ_TIMER_M), line:4:3, endln:4:47
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.EXC_CAUSE_IRQ_TIMER_M), line:4:34, endln:4:47
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@dut.EXC_CAUSE_IRQ_TIMER_M
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:6
+        |vpiDecompile:{1'b1, 5'd07}
+        |BIN:100111
   |vpiTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
     |vpiParent:
@@ -145,9 +169,6 @@ Design: (unnamed)
       \_Constant: , line:2:21, endln:2:22
         |vpiParent:
         \_Range: , line:2:20, endln:2:25
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
         |vpiTypespec:
         \_RefTypespec: (work@dut), line:2:21, endln:2:22
           |vpiParent:
@@ -156,13 +177,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:5
+        |UINT:5
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
         |vpiParent:
         \_Range: , line:2:20, endln:2:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@dut), line:2:23, endln:2:24
           |vpiParent:
@@ -171,6 +192,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -184,6 +208,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
   |vpiTypespec:
   \_TypedefTypespec: (exc_cause_e), line:5:3, endln:5:14
     |vpiParent:
@@ -210,6 +238,8 @@ Design: (unnamed)
   \_BitTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (exc_cause_e), line:5:3, endln:5:14
   |vpiDefName:work@dut

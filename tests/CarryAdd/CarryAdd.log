@@ -419,20 +419,18 @@ Design: (unnamed)
   \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
-    |UINT:2
     |vpiName:WIDTH
     |vpiFullName:work@carryadd.WIDTH
   |vpiParamAssign:
   \_ParamAssign: , line:3:11, endln:3:20
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiLhs:
+    \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
     |vpiRhs:
     \_Constant: , line:3:19, endln:3:20
       |vpiParent:
       \_ParamAssign: , line:3:11, endln:3:20
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
       |vpiTypespec:
       \_RefTypespec: (work@carryadd), line:3:19, endln:3:20
         |vpiParent:
@@ -441,8 +439,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+      |vpiSize:64
+      |vpiDecompile:2
+      |UINT:2
   |vpiInternalScope:
   \_GenRegion: (work@carryadd), line:9:1, endln:20:12
     |vpiParent:
@@ -483,6 +482,14 @@ Design: (unnamed)
             \_ContAssign: , line:14:32, endln:14:60
               |vpiParent:
               \_Begin: (work@carryadd.STAGE), line:14:25, endln:14:61
+              |vpiLhs:
+              \_RefObj: (work@carryadd.STAGE.C), line:14:32, endln:14:33
+                |vpiParent:
+                \_ContAssign: , line:14:32, endln:14:60
+                |vpiName:C
+                |vpiFullName:work@carryadd.STAGE.C
+                |vpiActual:
+                \_Net: (work@carryadd.STAGE.C), line:12:22, endln:12:23
               |vpiRhs:
               \_Operation: , line:14:36, endln:14:45
                 |vpiParent:
@@ -504,18 +511,18 @@ Design: (unnamed)
                   |vpiFullName:work@carryadd.STAGE.IN2
                   |vpiActual:
                   \_Net: (work@carryadd.STAGE.IN2), line:11:34, endln:11:37
-              |vpiLhs:
-              \_RefObj: (work@carryadd.STAGE.C), line:14:32, endln:14:33
-                |vpiParent:
-                \_ContAssign: , line:14:32, endln:14:60
-                |vpiName:C
-                |vpiFullName:work@carryadd.STAGE.C
-                |vpiActual:
-                \_Net: (work@carryadd.STAGE.C), line:12:22, endln:12:23
             |vpiStmt:
             \_ContAssign: , line:14:32, endln:14:60
               |vpiParent:
               \_Begin: (work@carryadd.STAGE), line:14:25, endln:14:61
+              |vpiLhs:
+              \_RefObj: (work@carryadd.STAGE.Y), line:14:47, endln:14:48
+                |vpiParent:
+                \_ContAssign: , line:14:32, endln:14:60
+                |vpiName:Y
+                |vpiFullName:work@carryadd.STAGE.Y
+                |vpiActual:
+                \_Net: (work@carryadd.STAGE.Y), line:12:25, endln:12:26
               |vpiRhs:
               \_Operation: , line:14:51, endln:14:60
                 |vpiParent:
@@ -537,14 +544,6 @@ Design: (unnamed)
                   |vpiFullName:work@carryadd.STAGE.IN2
                   |vpiActual:
                   \_Net: (work@carryadd.STAGE.IN2), line:11:34, endln:11:37
-              |vpiLhs:
-              \_RefObj: (work@carryadd.STAGE.Y), line:14:47, endln:14:48
-                |vpiParent:
-                \_ContAssign: , line:14:32, endln:14:60
-                |vpiName:Y
-                |vpiFullName:work@carryadd.STAGE.Y
-                |vpiActual:
-                \_Net: (work@carryadd.STAGE.Y), line:12:25, endln:12:26
           |vpiInternalScope:
           \_Begin: (work@carryadd.STAGE), line:16:25, endln:17:61
             |vpiParent:
@@ -560,6 +559,14 @@ Design: (unnamed)
             \_ContAssign: , line:16:32, endln:17:60
               |vpiParent:
               \_Begin: (work@carryadd.STAGE), line:16:25, endln:17:61
+              |vpiLhs:
+              \_RefObj: (work@carryadd.STAGE.C), line:16:32, endln:16:33
+                |vpiParent:
+                \_ContAssign: , line:16:32, endln:17:60
+                |vpiName:C
+                |vpiFullName:work@carryadd.STAGE.C
+                |vpiActual:
+                \_Net: (work@carryadd.STAGE.C), line:12:22, endln:12:23
               |vpiRhs:
               \_Operation: , line:16:36, endln:16:78
                 |vpiParent:
@@ -616,6 +623,7 @@ Design: (unnamed)
                   \_HierPath: (STAGE[i - 1].C), line:16:65, endln:16:77
                     |vpiParent:
                     \_Operation: , line:16:51, endln:16:77
+                    |vpiName:STAGE[i - 1].C
                     |vpiActual:
                     \_BitSelect: (STAGE[i - 1]), line:16:65, endln:16:70
                       |vpiParent:
@@ -641,9 +649,6 @@ Design: (unnamed)
                         \_Constant: , line:16:73, endln:16:74
                           |vpiParent:
                           \_Operation: , line:16:71, endln:16:74
-                          |vpiDecompile:1
-                          |vpiSize:64
-                          |UINT:1
                           |vpiTypespec:
                           \_RefTypespec: (work@carryadd.STAGE.STAGE[i - 1].C.STAGE), line:16:73, endln:16:74
                             |vpiParent:
@@ -652,6 +657,9 @@ Design: (unnamed)
                             |vpiActual:
                             \_IntTypespec: 
                           |vpiConstType:9
+                          |vpiSize:64
+                          |vpiDecompile:1
+                          |UINT:1
                     |vpiActual:
                     \_RefObj: (work@carryadd.STAGE.C), line:16:76, endln:16:77
                       |vpiParent:
@@ -660,19 +668,18 @@ Design: (unnamed)
                       |vpiFullName:work@carryadd.STAGE.C
                       |vpiActual:
                       \_Net: (work@carryadd.STAGE.C), line:12:22, endln:12:23
-                    |vpiName:STAGE[i - 1].C
-              |vpiLhs:
-              \_RefObj: (work@carryadd.STAGE.C), line:16:32, endln:16:33
-                |vpiParent:
-                \_ContAssign: , line:16:32, endln:17:60
-                |vpiName:C
-                |vpiFullName:work@carryadd.STAGE.C
-                |vpiActual:
-                \_Net: (work@carryadd.STAGE.C), line:12:22, endln:12:23
             |vpiStmt:
             \_ContAssign: , line:16:32, endln:17:60
               |vpiParent:
               \_Begin: (work@carryadd.STAGE), line:16:25, endln:17:61
+              |vpiLhs:
+              \_RefObj: (work@carryadd.STAGE.Y), line:17:32, endln:17:33
+                |vpiParent:
+                \_ContAssign: , line:16:32, endln:17:60
+                |vpiName:Y
+                |vpiFullName:work@carryadd.STAGE.Y
+                |vpiActual:
+                \_Net: (work@carryadd.STAGE.Y), line:12:25, endln:12:26
               |vpiRhs:
               \_Operation: , line:17:36, endln:17:60
                 |vpiParent:
@@ -703,6 +710,7 @@ Design: (unnamed)
                 \_HierPath: (STAGE[i - 1].C), line:17:48, endln:17:60
                   |vpiParent:
                   \_Operation: , line:17:36, endln:17:60
+                  |vpiName:STAGE[i - 1].C
                   |vpiActual:
                   \_BitSelect: (STAGE[i - 1]), line:17:48, endln:17:53
                     |vpiParent:
@@ -728,9 +736,6 @@ Design: (unnamed)
                       \_Constant: , line:17:56, endln:17:57
                         |vpiParent:
                         \_Operation: , line:17:54, endln:17:57
-                        |vpiDecompile:1
-                        |vpiSize:64
-                        |UINT:1
                         |vpiTypespec:
                         \_RefTypespec: (work@carryadd.STAGE.STAGE[i - 1].C.STAGE), line:17:56, endln:17:57
                           |vpiParent:
@@ -739,6 +744,9 @@ Design: (unnamed)
                           |vpiActual:
                           \_IntTypespec: 
                         |vpiConstType:9
+                        |vpiSize:64
+                        |vpiDecompile:1
+                        |UINT:1
                   |vpiActual:
                   \_RefObj: (work@carryadd.STAGE.C), line:17:59, endln:17:60
                     |vpiParent:
@@ -747,15 +755,6 @@ Design: (unnamed)
                     |vpiFullName:work@carryadd.STAGE.C
                     |vpiActual:
                     \_Net: (work@carryadd.STAGE.C), line:12:22, endln:12:23
-                  |vpiName:STAGE[i - 1].C
-              |vpiLhs:
-              \_RefObj: (work@carryadd.STAGE.Y), line:17:32, endln:17:33
-                |vpiParent:
-                \_ContAssign: , line:16:32, endln:17:60
-                |vpiName:Y
-                |vpiFullName:work@carryadd.STAGE.Y
-                |vpiActual:
-                \_Net: (work@carryadd.STAGE.Y), line:12:25, endln:12:26
           |vpiTypespec:
           \_IntTypespec: 
             |vpiParent:
@@ -845,9 +844,6 @@ Design: (unnamed)
               \_Constant: , line:13:26, endln:13:27
                 |vpiParent:
                 \_Operation: , line:13:21, endln:13:27
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
                 |vpiTypespec:
                 \_RefTypespec: (work@carryadd.STAGE), line:13:26, endln:13:27
                   |vpiParent:
@@ -856,6 +852,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:9
+                |vpiSize:64
+                |vpiDecompile:0
+                |UINT:0
             |vpiStmt:
             \_Begin: (work@carryadd.STAGE), line:14:25, endln:14:61
             |vpiElseStmt:
@@ -864,14 +863,6 @@ Design: (unnamed)
           \_ContAssign: , line:18:24, endln:18:32
             |vpiParent:
             \_Begin: (work@carryadd.STAGE), line:10:41, endln:19:12
-            |vpiRhs:
-            \_RefObj: (work@carryadd.STAGE.Y), line:18:31, endln:18:32
-              |vpiParent:
-              \_ContAssign: , line:18:24, endln:18:32
-              |vpiName:Y
-              |vpiFullName:work@carryadd.STAGE.Y
-              |vpiActual:
-              \_Net: (work@carryadd.STAGE.Y), line:12:25, endln:12:26
             |vpiLhs:
             \_BitSelect: (work@carryadd.STAGE.y), line:18:25, endln:18:28
               |vpiParent:
@@ -888,6 +879,14 @@ Design: (unnamed)
                 |vpiFullName:work@carryadd.STAGE.i
                 |vpiActual:
                 \_Variable: (work@carryadd.i), line:10:14, endln:10:15
+            |vpiRhs:
+            \_RefObj: (work@carryadd.STAGE.Y), line:18:31, endln:18:32
+              |vpiParent:
+              \_ContAssign: , line:18:24, endln:18:32
+              |vpiName:Y
+              |vpiFullName:work@carryadd.STAGE.Y
+              |vpiActual:
+              \_Net: (work@carryadd.STAGE.Y), line:12:25, endln:12:26
         |vpiTypespec:
         \_IntTypespec: 
           |vpiParent:
@@ -900,13 +899,12 @@ Design: (unnamed)
         \_Assignment: , line:10:14, endln:10:19
           |vpiParent:
           \_GenFor: (work@carryadd), line:10:9, endln:19:12
+          |vpiLhs:
+          \_Variable: (work@carryadd.i), line:10:14, endln:10:15
           |vpiRhs:
           \_Constant: , line:10:18, endln:10:19
             |vpiParent:
             \_Assignment: , line:10:14, endln:10:19
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@carryadd), line:10:18, endln:10:19
               |vpiParent:
@@ -915,8 +913,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiLhs:
-          \_Variable: (work@carryadd.i), line:10:14, endln:10:15
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiCondition:
         \_Operation: , line:10:21, endln:10:30
           |vpiParent:
@@ -943,6 +942,14 @@ Design: (unnamed)
           |vpiParent:
           \_GenFor: (work@carryadd), line:10:9, endln:19:12
           |vpiOpType:82
+          |vpiLhs:
+          \_RefObj: (work@carryadd.i), line:10:32, endln:10:33
+            |vpiParent:
+            \_Assignment: , line:10:32, endln:10:39
+            |vpiName:i
+            |vpiFullName:work@carryadd.i
+            |vpiActual:
+            \_Variable: (work@carryadd.i), line:10:14, endln:10:15
           |vpiRhs:
           \_Operation: , line:10:36, endln:10:39
             |vpiParent:
@@ -960,9 +967,6 @@ Design: (unnamed)
             \_Constant: , line:10:38, endln:10:39
               |vpiParent:
               \_Operation: , line:10:36, endln:10:39
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
               |vpiTypespec:
               \_RefTypespec: (work@carryadd), line:10:38, endln:10:39
                 |vpiParent:
@@ -971,14 +975,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
-          |vpiLhs:
-          \_RefObj: (work@carryadd.i), line:10:32, endln:10:33
-            |vpiParent:
-            \_Assignment: , line:10:32, endln:10:39
-            |vpiName:i
-            |vpiFullName:work@carryadd.i
-            |vpiActual:
-            \_Variable: (work@carryadd.i), line:10:14, endln:10:15
+              |vpiSize:64
+              |vpiDecompile:1
+              |UINT:1
         |vpiStmt:
         \_Begin: (work@carryadd.STAGE), line:10:41, endln:19:12
       |vpiStmt:
@@ -1014,9 +1013,6 @@ Design: (unnamed)
         \_Constant: , line:5:14, endln:5:15
           |vpiParent:
           \_Operation: , line:5:8, endln:5:15
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@carryadd), line:5:14, endln:5:15
             |vpiParent:
@@ -1025,13 +1021,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:5:16, endln:5:17
         |vpiParent:
         \_Range: , line:5:7, endln:5:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@carryadd), line:5:16, endln:5:17
           |vpiParent:
@@ -1040,6 +1036,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:

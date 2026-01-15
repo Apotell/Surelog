@@ -396,17 +396,24 @@ Design: (unnamed)
       |vpiFullName:work@top.VADDR
       |vpiActual:
       \_ArrayTypespec: , line:9:34, endln:9:54
-    |vpiLocalParam:1
     |vpiName:VADDR
     |vpiFullName:work@top.VADDR
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:9:29, endln:9:54
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:1:1, endln:20:10
+    |vpiLhs:
+    \_Parameter: (work@top.VADDR), line:9:29, endln:9:54
     |vpiRhs:
     \_FuncCall: (ASSIGN_VADDR), line:9:40, endln:9:53
       |vpiParent:
       \_ParamAssign: , line:9:29, endln:9:54
+      |vpiName:
+      \_Identifier: (ASSIGN_VADDR), line:9:40, endln:9:52
+        |vpiParent:
+        \_FuncCall: (ASSIGN_VADDR), line:9:40, endln:9:53
+        |vpiName:ASSIGN_VADDR
       |vpiTaskFunc:
       \_Function: (work@top.ASSIGN_VADDR), line:3:5, endln:7:16
         |vpiParent:
@@ -452,21 +459,6 @@ Design: (unnamed)
               \_Begin: (work@top.ASSIGN_VADDR), line:4:37, endln:6:12
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:5:32, endln:5:33
-                |vpiParent:
-                \_Assignment: , line:5:14, endln:5:33
-                |vpiDecompile:5
-                |vpiSize:64
-                |UINT:5
-                |vpiTypespec:
-                \_RefTypespec: (work@top.ASSIGN_VADDR), line:5:32, endln:5:33
-                  |vpiParent:
-                  \_Constant: , line:5:32, endln:5:33
-                  |vpiFullName:work@top.ASSIGN_VADDR
-                  |vpiActual:
-                  \_IntTypespec: 
-                |vpiConstType:9
               |vpiLhs:
               \_BitSelect: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:5:26, endln:5:29
                 |vpiParent:
@@ -483,17 +475,31 @@ Design: (unnamed)
                   |vpiFullName:work@top.ASSIGN_VADDR.i
                   |vpiActual:
                   \_Variable: (work@top.ASSIGN_VADDR.i), line:4:18, endln:4:19
+              |vpiRhs:
+              \_Constant: , line:5:32, endln:5:33
+                |vpiParent:
+                \_Assignment: , line:5:14, endln:5:33
+                |vpiTypespec:
+                \_RefTypespec: (work@top.ASSIGN_VADDR), line:5:32, endln:5:33
+                  |vpiParent:
+                  \_Constant: , line:5:32, endln:5:33
+                  |vpiFullName:work@top.ASSIGN_VADDR
+                  |vpiActual:
+                  \_IntTypespec: 
+                |vpiConstType:9
+                |vpiSize:64
+                |vpiDecompile:5
+                |UINT:5
           |vpiForInitStmt:
           \_Assignment: , line:4:14, endln:4:23
             |vpiParent:
             \_ForStmt: (work@top.ASSIGN_VADDR), line:4:9, endln:6:12
+            |vpiLhs:
+            \_Variable: (work@top.ASSIGN_VADDR.i), line:4:18, endln:4:19
             |vpiRhs:
             \_Constant: , line:4:22, endln:4:23
               |vpiParent:
               \_Assignment: , line:4:14, endln:4:23
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
               |vpiTypespec:
               \_RefTypespec: (work@top.ASSIGN_VADDR), line:4:22, endln:4:23
                 |vpiParent:
@@ -502,8 +508,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
-            |vpiLhs:
-            \_Variable: (work@top.ASSIGN_VADDR.i), line:4:18, endln:4:19
+              |vpiSize:64
+              |vpiDecompile:0
+              |UINT:0
           |vpiForIncStmt:
           \_Operation: , line:4:32, endln:4:35
             |vpiParent:
@@ -534,9 +541,6 @@ Design: (unnamed)
             \_Constant: , line:4:29, endln:4:30
               |vpiParent:
               \_Operation: , line:4:25, endln:4:30
-              |vpiDecompile:2
-              |vpiSize:64
-              |UINT:2
               |vpiTypespec:
               \_RefTypespec: (work@top.ASSIGN_VADDR), line:4:29, endln:4:30
                 |vpiParent:
@@ -545,6 +549,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:2
+              |UINT:2
           |vpiStmt:
           \_Begin: (work@top.ASSIGN_VADDR), line:4:37, endln:6:12
         |vpiTypespec:
@@ -573,13 +580,6 @@ Design: (unnamed)
           \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:2:26, endln:2:44
         |vpiStmt:
         \_ForStmt: (work@top.ASSIGN_VADDR), line:4:9, endln:6:12
-      |vpiName:
-      \_Identifier: (ASSIGN_VADDR), line:9:40, endln:9:52
-        |vpiParent:
-        \_FuncCall: (ASSIGN_VADDR), line:9:40, endln:9:53
-        |vpiName:ASSIGN_VADDR
-    |vpiLhs:
-    \_Parameter: (work@top.VADDR), line:9:29, endln:9:54
   |vpiInternalScope:
   \_Function: (work@top.ASSIGN_VADDR), line:3:5, endln:7:16
   |vpiInternalScope:
@@ -623,9 +623,6 @@ Design: (unnamed)
         \_Constant: , line:2:45, endln:2:46
           |vpiParent:
           \_Operation: , line:2:45, endln:2:46
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
           |vpiTypespec:
           \_RefTypespec: (work@top), line:2:45, endln:2:46
             |vpiParent:
@@ -634,6 +631,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |UINT:2
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:2:13, endln:2:25
       |vpiParent:
@@ -675,9 +675,6 @@ Design: (unnamed)
         \_Constant: , line:9:35, endln:9:36
           |vpiParent:
           \_Operation: , line:9:35, endln:9:36
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
           |vpiTypespec:
           \_RefTypespec: (work@top), line:9:35, endln:9:36
             |vpiParent:
@@ -686,6 +683,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |UINT:2
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:9:16, endln:9:28
       |vpiParent:
@@ -729,9 +729,6 @@ Design: (unnamed)
         \_Constant: , line:11:12, endln:11:13
           |vpiParent:
           \_BitSelect: (work@top.VADDR), line:11:11, endln:11:14
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@top.VADDR), line:11:12, endln:11:13
             |vpiParent:
@@ -740,13 +737,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiOperand:
       \_Constant: , line:11:18, endln:11:19
         |vpiParent:
         \_Operation: , line:11:6, endln:11:19
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
         |vpiTypespec:
         \_RefTypespec: (work@top), line:11:18, endln:11:19
           |vpiParent:
@@ -755,6 +752,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:5
+        |UINT:5
     |vpiStmt:
     \_Begin: (work@top), line:11:21, endln:13:5
   |vpiGenStmt:
@@ -778,9 +778,6 @@ Design: (unnamed)
         \_Constant: , line:14:12, endln:14:13
           |vpiParent:
           \_BitSelect: (work@top.VADDR), line:14:11, endln:14:14
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@top.VADDR), line:14:12, endln:14:13
             |vpiParent:
@@ -789,13 +786,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiOperand:
       \_Constant: , line:14:18, endln:14:19
         |vpiParent:
         \_Operation: , line:14:6, endln:14:19
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
         |vpiTypespec:
         \_RefTypespec: (work@top), line:14:18, endln:14:19
           |vpiParent:
@@ -804,6 +801,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:5
+        |UINT:5
     |vpiStmt:
     \_Begin: (work@top), line:14:21, endln:16:5
   |vpiGenStmt:
@@ -827,9 +827,6 @@ Design: (unnamed)
         \_Constant: , line:17:12, endln:17:13
           |vpiParent:
           \_BitSelect: (work@top.VADDR), line:17:11, endln:17:14
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@top.VADDR), line:17:12, endln:17:13
             |vpiParent:
@@ -838,13 +835,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiOperand:
       \_Constant: , line:17:18, endln:17:19
         |vpiParent:
         \_Operation: , line:17:6, endln:17:19
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
         |vpiTypespec:
         \_RefTypespec: (work@top), line:17:18, endln:17:19
           |vpiParent:
@@ -853,6 +850,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:5
+        |UINT:5
     |vpiStmt:
     \_Begin: (work@top), line:17:21, endln:19:5
 |vpiTypespec:

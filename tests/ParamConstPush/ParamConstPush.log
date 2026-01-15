@@ -165,7 +165,6 @@ Design: (unnamed)
   \_Parameter: (base_pkg::BASE), line:2:25, endln:2:39
     |vpiParent:
     \_Package: base_pkg (base_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:1:1, endln:4:11
-    |BIN:00
     |vpiTypespec:
     \_RefTypespec: (base_pkg::BASE), line:2:12, endln:2:23
       |vpiParent:
@@ -173,9 +172,9 @@ Design: (unnamed)
       |vpiFullName:base_pkg::BASE
       |vpiActual:
       \_LogicTypespec: , line:2:12, endln:2:17
-    |vpiLocalParam:1
     |vpiName:BASE
     |vpiFullName:base_pkg::BASE
+    |vpiLocalParam:1
   |vpiParameter:
   \_Parameter: (base_pkg::USAGE), line:3:25, endln:3:46
     |vpiParent:
@@ -187,20 +186,19 @@ Design: (unnamed)
       |vpiFullName:base_pkg::USAGE
       |vpiActual:
       \_LogicTypespec: , line:2:12, endln:2:17
-    |vpiLocalParam:1
     |vpiName:USAGE
     |vpiFullName:base_pkg::USAGE
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:2:25, endln:2:39
     |vpiParent:
     \_Package: base_pkg (base_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:1:1, endln:4:11
+    |vpiLhs:
+    \_Parameter: (base_pkg::BASE), line:2:25, endln:2:39
     |vpiRhs:
     \_Constant: , line:2:34, endln:2:39
       |vpiParent:
       \_ParamAssign: , line:2:25, endln:2:39
-      |vpiDecompile:2'b00
-      |vpiSize:2
-      |BIN:00
       |vpiTypespec:
       \_RefTypespec: (base_pkg), line:2:34, endln:2:39
         |vpiParent:
@@ -209,12 +207,15 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (base_pkg::BASE), line:2:25, endln:2:39
+      |vpiSize:2
+      |vpiDecompile:2'b00
+      |BIN:00
   |vpiParamAssign:
   \_ParamAssign: , line:3:25, endln:3:46
     |vpiParent:
     \_Package: base_pkg (base_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:1:1, endln:4:11
+    |vpiLhs:
+    \_Parameter: (base_pkg::USAGE), line:3:25, endln:3:46
     |vpiRhs:
     \_Operation: , line:3:34, endln:3:46
       |vpiParent:
@@ -232,9 +233,6 @@ Design: (unnamed)
       \_Constant: , line:3:41, endln:3:46
         |vpiParent:
         \_Operation: , line:3:34, endln:3:46
-        |vpiDecompile:2'b01
-        |vpiSize:2
-        |BIN:01
         |vpiTypespec:
         \_RefTypespec: (base_pkg), line:3:41, endln:3:46
           |vpiParent:
@@ -243,8 +241,9 @@ Design: (unnamed)
           |vpiActual:
           \_LogicTypespec: 
         |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (base_pkg::USAGE), line:3:25, endln:3:46
+        |vpiSize:2
+        |vpiDecompile:2'b01
+        |BIN:01
   |vpiTypespec:
   \_LogicTypespec: , line:2:12, endln:2:17
     |vpiParent:
@@ -257,9 +256,6 @@ Design: (unnamed)
       \_Constant: , line:2:19, endln:2:20
         |vpiParent:
         \_Range: , line:2:18, endln:2:23
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (base_pkg), line:2:19, endln:2:20
           |vpiParent:
@@ -268,13 +264,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:2:21, endln:2:22
         |vpiParent:
         \_Range: , line:2:18, endln:2:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (base_pkg), line:2:21, endln:2:22
           |vpiParent:
@@ -283,6 +279,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -318,13 +317,15 @@ Design: (unnamed)
       |vpiFullName:error_pkg::FROM_USAGE
       |vpiActual:
       \_LogicTypespec: , line:7:12, endln:7:17
-    |vpiLocalParam:1
     |vpiName:FROM_USAGE
     |vpiFullName:error_pkg::FROM_USAGE
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:7:25, endln:7:53
     |vpiParent:
     \_Package: error_pkg (error_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:6:1, endln:8:11
+    |vpiLhs:
+    \_Parameter: (error_pkg::FROM_USAGE), line:7:25, endln:7:53
     |vpiRhs:
     \_RefObj: (error_pkg::base_pkg::USAGE), line:7:38, endln:7:53
       |vpiParent:
@@ -333,8 +334,6 @@ Design: (unnamed)
       |vpiFullName:error_pkg::base_pkg::USAGE
       |vpiActual:
       \_Parameter: (base_pkg::USAGE), line:3:25, endln:3:46
-    |vpiLhs:
-    \_Parameter: (error_pkg::FROM_USAGE), line:7:25, endln:7:53
   |vpiTypespec:
   \_LogicTypespec: , line:7:12, endln:7:17
     |vpiParent:
@@ -347,9 +346,6 @@ Design: (unnamed)
       \_Constant: , line:7:19, endln:7:20
         |vpiParent:
         \_Range: , line:7:18, endln:7:23
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (error_pkg), line:7:19, endln:7:20
           |vpiParent:
@@ -358,13 +354,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:7:21, endln:7:22
         |vpiParent:
         \_Range: , line:7:18, endln:7:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (error_pkg), line:7:21, endln:7:22
           |vpiParent:
@@ -373,6 +369,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -404,9 +403,6 @@ Design: (unnamed)
     \_Constant: , line:10:19, endln:10:31
       |vpiParent:
       \_ImportTypespec: (error_pkg), line:10:19, endln:10:31
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@top.error_pkg), line:10:19, endln:10:31
         |vpiParent:
@@ -415,6 +411,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:

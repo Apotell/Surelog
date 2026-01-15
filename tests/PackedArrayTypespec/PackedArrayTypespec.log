@@ -91,22 +91,22 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          2
-Constant                                               6
+Constant                                               9
 Design                                                 1
 EnumConst                                              3
 EnumTypespec                                           1
 Identifier                                             4
-IntTypespec                                            6
+IntTypespec                                            9
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
 Range                                                  3
-RefTypespec                                           12
+RefTypespec                                           15
 SourceFile                                             1
 TypedefTypespec                                        3
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                48
+Total:                                                57
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -143,25 +143,61 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:3:12, endln:7:16
       |vpiName:DISABLED
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:2
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (DISABLED), line:4:5, endln:4:13
+        |vpiTypespec:
+        \_RefTypespec: (work@top.DISABLED), line:4:5, endln:4:13
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.DISABLED
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:2
+        |vpiDecompile:0
+        |INT:0
     |vpiEnumConst:
     \_EnumConst: (PARALLEL), line:5:5, endln:5:13
       |vpiParent:
       \_EnumTypespec: , line:3:12, endln:7:16
       |vpiName:PARALLEL
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:2
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (PARALLEL), line:5:5, endln:5:13
+        |vpiTypespec:
+        \_RefTypespec: (work@top.PARALLEL), line:5:5, endln:5:13
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.PARALLEL
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:2
+        |vpiDecompile:1
+        |INT:1
     |vpiEnumConst:
     \_EnumConst: (MERGED), line:6:5, endln:6:11
       |vpiParent:
       \_EnumTypespec: , line:3:12, endln:7:16
       |vpiName:MERGED
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:2
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (MERGED), line:6:5, endln:6:11
+        |vpiTypespec:
+        \_RefTypespec: (work@top.MERGED), line:6:5, endln:6:11
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.MERGED
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:2
+        |vpiDecompile:2
+        |INT:2
   |vpiTypespec:
   \_LogicTypespec: , line:3:17, endln:3:22
     |vpiParent:
@@ -174,9 +210,6 @@ Design: (unnamed)
       \_Constant: , line:3:24, endln:3:25
         |vpiParent:
         \_Range: , line:3:23, endln:3:28
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@top), line:3:24, endln:3:25
           |vpiParent:
@@ -185,13 +218,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:3:26, endln:3:27
         |vpiParent:
         \_Range: , line:3:23, endln:3:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:3:26, endln:3:27
           |vpiParent:
@@ -200,10 +233,18 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (unit_type_t), line:7:5, endln:7:16
     |vpiParent:
@@ -248,9 +289,6 @@ Design: (unnamed)
       \_Constant: , line:9:24, endln:9:25
         |vpiParent:
         \_Range: , line:9:23, endln:9:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:9:24, endln:9:25
           |vpiParent:
@@ -259,13 +297,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
       |vpiRightRange:
       \_Constant: , line:9:26, endln:9:27
         |vpiParent:
         \_Range: , line:9:23, endln:9:28
-        |vpiDecompile:4
-        |vpiSize:64
-        |UINT:4
         |vpiTypespec:
         \_RefTypespec: (work@top), line:9:26, endln:9:27
           |vpiParent:
@@ -274,6 +312,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:4
+        |UINT:4
     |vpiElemTypespec:
     \_RefTypespec: (work@top.unit_type_t), line:9:11, endln:9:22
       |vpiParent:
@@ -311,9 +352,6 @@ Design: (unnamed)
       \_Constant: , line:11:29, endln:11:30
         |vpiParent:
         \_Range: , line:11:28, endln:11:33
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:11:29, endln:11:30
           |vpiParent:
@@ -322,13 +360,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
       |vpiRightRange:
       \_Constant: , line:11:31, endln:11:32
         |vpiParent:
         \_Range: , line:11:28, endln:11:33
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@top), line:11:31, endln:11:32
           |vpiParent:
@@ -337,6 +375,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
     |vpiElemTypespec:
     \_RefTypespec: (work@top.fmt_unit_types_t), line:11:11, endln:11:27
       |vpiParent:
@@ -350,6 +391,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:3:12, endln:7:16
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:17, endln:3:22
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:

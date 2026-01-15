@@ -324,9 +324,6 @@ Design: (unnamed)
       \_Constant: , line:12:14, endln:12:15
         |vpiParent:
         \_Range: , line:12:13, endln:12:18
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
         |vpiTypespec:
         \_RefTypespec: (work@foo), line:12:14, endln:12:15
           |vpiParent:
@@ -335,13 +332,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:7
+        |UINT:7
       |vpiRightRange:
       \_Constant: , line:12:16, endln:12:17
         |vpiParent:
         \_Range: , line:12:13, endln:12:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@foo), line:12:16, endln:12:17
           |vpiParent:
@@ -350,6 +347,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -540,21 +540,6 @@ Design: (unnamed)
           |vpiParent:
           \_IfElse: , line:17:3, endln:20:53
           |vpiOpType:82
-          |vpiRhs:
-          \_Constant: , line:17:19, endln:17:20
-            |vpiParent:
-            \_Assignment: , line:17:12, endln:17:20
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@foo), line:17:19, endln:17:20
-              |vpiParent:
-              \_Constant: , line:17:19, endln:17:20
-              |vpiFullName:work@foo
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@foo.out), line:17:12, endln:17:15
             |vpiParent:
@@ -563,15 +548,43 @@ Design: (unnamed)
             |vpiFullName:work@foo.out
             |vpiActual:
             \_Net: (work@foo.out), line:9:36, endln:9:39
+          |vpiRhs:
+          \_Constant: , line:17:19, endln:17:20
+            |vpiParent:
+            \_Assignment: , line:17:12, endln:17:20
+            |vpiTypespec:
+            \_RefTypespec: (work@foo), line:17:19, endln:17:20
+              |vpiParent:
+              \_Constant: , line:17:19, endln:17:20
+              |vpiFullName:work@foo
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiElseStmt:
         \_Assignment: , line:19:5, endln:20:52
           |vpiParent:
           \_IfElse: , line:17:3, endln:20:53
           |vpiOpType:82
+          |vpiLhs:
+          \_RefObj: (work@foo.out), line:19:5, endln:19:8
+            |vpiParent:
+            \_Assignment: , line:19:5, endln:20:52
+            |vpiName:out
+            |vpiFullName:work@foo.out
+            |vpiActual:
+            \_Net: (work@foo.out), line:9:36, endln:9:39
           |vpiRhs:
           \_FuncCall: (do_add), line:20:5, endln:20:52
             |vpiParent:
             \_Assignment: , line:19:5, endln:20:52
+            |vpiName:
+            \_Identifier: (do_add), line:20:5, endln:20:11
+              |vpiParent:
+              \_FuncCall: (do_add), line:20:5, endln:20:52
+              |vpiName:do_add
             |vpiTaskFunc:
             \_Function: (do_add), line:1:1, endln:7:12
               |vpiParent:
@@ -593,9 +606,6 @@ Design: (unnamed)
                   \_Constant: , line:1:11, endln:1:12
                     |vpiParent:
                     \_Range: , line:1:10, endln:1:15
-                    |vpiDecompile:7
-                    |vpiSize:64
-                    |UINT:7
                     |vpiTypespec:
                     \_RefTypespec: (do_add), line:1:11, endln:1:12
                       |vpiParent:
@@ -604,13 +614,13 @@ Design: (unnamed)
                       |vpiActual:
                       \_IntTypespec: 
                     |vpiConstType:9
+                    |vpiSize:64
+                    |vpiDecompile:7
+                    |UINT:7
                   |vpiRightRange:
                   \_Constant: , line:1:13, endln:1:14
                     |vpiParent:
                     \_Range: , line:1:10, endln:1:15
-                    |vpiDecompile:0
-                    |vpiSize:64
-                    |UINT:0
                     |vpiTypespec:
                     \_RefTypespec: (do_add), line:1:13, endln:1:14
                       |vpiParent:
@@ -619,6 +629,9 @@ Design: (unnamed)
                       |vpiActual:
                       \_IntTypespec: 
                     |vpiConstType:9
+                    |vpiSize:64
+                    |vpiDecompile:0
+                    |UINT:0
               |vpiTypespec:
               \_IntTypespec: 
                 |vpiParent:
@@ -640,8 +653,8 @@ Design: (unnamed)
               \_IODecl: (inp_a), line:2:13, endln:2:18
                 |vpiParent:
                 \_Function: (do_add), line:1:1, endln:7:12
-                |vpiDirection:1
                 |vpiName:inp_a
+                |vpiDirection:1
                 |vpiTypespec:
                 \_RefTypespec: (do_add.inp_a), line:2:7, endln:2:12
                   |vpiParent:
@@ -653,8 +666,8 @@ Design: (unnamed)
               \_IODecl: (inp_b), line:3:13, endln:3:18
                 |vpiParent:
                 \_Function: (do_add), line:1:1, endln:7:12
-                |vpiDirection:1
                 |vpiName:inp_b
+                |vpiDirection:1
                 |vpiTypespec:
                 \_RefTypespec: (do_add.inp_b), line:3:7, endln:3:12
                   |vpiParent:
@@ -668,6 +681,14 @@ Design: (unnamed)
                 \_Function: (do_add), line:1:1, endln:7:12
                 |vpiOpType:82
                 |vpiBlocking:1
+                |vpiLhs:
+                \_RefObj: (do_add.do_add), line:5:1, endln:5:7
+                  |vpiParent:
+                  \_Assignment: , line:5:1, endln:5:23
+                  |vpiName:do_add
+                  |vpiFullName:do_add.do_add
+                  |vpiActual:
+                  \_Function: (do_add), line:1:1, endln:7:12
                 |vpiRhs:
                 \_Operation: , line:5:10, endln:5:23
                   |vpiParent:
@@ -689,14 +710,6 @@ Design: (unnamed)
                     |vpiFullName:do_add.inp_b
                     |vpiActual:
                     \_IODecl: (inp_b), line:3:13, endln:3:18
-                |vpiLhs:
-                \_RefObj: (do_add.do_add), line:5:1, endln:5:7
-                  |vpiParent:
-                  \_Assignment: , line:5:1, endln:5:23
-                  |vpiName:do_add
-                  |vpiFullName:do_add.do_add
-                  |vpiActual:
-                  \_Function: (do_add), line:1:1, endln:7:12
             |vpiArgument:
             \_RefObj: (work@foo.inp_a), line:20:39, endln:20:44
               |vpiParent:
@@ -713,19 +726,6 @@ Design: (unnamed)
               |vpiFullName:work@foo.inp_b
               |vpiActual:
               \_Net: (work@foo.inp_b), line:9:29, endln:9:34
-            |vpiName:
-            \_Identifier: (do_add), line:20:5, endln:20:11
-              |vpiParent:
-              \_FuncCall: (do_add), line:20:5, endln:20:52
-              |vpiName:do_add
-          |vpiLhs:
-          \_RefObj: (work@foo.out), line:19:5, endln:19:8
-            |vpiParent:
-            \_Assignment: , line:19:5, endln:20:52
-            |vpiName:out
-            |vpiFullName:work@foo.out
-            |vpiActual:
-            \_Net: (work@foo.out), line:9:36, endln:9:39
     |vpiAlwaysType:1
 |vpiTypespec:
 \_ModuleTypespec: (work@foo)

@@ -347,7 +347,6 @@ Design: (unnamed)
   \_Parameter: (work@other.Width), line:2:19, endln:2:28
     |vpiParent:
     \_Module: work@other (work@other), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:1:1, endln:5:10
-    |UINT:1
     |vpiTypespec:
     \_RefTypespec: (work@other.Width), line:2:15, endln:2:18
       |vpiParent:
@@ -361,13 +360,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:19, endln:2:28
     |vpiParent:
     \_Module: work@other (work@other), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_Parameter: (work@other.Width), line:2:19, endln:2:28
     |vpiRhs:
     \_Constant: , line:2:27, endln:2:28
       |vpiParent:
       \_ParamAssign: , line:2:19, endln:2:28
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@other), line:2:27, endln:2:28
         |vpiParent:
@@ -376,8 +374,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@other.Width), line:2:19, endln:2:28
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiTypespec:
   \_IntTypespec: , line:2:15, endln:2:18
     |vpiParent:
@@ -460,14 +459,6 @@ Design: (unnamed)
   \_ContAssign: , line:4:11, endln:4:19
     |vpiParent:
     \_Module: work@other (work@other), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:1:1, endln:5:10
-    |vpiRhs:
-    \_RefObj: (work@other.in), line:4:17, endln:4:19
-      |vpiParent:
-      \_ContAssign: , line:4:11, endln:4:19
-      |vpiName:in
-      |vpiFullName:work@other.in
-      |vpiActual:
-      \_Net: (work@other.in), line:3:27, endln:3:29
     |vpiLhs:
     \_RefObj: (work@other.out), line:4:11, endln:4:14
       |vpiParent:
@@ -476,6 +467,14 @@ Design: (unnamed)
       |vpiFullName:work@other.out
       |vpiActual:
       \_Net: (work@other.out), line:3:55, endln:3:58
+    |vpiRhs:
+    \_RefObj: (work@other.in), line:4:17, endln:4:19
+      |vpiParent:
+      \_ContAssign: , line:4:11, endln:4:19
+      |vpiName:in
+      |vpiFullName:work@other.in
+      |vpiActual:
+      \_Net: (work@other.in), line:3:27, endln:3:29
 |vpiTypespec:
 \_ModuleTypespec: (work@dut)
   |vpiParent:

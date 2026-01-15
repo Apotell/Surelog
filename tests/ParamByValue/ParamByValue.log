@@ -235,14 +235,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamByValue/dut.sv:20:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              17
+Constant                                              18
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
 Identifier                                             6
 ImportTypespec                                         1
 IntTypespec                                           12
-LogicTypespec                                          9
+LogicTypespec                                         10
 Module                                                 4
 ModuleTypespec                                         3
 Operation                                              2
@@ -252,12 +252,12 @@ Parameter                                              4
 Range                                                  5
 RefModule                                              2
 RefObj                                                 4
-RefTypespec                                           23
+RefTypespec                                           24
 SourceFile                                             1
 StringTypespec                                         1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                               103
+Total:                                               106
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamByValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -282,7 +282,6 @@ Design: (unnamed)
   \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:51
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
-    |BIN:1110011001111001
     |vpiTypespec:
     \_RefTypespec: (lc_ctrl_state_pkg::B0), line:2:13, endln:2:25
       |vpiParent:
@@ -296,7 +295,6 @@ Design: (unnamed)
   \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:51
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
-    |BIN:1101111101101110
     |vpiTypespec:
     \_RefTypespec: (lc_ctrl_state_pkg::B1), line:3:13, endln:3:25
       |vpiParent:
@@ -310,13 +308,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:26, endln:2:51
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
+    |vpiLhs:
+    \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:51
     |vpiRhs:
     \_Constant: , line:2:31, endln:2:51
       |vpiParent:
       \_ParamAssign: , line:2:26, endln:2:51
-      |vpiDecompile:16'b1110011001111001
-      |vpiSize:16
-      |BIN:1110011001111001
       |vpiTypespec:
       \_RefTypespec: (lc_ctrl_state_pkg), line:2:31, endln:2:51
         |vpiParent:
@@ -325,19 +322,19 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:51
+      |vpiSize:16
+      |vpiDecompile:16'b1110011001111001
+      |BIN:1110011001111001
   |vpiParamAssign:
   \_ParamAssign: , line:3:26, endln:3:51
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
+    |vpiLhs:
+    \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:51
     |vpiRhs:
     \_Constant: , line:3:31, endln:3:51
       |vpiParent:
       \_ParamAssign: , line:3:26, endln:3:51
-      |vpiDecompile:16'b1101111101101110
-      |vpiSize:16
-      |BIN:1101111101101110
       |vpiTypespec:
       \_RefTypespec: (lc_ctrl_state_pkg), line:3:31, endln:3:51
         |vpiParent:
@@ -346,8 +343,9 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:51
+      |vpiSize:16
+      |vpiDecompile:16'b1101111101101110
+      |BIN:1101111101101110
   |vpiTypespec:
   \_LogicTypespec: , line:2:13, endln:2:18
     |vpiParent:
@@ -360,9 +358,6 @@ Design: (unnamed)
       \_Constant: , line:2:20, endln:2:22
         |vpiParent:
         \_Range: , line:2:19, endln:2:25
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
         |vpiTypespec:
         \_RefTypespec: (lc_ctrl_state_pkg), line:2:20, endln:2:22
           |vpiParent:
@@ -371,13 +366,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:15
+        |UINT:15
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
         |vpiParent:
         \_Range: , line:2:19, endln:2:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (lc_ctrl_state_pkg), line:2:23, endln:2:24
           |vpiParent:
@@ -386,6 +381,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -410,9 +408,21 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:4:11, endln:6:15
       |vpiName:LcStScrap
-      |BIN:11011111011011101110011001111001
-      |vpiDecompile:{B1, B0}
-      |vpiSize:32
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (LcStScrap), line:5:5, endln:5:34
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_state_pkg::LcStScrap), line:5:25, endln:5:34
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:lc_ctrl_state_pkg::LcStScrap
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:32
+        |vpiDecompile:{B1, B0}
+        |BIN:11011111011011101110011001111001
   |vpiTypespec:
   \_LogicTypespec: , line:4:16, endln:4:21
     |vpiParent:
@@ -425,9 +435,6 @@ Design: (unnamed)
       \_Constant: , line:4:23, endln:4:25
         |vpiParent:
         \_Range: , line:4:22, endln:4:28
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (lc_ctrl_state_pkg), line:4:23, endln:4:25
           |vpiParent:
@@ -436,13 +443,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:4:26, endln:4:27
         |vpiParent:
         \_Range: , line:4:22, endln:4:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (lc_ctrl_state_pkg), line:4:26, endln:4:27
           |vpiParent:
@@ -451,6 +458,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_state_pkg::lc_state_e), line:6:5, endln:6:15
     |vpiParent:
@@ -493,7 +503,6 @@ Design: (unnamed)
   \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:60
     |vpiParent:
     \_Module: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:9:1, endln:10:10
-    |UINT:0
     |vpiTypespec:
     \_RefTypespec: (work@generic_flop.ResetValue), line:9:33, endln:9:45
       |vpiParent:
@@ -507,13 +516,12 @@ Design: (unnamed)
   \_ParamAssign: , line:9:46, endln:9:60
     |vpiParent:
     \_Module: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:9:1, endln:10:10
+    |vpiLhs:
+    \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:60
     |vpiRhs:
     \_Constant: , line:9:59, endln:9:60
       |vpiParent:
       \_ParamAssign: , line:9:46, endln:9:60
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@generic_flop), line:9:59, endln:9:60
         |vpiParent:
@@ -522,8 +530,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:60
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:9:33, endln:9:38
     |vpiParent:
@@ -536,9 +545,6 @@ Design: (unnamed)
       \_Constant: , line:9:40, endln:9:42
         |vpiParent:
         \_Range: , line:9:39, endln:9:45
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
         |vpiTypespec:
         \_RefTypespec: (work@generic_flop), line:9:40, endln:9:42
           |vpiParent:
@@ -547,13 +553,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:15
+        |UINT:15
       |vpiRightRange:
       \_Constant: , line:9:43, endln:9:44
         |vpiParent:
         \_Range: , line:9:39, endln:9:45
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@generic_flop), line:9:43, endln:9:44
           |vpiParent:
@@ -562,6 +568,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -584,7 +593,6 @@ Design: (unnamed)
   \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:58
     |vpiParent:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:12:1, endln:18:10
-    |UINT:0
     |vpiTypespec:
     \_RefTypespec: (work@prim_flop.ResetValue), line:12:31, endln:12:43
       |vpiParent:
@@ -598,13 +606,12 @@ Design: (unnamed)
   \_ParamAssign: , line:12:44, endln:12:58
     |vpiParent:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:12:1, endln:18:10
+    |vpiLhs:
+    \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:58
     |vpiRhs:
     \_Constant: , line:12:57, endln:12:58
       |vpiParent:
       \_ParamAssign: , line:12:44, endln:12:58
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@prim_flop), line:12:57, endln:12:58
         |vpiParent:
@@ -613,8 +620,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:58
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:12:31, endln:12:36
     |vpiParent:
@@ -627,9 +635,6 @@ Design: (unnamed)
       \_Constant: , line:12:38, endln:12:40
         |vpiParent:
         \_Range: , line:12:37, endln:12:43
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
         |vpiTypespec:
         \_RefTypespec: (work@prim_flop), line:12:38, endln:12:40
           |vpiParent:
@@ -638,13 +643,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:15
+        |UINT:15
       |vpiRightRange:
       \_Constant: , line:12:41, endln:12:42
         |vpiParent:
         \_Range: , line:12:37, endln:12:43
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@prim_flop), line:12:41, endln:12:42
           |vpiParent:
@@ -653,6 +658,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -699,9 +707,6 @@ Design: (unnamed)
     \_Constant: , line:21:10, endln:21:30
       |vpiParent:
       \_ImportTypespec: (lc_ctrl_state_pkg), line:21:10, endln:21:30
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@top.lc_ctrl_state_pkg), line:21:10, endln:21:30
         |vpiParent:
@@ -710,6 +715,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:

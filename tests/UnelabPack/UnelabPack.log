@@ -89,21 +89,19 @@ Design: (unnamed)
   \_Parameter: (pkg1::X), line:2:12, endln:2:17
     |vpiParent:
     \_Package: pkg1 (pkg1), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:1:1, endln:3:11
-    |UINT:4
-    |vpiLocalParam:1
     |vpiName:X
     |vpiFullName:pkg1::X
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:2:12, endln:2:17
     |vpiParent:
     \_Package: pkg1 (pkg1), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:1:1, endln:3:11
+    |vpiLhs:
+    \_Parameter: (pkg1::X), line:2:12, endln:2:17
     |vpiRhs:
     \_Constant: , line:2:16, endln:2:17
       |vpiParent:
       \_ParamAssign: , line:2:12, endln:2:17
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
       |vpiTypespec:
       \_RefTypespec: (pkg1), line:2:16, endln:2:17
         |vpiParent:
@@ -112,8 +110,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (pkg1::X), line:2:12, endln:2:17
+      |vpiSize:64
+      |vpiDecompile:4
+      |UINT:4
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -134,13 +133,15 @@ Design: (unnamed)
   \_Parameter: (pkg2::Y), line:6:12, endln:6:23
     |vpiParent:
     \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:5:1, endln:7:11
-    |vpiLocalParam:1
     |vpiName:Y
     |vpiFullName:pkg2::Y
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:6:12, endln:6:23
     |vpiParent:
     \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:5:1, endln:7:11
+    |vpiLhs:
+    \_Parameter: (pkg2::Y), line:6:12, endln:6:23
     |vpiRhs:
     \_RefObj: (pkg2::pkg1::X), line:6:16, endln:6:23
       |vpiParent:
@@ -149,8 +150,6 @@ Design: (unnamed)
       |vpiFullName:pkg2::pkg1::X
       |vpiActual:
       \_Parameter: (pkg1::X), line:2:12, endln:2:17
-    |vpiLhs:
-    \_Parameter: (pkg2::Y), line:6:12, endln:6:23
   |vpiDefName:pkg2
 ===================
 [  FATAL] : 0

@@ -210,6 +210,8 @@ Design: (unnamed)
   \_ParamAssign: , line:9:35, endln:12:4
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
+    |vpiLhs:
+    \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
     |vpiRhs:
     \_Operation: , line:9:50, endln:12:4
       |vpiParent:
@@ -223,9 +225,6 @@ Design: (unnamed)
         \_Constant: , line:10:8, endln:10:12
           |vpiParent:
           \_TaggedPattern: , line:10:5, endln:10:12
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
           |vpiTypespec:
           \_RefTypespec: (my_package), line:10:8, endln:10:12
             |vpiParent:
@@ -234,6 +233,9 @@ Design: (unnamed)
             |vpiActual:
             \_BitTypespec: 
           |vpiConstType:3
+          |vpiSize:1
+          |vpiDecompile:1'b1
+          |BIN:1
         |vpiTypespec:
         \_RefTypespec: (my_package::a), line:10:5, endln:10:6
           |vpiParent:
@@ -250,9 +252,6 @@ Design: (unnamed)
         \_Constant: , line:11:8, endln:11:12
           |vpiParent:
           \_TaggedPattern: , line:11:5, endln:11:12
-          |vpiDecompile:1'b0
-          |vpiSize:1
-          |BIN:0
           |vpiTypespec:
           \_RefTypespec: (my_package), line:11:8, endln:11:12
             |vpiParent:
@@ -261,6 +260,9 @@ Design: (unnamed)
             |vpiActual:
             \_BitTypespec: 
           |vpiConstType:3
+          |vpiSize:1
+          |vpiDecompile:1'b0
+          |BIN:0
         |vpiTypespec:
         \_RefTypespec: (my_package::b), line:11:5, endln:11:6
           |vpiParent:
@@ -269,8 +271,6 @@ Design: (unnamed)
           |vpiFullName:my_package::b
           |vpiActual:
           \_StringTypespec: , line:10:5, endln:10:6
-    |vpiLhs:
-    \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
   |vpiTypespec:
   \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
     |vpiParent:
@@ -414,10 +414,19 @@ Design: (unnamed)
   \_ContAssign: , line:21:8, endln:21:38
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
+    |vpiLhs:
+    \_RefObj: (work@my_module.x), line:21:8, endln:21:9
+      |vpiParent:
+      \_ContAssign: , line:21:8, endln:21:38
+      |vpiName:x
+      |vpiFullName:work@my_module.x
+      |vpiActual:
+      \_Net: (work@my_module.x), line:17:34, endln:17:35
     |vpiRhs:
     \_HierPath: (work@my_module), line:21:12, endln:21:38
       |vpiParent:
       \_ContAssign: , line:21:8, endln:21:38
+      |vpiFullName:work@my_module
       |vpiActual:
       \_RefObj: (my_package::my_parameter), line:21:12, endln:21:24
         |vpiParent:
@@ -433,23 +442,23 @@ Design: (unnamed)
         |vpiFullName:work@my_module.a
         |vpiActual:
         \_TypespecMember: (a), line:5:11, endln:5:12
-      |vpiFullName:work@my_module
-    |vpiLhs:
-    \_RefObj: (work@my_module.x), line:21:8, endln:21:9
-      |vpiParent:
-      \_ContAssign: , line:21:8, endln:21:38
-      |vpiName:x
-      |vpiFullName:work@my_module.x
-      |vpiActual:
-      \_Net: (work@my_module.x), line:17:34, endln:17:35
   |vpiContAssign:
   \_ContAssign: , line:22:8, endln:22:38
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
+    |vpiLhs:
+    \_RefObj: (work@my_module.y), line:22:8, endln:22:9
+      |vpiParent:
+      \_ContAssign: , line:22:8, endln:22:38
+      |vpiName:y
+      |vpiFullName:work@my_module.y
+      |vpiActual:
+      \_Net: (work@my_module.y), line:18:34, endln:18:35
     |vpiRhs:
     \_HierPath: (work@my_module), line:22:12, endln:22:38
       |vpiParent:
       \_ContAssign: , line:22:8, endln:22:38
+      |vpiFullName:work@my_module
       |vpiActual:
       \_RefObj: (my_package::my_parameter), line:22:12, endln:22:24
         |vpiParent:
@@ -465,15 +474,6 @@ Design: (unnamed)
         |vpiFullName:work@my_module.b
         |vpiActual:
         \_TypespecMember: (b), line:6:11, endln:6:12
-      |vpiFullName:work@my_module
-    |vpiLhs:
-    \_RefObj: (work@my_module.y), line:22:8, endln:22:9
-      |vpiParent:
-      \_ContAssign: , line:22:8, endln:22:38
-      |vpiName:y
-      |vpiFullName:work@my_module.y
-      |vpiActual:
-      \_Net: (work@my_module.y), line:18:34, endln:18:35
   |vpiEndLabel:my_module
 |vpiTypespec:
 \_ModuleTypespec: (work@my_module)

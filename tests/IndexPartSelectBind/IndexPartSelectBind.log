@@ -257,10 +257,39 @@ Design: (unnamed)
               \_Begin: (pkg::tt::reg2bus), line:12:34, endln:15:4
               |vpiOpType:82
               |vpiBlocking:1
+              |vpiLhs:
+              \_HierPath: (rw.data[i]), line:13:6, endln:13:14
+                |vpiParent:
+                \_Assignment: , line:13:4, endln:13:32
+                |vpiName:rw.data[i]
+                |vpiActual:
+                \_RefObj: (rw), line:13:6, endln:13:11
+                  |vpiParent:
+                  \_HierPath: (rw.data[i]), line:13:6, endln:13:14
+                  |vpiName:rw
+                  |vpiActual:
+                  \_IODecl: (rw), line:10:69, endln:10:71
+                |vpiActual:
+                \_BitSelect: (pkg::tt::reg2bus::rw.data[i]::data), line:13:11, endln:13:14
+                  |vpiParent:
+                  \_HierPath: (rw.data[i]), line:13:6, endln:13:14
+                  |vpiName:data
+                  |vpiFullName:pkg::tt::reg2bus::rw.data[i]::data
+                  |vpiActual:
+                  \_TypespecMember: (data), line:5:18, endln:5:22
+                  |vpiIndex:
+                  \_RefObj: (pkg::tt::reg2bus::rw.data[i]::i), line:13:12, endln:13:13
+                    |vpiParent:
+                    \_BitSelect: (pkg::tt::reg2bus::rw.data[i]::data), line:13:11, endln:13:14
+                    |vpiName:i
+                    |vpiFullName:pkg::tt::reg2bus::rw.data[i]::i
+                    |vpiActual:
+                    \_Variable: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
               |vpiRhs:
               \_HierPath: (rw.data[i * 8+:8]), line:13:17, endln:13:31
                 |vpiParent:
                 \_Assignment: , line:13:4, endln:13:32
+                |vpiName:rw.data[i * 8+:8]
                 |vpiActual:
                 \_RefObj: (rw), line:13:17, endln:13:19
                   |vpiParent:
@@ -295,9 +324,6 @@ Design: (unnamed)
                     \_Constant: , line:13:27, endln:13:28
                       |vpiParent:
                       \_Operation: , line:13:25, endln:13:28
-                      |vpiDecompile:8
-                      |vpiSize:64
-                      |UINT:8
                       |vpiTypespec:
                       \_RefTypespec: (pkg::tt::reg2bus::rw.data[i * 8+:8]::data), line:13:27, endln:13:28
                         |vpiParent:
@@ -306,13 +332,13 @@ Design: (unnamed)
                         |vpiActual:
                         \_IntTypespec: 
                       |vpiConstType:9
+                      |vpiSize:64
+                      |vpiDecompile:8
+                      |UINT:8
                   |vpiWidthExpr:
                   \_Constant: , line:13:30, endln:13:31
                     |vpiParent:
                     \_IndexedPartSelect: (rw.data[i * 8+:8]), line:13:20, endln:13:31
-                    |vpiDecompile:8
-                    |vpiSize:64
-                    |UINT:8
                     |vpiTypespec:
                     \_RefTypespec: (pkg::tt::reg2bus::rw.data[i * 8+:8]::data), line:13:30, endln:13:31
                       |vpiParent:
@@ -321,46 +347,19 @@ Design: (unnamed)
                       |vpiActual:
                       \_IntTypespec: 
                     |vpiConstType:9
-                |vpiName:rw.data[i * 8+:8]
-              |vpiLhs:
-              \_HierPath: (rw.data[i]), line:13:6, endln:13:14
-                |vpiParent:
-                \_Assignment: , line:13:4, endln:13:32
-                |vpiActual:
-                \_RefObj: (rw), line:13:6, endln:13:11
-                  |vpiParent:
-                  \_HierPath: (rw.data[i]), line:13:6, endln:13:14
-                  |vpiName:rw
-                  |vpiActual:
-                  \_IODecl: (rw), line:10:69, endln:10:71
-                |vpiActual:
-                \_BitSelect: (pkg::tt::reg2bus::rw.data[i]::data), line:13:11, endln:13:14
-                  |vpiParent:
-                  \_HierPath: (rw.data[i]), line:13:6, endln:13:14
-                  |vpiName:data
-                  |vpiFullName:pkg::tt::reg2bus::rw.data[i]::data
-                  |vpiActual:
-                  \_TypespecMember: (data), line:5:18, endln:5:22
-                  |vpiIndex:
-                  \_RefObj: (pkg::tt::reg2bus::rw.data[i]::i), line:13:12, endln:13:13
-                    |vpiParent:
-                    \_BitSelect: (pkg::tt::reg2bus::rw.data[i]::data), line:13:11, endln:13:14
-                    |vpiName:i
-                    |vpiFullName:pkg::tt::reg2bus::rw.data[i]::i
-                    |vpiActual:
-                    \_Variable: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-                |vpiName:rw.data[i]
+                    |vpiSize:64
+                    |vpiDecompile:8
+                    |UINT:8
           |vpiForInitStmt:
           \_Assignment: , line:12:6, endln:12:15
             |vpiParent:
             \_ForStmt: (pkg::tt::reg2bus), line:12:1, endln:15:4
+            |vpiLhs:
+            \_Variable: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
             |vpiRhs:
             \_Constant: , line:12:14, endln:12:15
               |vpiParent:
               \_Assignment: , line:12:6, endln:12:15
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
               |vpiTypespec:
               \_RefTypespec: (pkg::tt::reg2bus), line:12:14, endln:12:15
                 |vpiParent:
@@ -369,8 +368,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
-            |vpiLhs:
-            \_Variable: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
+              |vpiSize:64
+              |vpiDecompile:0
+              |UINT:0
           |vpiForIncStmt:
           \_Operation: , line:12:29, endln:12:32
             |vpiParent:
@@ -454,8 +454,8 @@ Design: (unnamed)
       \_IODecl: (rw), line:10:69, endln:10:71
         |vpiParent:
         \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
-        |vpiDirection:6
         |vpiName:rw
+        |vpiDirection:6
         |vpiTypespec:
         \_RefTypespec: (pkg::tt::reg2bus::rw::uvm_reg_bus_op), line:10:54, endln:10:68
           |vpiParent:

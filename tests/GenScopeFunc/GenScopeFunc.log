@@ -186,9 +186,6 @@ Design: (unnamed)
         \_Constant: , line:4:9, endln:4:10
           |vpiParent:
           \_GenIf: , line:4:5, endln:8:8
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@mod), line:4:9, endln:4:10
             |vpiParent:
@@ -197,6 +194,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiStmt:
         \_Begin: (work@mod.cscope), line:4:12, endln:8:8
     |vpiStmt:
@@ -239,10 +239,19 @@ Design: (unnamed)
   \_ContAssign: , line:11:10, endln:11:46
     |vpiParent:
     \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeFunc/dut.sv, line:1:1, endln:12:10
+    |vpiLhs:
+    \_RefObj: (work@mod.foo), line:11:10, endln:11:13
+      |vpiParent:
+      \_ContAssign: , line:11:10, endln:11:46
+      |vpiName:foo
+      |vpiFullName:work@mod.foo
+      |vpiActual:
+      \_Net: (work@mod.foo), line:11:10, endln:11:13
     |vpiRhs:
     \_HierPath: (cscope.local_function), line:11:16, endln:11:46
       |vpiParent:
       \_ContAssign: , line:11:10, endln:11:46
+      |vpiName:cscope.local_function
       |vpiActual:
       \_RefObj: (cscope), line:11:16, endln:11:22
         |vpiParent:
@@ -254,6 +263,11 @@ Design: (unnamed)
       \_MethodFuncCall: (local_function), line:11:23, endln:11:46
         |vpiParent:
         \_HierPath: (cscope.local_function), line:11:16, endln:11:46
+        |vpiName:
+        \_Identifier: (local_function), line:11:23, endln:11:37
+          |vpiParent:
+          \_MethodFuncCall: (local_function), line:11:23, endln:11:46
+          |vpiName:local_function
         |vpiArgument:
         \_RefObj: (work@mod.cscope.local_function.counter), line:11:38, endln:11:45
           |vpiParent:
@@ -262,20 +276,6 @@ Design: (unnamed)
           |vpiFullName:work@mod.cscope.local_function.counter
           |vpiActual:
           \_Net: (work@mod.counter), line:11:38, endln:11:45
-        |vpiName:
-        \_Identifier: (local_function), line:11:23, endln:11:37
-          |vpiParent:
-          \_MethodFuncCall: (local_function), line:11:23, endln:11:46
-          |vpiName:local_function
-      |vpiName:cscope.local_function
-    |vpiLhs:
-    \_RefObj: (work@mod.foo), line:11:10, endln:11:13
-      |vpiParent:
-      \_ContAssign: , line:11:10, endln:11:46
-      |vpiName:foo
-      |vpiFullName:work@mod.foo
-      |vpiActual:
-      \_Net: (work@mod.foo), line:11:10, endln:11:13
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenScopeFunc/dut.sv, line:14:1, endln:16:10
   |vpiParent:

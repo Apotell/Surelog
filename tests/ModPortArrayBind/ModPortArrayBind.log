@@ -275,8 +275,8 @@ Design: (unnamed)
     \_IODecl: (vld), line:7:11, endln:7:14
       |vpiParent:
       \_Modport: (work@r5p_bus_if.man), line:6:11, endln:8:3
-      |vpiDirection:2
       |vpiName:vld
+      |vpiDirection:2
     |vpiInterface:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:2:1, endln:10:25
   |vpiEndLabel:r5p_bus_if
@@ -299,7 +299,6 @@ Design: (unnamed)
   \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
-    |UINT:2
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_dec.BN), line:13:3, endln:13:6
       |vpiParent:
@@ -313,13 +312,12 @@ Design: (unnamed)
   \_ParamAssign: , line:13:16, endln:13:22
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
+    |vpiLhs:
+    \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
     |vpiRhs:
     \_Constant: , line:13:21, endln:13:22
       |vpiParent:
       \_ParamAssign: , line:13:16, endln:13:22
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
       |vpiTypespec:
       \_RefTypespec: (work@r5p_bus_dec), line:13:21, endln:13:22
         |vpiParent:
@@ -328,8 +326,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
+      |vpiSize:64
+      |vpiDecompile:2
+      |UINT:2
   |vpiInternalScope:
   \_GenRegion: (work@r5p_bus_dec), line:20:1, endln:26:12
     |vpiParent:
@@ -384,6 +383,35 @@ Design: (unnamed)
           \_ContAssign: , line:23:10, endln:23:38
             |vpiParent:
             \_Begin: (work@r5p_bus_dec.gen_loop), line:21:22, endln:25:14
+            |vpiLhs:
+            \_HierPath: (m[i].vld), line:23:10, endln:23:18
+              |vpiParent:
+              \_ContAssign: , line:23:10, endln:23:38
+              |vpiName:m[i].vld
+              |vpiActual:
+              \_BitSelect: (m[i]), line:23:10, endln:23:11
+                |vpiParent:
+                \_HierPath: (m[i].vld), line:23:10, endln:23:18
+                |vpiName:m
+                |vpiFullName:m[i]
+                |vpiActual:
+                \_Net: (work@r5p_bus_dec.m), line:15:18, endln:15:19
+                |vpiIndex:
+                \_RefObj: (work@r5p_bus_dec.gen_loop.m[i].vld.i), line:23:12, endln:23:13
+                  |vpiParent:
+                  \_BitSelect: (m[i]), line:23:10, endln:23:11
+                  |vpiName:i
+                  |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].vld.i
+                  |vpiActual:
+                  \_Variable: (work@r5p_bus_dec.i), line:21:6, endln:21:7
+              |vpiActual:
+              \_RefObj: (m[i].vld), line:23:15, endln:23:18
+                |vpiParent:
+                \_HierPath: (m[i].vld), line:23:10, endln:23:18
+                |vpiName:vld
+                |vpiFullName:m[i].vld
+                |vpiActual:
+                \_Net: (work@r5p_bus_if.vld), line:4:17, endln:4:20
             |vpiRhs:
             \_Operation: , line:23:21, endln:23:38
               |vpiParent:
@@ -409,9 +437,6 @@ Design: (unnamed)
               \_Constant: , line:23:32, endln:23:33
                 |vpiParent:
                 \_Operation: , line:23:21, endln:23:38
-                |vpiDecompile:1
-                |vpiSize:64
-                |UINT:1
                 |vpiTypespec:
                 \_RefTypespec: (work@r5p_bus_dec.gen_loop), line:23:32, endln:23:33
                   |vpiParent:
@@ -420,13 +445,13 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:9
+                |vpiSize:64
+                |vpiDecompile:1
+                |UINT:1
               |vpiOperand:
               \_Constant: , line:23:36, endln:23:38
                 |vpiParent:
                 \_Operation: , line:23:21, endln:23:38
-                |vpiDecompile:'0
-                |vpiSize:-1
-                |BIN:0
                 |vpiTypespec:
                 \_RefTypespec: (work@r5p_bus_dec.gen_loop), line:23:36, endln:23:38
                   |vpiParent:
@@ -435,35 +460,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_BitTypespec: 
                 |vpiConstType:3
-            |vpiLhs:
-            \_HierPath: (m[i].vld), line:23:10, endln:23:18
-              |vpiParent:
-              \_ContAssign: , line:23:10, endln:23:38
-              |vpiActual:
-              \_BitSelect: (m[i]), line:23:10, endln:23:11
-                |vpiParent:
-                \_HierPath: (m[i].vld), line:23:10, endln:23:18
-                |vpiName:m
-                |vpiFullName:m[i]
-                |vpiActual:
-                \_Net: (work@r5p_bus_dec.m), line:15:18, endln:15:19
-                |vpiIndex:
-                \_RefObj: (work@r5p_bus_dec.gen_loop.m[i].vld.i), line:23:12, endln:23:13
-                  |vpiParent:
-                  \_BitSelect: (m[i]), line:23:10, endln:23:11
-                  |vpiName:i
-                  |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].vld.i
-                  |vpiActual:
-                  \_Variable: (work@r5p_bus_dec.i), line:21:6, endln:21:7
-              |vpiActual:
-              \_RefObj: (m[i].vld), line:23:15, endln:23:18
-                |vpiParent:
-                \_HierPath: (m[i].vld), line:23:10, endln:23:18
-                |vpiName:vld
-                |vpiFullName:m[i].vld
-                |vpiActual:
-                \_Net: (work@r5p_bus_if.vld), line:4:17, endln:4:20
-              |vpiName:m[i].vld
+                |vpiSize:-1
+                |vpiDecompile:'0
+                |BIN:0
         |vpiTypespec:
         \_IntTypespec: 
           |vpiParent:
@@ -476,13 +475,12 @@ Design: (unnamed)
         \_Assignment: , line:21:6, endln:21:9
           |vpiParent:
           \_GenFor: (work@r5p_bus_dec), line:21:1, endln:25:14
+          |vpiLhs:
+          \_Variable: (work@r5p_bus_dec.i), line:21:6, endln:21:7
           |vpiRhs:
           \_Constant: , line:21:8, endln:21:9
             |vpiParent:
             \_Assignment: , line:21:6, endln:21:9
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@r5p_bus_dec), line:21:8, endln:21:9
               |vpiParent:
@@ -491,8 +489,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiLhs:
-          \_Variable: (work@r5p_bus_dec.i), line:21:6, endln:21:7
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiCondition:
         \_Operation: , line:21:11, endln:21:15
           |vpiParent:
@@ -567,9 +566,6 @@ Design: (unnamed)
         \_Constant: , line:15:23, endln:15:24
           |vpiParent:
           \_Operation: , line:15:20, endln:15:24
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@r5p_bus_dec), line:15:23, endln:15:24
             |vpiParent:
@@ -578,13 +574,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:15:25, endln:15:26
         |vpiParent:
         \_Range: , line:15:19, endln:15:27
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@r5p_bus_dec), line:15:25, endln:15:26
           |vpiParent:
@@ -593,6 +589,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiElemTypespec:
     \_RefTypespec: (work@r5p_bus_dec.r5p_bus_if), line:15:3, endln:15:13
       |vpiParent:
@@ -627,9 +626,6 @@ Design: (unnamed)
         \_Constant: , line:15:23, endln:15:24
           |vpiParent:
           \_Operation: , line:15:20, endln:15:24
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@r5p_bus_dec), line:15:23, endln:15:24
             |vpiParent:
@@ -638,13 +634,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:15:25, endln:15:26
         |vpiParent:
         \_Range: , line:15:19, endln:15:27
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@r5p_bus_dec), line:15:25, endln:15:26
           |vpiParent:
@@ -653,6 +649,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiElemTypespec:
     \_RefTypespec: (work@r5p_bus_dec), line:15:3, endln:15:13
       |vpiParent:

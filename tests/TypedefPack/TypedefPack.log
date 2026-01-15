@@ -117,14 +117,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:10:1: Compile module "work@prim_lc_sender".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              10
+Constant                                              12
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             4
 IntTypespec                                            6
-LogicTypespec                                          7
+LogicTypespec                                          9
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
@@ -133,12 +133,12 @@ Package                                                1
 Port                                                   2
 Range                                                  3
 RefObj                                                 2
-RefTypespec                                           17
+RefTypespec                                           19
 SourceFile                                             1
 TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                67
+Total:                                                73
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -175,17 +175,41 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:5:12
       |vpiName:On
-      |BIN:1010
-      |vpiDecompile:4'b1010
-      |vpiSize:4
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (On), line:3:5, endln:3:18
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg::On), line:3:11, endln:3:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:lc_ctrl_pkg::On
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:4
+        |vpiDecompile:4'b1010
+        |BIN:1010
     |vpiEnumConst:
     \_EnumConst: (Off), line:4:5, endln:4:18
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:5:12
       |vpiName:Off
-      |BIN:0101
-      |vpiDecompile:4'b0101
-      |vpiSize:4
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (Off), line:4:5, endln:4:18
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg::Off), line:4:11, endln:4:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:lc_ctrl_pkg::Off
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:4
+        |vpiDecompile:4'b0101
+        |BIN:0101
   |vpiTypespec:
   \_LogicTypespec: , line:2:16, endln:2:21
     |vpiParent:
@@ -198,9 +222,6 @@ Design: (unnamed)
       \_Constant: , line:2:23, endln:2:24
         |vpiParent:
         \_Range: , line:2:22, endln:2:27
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
         |vpiTypespec:
         \_RefTypespec: (lc_ctrl_pkg), line:2:23, endln:2:24
           |vpiParent:
@@ -209,13 +230,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:3
+        |UINT:3
       |vpiRightRange:
       \_Constant: , line:2:25, endln:2:26
         |vpiParent:
         \_Range: , line:2:22, endln:2:27
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (lc_ctrl_pkg), line:2:25, endln:2:26
           |vpiParent:
@@ -224,6 +245,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -300,9 +324,6 @@ Design: (unnamed)
       \_Constant: , line:11:11, endln:11:12
         |vpiParent:
         \_Range: , line:11:10, endln:11:15
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
         |vpiTypespec:
         \_RefTypespec: (work@prim_lc_sender), line:11:11, endln:11:12
           |vpiParent:
@@ -311,13 +332,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:3
+        |UINT:3
       |vpiRightRange:
       \_Constant: , line:11:13, endln:11:14
         |vpiParent:
         \_Range: , line:11:10, endln:11:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@prim_lc_sender), line:11:13, endln:11:14
           |vpiParent:
@@ -326,6 +347,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -397,6 +421,14 @@ Design: (unnamed)
   \_ContAssign: , line:14:10, endln:14:50
     |vpiParent:
     \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
+    |vpiLhs:
+    \_RefObj: (work@prim_lc_sender.lc_en_o), line:14:10, endln:14:17
+      |vpiParent:
+      \_ContAssign: , line:14:10, endln:14:50
+      |vpiName:lc_en_o
+      |vpiFullName:work@prim_lc_sender.lc_en_o
+      |vpiActual:
+      \_Net: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
     |vpiRhs:
     \_Operation: , line:14:20, endln:14:50
       |vpiParent:
@@ -410,14 +442,6 @@ Design: (unnamed)
         |vpiFullName:work@prim_lc_sender.lc_en_i
         |vpiActual:
         \_Net: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
-    |vpiLhs:
-    \_RefObj: (work@prim_lc_sender.lc_en_o), line:14:10, endln:14:17
-      |vpiParent:
-      \_ContAssign: , line:14:10, endln:14:50
-      |vpiName:lc_en_o
-      |vpiFullName:work@prim_lc_sender.lc_en_o
-      |vpiActual:
-      \_Net: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
   |vpiEndLabel:prim_lc_sender
 |vpiTypespec:
 \_ModuleTypespec: (work@prim_lc_sender)

@@ -290,7 +290,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  3
-Constant                                              11
+Constant                                              12
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
@@ -298,7 +298,7 @@ GenIf                                                  1
 GenIfElse                                              1
 Identifier                                            15
 ImportTypespec                                         4
-IntTypespec                                            7
+IntTypespec                                            8
 LogicTypespec                                          2
 Module                                                 5
 ModuleTypespec                                         4
@@ -308,7 +308,7 @@ ParamAssign                                            3
 Parameter                                              3
 RefModule                                              3
 RefObj                                                 1
-RefTypespec                                           19
+RefTypespec                                           20
 SourceFile                                             1
 StringTypespec                                         4
 StructTypespec                                         1
@@ -316,7 +316,7 @@ TypedefTypespec                                        2
 TypespecMember                                         2
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                               102
+Total:                                               105
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathEval/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -353,9 +353,21 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:2:12, endln:4:16
       |vpiName:BidirStd
-      |HEX:1
-      |vpiDecompile:1'h1
-      |vpiSize:1
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (BidirStd), line:3:7, endln:3:22
+        |vpiTypespec:
+        \_RefTypespec: (prim_pad_wrapper_pkg::BidirStd), line:3:18, endln:3:22
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:prim_pad_wrapper_pkg::BidirStd
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:4
+        |vpiSize:1
+        |vpiDecompile:1'h1
+        |HEX:1
   |vpiTypespec:
   \_LogicTypespec: , line:2:17, endln:2:22
     |vpiParent:
@@ -412,9 +424,6 @@ Design: (unnamed)
     \_Constant: , line:8:11, endln:8:34
       |vpiParent:
       \_ImportTypespec: (prim_pad_wrapper_pkg), line:8:11, endln:8:34
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (pinmux_pkg::prim_pad_wrapper_pkg), line:8:11, endln:8:34
         |vpiParent:
@@ -423,6 +432,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -512,7 +524,6 @@ Design: (unnamed)
   \_Parameter: (work@prim_generic_pad_attr.PadTypeInGeneric), line:21:25, endln:21:45
     |vpiParent:
     \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:19:1, endln:30:34
-    |UINT:0
     |vpiTypespec:
     \_RefTypespec: (work@prim_generic_pad_attr.PadTypeInGeneric.pad_type_e), line:21:14, endln:21:24
       |vpiParent:
@@ -527,13 +538,12 @@ Design: (unnamed)
   \_ParamAssign: , line:21:25, endln:21:45
     |vpiParent:
     \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:19:1, endln:30:34
+    |vpiLhs:
+    \_Parameter: (work@prim_generic_pad_attr.PadTypeInGeneric), line:21:25, endln:21:45
     |vpiRhs:
     \_Constant: , line:21:44, endln:21:45
       |vpiParent:
       \_ParamAssign: , line:21:25, endln:21:45
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@prim_generic_pad_attr), line:21:44, endln:21:45
         |vpiParent:
@@ -542,8 +552,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@prim_generic_pad_attr.PadTypeInGeneric), line:21:25, endln:21:45
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
   |vpiInternalScope:
   \_Begin: (work@prim_generic_pad_attr.gen_inner_if_true), line:23:6, endln:25:10
     |vpiParent:
@@ -592,9 +603,6 @@ Design: (unnamed)
     \_Constant: , line:20:11, endln:20:34
       |vpiParent:
       \_ImportTypespec: (prim_pad_wrapper_pkg), line:20:11, endln:20:34
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@prim_generic_pad_attr.prim_pad_wrapper_pkg), line:20:11, endln:20:34
         |vpiParent:
@@ -603,6 +611,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -639,9 +650,6 @@ Design: (unnamed)
       \_Constant: , line:22:28, endln:22:29
         |vpiParent:
         \_Operation: , line:22:8, endln:22:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@prim_generic_pad_attr), line:22:28, endln:22:29
           |vpiParent:
@@ -650,6 +658,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
     |vpiStmt:
     \_Begin: (work@prim_generic_pad_attr.gen_inner_if_true), line:23:6, endln:25:10
     |vpiElseStmt:
@@ -668,7 +679,6 @@ Design: (unnamed)
   \_Parameter: (work@prim_pad_attr.PadType), line:35:25, endln:35:36
     |vpiParent:
     \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:33:1, endln:44:10
-    |UINT:0
     |vpiTypespec:
     \_RefTypespec: (work@prim_pad_attr.PadType.pad_type_e), line:35:14, endln:35:24
       |vpiParent:
@@ -683,13 +693,12 @@ Design: (unnamed)
   \_ParamAssign: , line:35:25, endln:35:36
     |vpiParent:
     \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:33:1, endln:44:10
+    |vpiLhs:
+    \_Parameter: (work@prim_pad_attr.PadType), line:35:25, endln:35:36
     |vpiRhs:
     \_Constant: , line:35:35, endln:35:36
       |vpiParent:
       \_ParamAssign: , line:35:25, endln:35:36
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@prim_pad_attr), line:35:35, endln:35:36
         |vpiParent:
@@ -698,8 +707,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@prim_pad_attr.PadType), line:35:25, endln:35:36
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
   |vpiInternalScope:
   \_Begin: (work@prim_pad_attr.gen_outer_if), line:37:11, endln:43:7
     |vpiParent:
@@ -738,9 +748,6 @@ Design: (unnamed)
     \_Constant: , line:34:11, endln:34:34
       |vpiParent:
       \_ImportTypespec: (prim_pad_wrapper_pkg), line:34:11, endln:34:34
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@prim_pad_attr.prim_pad_wrapper_pkg), line:34:11, endln:34:34
         |vpiParent:
@@ -749,6 +756,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -772,9 +782,6 @@ Design: (unnamed)
     \_Constant: , line:37:8, endln:37:9
       |vpiParent:
       \_GenIf: , line:37:4, endln:43:7
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@prim_pad_attr), line:37:8, endln:37:9
         |vpiParent:
@@ -783,6 +790,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
     |vpiStmt:
     \_Begin: (work@prim_pad_attr.gen_outer_if), line:37:11, endln:43:7
 |vpiAllModules:
@@ -798,7 +808,6 @@ Design: (unnamed)
   \_Parameter: (work@top.TargetCfg), line:48:27, endln:48:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:46:1, endln:55:10
-    |UINT:2
     |vpiTypespec:
     \_RefTypespec: (work@top.TargetCfg.target_cfg_t), line:48:14, endln:48:26
       |vpiParent:
@@ -813,13 +822,12 @@ Design: (unnamed)
   \_ParamAssign: , line:48:27, endln:48:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:46:1, endln:55:10
+    |vpiLhs:
+    \_Parameter: (work@top.TargetCfg), line:48:27, endln:48:40
     |vpiRhs:
     \_Constant: , line:48:39, endln:48:40
       |vpiParent:
       \_ParamAssign: , line:48:27, endln:48:40
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
       |vpiTypespec:
       \_RefTypespec: (work@top), line:48:39, endln:48:40
         |vpiParent:
@@ -828,8 +836,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.TargetCfg), line:48:27, endln:48:40
+      |vpiSize:64
+      |vpiDecompile:2
+      |UINT:2
   |vpiTypespec:
   \_ImportTypespec: (pinmux_pkg), line:47:11, endln:47:24
     |vpiParent:
@@ -843,9 +852,6 @@ Design: (unnamed)
     \_Constant: , line:47:11, endln:47:24
       |vpiParent:
       \_ImportTypespec: (pinmux_pkg), line:47:11, endln:47:24
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@top.pinmux_pkg), line:47:11, endln:47:24
         |vpiParent:
@@ -854,6 +860,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:

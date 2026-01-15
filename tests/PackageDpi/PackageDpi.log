@@ -9,28 +9,28 @@
 ArrayTypespec                                          1
 ClassDefn                                              1
 ClassTypespec                                          1
-Constant                                               2
+Constant                                               4
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 FunctionDecl                                           1
 IODecl                                                 1
 Identifier                                             4
-IntTypespec                                            4
+IntTypespec                                            6
 Net                                                    4
 Package                                                1
 Range                                                  1
-RefTypespec                                           11
+RefTypespec                                           13
 SourceFile                                             1
 StringTypespec                                         3
 TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                44
+Total:                                                50
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageDpi/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/PackageDpi/dut.sv:17:1: Unsupported Typespec: id:40, type:RefTypespec, name:uvm_object_wrapper.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PackageDpi/dut.sv:17:1: Unsupported Typespec: id:46, type:RefTypespec, name:uvm_object_wrapper.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -79,9 +79,6 @@ Design: (unnamed)
       \_Constant: , line:21:38, endln:21:39
         |vpiParent:
         \_Variable: (pack::toto::DO_NOT_CATCH), line:21:18, endln:21:30
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (pack::toto::DO_NOT_CATCH), line:21:38, endln:21:39
           |vpiParent:
@@ -90,6 +87,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -130,17 +130,46 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:7:9, endln:12:17
       |vpiName:UVM_CORE_UNINITIALIZED
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (UVM_CORE_UNINITIALIZED), line:9:1, endln:9:23
+        |vpiTypespec:
+        \_RefTypespec: (pack::UVM_CORE_UNINITIALIZED), line:9:1, endln:9:23
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:pack::UVM_CORE_UNINITIALIZED
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:0
+        |INT:0
     |vpiEnumConst:
     \_EnumConst: (UVM_CORE_PRE_INIT), line:10:1, endln:10:18
       |vpiParent:
       \_EnumTypespec: , line:7:9, endln:12:17
       |vpiName:UVM_CORE_PRE_INIT
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (UVM_CORE_PRE_INIT), line:10:1, endln:10:18
+        |vpiTypespec:
+        \_RefTypespec: (pack::UVM_CORE_PRE_INIT), line:10:1, endln:10:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:pack::UVM_CORE_PRE_INIT
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:1
+        |INT:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (pack::uvm_core_state), line:12:3, endln:12:17
     |vpiParent:
@@ -189,6 +218,8 @@ Design: (unnamed)
   \_StringTypespec: , line:3:56, endln:3:62
   |vpiImportTypespec:
   \_EnumTypespec: , line:7:9, endln:12:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pack::uvm_core_state), line:12:3, endln:12:17
   |vpiImportTypespec:
@@ -278,8 +309,8 @@ Design: (unnamed)
     \_IODecl: (path), line:3:63, endln:3:67
       |vpiParent:
       \_FunctionDecl: (pack::uvm_hdl_check_path), line:3:1, endln:3:69
-      |vpiDirection:1
       |vpiName:path
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (pack::uvm_hdl_check_path::path), line:3:56, endln:3:62
         |vpiParent:

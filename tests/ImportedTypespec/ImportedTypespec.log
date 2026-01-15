@@ -153,7 +153,6 @@ Design: (unnamed)
   \_Parameter: (spi_device_pkg::SramAw), line:2:27, endln:2:38
     |vpiParent:
     \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
-    |UINT:10
     |vpiTypespec:
     \_RefTypespec: (spi_device_pkg::SramAw), line:2:14, endln:2:26
       |vpiParent:
@@ -167,13 +166,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:27, endln:2:38
     |vpiParent:
     \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
+    |vpiLhs:
+    \_Parameter: (spi_device_pkg::SramAw), line:2:27, endln:2:38
     |vpiRhs:
     \_Constant: , line:2:36, endln:2:38
       |vpiParent:
       \_ParamAssign: , line:2:27, endln:2:38
-      |vpiDecompile:10
-      |vpiSize:64
-      |UINT:10
       |vpiTypespec:
       \_RefTypespec: (spi_device_pkg), line:2:36, endln:2:38
         |vpiParent:
@@ -182,8 +180,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (spi_device_pkg::SramAw), line:2:27, endln:2:38
+      |vpiSize:64
+      |vpiDecompile:10
+      |UINT:10
   |vpiTypespec:
   \_IntTypespec: , line:2:14, endln:2:26
     |vpiParent:
@@ -217,9 +216,6 @@ Design: (unnamed)
         \_Constant: , line:3:26, endln:3:27
           |vpiParent:
           \_Operation: , line:3:19, endln:3:27
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (spi_device_pkg), line:3:26, endln:3:27
             |vpiParent:
@@ -228,13 +224,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:3:28, endln:3:29
         |vpiParent:
         \_Range: , line:3:18, endln:3:30
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (spi_device_pkg), line:3:28, endln:3:29
           |vpiParent:
@@ -243,6 +239,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_TypedefTypespec: (spi_device_pkg::sram_addr_t), line:3:31, endln:3:42
     |vpiParent:
@@ -305,9 +304,6 @@ Design: (unnamed)
     \_Constant: , line:7:11, endln:7:28
       |vpiParent:
       \_ImportTypespec: (spi_device_pkg), line:7:11, endln:7:28
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@top.spi_device_pkg), line:7:11, endln:7:28
         |vpiParent:
@@ -316,6 +312,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -351,23 +350,6 @@ Design: (unnamed)
   \_ContAssign: , line:9:11, endln:9:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
-    |vpiRhs:
-    \_SysFuncCall: ($bits), line:9:15, endln:9:33
-      |vpiParent:
-      \_ContAssign: , line:9:11, endln:9:33
-      |vpiArgument:
-      \_RefTypespec: (work@top.sram_addr_t), line:9:21, endln:9:32
-        |vpiParent:
-        \_SysFuncCall: ($bits), line:9:15, endln:9:33
-        |vpiName:sram_addr_t
-        |vpiFullName:work@top.sram_addr_t
-        |vpiActual:
-        \_TypedefTypespec: (spi_device_pkg::sram_addr_t), line:3:31, endln:3:42
-      |vpiName:
-      \_Identifier: ($bits), line:9:16, endln:9:20
-        |vpiParent:
-        \_SysFuncCall: ($bits), line:9:15, endln:9:33
-        |vpiName:$bits
     |vpiLhs:
     \_RefObj: (work@top.o), line:9:11, endln:9:12
       |vpiParent:
@@ -376,6 +358,23 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_Variable: (work@top.o), line:6:23, endln:6:24
+    |vpiRhs:
+    \_SysFuncCall: ($bits), line:9:15, endln:9:33
+      |vpiParent:
+      \_ContAssign: , line:9:11, endln:9:33
+      |vpiName:
+      \_Identifier: ($bits), line:9:16, endln:9:20
+        |vpiParent:
+        \_SysFuncCall: ($bits), line:9:15, endln:9:33
+        |vpiName:$bits
+      |vpiArgument:
+      \_RefTypespec: (work@top.sram_addr_t), line:9:21, endln:9:32
+        |vpiParent:
+        \_SysFuncCall: ($bits), line:9:15, endln:9:33
+        |vpiName:sram_addr_t
+        |vpiFullName:work@top.sram_addr_t
+        |vpiActual:
+        \_TypedefTypespec: (spi_device_pkg::sram_addr_t), line:3:31, endln:3:42
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

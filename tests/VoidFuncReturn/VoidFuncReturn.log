@@ -178,13 +178,15 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:4:1, endln:4:25
         |vpiParent:
         \_Begin: (work@top.add)
+        |vpiName:
+        \_Identifier: ($display), line:4:2, endln:4:9
+          |vpiParent:
+          \_SysFuncCall: ($display), line:4:1, endln:4:25
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:4:10, endln:4:18
           |vpiParent:
           \_SysFuncCall: ($display), line:4:1, endln:4:25
-          |vpiDecompile:"%d+%d="
-          |vpiSize:48
-          |STRING:%d+%d=
           |vpiTypespec:
           \_RefTypespec: (work@top.add), line:4:10, endln:4:18
             |vpiParent:
@@ -193,6 +195,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:48
+          |vpiDecompile:"%d+%d="
+          |STRING:%d+%d=
         |vpiArgument:
         \_RefObj: (work@top.add.a), line:4:20, endln:4:21
           |vpiParent:
@@ -209,11 +214,6 @@ Design: (unnamed)
           |vpiFullName:work@top.add.b
           |vpiActual:
           \_IODecl: (b), line:3:30, endln:3:31
-        |vpiName:
-        \_Identifier: ($display), line:4:2, endln:4:9
-          |vpiParent:
-          \_SysFuncCall: ($display), line:4:1, endln:4:25
-          |vpiName:$display
       |vpiStmt:
       \_ReturnStmt: , line:5:1, endln:5:13
         |vpiParent:
@@ -264,8 +264,8 @@ Design: (unnamed)
     \_IODecl: (a), line:3:23, endln:3:24
       |vpiParent:
       \_Function: (work@top.add), line:3:1, endln:6:12
-      |vpiDirection:1
       |vpiName:a
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@top.add.a), line:3:19, endln:3:22
         |vpiParent:
@@ -277,8 +277,8 @@ Design: (unnamed)
     \_IODecl: (b), line:3:30, endln:3:31
       |vpiParent:
       \_Function: (work@top.add), line:3:1, endln:6:12
-      |vpiDirection:1
       |vpiName:b
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@top.add.b), line:3:26, endln:3:29
         |vpiParent:
@@ -313,13 +313,15 @@ Design: (unnamed)
     \_SysFuncCall: ($display), line:9:1, endln:9:28
       |vpiParent:
       \_Initial: , line:8:1, endln:9:29
+      |vpiName:
+      \_Identifier: ($display), line:9:2, endln:9:9
+        |vpiParent:
+        \_SysFuncCall: ($display), line:9:1, endln:9:28
+        |vpiName:$display
       |vpiArgument:
       \_Constant: , line:9:10, endln:9:14
         |vpiParent:
         \_SysFuncCall: ($display), line:9:1, endln:9:28
-        |vpiDecompile:"%d"
-        |vpiSize:16
-        |STRING:%d
         |vpiTypespec:
         \_RefTypespec: (work@top), line:9:10, endln:9:14
           |vpiParent:
@@ -328,19 +330,24 @@ Design: (unnamed)
           |vpiActual:
           \_StringTypespec: 
         |vpiConstType:6
+        |vpiSize:16
+        |vpiDecompile:"%d"
+        |STRING:%d
       |vpiArgument:
       \_FuncCall: (add), line:9:16, endln:9:27
         |vpiParent:
         \_SysFuncCall: ($display), line:9:1, endln:9:28
+        |vpiName:
+        \_Identifier: (add), line:9:16, endln:9:19
+          |vpiParent:
+          \_FuncCall: (add), line:9:16, endln:9:27
+          |vpiName:add
         |vpiTaskFunc:
         \_Function: (work@top.add), line:3:1, endln:6:12
         |vpiArgument:
         \_Constant: , line:9:20, endln:9:22
           |vpiParent:
           \_FuncCall: (add), line:9:16, endln:9:27
-          |vpiDecompile:45
-          |vpiSize:64
-          |UINT:45
           |vpiTypespec:
           \_RefTypespec: (work@top), line:9:20, endln:9:22
             |vpiParent:
@@ -349,13 +356,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:45
+          |UINT:45
         |vpiArgument:
         \_Constant: , line:9:24, endln:9:26
           |vpiParent:
           \_FuncCall: (add), line:9:16, endln:9:27
-          |vpiDecompile:90
-          |vpiSize:64
-          |UINT:90
           |vpiTypespec:
           \_RefTypespec: (work@top), line:9:24, endln:9:26
             |vpiParent:
@@ -364,16 +371,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-        |vpiName:
-        \_Identifier: (add), line:9:16, endln:9:19
-          |vpiParent:
-          \_FuncCall: (add), line:9:16, endln:9:27
-          |vpiName:add
-      |vpiName:
-      \_Identifier: ($display), line:9:2, endln:9:9
-        |vpiParent:
-        \_SysFuncCall: ($display), line:9:1, endln:9:28
-        |vpiName:$display
+          |vpiSize:64
+          |vpiDecompile:90
+          |UINT:90
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

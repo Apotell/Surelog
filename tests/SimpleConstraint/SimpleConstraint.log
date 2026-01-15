@@ -764,7 +764,7 @@ CaseItem                                               4
 CaseStmt                                               1
 ClassDefn                                              9
 ClassTypespec                                          9
-Constant                                              35
+Constant                                              43
 Constraint                                             3
 Design                                                 1
 EnumConst                                              8
@@ -778,7 +778,7 @@ Identifier                                            57
 IfElse                                                 3
 IfStmt                                                 1
 Initial                                                1
-IntTypespec                                           26
+IntTypespec                                           34
 IntegerTypespec                                        4
 LogicTypespec                                          1
 MethodFuncCall                                        10
@@ -789,7 +789,7 @@ Program                                                1
 ProgramTypespec                                        1
 Range                                                  2
 RefObj                                                27
-RefTypespec                                           61
+RefTypespec                                           69
 SourceFile                                             1
 StringTypespec                                        18
 SysFuncCall                                           13
@@ -798,7 +798,7 @@ TypedefTypespec                                        2
 UnsupportedTypespec                                    3
 Variable                                               6
 ------------------------------------------------------------
-Total:                                               381
+Total:                                               405
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleConstraint/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -907,15 +907,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:3:23, endln:3:28
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:3:31, endln:3:32
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
             |vpiParent:
@@ -924,6 +921,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -973,8 +973,8 @@ Design: (unnamed)
       \_IODecl: (message), line:9:15, endln:9:22
         |vpiParent:
         \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
       |vpiParent:
@@ -1004,8 +1004,8 @@ Design: (unnamed)
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
       |vpiParent:
@@ -1022,8 +1022,8 @@ Design: (unnamed)
       \_IODecl: (message), line:15:19, endln:15:26
         |vpiParent:
         \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
       |vpiParent:
@@ -1054,8 +1054,8 @@ Design: (unnamed)
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
       |vpiParent:
@@ -1072,8 +1072,8 @@ Design: (unnamed)
       \_IODecl: (message), line:21:20, endln:21:27
         |vpiParent:
         \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
       |vpiParent:
@@ -1104,8 +1104,8 @@ Design: (unnamed)
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiImportTypespec:
@@ -1245,41 +1245,106 @@ Design: (unnamed)
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::FINISHED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:0
+          |INT:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::RUNNING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:1
+          |INT:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
-        |INT:2
-        |vpiDecompile:2
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::WAITING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:2
+          |INT:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::SUSPENDED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:3
+          |INT:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
-        |INT:4
-        |vpiDecompile:4
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::KILLED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:4
+          |INT:4
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/SimpleConstraint/builtin.sv, line:30:3, endln:52:11
+      |vpiSigned:1
     |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
@@ -1298,6 +1363,8 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -1362,15 +1429,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:57:22, endln:57:30
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:57:33, endln:57:34
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
             |vpiParent:
@@ -1379,6 +1443,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -1415,15 +1482,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:60:18, endln:60:26
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:60:29, endln:60:30
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
             |vpiParent:
@@ -1432,6 +1496,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -1468,15 +1535,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:63:18, endln:63:26
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:63:29, endln:63:30
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
             |vpiParent:
@@ -1485,6 +1549,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -1528,15 +1595,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:66:41, endln:66:42
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
             |vpiParent:
@@ -1545,6 +1609,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1795,21 +1862,6 @@ Design: (unnamed)
               \_CaseItem: , line:26:10, endln:26:42
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:26:32, endln:26:41
-                |vpiParent:
-                \_Assignment: , line:26:22, endln:26:41
-                |vpiDecompile:"UNICAST"
-                |vpiSize:56
-                |STRING:UNICAST
-                |vpiTypespec:
-                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:26:32, endln:26:41
-                  |vpiParent:
-                  \_Constant: , line:26:32, endln:26:41
-                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
-                  |vpiActual:
-                  \_StringTypespec: 
-                |vpiConstType:6
               |vpiLhs:
               \_RefObj: (work@constaint_mode_ex::frame_t::getType::getType), line:26:22, endln:26:29
                 |vpiParent:
@@ -1818,6 +1870,21 @@ Design: (unnamed)
                 |vpiFullName:work@constaint_mode_ex::frame_t::getType::getType
                 |vpiActual:
                 \_Function: (work@constaint_mode_ex::frame_t::getType), line:23:5, endln:32:16
+              |vpiRhs:
+              \_Constant: , line:26:32, endln:26:41
+                |vpiParent:
+                \_Assignment: , line:26:22, endln:26:41
+                |vpiTypespec:
+                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:26:32, endln:26:41
+                  |vpiParent:
+                  \_Constant: , line:26:32, endln:26:41
+                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
+                  |vpiActual:
+                  \_StringTypespec: 
+                |vpiConstType:6
+                |vpiSize:56
+                |vpiDecompile:"UNICAST"
+                |STRING:UNICAST
           |vpiCaseItem:
           \_CaseItem: , line:27:10, endln:27:44
             |vpiParent:
@@ -1836,21 +1903,6 @@ Design: (unnamed)
               \_CaseItem: , line:27:10, endln:27:44
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:27:32, endln:27:43
-                |vpiParent:
-                \_Assignment: , line:27:22, endln:27:43
-                |vpiDecompile:"MULTICAST"
-                |vpiSize:72
-                |STRING:MULTICAST
-                |vpiTypespec:
-                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:27:32, endln:27:43
-                  |vpiParent:
-                  \_Constant: , line:27:32, endln:27:43
-                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
-                  |vpiActual:
-                  \_StringTypespec: 
-                |vpiConstType:6
               |vpiLhs:
               \_RefObj: (work@constaint_mode_ex::frame_t::getType::getType), line:27:22, endln:27:29
                 |vpiParent:
@@ -1859,6 +1911,21 @@ Design: (unnamed)
                 |vpiFullName:work@constaint_mode_ex::frame_t::getType::getType
                 |vpiActual:
                 \_Function: (work@constaint_mode_ex::frame_t::getType), line:23:5, endln:32:16
+              |vpiRhs:
+              \_Constant: , line:27:32, endln:27:43
+                |vpiParent:
+                \_Assignment: , line:27:22, endln:27:43
+                |vpiTypespec:
+                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:27:32, endln:27:43
+                  |vpiParent:
+                  \_Constant: , line:27:32, endln:27:43
+                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
+                  |vpiActual:
+                  \_StringTypespec: 
+                |vpiConstType:6
+                |vpiSize:72
+                |vpiDecompile:"MULTICAST"
+                |STRING:MULTICAST
           |vpiCaseItem:
           \_CaseItem: , line:28:10, endln:28:44
             |vpiParent:
@@ -1877,21 +1944,6 @@ Design: (unnamed)
               \_CaseItem: , line:28:10, endln:28:44
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:28:32, endln:28:43
-                |vpiParent:
-                \_Assignment: , line:28:22, endln:28:43
-                |vpiDecompile:"BROADCAST"
-                |vpiSize:72
-                |STRING:BROADCAST
-                |vpiTypespec:
-                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:28:32, endln:28:43
-                  |vpiParent:
-                  \_Constant: , line:28:32, endln:28:43
-                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
-                  |vpiActual:
-                  \_StringTypespec: 
-                |vpiConstType:6
               |vpiLhs:
               \_RefObj: (work@constaint_mode_ex::frame_t::getType::getType), line:28:22, endln:28:29
                 |vpiParent:
@@ -1900,6 +1952,21 @@ Design: (unnamed)
                 |vpiFullName:work@constaint_mode_ex::frame_t::getType::getType
                 |vpiActual:
                 \_Function: (work@constaint_mode_ex::frame_t::getType), line:23:5, endln:32:16
+              |vpiRhs:
+              \_Constant: , line:28:32, endln:28:43
+                |vpiParent:
+                \_Assignment: , line:28:22, endln:28:43
+                |vpiTypespec:
+                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:28:32, endln:28:43
+                  |vpiParent:
+                  \_Constant: , line:28:32, endln:28:43
+                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
+                  |vpiActual:
+                  \_StringTypespec: 
+                |vpiConstType:6
+                |vpiSize:72
+                |vpiDecompile:"BROADCAST"
+                |STRING:BROADCAST
           |vpiCaseItem:
           \_CaseItem: , line:29:10, endln:29:42
             |vpiParent:
@@ -1910,21 +1977,6 @@ Design: (unnamed)
               \_CaseItem: , line:29:10, endln:29:42
               |vpiOpType:82
               |vpiBlocking:1
-              |vpiRhs:
-              \_Constant: , line:29:32, endln:29:41
-                |vpiParent:
-                \_Assignment: , line:29:22, endln:29:41
-                |vpiDecompile:"UNKNOWN"
-                |vpiSize:56
-                |STRING:UNKNOWN
-                |vpiTypespec:
-                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:29:32, endln:29:41
-                  |vpiParent:
-                  \_Constant: , line:29:32, endln:29:41
-                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
-                  |vpiActual:
-                  \_StringTypespec: 
-                |vpiConstType:6
               |vpiLhs:
               \_RefObj: (work@constaint_mode_ex::frame_t::getType::getType), line:29:22, endln:29:29
                 |vpiParent:
@@ -1933,6 +1985,21 @@ Design: (unnamed)
                 |vpiFullName:work@constaint_mode_ex::frame_t::getType::getType
                 |vpiActual:
                 \_Function: (work@constaint_mode_ex::frame_t::getType), line:23:5, endln:32:16
+              |vpiRhs:
+              \_Constant: , line:29:32, endln:29:41
+                |vpiParent:
+                \_Assignment: , line:29:22, endln:29:41
+                |vpiTypespec:
+                \_RefTypespec: (work@constaint_mode_ex::frame_t::getType), line:29:32, endln:29:41
+                  |vpiParent:
+                  \_Constant: , line:29:32, endln:29:41
+                  |vpiFullName:work@constaint_mode_ex::frame_t::getType
+                  |vpiActual:
+                  \_StringTypespec: 
+                |vpiConstType:6
+                |vpiSize:56
+                |vpiDecompile:"UNKNOWN"
+                |STRING:UNKNOWN
       |vpiTypespec:
       \_StringTypespec: , line:23:14, endln:23:20
         |vpiParent:
@@ -1952,8 +2019,8 @@ Design: (unnamed)
       \_IODecl: (ltype), line:23:38, endln:23:43
         |vpiParent:
         \_Function: (work@constaint_mode_ex::frame_t::getType), line:23:5, endln:32:16
-        |vpiDirection:1
         |vpiName:ltype
+        |vpiDirection:1
         |vpiTypespec:
         \_RefTypespec: (work@constaint_mode_ex::frame_t::getType::ltype::pkt_type), line:23:29, endln:23:37
           |vpiParent:
@@ -2019,13 +2086,12 @@ Design: (unnamed)
           \_Begin: (work@constaint_mode_ex::frame_t::print), line:35:7, endln:46:10
           |vpiOpType:82
           |vpiBlocking:1
+          |vpiLhs:
+          \_Variable: (work@constaint_mode_ex::frame_t::print::i), line:36:17, endln:36:18
           |vpiRhs:
           \_Constant: , line:36:20, endln:36:21
             |vpiParent:
             \_Assignment: , line:36:17, endln:36:21
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:36:20, endln:36:21
               |vpiParent:
@@ -2034,19 +2100,22 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiLhs:
-          \_Variable: (work@constaint_mode_ex::frame_t::print::i), line:36:17, endln:36:18
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiStmt:
         \_SysFuncCall: ($write), line:37:9, endln:37:50
           |vpiParent:
           \_Begin: (work@constaint_mode_ex::frame_t::print), line:35:7, endln:46:10
+          |vpiName:
+          \_Identifier: ($write), line:37:10, endln:37:15
+            |vpiParent:
+            \_SysFuncCall: ($write), line:37:9, endln:37:50
+            |vpiName:$write
           |vpiArgument:
           \_Constant: , line:37:16, endln:37:34
             |vpiParent:
             \_SysFuncCall: ($write), line:37:9, endln:37:50
-            |vpiDecompile:"Packet type %s\n"
-            |vpiSize:128
-            |STRING:Packet type %s\n
             |vpiTypespec:
             \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:37:16, endln:37:34
               |vpiParent:
@@ -2055,10 +2124,18 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
+            |vpiSize:128
+            |vpiDecompile:"Packet type %s\n"
+            |STRING:Packet type %s\n
           |vpiArgument:
           \_FuncCall: (getType), line:37:35, endln:37:49
             |vpiParent:
             \_SysFuncCall: ($write), line:37:9, endln:37:50
+            |vpiName:
+            \_Identifier: (getType), line:37:35, endln:37:42
+              |vpiParent:
+              \_FuncCall: (getType), line:37:35, endln:37:49
+              |vpiName:getType
             |vpiTaskFunc:
             \_Function: (work@constaint_mode_ex::frame_t::getType), line:23:5, endln:32:16
             |vpiArgument:
@@ -2069,27 +2146,19 @@ Design: (unnamed)
               |vpiFullName:work@constaint_mode_ex::frame_t::print::ptype
               |vpiActual:
               \_Variable: (work@constaint_mode_ex::frame_t::ptype), line:6:19, endln:6:24
-            |vpiName:
-            \_Identifier: (getType), line:37:35, endln:37:42
-              |vpiParent:
-              \_FuncCall: (getType), line:37:35, endln:37:49
-              |vpiName:getType
-          |vpiName:
-          \_Identifier: ($write), line:37:10, endln:37:15
-            |vpiParent:
-            \_SysFuncCall: ($write), line:37:9, endln:37:50
-            |vpiName:$write
         |vpiStmt:
         \_SysFuncCall: ($write), line:38:9, endln:38:45
           |vpiParent:
           \_Begin: (work@constaint_mode_ex::frame_t::print), line:35:7, endln:46:10
+          |vpiName:
+          \_Identifier: ($write), line:38:10, endln:38:15
+            |vpiParent:
+            \_SysFuncCall: ($write), line:38:9, endln:38:45
+            |vpiName:$write
           |vpiArgument:
           \_Constant: , line:38:16, endln:38:40
             |vpiParent:
             \_SysFuncCall: ($write), line:38:9, endln:38:45
-            |vpiDecompile:"Size of frame is %0d\n"
-            |vpiSize:176
-            |STRING:Size of frame is %0d\n
             |vpiTypespec:
             \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:38:16, endln:38:40
               |vpiParent:
@@ -2098,6 +2167,9 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
+            |vpiSize:176
+            |vpiDecompile:"Size of frame is %0d\n"
+            |STRING:Size of frame is %0d\n
           |vpiArgument:
           \_RefObj: (work@constaint_mode_ex::frame_t::print::len), line:38:41, endln:38:44
             |vpiParent:
@@ -2106,11 +2178,6 @@ Design: (unnamed)
             |vpiFullName:work@constaint_mode_ex::frame_t::print::len
             |vpiActual:
             \_Variable: (work@constaint_mode_ex::frame_t::len), line:7:18, endln:7:21
-          |vpiName:
-          \_Identifier: ($write), line:38:10, endln:38:15
-            |vpiParent:
-            \_SysFuncCall: ($write), line:38:9, endln:38:45
-            |vpiName:$write
         |vpiStmt:
         \_IfStmt: , line:39:9, endln:45:12
           |vpiParent:
@@ -2124,6 +2191,7 @@ Design: (unnamed)
             \_HierPath: (payload.size), line:39:13, endln:39:27
               |vpiParent:
               \_Operation: , line:39:13, endln:39:31
+              |vpiName:payload.size
               |vpiActual:
               \_RefObj: (payload), line:39:13, endln:39:20
                 |vpiParent:
@@ -2140,14 +2208,10 @@ Design: (unnamed)
                   |vpiParent:
                   \_MethodFuncCall: (size), line:39:21, endln:39:27
                   |vpiName:size
-              |vpiName:payload.size
             |vpiOperand:
             \_Constant: , line:39:30, endln:39:31
               |vpiParent:
               \_Operation: , line:39:13, endln:39:31
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
               |vpiTypespec:
               \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:39:30, endln:39:31
                 |vpiParent:
@@ -2156,6 +2220,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:0
+              |UINT:0
           |vpiStmt:
           \_Begin: (work@constaint_mode_ex::frame_t::print), line:39:33, endln:45:12
             |vpiParent:
@@ -2181,13 +2248,15 @@ Design: (unnamed)
                 \_SysFuncCall: ($write), line:42:13, endln:42:38
                   |vpiParent:
                   \_Begin: (work@constaint_mode_ex::frame_t::print), line:41:35, endln:43:14
+                  |vpiName:
+                  \_Identifier: ($write), line:42:14, endln:42:19
+                    |vpiParent:
+                    \_SysFuncCall: ($write), line:42:13, endln:42:38
+                    |vpiName:$write
                   |vpiArgument:
                   \_Constant: , line:42:20, endln:42:26
                     |vpiParent:
                     \_SysFuncCall: ($write), line:42:13, endln:42:38
-                    |vpiDecompile:" %2x"
-                    |vpiSize:32
-                    |STRING: %2x
                     |vpiTypespec:
                     \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:42:20, endln:42:26
                       |vpiParent:
@@ -2196,6 +2265,9 @@ Design: (unnamed)
                       |vpiActual:
                       \_StringTypespec: 
                     |vpiConstType:6
+                    |vpiSize:32
+                    |vpiDecompile:" %2x"
+                    |STRING: %2x
                   |vpiArgument:
                   \_BitSelect: (work@constaint_mode_ex::frame_t::print::payload), line:42:34, endln:42:37
                     |vpiParent:
@@ -2212,30 +2284,10 @@ Design: (unnamed)
                       |vpiFullName:work@constaint_mode_ex::frame_t::print::i
                       |vpiActual:
                       \_Variable: (work@constaint_mode_ex::frame_t::print::i), line:36:17, endln:36:18
-                  |vpiName:
-                  \_Identifier: ($write), line:42:14, endln:42:19
-                    |vpiParent:
-                    \_SysFuncCall: ($write), line:42:13, endln:42:38
-                    |vpiName:$write
               |vpiForInitStmt:
               \_Assignment: , line:41:16, endln:41:19
                 |vpiParent:
                 \_ForStmt: (work@constaint_mode_ex::frame_t::print), line:41:11, endln:43:14
-                |vpiRhs:
-                \_Constant: , line:41:18, endln:41:19
-                  |vpiParent:
-                  \_Assignment: , line:41:16, endln:41:19
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-                  |vpiTypespec:
-                  \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:41:18, endln:41:19
-                    |vpiParent:
-                    \_Constant: , line:41:18, endln:41:19
-                    |vpiFullName:work@constaint_mode_ex::frame_t::print
-                    |vpiActual:
-                    \_IntTypespec: 
-                  |vpiConstType:9
                 |vpiLhs:
                 \_RefObj: (work@constaint_mode_ex::frame_t::print::i), line:41:16, endln:41:17
                   |vpiParent:
@@ -2244,6 +2296,21 @@ Design: (unnamed)
                   |vpiFullName:work@constaint_mode_ex::frame_t::print::i
                   |vpiActual:
                   \_Variable: (work@constaint_mode_ex::frame_t::print::i), line:36:17, endln:36:18
+                |vpiRhs:
+                \_Constant: , line:41:18, endln:41:19
+                  |vpiParent:
+                  \_Assignment: , line:41:16, endln:41:19
+                  |vpiTypespec:
+                  \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:41:18, endln:41:19
+                    |vpiParent:
+                    \_Constant: , line:41:18, endln:41:19
+                    |vpiFullName:work@constaint_mode_ex::frame_t::print
+                    |vpiActual:
+                    \_IntTypespec: 
+                  |vpiConstType:9
+                  |vpiSize:64
+                  |vpiDecompile:0
+                  |UINT:0
               |vpiForIncStmt:
               \_Operation: , line:41:30, endln:41:33
                 |vpiParent:
@@ -2296,13 +2363,15 @@ Design: (unnamed)
             \_SysFuncCall: ($write), line:40:11, endln:40:32
               |vpiParent:
               \_Begin: (work@constaint_mode_ex::frame_t::print), line:39:33, endln:45:12
+              |vpiName:
+              \_Identifier: ($write), line:40:12, endln:40:17
+                |vpiParent:
+                \_SysFuncCall: ($write), line:40:11, endln:40:32
+                |vpiName:$write
               |vpiArgument:
               \_Constant: , line:40:18, endln:40:31
                 |vpiParent:
                 \_SysFuncCall: ($write), line:40:11, endln:40:32
-                |vpiDecompile:"Payload is "
-                |vpiSize:88
-                |STRING:Payload is 
                 |vpiTypespec:
                 \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:40:18, endln:40:31
                   |vpiParent:
@@ -2311,24 +2380,24 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
-              |vpiName:
-              \_Identifier: ($write), line:40:12, endln:40:17
-                |vpiParent:
-                \_SysFuncCall: ($write), line:40:11, endln:40:32
-                |vpiName:$write
+                |vpiSize:88
+                |vpiDecompile:"Payload is "
+                |STRING:Payload is 
             |vpiStmt:
             \_ForStmt: (work@constaint_mode_ex::frame_t::print), line:41:11, endln:43:14
             |vpiStmt:
             \_SysFuncCall: ($write), line:44:11, endln:44:23
               |vpiParent:
               \_Begin: (work@constaint_mode_ex::frame_t::print), line:39:33, endln:45:12
+              |vpiName:
+              \_Identifier: ($write), line:44:12, endln:44:17
+                |vpiParent:
+                \_SysFuncCall: ($write), line:44:11, endln:44:23
+                |vpiName:$write
               |vpiArgument:
               \_Constant: , line:44:18, endln:44:22
                 |vpiParent:
                 \_SysFuncCall: ($write), line:44:11, endln:44:23
-                |vpiDecompile:"\n"
-                |vpiSize:16
-                |STRING:\n
                 |vpiTypespec:
                 \_RefTypespec: (work@constaint_mode_ex::frame_t::print), line:44:18, endln:44:22
                   |vpiParent:
@@ -2337,11 +2406,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
-              |vpiName:
-              \_Identifier: ($write), line:44:12, endln:44:17
-                |vpiParent:
-                \_SysFuncCall: ($write), line:44:11, endln:44:23
-                |vpiName:$write
+                |vpiSize:16
+                |vpiDecompile:"\n"
+                |STRING:\n
       |vpiMethod:1
       |vpiVisibility:1
       |vpiStmt:
@@ -2371,9 +2438,6 @@ Design: (unnamed)
         \_Constant: , line:8:16, endln:8:17
           |vpiParent:
           \_Range: , line:8:15, endln:8:20
-          |vpiDecompile:7
-          |vpiSize:64
-          |UINT:7
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex::frame_t), line:8:16, endln:8:17
             |vpiParent:
@@ -2382,13 +2446,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:7
+          |UINT:7
         |vpiRightRange:
         \_Constant: , line:8:18, endln:8:19
           |vpiParent:
           \_Range: , line:8:15, endln:8:20
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex::frame_t), line:8:18, endln:8:19
             |vpiParent:
@@ -2397,6 +2461,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiElemTypespec:
       \_RefTypespec: (work@constaint_mode_ex::frame_t), line:8:15, endln:8:20
         |vpiParent:
@@ -2576,13 +2643,12 @@ Design: (unnamed)
         \_Begin: (work@constaint_mode_ex), line:50:11, endln:79:6
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_Variable: (work@constaint_mode_ex.j), line:52:14, endln:52:15
         |vpiRhs:
         \_Constant: , line:52:18, endln:52:19
           |vpiParent:
           \_Assignment: , line:52:14, endln:52:19
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex), line:52:18, endln:52:19
             |vpiParent:
@@ -2591,19 +2657,22 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-        |vpiLhs:
-        \_Variable: (work@constaint_mode_ex.j), line:52:14, endln:52:15
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_SysFuncCall: ($write), line:53:6, endln:53:49
         |vpiParent:
         \_Begin: (work@constaint_mode_ex), line:50:11, endln:79:6
+        |vpiName:
+        \_Identifier: ($write), line:53:7, endln:53:12
+          |vpiParent:
+          \_SysFuncCall: ($write), line:53:6, endln:53:49
+          |vpiName:$write
         |vpiArgument:
         \_Constant: , line:53:13, endln:53:48
           |vpiParent:
           \_SysFuncCall: ($write), line:53:6, endln:53:49
-          |vpiDecompile:"-------------------------------\n"
-          |vpiSize:264
-          |STRING:-------------------------------\n
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex), line:53:13, endln:53:48
             |vpiParent:
@@ -2612,11 +2681,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
-        |vpiName:
-        \_Identifier: ($write), line:53:7, endln:53:12
-          |vpiParent:
-          \_SysFuncCall: ($write), line:53:6, endln:53:49
-          |vpiName:$write
+          |vpiSize:264
+          |vpiDecompile:"-------------------------------\n"
+          |STRING:-------------------------------\n
       |vpiStmt:
       \_MethodFuncCall: (multicast), line:55:12, endln:55:40
         |vpiParent:
@@ -2647,6 +2714,7 @@ Design: (unnamed)
           \_HierPath: (frame.multicast.constraint_mode), line:56:10, endln:56:43
             |vpiParent:
             \_Operation: , line:56:10, endln:56:48
+            |vpiName:frame.multicast.constraint_mode
             |vpiActual:
             \_RefObj: (frame), line:56:10, endln:56:15
               |vpiParent:
@@ -2670,14 +2738,10 @@ Design: (unnamed)
                 |vpiParent:
                 \_MethodFuncCall: (constraint_mode), line:56:26, endln:56:43
                 |vpiName:constraint_mode
-            |vpiName:frame.multicast.constraint_mode
           |vpiOperand:
           \_Constant: , line:56:47, endln:56:48
             |vpiParent:
             \_Operation: , line:56:10, endln:56:48
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@constaint_mode_ex), line:56:47, endln:56:48
               |vpiParent:
@@ -2686,6 +2750,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiStmt:
         \_Begin: (work@constaint_mode_ex), line:56:50, endln:62:9
           |vpiParent:
@@ -2710,6 +2777,7 @@ Design: (unnamed)
               \_HierPath: (frame.randomize), line:57:12, endln:57:29
                 |vpiParent:
                 \_Operation: , line:57:12, endln:57:34
+                |vpiName:frame.randomize
                 |vpiActual:
                 \_RefObj: (frame), line:57:12, endln:57:17
                   |vpiParent:
@@ -2726,14 +2794,10 @@ Design: (unnamed)
                     |vpiParent:
                     \_MethodFuncCall: (randomize), line:57:18, endln:57:29
                     |vpiName:randomize
-                |vpiName:frame.randomize
               |vpiOperand:
               \_Constant: , line:57:33, endln:57:34
                 |vpiParent:
                 \_Operation: , line:57:12, endln:57:34
-                |vpiDecompile:1
-                |vpiSize:64
-                |UINT:1
                 |vpiTypespec:
                 \_RefTypespec: (work@constaint_mode_ex), line:57:33, endln:57:34
                   |vpiParent:
@@ -2742,6 +2806,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:9
+                |vpiSize:64
+                |vpiDecompile:1
+                |UINT:1
             |vpiStmt:
             \_Begin: (work@constaint_mode_ex), line:57:36, endln:59:11
               |vpiParent:
@@ -2779,13 +2846,15 @@ Design: (unnamed)
               \_SysFuncCall: ($write), line:60:10, endln:60:47
                 |vpiParent:
                 \_Begin: (work@constaint_mode_ex), line:59:17, endln:61:11
+                |vpiName:
+                \_Identifier: ($write), line:60:11, endln:60:16
+                  |vpiParent:
+                  \_SysFuncCall: ($write), line:60:10, endln:60:47
+                  |vpiName:$write
                 |vpiArgument:
                 \_Constant: , line:60:17, endln:60:46
                   |vpiParent:
                   \_SysFuncCall: ($write), line:60:10, endln:60:47
-                  |vpiDecompile:"Failed to randomize frame\n"
-                  |vpiSize:216
-                  |STRING:Failed to randomize frame\n
                   |vpiTypespec:
                   \_RefTypespec: (work@constaint_mode_ex), line:60:17, endln:60:46
                     |vpiParent:
@@ -2794,11 +2863,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_StringTypespec: 
                   |vpiConstType:6
-                |vpiName:
-                \_Identifier: ($write), line:60:11, endln:60:16
-                  |vpiParent:
-                  \_SysFuncCall: ($write), line:60:10, endln:60:47
-                  |vpiName:$write
+                  |vpiSize:216
+                  |vpiDecompile:"Failed to randomize frame\n"
+                  |STRING:Failed to randomize frame\n
         |vpiElseStmt:
         \_Begin: (work@constaint_mode_ex), line:62:15, endln:64:9
           |vpiParent:
@@ -2814,13 +2881,15 @@ Design: (unnamed)
           \_SysFuncCall: ($write), line:63:9, endln:63:59
             |vpiParent:
             \_Begin: (work@constaint_mode_ex), line:62:15, endln:64:9
+            |vpiName:
+            \_Identifier: ($write), line:63:10, endln:63:15
+              |vpiParent:
+              \_SysFuncCall: ($write), line:63:9, endln:63:59
+              |vpiName:$write
             |vpiArgument:
             \_Constant: , line:63:16, endln:63:58
               |vpiParent:
               \_SysFuncCall: ($write), line:63:9, endln:63:59
-              |vpiDecompile:"Failed to disable constraint multicast\n"
-              |vpiSize:320
-              |STRING:Failed to disable constraint multicast\n
               |vpiTypespec:
               \_RefTypespec: (work@constaint_mode_ex), line:63:16, endln:63:58
                 |vpiParent:
@@ -2829,22 +2898,22 @@ Design: (unnamed)
                 |vpiActual:
                 \_StringTypespec: 
               |vpiConstType:6
-            |vpiName:
-            \_Identifier: ($write), line:63:10, endln:63:15
-              |vpiParent:
-              \_SysFuncCall: ($write), line:63:9, endln:63:59
-              |vpiName:$write
+              |vpiSize:320
+              |vpiDecompile:"Failed to disable constraint multicast\n"
+              |STRING:Failed to disable constraint multicast\n
       |vpiStmt:
       \_SysFuncCall: ($write), line:65:6, endln:65:49
         |vpiParent:
         \_Begin: (work@constaint_mode_ex), line:50:11, endln:79:6
+        |vpiName:
+        \_Identifier: ($write), line:65:7, endln:65:12
+          |vpiParent:
+          \_SysFuncCall: ($write), line:65:6, endln:65:49
+          |vpiName:$write
         |vpiArgument:
         \_Constant: , line:65:13, endln:65:48
           |vpiParent:
           \_SysFuncCall: ($write), line:65:6, endln:65:49
-          |vpiDecompile:"-------------------------------\n"
-          |vpiSize:264
-          |STRING:-------------------------------\n
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex), line:65:13, endln:65:48
             |vpiParent:
@@ -2853,22 +2922,22 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
-        |vpiName:
-        \_Identifier: ($write), line:65:7, endln:65:12
-          |vpiParent:
-          \_SysFuncCall: ($write), line:65:6, endln:65:49
-          |vpiName:$write
+          |vpiSize:264
+          |vpiDecompile:"-------------------------------\n"
+          |STRING:-------------------------------\n
       |vpiStmt:
       \_SysFuncCall: ($write), line:67:6, endln:68:44
         |vpiParent:
         \_Begin: (work@constaint_mode_ex), line:50:11, endln:79:6
+        |vpiName:
+        \_Identifier: ($write), line:67:7, endln:67:12
+          |vpiParent:
+          \_SysFuncCall: ($write), line:67:6, endln:68:44
+          |vpiName:$write
         |vpiArgument:
         \_Constant: , line:67:14, endln:67:54
           |vpiParent:
           \_SysFuncCall: ($write), line:67:6, endln:68:44
-          |vpiDecompile:"Constraint state of multicast is %0d\n"
-          |vpiSize:304
-          |STRING:Constraint state of multicast is %0d\n
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex), line:67:14, endln:67:54
             |vpiParent:
@@ -2877,10 +2946,14 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:304
+          |vpiDecompile:"Constraint state of multicast is %0d\n"
+          |STRING:Constraint state of multicast is %0d\n
         |vpiArgument:
         \_HierPath: (frame.multicast.constraint_mode), line:68:10, endln:68:43
           |vpiParent:
           \_SysFuncCall: ($write), line:67:6, endln:68:44
+          |vpiName:frame.multicast.constraint_mode
           |vpiActual:
           \_RefObj: (frame), line:68:10, endln:68:15
             |vpiParent:
@@ -2904,23 +2977,19 @@ Design: (unnamed)
               |vpiParent:
               \_MethodFuncCall: (constraint_mode), line:68:26, endln:68:43
               |vpiName:constraint_mode
-          |vpiName:frame.multicast.constraint_mode
-        |vpiName:
-        \_Identifier: ($write), line:67:7, endln:67:12
-          |vpiParent:
-          \_SysFuncCall: ($write), line:67:6, endln:68:44
-          |vpiName:$write
       |vpiStmt:
       \_SysFuncCall: ($write), line:69:6, endln:69:49
         |vpiParent:
         \_Begin: (work@constaint_mode_ex), line:50:11, endln:79:6
+        |vpiName:
+        \_Identifier: ($write), line:69:7, endln:69:12
+          |vpiParent:
+          \_SysFuncCall: ($write), line:69:6, endln:69:49
+          |vpiName:$write
         |vpiArgument:
         \_Constant: , line:69:13, endln:69:48
           |vpiParent:
           \_SysFuncCall: ($write), line:69:6, endln:69:49
-          |vpiDecompile:"-------------------------------\n"
-          |vpiSize:264
-          |STRING:-------------------------------\n
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex), line:69:13, endln:69:48
             |vpiParent:
@@ -2929,11 +2998,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
-        |vpiName:
-        \_Identifier: ($write), line:69:7, endln:69:12
-          |vpiParent:
-          \_SysFuncCall: ($write), line:69:6, endln:69:49
-          |vpiName:$write
+          |vpiSize:264
+          |vpiDecompile:"-------------------------------\n"
+          |STRING:-------------------------------\n
       |vpiStmt:
       \_MethodFuncCall: (unicast), line:71:12, endln:71:38
         |vpiParent:
@@ -2981,6 +3048,7 @@ Design: (unnamed)
           \_HierPath: (frame.randomize), line:73:10, endln:73:27
             |vpiParent:
             \_Operation: , line:73:10, endln:73:32
+            |vpiName:frame.randomize
             |vpiActual:
             \_RefObj: (frame), line:73:10, endln:73:15
               |vpiParent:
@@ -2997,14 +3065,10 @@ Design: (unnamed)
                 |vpiParent:
                 \_MethodFuncCall: (randomize), line:73:16, endln:73:27
                 |vpiName:randomize
-            |vpiName:frame.randomize
           |vpiOperand:
           \_Constant: , line:73:31, endln:73:32
             |vpiParent:
             \_Operation: , line:73:10, endln:73:32
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (work@constaint_mode_ex), line:73:31, endln:73:32
               |vpiParent:
@@ -3013,6 +3077,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
         |vpiStmt:
         \_Begin: (work@constaint_mode_ex), line:73:34, endln:75:9
           |vpiParent:
@@ -3050,13 +3117,15 @@ Design: (unnamed)
           \_SysFuncCall: ($write), line:76:8, endln:76:45
             |vpiParent:
             \_Begin: (work@constaint_mode_ex), line:75:15, endln:77:9
+            |vpiName:
+            \_Identifier: ($write), line:76:9, endln:76:14
+              |vpiParent:
+              \_SysFuncCall: ($write), line:76:8, endln:76:45
+              |vpiName:$write
             |vpiArgument:
             \_Constant: , line:76:15, endln:76:44
               |vpiParent:
               \_SysFuncCall: ($write), line:76:8, endln:76:45
-              |vpiDecompile:"Failed to randomize frame\n"
-              |vpiSize:216
-              |STRING:Failed to randomize frame\n
               |vpiTypespec:
               \_RefTypespec: (work@constaint_mode_ex), line:76:15, endln:76:44
                 |vpiParent:
@@ -3065,22 +3134,22 @@ Design: (unnamed)
                 |vpiActual:
                 \_StringTypespec: 
               |vpiConstType:6
-            |vpiName:
-            \_Identifier: ($write), line:76:9, endln:76:14
-              |vpiParent:
-              \_SysFuncCall: ($write), line:76:8, endln:76:45
-              |vpiName:$write
+              |vpiSize:216
+              |vpiDecompile:"Failed to randomize frame\n"
+              |STRING:Failed to randomize frame\n
       |vpiStmt:
       \_SysFuncCall: ($write), line:78:6, endln:78:49
         |vpiParent:
         \_Begin: (work@constaint_mode_ex), line:50:11, endln:79:6
+        |vpiName:
+        \_Identifier: ($write), line:78:7, endln:78:12
+          |vpiParent:
+          \_SysFuncCall: ($write), line:78:6, endln:78:49
+          |vpiName:$write
         |vpiArgument:
         \_Constant: , line:78:13, endln:78:48
           |vpiParent:
           \_SysFuncCall: ($write), line:78:6, endln:78:49
-          |vpiDecompile:"-------------------------------\n"
-          |vpiSize:264
-          |STRING:-------------------------------\n
           |vpiTypespec:
           \_RefTypespec: (work@constaint_mode_ex), line:78:13, endln:78:48
             |vpiParent:
@@ -3089,11 +3158,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
-        |vpiName:
-        \_Identifier: ($write), line:78:7, endln:78:12
-          |vpiParent:
-          \_SysFuncCall: ($write), line:78:6, endln:78:49
-          |vpiName:$write
+          |vpiSize:264
+          |vpiDecompile:"-------------------------------\n"
+          |STRING:-------------------------------\n
 |vpiTypespec:
 \_EnumTypespec: , line:2:9, endln:2:55
   |vpiParent:
@@ -3103,29 +3170,70 @@ Design: (unnamed)
     |vpiParent:
     \_EnumTypespec: , line:2:9, endln:2:55
     |vpiName:UNICAST
-    |UINT:11
-    |vpiDecompile:11
-    |vpiSize:64
+    |vpiValue:
+    \_Constant: 
+      |vpiParent:
+      \_EnumConst: (UNICAST), line:2:15, endln:2:25
+      |vpiTypespec:
+      \_RefTypespec: (UNICAST), line:2:23, endln:2:25
+        |vpiParent:
+        \_Constant: 
+        |vpiFullName:UNICAST
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:19
+      |vpiSize:64
+      |vpiDecompile:11
+      |UINT:11
   |vpiEnumConst:
   \_EnumConst: (MULTICAST), line:2:26, endln:2:35
     |vpiParent:
     \_EnumTypespec: , line:2:9, endln:2:55
     |vpiName:MULTICAST
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:64
+    |vpiValue:
+    \_Constant: 
+      |vpiParent:
+      \_EnumConst: (MULTICAST), line:2:26, endln:2:35
+      |vpiTypespec:
+      \_RefTypespec: (MULTICAST), line:2:26, endln:2:35
+        |vpiParent:
+        \_Constant: 
+        |vpiFullName:MULTICAST
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:6
+      |vpiSize:64
+      |vpiDecompile:1
+      |INT:1
   |vpiEnumConst:
   \_EnumConst: (BROADCAST), line:2:36, endln:2:45
     |vpiParent:
     \_EnumTypespec: , line:2:9, endln:2:55
     |vpiName:BROADCAST
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:64
+    |vpiValue:
+    \_Constant: 
+      |vpiParent:
+      \_EnumConst: (BROADCAST), line:2:36, endln:2:45
+      |vpiTypespec:
+      \_RefTypespec: (BROADCAST), line:2:36, endln:2:45
+        |vpiParent:
+        \_Constant: 
+        |vpiFullName:BROADCAST
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:6
+      |vpiSize:64
+      |vpiDecompile:2
+      |INT:2
 |vpiTypespec:
 \_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
 |vpiTypespec:
 \_TypedefTypespec: (pkt_type), line:2:47, endln:2:55
   |vpiParent:

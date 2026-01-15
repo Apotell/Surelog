@@ -175,6 +175,8 @@ Design: (unnamed)
   \_ParamAssign: , line:13:13, endln:13:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
+    |vpiLhs:
+    \_Parameter: (work@top.D), line:13:13, endln:13:19
     |vpiRhs:
     \_RefObj: (work@top.MAP), line:13:16, endln:13:19
       |vpiParent:
@@ -183,8 +185,6 @@ Design: (unnamed)
       |vpiFullName:work@top.MAP
       |vpiActual:
       \_Parameter: (MAP), line:3:23, endln:5:48
-    |vpiLhs:
-    \_Parameter: (work@top.D), line:13:13, endln:13:19
   |vpiInternalScope:
   \_Begin: (work@top), line:15:50, endln:17:6
     |vpiParent:
@@ -233,9 +233,6 @@ Design: (unnamed)
       \_Constant: , line:15:12, endln:15:48
         |vpiParent:
         \_Operation: , line:15:7, endln:15:48
-        |vpiDecompile:17'b00000000000000000000000000010000
-        |vpiSize:17
-        |BIN:00000000000000000000000000010000
         |vpiTypespec:
         \_RefTypespec: (work@top), line:15:12, endln:15:48
           |vpiParent:
@@ -244,6 +241,9 @@ Design: (unnamed)
           |vpiActual:
           \_LogicTypespec: 
         |vpiConstType:3
+        |vpiSize:17
+        |vpiDecompile:17'b00000000000000000000000000010000
+        |BIN:00000000000000000000000000010000
     |vpiStmt:
     \_Begin: (work@top), line:15:50, endln:17:6
 |vpiTypespec:
@@ -269,9 +269,6 @@ Design: (unnamed)
     \_Constant: , line:3:20, endln:3:21
       |vpiParent:
       \_Range: , line:3:12, endln:3:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: , line:3:20, endln:3:21
         |vpiParent:
@@ -279,6 +276,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
   |vpiPacked:1
 |vpiTypespec:
 \_ModuleTypespec: (work@GOOD)
@@ -293,9 +293,8 @@ Design: (unnamed)
 \_Parameter: (AWIDTH), line:1:25, endln:1:58
   |vpiParent:
   \_Design: (unnamed)
-  |UINT:16
-  |vpiLocalParam:1
   |vpiName:AWIDTH
+  |vpiLocalParam:1
 |vpiParameter:
 \_Parameter: (MAP), line:3:23, endln:5:48
   |vpiParent:
@@ -307,19 +306,18 @@ Design: (unnamed)
     |vpiFullName:MAP
     |vpiActual:
     \_ArrayTypespec: , line:3:12, endln:3:22
-  |vpiLocalParam:1
   |vpiName:MAP
+  |vpiLocalParam:1
 |vpiParamAssign:
 \_ParamAssign: , line:1:25, endln:1:58
   |vpiParent:
   \_Design: (unnamed)
+  |vpiLhs:
+  \_Parameter: (AWIDTH), line:1:25, endln:1:58
   |vpiRhs:
   \_Constant: , line:1:56, endln:1:58
     |vpiParent:
     \_ParamAssign: , line:1:25, endln:1:58
-    |vpiDecompile:16
-    |vpiSize:64
-    |UINT:16
     |vpiTypespec:
     \_RefTypespec: , line:1:56, endln:1:58
       |vpiParent:
@@ -327,12 +325,15 @@ Design: (unnamed)
       |vpiActual:
       \_IntTypespec: 
     |vpiConstType:9
-  |vpiLhs:
-  \_Parameter: (AWIDTH), line:1:25, endln:1:58
+    |vpiSize:64
+    |vpiDecompile:16
+    |UINT:16
 |vpiParamAssign:
 \_ParamAssign: , line:3:23, endln:5:48
   |vpiParent:
   \_Design: (unnamed)
+  |vpiLhs:
+  \_Parameter: (MAP), line:3:23, endln:5:48
   |vpiRhs:
   \_Operation: , line:3:33, endln:5:48
     |vpiParent:
@@ -345,8 +346,6 @@ Design: (unnamed)
       |vpiName:AWIDTH
       |vpiActual:
       \_Parameter: (AWIDTH), line:1:25, endln:1:58
-  |vpiLhs:
-  \_Parameter: (MAP), line:3:23, endln:5:48
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

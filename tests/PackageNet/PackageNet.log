@@ -167,28 +167,25 @@ Design: (unnamed)
   \_Parameter: (my_package1::p1), line:3:12, endln:3:18
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
-    |UINT:1
     |vpiName:p1
     |vpiFullName:my_package1::p1
   |vpiParameter:
   \_Parameter: (my_package1::p2), line:4:12, endln:4:18
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
-    |UINT:2
-    |vpiLocalParam:1
     |vpiName:p2
     |vpiFullName:my_package1::p2
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:3:12, endln:3:18
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
+    |vpiLhs:
+    \_Parameter: (my_package1::p1), line:3:12, endln:3:18
     |vpiRhs:
     \_Constant: , line:3:17, endln:3:18
       |vpiParent:
       \_ParamAssign: , line:3:12, endln:3:18
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (my_package1), line:3:17, endln:3:18
         |vpiParent:
@@ -197,19 +194,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (my_package1::p1), line:3:12, endln:3:18
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:4:12, endln:4:18
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
+    |vpiLhs:
+    \_Parameter: (my_package1::p2), line:4:12, endln:4:18
     |vpiRhs:
     \_Constant: , line:4:17, endln:4:18
       |vpiParent:
       \_ParamAssign: , line:4:12, endln:4:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
       |vpiTypespec:
       \_RefTypespec: (my_package1), line:4:17, endln:4:18
         |vpiParent:
@@ -218,8 +215,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (my_package1::p2), line:4:12, endln:4:18
+      |vpiSize:64
+      |vpiDecompile:2
+      |UINT:2
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -236,9 +234,6 @@ Design: (unnamed)
       \_Constant: , line:6:16, endln:6:17
         |vpiParent:
         \_Range: , line:6:15, endln:6:20
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (my_package1), line:6:16, endln:6:17
           |vpiParent:
@@ -247,13 +242,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:6:18, endln:6:19
         |vpiParent:
         \_Range: , line:6:15, endln:6:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (my_package1), line:6:18, endln:6:19
           |vpiParent:
@@ -262,6 +257,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
     |vpiParent:
@@ -323,9 +321,6 @@ Design: (unnamed)
     \_Constant: , line:15:8, endln:15:22
       |vpiParent:
       \_ImportTypespec: (my_package1), line:15:8, endln:15:22
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@test.my_package1), line:15:8, endln:15:22
         |vpiParent:
@@ -334,6 +329,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -358,6 +356,14 @@ Design: (unnamed)
         \_Begin: (work@test), line:17:9, endln:19:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@test.v), line:18:3, endln:18:4
+          |vpiParent:
+          \_Assignment: , line:18:3, endln:18:14
+          |vpiName:v
+          |vpiFullName:work@test.v
+          |vpiActual:
+          \_Net: (my_package1::v), line:8:6, endln:8:7
         |vpiRhs:
         \_Operation: , line:18:7, endln:18:14
           |vpiParent:
@@ -379,14 +385,6 @@ Design: (unnamed)
             |vpiFullName:work@test.p2
             |vpiActual:
             \_Parameter: (my_package1::p2), line:4:12, endln:4:18
-        |vpiLhs:
-        \_RefObj: (work@test.v), line:18:3, endln:18:4
-          |vpiParent:
-          \_Assignment: , line:18:3, endln:18:14
-          |vpiName:v
-          |vpiFullName:work@test.v
-          |vpiActual:
-          \_Net: (my_package1::v), line:8:6, endln:8:7
 |vpiTypespec:
 \_ModuleTypespec: (work@test)
   |vpiParent:

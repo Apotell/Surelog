@@ -136,9 +136,6 @@ Design: (unnamed)
       \_Constant: , line:2:16, endln:2:18
         |vpiParent:
         \_Range: , line:2:15, endln:2:21
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@top), line:2:16, endln:2:18
           |vpiParent:
@@ -147,13 +144,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:2:19, endln:2:20
         |vpiParent:
         \_Range: , line:2:15, endln:2:21
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:2:19, endln:2:20
           |vpiParent:
@@ -162,6 +159,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -200,10 +200,23 @@ Design: (unnamed)
   \_ContAssign: , line:4:10, endln:4:55
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_RefObj: (work@top.out), line:4:10, endln:4:13
+      |vpiParent:
+      \_ContAssign: , line:4:10, endln:4:55
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_Net: (work@top.out), line:1:13, endln:1:16
     |vpiRhs:
     \_SysFuncCall: ($unsigned), line:4:16, endln:4:55
       |vpiParent:
       \_ContAssign: , line:4:10, endln:4:55
+      |vpiName:
+      \_Identifier: ($unsigned), line:4:17, endln:4:25
+        |vpiParent:
+        \_SysFuncCall: ($unsigned), line:4:16, endln:4:55
+        |vpiName:$unsigned
       |vpiArgument:
       \_Operation: , line:4:26, endln:4:54
         |vpiParent:
@@ -218,6 +231,11 @@ Design: (unnamed)
           \_SysFuncCall: ($unsigned), line:4:30, endln:4:52
             |vpiParent:
             \_Operation: , line:4:28, endln:4:52
+            |vpiName:
+            \_Identifier: ($unsigned), line:4:31, endln:4:39
+              |vpiParent:
+              \_SysFuncCall: ($unsigned), line:4:30, endln:4:52
+              |vpiName:$unsigned
             |vpiArgument:
             \_Operation: , line:4:41, endln:4:50
               |vpiParent:
@@ -227,9 +245,6 @@ Design: (unnamed)
               \_Constant: , line:4:44, endln:4:49
                 |vpiParent:
                 \_Operation: , line:4:41, endln:4:50
-                |vpiDecompile:8'ha4
-                |vpiSize:8
-                |HEX:a4
                 |vpiTypespec:
                 \_RefTypespec: (work@top), line:4:44, endln:4:49
                   |vpiParent:
@@ -238,24 +253,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:5
-            |vpiName:
-            \_Identifier: ($unsigned), line:4:31, endln:4:39
-              |vpiParent:
-              \_SysFuncCall: ($unsigned), line:4:30, endln:4:52
-              |vpiName:$unsigned
-      |vpiName:
-      \_Identifier: ($unsigned), line:4:17, endln:4:25
-        |vpiParent:
-        \_SysFuncCall: ($unsigned), line:4:16, endln:4:55
-        |vpiName:$unsigned
-    |vpiLhs:
-    \_RefObj: (work@top.out), line:4:10, endln:4:13
-      |vpiParent:
-      \_ContAssign: , line:4:10, endln:4:55
-      |vpiName:out
-      |vpiFullName:work@top.out
-      |vpiActual:
-      \_Net: (work@top.out), line:1:13, endln:1:16
+                |vpiSize:8
+                |vpiDecompile:8'ha4
+                |HEX:a4
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

@@ -637,7 +637,7 @@ Assignment                                             2
 Begin                                                  4
 BitSelect                                              3
 BitTypespec                                            7
-Constant                                              53
+Constant                                              58
 ContAssign                                             2
 Design                                                 1
 EnumConst                                              5
@@ -649,7 +649,7 @@ GenIfElse                                              1
 HierPath                                               4
 IODecl                                                 1
 Identifier                                            12
-IntTypespec                                           49
+IntTypespec                                           54
 LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         1
@@ -660,7 +660,7 @@ Parameter                                              8
 PartSelect                                             1
 Range                                                  2
 RefObj                                                30
-RefTypespec                                           81
+RefTypespec                                           86
 ReturnStmt                                             1
 SourceFile                                             1
 StringTypespec                                        10
@@ -673,11 +673,11 @@ UnsupportedTypespec                                    4
 VarSelect                                              2
 Variable                                               2
 ------------------------------------------------------------
-Total:                                               357
+Total:                                               372
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload3/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:29:14: Unsupported Typespec: id:214, type:RefTypespec, name:fpu_features_t.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:45:14: Unsupported Typespec: id:273, type:RefTypespec, name:fpnew_pkg::fpu_features_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:29:14: Unsupported Typespec: id:229, type:RefTypespec, name:fpu_features_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:45:14: Unsupported Typespec: id:288, type:RefTypespec, name:fpnew_pkg::fpu_features_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -700,7 +700,6 @@ Design: (unnamed)
   \_Parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:45
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
-    |UINT:5
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::NUM_FP_FORMATS), line:3:14, endln:3:26
       |vpiParent:
@@ -708,9 +707,9 @@ Design: (unnamed)
       |vpiFullName:fpnew_pkg::NUM_FP_FORMATS
       |vpiActual:
       \_IntTypespec: , line:3:14, endln:3:26
-    |vpiLocalParam:1
     |vpiName:NUM_FP_FORMATS
     |vpiFullName:fpnew_pkg::NUM_FP_FORMATS
+    |vpiLocalParam:1
   |vpiParameter:
   \_Parameter: (fpnew_pkg::FP_FORMAT_BITS), line:4:27, endln:4:66
     |vpiParent:
@@ -722,9 +721,9 @@ Design: (unnamed)
       |vpiFullName:fpnew_pkg::FP_FORMAT_BITS
       |vpiActual:
       \_IntTypespec: , line:3:14, endln:3:26
-    |vpiLocalParam:1
     |vpiName:FP_FORMAT_BITS
     |vpiFullName:fpnew_pkg::FP_FORMAT_BITS
+    |vpiLocalParam:1
   |vpiParameter:
   \_Parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:27:4
     |vpiParent:
@@ -736,9 +735,9 @@ Design: (unnamed)
       |vpiFullName:fpnew_pkg::FP_ENCODINGS
       |vpiActual:
       \_ArrayTypespec: , line:20:14, endln:20:48
-    |vpiLocalParam:1
     |vpiName:FP_ENCODINGS
     |vpiFullName:fpnew_pkg::FP_ENCODINGS
+    |vpiLocalParam:1
   |vpiParameter:
   \_Parameter: (fpnew_pkg::RV64D_Xsflt), line:29:29, endln:35:4
     |vpiParent:
@@ -751,20 +750,19 @@ Design: (unnamed)
       |vpiFullName:fpnew_pkg::RV64D_Xsflt::fpu_features_t
       |vpiActual:
       \_UnsupportedTypespec: (fpu_features_t), line:29:14, endln:29:28
-    |vpiLocalParam:1
     |vpiName:RV64D_Xsflt
     |vpiFullName:fpnew_pkg::RV64D_Xsflt
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:3:27, endln:3:45
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
+    |vpiLhs:
+    \_Parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:45
     |vpiRhs:
     \_Constant: , line:3:44, endln:3:45
       |vpiParent:
       \_ParamAssign: , line:3:27, endln:3:45
-      |vpiDecompile:5
-      |vpiSize:64
-      |UINT:5
       |vpiTypespec:
       \_RefTypespec: (fpnew_pkg), line:3:44, endln:3:45
         |vpiParent:
@@ -773,16 +771,24 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:45
+      |vpiSize:64
+      |vpiDecompile:5
+      |UINT:5
   |vpiParamAssign:
   \_ParamAssign: , line:4:27, endln:4:66
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
+    |vpiLhs:
+    \_Parameter: (fpnew_pkg::FP_FORMAT_BITS), line:4:27, endln:4:66
     |vpiRhs:
     \_SysFuncCall: ($clog2), line:4:44, endln:4:66
       |vpiParent:
       \_ParamAssign: , line:4:27, endln:4:66
+      |vpiName:
+      \_Identifier: ($clog2), line:4:45, endln:4:50
+        |vpiParent:
+        \_SysFuncCall: ($clog2), line:4:44, endln:4:66
+        |vpiName:$clog2
       |vpiArgument:
       \_RefObj: (fpnew_pkg::NUM_FP_FORMATS), line:4:51, endln:4:65
         |vpiParent:
@@ -791,17 +797,12 @@ Design: (unnamed)
         |vpiFullName:fpnew_pkg::NUM_FP_FORMATS
         |vpiActual:
         \_Parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:45
-      |vpiName:
-      \_Identifier: ($clog2), line:4:45, endln:4:50
-        |vpiParent:
-        \_SysFuncCall: ($clog2), line:4:44, endln:4:66
-        |vpiName:$clog2
-    |vpiLhs:
-    \_Parameter: (fpnew_pkg::FP_FORMAT_BITS), line:4:27, endln:4:66
   |vpiParamAssign:
   \_ParamAssign: , line:20:49, endln:27:4
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
+    |vpiLhs:
+    \_Parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:27:4
     |vpiRhs:
     \_Operation: , line:20:65, endln:27:4
       |vpiParent:
@@ -816,9 +817,6 @@ Design: (unnamed)
         \_Constant: , line:21:7, endln:21:8
           |vpiParent:
           \_Operation: , line:21:5, endln:21:14
-          |vpiDecompile:8
-          |vpiSize:64
-          |UINT:8
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:21:7, endln:21:8
             |vpiParent:
@@ -827,13 +825,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:8
+          |UINT:8
         |vpiOperand:
         \_Constant: , line:21:11, endln:21:13
           |vpiParent:
           \_Operation: , line:21:5, endln:21:14
-          |vpiDecompile:23
-          |vpiSize:64
-          |UINT:23
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:21:11, endln:21:13
             |vpiParent:
@@ -842,6 +840,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:23
+          |UINT:23
       |vpiOperand:
       \_Operation: , line:22:5, endln:22:14
         |vpiParent:
@@ -851,9 +852,6 @@ Design: (unnamed)
         \_Constant: , line:22:7, endln:22:9
           |vpiParent:
           \_Operation: , line:22:5, endln:22:14
-          |vpiDecompile:11
-          |vpiSize:64
-          |UINT:11
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:22:7, endln:22:9
             |vpiParent:
@@ -862,13 +860,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:11
+          |UINT:11
         |vpiOperand:
         \_Constant: , line:22:11, endln:22:13
           |vpiParent:
           \_Operation: , line:22:5, endln:22:14
-          |vpiDecompile:52
-          |vpiSize:64
-          |UINT:52
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:22:11, endln:22:13
             |vpiParent:
@@ -877,6 +875,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:52
+          |UINT:52
       |vpiOperand:
       \_Operation: , line:23:5, endln:23:14
         |vpiParent:
@@ -886,9 +887,6 @@ Design: (unnamed)
         \_Constant: , line:23:7, endln:23:8
           |vpiParent:
           \_Operation: , line:23:5, endln:23:14
-          |vpiDecompile:5
-          |vpiSize:64
-          |UINT:5
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:23:7, endln:23:8
             |vpiParent:
@@ -897,13 +895,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:5
+          |UINT:5
         |vpiOperand:
         \_Constant: , line:23:11, endln:23:13
           |vpiParent:
           \_Operation: , line:23:5, endln:23:14
-          |vpiDecompile:10
-          |vpiSize:64
-          |UINT:10
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:23:11, endln:23:13
             |vpiParent:
@@ -912,6 +910,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:10
+          |UINT:10
       |vpiOperand:
       \_Operation: , line:24:5, endln:24:13
         |vpiParent:
@@ -921,9 +922,6 @@ Design: (unnamed)
         \_Constant: , line:24:7, endln:24:8
           |vpiParent:
           \_Operation: , line:24:5, endln:24:13
-          |vpiDecompile:5
-          |vpiSize:64
-          |UINT:5
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:24:7, endln:24:8
             |vpiParent:
@@ -932,13 +930,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:5
+          |UINT:5
         |vpiOperand:
         \_Constant: , line:24:11, endln:24:12
           |vpiParent:
           \_Operation: , line:24:5, endln:24:13
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:24:11, endln:24:12
             |vpiParent:
@@ -947,6 +945,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |UINT:2
       |vpiOperand:
       \_Operation: , line:25:5, endln:25:13
         |vpiParent:
@@ -956,9 +957,6 @@ Design: (unnamed)
         \_Constant: , line:25:7, endln:25:8
           |vpiParent:
           \_Operation: , line:25:5, endln:25:13
-          |vpiDecompile:8
-          |vpiSize:64
-          |UINT:8
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:25:7, endln:25:8
             |vpiParent:
@@ -967,13 +965,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:8
+          |UINT:8
         |vpiOperand:
         \_Constant: , line:25:11, endln:25:12
           |vpiParent:
           \_Operation: , line:25:5, endln:25:13
-          |vpiDecompile:7
-          |vpiSize:64
-          |UINT:7
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:25:11, endln:25:12
             |vpiParent:
@@ -982,12 +980,15 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:27:4
+          |vpiSize:64
+          |vpiDecompile:7
+          |UINT:7
   |vpiParamAssign:
   \_ParamAssign: , line:29:29, endln:35:4
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
+    |vpiLhs:
+    \_Parameter: (fpnew_pkg::RV64D_Xsflt), line:29:29, endln:35:4
     |vpiRhs:
     \_Operation: , line:29:43, endln:35:4
       |vpiParent:
@@ -1001,9 +1002,6 @@ Design: (unnamed)
         \_Constant: , line:30:20, endln:30:22
           |vpiParent:
           \_TaggedPattern: , line:30:5, endln:30:22
-          |vpiDecompile:64
-          |vpiSize:64
-          |UINT:64
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:30:20, endln:30:22
             |vpiParent:
@@ -1012,6 +1010,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:64
+          |UINT:64
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::Width), line:30:5, endln:30:10
           |vpiParent:
@@ -1028,9 +1029,6 @@ Design: (unnamed)
         \_Constant: , line:31:20, endln:31:24
           |vpiParent:
           \_TaggedPattern: , line:31:5, endln:31:24
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:31:20, endln:31:24
             |vpiParent:
@@ -1039,6 +1037,9 @@ Design: (unnamed)
             |vpiActual:
             \_BitTypespec: 
           |vpiConstType:3
+          |vpiSize:1
+          |vpiDecompile:1'b1
+          |BIN:1
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::EnableVectors), line:31:5, endln:31:18
           |vpiParent:
@@ -1055,9 +1056,6 @@ Design: (unnamed)
         \_Constant: , line:32:20, endln:32:24
           |vpiParent:
           \_TaggedPattern: , line:32:5, endln:32:24
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:32:20, endln:32:24
             |vpiParent:
@@ -1066,6 +1064,9 @@ Design: (unnamed)
             |vpiActual:
             \_BitTypespec: 
           |vpiConstType:3
+          |vpiSize:1
+          |vpiDecompile:1'b1
+          |BIN:1
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::EnableNanBox), line:32:5, endln:32:17
           |vpiParent:
@@ -1082,9 +1083,6 @@ Design: (unnamed)
         \_Constant: , line:33:20, endln:33:28
           |vpiParent:
           \_TaggedPattern: , line:33:5, endln:33:28
-          |vpiDecompile:5'b11111
-          |vpiSize:5
-          |BIN:11111
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:33:20, endln:33:28
             |vpiParent:
@@ -1093,6 +1091,9 @@ Design: (unnamed)
             |vpiActual:
             \_LogicTypespec: 
           |vpiConstType:3
+          |vpiSize:5
+          |vpiDecompile:5'b11111
+          |BIN:11111
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::FpFmtMask), line:33:5, endln:33:14
           |vpiParent:
@@ -1109,9 +1110,6 @@ Design: (unnamed)
         \_Constant: , line:34:20, endln:34:27
           |vpiParent:
           \_TaggedPattern: , line:34:5, endln:34:27
-          |vpiDecompile:4'b1111
-          |vpiSize:4
-          |BIN:1111
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:34:20, endln:34:27
             |vpiParent:
@@ -1120,6 +1118,9 @@ Design: (unnamed)
             |vpiActual:
             \_LogicTypespec: 
           |vpiConstType:3
+          |vpiSize:4
+          |vpiDecompile:4'b1111
+          |BIN:1111
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::IntFmtMask), line:34:5, endln:34:15
           |vpiParent:
@@ -1128,8 +1129,6 @@ Design: (unnamed)
           |vpiFullName:fpnew_pkg::IntFmtMask
           |vpiActual:
           \_StringTypespec: , line:30:5, endln:30:10
-    |vpiLhs:
-    \_Parameter: (fpnew_pkg::RV64D_Xsflt), line:29:29, endln:35:4
   |vpiInternalScope:
   \_Function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
     |vpiParent:
@@ -1165,8 +1164,8 @@ Design: (unnamed)
     \_IODecl: (fmt), line:37:56, endln:37:59
       |vpiParent:
       \_Function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
-      |vpiDirection:1
       |vpiName:fmt
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (fpnew_pkg::fp_width::fmt::fp_format_e), line:37:44, endln:37:55
         |vpiParent:
@@ -1193,6 +1192,7 @@ Design: (unnamed)
           \_HierPath: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
             |vpiParent:
             \_Operation: , line:38:12, endln:38:67
+            |vpiName:FP_ENCODINGS[fmt].exp_bits
             |vpiActual:
             \_BitSelect: (FP_ENCODINGS[fmt]), line:38:12, endln:38:24
               |vpiParent:
@@ -1217,11 +1217,11 @@ Design: (unnamed)
               |vpiFullName:fpnew_pkg::fp_width::exp_bits
               |vpiActual:
               \_TypespecMember: (exp_bits), line:7:18, endln:7:26
-            |vpiName:FP_ENCODINGS[fmt].exp_bits
           |vpiOperand:
           \_HierPath: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
             |vpiParent:
             \_Operation: , line:38:12, endln:38:67
+            |vpiName:FP_ENCODINGS[fmt].man_bits
             |vpiActual:
             \_BitSelect: (FP_ENCODINGS[fmt]), line:38:41, endln:38:53
               |vpiParent:
@@ -1246,14 +1246,10 @@ Design: (unnamed)
               |vpiFullName:fpnew_pkg::fp_width::man_bits
               |vpiActual:
               \_TypespecMember: (man_bits), line:8:18, endln:8:26
-            |vpiName:FP_ENCODINGS[fmt].man_bits
         |vpiOperand:
         \_Constant: , line:38:70, endln:38:71
           |vpiParent:
           \_Operation: , line:38:12, endln:38:71
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg::fp_width), line:38:70, endln:38:71
             |vpiParent:
@@ -1262,6 +1258,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
     |vpiInstance:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
   |vpiTypespec:
@@ -1333,41 +1332,101 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:11:11, endln:18:16
       |vpiName:FP32
-      |INT:0
-      |vpiDecompile:'d0
-      |vpiSize:-1
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (FP32), line:12:5, endln:12:18
+        |vpiTypespec:
+        \_RefTypespec: (fpnew_pkg::FP32), line:12:15, endln:12:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:fpnew_pkg::FP32
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:-1
+        |vpiDecompile:'d0
+        |INT:0
     |vpiEnumConst:
     \_EnumConst: (FP64), line:13:5, endln:13:18
       |vpiParent:
       \_EnumTypespec: , line:11:11, endln:18:16
       |vpiName:FP64
-      |INT:1
-      |vpiDecompile:'d1
-      |vpiSize:-1
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (FP64), line:13:5, endln:13:18
+        |vpiTypespec:
+        \_RefTypespec: (fpnew_pkg::FP64), line:13:15, endln:13:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:fpnew_pkg::FP64
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:-1
+        |vpiDecompile:'d1
+        |INT:1
     |vpiEnumConst:
     \_EnumConst: (FP16), line:14:5, endln:14:18
       |vpiParent:
       \_EnumTypespec: , line:11:11, endln:18:16
       |vpiName:FP16
-      |INT:2
-      |vpiDecompile:'d2
-      |vpiSize:-1
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (FP16), line:14:5, endln:14:18
+        |vpiTypespec:
+        \_RefTypespec: (fpnew_pkg::FP16), line:14:15, endln:14:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:fpnew_pkg::FP16
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:-1
+        |vpiDecompile:'d2
+        |INT:2
     |vpiEnumConst:
     \_EnumConst: (FP8), line:15:5, endln:15:18
       |vpiParent:
       \_EnumTypespec: , line:11:11, endln:18:16
       |vpiName:FP8
-      |INT:3
-      |vpiDecompile:'d3
-      |vpiSize:-1
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (FP8), line:15:5, endln:15:18
+        |vpiTypespec:
+        \_RefTypespec: (fpnew_pkg::FP8), line:15:15, endln:15:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:fpnew_pkg::FP8
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:-1
+        |vpiDecompile:'d3
+        |INT:3
     |vpiEnumConst:
     \_EnumConst: (FP16ALT), line:16:5, endln:16:18
       |vpiParent:
       \_EnumTypespec: , line:11:11, endln:18:16
       |vpiName:FP16ALT
-      |INT:4
-      |vpiDecompile:'d4
-      |vpiSize:-1
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (FP16ALT), line:16:5, endln:16:18
+        |vpiTypespec:
+        \_RefTypespec: (fpnew_pkg::FP16ALT), line:16:15, endln:16:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:fpnew_pkg::FP16ALT
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:-1
+        |vpiDecompile:'d4
+        |INT:4
   |vpiTypespec:
   \_LogicTypespec: , line:11:16, endln:11:21
     |vpiParent:
@@ -1393,9 +1452,6 @@ Design: (unnamed)
         \_Constant: , line:11:38, endln:11:39
           |vpiParent:
           \_Operation: , line:11:23, endln:11:39
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:11:38, endln:11:39
             |vpiParent:
@@ -1404,13 +1460,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:11:40, endln:11:41
         |vpiParent:
         \_Range: , line:11:22, endln:11:42
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg), line:11:40, endln:11:41
           |vpiParent:
@@ -1419,6 +1475,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -1452,9 +1511,6 @@ Design: (unnamed)
       \_Constant: , line:20:29, endln:20:30
         |vpiParent:
         \_Range: , line:20:28, endln:20:48
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg), line:20:29, endln:20:30
           |vpiParent:
@@ -1463,6 +1519,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
       |vpiRightRange:
       \_Operation: , line:20:31, endln:20:47
         |vpiParent:
@@ -1480,9 +1539,6 @@ Design: (unnamed)
         \_Constant: , line:20:46, endln:20:47
           |vpiParent:
           \_Operation: , line:20:31, endln:20:47
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (fpnew_pkg), line:20:46, endln:20:47
             |vpiParent:
@@ -1491,6 +1547,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
     |vpiElemTypespec:
     \_RefTypespec: (fpnew_pkg::fp_encoding_t), line:20:14, endln:20:27
       |vpiParent:
@@ -1568,9 +1627,9 @@ Design: (unnamed)
       |vpiFullName:work@top.NUM_FORMATS
       |vpiActual:
       \_IntTypespec: , line:44:15, endln:44:27
-    |vpiLocalParam:1
     |vpiName:NUM_FORMATS
     |vpiFullName:work@top.NUM_FORMATS
+    |vpiLocalParam:1
   |vpiParameter:
   \_Parameter: (work@top.Features), line:45:46, endln:45:85
     |vpiParent:
@@ -1595,6 +1654,8 @@ Design: (unnamed)
   \_ParamAssign: , line:44:28, endln:44:68
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
+    |vpiLhs:
+    \_Parameter: (work@top.NUM_FORMATS), line:44:28, endln:44:68
     |vpiRhs:
     \_RefObj: (work@top.fpnew_pkg::NUM_FP_FORMATS), line:44:43, endln:44:68
       |vpiParent:
@@ -1603,12 +1664,12 @@ Design: (unnamed)
       |vpiFullName:work@top.fpnew_pkg::NUM_FP_FORMATS
       |vpiActual:
       \_Parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:45
-    |vpiLhs:
-    \_Parameter: (work@top.NUM_FORMATS), line:44:28, endln:44:68
   |vpiParamAssign:
   \_ParamAssign: , line:45:46, endln:45:85
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
+    |vpiLhs:
+    \_Parameter: (work@top.Features), line:45:46, endln:45:85
     |vpiRhs:
     \_RefObj: (work@top.fpnew_pkg::RV64D_Xsflt), line:45:63, endln:45:85
       |vpiParent:
@@ -1617,16 +1678,17 @@ Design: (unnamed)
       |vpiFullName:work@top.fpnew_pkg::RV64D_Xsflt
       |vpiActual:
       \_Parameter: (fpnew_pkg::RV64D_Xsflt), line:29:29, endln:35:4
-    |vpiLhs:
-    \_Parameter: (work@top.Features), line:45:46, endln:45:85
   |vpiParamAssign:
   \_ParamAssign: , line:46:14, endln:46:36
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
+    |vpiLhs:
+    \_Parameter: (work@top.WIDTH), line:46:14, endln:46:36
     |vpiRhs:
     \_HierPath: (Features.Width), line:46:30, endln:46:36
       |vpiParent:
       \_ParamAssign: , line:46:14, endln:46:36
+      |vpiName:Features.Width
       |vpiActual:
       \_RefObj: (Features), line:46:30, endln:46:36
         |vpiParent:
@@ -1641,9 +1703,6 @@ Design: (unnamed)
         |vpiName:Width
         |vpiActual:
         \_Net: (work@top.Width), line:46:31, endln:46:36
-      |vpiName:Features.Width
-    |vpiLhs:
-    \_Parameter: (work@top.WIDTH), line:46:14, endln:46:36
   |vpiInternalScope:
   \_GenFor: (work@top), line:49:3, endln:62:6
     |vpiParent:
@@ -1676,17 +1735,24 @@ Design: (unnamed)
           |vpiFullName:work@top.gen_nanbox_check.FP_WIDTH
           |vpiActual:
           \_IntTypespec: , line:44:15, endln:44:27
-        |vpiLocalParam:1
         |vpiName:FP_WIDTH
         |vpiFullName:work@top.gen_nanbox_check.FP_WIDTH
+        |vpiLocalParam:1
       |vpiParamAssign:
       \_ParamAssign: , line:50:29, endln:50:89
         |vpiParent:
         \_Begin: (work@top.gen_nanbox_check), line:49:56, endln:62:6
+        |vpiLhs:
+        \_Parameter: (work@top.gen_nanbox_check.FP_WIDTH), line:50:29, endln:50:37
         |vpiRhs:
         \_FuncCall: (fpnew_pkg::fp_width), line:50:40, endln:50:88
           |vpiParent:
           \_ParamAssign: , line:50:29, endln:50:89
+          |vpiName:
+          \_Identifier: (fpnew_pkg::fp_width), line:50:51, endln:50:59
+            |vpiParent:
+            \_FuncCall: (fpnew_pkg::fp_width), line:50:40, endln:50:88
+            |vpiName:fpnew_pkg::fp_width
           |vpiTaskFunc:
           \_Function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
           |vpiArgument:
@@ -1702,13 +1768,6 @@ Design: (unnamed)
               |vpiFullName:work@top.gen_nanbox_check.fmt
               |vpiActual:
               \_Variable: (work@top.fmt), line:49:15, endln:49:18
-          |vpiName:
-          \_Identifier: (fpnew_pkg::fp_width), line:50:51, endln:50:59
-            |vpiParent:
-            \_FuncCall: (fpnew_pkg::fp_width), line:50:40, endln:50:88
-            |vpiName:fpnew_pkg::fp_width
-        |vpiLhs:
-        \_Parameter: (work@top.gen_nanbox_check.FP_WIDTH), line:50:29, endln:50:37
       |vpiInternalScope:
       \_Begin: (work@top.gen_nanbox_check.check), line:52:54, endln:58:8
         |vpiParent:
@@ -1777,6 +1836,30 @@ Design: (unnamed)
             \_ContAssign: , line:54:16, endln:56:42
               |vpiParent:
               \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
+              |vpiLhs:
+              \_VarSelect: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
+                |vpiParent:
+                \_ContAssign: , line:54:16, endln:56:42
+                |vpiName:is_boxed
+                |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed
+                |vpiActual:
+                \_Net: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
+                |vpiIndex:
+                \_RefObj: (work@top.gen_nanbox_check.check.operands.is_boxed.fmt), line:54:25, endln:54:28
+                  |vpiParent:
+                  \_VarSelect: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
+                  |vpiName:fmt
+                  |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed.fmt
+                  |vpiActual:
+                  \_Variable: (work@top.fmt), line:49:15, endln:49:18
+                |vpiIndex:
+                \_RefObj: (work@top.gen_nanbox_check.check.operands.is_boxed.op), line:54:30, endln:54:32
+                  |vpiParent:
+                  \_VarSelect: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
+                  |vpiName:op
+                  |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed.op
+                  |vpiActual:
+                  \_Variable: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
               |vpiRhs:
               \_Operation: , line:54:36, endln:56:42
                 |vpiParent:
@@ -1843,9 +1926,6 @@ Design: (unnamed)
                         \_Constant: , line:55:59, endln:55:60
                           |vpiParent:
                           \_Operation: , line:55:53, endln:55:60
-                          |vpiDecompile:1
-                          |vpiSize:64
-                          |UINT:1
                           |vpiTypespec:
                           \_RefTypespec: (work@top.gen_nanbox_check.check.operands.operands_i.operands_i), line:55:59, endln:55:60
                             |vpiParent:
@@ -1854,6 +1934,9 @@ Design: (unnamed)
                             |vpiActual:
                             \_IntTypespec: 
                           |vpiConstType:9
+                          |vpiSize:64
+                          |vpiDecompile:1
+                          |UINT:1
                       |vpiRightRange:
                       \_RefObj: (work@top.gen_nanbox_check.check.operands.operands_i.operands_i.FP_WIDTH), line:55:61, endln:55:69
                         |vpiParent:
@@ -1866,9 +1949,6 @@ Design: (unnamed)
                   \_Constant: , line:55:74, endln:55:76
                     |vpiParent:
                     \_Operation: , line:55:38, endln:55:76
-                    |vpiDecompile:'1
-                    |vpiSize:-1
-                    |BIN:1
                     |vpiTypespec:
                     \_RefTypespec: (work@top.gen_nanbox_check.check.operands), line:55:74, endln:55:76
                       |vpiParent:
@@ -1877,13 +1957,13 @@ Design: (unnamed)
                       |vpiActual:
                       \_BitTypespec: 
                     |vpiConstType:3
+                    |vpiSize:-1
+                    |vpiDecompile:'1
+                    |BIN:1
                 |vpiOperand:
                 \_Constant: , line:56:38, endln:56:42
                   |vpiParent:
                   \_Operation: , line:54:36, endln:56:42
-                  |vpiDecompile:1'b1
-                  |vpiSize:1
-                  |BIN:1
                   |vpiTypespec:
                   \_RefTypespec: (work@top.gen_nanbox_check.check.operands), line:56:38, endln:56:42
                     |vpiParent:
@@ -1892,30 +1972,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_BitTypespec: 
                   |vpiConstType:3
-              |vpiLhs:
-              \_VarSelect: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
-                |vpiParent:
-                \_ContAssign: , line:54:16, endln:56:42
-                |vpiName:is_boxed
-                |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed
-                |vpiActual:
-                \_Net: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
-                |vpiIndex:
-                \_RefObj: (work@top.gen_nanbox_check.check.operands.is_boxed.fmt), line:54:25, endln:54:28
-                  |vpiParent:
-                  \_VarSelect: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
-                  |vpiName:fmt
-                  |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed.fmt
-                  |vpiActual:
-                  \_Variable: (work@top.fmt), line:49:15, endln:49:18
-                |vpiIndex:
-                \_RefObj: (work@top.gen_nanbox_check.check.operands.is_boxed.op), line:54:30, endln:54:32
-                  |vpiParent:
-                  \_VarSelect: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
-                  |vpiName:op
-                  |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed.op
-                  |vpiActual:
-                  \_Variable: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
+                  |vpiSize:1
+                  |vpiDecompile:1'b1
+                  |BIN:1
           |vpiTypespec:
           \_IntTypespec: 
             |vpiParent:
@@ -1937,13 +1996,12 @@ Design: (unnamed)
           \_Assignment: , line:53:12, endln:53:25
             |vpiParent:
             \_GenFor: (work@top.gen_nanbox_check.check), line:53:7, endln:57:10
+            |vpiLhs:
+            \_Variable: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
             |vpiRhs:
             \_Constant: , line:53:24, endln:53:25
               |vpiParent:
               \_Assignment: , line:53:12, endln:53:25
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
               |vpiTypespec:
               \_RefTypespec: (work@top.gen_nanbox_check.check), line:53:24, endln:53:25
                 |vpiParent:
@@ -1952,8 +2010,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
-            |vpiLhs:
-            \_Variable: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
+              |vpiSize:64
+              |vpiDecompile:0
+              |UINT:0
           |vpiCondition:
           \_Operation: , line:53:27, endln:53:50
             |vpiParent:
@@ -2024,21 +2083,6 @@ Design: (unnamed)
         \_ContAssign: , line:59:14, endln:59:32
           |vpiParent:
           \_Begin: (work@top.gen_nanbox_check.no_check), line:58:14, endln:60:8
-          |vpiRhs:
-          \_Constant: , line:59:30, endln:59:32
-            |vpiParent:
-            \_ContAssign: , line:59:14, endln:59:32
-            |vpiDecompile:'1
-            |vpiSize:-1
-            |BIN:1
-            |vpiTypespec:
-            \_RefTypespec: (work@top.gen_nanbox_check.no_check), line:59:30, endln:59:32
-              |vpiParent:
-              \_Constant: , line:59:30, endln:59:32
-              |vpiFullName:work@top.gen_nanbox_check.no_check
-              |vpiActual:
-              \_BitTypespec: 
-            |vpiConstType:3
           |vpiLhs:
           \_BitSelect: (work@top.gen_nanbox_check.no_check.is_boxed), line:59:22, endln:59:27
             |vpiParent:
@@ -2055,6 +2099,21 @@ Design: (unnamed)
               |vpiFullName:work@top.gen_nanbox_check.no_check.fmt
               |vpiActual:
               \_Variable: (work@top.fmt), line:49:15, endln:49:18
+          |vpiRhs:
+          \_Constant: , line:59:30, endln:59:32
+            |vpiParent:
+            \_ContAssign: , line:59:14, endln:59:32
+            |vpiTypespec:
+            \_RefTypespec: (work@top.gen_nanbox_check.no_check), line:59:30, endln:59:32
+              |vpiParent:
+              \_Constant: , line:59:30, endln:59:32
+              |vpiFullName:work@top.gen_nanbox_check.no_check
+              |vpiActual:
+              \_BitTypespec: 
+            |vpiConstType:3
+            |vpiSize:-1
+            |vpiDecompile:'1
+            |BIN:1
       |vpiImportTypespec:
       \_Net: (work@top.gen_nanbox_check.EnableNanBox), line:52:18, endln:52:30
         |vpiParent:
@@ -2077,6 +2136,7 @@ Design: (unnamed)
           \_HierPath: (Features.EnableNanBox), line:52:17, endln:52:30
             |vpiParent:
             \_Operation: , line:52:9, endln:52:52
+            |vpiName:Features.EnableNanBox
             |vpiActual:
             \_RefObj: (Features), line:52:17, endln:52:30
               |vpiParent:
@@ -2091,7 +2151,6 @@ Design: (unnamed)
               |vpiName:EnableNanBox
               |vpiActual:
               \_Net: (work@top.gen_nanbox_check.EnableNanBox), line:52:18, endln:52:30
-            |vpiName:Features.EnableNanBox
           |vpiOperand:
           \_Operation: , line:52:35, endln:52:51
             |vpiParent:
@@ -2129,13 +2188,12 @@ Design: (unnamed)
     \_Assignment: , line:49:8, endln:49:22
       |vpiParent:
       \_GenFor: (work@top), line:49:3, endln:62:6
+      |vpiLhs:
+      \_Variable: (work@top.fmt), line:49:15, endln:49:18
       |vpiRhs:
       \_Constant: , line:49:21, endln:49:22
         |vpiParent:
         \_Assignment: , line:49:8, endln:49:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:49:21, endln:49:22
           |vpiParent:
@@ -2144,8 +2202,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-      |vpiLhs:
-      \_Variable: (work@top.fmt), line:49:15, endln:49:18
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiCondition:
     \_Operation: , line:49:24, endln:49:47
       |vpiParent:

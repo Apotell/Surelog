@@ -353,9 +353,6 @@ Design: (unnamed)
       \_Constant: , line:3:11, endln:3:12
         |vpiParent:
         \_Range: , line:3:10, endln:3:15
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
         |vpiTypespec:
         \_RefTypespec: (pkg), line:3:11, endln:3:12
           |vpiParent:
@@ -364,13 +361,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:7
+        |UINT:7
       |vpiRightRange:
       \_Constant: , line:3:13, endln:3:14
         |vpiParent:
         \_Range: , line:3:10, endln:3:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (pkg), line:3:13, endln:3:14
           |vpiParent:
@@ -379,6 +376,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -412,7 +412,6 @@ Design: (unnamed)
   \_Parameter: (work@dut.Width), line:8:28, endln:8:37
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
-    |UINT:1
     |vpiTypespec:
     \_RefTypespec: (work@dut.Width), line:8:24, endln:8:27
       |vpiParent:
@@ -426,13 +425,12 @@ Design: (unnamed)
   \_ParamAssign: , line:8:28, endln:8:37
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
+    |vpiLhs:
+    \_Parameter: (work@dut.Width), line:8:28, endln:8:37
     |vpiRhs:
     \_Constant: , line:8:36, endln:8:37
       |vpiParent:
       \_ParamAssign: , line:8:28, endln:8:37
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@dut), line:8:36, endln:8:37
         |vpiParent:
@@ -441,8 +439,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@dut.Width), line:8:28, endln:8:37
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiTypespec:
   \_IntTypespec: , line:8:24, endln:8:27
     |vpiParent:
@@ -477,17 +476,24 @@ Design: (unnamed)
       |vpiFullName:work@top.SyncWidth
       |vpiActual:
       \_IntTypespec: , line:12:15, endln:12:18
-    |vpiLocalParam:1
     |vpiName:SyncWidth
     |vpiFullName:work@top.SyncWidth
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:12:19, endln:12:47
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
+    |vpiLhs:
+    \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:47
     |vpiRhs:
     \_SysFuncCall: ($bits), line:12:31, endln:12:47
       |vpiParent:
       \_ParamAssign: , line:12:19, endln:12:47
+      |vpiName:
+      \_Identifier: ($bits), line:12:32, endln:12:36
+        |vpiParent:
+        \_SysFuncCall: ($bits), line:12:31, endln:12:47
+        |vpiName:$bits
       |vpiArgument:
       \_Operation: , line:12:37, endln:12:46
         |vpiParent:
@@ -505,6 +511,7 @@ Design: (unnamed)
         \_HierPath: (in.x), line:12:41, endln:12:45
           |vpiParent:
           \_Operation: , line:12:37, endln:12:46
+          |vpiName:in.x
           |vpiActual:
           \_RefObj: (in), line:12:41, endln:12:43
             |vpiParent:
@@ -520,14 +527,6 @@ Design: (unnamed)
             |vpiFullName:work@top.x
             |vpiActual:
             \_TypespecMember: (x), line:3:16, endln:3:17
-          |vpiName:in.x
-      |vpiName:
-      \_Identifier: ($bits), line:12:32, endln:12:36
-        |vpiParent:
-        \_SysFuncCall: ($bits), line:12:31, endln:12:47
-        |vpiName:$bits
-    |vpiLhs:
-    \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:47
   |vpiTypespec:
   \_IntTypespec: , line:12:15, endln:12:18
     |vpiParent:

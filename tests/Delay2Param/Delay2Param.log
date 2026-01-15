@@ -409,7 +409,7 @@ there are 1 more instances of this message.
 there are 1 more instances of this message.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              14
+Constant                                              16
 Design                                                 1
 IODecl                                                 2
 Identifier                                             6
@@ -425,15 +425,16 @@ Port                                                   8
 Range                                                  3
 RefModule                                              2
 RefObj                                                13
-RefTypespec                                           17
+RefTypespec                                           19
 SourceFile                                             1
+StringTypespec                                         2
 SysFuncCall                                            3
 TableEntry                                             2
 Udp                                                    1
 UdpDefn                                                1
 UdpDefnTypespec                                        1
 ------------------------------------------------------------
-Total:                                               132
+Total:                                               138
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Delay2Param/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -450,47 +451,73 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiFullName:work@BUFG
-  |vpiImportTypespec:
-  \_Net: (work@BUFG.O), line:15:11, endln:15:12
+  |vpiTypespec:
+  \_StringTypespec: 
     |vpiParent:
     \_UdpDefn: work@BUFG (work@BUFG), line:14:1, endln:21:13
-    |vpiName:O
-    |vpiFullName:work@BUFG.O
   |vpiImportTypespec:
-  \_Net: (work@BUFG.I), line:16:10, endln:16:11
-    |vpiParent:
-    \_UdpDefn: work@BUFG (work@BUFG), line:14:1, endln:21:13
-    |vpiName:I
-    |vpiFullName:work@BUFG.I
+  \_StringTypespec: 
   |vpiDefName:work@BUFG
   |vpiIODecl:
   \_IODecl: (O), line:14:18, endln:14:19
     |vpiParent:
     \_UdpDefn: work@BUFG (work@BUFG), line:14:1, endln:21:13
-    |vpiDirection:2
     |vpiName:O
+    |vpiDirection:2
     |vpiExpr:
-    \_Net: (work@BUFG.O), line:15:11, endln:15:12
+    \_Net: (work@BUFG.O.O), line:15:11, endln:15:12
+      |vpiParent:
+      \_IODecl: (O), line:14:18, endln:14:19
+      |vpiName:O
+      |vpiFullName:work@BUFG.O.O
   |vpiIODecl:
   \_IODecl: (I), line:14:21, endln:14:22
     |vpiParent:
     \_UdpDefn: work@BUFG (work@BUFG), line:14:1, endln:21:13
-    |vpiDirection:1
     |vpiName:I
+    |vpiDirection:1
     |vpiExpr:
-    \_Net: (work@BUFG.I), line:16:10, endln:16:11
+    \_Net: (work@BUFG.I.I), line:16:10, endln:16:11
+      |vpiParent:
+      \_IODecl: (I), line:14:21, endln:14:22
+      |vpiName:I
+      |vpiFullName:work@BUFG.I.I
   |vpiTableEntry:
   \_TableEntry: , line:18:7, endln:18:8
     |vpiParent:
     \_UdpDefn: work@BUFG (work@BUFG), line:14:1, endln:21:13
-    |vpiSize:1
-    |STRING:0 : 0
+    |vpiValue:
+    \_Constant: , line:18:7, endln:18:8
+      |vpiParent:
+      \_TableEntry: , line:18:7, endln:18:8
+      |vpiTypespec:
+      \_RefTypespec: (work@BUFG), line:18:7, endln:18:8
+        |vpiParent:
+        \_Constant: , line:18:7, endln:18:8
+        |vpiFullName:work@BUFG
+        |vpiActual:
+        \_StringTypespec: 
+      |vpiConstType:6
+      |vpiSize:1
+      |STRING:0 : 0
   |vpiTableEntry:
   \_TableEntry: , line:19:7, endln:19:8
     |vpiParent:
     \_UdpDefn: work@BUFG (work@BUFG), line:14:1, endln:21:13
-    |vpiSize:1
-    |STRING:1 : 1
+    |vpiValue:
+    \_Constant: , line:19:7, endln:19:8
+      |vpiParent:
+      \_TableEntry: , line:19:7, endln:19:8
+      |vpiTypespec:
+      \_RefTypespec: (work@BUFG), line:19:7, endln:19:8
+        |vpiParent:
+        \_Constant: , line:19:7, endln:19:8
+        |vpiFullName:work@BUFG
+        |vpiActual:
+        \_StringTypespec: 
+      |vpiConstType:6
+      |vpiSize:1
+      |STRING:1 : 1
 |vpiAllModules:
 \_Module: work@iNToRawFN (work@iNToRawFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:1:1, endln:4:10
   |vpiParent:
@@ -504,27 +531,25 @@ Design: (unnamed)
   \_Parameter: (work@iNToRawFN.intWidth), line:1:29, endln:1:41
     |vpiParent:
     \_Module: work@iNToRawFN (work@iNToRawFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:1:1, endln:4:10
-    |UINT:1
     |vpiName:intWidth
     |vpiFullName:work@iNToRawFN.intWidth
   |vpiParameter:
   \_Parameter: (work@iNToRawFN.expWidth), line:2:16, endln:2:46
     |vpiParent:
     \_Module: work@iNToRawFN (work@iNToRawFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:1:1, endln:4:10
-    |vpiLocalParam:1
     |vpiName:expWidth
     |vpiFullName:work@iNToRawFN.expWidth
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:1:29, endln:1:41
     |vpiParent:
     \_Module: work@iNToRawFN (work@iNToRawFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:1:1, endln:4:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRawFN.intWidth), line:1:29, endln:1:41
     |vpiRhs:
     \_Constant: , line:1:40, endln:1:41
       |vpiParent:
       \_ParamAssign: , line:1:29, endln:1:41
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@iNToRawFN), line:1:40, endln:1:41
         |vpiParent:
@@ -533,12 +558,15 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRawFN.intWidth), line:1:29, endln:1:41
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:2:16, endln:2:46
     |vpiParent:
     \_Module: work@iNToRawFN (work@iNToRawFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:1:1, endln:4:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRawFN.expWidth), line:2:16, endln:2:46
     |vpiRhs:
     \_Operation: , line:2:27, endln:2:46
       |vpiParent:
@@ -548,6 +576,11 @@ Design: (unnamed)
       \_SysFuncCall: ($clog2), line:2:27, endln:2:42
         |vpiParent:
         \_Operation: , line:2:27, endln:2:46
+        |vpiName:
+        \_Identifier: ($clog2), line:2:27, endln:2:32
+          |vpiParent:
+          \_SysFuncCall: ($clog2), line:2:27, endln:2:42
+          |vpiName:$clog2
         |vpiArgument:
         \_RefObj: (work@iNToRawFN.intWidth), line:2:33, endln:2:41
           |vpiParent:
@@ -556,18 +589,10 @@ Design: (unnamed)
           |vpiFullName:work@iNToRawFN.intWidth
           |vpiActual:
           \_Parameter: (work@iNToRawFN.intWidth), line:1:29, endln:1:41
-        |vpiName:
-        \_Identifier: ($clog2), line:2:27, endln:2:32
-          |vpiParent:
-          \_SysFuncCall: ($clog2), line:2:27, endln:2:42
-          |vpiName:$clog2
       |vpiOperand:
       \_Constant: , line:2:45, endln:2:46
         |vpiParent:
         \_Operation: , line:2:27, endln:2:46
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@iNToRawFN), line:2:45, endln:2:46
           |vpiParent:
@@ -576,8 +601,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRawFN.expWidth), line:2:16, endln:2:46
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -607,9 +633,6 @@ Design: (unnamed)
         \_Constant: , line:3:23, endln:3:24
           |vpiParent:
           \_Operation: , line:3:12, endln:3:24
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
           |vpiTypespec:
           \_RefTypespec: (work@iNToRawFN), line:3:23, endln:3:24
             |vpiParent:
@@ -618,13 +641,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |UINT:2
       |vpiRightRange:
       \_Constant: , line:3:26, endln:3:27
         |vpiParent:
         \_Range: , line:3:10, endln:3:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@iNToRawFN), line:3:26, endln:3:27
           |vpiParent:
@@ -633,6 +656,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -695,41 +721,38 @@ Design: (unnamed)
   \_Parameter: (work@iNToRawFN3.intWidth), line:6:30, endln:6:42
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
-    |UINT:1
     |vpiName:intWidth
     |vpiFullName:work@iNToRawFN3.intWidth
   |vpiParameter:
   \_Parameter: (work@iNToRawFN3.intWidth2), line:6:54, endln:6:67
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
-    |UINT:1
     |vpiName:intWidth2
     |vpiFullName:work@iNToRawFN3.intWidth2
   |vpiParameter:
   \_Parameter: (work@iNToRawFN3.expWidth), line:7:16, endln:7:46
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
-    |vpiLocalParam:1
     |vpiName:expWidth
     |vpiFullName:work@iNToRawFN3.expWidth
+    |vpiLocalParam:1
   |vpiParameter:
   \_Parameter: (work@iNToRawFN3.expWidth2), line:8:16, endln:8:48
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
-    |vpiLocalParam:1
     |vpiName:expWidth2
     |vpiFullName:work@iNToRawFN3.expWidth2
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:6:30, endln:6:42
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRawFN3.intWidth), line:6:30, endln:6:42
     |vpiRhs:
     \_Constant: , line:6:41, endln:6:42
       |vpiParent:
       \_ParamAssign: , line:6:30, endln:6:42
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@iNToRawFN3), line:6:41, endln:6:42
         |vpiParent:
@@ -738,19 +761,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRawFN3.intWidth), line:6:30, endln:6:42
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:6:54, endln:6:67
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRawFN3.intWidth2), line:6:54, endln:6:67
     |vpiRhs:
     \_Constant: , line:6:66, endln:6:67
       |vpiParent:
       \_ParamAssign: , line:6:54, endln:6:67
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@iNToRawFN3), line:6:66, endln:6:67
         |vpiParent:
@@ -759,12 +782,15 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRawFN3.intWidth2), line:6:54, endln:6:67
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:7:16, endln:7:46
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRawFN3.expWidth), line:7:16, endln:7:46
     |vpiRhs:
     \_Operation: , line:7:27, endln:7:46
       |vpiParent:
@@ -774,6 +800,11 @@ Design: (unnamed)
       \_SysFuncCall: ($clog2), line:7:27, endln:7:42
         |vpiParent:
         \_Operation: , line:7:27, endln:7:46
+        |vpiName:
+        \_Identifier: ($clog2), line:7:27, endln:7:32
+          |vpiParent:
+          \_SysFuncCall: ($clog2), line:7:27, endln:7:42
+          |vpiName:$clog2
         |vpiArgument:
         \_RefObj: (work@iNToRawFN3.intWidth), line:7:33, endln:7:41
           |vpiParent:
@@ -782,18 +813,10 @@ Design: (unnamed)
           |vpiFullName:work@iNToRawFN3.intWidth
           |vpiActual:
           \_Parameter: (work@iNToRawFN3.intWidth), line:6:30, endln:6:42
-        |vpiName:
-        \_Identifier: ($clog2), line:7:27, endln:7:32
-          |vpiParent:
-          \_SysFuncCall: ($clog2), line:7:27, endln:7:42
-          |vpiName:$clog2
       |vpiOperand:
       \_Constant: , line:7:45, endln:7:46
         |vpiParent:
         \_Operation: , line:7:27, endln:7:46
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@iNToRawFN3), line:7:45, endln:7:46
           |vpiParent:
@@ -802,12 +825,15 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRawFN3.expWidth), line:7:16, endln:7:46
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:8:16, endln:8:48
     |vpiParent:
     \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRawFN3.expWidth2), line:8:16, endln:8:48
     |vpiRhs:
     \_Operation: , line:8:28, endln:8:48
       |vpiParent:
@@ -817,6 +843,11 @@ Design: (unnamed)
       \_SysFuncCall: ($clog2), line:8:28, endln:8:44
         |vpiParent:
         \_Operation: , line:8:28, endln:8:48
+        |vpiName:
+        \_Identifier: ($clog2), line:8:28, endln:8:33
+          |vpiParent:
+          \_SysFuncCall: ($clog2), line:8:28, endln:8:44
+          |vpiName:$clog2
         |vpiArgument:
         \_RefObj: (work@iNToRawFN3.intWidth2), line:8:34, endln:8:43
           |vpiParent:
@@ -825,18 +856,10 @@ Design: (unnamed)
           |vpiFullName:work@iNToRawFN3.intWidth2
           |vpiActual:
           \_Parameter: (work@iNToRawFN3.intWidth2), line:6:54, endln:6:67
-        |vpiName:
-        \_Identifier: ($clog2), line:8:28, endln:8:33
-          |vpiParent:
-          \_SysFuncCall: ($clog2), line:8:28, endln:8:44
-          |vpiName:$clog2
       |vpiOperand:
       \_Constant: , line:8:47, endln:8:48
         |vpiParent:
         \_Operation: , line:8:28, endln:8:48
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@iNToRawFN3), line:8:47, endln:8:48
           |vpiParent:
@@ -845,8 +868,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRawFN3.expWidth2), line:8:16, endln:8:48
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -876,9 +900,6 @@ Design: (unnamed)
         \_Constant: , line:9:23, endln:9:24
           |vpiParent:
           \_Operation: , line:9:12, endln:9:24
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
           |vpiTypespec:
           \_RefTypespec: (work@iNToRawFN3), line:9:23, endln:9:24
             |vpiParent:
@@ -887,13 +908,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |UINT:2
       |vpiRightRange:
       \_Constant: , line:9:26, endln:9:27
         |vpiParent:
         \_Range: , line:9:10, endln:9:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@iNToRawFN3), line:9:26, endln:9:27
           |vpiParent:
@@ -902,6 +923,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:10:5, endln:10:9
     |vpiParent:
@@ -927,9 +951,6 @@ Design: (unnamed)
         \_Constant: , line:10:24, endln:10:25
           |vpiParent:
           \_Operation: , line:10:12, endln:10:25
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
           |vpiTypespec:
           \_RefTypespec: (work@iNToRawFN3), line:10:24, endln:10:25
             |vpiParent:
@@ -938,13 +959,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |UINT:2
       |vpiRightRange:
       \_Constant: , line:10:27, endln:10:28
         |vpiParent:
         \_Range: , line:10:10, endln:10:29
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@iNToRawFN3), line:10:27, endln:10:28
           |vpiParent:
@@ -953,6 +974,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -1033,27 +1057,24 @@ Design: (unnamed)
   \_Parameter: (work@iNToRecFN.intWidth), line:23:30, endln:23:43
     |vpiParent:
     \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
-    |UINT:64
     |vpiName:intWidth
     |vpiFullName:work@iNToRecFN.intWidth
   |vpiParameter:
   \_Parameter: (work@iNToRecFN.intWidth2), line:23:55, endln:23:69
     |vpiParent:
     \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
-    |UINT:64
     |vpiName:intWidth2
     |vpiFullName:work@iNToRecFN.intWidth2
   |vpiParamAssign:
   \_ParamAssign: , line:23:30, endln:23:43
     |vpiParent:
     \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRecFN.intWidth), line:23:30, endln:23:43
     |vpiRhs:
     \_Constant: , line:23:41, endln:23:43
       |vpiParent:
       \_ParamAssign: , line:23:30, endln:23:43
-      |vpiDecompile:64
-      |vpiSize:64
-      |UINT:64
       |vpiTypespec:
       \_RefTypespec: (work@iNToRecFN), line:23:41, endln:23:43
         |vpiParent:
@@ -1062,19 +1083,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRecFN.intWidth), line:23:30, endln:23:43
+      |vpiSize:64
+      |vpiDecompile:64
+      |UINT:64
   |vpiParamAssign:
   \_ParamAssign: , line:23:55, endln:23:69
     |vpiParent:
     \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
+    |vpiLhs:
+    \_Parameter: (work@iNToRecFN.intWidth2), line:23:55, endln:23:69
     |vpiRhs:
     \_Constant: , line:23:67, endln:23:69
       |vpiParent:
       \_ParamAssign: , line:23:55, endln:23:69
-      |vpiDecompile:64
-      |vpiSize:64
-      |UINT:64
       |vpiTypespec:
       \_RefTypespec: (work@iNToRecFN), line:23:67, endln:23:69
         |vpiParent:
@@ -1083,8 +1104,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@iNToRecFN.intWidth2), line:23:55, endln:23:69
+      |vpiSize:64
+      |vpiDecompile:64
+      |UINT:64
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -1128,8 +1150,8 @@ Design: (unnamed)
   \_Udp: BUFG (work@iNToRecFN.BUFG), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:27:1, endln:27:21
     |vpiParent:
     \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
-    |vpiDefName:BUFG
     |vpiFullName:work@iNToRecFN.BUFG
+    |vpiDefName:BUFG
   |vpiRefModule:
   \_RefModule: work@iNToRawFN (iNToRawFN), line:24:2, endln:24:11
     |vpiParent:

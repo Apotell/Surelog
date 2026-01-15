@@ -312,21 +312,19 @@ Design: (unnamed)
   \_Parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:35
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |UINT:2
-    |vpiLocalParam:1
     |vpiName:NUM_PERIPHERALS
     |vpiFullName:work@soc_tb.NUM_PERIPHERALS
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:8:16, endln:8:35
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
+    |vpiLhs:
+    \_Parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:35
     |vpiRhs:
     \_Constant: , line:8:34, endln:8:35
       |vpiParent:
       \_ParamAssign: , line:8:16, endln:8:35
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
       |vpiTypespec:
       \_RefTypespec: (work@soc_tb), line:8:34, endln:8:35
         |vpiParent:
@@ -335,8 +333,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:35
+      |vpiSize:64
+      |vpiDecompile:2
+      |UINT:2
   |vpiInternalScope:
   \_GenRegion: (work@soc_tb), line:19:5, endln:24:16
     |vpiParent:
@@ -378,25 +377,11 @@ Design: (unnamed)
           \_ContAssign: , line:22:20, endln:22:58
             |vpiParent:
             \_Begin: (work@soc_tb.io_gen), line:21:9, endln:23:12
-            |vpiRhs:
-            \_Constant: , line:22:57, endln:22:58
-              |vpiParent:
-              \_ContAssign: , line:22:20, endln:22:58
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-              |vpiTypespec:
-              \_RefTypespec: (work@soc_tb.io_gen), line:22:57, endln:22:58
-                |vpiParent:
-                \_Constant: , line:22:57, endln:22:58
-                |vpiFullName:work@soc_tb.io_gen
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
             |vpiLhs:
             \_HierPath: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:54
               |vpiParent:
               \_ContAssign: , line:22:20, endln:22:58
+              |vpiName:peripheral_io_bus[io_idx].write_en
               |vpiActual:
               \_BitSelect: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
                 |vpiParent:
@@ -421,7 +406,21 @@ Design: (unnamed)
                 |vpiFullName:peripheral_io_bus[io_idx].write_en
                 |vpiActual:
                 \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
-              |vpiName:peripheral_io_bus[io_idx].write_en
+            |vpiRhs:
+            \_Constant: , line:22:57, endln:22:58
+              |vpiParent:
+              \_ContAssign: , line:22:20, endln:22:58
+              |vpiTypespec:
+              \_RefTypespec: (work@soc_tb.io_gen), line:22:57, endln:22:58
+                |vpiParent:
+                \_Constant: , line:22:57, endln:22:58
+                |vpiFullName:work@soc_tb.io_gen
+                |vpiActual:
+                \_IntTypespec: 
+              |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:1
+              |UINT:1
         |vpiTypespec:
         \_IntTypespec: 
           |vpiParent:
@@ -434,13 +433,12 @@ Design: (unnamed)
         \_Assignment: , line:20:14, endln:20:24
           |vpiParent:
           \_GenFor: (work@soc_tb), line:20:9, endln:23:12
+          |vpiLhs:
+          \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
           |vpiRhs:
           \_Constant: , line:20:23, endln:20:24
             |vpiParent:
             \_Assignment: , line:20:14, endln:20:24
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@soc_tb), line:20:23, endln:20:24
               |vpiParent:
@@ -449,8 +447,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiLhs:
-          \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiCondition:
         \_Operation: , line:20:26, endln:20:51
           |vpiParent:
@@ -586,9 +585,6 @@ Design: (unnamed)
         \_Constant: , line:14:58, endln:14:59
           |vpiParent:
           \_Operation: , line:14:40, endln:14:59
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@soc_tb.peripheral_io_bus), line:14:58, endln:14:59
             |vpiParent:
@@ -597,13 +593,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:14:60, endln:14:61
         |vpiParent:
         \_Range: , line:14:39, endln:14:62
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@soc_tb.peripheral_io_bus), line:14:60, endln:14:61
           |vpiParent:
@@ -612,6 +608,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiElemTypespec:
     \_RefTypespec: (work@soc_tb.peripheral_io_bus.io_bus_interface), line:14:5, endln:14:21
       |vpiParent:
@@ -624,25 +623,11 @@ Design: (unnamed)
   \_ContAssign: , line:16:12, endln:16:62
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiRhs:
-    \_Constant: , line:16:50, endln:16:62
-      |vpiParent:
-      \_ContAssign: , line:16:12, endln:16:62
-      |vpiDecompile:32'hffffffff
-      |vpiSize:32
-      |HEX:ffffffff
-      |vpiTypespec:
-      \_RefTypespec: (work@soc_tb), line:16:50, endln:16:62
-        |vpiParent:
-        \_Constant: , line:16:50, endln:16:62
-        |vpiFullName:work@soc_tb
-        |vpiActual:
-        \_IntTypespec: 
-      |vpiConstType:5
     |vpiLhs:
     \_HierPath: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:47
       |vpiParent:
       \_ContAssign: , line:16:12, endln:16:62
+      |vpiName:peripheral_io_bus[IO_ONES].write_en
       |vpiActual:
       \_BitSelect: (peripheral_io_bus[IO_ONES]), line:16:12, endln:16:29
         |vpiParent:
@@ -667,7 +652,21 @@ Design: (unnamed)
         |vpiFullName:peripheral_io_bus[IO_ONES].write_en
         |vpiActual:
         \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
-      |vpiName:peripheral_io_bus[IO_ONES].write_en
+    |vpiRhs:
+    \_Constant: , line:16:50, endln:16:62
+      |vpiParent:
+      \_ContAssign: , line:16:12, endln:16:62
+      |vpiTypespec:
+      \_RefTypespec: (work@soc_tb), line:16:50, endln:16:62
+        |vpiParent:
+        \_Constant: , line:16:50, endln:16:62
+        |vpiFullName:work@soc_tb
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:5
+      |vpiSize:32
+      |vpiDecompile:32'hffffffff
+      |HEX:ffffffff
 |vpiTypespec:
 \_InterfaceTypespec: (work@io_bus_interface)
 |vpiTypespec:

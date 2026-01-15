@@ -11,13 +11,13 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/PackImport/dut.sv:18:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              12
+Constant                                              14
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             6
 ImportTypespec                                         2
-IntTypespec                                           10
+IntTypespec                                           12
 LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         1
@@ -29,12 +29,12 @@ Parameter                                              1
 Port                                                   2
 Range                                                  2
 RefObj                                                 2
-RefTypespec                                           18
+RefTypespec                                           20
 SourceFile                                             1
 StringTypespec                                         2
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                79
+Total:                                                85
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackImport/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -71,17 +71,41 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:5:9, endln:8:11
       |vpiName:OPCODE_LOAD
-      |HEX:03
-      |vpiDecompile:7'h03
-      |vpiSize:7
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (OPCODE_LOAD), line:6:3, endln:6:26
+        |vpiTypespec:
+        \_RefTypespec: (ibex_pkg::OPCODE_LOAD), line:6:21, endln:6:26
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:ibex_pkg::OPCODE_LOAD
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:4
+        |vpiSize:7
+        |vpiDecompile:7'h03
+        |HEX:03
     |vpiEnumConst:
     \_EnumConst: (OPCODE_LUI), line:7:3, endln:7:26
       |vpiParent:
       \_EnumTypespec: , line:5:9, endln:8:11
       |vpiName:OPCODE_LUI
-      |HEX:37
-      |vpiDecompile:7'h37
-      |vpiSize:7
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (OPCODE_LUI), line:7:3, endln:7:26
+        |vpiTypespec:
+        \_RefTypespec: (ibex_pkg::OPCODE_LUI), line:7:21, endln:7:26
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:ibex_pkg::OPCODE_LUI
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:4
+        |vpiSize:7
+        |vpiDecompile:7'h37
+        |HEX:37
   |vpiTypespec:
   \_LogicTypespec: , line:5:14, endln:5:19
     |vpiParent:
@@ -94,9 +118,6 @@ Design: (unnamed)
       \_Constant: , line:5:21, endln:5:22
         |vpiParent:
         \_Range: , line:5:20, endln:5:25
-        |vpiDecompile:6
-        |vpiSize:64
-        |UINT:6
         |vpiTypespec:
         \_RefTypespec: (ibex_pkg), line:5:21, endln:5:22
           |vpiParent:
@@ -105,13 +126,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:6
+        |UINT:6
       |vpiRightRange:
       \_Constant: , line:5:23, endln:5:24
         |vpiParent:
         \_Range: , line:5:20, endln:5:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (ibex_pkg), line:5:23, endln:5:24
           |vpiParent:
@@ -120,6 +141,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -175,6 +199,8 @@ Design: (unnamed)
   \_ParamAssign: , line:13:24, endln:13:59
     |vpiParent:
     \_Package: ibex_tracer_pkg (ibex_tracer_pkg), file:${SURELOG_DIR}/tests/PackImport/dut.sv, line:11:1, endln:14:11
+    |vpiLhs:
+    \_Parameter: (ibex_tracer_pkg::INSN_LUI), line:13:24, endln:13:59
     |vpiRhs:
     \_Operation: , line:13:35, endln:13:59
       |vpiParent:
@@ -184,9 +210,6 @@ Design: (unnamed)
       \_Constant: , line:13:37, endln:13:42
         |vpiParent:
         \_Operation: , line:13:35, endln:13:59
-        |vpiDecompile:25'h?
-        |vpiSize:25
-        |HEX:?
         |vpiTypespec:
         \_RefTypespec: (ibex_tracer_pkg), line:13:37, endln:13:42
           |vpiParent:
@@ -195,6 +218,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:5
+        |vpiSize:25
+        |vpiDecompile:25'h?
+        |HEX:?
       |vpiOperand:
       \_Operation: , line:13:44, endln:13:58
         |vpiParent:
@@ -208,8 +234,6 @@ Design: (unnamed)
           |vpiFullName:ibex_tracer_pkg::OPCODE_LUI
           |vpiActual:
           \_EnumConst: (OPCODE_LUI), line:7:3, endln:7:26
-    |vpiLhs:
-    \_Parameter: (ibex_tracer_pkg::INSN_LUI), line:13:24, endln:13:59
   |vpiTypespec:
   \_ImportTypespec: (ibex_pkg), line:12:8, endln:12:19
     |vpiParent:
@@ -223,9 +247,6 @@ Design: (unnamed)
     \_Constant: , line:12:8, endln:12:19
       |vpiParent:
       \_ImportTypespec: (ibex_pkg), line:12:8, endln:12:19
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (ibex_tracer_pkg::ibex_pkg), line:12:8, endln:12:19
         |vpiParent:
@@ -234,6 +255,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -250,9 +274,6 @@ Design: (unnamed)
       \_Constant: , line:13:18, endln:13:20
         |vpiParent:
         \_Range: , line:13:17, endln:13:23
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (ibex_tracer_pkg), line:13:18, endln:13:20
           |vpiParent:
@@ -261,13 +282,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:13:21, endln:13:22
         |vpiParent:
         \_Range: , line:13:17, endln:13:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (ibex_tracer_pkg), line:13:21, endln:13:22
           |vpiParent:
@@ -276,6 +297,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -311,9 +335,6 @@ Design: (unnamed)
     \_Constant: , line:19:8, endln:19:19
       |vpiParent:
       \_ImportTypespec: (ibex_pkg), line:19:8, endln:19:19
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@top.ibex_pkg), line:19:8, endln:19:19
         |vpiParent:
@@ -322,6 +343,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:

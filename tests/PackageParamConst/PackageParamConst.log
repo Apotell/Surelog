@@ -127,7 +127,6 @@ Design: (unnamed)
   \_Parameter: (pkg::A), line:2:26, endln:2:34
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/PackageParamConst/dut.sv, line:1:1, endln:3:11
-    |HEX:F
     |vpiTypespec:
     \_RefTypespec: (pkg::A), line:2:14, endln:2:25
       |vpiParent:
@@ -141,13 +140,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:26, endln:2:34
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/PackageParamConst/dut.sv, line:1:1, endln:3:11
+    |vpiLhs:
+    \_Parameter: (pkg::A), line:2:26, endln:2:34
     |vpiRhs:
     \_Constant: , line:2:30, endln:2:34
       |vpiParent:
       \_ParamAssign: , line:2:26, endln:2:34
-      |vpiDecompile:4'hF
-      |vpiSize:4
-      |HEX:F
       |vpiTypespec:
       \_RefTypespec: (pkg), line:2:30, endln:2:34
         |vpiParent:
@@ -156,8 +154,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:5
-    |vpiLhs:
-    \_Parameter: (pkg::A), line:2:26, endln:2:34
+      |vpiSize:4
+      |vpiDecompile:4'hF
+      |HEX:F
   |vpiTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
     |vpiParent:
@@ -170,9 +169,6 @@ Design: (unnamed)
       \_Constant: , line:2:21, endln:2:22
         |vpiParent:
         \_Range: , line:2:20, endln:2:25
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
         |vpiTypespec:
         \_RefTypespec: (pkg), line:2:21, endln:2:22
           |vpiParent:
@@ -181,13 +177,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:3
+        |UINT:3
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
         |vpiParent:
         \_Range: , line:2:20, endln:2:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (pkg), line:2:23, endln:2:24
           |vpiParent:
@@ -196,6 +192,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -239,6 +238,14 @@ Design: (unnamed)
   \_ContAssign: , line:6:11, endln:6:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageParamConst/dut.sv, line:5:1, endln:7:10
+    |vpiLhs:
+    \_RefObj: (work@top.a), line:6:11, endln:6:12
+      |vpiParent:
+      \_ContAssign: , line:6:11, endln:6:24
+      |vpiName:a
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_Net: (work@top.a), line:5:19, endln:5:20
     |vpiRhs:
     \_BitSelect: (pkg::A), line:6:21, endln:6:24
       |vpiParent:
@@ -250,9 +257,6 @@ Design: (unnamed)
       \_Constant: , line:6:22, endln:6:23
         |vpiParent:
         \_BitSelect: (pkg::A), line:6:21, endln:6:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top.pkg::A), line:6:22, endln:6:23
           |vpiParent:
@@ -261,14 +265,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_RefObj: (work@top.a), line:6:11, endln:6:12
-      |vpiParent:
-      \_ContAssign: , line:6:11, endln:6:24
-      |vpiName:a
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_Net: (work@top.a), line:5:19, endln:5:20
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

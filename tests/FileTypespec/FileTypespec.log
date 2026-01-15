@@ -150,13 +150,13 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:25:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               2
+Constant                                               3
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
 Identifier                                             7
-IntTypespec                                            2
+IntTypespec                                            3
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
@@ -165,7 +165,7 @@ Package                                                2
 Port                                                   2
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           15
+RefTypespec                                           16
 SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        4
@@ -173,7 +173,7 @@ TypespecMember                                         4
 UnionTypespec                                          1
 UnsupportedTypespec                                    7
 ------------------------------------------------------------
-Total:                                                63
+Total:                                                66
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -264,9 +264,21 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:10:11, endln:12:12
       |vpiName:a
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:2
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (a), line:11:5, endln:11:6
+        |vpiTypespec:
+        \_RefTypespec: (fooes::a), line:11:5, endln:11:6
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:fooes::a
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:2
+        |vpiDecompile:0
+        |INT:0
   |vpiTypespec:
   \_LogicTypespec: , line:10:16, endln:10:21
     |vpiParent:
@@ -279,9 +291,6 @@ Design: (unnamed)
       \_Constant: , line:10:23, endln:10:24
         |vpiParent:
         \_Range: , line:10:22, endln:10:27
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (fooes), line:10:23, endln:10:24
           |vpiParent:
@@ -290,13 +299,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:10:25, endln:10:26
         |vpiParent:
         \_Range: , line:10:22, endln:10:27
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (fooes), line:10:25, endln:10:26
           |vpiParent:
@@ -305,10 +314,18 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
     \_Package: fooes (fooes), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:8:1, endln:14:19
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: fooes (fooes), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:8:1, endln:14:19
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (fooes::classes), line:12:5, endln:12:12
     |vpiParent:
@@ -329,6 +346,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:10:11, endln:12:12
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:16, endln:10:21
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -409,14 +428,6 @@ Design: (unnamed)
   \_ContAssign: , line:26:10, endln:26:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:25:1, endln:27:10
-    |vpiRhs:
-    \_RefObj: (work@top.a), line:26:14, endln:26:15
-      |vpiParent:
-      \_ContAssign: , line:26:10, endln:26:15
-      |vpiName:a
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_Net: (work@top.a), line:25:29, endln:25:30
     |vpiLhs:
     \_RefObj: (work@top.b), line:26:10, endln:26:11
       |vpiParent:
@@ -425,6 +436,14 @@ Design: (unnamed)
       |vpiFullName:work@top.b
       |vpiActual:
       \_Net: (work@top.b), line:25:51, endln:25:52
+    |vpiRhs:
+    \_RefObj: (work@top.a), line:26:14, endln:26:15
+      |vpiParent:
+      \_ContAssign: , line:26:10, endln:26:15
+      |vpiName:a
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_Net: (work@top.a), line:25:29, endln:25:30
 |vpiTypespec:
 \_TypedefTypespec: (padded_fooes_t), line:18:3, endln:18:17
   |vpiParent:

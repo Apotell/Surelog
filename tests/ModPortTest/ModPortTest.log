@@ -287,13 +287,13 @@ PP TREE: (top_level_rule null_rule (source_text (description (module module)) (d
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Attribute                                              2
-Constant                                               6
+Constant                                              14
 Design                                                 1
 EnumConst                                              8
 EnumTypespec                                           2
 IODecl                                                 4
 Identifier                                            14
-IntTypespec                                            6
+IntTypespec                                           14
 Interface                                              2
 InterfaceTypespec                                      2
 LogicTypespec                                          4
@@ -307,17 +307,17 @@ Parameter                                              1
 Port                                                   4
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           23
+RefTypespec                                           31
 SourceFile                                             1
 TypedefTypespec                                        3
 UnsupportedTypespec                                   11
 Variable                                               3
 ------------------------------------------------------------
-Total:                                               124
+Total:                                               148
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortTest/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:105, type:RefTypespec, name:id_t1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:99, type:RefTypespec, name:DD.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:129, type:RefTypespec, name:id_t1.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:123, type:RefTypespec, name:DD.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -378,6 +378,8 @@ Design: (unnamed)
   \_ParamAssign: , line:9:12, endln:9:31
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
+    |vpiLhs:
+    \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:31
     |vpiRhs:
     \_Operation: , line:9:29, endln:9:31
       |vpiParent:
@@ -387,9 +389,6 @@ Design: (unnamed)
       \_Constant: , line:9:30, endln:9:31
         |vpiParent:
         \_Operation: , line:9:29, endln:9:31
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@AXI_BUS), line:9:30, endln:9:31
           |vpiParent:
@@ -398,8 +397,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:31
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -447,9 +447,6 @@ Design: (unnamed)
         \_Constant: , line:12:31, endln:12:32
           |vpiParent:
           \_Operation: , line:12:18, endln:12:32
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@AXI_BUS), line:12:31, endln:12:32
             |vpiParent:
@@ -458,13 +455,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:12:33, endln:12:34
         |vpiParent:
         \_Range: , line:12:17, endln:12:35
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@AXI_BUS), line:12:33, endln:12:34
           |vpiParent:
@@ -473,6 +470,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_UnsupportedTypespec: (id_t1), line:14:3, endln:14:8
     |vpiParent:
@@ -543,8 +543,8 @@ Design: (unnamed)
     \_IODecl: (aw_id), line:17:12, endln:17:17
       |vpiParent:
       \_Modport: (work@AXI_BUS.Master), line:16:11, endln:18:4
-      |vpiDirection:2
       |vpiName:aw_id
+      |vpiDirection:2
     |vpiInterface:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
   |vpiModport:
@@ -560,8 +560,8 @@ Design: (unnamed)
     \_IODecl: (ww_id), line:23:12, endln:23:17
       |vpiParent:
       \_Modport: (work@AXI_BUS.Slave), line:22:11, endln:24:4
-      |vpiDirection:2
       |vpiName:ww_id
+      |vpiDirection:2
     |vpiInterface:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
 |vpiAllInterfaces:
@@ -619,8 +619,8 @@ Design: (unnamed)
     \_IODecl: (clk), line:31:26, endln:31:29
       |vpiParent:
       \_Modport: (work@mem_if.system), line:31:12, endln:31:30
-      |vpiDirection:1
       |vpiName:clk
+      |vpiDirection:1
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
   |vpiModport:
@@ -636,8 +636,8 @@ Design: (unnamed)
     \_IODecl: (clk), line:32:27, endln:32:30
       |vpiParent:
       \_Modport: (work@mem_if.memory), line:32:12, endln:32:31
-      |vpiDirection:2
       |vpiName:clk
+      |vpiDirection:2
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
   |vpiPort:
@@ -741,33 +741,86 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
       |vpiName:IDLE
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (IDLE), line:38:16, endln:38:20
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl1.IDLE), line:38:16, endln:38:20
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl1.IDLE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:0
+        |INT:0
     |vpiEnumConst:
     \_EnumConst: (WRITE), line:38:21, endln:38:26
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
       |vpiName:WRITE
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (WRITE), line:38:21, endln:38:26
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl1.WRITE), line:38:21, endln:38:26
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl1.WRITE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:1
+        |INT:1
     |vpiEnumConst:
     \_EnumConst: (READ), line:38:27, endln:38:31
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
       |vpiName:READ
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (READ), line:38:27, endln:38:31
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl1.READ), line:38:27, endln:38:31
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl1.READ
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:2
+        |INT:2
     |vpiEnumConst:
     \_EnumConst: (DONE), line:38:32, endln:38:36
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
       |vpiName:DONE
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (DONE), line:38:32, endln:38:36
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl1.DONE), line:38:32, endln:38:36
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl1.DONE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:3
+        |INT:3
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:36:1, endln:43:10
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (fsm_t), line:38:38, endln:38:43
     |vpiParent:
@@ -786,6 +839,8 @@ Design: (unnamed)
       \_EnumTypespec: , line:38:10, endln:38:43
   |vpiImportTypespec:
   \_EnumTypespec: , line:38:10, endln:38:43
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (fsm_t), line:38:38, endln:38:43
   |vpiImportTypespec:
@@ -853,33 +908,86 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
       |vpiName:IDLE
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (IDLE), line:47:16, endln:47:20
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl2.IDLE), line:47:16, endln:47:20
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl2.IDLE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:0
+        |INT:0
     |vpiEnumConst:
     \_EnumConst: (WRITE), line:47:21, endln:47:26
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
       |vpiName:WRITE
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (WRITE), line:47:21, endln:47:26
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl2.WRITE), line:47:21, endln:47:26
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl2.WRITE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:1
+        |INT:1
     |vpiEnumConst:
     \_EnumConst: (READ), line:47:27, endln:47:31
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
       |vpiName:READ
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (READ), line:47:27, endln:47:31
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl2.READ), line:47:27, endln:47:31
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl2.READ
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:2
+        |INT:2
     |vpiEnumConst:
     \_EnumConst: (DONE), line:47:32, endln:47:36
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
       |vpiName:DONE
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (DONE), line:47:32, endln:47:36
+        |vpiTypespec:
+        \_RefTypespec: (work@memory_ctrl2.DONE), line:47:32, endln:47:36
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@memory_ctrl2.DONE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:3
+        |INT:3
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@memory_ctrl2 (work@memory_ctrl2), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:45:1, endln:53:10
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (fsm_t), line:47:38, endln:47:43
     |vpiParent:
@@ -903,6 +1011,8 @@ Design: (unnamed)
     |vpiName:DD
   |vpiImportTypespec:
   \_EnumTypespec: , line:47:10, endln:47:43
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (fsm_t), line:47:38, endln:47:43
   |vpiImportTypespec:

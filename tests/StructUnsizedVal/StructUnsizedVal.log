@@ -296,7 +296,6 @@ Design: (unnamed)
   \_Parameter: (pkg::Width), line:2:17, endln:2:32
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
-    |UINT:64
     |vpiTypespec:
     \_RefTypespec: (pkg::Width), line:2:13, endln:2:16
       |vpiParent:
@@ -310,7 +309,6 @@ Design: (unnamed)
   \_Parameter: (pkg::InitDefault), line:7:21, endln:7:37
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
-    |BIN:1
     |vpiTypespec:
     \_RefTypespec: (pkg::InitDefault::init_t), line:7:14, endln:7:20
       |vpiParent:
@@ -319,20 +317,19 @@ Design: (unnamed)
       |vpiFullName:pkg::InitDefault::init_t
       |vpiActual:
       \_TypedefTypespec: (pkg::init_t), line:6:5, endln:6:11
-    |vpiLocalParam:1
     |vpiName:InitDefault
     |vpiFullName:pkg::InitDefault
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:2:17, endln:2:32
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
+    |vpiLhs:
+    \_Parameter: (pkg::Width), line:2:17, endln:2:32
     |vpiRhs:
     \_Constant: , line:2:30, endln:2:32
       |vpiParent:
       \_ParamAssign: , line:2:17, endln:2:32
-      |vpiDecompile:64
-      |vpiSize:64
-      |UINT:64
       |vpiTypespec:
       \_RefTypespec: (pkg), line:2:30, endln:2:32
         |vpiParent:
@@ -341,19 +338,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (pkg::Width), line:2:17, endln:2:32
+      |vpiSize:64
+      |vpiDecompile:64
+      |UINT:64
   |vpiParamAssign:
   \_ParamAssign: , line:7:21, endln:7:37
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
+    |vpiLhs:
+    \_Parameter: (pkg::InitDefault), line:7:21, endln:7:37
     |vpiRhs:
     \_Constant: , line:7:35, endln:7:37
       |vpiParent:
       \_ParamAssign: , line:7:21, endln:7:37
-      |vpiDecompile:'1
-      |vpiSize:-1
-      |BIN:1
       |vpiTypespec:
       \_RefTypespec: (pkg), line:7:35, endln:7:37
         |vpiParent:
@@ -362,8 +359,9 @@ Design: (unnamed)
         |vpiActual:
         \_BitTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (pkg::InitDefault), line:7:21, endln:7:37
+      |vpiSize:-1
+      |vpiDecompile:'1
+      |BIN:1
   |vpiTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
     |vpiParent:
@@ -398,9 +396,6 @@ Design: (unnamed)
         \_Constant: , line:3:24, endln:3:25
           |vpiParent:
           \_Operation: , line:3:18, endln:3:25
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (pkg), line:3:24, endln:3:25
             |vpiParent:
@@ -409,13 +404,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:3:26, endln:3:27
         |vpiParent:
         \_Range: , line:3:17, endln:3:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (pkg), line:3:26, endln:3:27
           |vpiParent:
@@ -424,6 +419,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_TypedefTypespec: (pkg::key), line:3:31, endln:3:34
     |vpiParent:
@@ -520,6 +518,8 @@ Design: (unnamed)
   \_ParamAssign: , line:17:46, endln:17:64
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:17:1, endln:19:10
+    |vpiLhs:
+    \_Parameter: (work@dut.Init), line:17:46, endln:17:64
     |vpiRhs:
     \_RefObj: (work@dut.InitDefault), line:17:53, endln:17:64
       |vpiParent:
@@ -528,8 +528,6 @@ Design: (unnamed)
       |vpiFullName:work@dut.InitDefault
       |vpiActual:
       \_Parameter: (pkg::InitDefault), line:7:21, endln:7:37
-    |vpiLhs:
-    \_Parameter: (work@dut.Init), line:17:46, endln:17:64
   |vpiTypespec:
   \_ImportTypespec: (pkg), line:17:19, endln:17:25
     |vpiParent:
@@ -543,9 +541,6 @@ Design: (unnamed)
     \_Constant: , line:17:19, endln:17:25
       |vpiParent:
       \_ImportTypespec: (pkg), line:17:19, endln:17:25
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@dut.pkg), line:17:19, endln:17:25
         |vpiParent:
@@ -554,6 +549,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -591,7 +589,6 @@ Design: (unnamed)
   \_Parameter: (work@foo.ResetValue), line:13:37, endln:13:52
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:13:1, endln:15:10
-    |BIN:0
     |vpiTypespec:
     \_RefTypespec: (work@foo.ResetValue), line:13:24, endln:13:36
       |vpiParent:
@@ -605,13 +602,12 @@ Design: (unnamed)
   \_ParamAssign: , line:13:37, endln:13:52
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:13:1, endln:15:10
+    |vpiLhs:
+    \_Parameter: (work@foo.ResetValue), line:13:37, endln:13:52
     |vpiRhs:
     \_Constant: , line:13:50, endln:13:52
       |vpiParent:
       \_ParamAssign: , line:13:37, endln:13:52
-      |vpiDecompile:'0
-      |vpiSize:-1
-      |BIN:0
       |vpiTypespec:
       \_RefTypespec: (work@foo), line:13:50, endln:13:52
         |vpiParent:
@@ -620,8 +616,9 @@ Design: (unnamed)
         |vpiActual:
         \_BitTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@foo.ResetValue), line:13:37, endln:13:52
+      |vpiSize:-1
+      |vpiDecompile:'0
+      |BIN:0
   |vpiTypespec:
   \_LogicTypespec: , line:13:24, endln:13:29
     |vpiParent:
@@ -634,9 +631,6 @@ Design: (unnamed)
       \_Constant: , line:13:31, endln:13:33
         |vpiParent:
         \_Range: , line:13:30, endln:13:36
-        |vpiDecompile:63
-        |vpiSize:64
-        |UINT:63
         |vpiTypespec:
         \_RefTypespec: (work@foo), line:13:31, endln:13:33
           |vpiParent:
@@ -645,13 +639,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:63
+        |UINT:63
       |vpiRightRange:
       \_Constant: , line:13:34, endln:13:35
         |vpiParent:
         \_Range: , line:13:30, endln:13:36
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@foo), line:13:34, endln:13:35
           |vpiParent:
@@ -660,6 +654,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -703,7 +700,6 @@ Design: (unnamed)
   \_Parameter: (work@foo2.ResetValue), line:10:38, endln:10:53
     |vpiParent:
     \_Module: work@foo2 (work@foo2), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:10:1, endln:11:10
-    |BIN:0
     |vpiTypespec:
     \_RefTypespec: (work@foo2.ResetValue), line:10:25, endln:10:37
       |vpiParent:
@@ -717,13 +713,12 @@ Design: (unnamed)
   \_ParamAssign: , line:10:38, endln:10:53
     |vpiParent:
     \_Module: work@foo2 (work@foo2), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:10:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@foo2.ResetValue), line:10:38, endln:10:53
     |vpiRhs:
     \_Constant: , line:10:51, endln:10:53
       |vpiParent:
       \_ParamAssign: , line:10:38, endln:10:53
-      |vpiDecompile:'0
-      |vpiSize:-1
-      |BIN:0
       |vpiTypespec:
       \_RefTypespec: (work@foo2), line:10:51, endln:10:53
         |vpiParent:
@@ -732,8 +727,9 @@ Design: (unnamed)
         |vpiActual:
         \_BitTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@foo2.ResetValue), line:10:38, endln:10:53
+      |vpiSize:-1
+      |vpiDecompile:'0
+      |BIN:0
   |vpiTypespec:
   \_LogicTypespec: , line:10:25, endln:10:30
     |vpiParent:
@@ -746,9 +742,6 @@ Design: (unnamed)
       \_Constant: , line:10:32, endln:10:34
         |vpiParent:
         \_Range: , line:10:31, endln:10:37
-        |vpiDecompile:63
-        |vpiSize:64
-        |UINT:63
         |vpiTypespec:
         \_RefTypespec: (work@foo2), line:10:32, endln:10:34
           |vpiParent:
@@ -757,13 +750,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:63
+        |UINT:63
       |vpiRightRange:
       \_Constant: , line:10:35, endln:10:36
         |vpiParent:
         \_Range: , line:10:31, endln:10:37
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@foo2), line:10:35, endln:10:36
           |vpiParent:
@@ -772,6 +765,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:

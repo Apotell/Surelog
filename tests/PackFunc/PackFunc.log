@@ -227,9 +227,6 @@ Design: (unnamed)
       \_Constant: , line:3:12, endln:3:14
         |vpiParent:
         \_Range: , line:3:11, endln:3:17
-        |vpiDecompile:10
-        |vpiSize:64
-        |UINT:10
         |vpiTypespec:
         \_RefTypespec: (b), line:3:12, endln:3:14
           |vpiParent:
@@ -238,13 +235,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:10
+        |UINT:10
       |vpiRightRange:
       \_Constant: , line:3:15, endln:3:16
         |vpiParent:
         \_Range: , line:3:11, endln:3:17
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (b), line:3:15, endln:3:16
           |vpiParent:
@@ -253,6 +250,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -296,14 +296,6 @@ Design: (unnamed)
         \_Begin: (aa::foo_bar), line:17:5, endln:19:8
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_RefObj: (aa::foo_bar::y), line:18:17, endln:18:18
-          |vpiParent:
-          \_Assignment: , line:18:7, endln:18:18
-          |vpiName:y
-          |vpiFullName:aa::foo_bar::y
-          |vpiActual:
-          \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
         |vpiLhs:
         \_RefObj: (aa::foo_bar::foo_bar), line:18:7, endln:18:14
           |vpiParent:
@@ -312,6 +304,14 @@ Design: (unnamed)
           |vpiFullName:aa::foo_bar::foo_bar
           |vpiActual:
           \_Function: (aa::foo_bar), line:10:3, endln:21:14
+        |vpiRhs:
+        \_RefObj: (aa::foo_bar::y), line:18:17, endln:18:18
+          |vpiParent:
+          \_Assignment: , line:18:7, endln:18:18
+          |vpiName:y
+          |vpiFullName:aa::foo_bar::y
+          |vpiActual:
+          \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
     |vpiTypespec:
     \_LogicTypespec: , line:15:5, endln:15:8
       |vpiParent:
@@ -329,6 +329,11 @@ Design: (unnamed)
           \_SysFuncCall: ($bits), line:15:10, endln:15:18
             |vpiParent:
             \_Operation: , line:15:10, endln:15:20
+            |vpiName:
+            \_Identifier: ($bits), line:15:11, endln:15:15
+              |vpiParent:
+              \_SysFuncCall: ($bits), line:15:10, endln:15:18
+              |vpiName:$bits
             |vpiArgument:
             \_RefObj: (aa::foo_bar::a), line:15:16, endln:15:17
               |vpiParent:
@@ -337,18 +342,10 @@ Design: (unnamed)
               |vpiFullName:aa::foo_bar::a
               |vpiActual:
               \_IODecl: (a), line:12:24, endln:12:25
-            |vpiName:
-            \_Identifier: ($bits), line:15:11, endln:15:15
-              |vpiParent:
-              \_SysFuncCall: ($bits), line:15:10, endln:15:18
-              |vpiName:$bits
           |vpiOperand:
           \_Constant: , line:15:19, endln:15:20
             |vpiParent:
             \_Operation: , line:15:10, endln:15:20
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (aa::foo_bar), line:15:19, endln:15:20
               |vpiParent:
@@ -357,13 +354,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
         |vpiRightRange:
         \_Constant: , line:15:21, endln:15:22
           |vpiParent:
           \_Range: , line:15:9, endln:15:23
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (aa::foo_bar), line:15:21, endln:15:22
             |vpiParent:
@@ -372,6 +369,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -423,8 +423,8 @@ Design: (unnamed)
     \_IODecl: (a), line:12:24, endln:12:25
       |vpiParent:
       \_Function: (aa::foo_bar), line:10:3, endln:21:14
-      |vpiDirection:1
       |vpiName:a
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (aa::foo_bar::a::b::foo_bar_t), line:12:11, endln:12:23
         |vpiParent:

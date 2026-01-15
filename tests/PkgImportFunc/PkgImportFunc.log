@@ -198,13 +198,12 @@ Design: (unnamed)
         \_Begin: (prim_util_pkg::get_5)
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_Variable: (prim_util_pkg::get_5::result), line:3:11, endln:3:17
         |vpiRhs:
         \_Constant: , line:3:20, endln:3:21
           |vpiParent:
           \_Assignment: , line:3:11, endln:3:21
-          |vpiDecompile:5
-          |vpiSize:64
-          |UINT:5
           |vpiTypespec:
           \_RefTypespec: (prim_util_pkg::get_5), line:3:20, endln:3:21
             |vpiParent:
@@ -213,8 +212,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-        |vpiLhs:
-        \_Variable: (prim_util_pkg::get_5::result), line:3:11, endln:3:17
+          |vpiSize:64
+          |vpiDecompile:5
+          |UINT:5
       |vpiStmt:
       \_ReturnStmt: , line:4:7, endln:4:20
         |vpiParent:
@@ -274,9 +274,6 @@ Design: (unnamed)
     \_Constant: , line:9:26, endln:9:31
       |vpiParent:
       \_ImportTypespec: (prim_util_pkg), line:9:11, endln:9:31
-      |vpiDecompile:get_5
-      |vpiSize:40
-      |STRING:get_5
       |vpiTypespec:
       \_RefTypespec: (lc_ctrl_state_pkg::prim_util_pkg), line:9:26, endln:9:31
         |vpiParent:
@@ -285,6 +282,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:40
+      |vpiDecompile:get_5
+      |STRING:get_5
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -345,14 +345,6 @@ Design: (unnamed)
   \_ContAssign: , line:13:11, endln:13:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PkgImportFunc/dut.sv, line:12:1, endln:14:10
-    |vpiRhs:
-    \_RefObj: (work@top.lc_ctrl_state_pkg::get_5), line:13:15, endln:13:34
-      |vpiParent:
-      \_ContAssign: , line:13:11, endln:13:41
-      |vpiName:lc_ctrl_state_pkg::get_5
-      |vpiFullName:work@top.lc_ctrl_state_pkg::get_5
-      |vpiActual:
-      \_Function: (prim_util_pkg::get_5), line:2:4, endln:5:15
     |vpiLhs:
     \_RefObj: (work@top.o), line:13:11, endln:13:12
       |vpiParent:
@@ -361,6 +353,14 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_Variable: (work@top.o), line:12:23, endln:12:24
+    |vpiRhs:
+    \_RefObj: (work@top.lc_ctrl_state_pkg::get_5), line:13:15, endln:13:34
+      |vpiParent:
+      \_ContAssign: , line:13:11, endln:13:41
+      |vpiName:lc_ctrl_state_pkg::get_5
+      |vpiFullName:work@top.lc_ctrl_state_pkg::get_5
+      |vpiActual:
+      \_Function: (prim_util_pkg::get_5), line:2:4, endln:5:15
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

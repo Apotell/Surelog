@@ -94,25 +94,25 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/XValue/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               6
+Constant                                               8
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             2
 IntTypespec                                            2
-LogicTypespec                                          9
+LogicTypespec                                         11
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
 Port                                                   2
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           12
+RefTypespec                                           14
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                48
+Total:                                                54
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/XValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -149,17 +149,41 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:2:12, endln:5:15
       |vpiName:REF
-      |BIN:0001
-      |vpiDecompile:4'b0001
-      |vpiSize:4
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (REF), line:3:9, endln:3:27
+        |vpiTypespec:
+        \_RefTypespec: (work@top.REF), line:3:20, endln:3:27
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.REF
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:4
+        |vpiDecompile:4'b0001
+        |BIN:0001
     |vpiEnumConst:
     \_EnumConst: (DESELECT), line:4:9, endln:4:27
       |vpiParent:
       \_EnumTypespec: , line:2:12, endln:5:15
       |vpiName:DESELECT
-      |BIN:1xxx
-      |vpiDecompile:4'b1xxx
-      |vpiSize:4
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (DESELECT), line:4:9, endln:4:27
+        |vpiTypespec:
+        \_RefTypespec: (work@top.DESELECT), line:4:20, endln:4:27
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.DESELECT
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:4
+        |vpiDecompile:4'b1xxx
+        |BIN:1xxx
   |vpiTypespec:
   \_LogicTypespec: , line:2:17, endln:2:22
     |vpiParent:
@@ -172,9 +196,6 @@ Design: (unnamed)
       \_Constant: , line:2:24, endln:2:25
         |vpiParent:
         \_Range: , line:2:23, endln:2:28
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
         |vpiTypespec:
         \_RefTypespec: (work@top), line:2:24, endln:2:25
           |vpiParent:
@@ -183,13 +204,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:3
+        |UINT:3
       |vpiRightRange:
       \_Constant: , line:2:26, endln:2:27
         |vpiParent:
         \_Range: , line:2:23, endln:2:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:2:26, endln:2:27
           |vpiParent:
@@ -198,6 +219,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -301,14 +325,6 @@ Design: (unnamed)
   \_ContAssign: , line:7:11, endln:7:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/XValue/dut.sv, line:1:1, endln:8:10
-    |vpiRhs:
-    \_RefObj: (work@top.DESELECT), line:7:15, endln:7:23
-      |vpiParent:
-      \_ContAssign: , line:7:11, endln:7:23
-      |vpiName:DESELECT
-      |vpiFullName:work@top.DESELECT
-      |vpiActual:
-      \_EnumConst: (DESELECT), line:4:9, endln:4:27
     |vpiLhs:
     \_RefObj: (work@top.o), line:7:11, endln:7:12
       |vpiParent:
@@ -317,6 +333,14 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_Net: (work@top.o), line:1:47, endln:1:48
+    |vpiRhs:
+    \_RefObj: (work@top.DESELECT), line:7:15, endln:7:23
+      |vpiParent:
+      \_ContAssign: , line:7:11, endln:7:23
+      |vpiName:DESELECT
+      |vpiFullName:work@top.DESELECT
+      |vpiActual:
+      \_EnumConst: (DESELECT), line:4:9, endln:4:27
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

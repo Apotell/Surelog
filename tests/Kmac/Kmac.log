@@ -697,14 +697,14 @@ BitSelect                                              5
 BitTypespec                                            3
 CaseItem                                               6
 CaseStmt                                               1
-Constant                                              45
+Constant                                              50
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
 Identifier                                            13
 ImportTypespec                                         7
 IntTypespec                                           33
-LogicTypespec                                         12
+LogicTypespec                                         17
 Module                                                 3
 ModuleTypespec                                         2
 Net                                                    5
@@ -716,13 +716,13 @@ Port                                                   4
 Range                                                  3
 RefModule                                              1
 RefObj                                                34
-RefTypespec                                           64
+RefTypespec                                           69
 SourceFile                                             3
 StringTypespec                                         7
 SysFuncCall                                            2
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                               312
+Total:                                               327
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Kmac/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -757,7 +757,6 @@ Design: (unnamed)
   \_Parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:30
     |vpiParent:
     \_Package: sha3_pkg (sha3_pkg), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |UINT:64
     |vpiTypespec:
     \_RefTypespec: (sha3_pkg::MsgWidth), line:9:13, endln:9:16
       |vpiParent:
@@ -810,13 +809,12 @@ Design: (unnamed)
   \_ParamAssign: , line:9:17, endln:9:30
     |vpiParent:
     \_Package: sha3_pkg (sha3_pkg), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
+    |vpiLhs:
+    \_Parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:30
     |vpiRhs:
     \_Constant: , line:9:28, endln:9:30
       |vpiParent:
       \_ParamAssign: , line:9:17, endln:9:30
-      |vpiDecompile:64
-      |vpiSize:64
-      |UINT:64
       |vpiTypespec:
       \_RefTypespec: (sha3_pkg), line:9:28, endln:9:30
         |vpiParent:
@@ -825,12 +823,15 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:30
+      |vpiSize:64
+      |vpiDecompile:64
+      |UINT:64
   |vpiParamAssign:
   \_ParamAssign: , line:20:26, endln:26:4
     |vpiParent:
     \_Package: sha3_pkg (sha3_pkg), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
+    |vpiLhs:
+    \_Parameter: (sha3_pkg::KeccakRate), line:20:26, endln:26:4
     |vpiRhs:
     \_Operation: , line:20:43, endln:26:4
       |vpiParent:
@@ -845,9 +846,6 @@ Design: (unnamed)
         \_Constant: , line:21:5, endln:21:9
           |vpiParent:
           \_Operation: , line:21:5, endln:21:18
-          |vpiDecompile:1344
-          |vpiSize:64
-          |UINT:1344
           |vpiTypespec:
           \_RefTypespec: (sha3_pkg), line:21:5, endln:21:9
             |vpiParent:
@@ -856,6 +854,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1344
+          |UINT:1344
         |vpiOperand:
         \_RefObj: (sha3_pkg::MsgWidth), line:21:10, endln:21:18
           |vpiParent:
@@ -873,9 +874,6 @@ Design: (unnamed)
         \_Constant: , line:22:5, endln:22:9
           |vpiParent:
           \_Operation: , line:22:5, endln:22:18
-          |vpiDecompile:1152
-          |vpiSize:64
-          |UINT:1152
           |vpiTypespec:
           \_RefTypespec: (sha3_pkg), line:22:5, endln:22:9
             |vpiParent:
@@ -884,6 +882,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1152
+          |UINT:1152
         |vpiOperand:
         \_RefObj: (sha3_pkg::MsgWidth), line:22:10, endln:22:18
           |vpiParent:
@@ -901,9 +902,6 @@ Design: (unnamed)
         \_Constant: , line:23:5, endln:23:9
           |vpiParent:
           \_Operation: , line:23:5, endln:23:18
-          |vpiDecompile:1088
-          |vpiSize:64
-          |UINT:1088
           |vpiTypespec:
           \_RefTypespec: (sha3_pkg), line:23:5, endln:23:9
             |vpiParent:
@@ -912,6 +910,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1088
+          |UINT:1088
         |vpiOperand:
         \_RefObj: (sha3_pkg::MsgWidth), line:23:10, endln:23:18
           |vpiParent:
@@ -929,9 +930,6 @@ Design: (unnamed)
         \_Constant: , line:24:6, endln:24:9
           |vpiParent:
           \_Operation: , line:24:6, endln:24:18
-          |vpiDecompile:832
-          |vpiSize:64
-          |UINT:832
           |vpiTypespec:
           \_RefTypespec: (sha3_pkg), line:24:6, endln:24:9
             |vpiParent:
@@ -940,6 +938,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:832
+          |UINT:832
         |vpiOperand:
         \_RefObj: (sha3_pkg::MsgWidth), line:24:10, endln:24:18
           |vpiParent:
@@ -957,9 +958,6 @@ Design: (unnamed)
         \_Constant: , line:25:6, endln:25:9
           |vpiParent:
           \_Operation: , line:25:6, endln:25:18
-          |vpiDecompile:576
-          |vpiSize:64
-          |UINT:576
           |vpiTypespec:
           \_RefTypespec: (sha3_pkg), line:25:6, endln:25:9
             |vpiParent:
@@ -968,6 +966,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:576
+          |UINT:576
         |vpiOperand:
         \_RefObj: (sha3_pkg::MsgWidth), line:25:10, endln:25:18
           |vpiParent:
@@ -976,12 +977,12 @@ Design: (unnamed)
           |vpiFullName:sha3_pkg::MsgWidth
           |vpiActual:
           \_Parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:30
-    |vpiLhs:
-    \_Parameter: (sha3_pkg::KeccakRate), line:20:26, endln:26:4
   |vpiParamAssign:
   \_ParamAssign: , line:28:26, endln:28:55
     |vpiParent:
     \_Package: sha3_pkg (sha3_pkg), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
+    |vpiLhs:
+    \_Parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:55
     |vpiRhs:
     \_Operation: , line:28:42, endln:28:55
       |vpiParent:
@@ -991,9 +992,6 @@ Design: (unnamed)
       \_Constant: , line:28:42, endln:28:46
         |vpiParent:
         \_Operation: , line:28:42, endln:28:55
-        |vpiDecompile:1600
-        |vpiSize:64
-        |UINT:1600
         |vpiTypespec:
         \_RefTypespec: (sha3_pkg), line:28:42, endln:28:46
           |vpiParent:
@@ -1002,6 +1000,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1600
+        |UINT:1600
       |vpiOperand:
       \_RefObj: (sha3_pkg::MsgWidth), line:28:47, endln:28:55
         |vpiParent:
@@ -1010,16 +1011,21 @@ Design: (unnamed)
         |vpiFullName:sha3_pkg::MsgWidth
         |vpiActual:
         \_Parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:30
-    |vpiLhs:
-    \_Parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:55
   |vpiParamAssign:
   \_ParamAssign: , line:30:26, endln:30:64
     |vpiParent:
     \_Package: sha3_pkg (sha3_pkg), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
+    |vpiLhs:
+    \_Parameter: (sha3_pkg::KeccakCountW), line:30:26, endln:30:64
     |vpiRhs:
     \_SysFuncCall: ($clog2), line:30:41, endln:30:64
       |vpiParent:
       \_ParamAssign: , line:30:26, endln:30:64
+      |vpiName:
+      \_Identifier: ($clog2), line:30:42, endln:30:47
+        |vpiParent:
+        \_SysFuncCall: ($clog2), line:30:41, endln:30:64
+        |vpiName:$clog2
       |vpiArgument:
       \_Operation: , line:30:48, endln:30:63
         |vpiParent:
@@ -1037,9 +1043,6 @@ Design: (unnamed)
         \_Constant: , line:30:62, endln:30:63
           |vpiParent:
           \_Operation: , line:30:48, endln:30:63
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (sha3_pkg), line:30:62, endln:30:63
             |vpiParent:
@@ -1048,13 +1051,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-      |vpiName:
-      \_Identifier: ($clog2), line:30:42, endln:30:47
-        |vpiParent:
-        \_SysFuncCall: ($clog2), line:30:41, endln:30:64
-        |vpiName:$clog2
-    |vpiLhs:
-    \_Parameter: (sha3_pkg::KeccakCountW), line:30:26, endln:30:64
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
   |vpiTypespec:
   \_IntTypespec: , line:9:13, endln:9:16
     |vpiParent:
@@ -1080,41 +1079,101 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:12:11, endln:18:22
       |vpiName:L128
-      |BIN:000
-      |vpiDecompile:3'b000
-      |vpiSize:3
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (L128), line:13:5, endln:13:18
+        |vpiTypespec:
+        \_RefTypespec: (sha3_pkg::L128), line:13:12, endln:13:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:sha3_pkg::L128
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:3
+        |vpiDecompile:3'b000
+        |BIN:000
     |vpiEnumConst:
     \_EnumConst: (L224), line:14:5, endln:14:18
       |vpiParent:
       \_EnumTypespec: , line:12:11, endln:18:22
       |vpiName:L224
-      |BIN:001
-      |vpiDecompile:3'b001
-      |vpiSize:3
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (L224), line:14:5, endln:14:18
+        |vpiTypespec:
+        \_RefTypespec: (sha3_pkg::L224), line:14:12, endln:14:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:sha3_pkg::L224
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:3
+        |vpiDecompile:3'b001
+        |BIN:001
     |vpiEnumConst:
     \_EnumConst: (L256), line:15:5, endln:15:18
       |vpiParent:
       \_EnumTypespec: , line:12:11, endln:18:22
       |vpiName:L256
-      |BIN:010
-      |vpiDecompile:3'b010
-      |vpiSize:3
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (L256), line:15:5, endln:15:18
+        |vpiTypespec:
+        \_RefTypespec: (sha3_pkg::L256), line:15:12, endln:15:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:sha3_pkg::L256
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:3
+        |vpiDecompile:3'b010
+        |BIN:010
     |vpiEnumConst:
     \_EnumConst: (L384), line:16:5, endln:16:18
       |vpiParent:
       \_EnumTypespec: , line:12:11, endln:18:22
       |vpiName:L384
-      |BIN:011
-      |vpiDecompile:3'b011
-      |vpiSize:3
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (L384), line:16:5, endln:16:18
+        |vpiTypespec:
+        \_RefTypespec: (sha3_pkg::L384), line:16:12, endln:16:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:sha3_pkg::L384
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:3
+        |vpiDecompile:3'b011
+        |BIN:011
     |vpiEnumConst:
     \_EnumConst: (L512), line:17:5, endln:17:18
       |vpiParent:
       \_EnumTypespec: , line:12:11, endln:18:22
       |vpiName:L512
-      |BIN:100
-      |vpiDecompile:3'b100
-      |vpiSize:3
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (L512), line:17:5, endln:17:18
+        |vpiTypespec:
+        \_RefTypespec: (sha3_pkg::L512), line:17:12, endln:17:18
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:sha3_pkg::L512
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:3
+        |vpiDecompile:3'b100
+        |BIN:100
   |vpiTypespec:
   \_LogicTypespec: , line:12:16, endln:12:21
     |vpiParent:
@@ -1127,9 +1186,6 @@ Design: (unnamed)
       \_Constant: , line:12:23, endln:12:24
         |vpiParent:
         \_Range: , line:12:22, endln:12:27
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
         |vpiTypespec:
         \_RefTypespec: (sha3_pkg), line:12:23, endln:12:24
           |vpiParent:
@@ -1138,13 +1194,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:2
+        |UINT:2
       |vpiRightRange:
       \_Constant: , line:12:25, endln:12:26
         |vpiParent:
         \_Range: , line:12:22, endln:12:27
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (sha3_pkg), line:12:25, endln:12:26
           |vpiParent:
@@ -1153,6 +1209,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: 
     |vpiParent:
@@ -1195,9 +1254,6 @@ Design: (unnamed)
         \_Constant: , line:20:38, endln:20:39
           |vpiParent:
           \_Operation: , line:20:38, endln:20:39
-          |vpiDecompile:5
-          |vpiSize:64
-          |UINT:5
           |vpiTypespec:
           \_RefTypespec: (sha3_pkg), line:20:38, endln:20:39
             |vpiParent:
@@ -1206,6 +1262,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:5
+          |UINT:5
     |vpiElemTypespec:
     \_RefTypespec: (sha3_pkg), line:20:13, endln:20:25
       |vpiParent:
@@ -1244,7 +1303,6 @@ Design: (unnamed)
   \_Parameter: (work@kmac.EnMasking), line:4:18, endln:4:31
     |vpiParent:
     \_Module: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |UINT:0
     |vpiTypespec:
     \_RefTypespec: (work@kmac.EnMasking), line:4:14, endln:4:17
       |vpiParent:
@@ -1265,20 +1323,19 @@ Design: (unnamed)
       |vpiFullName:work@kmac.Share
       |vpiActual:
       \_IntTypespec: , line:5:14, endln:5:17
-    |vpiLocalParam:1
     |vpiName:Share
     |vpiFullName:work@kmac.Share
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:4:18, endln:4:31
     |vpiParent:
     \_Module: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
+    |vpiLhs:
+    \_Parameter: (work@kmac.EnMasking), line:4:18, endln:4:31
     |vpiRhs:
     \_Constant: , line:4:30, endln:4:31
       |vpiParent:
       \_ParamAssign: , line:4:18, endln:4:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@kmac), line:4:30, endln:4:31
         |vpiParent:
@@ -1287,12 +1344,15 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@kmac.EnMasking), line:4:18, endln:4:31
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
   |vpiParamAssign:
   \_ParamAssign: , line:5:18, endln:5:45
     |vpiParent:
     \_Module: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
+    |vpiLhs:
+    \_Parameter: (work@kmac.Share), line:5:18, endln:5:45
     |vpiRhs:
     \_Operation: , line:5:26, endln:5:45
       |vpiParent:
@@ -1310,9 +1370,6 @@ Design: (unnamed)
       \_Constant: , line:5:40, endln:5:41
         |vpiParent:
         \_Operation: , line:5:26, endln:5:45
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
         |vpiTypespec:
         \_RefTypespec: (work@kmac), line:5:40, endln:5:41
           |vpiParent:
@@ -1321,13 +1378,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:2
+        |UINT:2
       |vpiOperand:
       \_Constant: , line:5:44, endln:5:45
         |vpiParent:
         \_Operation: , line:5:26, endln:5:45
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@kmac), line:5:44, endln:5:45
           |vpiParent:
@@ -1336,8 +1393,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@kmac.Share), line:5:18, endln:5:45
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiTypespec:
   \_BitTypespec: , line:4:14, endln:4:17
     |vpiParent:
@@ -1430,7 +1488,6 @@ Design: (unnamed)
   \_Parameter: (work@kmac_core.EnMasking), line:4:18, endln:4:31
     |vpiParent:
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
-    |UINT:0
     |vpiTypespec:
     \_RefTypespec: (work@kmac_core.EnMasking), line:4:14, endln:4:17
       |vpiParent:
@@ -1451,20 +1508,19 @@ Design: (unnamed)
       |vpiFullName:work@kmac_core.Share
       |vpiActual:
       \_IntTypespec: , line:5:14, endln:5:17
-    |vpiLocalParam:1
     |vpiName:Share
     |vpiFullName:work@kmac_core.Share
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:4:18, endln:4:31
     |vpiParent:
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
+    |vpiLhs:
+    \_Parameter: (work@kmac_core.EnMasking), line:4:18, endln:4:31
     |vpiRhs:
     \_Constant: , line:4:30, endln:4:31
       |vpiParent:
       \_ParamAssign: , line:4:18, endln:4:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core), line:4:30, endln:4:31
         |vpiParent:
@@ -1473,12 +1529,15 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@kmac_core.EnMasking), line:4:18, endln:4:31
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
   |vpiParamAssign:
   \_ParamAssign: , line:5:18, endln:5:45
     |vpiParent:
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
+    |vpiLhs:
+    \_Parameter: (work@kmac_core.Share), line:5:18, endln:5:45
     |vpiRhs:
     \_Operation: , line:5:26, endln:5:45
       |vpiParent:
@@ -1496,9 +1555,6 @@ Design: (unnamed)
       \_Constant: , line:5:40, endln:5:41
         |vpiParent:
         \_Operation: , line:5:26, endln:5:45
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
         |vpiTypespec:
         \_RefTypespec: (work@kmac_core), line:5:40, endln:5:41
           |vpiParent:
@@ -1507,13 +1563,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:2
+        |UINT:2
       |vpiOperand:
       \_Constant: , line:5:44, endln:5:45
         |vpiParent:
         \_Operation: , line:5:26, endln:5:45
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@kmac_core), line:5:44, endln:5:45
           |vpiParent:
@@ -1522,8 +1578,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@kmac_core.Share), line:5:18, endln:5:45
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiTypespec:
   \_ImportTypespec: (sha3_pkg), line:15:10, endln:15:32
     |vpiParent:
@@ -1537,9 +1594,6 @@ Design: (unnamed)
     \_Constant: , line:15:20, endln:15:32
       |vpiParent:
       \_ImportTypespec: (sha3_pkg), line:15:10, endln:15:32
-      |vpiDecompile:KeccakCountW
-      |vpiSize:96
-      |STRING:KeccakCountW
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core.sha3_pkg), line:15:20, endln:15:32
         |vpiParent:
@@ -1548,6 +1602,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:96
+      |vpiDecompile:KeccakCountW
+      |STRING:KeccakCountW
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
@@ -1565,9 +1622,6 @@ Design: (unnamed)
     \_Constant: , line:16:20, endln:16:30
       |vpiParent:
       \_ImportTypespec: (sha3_pkg), line:16:10, endln:16:30
-      |vpiDecompile:KeccakRate
-      |vpiSize:80
-      |STRING:KeccakRate
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core.sha3_pkg), line:16:20, endln:16:30
         |vpiParent:
@@ -1576,6 +1630,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:80
+      |vpiDecompile:KeccakRate
+      |STRING:KeccakRate
   |vpiTypespec:
   \_ImportTypespec: (sha3_pkg), line:17:10, endln:17:24
     |vpiParent:
@@ -1589,9 +1646,6 @@ Design: (unnamed)
     \_Constant: , line:17:20, endln:17:24
       |vpiParent:
       \_ImportTypespec: (sha3_pkg), line:17:10, endln:17:24
-      |vpiDecompile:L128
-      |vpiSize:32
-      |STRING:L128
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core.sha3_pkg), line:17:20, endln:17:24
         |vpiParent:
@@ -1600,6 +1654,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:32
+      |vpiDecompile:L128
+      |STRING:L128
   |vpiTypespec:
   \_ImportTypespec: (sha3_pkg), line:18:10, endln:18:24
     |vpiParent:
@@ -1613,9 +1670,6 @@ Design: (unnamed)
     \_Constant: , line:18:20, endln:18:24
       |vpiParent:
       \_ImportTypespec: (sha3_pkg), line:18:10, endln:18:24
-      |vpiDecompile:L224
-      |vpiSize:32
-      |STRING:L224
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core.sha3_pkg), line:18:20, endln:18:24
         |vpiParent:
@@ -1624,6 +1678,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:32
+      |vpiDecompile:L224
+      |STRING:L224
   |vpiTypespec:
   \_ImportTypespec: (sha3_pkg), line:19:10, endln:19:24
     |vpiParent:
@@ -1637,9 +1694,6 @@ Design: (unnamed)
     \_Constant: , line:19:20, endln:19:24
       |vpiParent:
       \_ImportTypespec: (sha3_pkg), line:19:10, endln:19:24
-      |vpiDecompile:L256
-      |vpiSize:32
-      |STRING:L256
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core.sha3_pkg), line:19:20, endln:19:24
         |vpiParent:
@@ -1648,6 +1702,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:32
+      |vpiDecompile:L256
+      |STRING:L256
   |vpiTypespec:
   \_ImportTypespec: (sha3_pkg), line:20:10, endln:20:24
     |vpiParent:
@@ -1661,9 +1718,6 @@ Design: (unnamed)
     \_Constant: , line:20:20, endln:20:24
       |vpiParent:
       \_ImportTypespec: (sha3_pkg), line:20:10, endln:20:24
-      |vpiDecompile:L384
-      |vpiSize:32
-      |STRING:L384
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core.sha3_pkg), line:20:20, endln:20:24
         |vpiParent:
@@ -1672,6 +1726,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:32
+      |vpiDecompile:L384
+      |STRING:L384
   |vpiTypespec:
   \_ImportTypespec: (sha3_pkg), line:21:10, endln:21:24
     |vpiParent:
@@ -1685,9 +1742,6 @@ Design: (unnamed)
     \_Constant: , line:21:20, endln:21:24
       |vpiParent:
       \_ImportTypespec: (sha3_pkg), line:21:10, endln:21:24
-      |vpiDecompile:L512
-      |vpiSize:32
-      |STRING:L512
       |vpiTypespec:
       \_RefTypespec: (work@kmac_core.sha3_pkg), line:21:20, endln:21:24
         |vpiParent:
@@ -1696,6 +1750,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:32
+      |vpiDecompile:L512
+      |STRING:L512
   |vpiTypespec:
   \_BitTypespec: , line:4:14, endln:4:17
     |vpiParent:
@@ -1734,9 +1791,6 @@ Design: (unnamed)
         \_Constant: , line:23:32, endln:23:33
           |vpiParent:
           \_Operation: , line:23:9, endln:23:33
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@kmac_core), line:23:32, endln:23:33
             |vpiParent:
@@ -1745,13 +1799,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiRightRange:
       \_Constant: , line:23:34, endln:23:35
         |vpiParent:
         \_Range: , line:23:8, endln:23:36
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@kmac_core), line:23:34, endln:23:35
           |vpiParent:
@@ -1760,6 +1814,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_ImportTypespec: (sha3_pkg), line:15:10, endln:15:32
   |vpiImportTypespec:
@@ -1892,6 +1949,14 @@ Design: (unnamed)
             \_CaseItem: , line:26:7, endln:26:64
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (work@kmac_core.block_addr_limit), line:26:13, endln:26:29
+              |vpiParent:
+              \_Assignment: , line:26:13, endln:26:63
+              |vpiName:block_addr_limit
+              |vpiFullName:work@kmac_core.block_addr_limit
+              |vpiActual:
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
             |vpiRhs:
             \_Operation: , line:26:32, endln:26:63
               |vpiParent:
@@ -1913,14 +1978,6 @@ Design: (unnamed)
                   |vpiFullName:work@kmac_core.L128
                   |vpiActual:
                   \_EnumConst: (L128), line:13:5, endln:13:18
-            |vpiLhs:
-            \_RefObj: (work@kmac_core.block_addr_limit), line:26:13, endln:26:29
-              |vpiParent:
-              \_Assignment: , line:26:13, endln:26:63
-              |vpiName:block_addr_limit
-              |vpiFullName:work@kmac_core.block_addr_limit
-              |vpiActual:
-              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:27:7, endln:27:64
           |vpiParent:
@@ -1939,6 +1996,14 @@ Design: (unnamed)
             \_CaseItem: , line:27:7, endln:27:64
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (work@kmac_core.block_addr_limit), line:27:13, endln:27:29
+              |vpiParent:
+              \_Assignment: , line:27:13, endln:27:63
+              |vpiName:block_addr_limit
+              |vpiFullName:work@kmac_core.block_addr_limit
+              |vpiActual:
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
             |vpiRhs:
             \_Operation: , line:27:32, endln:27:63
               |vpiParent:
@@ -1960,14 +2025,6 @@ Design: (unnamed)
                   |vpiFullName:work@kmac_core.L224
                   |vpiActual:
                   \_EnumConst: (L224), line:14:5, endln:14:18
-            |vpiLhs:
-            \_RefObj: (work@kmac_core.block_addr_limit), line:27:13, endln:27:29
-              |vpiParent:
-              \_Assignment: , line:27:13, endln:27:63
-              |vpiName:block_addr_limit
-              |vpiFullName:work@kmac_core.block_addr_limit
-              |vpiActual:
-              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:28:7, endln:28:64
           |vpiParent:
@@ -1986,6 +2043,14 @@ Design: (unnamed)
             \_CaseItem: , line:28:7, endln:28:64
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (work@kmac_core.block_addr_limit), line:28:13, endln:28:29
+              |vpiParent:
+              \_Assignment: , line:28:13, endln:28:63
+              |vpiName:block_addr_limit
+              |vpiFullName:work@kmac_core.block_addr_limit
+              |vpiActual:
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
             |vpiRhs:
             \_Operation: , line:28:32, endln:28:63
               |vpiParent:
@@ -2007,14 +2072,6 @@ Design: (unnamed)
                   |vpiFullName:work@kmac_core.L256
                   |vpiActual:
                   \_EnumConst: (L256), line:15:5, endln:15:18
-            |vpiLhs:
-            \_RefObj: (work@kmac_core.block_addr_limit), line:28:13, endln:28:29
-              |vpiParent:
-              \_Assignment: , line:28:13, endln:28:63
-              |vpiName:block_addr_limit
-              |vpiFullName:work@kmac_core.block_addr_limit
-              |vpiActual:
-              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:29:7, endln:29:64
           |vpiParent:
@@ -2033,6 +2090,14 @@ Design: (unnamed)
             \_CaseItem: , line:29:7, endln:29:64
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (work@kmac_core.block_addr_limit), line:29:13, endln:29:29
+              |vpiParent:
+              \_Assignment: , line:29:13, endln:29:63
+              |vpiName:block_addr_limit
+              |vpiFullName:work@kmac_core.block_addr_limit
+              |vpiActual:
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
             |vpiRhs:
             \_Operation: , line:29:32, endln:29:63
               |vpiParent:
@@ -2054,14 +2119,6 @@ Design: (unnamed)
                   |vpiFullName:work@kmac_core.L384
                   |vpiActual:
                   \_EnumConst: (L384), line:16:5, endln:16:18
-            |vpiLhs:
-            \_RefObj: (work@kmac_core.block_addr_limit), line:29:13, endln:29:29
-              |vpiParent:
-              \_Assignment: , line:29:13, endln:29:63
-              |vpiName:block_addr_limit
-              |vpiFullName:work@kmac_core.block_addr_limit
-              |vpiActual:
-              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:30:7, endln:30:64
           |vpiParent:
@@ -2080,6 +2137,14 @@ Design: (unnamed)
             \_CaseItem: , line:30:7, endln:30:64
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (work@kmac_core.block_addr_limit), line:30:13, endln:30:29
+              |vpiParent:
+              \_Assignment: , line:30:13, endln:30:63
+              |vpiName:block_addr_limit
+              |vpiFullName:work@kmac_core.block_addr_limit
+              |vpiActual:
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
             |vpiRhs:
             \_Operation: , line:30:32, endln:30:63
               |vpiParent:
@@ -2101,14 +2166,6 @@ Design: (unnamed)
                   |vpiFullName:work@kmac_core.L512
                   |vpiActual:
                   \_EnumConst: (L512), line:17:5, endln:17:18
-            |vpiLhs:
-            \_RefObj: (work@kmac_core.block_addr_limit), line:30:13, endln:30:29
-              |vpiParent:
-              \_Assignment: , line:30:13, endln:30:63
-              |vpiName:block_addr_limit
-              |vpiFullName:work@kmac_core.block_addr_limit
-              |vpiActual:
-              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:32:7, endln:32:38
           |vpiParent:
@@ -2119,21 +2176,6 @@ Design: (unnamed)
             \_CaseItem: , line:32:7, endln:32:38
             |vpiOpType:82
             |vpiBlocking:1
-            |vpiRhs:
-            \_Constant: , line:32:35, endln:32:37
-              |vpiParent:
-              \_Assignment: , line:32:16, endln:32:37
-              |vpiDecompile:'0
-              |vpiSize:-1
-              |BIN:0
-              |vpiTypespec:
-              \_RefTypespec: (work@kmac_core), line:32:35, endln:32:37
-                |vpiParent:
-                \_Constant: , line:32:35, endln:32:37
-                |vpiFullName:work@kmac_core
-                |vpiActual:
-                \_BitTypespec: 
-              |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@kmac_core.block_addr_limit), line:32:16, endln:32:32
               |vpiParent:
@@ -2142,6 +2184,21 @@ Design: (unnamed)
               |vpiFullName:work@kmac_core.block_addr_limit
               |vpiActual:
               \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+            |vpiRhs:
+            \_Constant: , line:32:35, endln:32:37
+              |vpiParent:
+              \_Assignment: , line:32:16, endln:32:37
+              |vpiTypespec:
+              \_RefTypespec: (work@kmac_core), line:32:35, endln:32:37
+                |vpiParent:
+                \_Constant: , line:32:35, endln:32:37
+                |vpiFullName:work@kmac_core
+                |vpiActual:
+                \_BitTypespec: 
+              |vpiConstType:3
+              |vpiSize:-1
+              |vpiDecompile:'0
+              |BIN:0
     |vpiAlwaysType:2
 |vpiTypespec:
 \_ModuleTypespec: (work@kmac)

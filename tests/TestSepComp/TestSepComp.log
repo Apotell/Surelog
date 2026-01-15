@@ -54,9 +54,26 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:3:11, endln:5:10
       |vpiName:HERE
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (HERE), line:4:5, endln:4:9
+        |vpiTypespec:
+        \_RefTypespec: (pkg1::HERE), line:4:5, endln:4:9
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:pkg1::HERE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:64
+        |vpiDecompile:0
+        |INT:0
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg1 (pkg1), file:${SURELOG_DIR}/tests/TestSepComp/pkg1.sv, line:1:1, endln:7:11
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (pkg1::enum1), line:5:5, endln:5:10
     |vpiParent:
@@ -75,6 +92,8 @@ Design: (unnamed)
       \_EnumTypespec: , line:3:11, endln:5:10
   |vpiImportTypespec:
   \_EnumTypespec: , line:3:11, endln:5:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg1::enum1), line:5:5, endln:5:10
   |vpiDefName:pkg1
@@ -105,6 +124,8 @@ Design: (unnamed)
   \_ParamAssign: , line:4:18, endln:4:33
     |vpiParent:
     \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/TestSepComp/pkg2.sv, line:1:1, endln:16:11
+    |vpiLhs:
+    \_Parameter: (pkg2::P1), line:4:18, endln:4:33
     |vpiRhs:
     \_RefObj: (pkg2::pkg1::HERE), line:4:23, endln:4:33
       |vpiParent:
@@ -113,8 +134,6 @@ Design: (unnamed)
       |vpiFullName:pkg2::pkg1::HERE
       |vpiActual:
       \_EnumConst: (HERE), line:4:5, endln:4:9
-    |vpiLhs:
-    \_Parameter: (pkg2::P1), line:4:18, endln:4:33
   |vpiTypespec:
   \_TypedefTypespec: (pkg2::enum2), line:3:22, endln:3:27
     |vpiParent:
@@ -157,9 +176,6 @@ Design: (unnamed)
     \_Constant: , line:2:11, endln:2:18
       |vpiParent:
       \_ImportTypespec: (pkg2), line:2:11, endln:2:18
-      |vpiDecompile:*
-      |vpiSize:8
-      |STRING:*
       |vpiTypespec:
       \_RefTypespec: (work@top.pkg2), line:2:11, endln:2:18
         |vpiParent:
@@ -168,6 +184,9 @@ Design: (unnamed)
         |vpiActual:
         \_StringTypespec: 
       |vpiConstType:8
+      |vpiSize:8
+      |vpiDecompile:*
+      |STRING:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:

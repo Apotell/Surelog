@@ -241,7 +241,6 @@ Design: (unnamed)
   \_Parameter: (work@top.Depth), line:2:28, endln:2:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncBindGen/dut.sv, line:1:1, endln:14:10
-    |UINT:500
     |vpiTypespec:
     \_RefTypespec: (work@top.Depth), line:2:15, endln:2:27
       |vpiParent:
@@ -255,7 +254,6 @@ Design: (unnamed)
   \_Parameter: (work@top.PTR_WIDTH), line:3:28, endln:3:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncBindGen/dut.sv, line:1:1, endln:14:10
-    |UINT:3
     |vpiTypespec:
     \_RefTypespec: (work@top.PTR_WIDTH), line:3:15, endln:3:27
       |vpiParent:
@@ -263,20 +261,19 @@ Design: (unnamed)
       |vpiFullName:work@top.PTR_WIDTH
       |vpiActual:
       \_IntTypespec: , line:2:15, endln:2:27
-    |vpiLocalParam:1
     |vpiName:PTR_WIDTH
     |vpiFullName:work@top.PTR_WIDTH
+    |vpiLocalParam:1
   |vpiParamAssign:
   \_ParamAssign: , line:2:28, endln:2:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncBindGen/dut.sv, line:1:1, endln:14:10
+    |vpiLhs:
+    \_Parameter: (work@top.Depth), line:2:28, endln:2:40
     |vpiRhs:
     \_Constant: , line:2:37, endln:2:40
       |vpiParent:
       \_ParamAssign: , line:2:28, endln:2:40
-      |vpiDecompile:500
-      |vpiSize:64
-      |UINT:500
       |vpiTypespec:
       \_RefTypespec: (work@top), line:2:37, endln:2:40
         |vpiParent:
@@ -285,19 +282,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.Depth), line:2:28, endln:2:40
+      |vpiSize:64
+      |vpiDecompile:500
+      |UINT:500
   |vpiParamAssign:
   \_ParamAssign: , line:3:28, endln:3:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncBindGen/dut.sv, line:1:1, endln:14:10
+    |vpiLhs:
+    \_Parameter: (work@top.PTR_WIDTH), line:3:28, endln:3:41
     |vpiRhs:
     \_Constant: , line:3:40, endln:3:41
       |vpiParent:
       \_ParamAssign: , line:3:28, endln:3:41
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
       |vpiTypespec:
       \_RefTypespec: (work@top), line:3:40, endln:3:41
         |vpiParent:
@@ -306,8 +303,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.PTR_WIDTH), line:3:28, endln:3:41
+      |vpiSize:64
+      |vpiDecompile:3
+      |UINT:3
   |vpiInternalScope:
   \_Begin: (work@top.gen_block), line:5:19, endln:12:7
     |vpiParent:
@@ -322,6 +320,14 @@ Design: (unnamed)
     \_ContAssign: , line:11:14, endln:11:42
       |vpiParent:
       \_Begin: (work@top.gen_block), line:5:19, endln:12:7
+      |vpiLhs:
+      \_RefObj: (work@top.gen_block.o), line:11:14, endln:11:15
+        |vpiParent:
+        \_ContAssign: , line:11:14, endln:11:42
+        |vpiName:o
+        |vpiFullName:work@top.gen_block.o
+        |vpiActual:
+        \_Variable: (work@top.o), line:1:23, endln:1:24
       |vpiRhs:
       \_Operation: , line:11:18, endln:11:42
         |vpiParent:
@@ -336,14 +342,6 @@ Design: (unnamed)
             |vpiParent:
             \_FuncCall: (get_casted_param), line:11:23, endln:11:41
             |vpiName:get_casted_param
-      |vpiLhs:
-      \_RefObj: (work@top.gen_block.o), line:11:14, endln:11:15
-        |vpiParent:
-        \_ContAssign: , line:11:14, endln:11:42
-        |vpiName:o
-        |vpiFullName:work@top.gen_block.o
-        |vpiActual:
-        \_Variable: (work@top.o), line:1:23, endln:1:24
   |vpiTypespec:
   \_IntTypespec: , line:2:15, endln:2:27
     |vpiParent:
@@ -400,9 +398,6 @@ Design: (unnamed)
       \_Constant: , line:5:16, endln:5:17
         |vpiParent:
         \_Operation: , line:5:8, endln:5:17
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
         |vpiTypespec:
         \_RefTypespec: (work@top), line:5:16, endln:5:17
           |vpiParent:
@@ -411,6 +406,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:2
+        |UINT:2
     |vpiStmt:
     \_Begin: (work@top.gen_block), line:5:19, endln:12:7
 |vpiTypespec:

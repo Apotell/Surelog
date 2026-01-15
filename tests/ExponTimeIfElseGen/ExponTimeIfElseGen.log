@@ -966,20 +966,18 @@ Design: (unnamed)
   \_Parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:36
     |vpiParent:
     \_Module: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/ExponTimeIfElseGen/dut.sv, line:1:1, endln:91:10
-    |UINT:1
     |vpiName:ADDR_OFFSET_PART_1
     |vpiFullName:work@Foo.ADDR_OFFSET_PART_1
   |vpiParamAssign:
   \_ParamAssign: , line:2:14, endln:2:36
     |vpiParent:
     \_Module: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/ExponTimeIfElseGen/dut.sv, line:1:1, endln:91:10
+    |vpiLhs:
+    \_Parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:36
     |vpiRhs:
     \_Constant: , line:2:35, endln:2:36
       |vpiParent:
       \_ParamAssign: , line:2:14, endln:2:36
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@Foo), line:2:35, endln:2:36
         |vpiParent:
@@ -988,8 +986,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:36
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiInternalScope:
   \_GenRegion: (work@Foo), line:4:5, endln:88:16
     |vpiParent:
@@ -1096,6 +1095,22 @@ Design: (unnamed)
                         |vpiParent:
                         \_Begin: (work@Foo), line:8:41, endln:10:24
                         |vpiOpType:82
+                        |vpiLhs:
+                        \_BitSelect: (work@Foo.foo_bar_4), line:9:34, endln:9:37
+                          |vpiParent:
+                          \_Assignment: , line:9:25, endln:9:55
+                          |vpiName:foo_bar_4
+                          |vpiFullName:work@Foo.foo_bar_4
+                          |vpiActual:
+                          \_Net: (work@Foo.foo_bar_4), line:9:34, endln:9:37
+                          |vpiIndex:
+                          \_RefObj: (work@Foo.i), line:9:35, endln:9:36
+                            |vpiParent:
+                            \_BitSelect: (work@Foo.foo_bar_4), line:9:34, endln:9:37
+                            |vpiName:i
+                            |vpiFullName:work@Foo.i
+                            |vpiActual:
+                            \_Variable: (work@Foo.i), line:5:21, endln:5:22
                         |vpiRhs:
                         \_BitSelect: (work@Foo.foo_bar_4), line:9:50, endln:9:55
                           |vpiParent:
@@ -1121,9 +1136,6 @@ Design: (unnamed)
                             \_Constant: , line:9:53, endln:9:54
                               |vpiParent:
                               \_Operation: , line:9:51, endln:9:54
-                              |vpiDecompile:1
-                              |vpiSize:64
-                              |UINT:1
                               |vpiTypespec:
                               \_RefTypespec: (work@Foo.foo_bar_4), line:9:53, endln:9:54
                                 |vpiParent:
@@ -1132,22 +1144,9 @@ Design: (unnamed)
                                 |vpiActual:
                                 \_IntTypespec: 
                               |vpiConstType:9
-                        |vpiLhs:
-                        \_BitSelect: (work@Foo.foo_bar_4), line:9:34, endln:9:37
-                          |vpiParent:
-                          \_Assignment: , line:9:25, endln:9:55
-                          |vpiName:foo_bar_4
-                          |vpiFullName:work@Foo.foo_bar_4
-                          |vpiActual:
-                          \_Net: (work@Foo.foo_bar_4), line:9:34, endln:9:37
-                          |vpiIndex:
-                          \_RefObj: (work@Foo.i), line:9:35, endln:9:36
-                            |vpiParent:
-                            \_BitSelect: (work@Foo.foo_bar_4), line:9:34, endln:9:37
-                            |vpiName:i
-                            |vpiFullName:work@Foo.i
-                            |vpiActual:
-                            \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                              |vpiSize:64
+                              |vpiDecompile:1
+                              |UINT:1
               |vpiAlwaysType:3
           |vpiInternalScope:
           \_Begin: (work@Foo), line:14:18, endln:85:16
@@ -1234,6 +1233,22 @@ Design: (unnamed)
                           |vpiParent:
                           \_Begin: (work@Foo), line:16:41, endln:18:24
                           |vpiOpType:82
+                          |vpiLhs:
+                          \_BitSelect: (work@Foo.foo_bar_4), line:17:34, endln:17:37
+                            |vpiParent:
+                            \_Assignment: , line:17:25, endln:17:55
+                            |vpiName:foo_bar_4
+                            |vpiFullName:work@Foo.foo_bar_4
+                            |vpiActual:
+                            \_Net: (work@Foo.foo_bar_4), line:17:34, endln:17:37
+                            |vpiIndex:
+                            \_RefObj: (work@Foo.i), line:17:35, endln:17:36
+                              |vpiParent:
+                              \_BitSelect: (work@Foo.foo_bar_4), line:17:34, endln:17:37
+                              |vpiName:i
+                              |vpiFullName:work@Foo.i
+                              |vpiActual:
+                              \_Variable: (work@Foo.i), line:5:21, endln:5:22
                           |vpiRhs:
                           \_BitSelect: (work@Foo.foo_bar_4), line:17:50, endln:17:55
                             |vpiParent:
@@ -1259,9 +1274,6 @@ Design: (unnamed)
                               \_Constant: , line:17:53, endln:17:54
                                 |vpiParent:
                                 \_Operation: , line:17:51, endln:17:54
-                                |vpiDecompile:1
-                                |vpiSize:64
-                                |UINT:1
                                 |vpiTypespec:
                                 \_RefTypespec: (work@Foo.foo_bar_4), line:17:53, endln:17:54
                                   |vpiParent:
@@ -1270,22 +1282,9 @@ Design: (unnamed)
                                   |vpiActual:
                                   \_IntTypespec: 
                                 |vpiConstType:9
-                          |vpiLhs:
-                          \_BitSelect: (work@Foo.foo_bar_4), line:17:34, endln:17:37
-                            |vpiParent:
-                            \_Assignment: , line:17:25, endln:17:55
-                            |vpiName:foo_bar_4
-                            |vpiFullName:work@Foo.foo_bar_4
-                            |vpiActual:
-                            \_Net: (work@Foo.foo_bar_4), line:17:34, endln:17:37
-                            |vpiIndex:
-                            \_RefObj: (work@Foo.i), line:17:35, endln:17:36
-                              |vpiParent:
-                              \_BitSelect: (work@Foo.foo_bar_4), line:17:34, endln:17:37
-                              |vpiName:i
-                              |vpiFullName:work@Foo.i
-                              |vpiActual:
-                              \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                |vpiSize:64
+                                |vpiDecompile:1
+                                |UINT:1
                 |vpiAlwaysType:3
             |vpiInternalScope:
             \_Begin: (work@Foo), line:22:18, endln:85:16
@@ -1372,6 +1371,22 @@ Design: (unnamed)
                             |vpiParent:
                             \_Begin: (work@Foo), line:24:41, endln:26:24
                             |vpiOpType:82
+                            |vpiLhs:
+                            \_BitSelect: (work@Foo.foo_bar_4), line:25:34, endln:25:37
+                              |vpiParent:
+                              \_Assignment: , line:25:25, endln:25:55
+                              |vpiName:foo_bar_4
+                              |vpiFullName:work@Foo.foo_bar_4
+                              |vpiActual:
+                              \_Net: (work@Foo.foo_bar_4), line:25:34, endln:25:37
+                              |vpiIndex:
+                              \_RefObj: (work@Foo.i), line:25:35, endln:25:36
+                                |vpiParent:
+                                \_BitSelect: (work@Foo.foo_bar_4), line:25:34, endln:25:37
+                                |vpiName:i
+                                |vpiFullName:work@Foo.i
+                                |vpiActual:
+                                \_Variable: (work@Foo.i), line:5:21, endln:5:22
                             |vpiRhs:
                             \_BitSelect: (work@Foo.foo_bar_4), line:25:50, endln:25:55
                               |vpiParent:
@@ -1397,9 +1412,6 @@ Design: (unnamed)
                                 \_Constant: , line:25:53, endln:25:54
                                   |vpiParent:
                                   \_Operation: , line:25:51, endln:25:54
-                                  |vpiDecompile:1
-                                  |vpiSize:64
-                                  |UINT:1
                                   |vpiTypespec:
                                   \_RefTypespec: (work@Foo.foo_bar_4), line:25:53, endln:25:54
                                     |vpiParent:
@@ -1408,22 +1420,9 @@ Design: (unnamed)
                                     |vpiActual:
                                     \_IntTypespec: 
                                   |vpiConstType:9
-                            |vpiLhs:
-                            \_BitSelect: (work@Foo.foo_bar_4), line:25:34, endln:25:37
-                              |vpiParent:
-                              \_Assignment: , line:25:25, endln:25:55
-                              |vpiName:foo_bar_4
-                              |vpiFullName:work@Foo.foo_bar_4
-                              |vpiActual:
-                              \_Net: (work@Foo.foo_bar_4), line:25:34, endln:25:37
-                              |vpiIndex:
-                              \_RefObj: (work@Foo.i), line:25:35, endln:25:36
-                                |vpiParent:
-                                \_BitSelect: (work@Foo.foo_bar_4), line:25:34, endln:25:37
-                                |vpiName:i
-                                |vpiFullName:work@Foo.i
-                                |vpiActual:
-                                \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                  |vpiSize:64
+                                  |vpiDecompile:1
+                                  |UINT:1
                   |vpiAlwaysType:3
               |vpiInternalScope:
               \_Begin: (work@Foo), line:30:18, endln:85:16
@@ -1510,6 +1509,22 @@ Design: (unnamed)
                               |vpiParent:
                               \_Begin: (work@Foo), line:32:41, endln:34:24
                               |vpiOpType:82
+                              |vpiLhs:
+                              \_BitSelect: (work@Foo.foo_bar_4), line:33:34, endln:33:37
+                                |vpiParent:
+                                \_Assignment: , line:33:25, endln:33:55
+                                |vpiName:foo_bar_4
+                                |vpiFullName:work@Foo.foo_bar_4
+                                |vpiActual:
+                                \_Net: (work@Foo.foo_bar_4), line:33:34, endln:33:37
+                                |vpiIndex:
+                                \_RefObj: (work@Foo.i), line:33:35, endln:33:36
+                                  |vpiParent:
+                                  \_BitSelect: (work@Foo.foo_bar_4), line:33:34, endln:33:37
+                                  |vpiName:i
+                                  |vpiFullName:work@Foo.i
+                                  |vpiActual:
+                                  \_Variable: (work@Foo.i), line:5:21, endln:5:22
                               |vpiRhs:
                               \_BitSelect: (work@Foo.foo_bar_4), line:33:50, endln:33:55
                                 |vpiParent:
@@ -1535,9 +1550,6 @@ Design: (unnamed)
                                   \_Constant: , line:33:53, endln:33:54
                                     |vpiParent:
                                     \_Operation: , line:33:51, endln:33:54
-                                    |vpiDecompile:1
-                                    |vpiSize:64
-                                    |UINT:1
                                     |vpiTypespec:
                                     \_RefTypespec: (work@Foo.foo_bar_4), line:33:53, endln:33:54
                                       |vpiParent:
@@ -1546,22 +1558,9 @@ Design: (unnamed)
                                       |vpiActual:
                                       \_IntTypespec: 
                                     |vpiConstType:9
-                              |vpiLhs:
-                              \_BitSelect: (work@Foo.foo_bar_4), line:33:34, endln:33:37
-                                |vpiParent:
-                                \_Assignment: , line:33:25, endln:33:55
-                                |vpiName:foo_bar_4
-                                |vpiFullName:work@Foo.foo_bar_4
-                                |vpiActual:
-                                \_Net: (work@Foo.foo_bar_4), line:33:34, endln:33:37
-                                |vpiIndex:
-                                \_RefObj: (work@Foo.i), line:33:35, endln:33:36
-                                  |vpiParent:
-                                  \_BitSelect: (work@Foo.foo_bar_4), line:33:34, endln:33:37
-                                  |vpiName:i
-                                  |vpiFullName:work@Foo.i
-                                  |vpiActual:
-                                  \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                    |vpiSize:64
+                                    |vpiDecompile:1
+                                    |UINT:1
                     |vpiAlwaysType:3
                 |vpiInternalScope:
                 \_Begin: (work@Foo), line:38:18, endln:85:16
@@ -1648,6 +1647,22 @@ Design: (unnamed)
                                 |vpiParent:
                                 \_Begin: (work@Foo), line:40:41, endln:42:24
                                 |vpiOpType:82
+                                |vpiLhs:
+                                \_BitSelect: (work@Foo.foo_bar_4), line:41:34, endln:41:37
+                                  |vpiParent:
+                                  \_Assignment: , line:41:25, endln:41:55
+                                  |vpiName:foo_bar_4
+                                  |vpiFullName:work@Foo.foo_bar_4
+                                  |vpiActual:
+                                  \_Net: (work@Foo.foo_bar_4), line:41:34, endln:41:37
+                                  |vpiIndex:
+                                  \_RefObj: (work@Foo.i), line:41:35, endln:41:36
+                                    |vpiParent:
+                                    \_BitSelect: (work@Foo.foo_bar_4), line:41:34, endln:41:37
+                                    |vpiName:i
+                                    |vpiFullName:work@Foo.i
+                                    |vpiActual:
+                                    \_Variable: (work@Foo.i), line:5:21, endln:5:22
                                 |vpiRhs:
                                 \_BitSelect: (work@Foo.foo_bar_4), line:41:50, endln:41:55
                                   |vpiParent:
@@ -1673,9 +1688,6 @@ Design: (unnamed)
                                     \_Constant: , line:41:53, endln:41:54
                                       |vpiParent:
                                       \_Operation: , line:41:51, endln:41:54
-                                      |vpiDecompile:1
-                                      |vpiSize:64
-                                      |UINT:1
                                       |vpiTypespec:
                                       \_RefTypespec: (work@Foo.foo_bar_4), line:41:53, endln:41:54
                                         |vpiParent:
@@ -1684,22 +1696,9 @@ Design: (unnamed)
                                         |vpiActual:
                                         \_IntTypespec: 
                                       |vpiConstType:9
-                                |vpiLhs:
-                                \_BitSelect: (work@Foo.foo_bar_4), line:41:34, endln:41:37
-                                  |vpiParent:
-                                  \_Assignment: , line:41:25, endln:41:55
-                                  |vpiName:foo_bar_4
-                                  |vpiFullName:work@Foo.foo_bar_4
-                                  |vpiActual:
-                                  \_Net: (work@Foo.foo_bar_4), line:41:34, endln:41:37
-                                  |vpiIndex:
-                                  \_RefObj: (work@Foo.i), line:41:35, endln:41:36
-                                    |vpiParent:
-                                    \_BitSelect: (work@Foo.foo_bar_4), line:41:34, endln:41:37
-                                    |vpiName:i
-                                    |vpiFullName:work@Foo.i
-                                    |vpiActual:
-                                    \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                      |vpiSize:64
+                                      |vpiDecompile:1
+                                      |UINT:1
                       |vpiAlwaysType:3
                   |vpiInternalScope:
                   \_Begin: (work@Foo), line:46:18, endln:85:16
@@ -1786,6 +1785,22 @@ Design: (unnamed)
                                   |vpiParent:
                                   \_Begin: (work@Foo), line:48:41, endln:50:24
                                   |vpiOpType:82
+                                  |vpiLhs:
+                                  \_BitSelect: (work@Foo.foo_bar_4), line:49:34, endln:49:37
+                                    |vpiParent:
+                                    \_Assignment: , line:49:25, endln:49:55
+                                    |vpiName:foo_bar_4
+                                    |vpiFullName:work@Foo.foo_bar_4
+                                    |vpiActual:
+                                    \_Net: (work@Foo.foo_bar_4), line:49:34, endln:49:37
+                                    |vpiIndex:
+                                    \_RefObj: (work@Foo.i), line:49:35, endln:49:36
+                                      |vpiParent:
+                                      \_BitSelect: (work@Foo.foo_bar_4), line:49:34, endln:49:37
+                                      |vpiName:i
+                                      |vpiFullName:work@Foo.i
+                                      |vpiActual:
+                                      \_Variable: (work@Foo.i), line:5:21, endln:5:22
                                   |vpiRhs:
                                   \_BitSelect: (work@Foo.foo_bar_4), line:49:50, endln:49:55
                                     |vpiParent:
@@ -1811,9 +1826,6 @@ Design: (unnamed)
                                       \_Constant: , line:49:53, endln:49:54
                                         |vpiParent:
                                         \_Operation: , line:49:51, endln:49:54
-                                        |vpiDecompile:1
-                                        |vpiSize:64
-                                        |UINT:1
                                         |vpiTypespec:
                                         \_RefTypespec: (work@Foo.foo_bar_4), line:49:53, endln:49:54
                                           |vpiParent:
@@ -1822,22 +1834,9 @@ Design: (unnamed)
                                           |vpiActual:
                                           \_IntTypespec: 
                                         |vpiConstType:9
-                                  |vpiLhs:
-                                  \_BitSelect: (work@Foo.foo_bar_4), line:49:34, endln:49:37
-                                    |vpiParent:
-                                    \_Assignment: , line:49:25, endln:49:55
-                                    |vpiName:foo_bar_4
-                                    |vpiFullName:work@Foo.foo_bar_4
-                                    |vpiActual:
-                                    \_Net: (work@Foo.foo_bar_4), line:49:34, endln:49:37
-                                    |vpiIndex:
-                                    \_RefObj: (work@Foo.i), line:49:35, endln:49:36
-                                      |vpiParent:
-                                      \_BitSelect: (work@Foo.foo_bar_4), line:49:34, endln:49:37
-                                      |vpiName:i
-                                      |vpiFullName:work@Foo.i
-                                      |vpiActual:
-                                      \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                        |vpiSize:64
+                                        |vpiDecompile:1
+                                        |UINT:1
                         |vpiAlwaysType:3
                     |vpiInternalScope:
                     \_Begin: (work@Foo), line:54:18, endln:85:16
@@ -1924,6 +1923,22 @@ Design: (unnamed)
                                     |vpiParent:
                                     \_Begin: (work@Foo), line:56:41, endln:58:24
                                     |vpiOpType:82
+                                    |vpiLhs:
+                                    \_BitSelect: (work@Foo.foo_bar_4), line:57:34, endln:57:37
+                                      |vpiParent:
+                                      \_Assignment: , line:57:25, endln:57:55
+                                      |vpiName:foo_bar_4
+                                      |vpiFullName:work@Foo.foo_bar_4
+                                      |vpiActual:
+                                      \_Net: (work@Foo.foo_bar_4), line:57:34, endln:57:37
+                                      |vpiIndex:
+                                      \_RefObj: (work@Foo.i), line:57:35, endln:57:36
+                                        |vpiParent:
+                                        \_BitSelect: (work@Foo.foo_bar_4), line:57:34, endln:57:37
+                                        |vpiName:i
+                                        |vpiFullName:work@Foo.i
+                                        |vpiActual:
+                                        \_Variable: (work@Foo.i), line:5:21, endln:5:22
                                     |vpiRhs:
                                     \_BitSelect: (work@Foo.foo_bar_4), line:57:50, endln:57:55
                                       |vpiParent:
@@ -1949,9 +1964,6 @@ Design: (unnamed)
                                         \_Constant: , line:57:53, endln:57:54
                                           |vpiParent:
                                           \_Operation: , line:57:51, endln:57:54
-                                          |vpiDecompile:1
-                                          |vpiSize:64
-                                          |UINT:1
                                           |vpiTypespec:
                                           \_RefTypespec: (work@Foo.foo_bar_4), line:57:53, endln:57:54
                                             |vpiParent:
@@ -1960,22 +1972,9 @@ Design: (unnamed)
                                             |vpiActual:
                                             \_IntTypespec: 
                                           |vpiConstType:9
-                                    |vpiLhs:
-                                    \_BitSelect: (work@Foo.foo_bar_4), line:57:34, endln:57:37
-                                      |vpiParent:
-                                      \_Assignment: , line:57:25, endln:57:55
-                                      |vpiName:foo_bar_4
-                                      |vpiFullName:work@Foo.foo_bar_4
-                                      |vpiActual:
-                                      \_Net: (work@Foo.foo_bar_4), line:57:34, endln:57:37
-                                      |vpiIndex:
-                                      \_RefObj: (work@Foo.i), line:57:35, endln:57:36
-                                        |vpiParent:
-                                        \_BitSelect: (work@Foo.foo_bar_4), line:57:34, endln:57:37
-                                        |vpiName:i
-                                        |vpiFullName:work@Foo.i
-                                        |vpiActual:
-                                        \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                          |vpiSize:64
+                                          |vpiDecompile:1
+                                          |UINT:1
                           |vpiAlwaysType:3
                       |vpiInternalScope:
                       \_Begin: (work@Foo), line:62:18, endln:85:16
@@ -2062,6 +2061,22 @@ Design: (unnamed)
                                       |vpiParent:
                                       \_Begin: (work@Foo), line:64:41, endln:66:24
                                       |vpiOpType:82
+                                      |vpiLhs:
+                                      \_BitSelect: (work@Foo.foo_bar_4), line:65:34, endln:65:37
+                                        |vpiParent:
+                                        \_Assignment: , line:65:25, endln:65:55
+                                        |vpiName:foo_bar_4
+                                        |vpiFullName:work@Foo.foo_bar_4
+                                        |vpiActual:
+                                        \_Net: (work@Foo.foo_bar_4), line:65:34, endln:65:37
+                                        |vpiIndex:
+                                        \_RefObj: (work@Foo.i), line:65:35, endln:65:36
+                                          |vpiParent:
+                                          \_BitSelect: (work@Foo.foo_bar_4), line:65:34, endln:65:37
+                                          |vpiName:i
+                                          |vpiFullName:work@Foo.i
+                                          |vpiActual:
+                                          \_Variable: (work@Foo.i), line:5:21, endln:5:22
                                       |vpiRhs:
                                       \_BitSelect: (work@Foo.foo_bar_4), line:65:50, endln:65:55
                                         |vpiParent:
@@ -2087,9 +2102,6 @@ Design: (unnamed)
                                           \_Constant: , line:65:53, endln:65:54
                                             |vpiParent:
                                             \_Operation: , line:65:51, endln:65:54
-                                            |vpiDecompile:1
-                                            |vpiSize:64
-                                            |UINT:1
                                             |vpiTypespec:
                                             \_RefTypespec: (work@Foo.foo_bar_4), line:65:53, endln:65:54
                                               |vpiParent:
@@ -2098,22 +2110,9 @@ Design: (unnamed)
                                               |vpiActual:
                                               \_IntTypespec: 
                                             |vpiConstType:9
-                                      |vpiLhs:
-                                      \_BitSelect: (work@Foo.foo_bar_4), line:65:34, endln:65:37
-                                        |vpiParent:
-                                        \_Assignment: , line:65:25, endln:65:55
-                                        |vpiName:foo_bar_4
-                                        |vpiFullName:work@Foo.foo_bar_4
-                                        |vpiActual:
-                                        \_Net: (work@Foo.foo_bar_4), line:65:34, endln:65:37
-                                        |vpiIndex:
-                                        \_RefObj: (work@Foo.i), line:65:35, endln:65:36
-                                          |vpiParent:
-                                          \_BitSelect: (work@Foo.foo_bar_4), line:65:34, endln:65:37
-                                          |vpiName:i
-                                          |vpiFullName:work@Foo.i
-                                          |vpiActual:
-                                          \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                            |vpiSize:64
+                                            |vpiDecompile:1
+                                            |UINT:1
                             |vpiAlwaysType:3
                         |vpiInternalScope:
                         \_Begin: (work@Foo), line:70:18, endln:85:16
@@ -2200,6 +2199,22 @@ Design: (unnamed)
                                         |vpiParent:
                                         \_Begin: (work@Foo), line:72:41, endln:74:24
                                         |vpiOpType:82
+                                        |vpiLhs:
+                                        \_BitSelect: (work@Foo.foo_bar_4), line:73:34, endln:73:37
+                                          |vpiParent:
+                                          \_Assignment: , line:73:25, endln:73:55
+                                          |vpiName:foo_bar_4
+                                          |vpiFullName:work@Foo.foo_bar_4
+                                          |vpiActual:
+                                          \_Net: (work@Foo.foo_bar_4), line:73:34, endln:73:37
+                                          |vpiIndex:
+                                          \_RefObj: (work@Foo.i), line:73:35, endln:73:36
+                                            |vpiParent:
+                                            \_BitSelect: (work@Foo.foo_bar_4), line:73:34, endln:73:37
+                                            |vpiName:i
+                                            |vpiFullName:work@Foo.i
+                                            |vpiActual:
+                                            \_Variable: (work@Foo.i), line:5:21, endln:5:22
                                         |vpiRhs:
                                         \_BitSelect: (work@Foo.foo_bar_4), line:73:50, endln:73:55
                                           |vpiParent:
@@ -2225,9 +2240,6 @@ Design: (unnamed)
                                             \_Constant: , line:73:53, endln:73:54
                                               |vpiParent:
                                               \_Operation: , line:73:51, endln:73:54
-                                              |vpiDecompile:1
-                                              |vpiSize:64
-                                              |UINT:1
                                               |vpiTypespec:
                                               \_RefTypespec: (work@Foo.foo_bar_4), line:73:53, endln:73:54
                                                 |vpiParent:
@@ -2236,22 +2248,9 @@ Design: (unnamed)
                                                 |vpiActual:
                                                 \_IntTypespec: 
                                               |vpiConstType:9
-                                        |vpiLhs:
-                                        \_BitSelect: (work@Foo.foo_bar_4), line:73:34, endln:73:37
-                                          |vpiParent:
-                                          \_Assignment: , line:73:25, endln:73:55
-                                          |vpiName:foo_bar_4
-                                          |vpiFullName:work@Foo.foo_bar_4
-                                          |vpiActual:
-                                          \_Net: (work@Foo.foo_bar_4), line:73:34, endln:73:37
-                                          |vpiIndex:
-                                          \_RefObj: (work@Foo.i), line:73:35, endln:73:36
-                                            |vpiParent:
-                                            \_BitSelect: (work@Foo.foo_bar_4), line:73:34, endln:73:37
-                                            |vpiName:i
-                                            |vpiFullName:work@Foo.i
-                                            |vpiActual:
-                                            \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                              |vpiSize:64
+                                              |vpiDecompile:1
+                                              |UINT:1
                               |vpiAlwaysType:3
                           |vpiInternalScope:
                           \_Begin: (work@Foo), line:78:18, endln:85:16
@@ -2338,6 +2337,22 @@ Design: (unnamed)
                                           |vpiParent:
                                           \_Begin: (work@Foo), line:80:41, endln:82:24
                                           |vpiOpType:82
+                                          |vpiLhs:
+                                          \_BitSelect: (work@Foo.foo_bar_4), line:81:34, endln:81:37
+                                            |vpiParent:
+                                            \_Assignment: , line:81:25, endln:81:55
+                                            |vpiName:foo_bar_4
+                                            |vpiFullName:work@Foo.foo_bar_4
+                                            |vpiActual:
+                                            \_Net: (work@Foo.foo_bar_4), line:81:34, endln:81:37
+                                            |vpiIndex:
+                                            \_RefObj: (work@Foo.i), line:81:35, endln:81:36
+                                              |vpiParent:
+                                              \_BitSelect: (work@Foo.foo_bar_4), line:81:34, endln:81:37
+                                              |vpiName:i
+                                              |vpiFullName:work@Foo.i
+                                              |vpiActual:
+                                              \_Variable: (work@Foo.i), line:5:21, endln:5:22
                                           |vpiRhs:
                                           \_BitSelect: (work@Foo.foo_bar_4), line:81:50, endln:81:55
                                             |vpiParent:
@@ -2363,9 +2378,6 @@ Design: (unnamed)
                                               \_Constant: , line:81:53, endln:81:54
                                                 |vpiParent:
                                                 \_Operation: , line:81:51, endln:81:54
-                                                |vpiDecompile:1
-                                                |vpiSize:64
-                                                |UINT:1
                                                 |vpiTypespec:
                                                 \_RefTypespec: (work@Foo.foo_bar_4), line:81:53, endln:81:54
                                                   |vpiParent:
@@ -2374,22 +2386,9 @@ Design: (unnamed)
                                                   |vpiActual:
                                                   \_IntTypespec: 
                                                 |vpiConstType:9
-                                          |vpiLhs:
-                                          \_BitSelect: (work@Foo.foo_bar_4), line:81:34, endln:81:37
-                                            |vpiParent:
-                                            \_Assignment: , line:81:25, endln:81:55
-                                            |vpiName:foo_bar_4
-                                            |vpiFullName:work@Foo.foo_bar_4
-                                            |vpiActual:
-                                            \_Net: (work@Foo.foo_bar_4), line:81:34, endln:81:37
-                                            |vpiIndex:
-                                            \_RefObj: (work@Foo.i), line:81:35, endln:81:36
-                                              |vpiParent:
-                                              \_BitSelect: (work@Foo.foo_bar_4), line:81:34, endln:81:37
-                                              |vpiName:i
-                                              |vpiFullName:work@Foo.i
-                                              |vpiActual:
-                                              \_Variable: (work@Foo.i), line:5:21, endln:5:22
+                                                |vpiSize:64
+                                                |vpiDecompile:1
+                                                |UINT:1
                                 |vpiAlwaysType:3
                             |vpiImportTypespec:
                             \_Net: (work@Foo.ADDR_OFFSET_PART_1_STRIDE), line:78:27, endln:78:52
@@ -2754,13 +2753,12 @@ Design: (unnamed)
         \_Assignment: , line:5:14, endln:5:26
           |vpiParent:
           \_GenFor: (work@Foo), line:5:9, endln:87:12
+          |vpiLhs:
+          \_Variable: (work@Foo.i), line:5:21, endln:5:22
           |vpiRhs:
           \_Constant: , line:5:25, endln:5:26
             |vpiParent:
             \_Assignment: , line:5:14, endln:5:26
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@Foo), line:5:25, endln:5:26
               |vpiParent:
@@ -2769,8 +2767,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiLhs:
-          \_Variable: (work@Foo.i), line:5:21, endln:5:22
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiCondition:
         \_Operation: , line:5:29, endln:5:36
           |vpiParent:
@@ -2788,9 +2787,6 @@ Design: (unnamed)
           \_Constant: , line:5:34, endln:5:36
             |vpiParent:
             \_Operation: , line:5:29, endln:5:36
-            |vpiDecompile:17
-            |vpiSize:64
-            |UINT:17
             |vpiTypespec:
             \_RefTypespec: (work@Foo), line:5:34, endln:5:36
               |vpiParent:
@@ -2799,6 +2795,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:17
+            |UINT:17
         |vpiForIncStmt:
         \_Operation: , line:5:39, endln:5:42
           |vpiParent:

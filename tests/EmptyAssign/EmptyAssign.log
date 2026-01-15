@@ -211,34 +211,30 @@ Design: (unnamed)
   \_Parameter: (work@dut.a), line:1:24, endln:1:29
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
-    |UINT:1
     |vpiName:a
     |vpiFullName:work@dut.a
   |vpiParameter:
   \_Parameter: (work@dut.b), line:1:31, endln:1:36
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
-    |UINT:2
     |vpiName:b
     |vpiFullName:work@dut.b
   |vpiParameter:
   \_Parameter: (work@dut.c), line:1:38, endln:1:43
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
-    |UINT:3
     |vpiName:c
     |vpiFullName:work@dut.c
   |vpiParamAssign:
   \_ParamAssign: , line:1:24, endln:1:29
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@dut.a), line:1:24, endln:1:29
     |vpiRhs:
     \_Constant: , line:1:28, endln:1:29
       |vpiParent:
       \_ParamAssign: , line:1:24, endln:1:29
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@dut), line:1:28, endln:1:29
         |vpiParent:
@@ -247,19 +243,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@dut.a), line:1:24, endln:1:29
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiParamAssign:
   \_ParamAssign: , line:1:31, endln:1:36
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@dut.b), line:1:31, endln:1:36
     |vpiRhs:
     \_Constant: , line:1:35, endln:1:36
       |vpiParent:
       \_ParamAssign: , line:1:31, endln:1:36
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
       |vpiTypespec:
       \_RefTypespec: (work@dut), line:1:35, endln:1:36
         |vpiParent:
@@ -268,19 +264,19 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@dut.b), line:1:31, endln:1:36
+      |vpiSize:64
+      |vpiDecompile:2
+      |UINT:2
   |vpiParamAssign:
   \_ParamAssign: , line:1:38, endln:1:43
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@dut.c), line:1:38, endln:1:43
     |vpiRhs:
     \_Constant: , line:1:42, endln:1:43
       |vpiParent:
       \_ParamAssign: , line:1:38, endln:1:43
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
       |vpiTypespec:
       \_RefTypespec: (work@dut), line:1:42, endln:1:43
         |vpiParent:
@@ -289,8 +285,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@dut.c), line:1:38, endln:1:43
+      |vpiSize:64
+      |vpiDecompile:3
+      |UINT:3
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -323,13 +320,15 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:4:3, endln:4:35
         |vpiParent:
         \_Begin: (work@dut), line:3:9, endln:9:4
+        |vpiName:
+        \_Identifier: ($display), line:4:4, endln:4:11
+          |vpiParent:
+          \_SysFuncCall: ($display), line:4:3, endln:4:35
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:4:12, endln:4:25
           |vpiParent:
           \_SysFuncCall: ($display), line:4:3, endln:4:35
-          |vpiDecompile:"%0d %0d %0d"
-          |vpiSize:88
-          |STRING:%0d %0d %0d
           |vpiTypespec:
           \_RefTypespec: (work@dut), line:4:12, endln:4:25
             |vpiParent:
@@ -338,6 +337,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:88
+          |vpiDecompile:"%0d %0d %0d"
+          |STRING:%0d %0d %0d
         |vpiArgument:
         \_RefObj: (work@dut.a), line:4:27, endln:4:28
           |vpiParent:
@@ -362,11 +364,6 @@ Design: (unnamed)
           |vpiFullName:work@dut.c
           |vpiActual:
           \_Parameter: (work@dut.c), line:1:38, endln:1:43
-        |vpiName:
-        \_Identifier: ($display), line:4:4, endln:4:11
-          |vpiParent:
-          \_SysFuncCall: ($display), line:4:3, endln:4:35
-          |vpiName:$display
       |vpiStmt:
       \_IfElse: , line:5:3, endln:8:24
         |vpiParent:
@@ -388,9 +385,6 @@ Design: (unnamed)
           \_Constant: , line:5:13, endln:5:14
             |vpiParent:
             \_Operation: , line:5:7, endln:5:14
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
             |vpiTypespec:
             \_RefTypespec: (work@dut), line:5:13, endln:5:14
               |vpiParent:
@@ -399,17 +393,22 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:2
+            |UINT:2
         |vpiStmt:
         \_SysFuncCall: ($display), line:6:5, endln:6:23
           |vpiParent:
           \_IfElse: , line:5:3, endln:8:24
+          |vpiName:
+          \_Identifier: ($display), line:6:6, endln:6:13
+            |vpiParent:
+            \_SysFuncCall: ($display), line:6:5, endln:6:23
+            |vpiName:$display
           |vpiArgument:
           \_Constant: , line:6:14, endln:6:22
             |vpiParent:
             \_SysFuncCall: ($display), line:6:5, endln:6:23
-            |vpiDecompile:"PASSED"
-            |vpiSize:48
-            |STRING:PASSED
             |vpiTypespec:
             \_RefTypespec: (work@dut), line:6:14, endln:6:22
               |vpiParent:
@@ -418,22 +417,22 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
-          |vpiName:
-          \_Identifier: ($display), line:6:6, endln:6:13
-            |vpiParent:
-            \_SysFuncCall: ($display), line:6:5, endln:6:23
-            |vpiName:$display
+            |vpiSize:48
+            |vpiDecompile:"PASSED"
+            |STRING:PASSED
         |vpiElseStmt:
         \_SysFuncCall: ($display), line:8:5, endln:8:23
           |vpiParent:
           \_IfElse: , line:5:3, endln:8:24
+          |vpiName:
+          \_Identifier: ($display), line:8:6, endln:8:13
+            |vpiParent:
+            \_SysFuncCall: ($display), line:8:5, endln:8:23
+            |vpiName:$display
           |vpiArgument:
           \_Constant: , line:8:14, endln:8:22
             |vpiParent:
             \_SysFuncCall: ($display), line:8:5, endln:8:23
-            |vpiDecompile:"FAILED"
-            |vpiSize:48
-            |STRING:FAILED
             |vpiTypespec:
             \_RefTypespec: (work@dut), line:8:14, endln:8:22
               |vpiParent:
@@ -442,11 +441,9 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
-          |vpiName:
-          \_Identifier: ($display), line:8:6, endln:8:13
-            |vpiParent:
-            \_SysFuncCall: ($display), line:8:5, endln:8:23
-            |vpiName:$display
+            |vpiSize:48
+            |vpiDecompile:"FAILED"
+            |STRING:FAILED
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
   |vpiParent:

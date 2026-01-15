@@ -2880,7 +2880,7 @@ Assignment                                            48
 Begin                                                  7
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              62
+Constant                                              67
 DelayControl                                          33
 Design                                                 1
 EnumConst                                              5
@@ -2891,7 +2891,7 @@ GateArray                                              1
 IODecl                                                11
 Identifier                                            55
 Initial                                                7
-IntTypespec                                           64
+IntTypespec                                           69
 LogicTypespec                                         65
 Module                                                11
 ModuleTypespec                                        11
@@ -2902,7 +2902,7 @@ Port                                                   4
 PrimTerm                                              91
 Range                                                  4
 RefObj                                               186
-RefTypespec                                          139
+RefTypespec                                          144
 SourceFile                                             1
 StringTypespec                                         7
 SysFuncCall                                           16
@@ -2910,7 +2910,7 @@ Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                               974
+Total:                                               989
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Gates/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -3019,15 +3019,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:3:23, endln:3:28
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:3:31, endln:3:32
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
             |vpiParent:
@@ -3036,6 +3033,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -3085,8 +3085,8 @@ Design: (unnamed)
       \_IODecl: (message), line:9:15, endln:9:22
         |vpiParent:
         \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
       |vpiParent:
@@ -3116,8 +3116,8 @@ Design: (unnamed)
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
       |vpiParent:
@@ -3134,8 +3134,8 @@ Design: (unnamed)
       \_IODecl: (message), line:15:19, endln:15:26
         |vpiParent:
         \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
       |vpiParent:
@@ -3166,8 +3166,8 @@ Design: (unnamed)
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
       |vpiParent:
@@ -3184,8 +3184,8 @@ Design: (unnamed)
       \_IODecl: (message), line:21:20, endln:21:27
         |vpiParent:
         \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
       |vpiParent:
@@ -3216,8 +3216,8 @@ Design: (unnamed)
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiImportTypespec:
@@ -3357,41 +3357,106 @@ Design: (unnamed)
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::FINISHED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:0
+          |INT:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::RUNNING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:1
+          |INT:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
-        |INT:2
-        |vpiDecompile:2
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::WAITING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:2
+          |INT:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::SUSPENDED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:3
+          |INT:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
-        |INT:4
-        |vpiDecompile:4
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::KILLED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:4
+          |INT:4
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Gates/builtin.sv, line:30:3, endln:52:11
+      |vpiSigned:1
     |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
@@ -3410,6 +3475,8 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -3474,15 +3541,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:57:22, endln:57:30
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:57:33, endln:57:34
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
             |vpiParent:
@@ -3491,6 +3555,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -3527,15 +3594,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:60:18, endln:60:26
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:60:29, endln:60:30
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
             |vpiParent:
@@ -3544,6 +3608,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -3580,15 +3647,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:63:18, endln:63:26
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:63:29, endln:63:30
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
             |vpiParent:
@@ -3597,6 +3661,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -3640,15 +3707,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:66:41, endln:66:42
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
             |vpiParent:
@@ -3657,6 +3721,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -3889,13 +3956,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:134:3, endln:134:45
         |vpiParent:
         \_Begin: (work@and_from_nand), line:133:9, endln:141:4
+        |vpiName:
+        \_Identifier: ($monitor), line:134:4, endln:134:11
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:134:3, endln:134:45
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:134:13, endln:134:35
           |vpiParent:
           \_SysFuncCall: ($monitor), line:134:3, endln:134:45
-          |vpiDecompile:"X = %b Y = %b F = %b"
-          |vpiSize:160
-          |STRING:X = %b Y = %b F = %b
           |vpiTypespec:
           \_RefTypespec: (work@and_from_nand), line:134:13, endln:134:35
             |vpiParent:
@@ -3904,6 +3973,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:160
+          |vpiDecompile:"X = %b Y = %b F = %b"
+          |STRING:X = %b Y = %b F = %b
         |vpiArgument:
         \_RefObj: (work@and_from_nand.X), line:134:37, endln:134:38
           |vpiParent:
@@ -3928,32 +4000,12 @@ Design: (unnamed)
           |vpiFullName:work@and_from_nand.F
           |vpiActual:
           \_Net: (work@and_from_nand.F), line:127:6, endln:127:7
-        |vpiName:
-        \_Identifier: ($monitor), line:134:4, endln:134:11
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:134:3, endln:134:45
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:135:3, endln:135:8
         |vpiParent:
         \_Begin: (work@and_from_nand), line:133:9, endln:141:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:135:7, endln:135:8
-          |vpiParent:
-          \_Assignment: , line:135:3, endln:135:8
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@and_from_nand), line:135:7, endln:135:8
-            |vpiParent:
-            \_Constant: , line:135:7, endln:135:8
-            |vpiFullName:work@and_from_nand
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@and_from_nand.X), line:135:3, endln:135:4
           |vpiParent:
@@ -3962,27 +4014,27 @@ Design: (unnamed)
           |vpiFullName:work@and_from_nand.X
           |vpiActual:
           \_Net: (work@and_from_nand.X), line:126:5, endln:126:6
+        |vpiRhs:
+        \_Constant: , line:135:7, endln:135:8
+          |vpiParent:
+          \_Assignment: , line:135:3, endln:135:8
+          |vpiTypespec:
+          \_RefTypespec: (work@and_from_nand), line:135:7, endln:135:8
+            |vpiParent:
+            \_Constant: , line:135:7, endln:135:8
+            |vpiFullName:work@and_from_nand
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:136:3, endln:136:8
         |vpiParent:
         \_Begin: (work@and_from_nand), line:133:9, endln:141:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:136:7, endln:136:8
-          |vpiParent:
-          \_Assignment: , line:136:3, endln:136:8
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@and_from_nand), line:136:7, endln:136:8
-            |vpiParent:
-            \_Constant: , line:136:7, endln:136:8
-            |vpiFullName:work@and_from_nand
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@and_from_nand.Y), line:136:3, endln:136:4
           |vpiParent:
@@ -3991,6 +4043,21 @@ Design: (unnamed)
           |vpiFullName:work@and_from_nand.Y
           |vpiActual:
           \_Net: (work@and_from_nand.Y), line:126:8, endln:126:9
+        |vpiRhs:
+        \_Constant: , line:136:7, endln:136:8
+          |vpiParent:
+          \_Assignment: , line:136:3, endln:136:8
+          |vpiTypespec:
+          \_RefTypespec: (work@and_from_nand), line:136:7, endln:136:8
+            |vpiParent:
+            \_Constant: , line:136:7, endln:136:8
+            |vpiFullName:work@and_from_nand
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:137:3, endln:137:11
         |vpiParent:
@@ -4002,21 +4069,6 @@ Design: (unnamed)
           \_DelayControl: , line:137:3, endln:137:11
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:137:10, endln:137:11
-            |vpiParent:
-            \_Assignment: , line:137:6, endln:137:11
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@and_from_nand), line:137:10, endln:137:11
-              |vpiParent:
-              \_Constant: , line:137:10, endln:137:11
-              |vpiFullName:work@and_from_nand
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@and_from_nand.X), line:137:6, endln:137:7
             |vpiParent:
@@ -4025,6 +4077,21 @@ Design: (unnamed)
             |vpiFullName:work@and_from_nand.X
             |vpiActual:
             \_Net: (work@and_from_nand.X), line:126:5, endln:126:6
+          |vpiRhs:
+          \_Constant: , line:137:10, endln:137:11
+            |vpiParent:
+            \_Assignment: , line:137:6, endln:137:11
+            |vpiTypespec:
+            \_RefTypespec: (work@and_from_nand), line:137:10, endln:137:11
+              |vpiParent:
+              \_Constant: , line:137:10, endln:137:11
+              |vpiFullName:work@and_from_nand
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:138:3, endln:138:11
         |vpiParent:
@@ -4036,21 +4103,6 @@ Design: (unnamed)
           \_DelayControl: , line:138:3, endln:138:11
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:138:10, endln:138:11
-            |vpiParent:
-            \_Assignment: , line:138:6, endln:138:11
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@and_from_nand), line:138:10, endln:138:11
-              |vpiParent:
-              \_Constant: , line:138:10, endln:138:11
-              |vpiFullName:work@and_from_nand
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@and_from_nand.Y), line:138:6, endln:138:7
             |vpiParent:
@@ -4059,6 +4111,21 @@ Design: (unnamed)
             |vpiFullName:work@and_from_nand.Y
             |vpiActual:
             \_Net: (work@and_from_nand.Y), line:126:8, endln:126:9
+          |vpiRhs:
+          \_Constant: , line:138:10, endln:138:11
+            |vpiParent:
+            \_Assignment: , line:138:6, endln:138:11
+            |vpiTypespec:
+            \_RefTypespec: (work@and_from_nand), line:138:10, endln:138:11
+              |vpiParent:
+              \_Constant: , line:138:10, endln:138:11
+              |vpiFullName:work@and_from_nand
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:139:3, endln:139:11
         |vpiParent:
@@ -4070,21 +4137,6 @@ Design: (unnamed)
           \_DelayControl: , line:139:3, endln:139:11
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:139:10, endln:139:11
-            |vpiParent:
-            \_Assignment: , line:139:6, endln:139:11
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@and_from_nand), line:139:10, endln:139:11
-              |vpiParent:
-              \_Constant: , line:139:10, endln:139:11
-              |vpiFullName:work@and_from_nand
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@and_from_nand.X), line:139:6, endln:139:7
             |vpiParent:
@@ -4093,6 +4145,21 @@ Design: (unnamed)
             |vpiFullName:work@and_from_nand.X
             |vpiActual:
             \_Net: (work@and_from_nand.X), line:126:5, endln:126:6
+          |vpiRhs:
+          \_Constant: , line:139:10, endln:139:11
+            |vpiParent:
+            \_Assignment: , line:139:6, endln:139:11
+            |vpiTypespec:
+            \_RefTypespec: (work@and_from_nand), line:139:10, endln:139:11
+              |vpiParent:
+              \_Constant: , line:139:10, endln:139:11
+              |vpiFullName:work@and_from_nand
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
       |vpiStmt:
       \_DelayControl: , line:140:3, endln:140:13
         |vpiParent:
@@ -4111,9 +4178,9 @@ Design: (unnamed)
   \_Gate: work@nand (work@and_from_nand.U1), line:129:6, endln:129:16
     |vpiParent:
     \_Module: work@and_from_nand (work@and_from_nand), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:124:1, endln:143:10
-    |vpiDefName:work@nand
     |vpiName:U1
     |vpiFullName:work@and_from_nand.U1
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:129:9, endln:129:10
@@ -4160,9 +4227,9 @@ Design: (unnamed)
   \_Gate: work@nand (work@and_from_nand.U2), line:130:6, endln:130:17
     |vpiParent:
     \_Module: work@and_from_nand (work@and_from_nand), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:124:1, endln:143:10
-    |vpiDefName:work@nand
     |vpiName:U2
     |vpiFullName:work@and_from_nand.U2
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:130:9, endln:130:10
@@ -4374,13 +4441,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:165:3, endln:167:54
         |vpiParent:
         \_Begin: (work@delay_example), line:164:9, endln:174:4
+        |vpiName:
+        \_Identifier: ($monitor), line:165:4, endln:165:11
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:165:3, endln:167:54
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:166:3, endln:166:71
           |vpiParent:
           \_SysFuncCall: ($monitor), line:165:3, endln:167:54
-          |vpiDecompile:"Time=%g b=%b c=%b  out1=%b out2=%b out3=%b out4=%b out5=%b out6=%b"
-          |vpiSize:528
-          |STRING:Time=%g b=%b c=%b  out1=%b out2=%b out3=%b out4=%b out5=%b out6=%b
           |vpiTypespec:
           \_RefTypespec: (work@delay_example), line:166:3, endln:166:71
             |vpiParent:
@@ -4389,6 +4458,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:528
+          |vpiDecompile:"Time=%g b=%b c=%b  out1=%b out2=%b out3=%b out4=%b out5=%b out6=%b"
+          |STRING:Time=%g b=%b c=%b  out1=%b out2=%b out3=%b out4=%b out5=%b out6=%b
         |vpiArgument:
         \_SysFuncCall: ($time), line:167:5, endln:167:10
           |vpiParent:
@@ -4462,32 +4534,12 @@ Design: (unnamed)
           |vpiFullName:work@delay_example.out6
           |vpiActual:
           \_Net: (work@delay_example.out6), line:147:31, endln:147:35
-        |vpiName:
-        \_Identifier: ($monitor), line:165:4, endln:165:11
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:165:3, endln:167:54
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:168:3, endln:168:8
         |vpiParent:
         \_Begin: (work@delay_example), line:164:9, endln:174:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:168:7, endln:168:8
-          |vpiParent:
-          \_Assignment: , line:168:3, endln:168:8
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@delay_example), line:168:7, endln:168:8
-            |vpiParent:
-            \_Constant: , line:168:7, endln:168:8
-            |vpiFullName:work@delay_example
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@delay_example.b), line:168:3, endln:168:4
           |vpiParent:
@@ -4496,27 +4548,27 @@ Design: (unnamed)
           |vpiFullName:work@delay_example.b
           |vpiActual:
           \_Net: (work@delay_example.b), line:148:5, endln:148:6
+        |vpiRhs:
+        \_Constant: , line:168:7, endln:168:8
+          |vpiParent:
+          \_Assignment: , line:168:3, endln:168:8
+          |vpiTypespec:
+          \_RefTypespec: (work@delay_example), line:168:7, endln:168:8
+            |vpiParent:
+            \_Constant: , line:168:7, endln:168:8
+            |vpiFullName:work@delay_example
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:169:3, endln:169:8
         |vpiParent:
         \_Begin: (work@delay_example), line:164:9, endln:174:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:169:7, endln:169:8
-          |vpiParent:
-          \_Assignment: , line:169:3, endln:169:8
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@delay_example), line:169:7, endln:169:8
-            |vpiParent:
-            \_Constant: , line:169:7, endln:169:8
-            |vpiFullName:work@delay_example
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@delay_example.c), line:169:3, endln:169:4
           |vpiParent:
@@ -4525,6 +4577,21 @@ Design: (unnamed)
           |vpiFullName:work@delay_example.c
           |vpiActual:
           \_Net: (work@delay_example.c), line:148:7, endln:148:8
+        |vpiRhs:
+        \_Constant: , line:169:7, endln:169:8
+          |vpiParent:
+          \_Assignment: , line:169:3, endln:169:8
+          |vpiTypespec:
+          \_RefTypespec: (work@delay_example), line:169:7, endln:169:8
+            |vpiParent:
+            \_Constant: , line:169:7, endln:169:8
+            |vpiFullName:work@delay_example
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:170:3, endln:170:12
         |vpiParent:
@@ -4536,21 +4603,6 @@ Design: (unnamed)
           \_DelayControl: , line:170:3, endln:170:12
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:170:11, endln:170:12
-            |vpiParent:
-            \_Assignment: , line:170:7, endln:170:12
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@delay_example), line:170:11, endln:170:12
-              |vpiParent:
-              \_Constant: , line:170:11, endln:170:12
-              |vpiFullName:work@delay_example
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@delay_example.b), line:170:7, endln:170:8
             |vpiParent:
@@ -4559,6 +4611,21 @@ Design: (unnamed)
             |vpiFullName:work@delay_example.b
             |vpiActual:
             \_Net: (work@delay_example.b), line:148:5, endln:148:6
+          |vpiRhs:
+          \_Constant: , line:170:11, endln:170:12
+            |vpiParent:
+            \_Assignment: , line:170:7, endln:170:12
+            |vpiTypespec:
+            \_RefTypespec: (work@delay_example), line:170:11, endln:170:12
+              |vpiParent:
+              \_Constant: , line:170:11, endln:170:12
+              |vpiFullName:work@delay_example
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:171:3, endln:171:12
         |vpiParent:
@@ -4570,21 +4637,6 @@ Design: (unnamed)
           \_DelayControl: , line:171:3, endln:171:12
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:171:11, endln:171:12
-            |vpiParent:
-            \_Assignment: , line:171:7, endln:171:12
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@delay_example), line:171:11, endln:171:12
-              |vpiParent:
-              \_Constant: , line:171:11, endln:171:12
-              |vpiFullName:work@delay_example
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@delay_example.c), line:171:7, endln:171:8
             |vpiParent:
@@ -4593,6 +4645,21 @@ Design: (unnamed)
             |vpiFullName:work@delay_example.c
             |vpiActual:
             \_Net: (work@delay_example.c), line:148:7, endln:148:8
+          |vpiRhs:
+          \_Constant: , line:171:11, endln:171:12
+            |vpiParent:
+            \_Assignment: , line:171:7, endln:171:12
+            |vpiTypespec:
+            \_RefTypespec: (work@delay_example), line:171:11, endln:171:12
+              |vpiParent:
+              \_Constant: , line:171:11, endln:171:12
+              |vpiFullName:work@delay_example
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:172:3, endln:172:12
         |vpiParent:
@@ -4604,21 +4671,6 @@ Design: (unnamed)
           \_DelayControl: , line:172:3, endln:172:12
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:172:11, endln:172:12
-            |vpiParent:
-            \_Assignment: , line:172:7, endln:172:12
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@delay_example), line:172:11, endln:172:12
-              |vpiParent:
-              \_Constant: , line:172:11, endln:172:12
-              |vpiFullName:work@delay_example
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@delay_example.b), line:172:7, endln:172:8
             |vpiParent:
@@ -4627,6 +4679,21 @@ Design: (unnamed)
             |vpiFullName:work@delay_example.b
             |vpiActual:
             \_Net: (work@delay_example.b), line:148:5, endln:148:6
+          |vpiRhs:
+          \_Constant: , line:172:11, endln:172:12
+            |vpiParent:
+            \_Assignment: , line:172:7, endln:172:12
+            |vpiTypespec:
+            \_RefTypespec: (work@delay_example), line:172:11, endln:172:12
+              |vpiParent:
+              \_Constant: , line:172:11, endln:172:12
+              |vpiFullName:work@delay_example
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
       |vpiStmt:
       \_DelayControl: , line:173:3, endln:173:14
         |vpiParent:
@@ -4645,8 +4712,8 @@ Design: (unnamed)
   \_Gate: work@or (work@delay_example.work@or), line:151:38, endln:151:48
     |vpiParent:
     \_Module: work@delay_example (work@delay_example), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:145:1, endln:176:10
-    |vpiDefName:work@or
     |vpiFullName:work@delay_example.work@or
+    |vpiDefName:work@or
     |vpiPrimType:4
     |vpiPrimTerm:
     \_PrimTerm: , line:151:44, endln:151:45
@@ -4679,9 +4746,9 @@ Design: (unnamed)
   \_Gate: work@and (work@delay_example.u_and), line:153:29, endln:153:48
     |vpiParent:
     \_Module: work@delay_example (work@delay_example), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:145:1, endln:176:10
-    |vpiDefName:work@and
     |vpiName:u_and
     |vpiFullName:work@delay_example.u_and
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:153:39, endln:153:43
@@ -4728,9 +4795,9 @@ Design: (unnamed)
   \_Gate: work@nand (work@delay_example.u_nand), line:157:29, endln:157:48
     |vpiParent:
     \_Module: work@delay_example (work@delay_example), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:145:1, endln:176:10
-    |vpiDefName:work@nand
     |vpiName:u_nand
     |vpiFullName:work@delay_example.u_nand
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:157:39, endln:157:43
@@ -4777,9 +4844,9 @@ Design: (unnamed)
   \_Gate: work@buf (work@delay_example.u_buf), line:159:29, endln:159:46
     |vpiParent:
     \_Module: work@delay_example (work@delay_example), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:145:1, endln:176:10
-    |vpiDefName:work@buf
     |vpiName:u_buf
     |vpiFullName:work@delay_example.u_buf
+    |vpiDefName:work@buf
     |vpiPrimType:7
     |vpiPrimTerm:
     \_PrimTerm: , line:159:39, endln:159:43
@@ -4931,13 +4998,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:73:3, endln:73:65
         |vpiParent:
         \_Begin: (work@dff_from_nand), line:72:9, endln:79:4
+        |vpiName:
+        \_Identifier: ($monitor), line:73:4, endln:73:11
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:73:3, endln:73:65
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:73:12, endln:73:47
           |vpiParent:
           \_SysFuncCall: ($monitor), line:73:3, endln:73:65
-          |vpiDecompile:"CLK = %b D = %b Q = %b Q_BAR = %b"
-          |vpiSize:264
-          |STRING:CLK = %b D = %b Q = %b Q_BAR = %b
           |vpiTypespec:
           \_RefTypespec: (work@dff_from_nand), line:73:12, endln:73:47
             |vpiParent:
@@ -4946,6 +5015,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:264
+          |vpiDecompile:"CLK = %b D = %b Q = %b Q_BAR = %b"
+          |STRING:CLK = %b D = %b Q = %b Q_BAR = %b
         |vpiArgument:
         \_RefObj: (work@dff_from_nand.CLK), line:73:48, endln:73:51
           |vpiParent:
@@ -4978,32 +5050,12 @@ Design: (unnamed)
           |vpiFullName:work@dff_from_nand.Q_BAR
           |vpiActual:
           \_Net: (work@dff_from_nand.Q_BAR), line:63:8, endln:63:13
-        |vpiName:
-        \_Identifier: ($monitor), line:73:4, endln:73:11
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:73:3, endln:73:65
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:74:3, endln:74:10
         |vpiParent:
         \_Begin: (work@dff_from_nand), line:72:9, endln:79:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:74:9, endln:74:10
-          |vpiParent:
-          \_Assignment: , line:74:3, endln:74:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@dff_from_nand), line:74:9, endln:74:10
-            |vpiParent:
-            \_Constant: , line:74:9, endln:74:10
-            |vpiFullName:work@dff_from_nand
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@dff_from_nand.CLK), line:74:3, endln:74:6
           |vpiParent:
@@ -5012,27 +5064,27 @@ Design: (unnamed)
           |vpiFullName:work@dff_from_nand.CLK
           |vpiActual:
           \_Net: (work@dff_from_nand.CLK), line:64:7, endln:64:10
+        |vpiRhs:
+        \_Constant: , line:74:9, endln:74:10
+          |vpiParent:
+          \_Assignment: , line:74:3, endln:74:10
+          |vpiTypespec:
+          \_RefTypespec: (work@dff_from_nand), line:74:9, endln:74:10
+            |vpiParent:
+            \_Constant: , line:74:9, endln:74:10
+            |vpiFullName:work@dff_from_nand
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:75:3, endln:75:8
         |vpiParent:
         \_Begin: (work@dff_from_nand), line:72:9, endln:79:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:75:7, endln:75:8
-          |vpiParent:
-          \_Assignment: , line:75:3, endln:75:8
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@dff_from_nand), line:75:7, endln:75:8
-            |vpiParent:
-            \_Constant: , line:75:7, endln:75:8
-            |vpiFullName:work@dff_from_nand
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@dff_from_nand.D), line:75:3, endln:75:4
           |vpiParent:
@@ -5041,6 +5093,21 @@ Design: (unnamed)
           |vpiFullName:work@dff_from_nand.D
           |vpiActual:
           \_Net: (work@dff_from_nand.D), line:64:5, endln:64:6
+        |vpiRhs:
+        \_Constant: , line:75:7, endln:75:8
+          |vpiParent:
+          \_Assignment: , line:75:3, endln:75:8
+          |vpiTypespec:
+          \_RefTypespec: (work@dff_from_nand), line:75:7, endln:75:8
+            |vpiParent:
+            \_Constant: , line:75:7, endln:75:8
+            |vpiFullName:work@dff_from_nand
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:76:3, endln:76:11
         |vpiParent:
@@ -5052,21 +5119,6 @@ Design: (unnamed)
           \_DelayControl: , line:76:3, endln:76:11
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:76:10, endln:76:11
-            |vpiParent:
-            \_Assignment: , line:76:6, endln:76:11
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@dff_from_nand), line:76:10, endln:76:11
-              |vpiParent:
-              \_Constant: , line:76:10, endln:76:11
-              |vpiFullName:work@dff_from_nand
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@dff_from_nand.D), line:76:6, endln:76:7
             |vpiParent:
@@ -5075,6 +5127,21 @@ Design: (unnamed)
             |vpiFullName:work@dff_from_nand.D
             |vpiActual:
             \_Net: (work@dff_from_nand.D), line:64:5, endln:64:6
+          |vpiRhs:
+          \_Constant: , line:76:10, endln:76:11
+            |vpiParent:
+            \_Assignment: , line:76:6, endln:76:11
+            |vpiTypespec:
+            \_RefTypespec: (work@dff_from_nand), line:76:10, endln:76:11
+              |vpiParent:
+              \_Constant: , line:76:10, endln:76:11
+              |vpiFullName:work@dff_from_nand
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:77:3, endln:77:11
         |vpiParent:
@@ -5086,21 +5153,6 @@ Design: (unnamed)
           \_DelayControl: , line:77:3, endln:77:11
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:77:10, endln:77:11
-            |vpiParent:
-            \_Assignment: , line:77:6, endln:77:11
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@dff_from_nand), line:77:10, endln:77:11
-              |vpiParent:
-              \_Constant: , line:77:10, endln:77:11
-              |vpiFullName:work@dff_from_nand
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@dff_from_nand.D), line:77:6, endln:77:7
             |vpiParent:
@@ -5109,6 +5161,21 @@ Design: (unnamed)
             |vpiFullName:work@dff_from_nand.D
             |vpiActual:
             \_Net: (work@dff_from_nand.D), line:64:5, endln:64:6
+          |vpiRhs:
+          \_Constant: , line:77:10, endln:77:11
+            |vpiParent:
+            \_Assignment: , line:77:6, endln:77:11
+            |vpiTypespec:
+            \_RefTypespec: (work@dff_from_nand), line:77:10, endln:77:11
+              |vpiParent:
+              \_Constant: , line:77:10, endln:77:11
+              |vpiFullName:work@dff_from_nand
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
       |vpiStmt:
       \_DelayControl: , line:78:3, endln:78:13
         |vpiParent:
@@ -5138,6 +5205,14 @@ Design: (unnamed)
         \_DelayControl: , line:81:8, endln:81:21
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@dff_from_nand.CLK), line:81:11, endln:81:14
+          |vpiParent:
+          \_Assignment: , line:81:11, endln:81:21
+          |vpiName:CLK
+          |vpiFullName:work@dff_from_nand.CLK
+          |vpiActual:
+          \_Net: (work@dff_from_nand.CLK), line:64:7, endln:64:10
         |vpiRhs:
         \_Operation: , line:81:17, endln:81:21
           |vpiParent:
@@ -5151,22 +5226,14 @@ Design: (unnamed)
             |vpiFullName:work@dff_from_nand.CLK
             |vpiActual:
             \_Net: (work@dff_from_nand.CLK), line:64:7, endln:64:10
-        |vpiLhs:
-        \_RefObj: (work@dff_from_nand.CLK), line:81:11, endln:81:14
-          |vpiParent:
-          \_Assignment: , line:81:11, endln:81:21
-          |vpiName:CLK
-          |vpiFullName:work@dff_from_nand.CLK
-          |vpiActual:
-          \_Net: (work@dff_from_nand.CLK), line:64:7, endln:64:10
     |vpiAlwaysType:1
   |vpiPrimitive:
   \_Gate: work@nand (work@dff_from_nand.U1), line:66:6, endln:66:18
     |vpiParent:
     \_Module: work@dff_from_nand (work@dff_from_nand), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:62:1, endln:83:10
-    |vpiDefName:work@nand
     |vpiName:U1
     |vpiFullName:work@dff_from_nand.U1
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:66:10, endln:66:11
@@ -5213,9 +5280,9 @@ Design: (unnamed)
   \_Gate: work@nand (work@dff_from_nand.U2), line:67:6, endln:67:18
     |vpiParent:
     \_Module: work@dff_from_nand (work@dff_from_nand), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:62:1, endln:83:10
-    |vpiDefName:work@nand
     |vpiName:U2
     |vpiFullName:work@dff_from_nand.U2
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:67:10, endln:67:11
@@ -5262,9 +5329,9 @@ Design: (unnamed)
   \_Gate: work@nand (work@dff_from_nand.U3), line:68:6, endln:68:20
     |vpiParent:
     \_Module: work@dff_from_nand (work@dff_from_nand), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:62:1, endln:83:10
-    |vpiDefName:work@nand
     |vpiName:U3
     |vpiFullName:work@dff_from_nand.U3
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:68:10, endln:68:11
@@ -5311,9 +5378,9 @@ Design: (unnamed)
   \_Gate: work@nand (work@dff_from_nand.U4), line:69:6, endln:69:20
     |vpiParent:
     \_Module: work@dff_from_nand (work@dff_from_nand), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:62:1, endln:83:10
-    |vpiDefName:work@nand
     |vpiName:U4
     |vpiFullName:work@dff_from_nand.U4
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:69:10, endln:69:15
@@ -5381,9 +5448,6 @@ Design: (unnamed)
       \_Constant: , line:232:7, endln:232:8
         |vpiParent:
         \_Range: , line:232:6, endln:232:11
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
         |vpiTypespec:
         \_RefTypespec: (work@gate_array), line:232:7, endln:232:8
           |vpiParent:
@@ -5392,13 +5456,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:7
+        |UINT:7
       |vpiRightRange:
       \_Constant: , line:232:9, endln:232:10
         |vpiParent:
         \_Range: , line:232:6, endln:232:11
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@gate_array), line:232:9, endln:232:10
           |vpiParent:
@@ -5407,6 +5471,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -5464,9 +5531,9 @@ Design: (unnamed)
   \_Gate: work@nand (work@gate_array.n_gate), line:233:6, endln:233:34
     |vpiParent:
     \_Module: work@gate_array (work@gate_array), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:230:1, endln:235:10
-    |vpiDefName:work@nand
     |vpiName:n_gate
     |vpiFullName:work@gate_array.n_gate
+    |vpiDefName:work@nand
     |vpiPrimType:2
     |vpiPrimTerm:
     \_PrimTerm: , line:233:20, endln:233:23
@@ -5523,9 +5590,6 @@ Design: (unnamed)
       \_Constant: , line:233:14, endln:233:15
         |vpiParent:
         \_Range: , line:233:13, endln:233:18
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
         |vpiTypespec:
         \_RefTypespec: (work@gate_array.n_gate), line:233:14, endln:233:15
           |vpiParent:
@@ -5534,13 +5598,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:7
+        |UINT:7
       |vpiRightRange:
       \_Constant: , line:233:16, endln:233:17
         |vpiParent:
         \_Range: , line:233:13, endln:233:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@gate_array.n_gate), line:233:16, endln:233:17
           |vpiParent:
@@ -5549,6 +5613,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiPrimitive:
     \_Gate: work@nand (work@gate_array.n_gate), line:233:6, endln:233:34
 |vpiAllModules:
@@ -5704,13 +5771,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:13:3, endln:15:35
         |vpiParent:
         \_Begin: (work@gates), line:12:9, endln:25:4
+        |vpiName:
+        \_Identifier: ($monitor), line:13:4, endln:13:11
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:13:3, endln:15:35
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:14:3, endln:14:56
           |vpiParent:
           \_SysFuncCall: ($monitor), line:13:3, endln:15:35
-          |vpiDecompile:"in1=%b in2=%b in3=%b in4=%b out0=%b out1=%b out2=%b"
-          |vpiSize:408
-          |STRING:in1=%b in2=%b in3=%b in4=%b out0=%b out1=%b out2=%b
           |vpiTypespec:
           \_RefTypespec: (work@gates), line:14:3, endln:14:56
             |vpiParent:
@@ -5719,6 +5788,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:408
+          |vpiDecompile:"in1=%b in2=%b in3=%b in4=%b out0=%b out1=%b out2=%b"
+          |STRING:in1=%b in2=%b in3=%b in4=%b out0=%b out1=%b out2=%b
         |vpiArgument:
         \_RefObj: (work@gates.in1), line:15:4, endln:15:7
           |vpiParent:
@@ -5775,32 +5847,12 @@ Design: (unnamed)
           |vpiFullName:work@gates.out2
           |vpiActual:
           \_Net: (work@gates.out2), line:5:6, endln:5:10
-        |vpiName:
-        \_Identifier: ($monitor), line:13:4, endln:13:11
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:13:3, endln:15:35
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:16:3, endln:16:10
         |vpiParent:
         \_Begin: (work@gates), line:12:9, endln:25:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:16:9, endln:16:10
-          |vpiParent:
-          \_Assignment: , line:16:3, endln:16:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@gates), line:16:9, endln:16:10
-            |vpiParent:
-            \_Constant: , line:16:9, endln:16:10
-            |vpiFullName:work@gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@gates.in1), line:16:3, endln:16:6
           |vpiParent:
@@ -5809,27 +5861,27 @@ Design: (unnamed)
           |vpiFullName:work@gates.in1
           |vpiActual:
           \_Net: (work@gates.in1), line:6:6, endln:6:9
+        |vpiRhs:
+        \_Constant: , line:16:9, endln:16:10
+          |vpiParent:
+          \_Assignment: , line:16:3, endln:16:10
+          |vpiTypespec:
+          \_RefTypespec: (work@gates), line:16:9, endln:16:10
+            |vpiParent:
+            \_Constant: , line:16:9, endln:16:10
+            |vpiFullName:work@gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:17:3, endln:17:10
         |vpiParent:
         \_Begin: (work@gates), line:12:9, endln:25:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:17:9, endln:17:10
-          |vpiParent:
-          \_Assignment: , line:17:3, endln:17:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@gates), line:17:9, endln:17:10
-            |vpiParent:
-            \_Constant: , line:17:9, endln:17:10
-            |vpiFullName:work@gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@gates.in2), line:17:3, endln:17:6
           |vpiParent:
@@ -5838,27 +5890,27 @@ Design: (unnamed)
           |vpiFullName:work@gates.in2
           |vpiActual:
           \_Net: (work@gates.in2), line:6:10, endln:6:13
+        |vpiRhs:
+        \_Constant: , line:17:9, endln:17:10
+          |vpiParent:
+          \_Assignment: , line:17:3, endln:17:10
+          |vpiTypespec:
+          \_RefTypespec: (work@gates), line:17:9, endln:17:10
+            |vpiParent:
+            \_Constant: , line:17:9, endln:17:10
+            |vpiFullName:work@gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:18:3, endln:18:10
         |vpiParent:
         \_Begin: (work@gates), line:12:9, endln:25:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:18:9, endln:18:10
-          |vpiParent:
-          \_Assignment: , line:18:3, endln:18:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@gates), line:18:9, endln:18:10
-            |vpiParent:
-            \_Constant: , line:18:9, endln:18:10
-            |vpiFullName:work@gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@gates.in3), line:18:3, endln:18:6
           |vpiParent:
@@ -5867,27 +5919,27 @@ Design: (unnamed)
           |vpiFullName:work@gates.in3
           |vpiActual:
           \_Net: (work@gates.in3), line:6:14, endln:6:17
+        |vpiRhs:
+        \_Constant: , line:18:9, endln:18:10
+          |vpiParent:
+          \_Assignment: , line:18:3, endln:18:10
+          |vpiTypespec:
+          \_RefTypespec: (work@gates), line:18:9, endln:18:10
+            |vpiParent:
+            \_Constant: , line:18:9, endln:18:10
+            |vpiFullName:work@gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:19:3, endln:19:10
         |vpiParent:
         \_Begin: (work@gates), line:12:9, endln:25:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:19:9, endln:19:10
-          |vpiParent:
-          \_Assignment: , line:19:3, endln:19:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@gates), line:19:9, endln:19:10
-            |vpiParent:
-            \_Constant: , line:19:9, endln:19:10
-            |vpiFullName:work@gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@gates.in4), line:19:3, endln:19:6
           |vpiParent:
@@ -5896,6 +5948,21 @@ Design: (unnamed)
           |vpiFullName:work@gates.in4
           |vpiActual:
           \_Net: (work@gates.in4), line:6:18, endln:6:21
+        |vpiRhs:
+        \_Constant: , line:19:9, endln:19:10
+          |vpiParent:
+          \_Assignment: , line:19:3, endln:19:10
+          |vpiTypespec:
+          \_RefTypespec: (work@gates), line:19:9, endln:19:10
+            |vpiParent:
+            \_Constant: , line:19:9, endln:19:10
+            |vpiFullName:work@gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:20:3, endln:20:13
         |vpiParent:
@@ -5907,21 +5974,6 @@ Design: (unnamed)
           \_DelayControl: , line:20:3, endln:20:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:20:12, endln:20:13
-            |vpiParent:
-            \_Assignment: , line:20:6, endln:20:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@gates), line:20:12, endln:20:13
-              |vpiParent:
-              \_Constant: , line:20:12, endln:20:13
-              |vpiFullName:work@gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@gates.in1), line:20:6, endln:20:9
             |vpiParent:
@@ -5930,6 +5982,21 @@ Design: (unnamed)
             |vpiFullName:work@gates.in1
             |vpiActual:
             \_Net: (work@gates.in1), line:6:6, endln:6:9
+          |vpiRhs:
+          \_Constant: , line:20:12, endln:20:13
+            |vpiParent:
+            \_Assignment: , line:20:6, endln:20:13
+            |vpiTypespec:
+            \_RefTypespec: (work@gates), line:20:12, endln:20:13
+              |vpiParent:
+              \_Constant: , line:20:12, endln:20:13
+              |vpiFullName:work@gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:21:3, endln:21:13
         |vpiParent:
@@ -5941,21 +6008,6 @@ Design: (unnamed)
           \_DelayControl: , line:21:3, endln:21:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:21:12, endln:21:13
-            |vpiParent:
-            \_Assignment: , line:21:6, endln:21:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@gates), line:21:12, endln:21:13
-              |vpiParent:
-              \_Constant: , line:21:12, endln:21:13
-              |vpiFullName:work@gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@gates.in2), line:21:6, endln:21:9
             |vpiParent:
@@ -5964,6 +6016,21 @@ Design: (unnamed)
             |vpiFullName:work@gates.in2
             |vpiActual:
             \_Net: (work@gates.in2), line:6:10, endln:6:13
+          |vpiRhs:
+          \_Constant: , line:21:12, endln:21:13
+            |vpiParent:
+            \_Assignment: , line:21:6, endln:21:13
+            |vpiTypespec:
+            \_RefTypespec: (work@gates), line:21:12, endln:21:13
+              |vpiParent:
+              \_Constant: , line:21:12, endln:21:13
+              |vpiFullName:work@gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:22:3, endln:22:13
         |vpiParent:
@@ -5975,21 +6042,6 @@ Design: (unnamed)
           \_DelayControl: , line:22:3, endln:22:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:22:12, endln:22:13
-            |vpiParent:
-            \_Assignment: , line:22:6, endln:22:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@gates), line:22:12, endln:22:13
-              |vpiParent:
-              \_Constant: , line:22:12, endln:22:13
-              |vpiFullName:work@gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@gates.in3), line:22:6, endln:22:9
             |vpiParent:
@@ -5998,6 +6050,21 @@ Design: (unnamed)
             |vpiFullName:work@gates.in3
             |vpiActual:
             \_Net: (work@gates.in3), line:6:14, endln:6:17
+          |vpiRhs:
+          \_Constant: , line:22:12, endln:22:13
+            |vpiParent:
+            \_Assignment: , line:22:6, endln:22:13
+            |vpiTypespec:
+            \_RefTypespec: (work@gates), line:22:12, endln:22:13
+              |vpiParent:
+              \_Constant: , line:22:12, endln:22:13
+              |vpiFullName:work@gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:23:3, endln:23:13
         |vpiParent:
@@ -6009,21 +6076,6 @@ Design: (unnamed)
           \_DelayControl: , line:23:3, endln:23:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:23:12, endln:23:13
-            |vpiParent:
-            \_Assignment: , line:23:6, endln:23:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@gates), line:23:12, endln:23:13
-              |vpiParent:
-              \_Constant: , line:23:12, endln:23:13
-              |vpiFullName:work@gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@gates.in4), line:23:6, endln:23:9
             |vpiParent:
@@ -6032,6 +6084,21 @@ Design: (unnamed)
             |vpiFullName:work@gates.in4
             |vpiActual:
             \_Net: (work@gates.in4), line:6:18, endln:6:21
+          |vpiRhs:
+          \_Constant: , line:23:12, endln:23:13
+            |vpiParent:
+            \_Assignment: , line:23:6, endln:23:13
+            |vpiTypespec:
+            \_RefTypespec: (work@gates), line:23:12, endln:23:13
+              |vpiParent:
+              \_Constant: , line:23:12, endln:23:13
+              |vpiFullName:work@gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:24:3, endln:24:13
         |vpiParent:
@@ -6050,9 +6117,9 @@ Design: (unnamed)
   \_Gate: work@not (work@gates.U1), line:8:5, endln:8:17
     |vpiParent:
     \_Module: work@gates (work@gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:1:1, endln:27:10
-    |vpiDefName:work@not
     |vpiName:U1
     |vpiFullName:work@gates.U1
+    |vpiDefName:work@not
     |vpiPrimType:8
     |vpiPrimTerm:
     \_PrimTerm: , line:8:8, endln:8:12
@@ -6085,9 +6152,9 @@ Design: (unnamed)
   \_Gate: work@and (work@gates.U2), line:9:5, endln:9:29
     |vpiParent:
     \_Module: work@gates (work@gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:1:1, endln:27:10
-    |vpiDefName:work@and
     |vpiName:U2
     |vpiFullName:work@gates.U2
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:9:8, endln:9:12
@@ -6162,9 +6229,9 @@ Design: (unnamed)
   \_Gate: work@xor (work@gates.U3), line:10:5, endln:10:25
     |vpiParent:
     \_Module: work@gates (work@gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:1:1, endln:27:10
-    |vpiDefName:work@xor
     |vpiName:U3
     |vpiFullName:work@gates.U3
+    |vpiDefName:work@xor
     |vpiPrimType:5
     |vpiPrimTerm:
     \_PrimTerm: , line:10:8, endln:10:12
@@ -6327,8 +6394,8 @@ Design: (unnamed)
   \_Gate: work@xor (work@half_adder.work@xor), line:225:12, endln:225:23
     |vpiParent:
     \_Module: work@half_adder (work@half_adder), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:222:1, endln:227:10
-    |vpiDefName:work@xor
     |vpiFullName:work@half_adder.work@xor
+    |vpiDefName:work@xor
     |vpiPrimType:5
     |vpiPrimTerm:
     \_PrimTerm: , line:225:18, endln:225:19
@@ -6361,8 +6428,8 @@ Design: (unnamed)
   \_Gate: work@and (work@half_adder.work@and), line:226:12, endln:226:25
     |vpiParent:
     \_Module: work@half_adder (work@half_adder), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:222:1, endln:227:10
-    |vpiDefName:work@and
     |vpiFullName:work@half_adder.work@and
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:226:20, endln:226:21
@@ -6598,13 +6665,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:101:3, endln:103:28
         |vpiParent:
         \_Begin: (work@mux_from_gates), line:100:9, endln:114:4
+        |vpiName:
+        \_Identifier: ($monitor), line:101:4, endln:101:11
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:101:3, endln:103:28
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:102:4, endln:102:58
           |vpiParent:
           \_SysFuncCall: ($monitor), line:101:3, endln:103:28
-          |vpiDecompile:"c0 = %b c1 = %b c2 = %b c3 = %b A = %b B = %b Y = %b"
-          |vpiSize:416
-          |STRING:c0 = %b c1 = %b c2 = %b c3 = %b A = %b B = %b Y = %b
           |vpiTypespec:
           \_RefTypespec: (work@mux_from_gates), line:102:4, endln:102:58
             |vpiParent:
@@ -6613,6 +6682,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:416
+          |vpiDecompile:"c0 = %b c1 = %b c2 = %b c3 = %b A = %b B = %b Y = %b"
+          |STRING:c0 = %b c1 = %b c2 = %b c3 = %b A = %b B = %b Y = %b
         |vpiArgument:
         \_RefObj: (work@mux_from_gates.c0), line:103:4, endln:103:6
           |vpiParent:
@@ -6669,32 +6741,12 @@ Design: (unnamed)
           |vpiFullName:work@mux_from_gates.Y
           |vpiActual:
           \_Net: (work@mux_from_gates.Y), line:87:6, endln:87:7
-        |vpiName:
-        \_Identifier: ($monitor), line:101:4, endln:101:11
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:101:3, endln:103:28
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:104:3, endln:104:9
         |vpiParent:
         \_Begin: (work@mux_from_gates), line:100:9, endln:114:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:104:8, endln:104:9
-          |vpiParent:
-          \_Assignment: , line:104:3, endln:104:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@mux_from_gates), line:104:8, endln:104:9
-            |vpiParent:
-            \_Constant: , line:104:8, endln:104:9
-            |vpiFullName:work@mux_from_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@mux_from_gates.c0), line:104:3, endln:104:5
           |vpiParent:
@@ -6703,27 +6755,27 @@ Design: (unnamed)
           |vpiFullName:work@mux_from_gates.c0
           |vpiActual:
           \_Net: (work@mux_from_gates.c0), line:86:5, endln:86:7
+        |vpiRhs:
+        \_Constant: , line:104:8, endln:104:9
+          |vpiParent:
+          \_Assignment: , line:104:3, endln:104:9
+          |vpiTypespec:
+          \_RefTypespec: (work@mux_from_gates), line:104:8, endln:104:9
+            |vpiParent:
+            \_Constant: , line:104:8, endln:104:9
+            |vpiFullName:work@mux_from_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:105:3, endln:105:9
         |vpiParent:
         \_Begin: (work@mux_from_gates), line:100:9, endln:114:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:105:8, endln:105:9
-          |vpiParent:
-          \_Assignment: , line:105:3, endln:105:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@mux_from_gates), line:105:8, endln:105:9
-            |vpiParent:
-            \_Constant: , line:105:8, endln:105:9
-            |vpiFullName:work@mux_from_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@mux_from_gates.c1), line:105:3, endln:105:5
           |vpiParent:
@@ -6732,27 +6784,27 @@ Design: (unnamed)
           |vpiFullName:work@mux_from_gates.c1
           |vpiActual:
           \_Net: (work@mux_from_gates.c1), line:86:8, endln:86:10
+        |vpiRhs:
+        \_Constant: , line:105:8, endln:105:9
+          |vpiParent:
+          \_Assignment: , line:105:3, endln:105:9
+          |vpiTypespec:
+          \_RefTypespec: (work@mux_from_gates), line:105:8, endln:105:9
+            |vpiParent:
+            \_Constant: , line:105:8, endln:105:9
+            |vpiFullName:work@mux_from_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:106:3, endln:106:9
         |vpiParent:
         \_Begin: (work@mux_from_gates), line:100:9, endln:114:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:106:8, endln:106:9
-          |vpiParent:
-          \_Assignment: , line:106:3, endln:106:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@mux_from_gates), line:106:8, endln:106:9
-            |vpiParent:
-            \_Constant: , line:106:8, endln:106:9
-            |vpiFullName:work@mux_from_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@mux_from_gates.c2), line:106:3, endln:106:5
           |vpiParent:
@@ -6761,27 +6813,27 @@ Design: (unnamed)
           |vpiFullName:work@mux_from_gates.c2
           |vpiActual:
           \_Net: (work@mux_from_gates.c2), line:86:11, endln:86:13
+        |vpiRhs:
+        \_Constant: , line:106:8, endln:106:9
+          |vpiParent:
+          \_Assignment: , line:106:3, endln:106:9
+          |vpiTypespec:
+          \_RefTypespec: (work@mux_from_gates), line:106:8, endln:106:9
+            |vpiParent:
+            \_Constant: , line:106:8, endln:106:9
+            |vpiFullName:work@mux_from_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:107:3, endln:107:9
         |vpiParent:
         \_Begin: (work@mux_from_gates), line:100:9, endln:114:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:107:8, endln:107:9
-          |vpiParent:
-          \_Assignment: , line:107:3, endln:107:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@mux_from_gates), line:107:8, endln:107:9
-            |vpiParent:
-            \_Constant: , line:107:8, endln:107:9
-            |vpiFullName:work@mux_from_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@mux_from_gates.c3), line:107:3, endln:107:5
           |vpiParent:
@@ -6790,27 +6842,27 @@ Design: (unnamed)
           |vpiFullName:work@mux_from_gates.c3
           |vpiActual:
           \_Net: (work@mux_from_gates.c3), line:86:14, endln:86:16
+        |vpiRhs:
+        \_Constant: , line:107:8, endln:107:9
+          |vpiParent:
+          \_Assignment: , line:107:3, endln:107:9
+          |vpiTypespec:
+          \_RefTypespec: (work@mux_from_gates), line:107:8, endln:107:9
+            |vpiParent:
+            \_Constant: , line:107:8, endln:107:9
+            |vpiFullName:work@mux_from_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:108:3, endln:108:8
         |vpiParent:
         \_Begin: (work@mux_from_gates), line:100:9, endln:114:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:108:7, endln:108:8
-          |vpiParent:
-          \_Assignment: , line:108:3, endln:108:8
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@mux_from_gates), line:108:7, endln:108:8
-            |vpiParent:
-            \_Constant: , line:108:7, endln:108:8
-            |vpiFullName:work@mux_from_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@mux_from_gates.A), line:108:3, endln:108:4
           |vpiParent:
@@ -6819,27 +6871,27 @@ Design: (unnamed)
           |vpiFullName:work@mux_from_gates.A
           |vpiActual:
           \_Net: (work@mux_from_gates.A), line:86:17, endln:86:18
+        |vpiRhs:
+        \_Constant: , line:108:7, endln:108:8
+          |vpiParent:
+          \_Assignment: , line:108:3, endln:108:8
+          |vpiTypespec:
+          \_RefTypespec: (work@mux_from_gates), line:108:7, endln:108:8
+            |vpiParent:
+            \_Constant: , line:108:7, endln:108:8
+            |vpiFullName:work@mux_from_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:109:3, endln:109:8
         |vpiParent:
         \_Begin: (work@mux_from_gates), line:100:9, endln:114:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:109:7, endln:109:8
-          |vpiParent:
-          \_Assignment: , line:109:3, endln:109:8
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@mux_from_gates), line:109:7, endln:109:8
-            |vpiParent:
-            \_Constant: , line:109:7, endln:109:8
-            |vpiFullName:work@mux_from_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@mux_from_gates.B), line:109:3, endln:109:4
           |vpiParent:
@@ -6848,6 +6900,21 @@ Design: (unnamed)
           |vpiFullName:work@mux_from_gates.B
           |vpiActual:
           \_Net: (work@mux_from_gates.B), line:86:19, endln:86:20
+        |vpiRhs:
+        \_Constant: , line:109:7, endln:109:8
+          |vpiParent:
+          \_Assignment: , line:109:3, endln:109:8
+          |vpiTypespec:
+          \_RefTypespec: (work@mux_from_gates), line:109:7, endln:109:8
+            |vpiParent:
+            \_Constant: , line:109:7, endln:109:8
+            |vpiFullName:work@mux_from_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:110:3, endln:110:12
         |vpiParent:
@@ -6859,21 +6926,6 @@ Design: (unnamed)
           \_DelayControl: , line:110:3, endln:110:12
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:110:11, endln:110:12
-            |vpiParent:
-            \_Assignment: , line:110:6, endln:110:12
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@mux_from_gates), line:110:11, endln:110:12
-              |vpiParent:
-              \_Constant: , line:110:11, endln:110:12
-              |vpiFullName:work@mux_from_gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@mux_from_gates.A), line:110:6, endln:110:7
             |vpiParent:
@@ -6882,6 +6934,21 @@ Design: (unnamed)
             |vpiFullName:work@mux_from_gates.A
             |vpiActual:
             \_Net: (work@mux_from_gates.A), line:86:17, endln:86:18
+          |vpiRhs:
+          \_Constant: , line:110:11, endln:110:12
+            |vpiParent:
+            \_Assignment: , line:110:6, endln:110:12
+            |vpiTypespec:
+            \_RefTypespec: (work@mux_from_gates), line:110:11, endln:110:12
+              |vpiParent:
+              \_Constant: , line:110:11, endln:110:12
+              |vpiFullName:work@mux_from_gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:111:3, endln:111:12
         |vpiParent:
@@ -6893,21 +6960,6 @@ Design: (unnamed)
           \_DelayControl: , line:111:3, endln:111:12
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:111:11, endln:111:12
-            |vpiParent:
-            \_Assignment: , line:111:6, endln:111:12
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@mux_from_gates), line:111:11, endln:111:12
-              |vpiParent:
-              \_Constant: , line:111:11, endln:111:12
-              |vpiFullName:work@mux_from_gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@mux_from_gates.B), line:111:6, endln:111:7
             |vpiParent:
@@ -6916,6 +6968,21 @@ Design: (unnamed)
             |vpiFullName:work@mux_from_gates.B
             |vpiActual:
             \_Net: (work@mux_from_gates.B), line:86:19, endln:86:20
+          |vpiRhs:
+          \_Constant: , line:111:11, endln:111:12
+            |vpiParent:
+            \_Assignment: , line:111:6, endln:111:12
+            |vpiTypespec:
+            \_RefTypespec: (work@mux_from_gates), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:work@mux_from_gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:112:3, endln:112:12
         |vpiParent:
@@ -6927,21 +6994,6 @@ Design: (unnamed)
           \_DelayControl: , line:112:3, endln:112:12
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:112:11, endln:112:12
-            |vpiParent:
-            \_Assignment: , line:112:6, endln:112:12
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@mux_from_gates), line:112:11, endln:112:12
-              |vpiParent:
-              \_Constant: , line:112:11, endln:112:12
-              |vpiFullName:work@mux_from_gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@mux_from_gates.A), line:112:6, endln:112:7
             |vpiParent:
@@ -6950,6 +7002,21 @@ Design: (unnamed)
             |vpiFullName:work@mux_from_gates.A
             |vpiActual:
             \_Net: (work@mux_from_gates.A), line:86:17, endln:86:18
+          |vpiRhs:
+          \_Constant: , line:112:11, endln:112:12
+            |vpiParent:
+            \_Assignment: , line:112:6, endln:112:12
+            |vpiTypespec:
+            \_RefTypespec: (work@mux_from_gates), line:112:11, endln:112:12
+              |vpiParent:
+              \_Constant: , line:112:11, endln:112:12
+              |vpiFullName:work@mux_from_gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
       |vpiStmt:
       \_DelayControl: , line:113:3, endln:113:13
         |vpiParent:
@@ -6979,6 +7046,14 @@ Design: (unnamed)
         \_DelayControl: , line:116:8, endln:116:19
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@mux_from_gates.c0), line:116:11, endln:116:13
+          |vpiParent:
+          \_Assignment: , line:116:11, endln:116:19
+          |vpiName:c0
+          |vpiFullName:work@mux_from_gates.c0
+          |vpiActual:
+          \_Net: (work@mux_from_gates.c0), line:86:5, endln:86:7
         |vpiRhs:
         \_Operation: , line:116:16, endln:116:19
           |vpiParent:
@@ -6992,14 +7067,6 @@ Design: (unnamed)
             |vpiFullName:work@mux_from_gates.c0
             |vpiActual:
             \_Net: (work@mux_from_gates.c0), line:86:5, endln:86:7
-        |vpiLhs:
-        \_RefObj: (work@mux_from_gates.c0), line:116:11, endln:116:13
-          |vpiParent:
-          \_Assignment: , line:116:11, endln:116:19
-          |vpiName:c0
-          |vpiFullName:work@mux_from_gates.c0
-          |vpiActual:
-          \_Net: (work@mux_from_gates.c0), line:86:5, endln:86:7
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:117:1, endln:117:20
@@ -7016,6 +7083,14 @@ Design: (unnamed)
         \_DelayControl: , line:117:8, endln:117:19
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@mux_from_gates.c1), line:117:11, endln:117:13
+          |vpiParent:
+          \_Assignment: , line:117:11, endln:117:19
+          |vpiName:c1
+          |vpiFullName:work@mux_from_gates.c1
+          |vpiActual:
+          \_Net: (work@mux_from_gates.c1), line:86:8, endln:86:10
         |vpiRhs:
         \_Operation: , line:117:16, endln:117:19
           |vpiParent:
@@ -7029,14 +7104,6 @@ Design: (unnamed)
             |vpiFullName:work@mux_from_gates.c1
             |vpiActual:
             \_Net: (work@mux_from_gates.c1), line:86:8, endln:86:10
-        |vpiLhs:
-        \_RefObj: (work@mux_from_gates.c1), line:117:11, endln:117:13
-          |vpiParent:
-          \_Assignment: , line:117:11, endln:117:19
-          |vpiName:c1
-          |vpiFullName:work@mux_from_gates.c1
-          |vpiActual:
-          \_Net: (work@mux_from_gates.c1), line:86:8, endln:86:10
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:118:1, endln:118:20
@@ -7053,6 +7120,14 @@ Design: (unnamed)
         \_DelayControl: , line:118:8, endln:118:19
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@mux_from_gates.c2), line:118:11, endln:118:13
+          |vpiParent:
+          \_Assignment: , line:118:11, endln:118:19
+          |vpiName:c2
+          |vpiFullName:work@mux_from_gates.c2
+          |vpiActual:
+          \_Net: (work@mux_from_gates.c2), line:86:11, endln:86:13
         |vpiRhs:
         \_Operation: , line:118:16, endln:118:19
           |vpiParent:
@@ -7066,14 +7141,6 @@ Design: (unnamed)
             |vpiFullName:work@mux_from_gates.c2
             |vpiActual:
             \_Net: (work@mux_from_gates.c2), line:86:11, endln:86:13
-        |vpiLhs:
-        \_RefObj: (work@mux_from_gates.c2), line:118:11, endln:118:13
-          |vpiParent:
-          \_Assignment: , line:118:11, endln:118:19
-          |vpiName:c2
-          |vpiFullName:work@mux_from_gates.c2
-          |vpiActual:
-          \_Net: (work@mux_from_gates.c2), line:86:11, endln:86:13
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:119:1, endln:119:20
@@ -7090,6 +7157,14 @@ Design: (unnamed)
         \_DelayControl: , line:119:8, endln:119:19
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@mux_from_gates.c3), line:119:11, endln:119:13
+          |vpiParent:
+          \_Assignment: , line:119:11, endln:119:19
+          |vpiName:c3
+          |vpiFullName:work@mux_from_gates.c3
+          |vpiActual:
+          \_Net: (work@mux_from_gates.c3), line:86:14, endln:86:16
         |vpiRhs:
         \_Operation: , line:119:16, endln:119:19
           |vpiParent:
@@ -7103,21 +7178,13 @@ Design: (unnamed)
             |vpiFullName:work@mux_from_gates.c3
             |vpiActual:
             \_Net: (work@mux_from_gates.c3), line:86:14, endln:86:16
-        |vpiLhs:
-        \_RefObj: (work@mux_from_gates.c3), line:119:11, endln:119:13
-          |vpiParent:
-          \_Assignment: , line:119:11, endln:119:19
-          |vpiName:c3
-          |vpiFullName:work@mux_from_gates.c3
-          |vpiActual:
-          \_Net: (work@mux_from_gates.c3), line:86:14, endln:86:16
     |vpiAlwaysType:1
   |vpiPrimitive:
   \_Gate: work@not (work@mux_from_gates.work@not), line:89:5, endln:89:15
     |vpiParent:
     \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
-    |vpiDefName:work@not
     |vpiFullName:work@mux_from_gates.work@not
+    |vpiDefName:work@not
     |vpiPrimType:8
     |vpiPrimTerm:
     \_PrimTerm: , line:89:13, endln:89:14
@@ -7136,8 +7203,8 @@ Design: (unnamed)
   \_Gate: work@not (work@mux_from_gates.work@not), line:90:5, endln:90:15
     |vpiParent:
     \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
-    |vpiDefName:work@not
     |vpiFullName:work@mux_from_gates.work@not
+    |vpiDefName:work@not
     |vpiPrimType:8
     |vpiPrimTerm:
     \_PrimTerm: , line:90:13, endln:90:14
@@ -7156,8 +7223,8 @@ Design: (unnamed)
   \_Gate: work@and (work@mux_from_gates.work@and), line:92:5, endln:92:24
     |vpiParent:
     \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
-    |vpiDefName:work@and
     |vpiFullName:work@mux_from_gates.work@and
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:92:9, endln:92:11
@@ -7204,8 +7271,8 @@ Design: (unnamed)
   \_Gate: work@and (work@mux_from_gates.work@and), line:93:5, endln:93:20
     |vpiParent:
     \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
-    |vpiDefName:work@and
     |vpiFullName:work@mux_from_gates.work@and
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:93:9, endln:93:11
@@ -7252,8 +7319,8 @@ Design: (unnamed)
   \_Gate: work@and (work@mux_from_gates.work@and), line:94:5, endln:94:20
     |vpiParent:
     \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
-    |vpiDefName:work@and
     |vpiFullName:work@mux_from_gates.work@and
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:94:9, endln:94:11
@@ -7300,8 +7367,8 @@ Design: (unnamed)
   \_Gate: work@and (work@mux_from_gates.work@and), line:95:5, endln:95:16
     |vpiParent:
     \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
-    |vpiDefName:work@and
     |vpiFullName:work@mux_from_gates.work@and
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:95:9, endln:95:11
@@ -7348,8 +7415,8 @@ Design: (unnamed)
   \_Gate: work@or (work@mux_from_gates.work@or), line:97:4, endln:97:20
     |vpiParent:
     \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
-    |vpiDefName:work@or
     |vpiFullName:work@mux_from_gates.work@or
+    |vpiDefName:work@or
     |vpiPrimType:4
     |vpiPrimTerm:
     \_PrimTerm: , line:97:8, endln:97:10
@@ -7559,13 +7626,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:192:3, endln:194:40
         |vpiParent:
         \_Begin: (work@n_in_primitive), line:191:9, endln:204:4
+        |vpiName:
+        \_Identifier: ($monitor), line:192:4, endln:192:11
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:192:3, endln:194:40
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:193:3, endln:193:70
           |vpiParent:
           \_SysFuncCall: ($monitor), line:192:3, endln:194:40
-          |vpiDecompile:"in1 = %b in2 = %b in3 = %b in4 = %b out1 = %b out2 = %b out3 = %b"
-          |vpiSize:520
-          |STRING:in1 = %b in2 = %b in3 = %b in4 = %b out1 = %b out2 = %b out3 = %b
           |vpiTypespec:
           \_RefTypespec: (work@n_in_primitive), line:193:3, endln:193:70
             |vpiParent:
@@ -7574,6 +7643,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:520
+          |vpiDecompile:"in1 = %b in2 = %b in3 = %b in4 = %b out1 = %b out2 = %b out3 = %b"
+          |STRING:in1 = %b in2 = %b in3 = %b in4 = %b out1 = %b out2 = %b out3 = %b
         |vpiArgument:
         \_RefObj: (work@n_in_primitive.in1), line:194:3, endln:194:6
           |vpiParent:
@@ -7630,32 +7702,12 @@ Design: (unnamed)
           |vpiFullName:work@n_in_primitive.out3
           |vpiActual:
           \_Net: (work@n_in_primitive.out3), line:180:16, endln:180:20
-        |vpiName:
-        \_Identifier: ($monitor), line:192:4, endln:192:11
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:192:3, endln:194:40
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:195:3, endln:195:10
         |vpiParent:
         \_Begin: (work@n_in_primitive), line:191:9, endln:204:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:195:9, endln:195:10
-          |vpiParent:
-          \_Assignment: , line:195:3, endln:195:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@n_in_primitive), line:195:9, endln:195:10
-            |vpiParent:
-            \_Constant: , line:195:9, endln:195:10
-            |vpiFullName:work@n_in_primitive
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@n_in_primitive.in1), line:195:3, endln:195:6
           |vpiParent:
@@ -7664,27 +7716,27 @@ Design: (unnamed)
           |vpiFullName:work@n_in_primitive.in1
           |vpiActual:
           \_Net: (work@n_in_primitive.in1), line:181:5, endln:181:8
+        |vpiRhs:
+        \_Constant: , line:195:9, endln:195:10
+          |vpiParent:
+          \_Assignment: , line:195:3, endln:195:10
+          |vpiTypespec:
+          \_RefTypespec: (work@n_in_primitive), line:195:9, endln:195:10
+            |vpiParent:
+            \_Constant: , line:195:9, endln:195:10
+            |vpiFullName:work@n_in_primitive
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:196:3, endln:196:10
         |vpiParent:
         \_Begin: (work@n_in_primitive), line:191:9, endln:204:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:196:9, endln:196:10
-          |vpiParent:
-          \_Assignment: , line:196:3, endln:196:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@n_in_primitive), line:196:9, endln:196:10
-            |vpiParent:
-            \_Constant: , line:196:9, endln:196:10
-            |vpiFullName:work@n_in_primitive
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@n_in_primitive.in2), line:196:3, endln:196:6
           |vpiParent:
@@ -7693,27 +7745,27 @@ Design: (unnamed)
           |vpiFullName:work@n_in_primitive.in2
           |vpiActual:
           \_Net: (work@n_in_primitive.in2), line:181:9, endln:181:12
+        |vpiRhs:
+        \_Constant: , line:196:9, endln:196:10
+          |vpiParent:
+          \_Assignment: , line:196:3, endln:196:10
+          |vpiTypespec:
+          \_RefTypespec: (work@n_in_primitive), line:196:9, endln:196:10
+            |vpiParent:
+            \_Constant: , line:196:9, endln:196:10
+            |vpiFullName:work@n_in_primitive
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:197:3, endln:197:10
         |vpiParent:
         \_Begin: (work@n_in_primitive), line:191:9, endln:204:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:197:9, endln:197:10
-          |vpiParent:
-          \_Assignment: , line:197:3, endln:197:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@n_in_primitive), line:197:9, endln:197:10
-            |vpiParent:
-            \_Constant: , line:197:9, endln:197:10
-            |vpiFullName:work@n_in_primitive
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@n_in_primitive.in3), line:197:3, endln:197:6
           |vpiParent:
@@ -7722,27 +7774,27 @@ Design: (unnamed)
           |vpiFullName:work@n_in_primitive.in3
           |vpiActual:
           \_Net: (work@n_in_primitive.in3), line:181:13, endln:181:16
+        |vpiRhs:
+        \_Constant: , line:197:9, endln:197:10
+          |vpiParent:
+          \_Assignment: , line:197:3, endln:197:10
+          |vpiTypespec:
+          \_RefTypespec: (work@n_in_primitive), line:197:9, endln:197:10
+            |vpiParent:
+            \_Constant: , line:197:9, endln:197:10
+            |vpiFullName:work@n_in_primitive
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:198:3, endln:198:10
         |vpiParent:
         \_Begin: (work@n_in_primitive), line:191:9, endln:204:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:198:9, endln:198:10
-          |vpiParent:
-          \_Assignment: , line:198:3, endln:198:10
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@n_in_primitive), line:198:9, endln:198:10
-            |vpiParent:
-            \_Constant: , line:198:9, endln:198:10
-            |vpiFullName:work@n_in_primitive
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@n_in_primitive.in4), line:198:3, endln:198:6
           |vpiParent:
@@ -7751,6 +7803,21 @@ Design: (unnamed)
           |vpiFullName:work@n_in_primitive.in4
           |vpiActual:
           \_Net: (work@n_in_primitive.in4), line:181:17, endln:181:20
+        |vpiRhs:
+        \_Constant: , line:198:9, endln:198:10
+          |vpiParent:
+          \_Assignment: , line:198:3, endln:198:10
+          |vpiTypespec:
+          \_RefTypespec: (work@n_in_primitive), line:198:9, endln:198:10
+            |vpiParent:
+            \_Constant: , line:198:9, endln:198:10
+            |vpiFullName:work@n_in_primitive
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:199:3, endln:199:13
         |vpiParent:
@@ -7762,21 +7829,6 @@ Design: (unnamed)
           \_DelayControl: , line:199:3, endln:199:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:199:12, endln:199:13
-            |vpiParent:
-            \_Assignment: , line:199:6, endln:199:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@n_in_primitive), line:199:12, endln:199:13
-              |vpiParent:
-              \_Constant: , line:199:12, endln:199:13
-              |vpiFullName:work@n_in_primitive
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@n_in_primitive.in1), line:199:6, endln:199:9
             |vpiParent:
@@ -7785,6 +7837,21 @@ Design: (unnamed)
             |vpiFullName:work@n_in_primitive.in1
             |vpiActual:
             \_Net: (work@n_in_primitive.in1), line:181:5, endln:181:8
+          |vpiRhs:
+          \_Constant: , line:199:12, endln:199:13
+            |vpiParent:
+            \_Assignment: , line:199:6, endln:199:13
+            |vpiTypespec:
+            \_RefTypespec: (work@n_in_primitive), line:199:12, endln:199:13
+              |vpiParent:
+              \_Constant: , line:199:12, endln:199:13
+              |vpiFullName:work@n_in_primitive
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:200:3, endln:200:13
         |vpiParent:
@@ -7796,21 +7863,6 @@ Design: (unnamed)
           \_DelayControl: , line:200:3, endln:200:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:200:12, endln:200:13
-            |vpiParent:
-            \_Assignment: , line:200:6, endln:200:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@n_in_primitive), line:200:12, endln:200:13
-              |vpiParent:
-              \_Constant: , line:200:12, endln:200:13
-              |vpiFullName:work@n_in_primitive
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@n_in_primitive.in2), line:200:6, endln:200:9
             |vpiParent:
@@ -7819,6 +7871,21 @@ Design: (unnamed)
             |vpiFullName:work@n_in_primitive.in2
             |vpiActual:
             \_Net: (work@n_in_primitive.in2), line:181:9, endln:181:12
+          |vpiRhs:
+          \_Constant: , line:200:12, endln:200:13
+            |vpiParent:
+            \_Assignment: , line:200:6, endln:200:13
+            |vpiTypespec:
+            \_RefTypespec: (work@n_in_primitive), line:200:12, endln:200:13
+              |vpiParent:
+              \_Constant: , line:200:12, endln:200:13
+              |vpiFullName:work@n_in_primitive
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:201:3, endln:201:13
         |vpiParent:
@@ -7830,21 +7897,6 @@ Design: (unnamed)
           \_DelayControl: , line:201:3, endln:201:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:201:12, endln:201:13
-            |vpiParent:
-            \_Assignment: , line:201:6, endln:201:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@n_in_primitive), line:201:12, endln:201:13
-              |vpiParent:
-              \_Constant: , line:201:12, endln:201:13
-              |vpiFullName:work@n_in_primitive
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@n_in_primitive.in3), line:201:6, endln:201:9
             |vpiParent:
@@ -7853,6 +7905,21 @@ Design: (unnamed)
             |vpiFullName:work@n_in_primitive.in3
             |vpiActual:
             \_Net: (work@n_in_primitive.in3), line:181:13, endln:181:16
+          |vpiRhs:
+          \_Constant: , line:201:12, endln:201:13
+            |vpiParent:
+            \_Assignment: , line:201:6, endln:201:13
+            |vpiTypespec:
+            \_RefTypespec: (work@n_in_primitive), line:201:12, endln:201:13
+              |vpiParent:
+              \_Constant: , line:201:12, endln:201:13
+              |vpiFullName:work@n_in_primitive
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:202:3, endln:202:13
         |vpiParent:
@@ -7864,21 +7931,6 @@ Design: (unnamed)
           \_DelayControl: , line:202:3, endln:202:13
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:202:12, endln:202:13
-            |vpiParent:
-            \_Assignment: , line:202:6, endln:202:13
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@n_in_primitive), line:202:12, endln:202:13
-              |vpiParent:
-              \_Constant: , line:202:12, endln:202:13
-              |vpiFullName:work@n_in_primitive
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@n_in_primitive.in4), line:202:6, endln:202:9
             |vpiParent:
@@ -7887,6 +7939,21 @@ Design: (unnamed)
             |vpiFullName:work@n_in_primitive.in4
             |vpiActual:
             \_Net: (work@n_in_primitive.in4), line:181:17, endln:181:20
+          |vpiRhs:
+          \_Constant: , line:202:12, endln:202:13
+            |vpiParent:
+            \_Assignment: , line:202:6, endln:202:13
+            |vpiTypespec:
+            \_RefTypespec: (work@n_in_primitive), line:202:12, endln:202:13
+              |vpiParent:
+              \_Constant: , line:202:12, endln:202:13
+              |vpiFullName:work@n_in_primitive
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:203:3, endln:203:13
         |vpiParent:
@@ -7905,9 +7972,9 @@ Design: (unnamed)
   \_Gate: work@and (work@n_in_primitive.u_and1), line:184:5, endln:184:28
     |vpiParent:
     \_Module: work@n_in_primitive (work@n_in_primitive), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:178:1, endln:206:10
-    |vpiDefName:work@and
     |vpiName:u_and1
     |vpiFullName:work@n_in_primitive.u_and1
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:184:13, endln:184:17
@@ -7954,9 +8021,9 @@ Design: (unnamed)
   \_Gate: work@and (work@n_in_primitive.u_and2), line:186:5, endln:186:38
     |vpiParent:
     \_Module: work@n_in_primitive (work@n_in_primitive), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:178:1, endln:206:10
-    |vpiDefName:work@and
     |vpiName:u_and2
     |vpiFullName:work@n_in_primitive.u_and2
+    |vpiDefName:work@and
     |vpiPrimType:1
     |vpiPrimTerm:
     \_PrimTerm: , line:186:13, endln:186:17
@@ -8031,9 +8098,9 @@ Design: (unnamed)
   \_Gate: work@xnor (work@n_in_primitive.u_xnor1), line:188:6, endln:188:35
     |vpiParent:
     \_Module: work@n_in_primitive (work@n_in_primitive), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:178:1, endln:206:10
-    |vpiDefName:work@xnor
     |vpiName:u_xnor1
     |vpiFullName:work@n_in_primitive.u_xnor1
+    |vpiDefName:work@xnor
     |vpiPrimType:6
     |vpiPrimTerm:
     \_PrimTerm: , line:188:15, endln:188:19
@@ -8254,9 +8321,9 @@ Design: (unnamed)
   \_Gate: work@buf (work@n_out_primitive.u_buf0), line:214:5, endln:214:20
     |vpiParent:
     \_Module: work@n_out_primitive (work@n_out_primitive), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:208:1, endln:220:10
-    |vpiDefName:work@buf
     |vpiName:u_buf0
     |vpiFullName:work@n_out_primitive.u_buf0
+    |vpiDefName:work@buf
     |vpiPrimType:7
     |vpiPrimTerm:
     \_PrimTerm: , line:214:13, endln:214:16
@@ -8289,9 +8356,9 @@ Design: (unnamed)
   \_Gate: work@buf (work@n_out_primitive.u_buf1), line:216:5, endln:216:44
     |vpiParent:
     \_Module: work@n_out_primitive (work@n_out_primitive), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:208:1, endln:220:10
-    |vpiDefName:work@buf
     |vpiName:u_buf1
     |vpiFullName:work@n_out_primitive.u_buf1
+    |vpiDefName:work@buf
     |vpiPrimType:7
     |vpiPrimTerm:
     \_PrimTerm: , line:216:13, endln:216:18
@@ -8366,9 +8433,9 @@ Design: (unnamed)
   \_Gate: work@not (work@n_out_primitive.u_not0), line:218:5, endln:218:37
     |vpiParent:
     \_Module: work@n_out_primitive (work@n_out_primitive), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:208:1, endln:220:10
-    |vpiDefName:work@not
     |vpiName:u_not0
     |vpiFullName:work@n_out_primitive.u_not0
+    |vpiDefName:work@not
     |vpiPrimType:8
     |vpiPrimTerm:
     \_PrimTerm: , line:218:13, endln:218:18
@@ -8658,13 +8725,15 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:39:3, endln:41:54
         |vpiParent:
         \_Begin: (work@transmission_gates), line:38:9, endln:46:4
+        |vpiName:
+        \_Identifier: ($monitor), line:39:4, endln:39:11
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:39:3, endln:41:54
+          |vpiName:$monitor
         |vpiArgument:
         \_Constant: , line:40:5, endln:40:63
           |vpiParent:
           \_SysFuncCall: ($monitor), line:39:3, endln:41:54
-          |vpiDecompile:"@%g in=%b data_enable_low=%b out1=%b out2= b data_bus=%b"
-          |vpiSize:448
-          |STRING:@%g in=%b data_enable_low=%b out1=%b out2= b data_bus=%b
           |vpiTypespec:
           \_RefTypespec: (work@transmission_gates), line:40:5, endln:40:63
             |vpiParent:
@@ -8673,6 +8742,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:448
+          |vpiDecompile:"@%g in=%b data_enable_low=%b out1=%b out2= b data_bus=%b"
+          |STRING:@%g in=%b data_enable_low=%b out1=%b out2= b data_bus=%b
         |vpiArgument:
         \_SysFuncCall: ($time), line:41:5, endln:41:10
           |vpiParent:
@@ -8722,32 +8794,12 @@ Design: (unnamed)
           |vpiFullName:work@transmission_gates.data_bus
           |vpiActual:
           \_Net: (work@transmission_gates.data_bus), line:32:6, endln:32:14
-        |vpiName:
-        \_Identifier: ($monitor), line:39:4, endln:39:11
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:39:3, endln:41:54
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:42:3, endln:42:22
         |vpiParent:
         \_Begin: (work@transmission_gates), line:38:9, endln:46:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:42:21, endln:42:22
-          |vpiParent:
-          \_Assignment: , line:42:3, endln:42:22
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@transmission_gates), line:42:21, endln:42:22
-            |vpiParent:
-            \_Constant: , line:42:21, endln:42:22
-            |vpiFullName:work@transmission_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@transmission_gates.data_enable_low), line:42:3, endln:42:18
           |vpiParent:
@@ -8756,27 +8808,27 @@ Design: (unnamed)
           |vpiFullName:work@transmission_gates.data_enable_low
           |vpiActual:
           \_Net: (work@transmission_gates.data_enable_low), line:31:5, endln:31:20
+        |vpiRhs:
+        \_Constant: , line:42:21, endln:42:22
+          |vpiParent:
+          \_Assignment: , line:42:3, endln:42:22
+          |vpiTypespec:
+          \_RefTypespec: (work@transmission_gates), line:42:21, endln:42:22
+            |vpiParent:
+            \_Constant: , line:42:21, endln:42:22
+            |vpiFullName:work@transmission_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:43:3, endln:43:9
         |vpiParent:
         \_Begin: (work@transmission_gates), line:38:9, endln:46:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:43:8, endln:43:9
-          |vpiParent:
-          \_Assignment: , line:43:3, endln:43:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiTypespec:
-          \_RefTypespec: (work@transmission_gates), line:43:8, endln:43:9
-            |vpiParent:
-            \_Constant: , line:43:8, endln:43:9
-            |vpiFullName:work@transmission_gates
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@transmission_gates.in), line:43:3, endln:43:5
           |vpiParent:
@@ -8785,6 +8837,21 @@ Design: (unnamed)
           |vpiFullName:work@transmission_gates.in
           |vpiActual:
           \_Net: (work@transmission_gates.in), line:31:22, endln:31:24
+        |vpiRhs:
+        \_Constant: , line:43:8, endln:43:9
+          |vpiParent:
+          \_Assignment: , line:43:3, endln:43:9
+          |vpiTypespec:
+          \_RefTypespec: (work@transmission_gates), line:43:8, endln:43:9
+            |vpiParent:
+            \_Constant: , line:43:8, endln:43:9
+            |vpiFullName:work@transmission_gates
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_DelayControl: , line:44:3, endln:44:25
         |vpiParent:
@@ -8796,21 +8863,6 @@ Design: (unnamed)
           \_DelayControl: , line:44:3, endln:44:25
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:44:24, endln:44:25
-            |vpiParent:
-            \_Assignment: , line:44:6, endln:44:25
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiTypespec:
-            \_RefTypespec: (work@transmission_gates), line:44:24, endln:44:25
-              |vpiParent:
-              \_Constant: , line:44:24, endln:44:25
-              |vpiFullName:work@transmission_gates
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@transmission_gates.data_enable_low), line:44:6, endln:44:21
             |vpiParent:
@@ -8819,6 +8871,21 @@ Design: (unnamed)
             |vpiFullName:work@transmission_gates.data_enable_low
             |vpiActual:
             \_Net: (work@transmission_gates.data_enable_low), line:31:5, endln:31:20
+          |vpiRhs:
+          \_Constant: , line:44:24, endln:44:25
+            |vpiParent:
+            \_Assignment: , line:44:6, endln:44:25
+            |vpiTypespec:
+            \_RefTypespec: (work@transmission_gates), line:44:24, endln:44:25
+              |vpiParent:
+              \_Constant: , line:44:24, endln:44:25
+              |vpiFullName:work@transmission_gates
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_DelayControl: , line:45:3, endln:45:13
         |vpiParent:
@@ -8848,6 +8915,14 @@ Design: (unnamed)
         \_DelayControl: , line:48:8, endln:48:19
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@transmission_gates.in), line:48:11, endln:48:13
+          |vpiParent:
+          \_Assignment: , line:48:11, endln:48:19
+          |vpiName:in
+          |vpiFullName:work@transmission_gates.in
+          |vpiActual:
+          \_Net: (work@transmission_gates.in), line:31:22, endln:31:24
         |vpiRhs:
         \_Operation: , line:48:16, endln:48:19
           |vpiParent:
@@ -8861,22 +8936,14 @@ Design: (unnamed)
             |vpiFullName:work@transmission_gates.in
             |vpiActual:
             \_Net: (work@transmission_gates.in), line:31:22, endln:31:24
-        |vpiLhs:
-        \_RefObj: (work@transmission_gates.in), line:48:11, endln:48:13
-          |vpiParent:
-          \_Assignment: , line:48:11, endln:48:19
-          |vpiName:in
-          |vpiFullName:work@transmission_gates.in
-          |vpiActual:
-          \_Net: (work@transmission_gates.in), line:31:22, endln:31:24
     |vpiAlwaysType:1
   |vpiPrimitive:
   \_Gate: work@buf (work@transmission_gates.U2), line:35:6, endln:35:17
     |vpiParent:
     \_Module: work@transmission_gates (work@transmission_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:29:1, endln:50:10
-    |vpiDefName:work@buf
     |vpiName:U2
     |vpiFullName:work@transmission_gates.U2
+    |vpiDefName:work@buf
     |vpiPrimType:7
     |vpiPrimTerm:
     \_PrimTerm: , line:35:9, endln:35:13
@@ -8909,9 +8976,9 @@ Design: (unnamed)
   \_Gate: work@not (work@transmission_gates.U3), line:36:5, endln:36:16
     |vpiParent:
     \_Module: work@transmission_gates (work@transmission_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:29:1, endln:50:10
-    |vpiDefName:work@not
     |vpiName:U3
     |vpiFullName:work@transmission_gates.U3
+    |vpiDefName:work@not
     |vpiPrimType:8
     |vpiPrimTerm:
     \_PrimTerm: , line:36:8, endln:36:12

@@ -596,20 +596,18 @@ Design: (unnamed)
   \_Parameter: (work@top.NUM_WAYS), line:29:11, endln:29:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
-    |UINT:1
     |vpiName:NUM_WAYS
     |vpiFullName:work@top.NUM_WAYS
   |vpiParamAssign:
   \_ParamAssign: , line:29:11, endln:29:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
+    |vpiLhs:
+    \_Parameter: (work@top.NUM_WAYS), line:29:11, endln:29:23
     |vpiRhs:
     \_Constant: , line:29:22, endln:29:23
       |vpiParent:
       \_ParamAssign: , line:29:11, endln:29:23
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
       |vpiTypespec:
       \_RefTypespec: (work@top), line:29:22, endln:29:23
         |vpiParent:
@@ -618,8 +616,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.NUM_WAYS), line:29:11, endln:29:23
+      |vpiSize:64
+      |vpiDecompile:1
+      |UINT:1
   |vpiInternalScope:
   \_Begin: (work@top), line:17:11, endln:17:50
     |vpiParent:
@@ -638,14 +637,6 @@ Design: (unnamed)
       \_Begin: (work@top), line:17:11, endln:17:50
       |vpiStrength0:8
       |vpiStrength1:8
-      |vpiRhs:
-      \_RefObj: (work@top.pu), line:17:47, endln:17:49
-        |vpiParent:
-        \_ContAssign: , line:17:18, endln:17:49
-        |vpiName:pu
-        |vpiFullName:work@top.pu
-        |vpiActual:
-        \_Net: (work@top.pu), line:6:41, endln:6:43
       |vpiLhs:
       \_RefObj: (work@top.inout_i3), line:17:36, endln:17:44
         |vpiParent:
@@ -654,6 +645,14 @@ Design: (unnamed)
         |vpiFullName:work@top.inout_i3
         |vpiActual:
         \_Net: (work@top.inout_i3), line:17:36, endln:17:44
+      |vpiRhs:
+      \_RefObj: (work@top.pu), line:17:47, endln:17:49
+        |vpiParent:
+        \_ContAssign: , line:17:18, endln:17:49
+        |vpiName:pu
+        |vpiFullName:work@top.pu
+        |vpiActual:
+        \_Net: (work@top.pu), line:6:41, endln:6:43
   |vpiInternalScope:
   \_Begin: (work@top), line:18:9, endln:18:50
     |vpiParent:
@@ -672,6 +671,14 @@ Design: (unnamed)
       \_Begin: (work@top), line:18:9, endln:18:50
       |vpiStrength0:8
       |vpiStrength1:8
+      |vpiLhs:
+      \_RefObj: (work@top.inout_i3), line:18:35, endln:18:43
+        |vpiParent:
+        \_ContAssign: , line:18:16, endln:18:49
+        |vpiName:inout_i3
+        |vpiFullName:work@top.inout_i3
+        |vpiActual:
+        \_Net: (work@top.inout_i3), line:18:35, endln:18:43
       |vpiRhs:
       \_Operation: , line:18:46, endln:18:49
         |vpiParent:
@@ -685,14 +692,6 @@ Design: (unnamed)
           |vpiFullName:work@top.pd
           |vpiActual:
           \_Net: (work@top.pd), line:7:42, endln:7:44
-      |vpiLhs:
-      \_RefObj: (work@top.inout_i3), line:18:35, endln:18:43
-        |vpiParent:
-        \_ContAssign: , line:18:16, endln:18:49
-        |vpiName:inout_i3
-        |vpiFullName:work@top.inout_i3
-        |vpiActual:
-        \_Net: (work@top.inout_i3), line:18:35, endln:18:43
   |vpiInternalScope:
   \_GenRegion: (work@top), line:30:1, endln:43:12
     |vpiParent:
@@ -725,21 +724,6 @@ Design: (unnamed)
         \_ContAssign: , line:34:19, endln:34:31
           |vpiParent:
           \_Begin: (work@top), line:33:8, endln:36:11
-          |vpiRhs:
-          \_Constant: , line:34:30, endln:34:31
-            |vpiParent:
-            \_ContAssign: , line:34:19, endln:34:31
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@top), line:34:30, endln:34:31
-              |vpiParent:
-              \_Constant: , line:34:30, endln:34:31
-              |vpiFullName:work@top
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@top.fill_way), line:34:19, endln:34:27
             |vpiParent:
@@ -748,6 +732,21 @@ Design: (unnamed)
             |vpiFullName:work@top.fill_way
             |vpiActual:
             \_Net: (work@top.fill_way), line:34:19, endln:34:27
+          |vpiRhs:
+          \_Constant: , line:34:30, endln:34:31
+            |vpiParent:
+            \_ContAssign: , line:34:19, endln:34:31
+            |vpiTypespec:
+            \_RefTypespec: (work@top), line:34:30, endln:34:31
+              |vpiParent:
+              \_Constant: , line:34:30, endln:34:31
+              |vpiFullName:work@top
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
       |vpiInternalScope:
       \_Begin: (work@top), line:38:8, endln:41:11
         |vpiParent:
@@ -777,6 +776,14 @@ Design: (unnamed)
         \_ContAssign: , line:39:19, endln:39:43
           |vpiParent:
           \_Begin: (work@top), line:38:8, endln:41:11
+          |vpiLhs:
+          \_RefObj: (work@top.fill_way), line:39:19, endln:39:27
+            |vpiParent:
+            \_ContAssign: , line:39:19, endln:39:43
+            |vpiName:fill_way
+            |vpiFullName:work@top.fill_way
+            |vpiActual:
+            \_Net: (work@top.fill_way), line:39:19, endln:39:27
           |vpiRhs:
           \_Operation: , line:39:30, endln:39:43
             |vpiParent:
@@ -794,9 +801,6 @@ Design: (unnamed)
               \_Constant: , line:39:41, endln:39:42
                 |vpiParent:
                 \_BitSelect: (work@top.lru_flags), line:39:40, endln:39:43
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
                 |vpiTypespec:
                 \_RefTypespec: (work@top.lru_flags), line:39:41, endln:39:42
                   |vpiParent:
@@ -805,14 +809,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:9
-          |vpiLhs:
-          \_RefObj: (work@top.fill_way), line:39:19, endln:39:27
-            |vpiParent:
-            \_ContAssign: , line:39:19, endln:39:43
-            |vpiName:fill_way
-            |vpiFullName:work@top.fill_way
-            |vpiActual:
-            \_Net: (work@top.fill_way), line:39:19, endln:39:27
+                |vpiSize:64
+                |vpiDecompile:0
+                |UINT:0
       |vpiTypespec:
       \_IntTypespec: 
         |vpiParent:
@@ -839,9 +838,6 @@ Design: (unnamed)
           \_Constant: , line:32:8, endln:32:9
             |vpiParent:
             \_CaseItem: , line:32:8, endln:36:11
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (work@top), line:32:8, endln:32:9
               |vpiParent:
@@ -850,6 +846,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
           |vpiStmt:
           \_Begin: (work@top), line:33:8, endln:36:11
         |vpiCaseItem:
@@ -860,9 +859,6 @@ Design: (unnamed)
           \_Constant: , line:37:8, endln:37:9
             |vpiParent:
             \_CaseItem: , line:37:8, endln:41:11
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
             |vpiTypespec:
             \_RefTypespec: (work@top), line:37:8, endln:37:9
               |vpiParent:
@@ -871,6 +867,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:2
+            |UINT:2
           |vpiStmt:
           \_Begin: (work@top), line:38:8, endln:41:11
     |vpiStmt:
@@ -1008,14 +1007,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
     |vpiStrength0:1
     |vpiStrength1:8
-    |vpiRhs:
-    \_RefObj: (work@top.pu), line:6:41, endln:6:43
-      |vpiParent:
-      \_ContAssign: , line:6:11, endln:6:43
-      |vpiName:pu
-      |vpiFullName:work@top.pu
-      |vpiActual:
-      \_Net: (work@top.pu), line:6:41, endln:6:43
     |vpiLhs:
     \_RefObj: (work@top.inout_i1), line:6:30, endln:6:38
       |vpiParent:
@@ -1024,12 +1015,28 @@ Design: (unnamed)
       |vpiFullName:work@top.inout_i1
       |vpiActual:
       \_Net: (work@top.inout_i1), line:6:30, endln:6:38
+    |vpiRhs:
+    \_RefObj: (work@top.pu), line:6:41, endln:6:43
+      |vpiParent:
+      \_ContAssign: , line:6:11, endln:6:43
+      |vpiName:pu
+      |vpiFullName:work@top.pu
+      |vpiActual:
+      \_Net: (work@top.pu), line:6:41, endln:6:43
   |vpiContAssign:
   \_ContAssign: , line:7:11, endln:7:44
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
     |vpiStrength0:8
     |vpiStrength1:1
+    |vpiLhs:
+    \_RefObj: (work@top.inout_i1), line:7:30, endln:7:38
+      |vpiParent:
+      \_ContAssign: , line:7:11, endln:7:44
+      |vpiName:inout_i1
+      |vpiFullName:work@top.inout_i1
+      |vpiActual:
+      \_Net: (work@top.inout_i1), line:6:30, endln:6:38
     |vpiRhs:
     \_Operation: , line:7:41, endln:7:44
       |vpiParent:
@@ -1043,33 +1050,10 @@ Design: (unnamed)
         |vpiFullName:work@top.pd
         |vpiActual:
         \_Net: (work@top.pd), line:7:42, endln:7:44
-    |vpiLhs:
-    \_RefObj: (work@top.inout_i1), line:7:30, endln:7:38
-      |vpiParent:
-      \_ContAssign: , line:7:11, endln:7:44
-      |vpiName:inout_i1
-      |vpiFullName:work@top.inout_i1
-      |vpiActual:
-      \_Net: (work@top.inout_i1), line:6:30, endln:6:38
   |vpiContAssign:
   \_ContAssign: , line:9:9, endln:9:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
-    |vpiRhs:
-    \_Constant: , line:9:13, endln:9:15
-      |vpiParent:
-      \_ContAssign: , line:9:9, endln:9:15
-      |vpiDecompile:12
-      |vpiSize:64
-      |UINT:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top), line:9:13, endln:9:15
-        |vpiParent:
-        \_Constant: , line:9:13, endln:9:15
-        |vpiFullName:work@top
-        |vpiActual:
-        \_IntTypespec: 
-      |vpiConstType:9
     |vpiLhs:
     \_RefObj: (work@top.v), line:9:9, endln:9:10
       |vpiParent:
@@ -1078,25 +1062,25 @@ Design: (unnamed)
       |vpiFullName:work@top.v
       |vpiActual:
       \_Variable: (work@top.v), line:5:6, endln:5:7
-  |vpiContAssign:
-  \_ContAssign: , line:10:9, endln:10:15
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
     |vpiRhs:
-    \_Constant: , line:10:13, endln:10:15
+    \_Constant: , line:9:13, endln:9:15
       |vpiParent:
-      \_ContAssign: , line:10:9, endln:10:15
-      |vpiDecompile:13
-      |vpiSize:64
-      |UINT:13
+      \_ContAssign: , line:9:9, endln:9:15
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:10:13, endln:10:15
+      \_RefTypespec: (work@top), line:9:13, endln:9:15
         |vpiParent:
-        \_Constant: , line:10:13, endln:10:15
+        \_Constant: , line:9:13, endln:9:15
         |vpiFullName:work@top
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:12
+      |UINT:12
+  |vpiContAssign:
+  \_ContAssign: , line:10:9, endln:10:15
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
     |vpiLhs:
     \_RefObj: (work@top.v), line:10:9, endln:10:10
       |vpiParent:
@@ -1105,20 +1089,27 @@ Design: (unnamed)
       |vpiFullName:work@top.v
       |vpiActual:
       \_Variable: (work@top.v), line:5:6, endln:5:7
+    |vpiRhs:
+    \_Constant: , line:10:13, endln:10:15
+      |vpiParent:
+      \_ContAssign: , line:10:9, endln:10:15
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:10:13, endln:10:15
+        |vpiParent:
+        \_Constant: , line:10:13, endln:10:15
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:13
+      |UINT:13
   |vpiContAssign:
   \_ContAssign: , line:13:11, endln:13:42
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
     |vpiStrength0:8
     |vpiStrength1:8
-    |vpiRhs:
-    \_RefObj: (work@top.pu), line:13:40, endln:13:42
-      |vpiParent:
-      \_ContAssign: , line:13:11, endln:13:42
-      |vpiName:pu
-      |vpiFullName:work@top.pu
-      |vpiActual:
-      \_Net: (work@top.pu), line:6:41, endln:6:43
     |vpiLhs:
     \_RefObj: (work@top.inout_i2), line:13:29, endln:13:37
       |vpiParent:
@@ -1127,12 +1118,28 @@ Design: (unnamed)
       |vpiFullName:work@top.inout_i2
       |vpiActual:
       \_Net: (work@top.inout_i2), line:13:29, endln:13:37
+    |vpiRhs:
+    \_RefObj: (work@top.pu), line:13:40, endln:13:42
+      |vpiParent:
+      \_ContAssign: , line:13:11, endln:13:42
+      |vpiName:pu
+      |vpiFullName:work@top.pu
+      |vpiActual:
+      \_Net: (work@top.pu), line:6:41, endln:6:43
   |vpiContAssign:
   \_ContAssign: , line:14:11, endln:14:44
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
     |vpiStrength0:8
     |vpiStrength1:8
+    |vpiLhs:
+    \_RefObj: (work@top.inout_i2), line:14:30, endln:14:38
+      |vpiParent:
+      \_ContAssign: , line:14:11, endln:14:44
+      |vpiName:inout_i2
+      |vpiFullName:work@top.inout_i2
+      |vpiActual:
+      \_Net: (work@top.inout_i2), line:13:29, endln:13:37
     |vpiRhs:
     \_Operation: , line:14:41, endln:14:44
       |vpiParent:
@@ -1146,18 +1153,18 @@ Design: (unnamed)
         |vpiFullName:work@top.pd
         |vpiActual:
         \_Net: (work@top.pd), line:7:42, endln:7:44
-    |vpiLhs:
-    \_RefObj: (work@top.inout_i2), line:14:30, endln:14:38
-      |vpiParent:
-      \_ContAssign: , line:14:11, endln:14:44
-      |vpiName:inout_i2
-      |vpiFullName:work@top.inout_i2
-      |vpiActual:
-      \_Net: (work@top.inout_i2), line:13:29, endln:13:37
   |vpiContAssign:
   \_ContAssign: , line:21:17, endln:21:48
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
+    |vpiLhs:
+    \_RefObj: (work@top.out), line:21:17, endln:21:20
+      |vpiParent:
+      \_ContAssign: , line:21:17, endln:21:48
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_Net: (work@top.out), line:21:17, endln:21:20
     |vpiRhs:
     \_Operation: , line:21:23, endln:21:48
       |vpiParent:
@@ -1180,9 +1187,6 @@ Design: (unnamed)
         \_Constant: , line:21:31, endln:21:36
           |vpiParent:
           \_Operation: , line:21:24, endln:21:36
-          |vpiDecompile:2'b00
-          |vpiSize:2
-          |BIN:00
           |vpiTypespec:
           \_RefTypespec: (work@top), line:21:31, endln:21:36
             |vpiParent:
@@ -1191,6 +1195,9 @@ Design: (unnamed)
             |vpiActual:
             \_LogicTypespec: 
           |vpiConstType:3
+          |vpiSize:2
+          |vpiDecompile:2'b00
+          |BIN:00
       |vpiOperand:
       \_RefObj: (work@top.v0), line:21:39, endln:21:41
         |vpiParent:
@@ -1203,9 +1210,6 @@ Design: (unnamed)
       \_Constant: , line:21:44, endln:21:48
         |vpiParent:
         \_Operation: , line:21:23, endln:21:48
-        |vpiDecompile:2'bz
-        |vpiSize:2
-        |BIN:z
         |vpiTypespec:
         \_RefTypespec: (work@top), line:21:44, endln:21:48
           |vpiParent:
@@ -1214,18 +1218,21 @@ Design: (unnamed)
           |vpiActual:
           \_LogicTypespec: 
         |vpiConstType:3
-    |vpiLhs:
-    \_RefObj: (work@top.out), line:21:17, endln:21:20
-      |vpiParent:
-      \_ContAssign: , line:21:17, endln:21:48
-      |vpiName:out
-      |vpiFullName:work@top.out
-      |vpiActual:
-      \_Net: (work@top.out), line:21:17, endln:21:20
+        |vpiSize:2
+        |vpiDecompile:2'bz
+        |BIN:z
   |vpiContAssign:
   \_ContAssign: , line:22:17, endln:22:48
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
+    |vpiLhs:
+    \_RefObj: (work@top.out), line:22:17, endln:22:20
+      |vpiParent:
+      \_ContAssign: , line:22:17, endln:22:48
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_Net: (work@top.out), line:21:17, endln:21:20
     |vpiRhs:
     \_Operation: , line:22:23, endln:22:48
       |vpiParent:
@@ -1248,9 +1255,6 @@ Design: (unnamed)
         \_Constant: , line:22:31, endln:22:36
           |vpiParent:
           \_Operation: , line:22:24, endln:22:36
-          |vpiDecompile:2'b01
-          |vpiSize:2
-          |BIN:01
           |vpiTypespec:
           \_RefTypespec: (work@top), line:22:31, endln:22:36
             |vpiParent:
@@ -1259,6 +1263,9 @@ Design: (unnamed)
             |vpiActual:
             \_LogicTypespec: 
           |vpiConstType:3
+          |vpiSize:2
+          |vpiDecompile:2'b01
+          |BIN:01
       |vpiOperand:
       \_RefObj: (work@top.v1), line:22:39, endln:22:41
         |vpiParent:
@@ -1271,9 +1278,6 @@ Design: (unnamed)
       \_Constant: , line:22:44, endln:22:48
         |vpiParent:
         \_Operation: , line:22:23, endln:22:48
-        |vpiDecompile:2'bz
-        |vpiSize:2
-        |BIN:z
         |vpiTypespec:
         \_RefTypespec: (work@top), line:22:44, endln:22:48
           |vpiParent:
@@ -1282,35 +1286,15 @@ Design: (unnamed)
           |vpiActual:
           \_LogicTypespec: 
         |vpiConstType:3
-    |vpiLhs:
-    \_RefObj: (work@top.out), line:22:17, endln:22:20
-      |vpiParent:
-      \_ContAssign: , line:22:17, endln:22:48
-      |vpiName:out
-      |vpiFullName:work@top.out
-      |vpiActual:
-      \_Net: (work@top.out), line:21:17, endln:21:20
+        |vpiSize:2
+        |vpiDecompile:2'bz
+        |BIN:z
   |vpiContAssign:
   \_ContAssign: , line:24:18, endln:24:49
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
     |vpiStrength0:32
     |vpiStrength1:32
-    |vpiRhs:
-    \_Constant: , line:24:45, endln:24:49
-      |vpiParent:
-      \_ContAssign: , line:24:18, endln:24:49
-      |vpiDecompile:1'b1
-      |vpiSize:1
-      |BIN:1
-      |vpiTypespec:
-      \_RefTypespec: (work@top), line:24:45, endln:24:49
-        |vpiParent:
-        \_Constant: , line:24:45, endln:24:49
-        |vpiFullName:work@top
-        |vpiActual:
-        \_BitTypespec: 
-      |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@top.pull_up_1), line:24:33, endln:24:42
       |vpiParent:
@@ -1319,10 +1303,33 @@ Design: (unnamed)
       |vpiFullName:work@top.pull_up_1
       |vpiActual:
       \_Net: (work@top.pull_up_1), line:24:33, endln:24:42
+    |vpiRhs:
+    \_Constant: , line:24:45, endln:24:49
+      |vpiParent:
+      \_ContAssign: , line:24:18, endln:24:49
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:24:45, endln:24:49
+        |vpiParent:
+        \_Constant: , line:24:45, endln:24:49
+        |vpiFullName:work@top
+        |vpiActual:
+        \_BitTypespec: 
+      |vpiConstType:3
+      |vpiSize:1
+      |vpiDecompile:1'b1
+      |BIN:1
   |vpiContAssign:
   \_ContAssign: , line:26:18, endln:26:61
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:3:1, endln:45:10
+    |vpiLhs:
+    \_RefObj: (work@top.pull_up_1), line:26:18, endln:26:27
+      |vpiParent:
+      \_ContAssign: , line:26:18, endln:26:61
+      |vpiName:pull_up_1
+      |vpiFullName:work@top.pull_up_1
+      |vpiActual:
+      \_Net: (work@top.pull_up_1), line:24:33, endln:24:42
     |vpiRhs:
     \_Operation: , line:26:30, endln:26:61
       |vpiParent:
@@ -1348,9 +1355,6 @@ Design: (unnamed)
       \_Constant: , line:26:57, endln:26:61
         |vpiParent:
         \_Operation: , line:26:30, endln:26:61
-        |vpiDecompile:1'bz
-        |vpiSize:1
-        |BIN:z
         |vpiTypespec:
         \_RefTypespec: (work@top), line:26:57, endln:26:61
           |vpiParent:
@@ -1359,14 +1363,9 @@ Design: (unnamed)
           |vpiActual:
           \_LogicTypespec: 
         |vpiConstType:3
-    |vpiLhs:
-    \_RefObj: (work@top.pull_up_1), line:26:18, endln:26:27
-      |vpiParent:
-      \_ContAssign: , line:26:18, endln:26:61
-      |vpiName:pull_up_1
-      |vpiFullName:work@top.pull_up_1
-      |vpiActual:
-      \_Net: (work@top.pull_up_1), line:24:33, endln:24:42
+        |vpiSize:1
+        |vpiDecompile:1'bz
+        |BIN:z
   |vpiGenStmt:
   \_GenIfElse: , line:17:4, endln:18:50
     |vpiParent:
@@ -1375,9 +1374,6 @@ Design: (unnamed)
     \_Constant: , line:17:8, endln:17:9
       |vpiParent:
       \_GenIfElse: , line:17:4, endln:18:50
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiTypespec:
       \_RefTypespec: (work@top), line:17:8, endln:17:9
         |vpiParent:
@@ -1386,6 +1382,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |UINT:0
     |vpiStmt:
     \_Begin: (work@top), line:17:11, endln:17:50
     |vpiElseStmt:
@@ -1442,13 +1441,15 @@ Design: (unnamed)
     \_SysFuncCall: ($display), line:63:11, endln:63:67
       |vpiParent:
       \_Initial: , line:63:3, endln:63:68
+      |vpiName:
+      \_Identifier: ($display), line:63:12, endln:63:19
+        |vpiParent:
+        \_SysFuncCall: ($display), line:63:11, endln:63:67
+        |vpiName:$display
       |vpiArgument:
       \_Constant: , line:63:20, endln:63:66
         |vpiParent:
         \_SysFuncCall: ($display), line:63:11, endln:63:67
-        |vpiDecompile:"Failed: this should be a compile time error!"
-        |vpiSize:352
-        |STRING:Failed: this should be a compile time error!
         |vpiTypespec:
         \_RefTypespec: (work@top2), line:63:20, endln:63:66
           |vpiParent:
@@ -1457,30 +1458,13 @@ Design: (unnamed)
           |vpiActual:
           \_StringTypespec: 
         |vpiConstType:6
-      |vpiName:
-      \_Identifier: ($display), line:63:12, endln:63:19
-        |vpiParent:
-        \_SysFuncCall: ($display), line:63:11, endln:63:67
-        |vpiName:$display
+        |vpiSize:352
+        |vpiDecompile:"Failed: this should be a compile time error!"
+        |STRING:Failed: this should be a compile time error!
   |vpiContAssign:
   \_ContAssign: , line:60:10, endln:60:20
     |vpiParent:
     \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:57:1, endln:64:10
-    |vpiRhs:
-    \_Constant: , line:60:16, endln:60:20
-      |vpiParent:
-      \_ContAssign: , line:60:10, endln:60:20
-      |vpiDecompile:1'b1
-      |vpiSize:1
-      |BIN:1
-      |vpiTypespec:
-      \_RefTypespec: (work@top2), line:60:16, endln:60:20
-        |vpiParent:
-        \_Constant: , line:60:16, endln:60:20
-        |vpiFullName:work@top2
-        |vpiActual:
-        \_BitTypespec: 
-      |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@top2.two), line:60:10, endln:60:13
       |vpiParent:
@@ -1489,25 +1473,25 @@ Design: (unnamed)
       |vpiFullName:work@top2.two
       |vpiActual:
       \_Net: (work@top2.two), line:58:9, endln:58:12
-  |vpiContAssign:
-  \_ContAssign: , line:61:10, endln:61:20
-    |vpiParent:
-    \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:57:1, endln:64:10
     |vpiRhs:
-    \_Constant: , line:61:16, endln:61:20
+    \_Constant: , line:60:16, endln:60:20
       |vpiParent:
-      \_ContAssign: , line:61:10, endln:61:20
-      |vpiDecompile:1'b0
-      |vpiSize:1
-      |BIN:0
+      \_ContAssign: , line:60:10, endln:60:20
       |vpiTypespec:
-      \_RefTypespec: (work@top2), line:61:16, endln:61:20
+      \_RefTypespec: (work@top2), line:60:16, endln:60:20
         |vpiParent:
-        \_Constant: , line:61:16, endln:61:20
+        \_Constant: , line:60:16, endln:60:20
         |vpiFullName:work@top2
         |vpiActual:
         \_BitTypespec: 
       |vpiConstType:3
+      |vpiSize:1
+      |vpiDecompile:1'b1
+      |BIN:1
+  |vpiContAssign:
+  \_ContAssign: , line:61:10, endln:61:20
+    |vpiParent:
+    \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:57:1, endln:64:10
     |vpiLhs:
     \_RefObj: (work@top2.two), line:61:10, endln:61:13
       |vpiParent:
@@ -1516,6 +1500,21 @@ Design: (unnamed)
       |vpiFullName:work@top2.two
       |vpiActual:
       \_Net: (work@top2.two), line:58:9, endln:58:12
+    |vpiRhs:
+    \_Constant: , line:61:16, endln:61:20
+      |vpiParent:
+      \_ContAssign: , line:61:10, endln:61:20
+      |vpiTypespec:
+      \_RefTypespec: (work@top2), line:61:16, endln:61:20
+        |vpiParent:
+        \_Constant: , line:61:16, endln:61:20
+        |vpiFullName:work@top2
+        |vpiActual:
+        \_BitTypespec: 
+      |vpiConstType:3
+      |vpiSize:1
+      |vpiDecompile:1'b0
+      |BIN:0
 |vpiAllModules:
 \_Module: work@wandwor_test0 (work@wandwor_test0), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:48:1, endln:54:10
   |vpiParent:
@@ -1593,14 +1592,6 @@ Design: (unnamed)
   \_ContAssign: , line:52:9, endln:52:21
     |vpiParent:
     \_Module: work@wandwor_test0 (work@wandwor_test0), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:48:1, endln:54:10
-    |vpiRhs:
-    \_RefObj: (work@wandwor_test0.A), line:52:13, endln:52:14
-      |vpiParent:
-      \_ContAssign: , line:52:9, endln:52:21
-      |vpiName:A
-      |vpiFullName:work@wandwor_test0.A
-      |vpiActual:
-      \_Net: (work@wandwor_test0.A), line:48:23, endln:48:24
     |vpiLhs:
     \_RefObj: (work@wandwor_test0.X), line:52:9, endln:52:10
       |vpiParent:
@@ -1609,18 +1600,18 @@ Design: (unnamed)
       |vpiFullName:work@wandwor_test0.X
       |vpiActual:
       \_Net: (work@wandwor_test0.X), line:48:29, endln:48:30
+    |vpiRhs:
+    \_RefObj: (work@wandwor_test0.A), line:52:13, endln:52:14
+      |vpiParent:
+      \_ContAssign: , line:52:9, endln:52:21
+      |vpiName:A
+      |vpiFullName:work@wandwor_test0.A
+      |vpiActual:
+      \_Net: (work@wandwor_test0.A), line:48:23, endln:48:24
   |vpiContAssign:
   \_ContAssign: , line:52:9, endln:52:21
     |vpiParent:
     \_Module: work@wandwor_test0 (work@wandwor_test0), file:${SURELOG_DIR}/tests/MultContAssign/dut.sv, line:48:1, endln:54:10
-    |vpiRhs:
-    \_RefObj: (work@wandwor_test0.B), line:52:20, endln:52:21
-      |vpiParent:
-      \_ContAssign: , line:52:9, endln:52:21
-      |vpiName:B
-      |vpiFullName:work@wandwor_test0.B
-      |vpiActual:
-      \_Net: (work@wandwor_test0.B), line:48:26, endln:48:27
     |vpiLhs:
     \_RefObj: (work@wandwor_test0.X), line:52:16, endln:52:17
       |vpiParent:
@@ -1629,6 +1620,14 @@ Design: (unnamed)
       |vpiFullName:work@wandwor_test0.X
       |vpiActual:
       \_Net: (work@wandwor_test0.X), line:48:29, endln:48:30
+    |vpiRhs:
+    \_RefObj: (work@wandwor_test0.B), line:52:20, endln:52:21
+      |vpiParent:
+      \_ContAssign: , line:52:9, endln:52:21
+      |vpiName:B
+      |vpiFullName:work@wandwor_test0.B
+      |vpiActual:
+      \_Net: (work@wandwor_test0.B), line:48:26, endln:48:27
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

@@ -176,7 +176,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
 BitSelect                                              2
-Constant                                               9
+Constant                                              10
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              1
@@ -184,13 +184,13 @@ EnumTypespec                                           1
 HierPath                                               1
 Identifier                                             5
 IntTypespec                                            7
-LogicTypespec                                          3
+LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    1
 Range                                                  3
 RefObj                                                 5
-RefTypespec                                           19
+RefTypespec                                           20
 SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        4
@@ -198,7 +198,7 @@ TypespecMember                                         3
 UnionTypespec                                          1
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                78
+Total:                                                81
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiIndexBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -235,9 +235,21 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:4:9, endln:7:14
       |vpiName:AC_ADD
-      |BIN:0000
-      |vpiDecompile:4'b0000
-      |vpiSize:4
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (AC_ADD), line:6:5, endln:6:22
+        |vpiTypespec:
+        \_RefTypespec: (work@PreDecodeStage.AC_ADD), line:6:15, endln:6:22
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@PreDecodeStage.AC_ADD
+          |vpiActual:
+          \_LogicTypespec: 
+        |vpiConstType:1
+        |vpiSize:4
+        |vpiDecompile:4'b0000
+        |BIN:0000
   |vpiTypespec:
   \_LogicTypespec: , line:4:14, endln:4:19
     |vpiParent:
@@ -250,9 +262,6 @@ Design: (unnamed)
       \_Constant: , line:4:21, endln:4:22
         |vpiParent:
         \_Range: , line:4:20, endln:4:25
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
         |vpiTypespec:
         \_RefTypespec: (work@PreDecodeStage), line:4:21, endln:4:22
           |vpiParent:
@@ -261,13 +270,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:3
+        |UINT:3
       |vpiRightRange:
       \_Constant: , line:4:23, endln:4:24
         |vpiParent:
         \_Range: , line:4:20, endln:4:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@PreDecodeStage), line:4:23, endln:4:24
           |vpiParent:
@@ -276,6 +285,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -414,9 +426,6 @@ Design: (unnamed)
       \_Constant: , line:26:9, endln:26:10
         |vpiParent:
         \_Range: , line:26:8, endln:26:13
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@PreDecodeStage), line:26:9, endln:26:10
           |vpiParent:
@@ -425,13 +434,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:26:11, endln:26:12
         |vpiParent:
         \_Range: , line:26:8, endln:26:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@PreDecodeStage), line:26:11, endln:26:12
           |vpiParent:
@@ -440,6 +449,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiRange:
     \_Range: , line:26:13, endln:26:18
       |vpiParent:
@@ -448,9 +460,6 @@ Design: (unnamed)
       \_Constant: , line:26:14, endln:26:15
         |vpiParent:
         \_Range: , line:26:13, endln:26:18
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@PreDecodeStage), line:26:14, endln:26:15
           |vpiParent:
@@ -459,13 +468,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:26:16, endln:26:17
         |vpiParent:
         \_Range: , line:26:13, endln:26:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@PreDecodeStage), line:26:16, endln:26:17
           |vpiParent:
@@ -474,6 +483,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiElemTypespec:
     \_RefTypespec: (work@PreDecodeStage.OpInfo), line:26:1, endln:26:7
       |vpiParent:
@@ -572,10 +584,19 @@ Design: (unnamed)
   \_ContAssign: , line:28:8, endln:28:48
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiLhs:
+    \_RefObj: (work@PreDecodeStage.o), line:28:8, endln:28:9
+      |vpiParent:
+      \_ContAssign: , line:28:8, endln:28:48
+      |vpiName:o
+      |vpiFullName:work@PreDecodeStage.o
+      |vpiActual:
+      \_Net: (work@PreDecodeStage.o), line:28:8, endln:28:9
     |vpiRhs:
     \_HierPath: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
       |vpiParent:
       \_ContAssign: , line:28:8, endln:28:48
+      |vpiName:microOps[i][1].operand.intOp.aluCode
       |vpiActual:
       \_BitSelect: (microOps[i]), line:28:12, endln:28:20
         |vpiParent:
@@ -604,9 +625,6 @@ Design: (unnamed)
         \_Constant: , line:28:24, endln:28:25
           |vpiParent:
           \_BitSelect: (microOps[i][1]), line:28:21, endln:28:22
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (work@PreDecodeStage.microOps[i][1].operand.intOp.aluCode.microOps[i]), line:28:24, endln:28:25
             |vpiParent:
@@ -615,6 +633,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
       |vpiActual:
       \_RefObj: (operand), line:28:27, endln:28:34
         |vpiParent:
@@ -637,15 +658,6 @@ Design: (unnamed)
         |vpiFullName:work@PreDecodeStage.aluCode
         |vpiActual:
         \_Net: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
-      |vpiName:microOps[i][1].operand.intOp.aluCode
-    |vpiLhs:
-    \_RefObj: (work@PreDecodeStage.o), line:28:8, endln:28:9
-      |vpiParent:
-      \_ContAssign: , line:28:8, endln:28:48
-      |vpiName:o
-      |vpiFullName:work@PreDecodeStage.o
-      |vpiActual:
-      \_Net: (work@PreDecodeStage.o), line:28:8, endln:28:9
 |vpiTypespec:
 \_ModuleTypespec: (work@PreDecodeStage)
   |vpiParent:

@@ -215,7 +215,6 @@ Design: (unnamed)
   \_Parameter: (work@top1.p1), line:2:19, endln:2:30
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
-    |BIN:1
     |vpiTypespec:
     \_RefTypespec: (work@top1.p1), line:2:13, endln:2:18
       |vpiParent:
@@ -229,7 +228,6 @@ Design: (unnamed)
   \_Parameter: (work@top1.p2), line:3:19, endln:3:31
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
-    |BIN:10
     |vpiTypespec:
     \_RefTypespec: (work@top1.p2), line:3:13, endln:3:18
       |vpiParent:
@@ -243,7 +241,6 @@ Design: (unnamed)
   \_Parameter: (work@top1.p3), line:4:17, endln:4:29
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
-    |BIN:10
     |vpiTypespec:
     \_RefTypespec: (work@top1.p3), line:4:13, endln:4:16
       |vpiParent:
@@ -257,13 +254,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:19, endln:2:30
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_Parameter: (work@top1.p1), line:2:19, endln:2:30
     |vpiRhs:
     \_Constant: , line:2:25, endln:2:30
       |vpiParent:
       \_ParamAssign: , line:2:19, endln:2:30
-      |vpiDecompile:1'sb1
-      |vpiSize:1
-      |BIN:1
       |vpiTypespec:
       \_RefTypespec: (work@top1), line:2:25, endln:2:30
         |vpiParent:
@@ -272,19 +268,19 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@top1.p1), line:2:19, endln:2:30
+      |vpiSize:1
+      |vpiDecompile:1'sb1
+      |BIN:1
   |vpiParamAssign:
   \_ParamAssign: , line:3:19, endln:3:31
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_Parameter: (work@top1.p2), line:3:19, endln:3:31
     |vpiRhs:
     \_Constant: , line:3:25, endln:3:31
       |vpiParent:
       \_ParamAssign: , line:3:19, endln:3:31
-      |vpiDecompile:2'sb10
-      |vpiSize:2
-      |BIN:10
       |vpiTypespec:
       \_RefTypespec: (work@top1), line:3:25, endln:3:31
         |vpiParent:
@@ -293,19 +289,19 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@top1.p2), line:3:19, endln:3:31
+      |vpiSize:2
+      |vpiDecompile:2'sb10
+      |BIN:10
   |vpiParamAssign:
   \_ParamAssign: , line:4:17, endln:4:29
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_Parameter: (work@top1.p3), line:4:17, endln:4:29
     |vpiRhs:
     \_Constant: , line:4:23, endln:4:29
       |vpiParent:
       \_ParamAssign: , line:4:17, endln:4:29
-      |vpiDecompile:2'sb10
-      |vpiSize:2
-      |BIN:10
       |vpiTypespec:
       \_RefTypespec: (work@top1), line:4:23, endln:4:29
         |vpiParent:
@@ -314,8 +310,9 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
-    |vpiLhs:
-    \_Parameter: (work@top1.p3), line:4:17, endln:4:29
+      |vpiSize:2
+      |vpiDecompile:2'sb10
+      |BIN:10
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -332,9 +329,6 @@ Design: (unnamed)
       \_Constant: , line:2:14, endln:2:15
         |vpiParent:
         \_Range: , line:2:13, endln:2:18
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@top1), line:2:14, endln:2:15
           |vpiParent:
@@ -343,13 +337,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:2:16, endln:2:17
         |vpiParent:
         \_Range: , line:2:13, endln:2:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top1), line:2:16, endln:2:17
           |vpiParent:
@@ -358,6 +352,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiPacked:1
   |vpiTypespec:
   \_LogicTypespec: 
@@ -375,9 +372,6 @@ Design: (unnamed)
       \_Constant: , line:3:14, endln:3:15
         |vpiParent:
         \_Range: , line:3:13, endln:3:18
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@top1), line:3:14, endln:3:15
           |vpiParent:
@@ -386,13 +380,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:3:16, endln:3:17
         |vpiParent:
         \_Range: , line:3:13, endln:3:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top1), line:3:16, endln:3:17
           |vpiParent:
@@ -401,6 +395,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiPacked:1
   |vpiTypespec:
   \_IntTypespec: , line:4:13, endln:4:16
@@ -446,9 +443,6 @@ Design: (unnamed)
     \_Constant: , line:11:13, endln:11:19
       |vpiParent:
       \_Variable: (work@top2.p3), line:11:7, endln:11:9
-      |vpiDecompile:2'sb10
-      |vpiSize:2
-      |BIN:10
       |vpiTypespec:
       \_RefTypespec: (work@top2.p3), line:11:13, endln:11:19
         |vpiParent:
@@ -457,6 +451,9 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: 
       |vpiConstType:3
+      |vpiSize:2
+      |vpiDecompile:2'sb10
+      |BIN:10
   |vpiTypespec:
   \_LogicTypespec: , line:9:3, endln:9:6
     |vpiParent:
@@ -469,9 +466,6 @@ Design: (unnamed)
       \_Constant: , line:9:8, endln:9:9
         |vpiParent:
         \_Range: , line:9:7, endln:9:12
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@top2), line:9:8, endln:9:9
           |vpiParent:
@@ -480,13 +474,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:9:10, endln:9:11
         |vpiParent:
         \_Range: , line:9:7, endln:9:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top2), line:9:10, endln:9:11
           |vpiParent:
@@ -495,6 +489,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:

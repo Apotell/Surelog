@@ -314,7 +314,7 @@ Begin                                                  6
 BitTypespec                                            2
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              12
+Constant                                              17
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -324,14 +324,14 @@ HierPath                                               4
 IODecl                                                15
 Identifier                                            41
 IfStmt                                                 3
-IntTypespec                                           17
+IntTypespec                                           22
 LogicTypespec                                          1
 MethodFuncCall                                         5
 Operation                                              2
 Package                                                2
 Range                                                  1
 RefObj                                                13
-RefTypespec                                           38
+RefTypespec                                           43
 ReturnStmt                                             2
 SourceFile                                             1
 StringTypespec                                         6
@@ -341,7 +341,7 @@ UnsupportedTypespec                                    7
 Variable                                               2
 VoidTypespec                                           2
 ------------------------------------------------------------
-Total:                                               237
+Total:                                               252
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:9:7: Illegal implicit net "id:39, name:tmp".
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:11:7: Illegal implicit net "id:49, name:tmp".
@@ -479,15 +479,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:3:23, endln:3:28
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:3:31, endln:3:32
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
             |vpiParent:
@@ -496,6 +493,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -545,8 +545,8 @@ Design: (unnamed)
       \_IODecl: (message), line:9:15, endln:9:22
         |vpiParent:
         \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
       |vpiParent:
@@ -576,8 +576,8 @@ Design: (unnamed)
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
       |vpiParent:
@@ -594,8 +594,8 @@ Design: (unnamed)
       \_IODecl: (message), line:15:19, endln:15:26
         |vpiParent:
         \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
       |vpiParent:
@@ -626,8 +626,8 @@ Design: (unnamed)
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
       |vpiParent:
@@ -644,8 +644,8 @@ Design: (unnamed)
       \_IODecl: (message), line:21:20, endln:21:27
         |vpiParent:
         \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
       |vpiParent:
@@ -676,8 +676,8 @@ Design: (unnamed)
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiImportTypespec:
@@ -817,41 +817,106 @@ Design: (unnamed)
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::FINISHED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:0
+          |INT:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::RUNNING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:1
+          |INT:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
-        |INT:2
-        |vpiDecompile:2
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::WAITING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:2
+          |INT:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::SUSPENDED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:3
+          |INT:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
-        |INT:4
-        |vpiDecompile:4
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::KILLED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:4
+          |INT:4
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitThisNew/builtin.sv, line:30:3, endln:52:11
+      |vpiSigned:1
     |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
@@ -870,6 +935,8 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -934,15 +1001,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:57:22, endln:57:30
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:57:33, endln:57:34
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
             |vpiParent:
@@ -951,6 +1015,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -987,15 +1054,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:60:18, endln:60:26
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:60:29, endln:60:30
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
             |vpiParent:
@@ -1004,6 +1068,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -1040,15 +1107,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:63:18, endln:63:26
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:63:29, endln:63:30
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
             |vpiParent:
@@ -1057,6 +1121,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -1100,15 +1167,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:66:41, endln:66:42
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
             |vpiParent:
@@ -1117,6 +1181,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1330,8 +1397,8 @@ Design: (unnamed)
     \_IODecl: (action_str), line:3:56, endln:3:66
       |vpiParent:
       \_Function: (toto::uvm_string_to_action), line:3:4, endln:5:16
-      |vpiDirection:1
       |vpiName:action_str
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (toto::uvm_string_to_action::action_str), line:3:49, endln:3:55
         |vpiParent:
@@ -1343,8 +1410,8 @@ Design: (unnamed)
     \_IODecl: (action), line:3:86, endln:3:92
       |vpiParent:
       \_Function: (toto::uvm_string_to_action), line:3:4, endln:5:16
-      |vpiDirection:2
       |vpiName:action
+      |vpiDirection:2
       |vpiTypespec:
       \_RefTypespec: (toto::uvm_string_to_action::action::uvm_action), line:3:75, endln:3:85
         |vpiParent:
@@ -1382,10 +1449,21 @@ Design: (unnamed)
         \_Begin: (toto::uvm_object::clone)
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (toto::uvm_object::clone::tmp), line:9:7, endln:9:10
+          |vpiParent:
+          \_Assignment: , line:9:7, endln:9:36
+          |vpiName:tmp
+          |vpiFullName:toto::uvm_object::clone::tmp
         |vpiRhs:
         \_MethodFuncCall: (create), line:9:18, endln:9:36
           |vpiParent:
           \_Assignment: , line:9:7, endln:9:36
+          |vpiName:
+          \_Identifier: (create), line:9:18, endln:9:24
+            |vpiParent:
+            \_MethodFuncCall: (create), line:9:18, endln:9:36
+            |vpiName:create
           |vpiArgument:
           \_FuncCall: (get_name), line:9:25, endln:9:35
             |vpiParent:
@@ -1395,18 +1473,10 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (get_name), line:9:25, endln:9:35
               |vpiName:get_name
-          |vpiName:
-          \_Identifier: (create), line:9:18, endln:9:24
-            |vpiParent:
-            \_MethodFuncCall: (create), line:9:18, endln:9:36
-            |vpiName:create
           |vpiPrefix:
           \_Constant: , line:9:13, endln:9:17
             |vpiParent:
             \_MethodFuncCall: (create), line:9:18, endln:9:36
-            |vpiDecompile:this
-            |vpiSize:4
-            |STRING:this
             |vpiTypespec:
             \_RefTypespec: (toto::uvm_object::clone), line:9:13, endln:9:17
               |vpiParent:
@@ -1415,27 +1485,24 @@ Design: (unnamed)
               |vpiActual:
               \_StringTypespec: 
             |vpiConstType:6
-        |vpiLhs:
-        \_RefObj: (toto::uvm_object::clone::tmp), line:9:7, endln:9:10
-          |vpiParent:
-          \_Assignment: , line:9:7, endln:9:36
-          |vpiName:tmp
-          |vpiFullName:toto::uvm_object::clone::tmp
+            |vpiSize:4
+            |vpiDecompile:this
+            |STRING:this
       |vpiStmt:
       \_MethodFuncCall: (copy), line:11:11, endln:11:21
         |vpiParent:
         \_Begin: (toto::uvm_object::clone)
+        |vpiName:
+        \_Identifier: (copy), line:11:11, endln:11:15
+          |vpiParent:
+          \_MethodFuncCall: (copy), line:11:11, endln:11:21
+          |vpiName:copy
         |vpiArgument:
         \_RefObj: (toto::uvm_object::clone::this), line:11:16, endln:11:20
           |vpiParent:
           \_MethodFuncCall: (copy), line:11:11, endln:11:21
           |vpiName:this
           |vpiFullName:toto::uvm_object::clone::this
-        |vpiName:
-        \_Identifier: (copy), line:11:11, endln:11:15
-          |vpiParent:
-          \_MethodFuncCall: (copy), line:11:11, endln:11:21
-          |vpiName:copy
         |vpiPrefix:
         \_RefObj: (toto::uvm_object::clone::tmp), line:11:7, endln:11:10
           |vpiParent:
@@ -1502,9 +1569,6 @@ Design: (unnamed)
           \_Constant: , line:17:19, endln:17:23
             |vpiParent:
             \_Operation: , line:17:7, endln:17:23
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (toto::m_initialize), line:17:19, endln:17:23
               |vpiParent:
@@ -1513,6 +1577,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:11
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiStmt:
         \_Begin: (toto::m_initialize), line:17:25, endln:20:7
           |vpiParent:
@@ -1530,6 +1597,12 @@ Design: (unnamed)
             \_Begin: (toto::m_initialize), line:17:25, endln:20:7
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (toto::m_initialize::m_b_inst), line:18:6, endln:18:14
+              |vpiParent:
+              \_Assignment: , line:18:6, endln:18:20
+              |vpiName:m_b_inst
+              |vpiFullName:toto::m_initialize::m_b_inst
             |vpiRhs:
             \_MethodFuncCall: (new), line:18:17, endln:18:20
               |vpiParent:
@@ -1539,29 +1612,31 @@ Design: (unnamed)
                 |vpiParent:
                 \_MethodFuncCall: (new), line:18:17, endln:18:20
                 |vpiName:new
-            |vpiLhs:
-            \_RefObj: (toto::m_initialize::m_b_inst), line:18:6, endln:18:14
-              |vpiParent:
-              \_Assignment: , line:18:6, endln:18:20
-              |vpiName:m_b_inst
-              |vpiFullName:toto::m_initialize::m_b_inst
           |vpiStmt:
           \_Assignment: , line:19:6, endln:19:22
             |vpiParent:
             \_Begin: (toto::m_initialize), line:17:25, endln:20:7
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_RefObj: (toto::m_initialize::m_pool), line:19:6, endln:19:12
+              |vpiParent:
+              \_Assignment: , line:19:6, endln:19:22
+              |vpiName:m_pool
+              |vpiFullName:toto::m_initialize::m_pool
             |vpiRhs:
             \_MethodFuncCall: (new), line:19:15, endln:19:22
               |vpiParent:
               \_Assignment: , line:19:6, endln:19:22
+              |vpiName:
+              \_Identifier: (new)
+                |vpiParent:
+                \_MethodFuncCall: (new), line:19:15, endln:19:22
+                |vpiName:new
               |vpiArgument:
               \_Constant: , line:19:20, endln:19:21
                 |vpiParent:
                 \_MethodFuncCall: (new), line:19:15, endln:19:22
-                |vpiDecompile:2
-                |vpiSize:64
-                |UINT:2
                 |vpiTypespec:
                 \_RefTypespec: (toto::m_initialize), line:19:20, endln:19:21
                   |vpiParent:
@@ -1570,17 +1645,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_IntTypespec: 
                 |vpiConstType:9
-              |vpiName:
-              \_Identifier: (new)
-                |vpiParent:
-                \_MethodFuncCall: (new), line:19:15, endln:19:22
-                |vpiName:new
-            |vpiLhs:
-            \_RefObj: (toto::m_initialize::m_pool), line:19:6, endln:19:12
-              |vpiParent:
-              \_Assignment: , line:19:6, endln:19:22
-              |vpiName:m_pool
-              |vpiFullName:toto::m_initialize::m_pool
+                |vpiSize:64
+                |vpiDecompile:2
+                |UINT:2
       |vpiStmt:
       \_ReturnStmt: , line:21:4, endln:21:19
         |vpiParent:
@@ -1646,8 +1713,8 @@ Design: (unnamed)
     \_IODecl: (field), line:25:48, endln:25:53
       |vpiParent:
       \_Function: (toto::uvm_reg::add_field), line:25:1, endln:30:12
-      |vpiDirection:1
       |vpiName:field
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (toto::uvm_reg::add_field::field::uvm_reg_field), line:25:34, endln:25:47
         |vpiParent:
@@ -1664,6 +1731,7 @@ Design: (unnamed)
       \_HierPath: (this.fields.get_lsb_pos_in_register), line:27:8, endln:27:50
         |vpiParent:
         \_IfStmt: , line:27:4, endln:28:7
+        |vpiName:this.fields.get_lsb_pos_in_register
         |vpiActual:
         \_RefObj: (this), line:27:8, endln:27:12
           |vpiParent:
@@ -1679,7 +1747,6 @@ Design: (unnamed)
           |vpiParent:
           \_HierPath: (this.fields.get_lsb_pos_in_register), line:27:8, endln:27:50
           |vpiName:get_lsb_pos_in_register
-        |vpiName:this.fields.get_lsb_pos_in_register
       |vpiStmt:
       \_Begin: (toto::uvm_reg::add_field), line:27:54, endln:28:7
         |vpiParent:
@@ -1730,6 +1797,7 @@ Design: (unnamed)
         \_HierPath: (this.stream_handle), line:33:11, endln:33:29
           |vpiParent:
           \_Operation: , line:33:11, endln:33:37
+          |vpiName:this.stream_handle
           |vpiActual:
           \_RefObj: (this), line:33:11, endln:33:15
             |vpiParent:
@@ -1740,14 +1808,10 @@ Design: (unnamed)
             |vpiParent:
             \_HierPath: (this.stream_handle), line:33:11, endln:33:29
             |vpiName:stream_handle
-          |vpiName:this.stream_handle
         |vpiOperand:
         \_Constant: , line:33:33, endln:33:37
           |vpiParent:
           \_Operation: , line:33:11, endln:33:37
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (toto::uvm_transaction::is_recording_enabled), line:33:33, endln:33:37
             |vpiParent:
@@ -1756,6 +1820,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:11
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
     |vpiInstance:
     \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
   |vpiInternalScope:
@@ -1810,7 +1877,6 @@ Design: (unnamed)
         \_Constant: , line:38:11, endln:38:47
           |vpiParent:
           \_IfStmt: , line:38:7, endln:40:10
-          |vpiDecompile:this
           |vpiTypespec:
           \_RefTypespec: (toto::uvm_reg_backdoor::start_update_thread), line:38:11, endln:38:15
             |vpiParent:
@@ -1818,6 +1884,7 @@ Design: (unnamed)
             |vpiFullName:toto::uvm_reg_backdoor::start_update_thread
             |vpiActual:
             \_StringTypespec: 
+          |vpiDecompile:this
         |vpiStmt:
         \_Begin: (toto::uvm_reg_backdoor::start_update_thread), line:38:49, endln:40:10
           |vpiParent:
@@ -1833,6 +1900,11 @@ Design: (unnamed)
           \_MethodFuncCall: (kill_update_thread), line:39:15, endln:39:42
             |vpiParent:
             \_Begin: (toto::uvm_reg_backdoor::start_update_thread), line:38:49, endln:40:10
+            |vpiName:
+            \_Identifier: (kill_update_thread), line:39:15, endln:39:33
+              |vpiParent:
+              \_MethodFuncCall: (kill_update_thread), line:39:15, endln:39:42
+              |vpiName:kill_update_thread
             |vpiArgument:
             \_RefObj: (toto::uvm_reg_backdoor::start_update_thread::element), line:39:34, endln:39:41
               |vpiParent:
@@ -1841,18 +1913,10 @@ Design: (unnamed)
               |vpiFullName:toto::uvm_reg_backdoor::start_update_thread::element
               |vpiActual:
               \_IODecl: (element), line:36:64, endln:36:71
-            |vpiName:
-            \_Identifier: (kill_update_thread), line:39:15, endln:39:33
-              |vpiParent:
-              \_MethodFuncCall: (kill_update_thread), line:39:15, endln:39:42
-              |vpiName:kill_update_thread
             |vpiPrefix:
             \_Constant: , line:39:10, endln:39:14
               |vpiParent:
               \_MethodFuncCall: (kill_update_thread), line:39:15, endln:39:42
-              |vpiDecompile:this
-              |vpiSize:4
-              |STRING:this
               |vpiTypespec:
               \_RefTypespec: (toto::uvm_reg_backdoor::start_update_thread), line:39:10, endln:39:14
                 |vpiParent:
@@ -1861,6 +1925,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_StringTypespec: 
               |vpiConstType:6
+              |vpiSize:4
+              |vpiDecompile:this
+              |STRING:this
     |vpiTypespec:
     \_VoidTypespec: , line:36:10, endln:36:14
       |vpiParent:
@@ -1886,8 +1953,8 @@ Design: (unnamed)
     \_IODecl: (element), line:36:64, endln:36:71
       |vpiParent:
       \_Function: (toto::uvm_reg_backdoor::start_update_thread), line:36:1, endln:42:15
-      |vpiDirection:1
       |vpiName:element
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (toto::uvm_reg_backdoor::start_update_thread::element::uvm_object), line:36:53, endln:36:63
         |vpiParent:

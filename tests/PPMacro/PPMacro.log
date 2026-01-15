@@ -135,13 +135,15 @@ Design: (unnamed)
     \_SysFuncCall: ($clog2), line:1:14, endln:1:25
       |vpiParent:
       \_ContAssign: , line:3:10, endln:3:24
+      |vpiName:
+      \_Identifier: ($clog2), line:1:15, endln:1:20
+        |vpiParent:
+        \_SysFuncCall: ($clog2), line:1:14, endln:1:25
+        |vpiName:$clog2
       |vpiArgument:
       \_Constant: , line:1:21, endln:1:24
         |vpiParent:
         \_SysFuncCall: ($clog2), line:1:14, endln:1:25
-        |vpiDecompile:123
-        |vpiSize:64
-        |UINT:123
         |vpiTypespec:
         \_RefTypespec: (work@top1), line:1:21, endln:1:24
           |vpiParent:
@@ -150,11 +152,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-      |vpiName:
-      \_Identifier: ($clog2), line:1:15, endln:1:20
-        |vpiParent:
-        \_SysFuncCall: ($clog2), line:1:14, endln:1:25
-        |vpiName:$clog2
+        |vpiSize:64
+        |vpiDecompile:123
+        |UINT:123
     |vpiObject:
     \_Identifier: ($clog2), line:1:15, endln:1:20
     |vpiObject:
@@ -180,9 +180,6 @@ Design: (unnamed)
     \_Constant: , line:6:14, endln:6:16
       |vpiParent:
       \_Operation: , line:8:14, endln:8:27
-      |vpiDecompile:42
-      |vpiSize:64
-      |UINT:42
       |vpiTypespec:
       \_RefTypespec: (work@top2), line:6:14, endln:6:16
         |vpiParent:
@@ -191,6 +188,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:42
+      |UINT:42
     |vpiObject:
     \_RefTypespec: (work@top2), line:6:14, endln:6:16
 |vpiAllModules:
@@ -222,8 +222,6 @@ Design: (unnamed)
   \_ContAssign: , line:3:10, endln:3:24
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
-    |vpiRhs:
-    \_SysFuncCall: ($clog2), line:1:14, endln:1:25
     |vpiLhs:
     \_RefObj: (work@top1.a), line:3:10, endln:3:11
       |vpiParent:
@@ -232,6 +230,8 @@ Design: (unnamed)
       |vpiFullName:work@top1.a
       |vpiActual:
       \_Net: (work@top1.a), line:3:10, endln:3:11
+    |vpiRhs:
+    \_SysFuncCall: ($clog2), line:1:14, endln:1:25
 |vpiAllModules:
 \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:7:1, endln:9:10
   |vpiParent:
@@ -261,6 +261,14 @@ Design: (unnamed)
   \_ContAssign: , line:8:10, endln:8:27
     |vpiParent:
     \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:7:1, endln:9:10
+    |vpiLhs:
+    \_RefObj: (work@top2.a), line:8:10, endln:8:11
+      |vpiParent:
+      \_ContAssign: , line:8:10, endln:8:27
+      |vpiName:a
+      |vpiFullName:work@top2.a
+      |vpiActual:
+      \_Net: (work@top2.a), line:8:10, endln:8:11
     |vpiRhs:
     \_Operation: , line:8:14, endln:8:27
       |vpiParent:
@@ -272,9 +280,6 @@ Design: (unnamed)
       \_Constant: , line:8:23, endln:8:26
         |vpiParent:
         \_Operation: , line:8:14, endln:8:27
-        |vpiDecompile:123
-        |vpiSize:64
-        |UINT:123
         |vpiTypespec:
         \_RefTypespec: (work@top2), line:8:23, endln:8:26
           |vpiParent:
@@ -283,14 +288,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-    |vpiLhs:
-    \_RefObj: (work@top2.a), line:8:10, endln:8:11
-      |vpiParent:
-      \_ContAssign: , line:8:10, endln:8:27
-      |vpiName:a
-      |vpiFullName:work@top2.a
-      |vpiActual:
-      \_Net: (work@top2.a), line:8:10, endln:8:11
+        |vpiSize:64
+        |vpiDecompile:123
+        |UINT:123
 |vpiTypespec:
 \_ModuleTypespec: (work@top1)
   |vpiParent:

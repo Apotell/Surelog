@@ -139,13 +139,15 @@ Design: (unnamed)
     \_SysFuncCall: ($fatal), line:6:7, endln:7:63
       |vpiParent:
       \_Assume: (work@dut.aw_select), line:4:16, endln:7:64
+      |vpiName:
+      \_Identifier: ($fatal), line:6:8, endln:6:13
+        |vpiParent:
+        \_SysFuncCall: ($fatal), line:6:7, endln:7:63
+        |vpiName:$fatal
       |vpiArgument:
       \_Constant: , line:6:14, endln:6:15
         |vpiParent:
         \_SysFuncCall: ($fatal), line:6:7, endln:7:63
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@dut.aw_select), line:6:14, endln:6:15
           |vpiParent:
@@ -154,15 +156,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiArgument:
       \_Constant: , line:6:17, endln:7:33
         |vpiParent:
         \_SysFuncCall: ($fatal), line:6:7, endln:7:63
-        |vpiDecompile:"slv_aw_select_i is %d: AW has selected a slave that is not defined.\
-                 NoMstPorts: %d"
-        |vpiSize:800
-        |STRING:slv_aw_select_i is %d: AW has selected a slave that is not defined.\
-                 NoMstPorts: %d
         |vpiTypespec:
         \_RefTypespec: (work@dut.aw_select), line:6:17, endln:7:33
           |vpiParent:
@@ -171,6 +171,11 @@ Design: (unnamed)
           |vpiActual:
           \_StringTypespec: 
         |vpiConstType:6
+        |vpiSize:800
+        |vpiDecompile:"slv_aw_select_i is %d: AW has selected a slave that is not defined.\
+                 NoMstPorts: %d"
+        |STRING:slv_aw_select_i is %d: AW has selected a slave that is not defined.\
+                 NoMstPorts: %d
       |vpiArgument:
       \_RefObj: (work@dut.aw_select.slv_aw_select_i), line:7:35, endln:7:50
         |vpiParent:
@@ -187,11 +192,6 @@ Design: (unnamed)
         |vpiFullName:work@dut.aw_select.NoMstPorts
         |vpiActual:
         \_Net: (work@dut.NoMstPorts), line:7:52, endln:7:62
-      |vpiName:
-      \_Identifier: ($fatal), line:6:8, endln:6:13
-        |vpiParent:
-        \_SysFuncCall: ($fatal), line:6:7, endln:7:63
-        |vpiName:$fatal
     |vpiProperty:
     \_PropertySpec: , line:4:33, endln:5:81
       |vpiParent:
@@ -218,6 +218,7 @@ Design: (unnamed)
         \_HierPath: (slv_req_i.aw_valid), line:4:51, endln:4:69
           |vpiParent:
           \_Operation: , line:4:51, endln:5:80
+          |vpiName:slv_req_i.aw_valid
           |vpiActual:
           \_RefObj: (slv_req_i), line:4:51, endln:4:60
             |vpiParent:
@@ -233,7 +234,6 @@ Design: (unnamed)
             |vpiFullName:work@dut.aw_select.aw_valid
             |vpiActual:
             \_Net: (work@dut.aw_valid), line:4:61, endln:4:69
-          |vpiName:slv_req_i.aw_valid
         |vpiOperand:
         \_Operation: , line:5:51, endln:5:79
           |vpiParent:

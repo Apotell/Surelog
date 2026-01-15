@@ -259,25 +259,11 @@ Design: (unnamed)
   \_ContAssign: , line:9:11, endln:9:38
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PortInterface/dut.sv, line:8:1, endln:10:10
-    |vpiRhs:
-    \_Constant: , line:9:30, endln:9:38
-      |vpiParent:
-      \_ContAssign: , line:9:11, endln:9:38
-      |vpiDecompile:32'h1234
-      |vpiSize:32
-      |HEX:1234
-      |vpiTypespec:
-      \_RefTypespec: (work@dut), line:9:30, endln:9:38
-        |vpiParent:
-        \_Constant: , line:9:30, endln:9:38
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_IntTypespec: 
-      |vpiConstType:5
     |vpiLhs:
     \_HierPath: (ss_if.start_addr), line:9:16, endln:9:27
       |vpiParent:
       \_ContAssign: , line:9:11, endln:9:38
+      |vpiName:ss_if.start_addr
       |vpiActual:
       \_RefObj: (ss_if), line:9:16, endln:9:27
         |vpiParent:
@@ -292,7 +278,21 @@ Design: (unnamed)
         |vpiName:start_addr
         |vpiActual:
         \_Net: (work@sim_sram_if.start_addr), line:5:8, endln:5:18
-      |vpiName:ss_if.start_addr
+    |vpiRhs:
+    \_Constant: , line:9:30, endln:9:38
+      |vpiParent:
+      \_ContAssign: , line:9:11, endln:9:38
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:9:30, endln:9:38
+        |vpiParent:
+        \_Constant: , line:9:30, endln:9:38
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:5
+      |vpiSize:32
+      |vpiDecompile:32'h1234
+      |HEX:1234
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PortInterface/dut.sv, line:12:1, endln:18:10
   |vpiParent:
@@ -371,10 +371,19 @@ Design: (unnamed)
   \_ContAssign: , line:17:10, endln:17:38
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PortInterface/dut.sv, line:12:1, endln:18:10
+    |vpiLhs:
+    \_RefObj: (work@top.o), line:17:10, endln:17:11
+      |vpiParent:
+      \_ContAssign: , line:17:10, endln:17:38
+      |vpiName:o
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_Variable: (work@top.o), line:12:23, endln:12:24
     |vpiRhs:
     \_HierPath: (u_sim_sram_if.start_addr), line:17:14, endln:17:38
       |vpiParent:
       \_ContAssign: , line:17:10, endln:17:38
+      |vpiName:u_sim_sram_if.start_addr
       |vpiActual:
       \_RefObj: (u_sim_sram_if), line:17:14, endln:17:27
         |vpiParent:
@@ -390,15 +399,6 @@ Design: (unnamed)
         |vpiFullName:work@top.start_addr
         |vpiActual:
         \_Net: (work@top.start_addr), line:17:28, endln:17:38
-      |vpiName:u_sim_sram_if.start_addr
-    |vpiLhs:
-    \_RefObj: (work@top.o), line:17:10, endln:17:11
-      |vpiParent:
-      \_ContAssign: , line:17:10, endln:17:38
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_Variable: (work@top.o), line:12:23, endln:12:24
   |vpiRefModule:
   \_RefModule: work@sim_sram_if (u_sim_sram_if), line:13:4, endln:13:15
     |vpiParent:

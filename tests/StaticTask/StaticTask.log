@@ -162,35 +162,39 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntegerTypespec: , line:6:2, endln:6:9
       |vpiImportTypespec:
-      \_Net: (work@tb.display.i), line:6:10, endln:6:11
-        |vpiParent:
-        \_Begin: (work@tb.display), line:6:2, endln:8:23
-        |vpiTypespec:
-        \_RefTypespec: (work@tb.display.i), line:6:2, endln:6:9
-          |vpiParent:
-          \_Net: (work@tb.display.i), line:6:10, endln:6:11
-          |vpiFullName:work@tb.display.i
-          |vpiActual:
-          \_IntegerTypespec: , line:6:2, endln:6:9
-        |vpiName:i
-        |vpiFullName:work@tb.display.i
-      |vpiImportTypespec:
       \_IntTypespec: 
       |vpiImportTypespec:
       \_StringTypespec: 
+      |vpiImportTypespec:
+      \_Net: (work@tb.display.i), line:7:2, endln:7:3
+        |vpiParent:
+        \_Begin: (work@tb.display), line:6:2, endln:8:23
+        |vpiName:i
+        |vpiFullName:work@tb.display.i
+        |vpiNetType:1
       |vpiStmt:
       \_Assignment: , line:6:10, endln:6:15
         |vpiParent:
         \_Begin: (work@tb.display), line:6:2, endln:8:23
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_Net: (work@tb.display.i), line:6:10, endln:6:11
+          |vpiParent:
+          \_Assignment: , line:6:10, endln:6:15
+          |vpiTypespec:
+          \_RefTypespec: (work@tb.display.i), line:6:2, endln:6:9
+            |vpiParent:
+            \_Net: (work@tb.display.i), line:6:10, endln:6:11
+            |vpiFullName:work@tb.display.i
+            |vpiActual:
+            \_IntegerTypespec: , line:6:2, endln:6:9
+          |vpiName:i
+          |vpiFullName:work@tb.display.i
         |vpiRhs:
         \_Constant: , line:6:14, endln:6:15
           |vpiParent:
           \_Assignment: , line:6:10, endln:6:15
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (work@tb.display), line:6:14, endln:6:15
             |vpiParent:
@@ -199,14 +203,23 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
-        |vpiLhs:
-        \_Net: (work@tb.display.i), line:6:10, endln:6:11
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiStmt:
       \_Assignment: , line:7:2, endln:7:11
         |vpiParent:
         \_Begin: (work@tb.display), line:6:2, endln:8:23
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.display.i), line:7:2, endln:7:3
+          |vpiParent:
+          \_Assignment: , line:7:2, endln:7:11
+          |vpiName:i
+          |vpiFullName:work@tb.display.i
+          |vpiActual:
+          \_Net: (work@tb.display.i), line:7:2, endln:7:3
         |vpiRhs:
         \_Operation: , line:7:6, endln:7:11
           |vpiParent:
@@ -219,14 +232,11 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@tb.display.i
             |vpiActual:
-            \_Net: (work@tb.display.i), line:6:10, endln:6:11
+            \_Net: (work@tb.display.i), line:7:2, endln:7:3
           |vpiOperand:
           \_Constant: , line:7:10, endln:7:11
             |vpiParent:
             \_Operation: , line:7:6, endln:7:11
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (work@tb.display), line:7:10, endln:7:11
               |vpiParent:
@@ -235,25 +245,22 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb.display.i), line:7:2, endln:7:3
-          |vpiParent:
-          \_Assignment: , line:7:2, endln:7:11
-          |vpiName:i
-          |vpiFullName:work@tb.display.i
-          |vpiActual:
-          \_Net: (work@tb.display.i), line:6:10, endln:6:11
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
       |vpiStmt:
       \_SysFuncCall: ($display), line:8:2, endln:8:22
         |vpiParent:
         \_Begin: (work@tb.display), line:6:2, endln:8:23
+        |vpiName:
+        \_Identifier: ($display), line:8:3, endln:8:10
+          |vpiParent:
+          \_SysFuncCall: ($display), line:8:2, endln:8:22
+          |vpiName:$display
         |vpiArgument:
         \_Constant: , line:8:11, endln:8:18
           |vpiParent:
           \_SysFuncCall: ($display), line:8:2, endln:8:22
-          |vpiDecompile:"i=%0d"
-          |vpiSize:40
-          |STRING:i=%0d
           |vpiTypespec:
           \_RefTypespec: (work@tb.display), line:8:11, endln:8:18
             |vpiParent:
@@ -262,6 +269,9 @@ Design: (unnamed)
             |vpiActual:
             \_StringTypespec: 
           |vpiConstType:6
+          |vpiSize:40
+          |vpiDecompile:"i=%0d"
+          |STRING:i=%0d
         |vpiArgument:
         \_RefObj: (work@tb.display.i), line:8:20, endln:8:21
           |vpiParent:
@@ -269,12 +279,7 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@tb.display.i
           |vpiActual:
-          \_Net: (work@tb.display.i), line:6:10, endln:6:11
-        |vpiName:
-        \_Identifier: ($display), line:8:3, endln:8:10
-          |vpiParent:
-          \_SysFuncCall: ($display), line:8:2, endln:8:22
-          |vpiName:$display
+          \_Net: (work@tb.display.i), line:7:2, endln:7:3
     |vpiVisibility:1
     |vpiStmt:
     \_Begin: (work@tb.display), line:6:2, endln:8:23
@@ -291,13 +296,13 @@ Design: (unnamed)
     \_TaskCall: (display), line:3:10, endln:3:19
       |vpiParent:
       \_Initial: , line:3:2, endln:3:20
-      |vpiTaskFunc:
-      \_Task: (work@tb.display), line:5:2, endln:9:9
       |vpiName:
       \_Identifier: (display), line:3:10, endln:3:17
         |vpiParent:
         \_TaskCall: (display), line:3:10, endln:3:19
         |vpiName:display
+      |vpiTaskFunc:
+      \_Task: (work@tb.display), line:5:2, endln:9:9
 |vpiTypespec:
 \_ModuleTypespec: (work@tb)
   |vpiParent:

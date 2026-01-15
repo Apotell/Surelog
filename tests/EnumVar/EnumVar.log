@@ -90,24 +90,24 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumVar/dut.sv:11:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               2
+Constant                                               5
 Design                                                 1
 EnumConst                                              3
 EnumTypespec                                           1
 Identifier                                             4
-IntTypespec                                            2
+IntTypespec                                            5
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
 Package                                                1
 Range                                                  1
-RefTypespec                                            7
+RefTypespec                                           10
 SourceFile                                             1
 TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                32
+Total:                                                41
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -144,25 +144,61 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:6:11
       |vpiName:ONE
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:8
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (ONE), line:3:5, endln:3:8
+        |vpiTypespec:
+        \_RefTypespec: (pkg::ONE), line:3:5, endln:3:8
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:pkg::ONE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:8
+        |vpiDecompile:0
+        |INT:0
     |vpiEnumConst:
     \_EnumConst: (TWO), line:4:5, endln:4:8
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:6:11
       |vpiName:TWO
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:8
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (TWO), line:4:5, endln:4:8
+        |vpiTypespec:
+        \_RefTypespec: (pkg::TWO), line:4:5, endln:4:8
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:pkg::TWO
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:8
+        |vpiDecompile:1
+        |INT:1
     |vpiEnumConst:
     \_EnumConst: (THREE), line:5:5, endln:5:10
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:6:11
       |vpiName:THREE
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:8
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (THREE), line:5:5, endln:5:10
+        |vpiTypespec:
+        \_RefTypespec: (pkg::THREE), line:5:5, endln:5:10
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:pkg::THREE
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:6
+        |vpiSize:8
+        |vpiDecompile:2
+        |INT:2
   |vpiTypespec:
   \_LogicTypespec: , line:2:16, endln:2:21
     |vpiParent:
@@ -175,9 +211,6 @@ Design: (unnamed)
       \_Constant: , line:2:22, endln:2:23
         |vpiParent:
         \_Range: , line:2:21, endln:2:26
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
         |vpiTypespec:
         \_RefTypespec: (pkg), line:2:22, endln:2:23
           |vpiParent:
@@ -186,13 +219,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:7
+        |UINT:7
       |vpiRightRange:
       \_Constant: , line:2:24, endln:2:25
         |vpiParent:
         \_Range: , line:2:21, endln:2:26
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (pkg), line:2:24, endln:2:25
           |vpiParent:
@@ -201,10 +234,18 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
     |vpiParent:
@@ -242,6 +283,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:11, endln:6:11
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:16, endln:2:21
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:

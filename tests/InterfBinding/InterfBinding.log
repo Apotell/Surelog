@@ -345,8 +345,8 @@ Design: (unnamed)
     \_IODecl: (backEnd), line:22:11, endln:22:18
       |vpiParent:
       \_Modport: (work@ControllerIF.BypassNetwork), line:20:12, endln:23:8
-      |vpiDirection:1
       |vpiName:backEnd
+      |vpiDirection:1
     |vpiInterface:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
   |vpiPort:
@@ -444,10 +444,19 @@ Design: (unnamed)
   \_ContAssign: , line:33:9, endln:33:25
     |vpiParent:
     \_Module: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
+    |vpiLhs:
+    \_RefObj: (work@BypassNetwork.o), line:33:9, endln:33:10
+      |vpiParent:
+      \_ContAssign: , line:33:9, endln:33:25
+      |vpiName:o
+      |vpiFullName:work@BypassNetwork.o
+      |vpiActual:
+      \_Net: (work@BypassNetwork.o), line:33:9, endln:33:10
     |vpiRhs:
     \_HierPath: (ctrl.backEnd), line:33:13, endln:33:25
       |vpiParent:
       \_ContAssign: , line:33:9, endln:33:25
+      |vpiName:ctrl.backEnd
       |vpiActual:
       \_RefObj: (ctrl), line:33:13, endln:33:17
         |vpiParent:
@@ -463,15 +472,6 @@ Design: (unnamed)
         |vpiFullName:work@BypassNetwork.backEnd
         |vpiActual:
         \_Net: (work@ControllerIF.backEnd), line:18:21, endln:18:28
-      |vpiName:ctrl.backEnd
-    |vpiLhs:
-    \_RefObj: (work@BypassNetwork.o), line:33:9, endln:33:10
-      |vpiParent:
-      \_ContAssign: , line:33:9, endln:33:25
-      |vpiName:o
-      |vpiFullName:work@BypassNetwork.o
-      |vpiActual:
-      \_Net: (work@BypassNetwork.o), line:33:9, endln:33:10
 |vpiTypespec:
 \_ImportTypespec: (pack), line:10:8, endln:10:15
   |vpiParent:
@@ -485,9 +485,6 @@ Design: (unnamed)
   \_Constant: , line:10:8, endln:10:15
     |vpiParent:
     \_ImportTypespec: (pack), line:10:8, endln:10:15
-    |vpiDecompile:*
-    |vpiSize:8
-    |STRING:*
     |vpiTypespec:
     \_RefTypespec: (pack), line:10:8, endln:10:15
       |vpiParent:
@@ -496,6 +493,9 @@ Design: (unnamed)
       |vpiActual:
       \_StringTypespec: 
     |vpiConstType:8
+    |vpiSize:8
+    |vpiDecompile:*
+    |STRING:*
 |vpiTypespec:
 \_StringTypespec: 
   |vpiParent:

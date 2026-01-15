@@ -508,10 +508,30 @@ Design: (unnamed)
         \_ForeachStmt: (Tsum), line:30:3, endln:31:36
         |vpiOpType:24
         |vpiBlocking:1
+        |vpiLhs:
+        \_HierPath: (Tsum.field1), line:31:9, endln:31:16
+          |vpiParent:
+          \_Assignment: , line:31:5, endln:31:36
+          |vpiName:Tsum.field1
+          |vpiActual:
+          \_RefObj: (Tsum), line:31:9, endln:31:16
+            |vpiParent:
+            \_HierPath: (Tsum.field1), line:31:9, endln:31:16
+            |vpiName:Tsum
+            |vpiActual:
+            \_Function: (Tsum), line:28:1, endln:32:12
+          |vpiActual:
+          \_RefObj: (field1), line:31:10, endln:31:16
+            |vpiParent:
+            \_HierPath: (Tsum.field1), line:31:9, endln:31:16
+            |vpiName:field1
+            |vpiActual:
+            \_TypespecMember: (field1), line:23:8, endln:23:14
         |vpiRhs:
         \_HierPath: (driver[i].field1), line:31:20, endln:31:36
           |vpiParent:
           \_Assignment: , line:31:5, endln:31:36
+          |vpiName:driver[i].field1
           |vpiActual:
           \_BitSelect: (driver[i]), line:31:20, endln:31:26
             |vpiParent:
@@ -536,26 +556,6 @@ Design: (unnamed)
             |vpiFullName:Tsum.field1
             |vpiActual:
             \_TypespecMember: (field1), line:23:8, endln:23:14
-          |vpiName:driver[i].field1
-        |vpiLhs:
-        \_HierPath: (Tsum.field1), line:31:9, endln:31:16
-          |vpiParent:
-          \_Assignment: , line:31:5, endln:31:36
-          |vpiActual:
-          \_RefObj: (Tsum), line:31:9, endln:31:16
-            |vpiParent:
-            \_HierPath: (Tsum.field1), line:31:9, endln:31:16
-            |vpiName:Tsum
-            |vpiActual:
-            \_Function: (Tsum), line:28:1, endln:32:12
-          |vpiActual:
-          \_RefObj: (field1), line:31:10, endln:31:16
-            |vpiParent:
-            \_HierPath: (Tsum.field1), line:31:9, endln:31:16
-            |vpiName:field1
-            |vpiActual:
-            \_TypespecMember: (field1), line:23:8, endln:23:14
-          |vpiName:Tsum.field1
     |vpiTypespec:
     \_RealTypespec: 
       |vpiParent:
@@ -574,25 +574,11 @@ Design: (unnamed)
       \_Begin: (Tsum)
       |vpiOpType:82
       |vpiBlocking:1
-      |vpiRhs:
-      \_Constant: , line:29:17, endln:29:20
-        |vpiParent:
-        \_Assignment: , line:29:3, endln:29:20
-        |vpiDecompile:0.0
-        |vpiSize:64
-        |REAL:0.000000
-        |vpiTypespec:
-        \_RefTypespec: (Tsum), line:29:17, endln:29:20
-          |vpiParent:
-          \_Constant: , line:29:17, endln:29:20
-          |vpiFullName:Tsum
-          |vpiActual:
-          \_RealTypespec: 
-        |vpiConstType:2
       |vpiLhs:
       \_HierPath: (Tsum.field1), line:29:7, endln:29:14
         |vpiParent:
         \_Assignment: , line:29:3, endln:29:20
+        |vpiName:Tsum.field1
         |vpiActual:
         \_RefObj: (Tsum), line:29:7, endln:29:14
           |vpiParent:
@@ -607,7 +593,21 @@ Design: (unnamed)
           |vpiName:field1
           |vpiActual:
           \_TypespecMember: (field1), line:23:8, endln:23:14
-        |vpiName:Tsum.field1
+      |vpiRhs:
+      \_Constant: , line:29:17, endln:29:20
+        |vpiParent:
+        \_Assignment: , line:29:3, endln:29:20
+        |vpiTypespec:
+        \_RefTypespec: (Tsum), line:29:17, endln:29:20
+          |vpiParent:
+          \_Constant: , line:29:17, endln:29:20
+          |vpiFullName:Tsum
+          |vpiActual:
+          \_RealTypespec: 
+        |vpiConstType:2
+        |vpiSize:64
+        |vpiDecompile:0.0
+        |REAL:0.000000
     |vpiStmt:
     \_ForeachStmt: (Tsum), line:30:3, endln:31:36
   |vpiTypespec:
@@ -646,8 +646,8 @@ Design: (unnamed)
   \_IODecl: (driver), line:28:36, endln:28:42
     |vpiParent:
     \_Function: (Tsum), line:28:1, endln:32:12
-    |vpiDirection:1
     |vpiName:driver
+    |vpiDirection:1
     |vpiRange:
     \_Range: , line:28:42, endln:28:44
       |vpiParent:
@@ -656,9 +656,6 @@ Design: (unnamed)
       \_Constant: , line:28:42, endln:28:43
         |vpiParent:
         \_Range: , line:28:42, endln:28:44
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (Tsum.driver), line:28:42, endln:28:44
           |vpiParent:
@@ -667,12 +664,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
       |vpiRightRange:
       \_Constant: , line:28:42, endln:28:43
         |vpiParent:
         \_Range: , line:28:42, endln:28:44
-        |vpiDecompile:unsized
-        |STRING:unsized
         |vpiTypespec:
         \_RefTypespec: (Tsum.driver), line:28:42, endln:28:44
           |vpiParent:
@@ -681,6 +679,8 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:6
+        |vpiDecompile:unsized
+        |STRING:unsized
     |vpiTypespec:
     \_RefTypespec: (Tsum.driver), line:28:34, endln:28:35
       |vpiParent:
@@ -739,8 +739,8 @@ Design: (unnamed)
   \_IODecl: (driver), line:41:49, endln:41:55
     |vpiParent:
     \_Function: (my_function2), line:41:1, endln:42:12
-    |vpiDirection:1
     |vpiName:driver
+    |vpiDirection:1
     |vpiRange:
     \_Range: , line:41:56, endln:41:58
       |vpiParent:
@@ -749,9 +749,6 @@ Design: (unnamed)
       \_Constant: , line:41:56, endln:41:57
         |vpiParent:
         \_Range: , line:41:56, endln:41:58
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (my_function2.driver), line:41:56, endln:41:58
           |vpiParent:
@@ -760,12 +757,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
       |vpiRightRange:
       \_Constant: , line:41:56, endln:41:57
         |vpiParent:
         \_Range: , line:41:56, endln:41:58
-        |vpiDecompile:unsized
-        |STRING:unsized
         |vpiTypespec:
         \_RefTypespec: (my_function2.driver), line:41:56, endln:41:58
           |vpiParent:
@@ -774,6 +772,8 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:6
+        |vpiDecompile:unsized
+        |STRING:unsized
     |vpiTypespec:
     \_RefTypespec: (my_function2.driver), line:41:44, endln:41:48
       |vpiParent:

@@ -236,9 +236,6 @@ Design: (unnamed)
       \_Constant: , line:5:20, endln:5:21
         |vpiParent:
         \_Variable: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (pkg::m_uvm_printer_knobs::identifier), line:5:20, endln:5:21
           |vpiParent:
@@ -247,6 +244,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -325,8 +325,8 @@ Design: (unnamed)
       \_IODecl: (enabled), line:11:54, endln:11:61
         |vpiParent:
         \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-        |vpiDirection:1
         |vpiName:enabled
+        |vpiDirection:1
         |vpiTypespec:
         \_RefTypespec: (pkg::uvm_printer::set_name_enabled::enabled), line:11:50, endln:11:53
           |vpiParent:
@@ -368,8 +368,8 @@ Design: (unnamed)
       \_IODecl: (enabled), line:16:50, endln:16:57
         |vpiParent:
         \_Function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
-        |vpiDirection:1
         |vpiName:enabled
+        |vpiDirection:1
         |vpiTypespec:
         \_RefTypespec: (pkg::uvm_printer::set_name_enabled::enabled), line:16:46, endln:16:49
           |vpiParent:
@@ -383,18 +383,11 @@ Design: (unnamed)
         \_Function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_RefObj: (pkg::uvm_printer::set_name_enabled::enabled), line:17:20, endln:17:27
-          |vpiParent:
-          \_Assignment: , line:17:1, endln:17:27
-          |vpiName:enabled
-          |vpiFullName:pkg::uvm_printer::set_name_enabled::enabled
-          |vpiActual:
-          \_IODecl: (enabled), line:16:50, endln:16:57
         |vpiLhs:
         \_HierPath: (knobs.identifier), line:17:6, endln:17:17
           |vpiParent:
           \_Assignment: , line:17:1, endln:17:27
+          |vpiName:knobs.identifier
           |vpiActual:
           \_RefObj: (knobs), line:17:6, endln:17:17
             |vpiParent:
@@ -409,7 +402,14 @@ Design: (unnamed)
             |vpiName:identifier
             |vpiActual:
             \_Variable: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
-          |vpiName:knobs.identifier
+        |vpiRhs:
+        \_RefObj: (pkg::uvm_printer::set_name_enabled::enabled), line:17:20, endln:17:27
+          |vpiParent:
+          \_Assignment: , line:17:1, endln:17:27
+          |vpiName:enabled
+          |vpiFullName:pkg::uvm_printer::set_name_enabled::enabled
+          |vpiActual:
+          \_IODecl: (enabled), line:16:50, endln:16:57
       |vpiInstance:
       \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
     |vpiImportTypespec:
@@ -509,6 +509,14 @@ Design: (unnamed)
         \_Begin: (work@top), line:25:9, endln:28:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@top.printer), line:26:5, endln:26:12
+          |vpiParent:
+          \_Assignment: , line:26:5, endln:26:18
+          |vpiName:printer
+          |vpiFullName:work@top.printer
+          |vpiActual:
+          \_Net: (work@top.printer), line:24:18, endln:24:25
         |vpiRhs:
         \_MethodFuncCall: (new), line:26:15, endln:26:18
           |vpiParent:
@@ -518,18 +526,15 @@ Design: (unnamed)
             |vpiParent:
             \_MethodFuncCall: (new), line:26:15, endln:26:18
             |vpiName:new
-        |vpiLhs:
-        \_RefObj: (work@top.printer), line:26:5, endln:26:12
-          |vpiParent:
-          \_Assignment: , line:26:5, endln:26:18
-          |vpiName:printer
-          |vpiFullName:work@top.printer
-          |vpiActual:
-          \_Net: (work@top.printer), line:24:18, endln:24:25
       |vpiStmt:
       \_MethodFuncCall: (set_name_enabled), line:27:9, endln:27:30
         |vpiParent:
         \_Begin: (work@top), line:25:9, endln:28:4
+        |vpiName:
+        \_Identifier: (set_name_enabled), line:27:9, endln:27:25
+          |vpiParent:
+          \_MethodFuncCall: (set_name_enabled), line:27:9, endln:27:30
+          |vpiName:set_name_enabled
         |vpiArgument:
         \_RefObj: (work@top.en), line:27:27, endln:27:29
           |vpiParent:
@@ -538,11 +543,6 @@ Design: (unnamed)
           |vpiFullName:work@top.en
           |vpiActual:
           \_Net: (work@top.en), line:27:27, endln:27:29
-        |vpiName:
-        \_Identifier: (set_name_enabled), line:27:9, endln:27:25
-          |vpiParent:
-          \_MethodFuncCall: (set_name_enabled), line:27:9, endln:27:30
-          |vpiName:set_name_enabled
         |vpiPrefix:
         \_RefObj: (work@top.printer), line:27:1, endln:27:8
           |vpiParent:

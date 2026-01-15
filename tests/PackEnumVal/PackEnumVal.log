@@ -119,7 +119,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PackEnumVal/dut.sv:16:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               4
+Constant                                               6
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
@@ -128,7 +128,7 @@ FuncCall                                               1
 Function                                               1
 IODecl                                                 1
 Identifier                                             5
-IntTypespec                                            4
+IntTypespec                                            6
 LogicTypespec                                          6
 Module                                                 2
 ModuleTypespec                                         1
@@ -137,13 +137,13 @@ Operation                                              1
 Package                                                1
 Port                                                   2
 RefObj                                                 4
-RefTypespec                                           12
+RefTypespec                                           14
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                56
+Total:                                                62
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackEnumVal/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -193,8 +193,8 @@ Design: (unnamed)
     \_IODecl: (val), line:9:46, endln:9:49
       |vpiParent:
       \_Function: (test_package::test_true), line:9:3, endln:11:26
-      |vpiDirection:1
       |vpiName:val
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (test_package::test_true::val::lc_tx_t), line:9:38, endln:9:45
         |vpiParent:
@@ -246,17 +246,41 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:4:11, endln:7:12
       |vpiName:On
-      |UINT:1
-      |vpiDecompile:1
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (On), line:5:5, endln:5:12
+        |vpiTypespec:
+        \_RefTypespec: (test_package::On), line:5:11, endln:5:12
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:test_package::On
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:19
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
     |vpiEnumConst:
     \_EnumConst: (Off), line:6:5, endln:6:12
       |vpiParent:
       \_EnumTypespec: , line:4:11, endln:7:12
       |vpiName:Off
-      |UINT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (Off), line:6:5, endln:6:12
+        |vpiTypespec:
+        \_RefTypespec: (test_package::Off), line:6:11, endln:6:12
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:test_package::Off
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:19
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_LogicTypespec: , line:4:16, endln:4:21
     |vpiParent:
@@ -372,10 +396,23 @@ Design: (unnamed)
   \_ContAssign: , line:17:10, endln:17:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackEnumVal/dut.sv, line:16:1, endln:18:10
+    |vpiLhs:
+    \_RefObj: (work@top.o), line:17:10, endln:17:11
+      |vpiParent:
+      \_ContAssign: , line:17:10, endln:17:40
+      |vpiName:o
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_Net: (work@top.o), line:16:40, endln:16:41
     |vpiRhs:
     \_FuncCall: (test_package::test_true), line:17:14, endln:17:40
       |vpiParent:
       \_ContAssign: , line:17:10, endln:17:40
+      |vpiName:
+      \_Identifier: (test_package::test_true), line:17:14, endln:17:37
+        |vpiParent:
+        \_FuncCall: (test_package::test_true), line:17:14, endln:17:40
+        |vpiName:test_package::test_true
       |vpiTaskFunc:
       \_Function: (test_package::test_true), line:9:3, endln:11:26
       |vpiArgument:
@@ -386,19 +423,6 @@ Design: (unnamed)
         |vpiFullName:work@top.i
         |vpiActual:
         \_Net: (work@top.i), line:16:24, endln:16:25
-      |vpiName:
-      \_Identifier: (test_package::test_true), line:17:14, endln:17:37
-        |vpiParent:
-        \_FuncCall: (test_package::test_true), line:17:14, endln:17:40
-        |vpiName:test_package::test_true
-    |vpiLhs:
-    \_RefObj: (work@top.o), line:17:10, endln:17:11
-      |vpiParent:
-      \_ContAssign: , line:17:10, endln:17:40
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_Net: (work@top.o), line:16:40, endln:16:41
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

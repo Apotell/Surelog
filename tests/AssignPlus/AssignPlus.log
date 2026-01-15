@@ -224,20 +224,18 @@ Design: (unnamed)
   \_Parameter: (work@top.bht_row_width_p), line:3:14, endln:3:34
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPlus/dut.sv, line:1:1, endln:11:10
-    |UINT:10
     |vpiName:bht_row_width_p
     |vpiFullName:work@top.bht_row_width_p
   |vpiParamAssign:
   \_ParamAssign: , line:3:14, endln:3:34
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPlus/dut.sv, line:1:1, endln:11:10
+    |vpiLhs:
+    \_Parameter: (work@top.bht_row_width_p), line:3:14, endln:3:34
     |vpiRhs:
     \_Constant: , line:3:32, endln:3:34
       |vpiParent:
       \_ParamAssign: , line:3:14, endln:3:34
-      |vpiDecompile:10
-      |vpiSize:64
-      |UINT:10
       |vpiTypespec:
       \_RefTypespec: (work@top), line:3:32, endln:3:34
         |vpiParent:
@@ -246,8 +244,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.bht_row_width_p), line:3:14, endln:3:34
+      |vpiSize:64
+      |vpiDecompile:10
+      |UINT:10
   |vpiInternalScope:
   \_GenFor: (work@top), line:5:5, endln:9:8
     |vpiParent:
@@ -314,6 +313,22 @@ Design: (unnamed)
       \_ContAssign: , line:7:14, endln:7:69
         |vpiParent:
         \_Begin: (work@top.wval), line:6:5, endln:9:8
+        |vpiLhs:
+        \_BitSelect: (work@top.wval.w_data_li), line:7:23, endln:7:26
+          |vpiParent:
+          \_ContAssign: , line:7:14, endln:7:69
+          |vpiName:w_data_li
+          |vpiFullName:work@top.wval.w_data_li
+          |vpiActual:
+          \_Net: (work@top.wval.w_data_li), line:7:23, endln:7:26
+          |vpiIndex:
+          \_RefObj: (work@top.wval.i), line:7:24, endln:7:25
+            |vpiParent:
+            \_BitSelect: (work@top.wval.w_data_li), line:7:23, endln:7:26
+            |vpiName:i
+            |vpiFullName:work@top.wval.i
+            |vpiActual:
+            \_Variable: (work@top.i), line:5:17, endln:5:18
         |vpiRhs:
         \_Operation: , line:7:31, endln:7:69
           |vpiParent:
@@ -339,9 +354,6 @@ Design: (unnamed)
             \_Constant: , line:7:54, endln:7:55
               |vpiParent:
               \_BitSelect: (work@top.wval.bht_init_lp), line:7:53, endln:7:56
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
               |vpiTypespec:
               \_RefTypespec: (work@top.wval.bht_init_lp), line:7:54, endln:7:55
                 |vpiParent:
@@ -350,6 +362,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:0
+              |UINT:0
           |vpiOperand:
           \_Operation: , line:7:59, endln:7:69
             |vpiParent:
@@ -363,26 +378,46 @@ Design: (unnamed)
               |vpiFullName:work@top.wval.correct_i
               |vpiActual:
               \_Net: (work@top.wval.correct_i), line:7:60, endln:7:69
+      |vpiStmt:
+      \_ContAssign: , line:8:14, endln:8:95
+        |vpiParent:
+        \_Begin: (work@top.wval), line:6:5, endln:9:8
         |vpiLhs:
-        \_BitSelect: (work@top.wval.w_data_li), line:7:23, endln:7:26
+        \_BitSelect: (work@top.wval.w_data_li), line:8:23, endln:8:28
           |vpiParent:
-          \_ContAssign: , line:7:14, endln:7:69
+          \_ContAssign: , line:8:14, endln:8:95
           |vpiName:w_data_li
           |vpiFullName:work@top.wval.w_data_li
           |vpiActual:
           \_Net: (work@top.wval.w_data_li), line:7:23, endln:7:26
           |vpiIndex:
-          \_RefObj: (work@top.wval.i), line:7:24, endln:7:25
+          \_Operation: , line:8:24, endln:8:27
             |vpiParent:
-            \_BitSelect: (work@top.wval.w_data_li), line:7:23, endln:7:26
-            |vpiName:i
-            |vpiFullName:work@top.wval.i
-            |vpiActual:
-            \_Variable: (work@top.i), line:5:17, endln:5:18
-      |vpiStmt:
-      \_ContAssign: , line:8:14, endln:8:95
-        |vpiParent:
-        \_Begin: (work@top.wval), line:6:5, endln:9:8
+            \_BitSelect: (work@top.wval.w_data_li), line:8:23, endln:8:28
+            |vpiOpType:24
+            |vpiOperand:
+            \_RefObj: (work@top.wval.w_data_li.i), line:8:24, endln:8:25
+              |vpiParent:
+              \_Operation: , line:8:24, endln:8:27
+              |vpiName:i
+              |vpiFullName:work@top.wval.w_data_li.i
+              |vpiActual:
+              \_Variable: (work@top.i), line:5:17, endln:5:18
+            |vpiOperand:
+            \_Constant: , line:8:26, endln:8:27
+              |vpiParent:
+              \_Operation: , line:8:24, endln:8:27
+              |vpiTypespec:
+              \_RefTypespec: (work@top.wval.w_data_li), line:8:26, endln:8:27
+                |vpiParent:
+                \_Constant: , line:8:26, endln:8:27
+                |vpiFullName:work@top.wval.w_data_li
+                |vpiActual:
+                \_IntTypespec: 
+              |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:1
+              |UINT:1
         |vpiRhs:
         \_Operation: , line:8:31, endln:8:95
           |vpiParent:
@@ -408,9 +443,6 @@ Design: (unnamed)
             \_Constant: , line:8:54, endln:8:55
               |vpiParent:
               \_BitSelect: (work@top.wval.bht_init_lp), line:8:53, endln:8:56
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
               |vpiTypespec:
               \_RefTypespec: (work@top.wval.bht_init_lp), line:8:54, endln:8:55
                 |vpiParent:
@@ -419,6 +451,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:1
+              |UINT:1
           |vpiOperand:
           \_Operation: , line:8:59, endln:8:95
             |vpiParent:
@@ -449,9 +484,6 @@ Design: (unnamed)
                 \_Constant: , line:8:67, endln:8:68
                   |vpiParent:
                   \_Operation: , line:8:65, endln:8:68
-                  |vpiDecompile:1
-                  |vpiSize:64
-                  |UINT:1
                   |vpiTypespec:
                   \_RefTypespec: (work@top.wval.val_i), line:8:67, endln:8:68
                     |vpiParent:
@@ -460,6 +492,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_IntTypespec: 
                   |vpiConstType:9
+                  |vpiSize:64
+                  |vpiDecompile:1
+                  |UINT:1
             |vpiOperand:
             \_Operation: , line:8:73, endln:8:94
               |vpiParent:
@@ -494,42 +529,6 @@ Design: (unnamed)
                   |vpiFullName:work@top.wval.i
                   |vpiActual:
                   \_Variable: (work@top.i), line:5:17, endln:5:18
-        |vpiLhs:
-        \_BitSelect: (work@top.wval.w_data_li), line:8:23, endln:8:28
-          |vpiParent:
-          \_ContAssign: , line:8:14, endln:8:95
-          |vpiName:w_data_li
-          |vpiFullName:work@top.wval.w_data_li
-          |vpiActual:
-          \_Net: (work@top.wval.w_data_li), line:7:23, endln:7:26
-          |vpiIndex:
-          \_Operation: , line:8:24, endln:8:27
-            |vpiParent:
-            \_BitSelect: (work@top.wval.w_data_li), line:8:23, endln:8:28
-            |vpiOpType:24
-            |vpiOperand:
-            \_RefObj: (work@top.wval.w_data_li.i), line:8:24, endln:8:25
-              |vpiParent:
-              \_Operation: , line:8:24, endln:8:27
-              |vpiName:i
-              |vpiFullName:work@top.wval.w_data_li.i
-              |vpiActual:
-              \_Variable: (work@top.i), line:5:17, endln:5:18
-            |vpiOperand:
-            \_Constant: , line:8:26, endln:8:27
-              |vpiParent:
-              \_Operation: , line:8:24, endln:8:27
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-              |vpiTypespec:
-              \_RefTypespec: (work@top.wval.w_data_li), line:8:26, endln:8:27
-                |vpiParent:
-                \_Constant: , line:8:26, endln:8:27
-                |vpiFullName:work@top.wval.w_data_li
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -542,13 +541,12 @@ Design: (unnamed)
     \_Assignment: , line:5:10, endln:5:22
       |vpiParent:
       \_GenFor: (work@top), line:5:5, endln:9:8
+      |vpiLhs:
+      \_Variable: (work@top.i), line:5:17, endln:5:18
       |vpiRhs:
       \_Constant: , line:5:21, endln:5:22
         |vpiParent:
         \_Assignment: , line:5:10, endln:5:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:5:21, endln:5:22
           |vpiParent:
@@ -557,8 +555,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-      |vpiLhs:
-      \_Variable: (work@top.i), line:5:17, endln:5:18
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiCondition:
     \_Operation: , line:5:24, endln:5:43
       |vpiParent:
@@ -585,21 +584,6 @@ Design: (unnamed)
       |vpiParent:
       \_GenFor: (work@top), line:5:5, endln:9:8
       |vpiOpType:24
-      |vpiRhs:
-      \_Constant: , line:5:48, endln:5:49
-        |vpiParent:
-        \_Assignment: , line:5:45, endln:5:49
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiTypespec:
-        \_RefTypespec: (work@top), line:5:48, endln:5:49
-          |vpiParent:
-          \_Constant: , line:5:48, endln:5:49
-          |vpiFullName:work@top
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
       |vpiLhs:
       \_RefObj: (work@top.i), line:5:45, endln:5:46
         |vpiParent:
@@ -608,6 +592,21 @@ Design: (unnamed)
         |vpiFullName:work@top.i
         |vpiActual:
         \_Variable: (work@top.i), line:5:17, endln:5:18
+      |vpiRhs:
+      \_Constant: , line:5:48, endln:5:49
+        |vpiParent:
+        \_Assignment: , line:5:45, endln:5:49
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:5:48, endln:5:49
+          |vpiParent:
+          \_Constant: , line:5:48, endln:5:49
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:2
+        |UINT:2
     |vpiStmt:
     \_Begin: (work@top.wval), line:6:5, endln:9:8
   |vpiTypespec:

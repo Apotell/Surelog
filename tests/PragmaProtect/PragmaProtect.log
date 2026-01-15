@@ -16,7 +16,7 @@ BitSelect                                              3
 BitTypespec                                            3
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              33
+Constant                                              38
 DelayControl                                           3
 Design                                                 1
 EnumConst                                              5
@@ -29,7 +29,7 @@ Identifier                                            34
 IfElse                                                 2
 IfStmt                                                 1
 Initial                                                1
-IntTypespec                                           34
+IntTypespec                                           39
 IntegerTypespec                                        1
 LogicTypespec                                         11
 Module                                                 2
@@ -40,7 +40,7 @@ Package                                                1
 Port                                                   4
 Range                                                  8
 RefObj                                                24
-RefTypespec                                           55
+RefTypespec                                           60
 SourceFile                                             1
 StringTypespec                                         2
 SysFuncCall                                            4
@@ -48,7 +48,7 @@ Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                               320
+Total:                                               335
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PragmaProtect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -157,15 +157,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:3:23, endln:3:28
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:3:31, endln:3:32
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
             |vpiParent:
@@ -174,6 +171,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -223,8 +223,8 @@ Design: (unnamed)
       \_IODecl: (message), line:9:15, endln:9:22
         |vpiParent:
         \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
       |vpiParent:
@@ -254,8 +254,8 @@ Design: (unnamed)
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiDirection:1
         |vpiName:message
+        |vpiDirection:1
     |vpiInternalScope:
     \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
       |vpiParent:
@@ -272,8 +272,8 @@ Design: (unnamed)
       \_IODecl: (message), line:15:19, endln:15:26
         |vpiParent:
         \_Task: (builtin::mailbox::get), line:15:5, endln:16:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
       |vpiParent:
@@ -304,8 +304,8 @@ Design: (unnamed)
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
       |vpiParent:
@@ -322,8 +322,8 @@ Design: (unnamed)
       \_IODecl: (message), line:21:20, endln:21:27
         |vpiParent:
         \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiInternalScope:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
       |vpiParent:
@@ -354,8 +354,8 @@ Design: (unnamed)
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiDirection:6
         |vpiName:message
+        |vpiDirection:6
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiImportTypespec:
@@ -495,41 +495,106 @@ Design: (unnamed)
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::FINISHED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:0
+          |INT:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::RUNNING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:1
+          |INT:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
-        |INT:2
-        |vpiDecompile:2
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::WAITING
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:2
+          |INT:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::SUSPENDED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:3
+          |INT:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
-        |INT:4
-        |vpiDecompile:4
-        |vpiSize:64
+        |vpiValue:
+        \_Constant: 
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiTypespec:
+          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+            |vpiParent:
+            \_Constant: 
+            |vpiFullName:builtin::process::KILLED
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:6
+          |vpiSize:64
+          |vpiDecompile:4
+          |INT:4
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+      |vpiSigned:1
     |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
@@ -548,6 +613,8 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -612,15 +679,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:57:22, endln:57:30
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:57:33, endln:57:34
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
             |vpiParent:
@@ -629,6 +693,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -665,15 +732,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:60:18, endln:60:26
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:60:29, endln:60:30
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
             |vpiParent:
@@ -682,6 +746,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -718,15 +785,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:63:18, endln:63:26
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:63:29, endln:63:30
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
             |vpiParent:
@@ -735,6 +799,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -778,15 +845,12 @@ Design: (unnamed)
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiDirection:1
         |vpiName:keyCount
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:66:41, endln:66:42
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
           |vpiTypespec:
           \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
             |vpiParent:
@@ -795,6 +859,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:1
+          |UINT:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -943,9 +1010,6 @@ Design: (unnamed)
       \_Constant: , line:6:8, endln:6:10
         |vpiParent:
         \_Range: , line:6:7, endln:6:13
-        |vpiDecompile:11
-        |vpiSize:64
-        |UINT:11
         |vpiTypespec:
         \_RefTypespec: (work@sram), line:6:8, endln:6:10
           |vpiParent:
@@ -954,13 +1018,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:11
+        |UINT:11
       |vpiRightRange:
       \_Constant: , line:6:11, endln:6:12
         |vpiParent:
         \_Range: , line:6:7, endln:6:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@sram), line:6:11, endln:6:12
           |vpiParent:
@@ -969,6 +1033,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -985,9 +1052,6 @@ Design: (unnamed)
       \_Constant: , line:7:8, endln:7:9
         |vpiParent:
         \_Range: , line:7:7, endln:7:12
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
         |vpiTypespec:
         \_RefTypespec: (work@sram), line:7:8, endln:7:9
           |vpiParent:
@@ -996,13 +1060,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:7
+        |UINT:7
       |vpiRightRange:
       \_Constant: , line:7:10, endln:7:11
         |vpiParent:
         \_Range: , line:7:7, endln:7:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@sram), line:7:10, endln:7:11
           |vpiParent:
@@ -1011,6 +1075,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_ArrayTypespec: , line:12:14, endln:12:22
     |vpiParent:
@@ -1024,9 +1091,6 @@ Design: (unnamed)
       \_Constant: , line:12:15, endln:12:16
         |vpiParent:
         \_Range: , line:12:14, endln:12:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@sram), line:12:15, endln:12:16
           |vpiParent:
@@ -1035,13 +1099,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
       |vpiRightRange:
       \_Constant: , line:12:17, endln:12:21
         |vpiParent:
         \_Range: , line:12:14, endln:12:22
-        |vpiDecompile:4095
-        |vpiSize:64
-        |UINT:4095
         |vpiTypespec:
         \_RefTypespec: (work@sram), line:12:17, endln:12:21
           |vpiParent:
@@ -1050,6 +1114,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:4095
+        |UINT:4095
     |vpiElemTypespec:
     \_RefTypespec: (work@sram), line:12:1, endln:12:10
       |vpiParent:
@@ -1239,21 +1306,6 @@ Design: (unnamed)
         \_Assignment: , line:18:9, endln:18:12
           |vpiParent:
           \_ForStmt: (work@sram), line:18:4, endln:19:17
-          |vpiRhs:
-          \_Constant: , line:18:11, endln:18:12
-            |vpiParent:
-            \_Assignment: , line:18:9, endln:18:12
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@sram), line:18:11, endln:18:12
-              |vpiParent:
-              \_Constant: , line:18:11, endln:18:12
-              |vpiFullName:work@sram
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@sram.i), line:18:9, endln:18:10
             |vpiParent:
@@ -1262,12 +1314,35 @@ Design: (unnamed)
             |vpiFullName:work@sram.i
             |vpiActual:
             \_Net: (work@sram.i), line:14:9, endln:14:10
+          |vpiRhs:
+          \_Constant: , line:18:11, endln:18:12
+            |vpiParent:
+            \_Assignment: , line:18:9, endln:18:12
+            |vpiTypespec:
+            \_RefTypespec: (work@sram), line:18:11, endln:18:12
+              |vpiParent:
+              \_Constant: , line:18:11, endln:18:12
+              |vpiFullName:work@sram
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiForIncStmt:
         \_Assignment: , line:18:24, endln:18:33
           |vpiParent:
           \_ForStmt: (work@sram), line:18:4, endln:19:17
           |vpiOpType:82
           |vpiBlocking:1
+          |vpiLhs:
+          \_RefObj: (work@sram.i), line:18:24, endln:18:25
+            |vpiParent:
+            \_Assignment: , line:18:24, endln:18:33
+            |vpiName:i
+            |vpiFullName:work@sram.i
+            |vpiActual:
+            \_Net: (work@sram.i), line:14:9, endln:14:10
           |vpiRhs:
           \_Operation: , line:18:28, endln:18:33
             |vpiParent:
@@ -1285,9 +1360,6 @@ Design: (unnamed)
             \_Constant: , line:18:32, endln:18:33
               |vpiParent:
               \_Operation: , line:18:28, endln:18:33
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
               |vpiTypespec:
               \_RefTypespec: (work@sram), line:18:32, endln:18:33
                 |vpiParent:
@@ -1296,14 +1368,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
-          |vpiLhs:
-          \_RefObj: (work@sram.i), line:18:24, endln:18:25
-            |vpiParent:
-            \_Assignment: , line:18:24, endln:18:33
-            |vpiName:i
-            |vpiFullName:work@sram.i
-            |vpiActual:
-            \_Net: (work@sram.i), line:14:9, endln:14:10
+              |vpiSize:64
+              |vpiDecompile:1
+              |UINT:1
         |vpiCondition:
         \_Operation: , line:18:14, endln:18:22
           |vpiParent:
@@ -1321,9 +1388,6 @@ Design: (unnamed)
           \_Constant: , line:18:18, endln:18:22
             |vpiParent:
             \_Operation: , line:18:14, endln:18:22
-            |vpiDecompile:4095
-            |vpiSize:64
-            |UINT:4095
             |vpiTypespec:
             \_RefTypespec: (work@sram), line:18:18, endln:18:22
               |vpiParent:
@@ -1332,27 +1396,15 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:4095
+            |UINT:4095
         |vpiStmt:
         \_Assignment: , line:19:6, endln:19:16
           |vpiParent:
           \_ForStmt: (work@sram), line:18:4, endln:19:17
           |vpiOpType:82
           |vpiBlocking:1
-          |vpiRhs:
-          \_Constant: , line:19:15, endln:19:16
-            |vpiParent:
-            \_Assignment: , line:19:6, endln:19:16
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_RefTypespec: (work@sram), line:19:15, endln:19:16
-              |vpiParent:
-              \_Constant: , line:19:15, endln:19:16
-              |vpiFullName:work@sram
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
           |vpiLhs:
           \_BitSelect: (work@sram.ram), line:19:9, endln:19:12
             |vpiParent:
@@ -1369,6 +1421,21 @@ Design: (unnamed)
               |vpiFullName:work@sram.i
               |vpiActual:
               \_Net: (work@sram.i), line:14:9, endln:14:10
+          |vpiRhs:
+          \_Constant: , line:19:15, endln:19:16
+            |vpiParent:
+            \_Assignment: , line:19:6, endln:19:16
+            |vpiTypespec:
+            \_RefTypespec: (work@sram), line:19:15, endln:19:16
+              |vpiParent:
+              \_Constant: , line:19:15, endln:19:16
+              |vpiFullName:work@sram
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
       |vpiTypespec:
       \_LogicTypespec: 
         |vpiParent:
@@ -1387,21 +1454,6 @@ Design: (unnamed)
         \_Begin: (work@sram), line:16:4, endln:20:7
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:17:18, endln:17:29
-          |vpiParent:
-          \_Assignment: , line:17:4, endln:17:29
-          |vpiDecompile:8'bzzzzzzzz
-          |vpiSize:8
-          |BIN:zzzzzzzz
-          |vpiTypespec:
-          \_RefTypespec: (work@sram), line:17:18, endln:17:29
-            |vpiParent:
-            \_Constant: , line:17:18, endln:17:29
-            |vpiFullName:work@sram
-            |vpiActual:
-            \_LogicTypespec: 
-          |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@sram.DBUS_driver), line:17:4, endln:17:15
           |vpiParent:
@@ -1410,6 +1462,21 @@ Design: (unnamed)
           |vpiFullName:work@sram.DBUS_driver
           |vpiActual:
           \_Net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+        |vpiRhs:
+        \_Constant: , line:17:18, endln:17:29
+          |vpiParent:
+          \_Assignment: , line:17:4, endln:17:29
+          |vpiTypespec:
+          \_RefTypespec: (work@sram), line:17:18, endln:17:29
+            |vpiParent:
+            \_Constant: , line:17:18, endln:17:29
+            |vpiFullName:work@sram
+            |vpiActual:
+            \_LogicTypespec: 
+          |vpiConstType:3
+          |vpiSize:8
+          |vpiDecompile:8'bzzzzzzzz
+          |BIN:zzzzzzzz
       |vpiStmt:
       \_ForStmt: (work@sram), line:18:4, endln:19:17
   |vpiProcess:
@@ -1486,9 +1553,6 @@ Design: (unnamed)
             \_Constant: , line:28:16, endln:28:20
               |vpiParent:
               \_Operation: , line:28:9, endln:28:20
-              |vpiDecompile:1'b0
-              |vpiSize:1
-              |BIN:0
               |vpiTypespec:
               \_RefTypespec: (work@sram), line:28:16, endln:28:20
                 |vpiParent:
@@ -1497,6 +1561,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_BitTypespec: 
               |vpiConstType:3
+              |vpiSize:1
+              |vpiDecompile:1'b0
+              |BIN:0
           |vpiStmt:
           \_Begin: (work@sram), line:29:7, endln:43:10
             |vpiParent:
@@ -1529,9 +1596,6 @@ Design: (unnamed)
                 \_Constant: , line:30:18, endln:30:22
                   |vpiParent:
                   \_Operation: , line:30:11, endln:30:22
-                  |vpiDecompile:1'b0
-                  |vpiSize:1
-                  |BIN:0
                   |vpiTypespec:
                   \_RefTypespec: (work@sram), line:30:18, endln:30:22
                     |vpiParent:
@@ -1540,6 +1604,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_BitTypespec: 
                   |vpiConstType:3
+                  |vpiSize:1
+                  |vpiDecompile:1'b0
+                  |BIN:0
               |vpiStmt:
               \_Begin: (work@sram), line:32:9, endln:37:12
                 |vpiParent:
@@ -1562,21 +1629,6 @@ Design: (unnamed)
                   |vpiParent:
                   \_Begin: (work@sram), line:32:9, endln:37:12
                   |vpiOpType:82
-                  |vpiRhs:
-                  \_Constant: , line:33:28, endln:33:39
-                    |vpiParent:
-                    \_Assignment: , line:33:9, endln:33:39
-                    |vpiDecompile:8'bzzzzzzzz
-                    |vpiSize:8
-                    |BIN:zzzzzzzz
-                    |vpiTypespec:
-                    \_RefTypespec: (work@sram), line:33:28, endln:33:39
-                      |vpiParent:
-                      \_Constant: , line:33:28, endln:33:39
-                      |vpiFullName:work@sram
-                      |vpiActual:
-                      \_LogicTypespec: 
-                    |vpiConstType:3
                   |vpiLhs:
                   \_RefObj: (work@sram.DBUS_driver), line:33:9, endln:33:20
                     |vpiParent:
@@ -1585,6 +1637,21 @@ Design: (unnamed)
                     |vpiFullName:work@sram.DBUS_driver
                     |vpiActual:
                     \_Net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+                  |vpiRhs:
+                  \_Constant: , line:33:28, endln:33:39
+                    |vpiParent:
+                    \_Assignment: , line:33:9, endln:33:39
+                    |vpiTypespec:
+                    \_RefTypespec: (work@sram), line:33:28, endln:33:39
+                      |vpiParent:
+                      \_Constant: , line:33:28, endln:33:39
+                      |vpiFullName:work@sram
+                      |vpiActual:
+                      \_LogicTypespec: 
+                    |vpiConstType:3
+                    |vpiSize:8
+                    |vpiDecompile:8'bzzzzzzzz
+                    |BIN:zzzzzzzz
                   |vpiDelayControl:
                   \_DelayControl: , line:33:24, endln:33:27
                     |vpiParent:
@@ -1629,6 +1696,11 @@ Design: (unnamed)
                 \_SysFuncCall: ($display), line:35:9, endln:35:64
                   |vpiParent:
                   \_Begin: (work@sram), line:32:9, endln:37:12
+                  |vpiName:
+                  \_Identifier: ($display), line:35:10, endln:35:17
+                    |vpiParent:
+                    \_SysFuncCall: ($display), line:35:9, endln:35:64
+                    |vpiName:$display
                   |vpiArgument:
                   \_SysFuncCall: ($time), line:35:18, endln:35:23
                     |vpiParent:
@@ -1642,9 +1714,6 @@ Design: (unnamed)
                   \_Constant: , line:35:24, endln:35:53
                     |vpiParent:
                     \_SysFuncCall: ($display), line:35:9, endln:35:64
-                    |vpiDecompile:" Writing %m ABUS=%h DATA=%h"
-                    |vpiSize:216
-                    |STRING: Writing %m ABUS=%h DATA=%h
                     |vpiTypespec:
                     \_RefTypespec: (work@sram), line:35:24, endln:35:53
                       |vpiParent:
@@ -1653,6 +1722,9 @@ Design: (unnamed)
                       |vpiActual:
                       \_StringTypespec: 
                     |vpiConstType:6
+                    |vpiSize:216
+                    |vpiDecompile:" Writing %m ABUS=%h DATA=%h"
+                    |STRING: Writing %m ABUS=%h DATA=%h
                   |vpiArgument:
                   \_RefObj: (work@sram.ABUS), line:35:54, endln:35:58
                     |vpiParent:
@@ -1669,25 +1741,12 @@ Design: (unnamed)
                     |vpiFullName:work@sram.DBUS
                     |vpiActual:
                     \_Net: (work@sram.DBUS), line:2:26, endln:2:30
-                  |vpiName:
-                  \_Identifier: ($display), line:35:10, endln:35:17
-                    |vpiParent:
-                    \_SysFuncCall: ($display), line:35:9, endln:35:64
-                    |vpiName:$display
                 |vpiStmt:
                 \_Assignment: , line:36:9, endln:36:25
                   |vpiParent:
                   \_Begin: (work@sram), line:32:9, endln:37:12
                   |vpiOpType:82
                   |vpiBlocking:1
-                  |vpiRhs:
-                  \_RefObj: (work@sram.DBUS), line:36:21, endln:36:25
-                    |vpiParent:
-                    \_Assignment: , line:36:9, endln:36:25
-                    |vpiName:DBUS
-                    |vpiFullName:work@sram.DBUS
-                    |vpiActual:
-                    \_Net: (work@sram.DBUS), line:2:26, endln:2:30
                   |vpiLhs:
                   \_BitSelect: (work@sram.ram), line:36:12, endln:36:18
                     |vpiParent:
@@ -1704,6 +1763,14 @@ Design: (unnamed)
                       |vpiFullName:work@sram.ABUS
                       |vpiActual:
                       \_Net: (work@sram.ABUS), line:2:21, endln:2:25
+                  |vpiRhs:
+                  \_RefObj: (work@sram.DBUS), line:36:21, endln:36:25
+                    |vpiParent:
+                    \_Assignment: , line:36:9, endln:36:25
+                    |vpiName:DBUS
+                    |vpiFullName:work@sram.DBUS
+                    |vpiActual:
+                    \_Net: (work@sram.DBUS), line:2:26, endln:2:30
               |vpiElseStmt:
               \_IfStmt: , line:38:12, endln:42:12
                 |vpiParent:
@@ -1725,9 +1792,6 @@ Design: (unnamed)
                   \_Constant: , line:38:23, endln:38:27
                     |vpiParent:
                     \_Operation: , line:38:16, endln:38:27
-                    |vpiDecompile:1'b1
-                    |vpiSize:1
-                    |BIN:1
                     |vpiTypespec:
                     \_RefTypespec: (work@sram), line:38:23, endln:38:27
                       |vpiParent:
@@ -1736,6 +1800,9 @@ Design: (unnamed)
                       |vpiActual:
                       \_BitTypespec: 
                     |vpiConstType:3
+                    |vpiSize:1
+                    |vpiDecompile:1'b1
+                    |BIN:1
                 |vpiStmt:
                 \_Begin: (work@sram), line:39:9, endln:42:12
                   |vpiParent:
@@ -1758,6 +1825,14 @@ Design: (unnamed)
                       \_DelayControl: , line:40:9, endln:40:37
                       |vpiOpType:82
                       |vpiBlocking:1
+                      |vpiLhs:
+                      \_RefObj: (work@sram.DBUS_driver), line:40:13, endln:40:24
+                        |vpiParent:
+                        \_Assignment: , line:40:13, endln:40:37
+                        |vpiName:DBUS_driver
+                        |vpiFullName:work@sram.DBUS_driver
+                        |vpiActual:
+                        \_Net: (work@sram.DBUS_driver), line:10:12, endln:10:23
                       |vpiRhs:
                       \_BitSelect: (work@sram.ram), line:40:31, endln:40:37
                         |vpiParent:
@@ -1774,18 +1849,15 @@ Design: (unnamed)
                           |vpiFullName:work@sram.ABUS
                           |vpiActual:
                           \_Net: (work@sram.ABUS), line:2:21, endln:2:25
-                      |vpiLhs:
-                      \_RefObj: (work@sram.DBUS_driver), line:40:13, endln:40:24
-                        |vpiParent:
-                        \_Assignment: , line:40:13, endln:40:37
-                        |vpiName:DBUS_driver
-                        |vpiFullName:work@sram.DBUS_driver
-                        |vpiActual:
-                        \_Net: (work@sram.DBUS_driver), line:10:12, endln:10:23
                   |vpiStmt:
                   \_SysFuncCall: ($display), line:41:9, endln:41:71
                     |vpiParent:
                     \_Begin: (work@sram), line:39:9, endln:42:12
+                    |vpiName:
+                    \_Identifier: ($display), line:41:10, endln:41:17
+                      |vpiParent:
+                      \_SysFuncCall: ($display), line:41:9, endln:41:71
+                      |vpiName:$display
                     |vpiArgument:
                     \_SysFuncCall: ($time), line:41:18, endln:41:23
                       |vpiParent:
@@ -1799,9 +1871,6 @@ Design: (unnamed)
                     \_Constant: , line:41:24, endln:41:53
                       |vpiParent:
                       \_SysFuncCall: ($display), line:41:9, endln:41:71
-                      |vpiDecompile:" Reading %m ABUS=%h DATA=%h"
-                      |vpiSize:216
-                      |STRING: Reading %m ABUS=%h DATA=%h
                       |vpiTypespec:
                       \_RefTypespec: (work@sram), line:41:24, endln:41:53
                         |vpiParent:
@@ -1810,6 +1879,9 @@ Design: (unnamed)
                         |vpiActual:
                         \_StringTypespec: 
                       |vpiConstType:6
+                      |vpiSize:216
+                      |vpiDecompile:" Reading %m ABUS=%h DATA=%h"
+                      |STRING: Reading %m ABUS=%h DATA=%h
                     |vpiArgument:
                     \_RefObj: (work@sram.ABUS), line:41:54, endln:41:58
                       |vpiParent:
@@ -1826,11 +1898,6 @@ Design: (unnamed)
                       |vpiFullName:work@sram.DBUS_driver
                       |vpiActual:
                       \_Net: (work@sram.DBUS_driver), line:10:12, endln:10:23
-                    |vpiName:
-                    \_Identifier: ($display), line:41:10, endln:41:17
-                      |vpiParent:
-                      \_SysFuncCall: ($display), line:41:9, endln:41:71
-                      |vpiName:$display
           |vpiElseStmt:
           \_Begin: (work@sram), line:45:7, endln:47:10
             |vpiParent:
@@ -1847,21 +1914,6 @@ Design: (unnamed)
               |vpiParent:
               \_Begin: (work@sram), line:45:7, endln:47:10
               |vpiOpType:82
-              |vpiRhs:
-              \_Constant: , line:46:27, endln:46:38
-                |vpiParent:
-                \_Assignment: , line:46:7, endln:46:38
-                |vpiDecompile:8'bzzzzzzzz
-                |vpiSize:8
-                |BIN:zzzzzzzz
-                |vpiTypespec:
-                \_RefTypespec: (work@sram), line:46:27, endln:46:38
-                  |vpiParent:
-                  \_Constant: , line:46:27, endln:46:38
-                  |vpiFullName:work@sram
-                  |vpiActual:
-                  \_LogicTypespec: 
-                |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@sram.DBUS_driver), line:46:7, endln:46:18
                 |vpiParent:
@@ -1870,6 +1922,21 @@ Design: (unnamed)
                 |vpiFullName:work@sram.DBUS_driver
                 |vpiActual:
                 \_Net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+              |vpiRhs:
+              \_Constant: , line:46:27, endln:46:38
+                |vpiParent:
+                \_Assignment: , line:46:7, endln:46:38
+                |vpiTypespec:
+                \_RefTypespec: (work@sram), line:46:27, endln:46:38
+                  |vpiParent:
+                  \_Constant: , line:46:27, endln:46:38
+                  |vpiFullName:work@sram
+                  |vpiActual:
+                  \_LogicTypespec: 
+                |vpiConstType:3
+                |vpiSize:8
+                |vpiDecompile:8'bzzzzzzzz
+                |BIN:zzzzzzzz
               |vpiDelayControl:
               \_DelayControl: , line:46:23, endln:46:26
                 |vpiParent:

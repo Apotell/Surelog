@@ -95,20 +95,18 @@ Design: (unnamed)
     \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
       |vpiParent:
       \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
-      |UINT:1
       |vpiName:WIDTH
       |vpiFullName:pack::Vector::WIDTH
     |vpiParamAssign:
     \_ParamAssign: , line:5:26, endln:5:33
       |vpiParent:
       \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
+      |vpiLhs:
+      \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
       |vpiRhs:
       \_Constant: , line:5:32, endln:5:33
         |vpiParent:
         \_ParamAssign: , line:5:26, endln:5:33
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (pack::Vector), line:5:32, endln:5:33
           |vpiParent:
@@ -117,8 +115,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
-      |vpiLhs:
-      \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -152,9 +151,6 @@ Design: (unnamed)
           \_Constant: , line:6:14, endln:6:15
             |vpiParent:
             \_Operation: , line:6:8, endln:6:15
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
             |vpiTypespec:
             \_RefTypespec: (pack::Vector), line:6:14, endln:6:15
               |vpiParent:
@@ -163,13 +159,13 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
         |vpiRightRange:
         \_Constant: , line:6:16, endln:6:17
           |vpiParent:
           \_Range: , line:6:7, endln:6:18
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (pack::Vector), line:6:16, endln:6:17
             |vpiParent:
@@ -178,6 +174,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
       |vpiElemTypespec:
       \_RefTypespec: (pack::Vector), line:6:3, endln:6:6
         |vpiParent:
@@ -319,15 +318,12 @@ Design: (unnamed)
       \_IODecl: (bound), line:15:21, endln:15:26
         |vpiParent:
         \_Function: (pack::C::new), line:15:3, endln:17:14
-        |vpiDirection:1
         |vpiName:bound
+        |vpiDirection:1
         |vpiExpr:
         \_Constant: , line:15:29, endln:15:30
           |vpiParent:
           \_IODecl: (bound), line:15:21, endln:15:26
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
           |vpiTypespec:
           \_RefTypespec: (pack::C::new::bound), line:15:29, endln:15:30
             |vpiParent:
@@ -336,6 +332,9 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
           |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |UINT:0
         |vpiTypespec:
         \_RefTypespec: (pack::C::new::bound), line:15:17, endln:15:20
           |vpiParent:
@@ -347,6 +346,11 @@ Design: (unnamed)
       \_MethodFuncCall: (super.new), line:16:15, endln:16:57
         |vpiParent:
         \_Function: (pack::C::new), line:15:3, endln:17:14
+        |vpiName:
+        \_Identifier: (super.new), line:16:4, endln:16:13
+          |vpiParent:
+          \_MethodFuncCall: (super.new), line:16:15, endln:16:57
+          |vpiName:super.new
         |vpiArgument:
         \_RefObj: (pack::C::new::name), line:16:15, endln:16:19
           |vpiParent:
@@ -377,11 +381,6 @@ Design: (unnamed)
           \_MethodFuncCall: (super.new), line:16:15, endln:16:57
           |vpiName:max_size
           |vpiFullName:pack::C::new::max_size
-        |vpiName:
-        \_Identifier: (super.new), line:16:4, endln:16:13
-          |vpiParent:
-          \_MethodFuncCall: (super.new), line:16:15, endln:16:57
-          |vpiName:super.new
     |vpiInternalScope:
     \_Task: (pack::C::set), line:19:3, endln:21:10
       |vpiParent:
@@ -405,8 +404,8 @@ Design: (unnamed)
       \_IODecl: (i), line:19:17, endln:19:18
         |vpiParent:
         \_Task: (pack::C::set), line:19:3, endln:21:10
-        |vpiDirection:1
         |vpiName:i
+        |vpiDirection:1
         |vpiTypespec:
         \_RefTypespec: (pack::C::set::i), line:19:13, endln:19:16
           |vpiParent:
@@ -420,14 +419,6 @@ Design: (unnamed)
         \_Task: (pack::C::set), line:19:3, endln:21:10
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_RefObj: (pack::C::set::i), line:20:9, endln:20:10
-          |vpiParent:
-          \_Assignment: , line:20:5, endln:20:10
-          |vpiName:i
-          |vpiFullName:pack::C::set::i
-          |vpiActual:
-          \_IODecl: (i), line:19:17, endln:19:18
         |vpiLhs:
         \_RefObj: (pack::C::set::x), line:20:5, endln:20:6
           |vpiParent:
@@ -436,6 +427,14 @@ Design: (unnamed)
           |vpiFullName:pack::C::set::x
           |vpiActual:
           \_Variable: (pack::C::x), line:13:7, endln:13:8
+        |vpiRhs:
+        \_RefObj: (pack::C::set::i), line:20:9, endln:20:10
+          |vpiParent:
+          \_Assignment: , line:20:5, endln:20:10
+          |vpiName:i
+          |vpiFullName:pack::C::set::i
+          |vpiActual:
+          \_IODecl: (i), line:19:17, endln:19:18
     |vpiInternalScope:
     \_Function: (pack::C::get), line:22:3, endln:24:14
       |vpiParent:

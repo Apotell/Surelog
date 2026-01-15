@@ -270,10 +270,16 @@ Design: (unnamed)
   \_LetDecl: (p1), line:4:5, endln:4:7
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
+    |vpiName:p1
     |vpiExpr:
     \_SysFuncCall: ($past), line:4:13, endln:4:21
       |vpiParent:
       \_LetDecl: (p1), line:4:5, endln:4:7
+      |vpiName:
+      \_Identifier: ($past), line:4:14, endln:4:18
+        |vpiParent:
+        \_SysFuncCall: ($past), line:4:13, endln:4:21
+        |vpiName:$past
       |vpiArgument:
       \_RefObj: (work@m.p1.x), line:4:19, endln:4:20
         |vpiParent:
@@ -282,25 +288,25 @@ Design: (unnamed)
         |vpiFullName:work@m.p1.x
         |vpiActual:
         \_Net: (work@m.x), line:4:19, endln:4:20
-      |vpiName:
-      \_Identifier: ($past), line:4:14, endln:4:18
-        |vpiParent:
-        \_SysFuncCall: ($past), line:4:13, endln:4:21
-        |vpiName:$past
     |vpiSeqFormalDecl:
     \_SeqFormalDecl: (x), line:4:8, endln:4:9
       |vpiParent:
       \_LetDecl: (p1), line:4:5, endln:4:7
       |vpiName:x
-    |vpiName:p1
   |vpiLetDecl:
   \_LetDecl: (p2), line:6:5, endln:6:7
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
+    |vpiName:p2
     |vpiExpr:
     \_SysFuncCall: ($past), line:6:13, endln:6:40
       |vpiParent:
       \_LetDecl: (p2), line:6:5, endln:6:7
+      |vpiName:
+      \_Identifier: ($past), line:6:14, endln:6:18
+        |vpiParent:
+        \_SysFuncCall: ($past), line:6:13, endln:6:40
+        |vpiName:$past
       |vpiArgument:
       \_RefObj: (work@m.p2.x), line:6:19, endln:6:20
         |vpiParent:
@@ -313,9 +319,6 @@ Design: (unnamed)
       \_Constant: , line:6:21, endln:6:21
         |vpiParent:
         \_SysFuncCall: ($past), line:6:13, endln:6:40
-        |vpiDecompile:0
-        |vpiSize:64
-        |INT:0
         |vpiTypespec:
         \_RefTypespec: (work@m.p2), line:6:21, endln:6:21
           |vpiParent:
@@ -324,13 +327,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:7
+        |vpiSize:64
+        |vpiDecompile:0
+        |INT:0
       |vpiArgument:
       \_Constant: , line:6:22, endln:6:22
         |vpiParent:
         \_SysFuncCall: ($past), line:6:13, endln:6:40
-        |vpiDecompile:0
-        |vpiSize:64
-        |INT:0
         |vpiTypespec:
         \_RefTypespec: (work@m.p2), line:6:22, endln:6:22
           |vpiParent:
@@ -339,6 +342,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:7
+        |vpiSize:64
+        |vpiDecompile:0
+        |INT:0
       |vpiArgument:
       \_Operation: , line:6:25, endln:6:38
         |vpiParent:
@@ -352,25 +358,25 @@ Design: (unnamed)
           |vpiFullName:work@m.p2.clock
           |vpiActual:
           \_Net: (work@m.clock), line:6:33, endln:6:38
-      |vpiName:
-      \_Identifier: ($past), line:6:14, endln:6:18
-        |vpiParent:
-        \_SysFuncCall: ($past), line:6:13, endln:6:40
-        |vpiName:$past
     |vpiSeqFormalDecl:
     \_SeqFormalDecl: (x), line:6:8, endln:6:9
       |vpiParent:
       \_LetDecl: (p2), line:6:5, endln:6:7
       |vpiName:x
-    |vpiName:p2
   |vpiLetDecl:
   \_LetDecl: (s), line:7:5, endln:7:6
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
+    |vpiName:s
     |vpiExpr:
     \_SysFuncCall: ($sampled), line:7:12, endln:7:23
       |vpiParent:
       \_LetDecl: (s), line:7:5, endln:7:6
+      |vpiName:
+      \_Identifier: ($sampled), line:7:13, endln:7:20
+        |vpiParent:
+        \_SysFuncCall: ($sampled), line:7:12, endln:7:23
+        |vpiName:$sampled
       |vpiArgument:
       \_RefObj: (work@m.s.x), line:7:21, endln:7:22
         |vpiParent:
@@ -379,17 +385,11 @@ Design: (unnamed)
         |vpiFullName:work@m.s.x
         |vpiActual:
         \_Net: (work@m.x), line:4:19, endln:4:20
-      |vpiName:
-      \_Identifier: ($sampled), line:7:13, endln:7:20
-        |vpiParent:
-        \_SysFuncCall: ($sampled), line:7:12, endln:7:23
-        |vpiName:$sampled
     |vpiSeqFormalDecl:
     \_SeqFormalDecl: (x), line:7:7, endln:7:8
       |vpiParent:
       \_LetDecl: (s), line:7:5, endln:7:6
       |vpiName:x
-    |vpiName:s
   |vpiDefName:work@m
   |vpiNet:
   \_Net: (work@m.a), line:3:7, endln:3:8
@@ -474,20 +474,20 @@ Design: (unnamed)
   \_IODecl: (x), line:4:8, endln:4:9
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
-    |vpiDirection:3
     |vpiName:x
+    |vpiDirection:3
   |vpiIODecl:
   \_IODecl: (x), line:6:8, endln:6:9
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
-    |vpiDirection:3
     |vpiName:x
+    |vpiDirection:3
   |vpiIODecl:
   \_IODecl: (x), line:7:7, endln:7:8
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
-    |vpiDirection:3
     |vpiName:x
+    |vpiDirection:3
   |vpiEndLabel:m
 |vpiTypespec:
 \_ModuleTypespec: (work@m)

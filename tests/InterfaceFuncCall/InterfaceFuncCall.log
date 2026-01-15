@@ -211,20 +211,18 @@ Design: (unnamed)
   \_Parameter: (work@Foo.MULTIPLIER), line:2:15, endln:2:29
     |vpiParent:
     \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
-    |UINT:7
     |vpiName:MULTIPLIER
     |vpiFullName:work@Foo.MULTIPLIER
   |vpiParamAssign:
   \_ParamAssign: , line:2:15, endln:2:29
     |vpiParent:
     \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
+    |vpiLhs:
+    \_Parameter: (work@Foo.MULTIPLIER), line:2:15, endln:2:29
     |vpiRhs:
     \_Constant: , line:2:28, endln:2:29
       |vpiParent:
       \_ParamAssign: , line:2:15, endln:2:29
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
       |vpiTypespec:
       \_RefTypespec: (work@Foo), line:2:28, endln:2:29
         |vpiParent:
@@ -233,8 +231,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@Foo.MULTIPLIER), line:2:15, endln:2:29
+      |vpiSize:64
+      |vpiDecompile:7
+      |UINT:7
   |vpiInternalScope:
   \_Function: (work@Foo.bar), line:3:5, endln:6:16
     |vpiParent:
@@ -264,8 +263,8 @@ Design: (unnamed)
     \_IODecl: (x), line:4:23, endln:4:24
       |vpiParent:
       \_Function: (work@Foo.bar), line:3:5, endln:6:16
-      |vpiDirection:1
       |vpiName:x
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@Foo.bar.x), line:4:15, endln:4:22
         |vpiParent:
@@ -362,10 +361,16 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:13:9, endln:13:31
         |vpiParent:
         \_Begin: (work@top), line:12:13, endln:15:8
+        |vpiName:
+        \_Identifier: ($display), line:13:10, endln:13:17
+          |vpiParent:
+          \_SysFuncCall: ($display), line:13:9, endln:13:31
+          |vpiName:$display
         |vpiArgument:
         \_HierPath: (foo_1.bar), line:13:18, endln:13:30
           |vpiParent:
           \_SysFuncCall: ($display), line:13:9, endln:13:31
+          |vpiName:foo_1.bar
           |vpiActual:
           \_RefObj: (foo_1), line:13:18, endln:13:23
             |vpiParent:
@@ -377,13 +382,15 @@ Design: (unnamed)
           \_MethodFuncCall: (bar), line:13:24, endln:13:30
             |vpiParent:
             \_HierPath: (foo_1.bar), line:13:18, endln:13:30
+            |vpiName:
+            \_Identifier: (bar), line:13:24, endln:13:27
+              |vpiParent:
+              \_MethodFuncCall: (bar), line:13:24, endln:13:30
+              |vpiName:bar
             |vpiArgument:
             \_Constant: , line:13:28, endln:13:29
               |vpiParent:
               \_MethodFuncCall: (bar), line:13:24, endln:13:30
-              |vpiDecompile:3
-              |vpiSize:64
-              |UINT:3
               |vpiTypespec:
               \_RefTypespec: (work@top.foo_1.bar), line:13:28, endln:13:29
                 |vpiParent:
@@ -392,25 +399,23 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
-            |vpiName:
-            \_Identifier: (bar), line:13:24, endln:13:27
-              |vpiParent:
-              \_MethodFuncCall: (bar), line:13:24, endln:13:30
-              |vpiName:bar
-          |vpiName:foo_1.bar
-        |vpiName:
-        \_Identifier: ($display), line:13:10, endln:13:17
-          |vpiParent:
-          \_SysFuncCall: ($display), line:13:9, endln:13:31
-          |vpiName:$display
+              |vpiSize:64
+              |vpiDecompile:3
+              |UINT:3
       |vpiStmt:
       \_SysFuncCall: ($display), line:14:9, endln:14:31
         |vpiParent:
         \_Begin: (work@top), line:12:13, endln:15:8
+        |vpiName:
+        \_Identifier: ($display), line:14:10, endln:14:17
+          |vpiParent:
+          \_SysFuncCall: ($display), line:14:9, endln:14:31
+          |vpiName:$display
         |vpiArgument:
         \_HierPath: (foo_2.bar), line:14:18, endln:14:30
           |vpiParent:
           \_SysFuncCall: ($display), line:14:9, endln:14:31
+          |vpiName:foo_2.bar
           |vpiActual:
           \_RefObj: (foo_2), line:14:18, endln:14:23
             |vpiParent:
@@ -422,13 +427,15 @@ Design: (unnamed)
           \_MethodFuncCall: (bar), line:14:24, endln:14:30
             |vpiParent:
             \_HierPath: (foo_2.bar), line:14:18, endln:14:30
+            |vpiName:
+            \_Identifier: (bar), line:14:24, endln:14:27
+              |vpiParent:
+              \_MethodFuncCall: (bar), line:14:24, endln:14:30
+              |vpiName:bar
             |vpiArgument:
             \_Constant: , line:14:28, endln:14:29
               |vpiParent:
               \_MethodFuncCall: (bar), line:14:24, endln:14:30
-              |vpiDecompile:3
-              |vpiSize:64
-              |UINT:3
               |vpiTypespec:
               \_RefTypespec: (work@top.foo_2.bar), line:14:28, endln:14:29
                 |vpiParent:
@@ -437,17 +444,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
-            |vpiName:
-            \_Identifier: (bar), line:14:24, endln:14:27
-              |vpiParent:
-              \_MethodFuncCall: (bar), line:14:24, endln:14:30
-              |vpiName:bar
-          |vpiName:foo_2.bar
-        |vpiName:
-        \_Identifier: ($display), line:14:10, endln:14:17
-          |vpiParent:
-          \_SysFuncCall: ($display), line:14:9, endln:14:31
-          |vpiName:$display
+              |vpiSize:64
+              |vpiDecompile:3
+              |UINT:3
   |vpiRefModule:
   \_RefModule: work@Foo (foo_1), line:10:5, endln:10:8
     |vpiParent:

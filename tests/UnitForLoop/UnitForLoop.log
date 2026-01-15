@@ -400,8 +400,8 @@ Design: (unnamed)
     \_IODecl: (i), line:3:18, endln:3:19
       |vpiParent:
       \_Function: (work@top::f2), line:3:1, endln:4:12
-      |vpiDirection:1
       |vpiName:i
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@top::f2::i), line:3:14, endln:3:17
         |vpiParent:
@@ -413,8 +413,8 @@ Design: (unnamed)
     \_IODecl: (j), line:3:25, endln:3:26
       |vpiParent:
       \_Function: (work@top::f2), line:3:1, endln:4:12
-      |vpiDirection:1
       |vpiName:j
+      |vpiDirection:1
       |vpiTypespec:
       \_RefTypespec: (work@top::f2::j), line:3:21, endln:3:24
         |vpiParent:
@@ -477,6 +477,11 @@ Design: (unnamed)
           \_FuncCall: (f2), line:9:7, endln:9:14
             |vpiParent:
             \_Begin: (work@top::f1), line:8:36, endln:11:7
+            |vpiName:
+            \_Identifier: (f2), line:9:7, endln:9:9
+              |vpiParent:
+              \_FuncCall: (f2), line:9:7, endln:9:14
+              |vpiName:f2
             |vpiTaskFunc:
             \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
@@ -493,15 +498,15 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f2), line:9:7, endln:9:9
-              |vpiParent:
-              \_FuncCall: (f2), line:9:7, endln:9:14
-              |vpiName:f2
           |vpiStmt:
           \_FuncCall: (f3), line:10:1, endln:10:8
             |vpiParent:
             \_Begin: (work@top::f1), line:8:36, endln:11:7
+            |vpiName:
+            \_Identifier: (f3), line:10:1, endln:10:3
+              |vpiParent:
+              \_FuncCall: (f3), line:10:1, endln:10:8
+              |vpiName:f3
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:10:4, endln:10:5
               |vpiParent:
@@ -516,22 +521,16 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f3), line:10:1, endln:10:3
-              |vpiParent:
-              \_FuncCall: (f3), line:10:1, endln:10:8
-              |vpiName:f3
         |vpiForInitStmt:
         \_Assignment: , line:8:10, endln:8:21
           |vpiParent:
           \_ForStmt: (work@top::f1), line:8:4, endln:11:7
+          |vpiLhs:
+          \_Variable: (work@top::f1::j), line:8:14, endln:8:15
           |vpiRhs:
           \_Constant: , line:8:16, endln:8:17
             |vpiParent:
             \_Assignment: , line:8:10, endln:8:21
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@top::f1), line:8:16, endln:8:17
               |vpiParent:
@@ -540,8 +539,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiLhs:
-          \_Variable: (work@top::f1::j), line:8:14, endln:8:15
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiForIncStmt:
         \_Operation: , line:8:26, endln:8:29
           |vpiParent:
@@ -583,9 +583,6 @@ Design: (unnamed)
           \_Constant: , line:8:24, endln:8:25
             |vpiParent:
             \_Operation: , line:8:22, endln:8:25
-            |vpiDecompile:8
-            |vpiSize:64
-            |UINT:8
             |vpiTypespec:
             \_RefTypespec: (work@top::f1), line:8:24, endln:8:25
               |vpiParent:
@@ -594,6 +591,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:8
+            |UINT:8
         |vpiStmt:
         \_Begin: (work@top::f1), line:8:36, endln:11:7
       |vpiInternalScope:
@@ -610,6 +610,11 @@ Design: (unnamed)
           \_FuncCall: (f2), line:13:7, endln:13:14
             |vpiParent:
             \_Begin: (work@top::f1), line:12:36, endln:15:7
+            |vpiName:
+            \_Identifier: (f2), line:13:7, endln:13:9
+              |vpiParent:
+              \_FuncCall: (f2), line:13:7, endln:13:14
+              |vpiName:f2
             |vpiTaskFunc:
             \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
@@ -626,15 +631,15 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f2), line:13:7, endln:13:9
-              |vpiParent:
-              \_FuncCall: (f2), line:13:7, endln:13:14
-              |vpiName:f2
           |vpiStmt:
           \_FuncCall: (f4), line:14:1, endln:14:8
             |vpiParent:
             \_Begin: (work@top::f1), line:12:36, endln:15:7
+            |vpiName:
+            \_Identifier: (f4), line:14:1, endln:14:3
+              |vpiParent:
+              \_FuncCall: (f4), line:14:1, endln:14:8
+              |vpiName:f4
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:14:4, endln:14:5
               |vpiParent:
@@ -649,22 +654,16 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f4), line:14:1, endln:14:3
-              |vpiParent:
-              \_FuncCall: (f4), line:14:1, endln:14:8
-              |vpiName:f4
         |vpiForInitStmt:
         \_Assignment: , line:12:9, endln:12:22
           |vpiParent:
           \_ForStmt: (work@top::f1), line:12:3, endln:15:7
+          |vpiLhs:
+          \_Variable: (work@top::f1::j), line:12:13, endln:12:14
           |vpiRhs:
           \_Constant: , line:12:15, endln:12:16
             |vpiParent:
             \_Assignment: , line:12:9, endln:12:22
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
             |vpiTypespec:
             \_RefTypespec: (work@top::f1), line:12:15, endln:12:16
               |vpiParent:
@@ -673,8 +672,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-          |vpiLhs:
-          \_Variable: (work@top::f1::j), line:12:13, endln:12:14
+            |vpiSize:64
+            |vpiDecompile:0
+            |UINT:0
         |vpiForIncStmt:
         \_Operation: , line:12:26, endln:12:29
           |vpiParent:
@@ -715,6 +715,11 @@ Design: (unnamed)
           \_FuncCall: (f2), line:17:2, endln:17:9
             |vpiParent:
             \_Begin: (work@top::f1), line:16:24, endln:19:7
+            |vpiName:
+            \_Identifier: (f2), line:17:2, endln:17:4
+              |vpiParent:
+              \_FuncCall: (f2), line:17:2, endln:17:9
+              |vpiName:f2
             |vpiTaskFunc:
             \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
@@ -731,15 +736,15 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f2), line:17:2, endln:17:4
-              |vpiParent:
-              \_FuncCall: (f2), line:17:2, endln:17:9
-              |vpiName:f2
           |vpiStmt:
           \_FuncCall: (f5), line:18:1, endln:18:8
             |vpiParent:
             \_Begin: (work@top::f1), line:16:24, endln:19:7
+            |vpiName:
+            \_Identifier: (f5), line:18:1, endln:18:3
+              |vpiParent:
+              \_FuncCall: (f5), line:18:1, endln:18:8
+              |vpiName:f5
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:18:4, endln:18:5
               |vpiParent:
@@ -754,11 +759,6 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f5), line:18:1, endln:18:3
-              |vpiParent:
-              \_FuncCall: (f5), line:18:1, endln:18:8
-              |vpiName:f5
         |vpiForIncStmt:
         \_Operation: , line:16:19, endln:16:22
           |vpiParent:
@@ -789,9 +789,6 @@ Design: (unnamed)
           \_Constant: , line:16:16, endln:16:17
             |vpiParent:
             \_Operation: , line:16:12, endln:16:17
-            |vpiDecompile:8
-            |vpiSize:64
-            |UINT:8
             |vpiTypespec:
             \_RefTypespec: (work@top::f1), line:16:16, endln:16:17
               |vpiParent:
@@ -800,6 +797,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:8
+            |UINT:8
         |vpiStmt:
         \_Begin: (work@top::f1), line:16:24, endln:19:7
       |vpiInternalScope:
@@ -816,6 +816,11 @@ Design: (unnamed)
           \_FuncCall: (f2), line:22:2, endln:22:9
             |vpiParent:
             \_Begin: (work@top::f1), line:21:16, endln:24:7
+            |vpiName:
+            \_Identifier: (f2), line:22:2, endln:22:4
+              |vpiParent:
+              \_FuncCall: (f2), line:22:2, endln:22:9
+              |vpiName:f2
             |vpiTaskFunc:
             \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
@@ -832,15 +837,15 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f2), line:22:2, endln:22:4
-              |vpiParent:
-              \_FuncCall: (f2), line:22:2, endln:22:9
-              |vpiName:f2
           |vpiStmt:
           \_FuncCall: (f6), line:23:2, endln:23:9
             |vpiParent:
             \_Begin: (work@top::f1), line:21:16, endln:24:7
+            |vpiName:
+            \_Identifier: (f6), line:23:2, endln:23:4
+              |vpiParent:
+              \_FuncCall: (f6), line:23:2, endln:23:9
+              |vpiName:f6
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:23:5, endln:23:6
               |vpiParent:
@@ -855,11 +860,6 @@ Design: (unnamed)
               |vpiFullName:work@top::f1::j
               |vpiActual:
               \_Variable: (work@top::f1::j), line:8:14, endln:8:15
-            |vpiName:
-            \_Identifier: (f6), line:23:2, endln:23:4
-              |vpiParent:
-              \_FuncCall: (f6), line:23:2, endln:23:9
-              |vpiName:f6
         |vpiStmt:
         \_Begin: (work@top::f1), line:21:16, endln:24:7
       |vpiTypespec:

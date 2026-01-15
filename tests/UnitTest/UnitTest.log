@@ -738,8 +738,8 @@ Design: (unnamed)
     \_IODecl: (clk), line:49:26, endln:49:29
       |vpiParent:
       \_Modport: (work@mem_if.system), line:49:12, endln:49:30
-      |vpiDirection:1
       |vpiName:clk
+      |vpiDirection:1
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
   |vpiModport:
@@ -755,8 +755,8 @@ Design: (unnamed)
     \_IODecl: (clk), line:50:27, endln:50:30
       |vpiParent:
       \_Modport: (work@mem_if.memory), line:50:12, endln:50:31
-      |vpiDirection:2
       |vpiName:clk
+      |vpiDirection:2
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
   |vpiPort:
@@ -948,9 +948,6 @@ Design: (unnamed)
       \_Constant: , line:5:7, endln:5:9
         |vpiParent:
         \_Range: , line:5:6, endln:5:12
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@tb_operators), line:5:7, endln:5:9
           |vpiParent:
@@ -959,13 +956,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:5:10, endln:5:11
         |vpiParent:
         \_Range: , line:5:6, endln:5:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@tb_operators), line:5:10, endln:5:11
           |vpiParent:
@@ -974,6 +971,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -1046,6 +1046,11 @@ Design: (unnamed)
       \_SysFuncCall: ($monitor), line:10:5, endln:10:29
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
+        |vpiName:
+        \_Identifier: ($monitor), line:10:6, endln:10:13
+          |vpiParent:
+          \_SysFuncCall: ($monitor), line:10:5, endln:10:29
+          |vpiName:$monitor
         |vpiArgument:
         \_RefObj: (work@tb_operators.shifter), line:10:14, endln:10:21
           |vpiParent:
@@ -1062,32 +1067,12 @@ Design: (unnamed)
           |vpiFullName:work@tb_operators.result
           |vpiActual:
           \_Net: (work@tb_operators.result), line:6:13, endln:6:19
-        |vpiName:
-        \_Identifier: ($monitor), line:10:6, endln:10:13
-          |vpiParent:
-          \_SysFuncCall: ($monitor), line:10:5, endln:10:29
-          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:11:5, endln:11:20
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
-        |vpiRhs:
-        \_Constant: , line:11:15, endln:11:20
-          |vpiParent:
-          \_Assignment: , line:11:5, endln:11:20
-          |vpiDecompile:32'b1
-          |vpiSize:32
-          |BIN:1
-          |vpiTypespec:
-          \_RefTypespec: (work@tb_operators), line:11:15, endln:11:20
-            |vpiParent:
-            \_Constant: , line:11:15, endln:11:20
-            |vpiFullName:work@tb_operators
-            |vpiActual:
-            \_LogicTypespec: 
-          |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@tb_operators.shifter), line:11:5, endln:11:12
           |vpiParent:
@@ -1096,12 +1081,35 @@ Design: (unnamed)
           |vpiFullName:work@tb_operators.shifter
           |vpiActual:
           \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
+        |vpiRhs:
+        \_Constant: , line:11:15, endln:11:20
+          |vpiParent:
+          \_Assignment: , line:11:5, endln:11:20
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_operators), line:11:15, endln:11:20
+            |vpiParent:
+            \_Constant: , line:11:15, endln:11:20
+            |vpiFullName:work@tb_operators
+            |vpiActual:
+            \_LogicTypespec: 
+          |vpiConstType:3
+          |vpiSize:32
+          |vpiDecompile:32'b1
+          |BIN:1
       |vpiStmt:
       \_Assignment: , line:13:5, endln:13:26
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:13:5, endln:13:11
+          |vpiParent:
+          \_Assignment: , line:13:5, endln:13:26
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:13:14, endln:13:26
           |vpiParent:
@@ -1119,9 +1127,6 @@ Design: (unnamed)
           \_Constant: , line:13:25, endln:13:26
             |vpiParent:
             \_Operation: , line:13:14, endln:13:26
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
             |vpiTypespec:
             \_RefTypespec: (work@tb_operators), line:13:25, endln:13:26
               |vpiParent:
@@ -1130,20 +1135,23 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:13:5, endln:13:11
-          |vpiParent:
-          \_Assignment: , line:13:5, endln:13:26
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
+            |vpiSize:64
+            |vpiDecompile:4
+            |UINT:4
       |vpiStmt:
       \_Assignment: , line:14:5, endln:14:26
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:14:5, endln:14:11
+          |vpiParent:
+          \_Assignment: , line:14:5, endln:14:26
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:14:14, endln:14:26
           |vpiParent:
@@ -1161,9 +1169,6 @@ Design: (unnamed)
           \_Constant: , line:14:25, endln:14:26
             |vpiParent:
             \_Operation: , line:14:14, endln:14:26
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
             |vpiTypespec:
             \_RefTypespec: (work@tb_operators), line:14:25, endln:14:26
               |vpiParent:
@@ -1172,20 +1177,23 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:14:5, endln:14:11
-          |vpiParent:
-          \_Assignment: , line:14:5, endln:14:26
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
+            |vpiSize:64
+            |vpiDecompile:4
+            |UINT:4
       |vpiStmt:
       \_Assignment: , line:15:5, endln:15:26
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:15:5, endln:15:11
+          |vpiParent:
+          \_Assignment: , line:15:5, endln:15:26
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:15:14, endln:15:26
           |vpiParent:
@@ -1203,9 +1211,6 @@ Design: (unnamed)
           \_Constant: , line:15:25, endln:15:26
             |vpiParent:
             \_Operation: , line:15:14, endln:15:26
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
             |vpiTypespec:
             \_RefTypespec: (work@tb_operators), line:15:25, endln:15:26
               |vpiParent:
@@ -1214,20 +1219,23 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:15:5, endln:15:11
-          |vpiParent:
-          \_Assignment: , line:15:5, endln:15:26
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
+            |vpiSize:64
+            |vpiDecompile:4
+            |UINT:4
       |vpiStmt:
       \_Assignment: , line:16:5, endln:16:33
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:16:5, endln:16:11
+          |vpiParent:
+          \_Assignment: , line:16:5, endln:16:33
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:16:14, endln:16:33
           |vpiParent:
@@ -1242,9 +1250,6 @@ Design: (unnamed)
             \_Constant: , line:16:15, endln:16:19
               |vpiParent:
               \_Operation: , line:16:14, endln:16:26
-              |vpiDecompile:1'b1
-              |vpiSize:1
-              |BIN:1
               |vpiTypespec:
               \_RefTypespec: (work@tb_operators), line:16:15, endln:16:19
                 |vpiParent:
@@ -1253,13 +1258,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_BitTypespec: 
               |vpiConstType:3
+              |vpiSize:1
+              |vpiDecompile:1'b1
+              |BIN:1
             |vpiOperand:
             \_Constant: , line:16:20, endln:16:25
               |vpiParent:
               \_Operation: , line:16:14, endln:16:26
-              |vpiDecompile:31'b0
-              |vpiSize:31
-              |BIN:0
               |vpiTypespec:
               \_RefTypespec: (work@tb_operators), line:16:20, endln:16:25
                 |vpiParent:
@@ -1268,13 +1273,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_LogicTypespec: 
               |vpiConstType:3
+              |vpiSize:31
+              |vpiDecompile:31'b0
+              |BIN:0
           |vpiOperand:
           \_Constant: , line:16:31, endln:16:33
             |vpiParent:
             \_Operation: , line:16:14, endln:16:33
-            |vpiDecompile:31
-            |vpiSize:64
-            |UINT:31
             |vpiTypespec:
             \_RefTypespec: (work@tb_operators), line:16:31, endln:16:33
               |vpiParent:
@@ -1283,20 +1288,23 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:16:5, endln:16:11
-          |vpiParent:
-          \_Assignment: , line:16:5, endln:16:33
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
+            |vpiSize:64
+            |vpiDecompile:31
+            |UINT:31
       |vpiStmt:
       \_Assignment: , line:17:5, endln:17:33
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:17:5, endln:17:11
+          |vpiParent:
+          \_Assignment: , line:17:5, endln:17:33
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:17:14, endln:17:33
           |vpiParent:
@@ -1311,9 +1319,6 @@ Design: (unnamed)
             \_Constant: , line:17:15, endln:17:19
               |vpiParent:
               \_Operation: , line:17:14, endln:17:26
-              |vpiDecompile:1'b0
-              |vpiSize:1
-              |BIN:0
               |vpiTypespec:
               \_RefTypespec: (work@tb_operators), line:17:15, endln:17:19
                 |vpiParent:
@@ -1322,13 +1327,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_BitTypespec: 
               |vpiConstType:3
+              |vpiSize:1
+              |vpiDecompile:1'b0
+              |BIN:0
             |vpiOperand:
             \_Constant: , line:17:20, endln:17:25
               |vpiParent:
               \_Operation: , line:17:14, endln:17:26
-              |vpiDecompile:31'b1
-              |vpiSize:31
-              |BIN:1
               |vpiTypespec:
               \_RefTypespec: (work@tb_operators), line:17:20, endln:17:25
                 |vpiParent:
@@ -1337,13 +1342,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_LogicTypespec: 
               |vpiConstType:3
+              |vpiSize:31
+              |vpiDecompile:31'b1
+              |BIN:1
           |vpiOperand:
           \_Constant: , line:17:31, endln:17:33
             |vpiParent:
             \_Operation: , line:17:14, endln:17:33
-            |vpiDecompile:31
-            |vpiSize:64
-            |UINT:31
             |vpiTypespec:
             \_RefTypespec: (work@tb_operators), line:17:31, endln:17:33
               |vpiParent:
@@ -1352,20 +1357,23 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:17:5, endln:17:11
-          |vpiParent:
-          \_Assignment: , line:17:5, endln:17:33
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
+            |vpiSize:64
+            |vpiDecompile:31
+            |UINT:31
       |vpiStmt:
       \_Assignment: , line:19:5, endln:19:26
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:19:5, endln:19:11
+          |vpiParent:
+          \_Assignment: , line:19:5, endln:19:26
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:19:14, endln:19:26
           |vpiParent:
@@ -1383,9 +1391,6 @@ Design: (unnamed)
           \_Constant: , line:19:25, endln:19:26
             |vpiParent:
             \_Operation: , line:19:14, endln:19:26
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
             |vpiTypespec:
             \_RefTypespec: (work@tb_operators), line:19:25, endln:19:26
               |vpiParent:
@@ -1394,20 +1399,23 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:19:5, endln:19:11
-          |vpiParent:
-          \_Assignment: , line:19:5, endln:19:26
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
+            |vpiSize:64
+            |vpiDecompile:2
+            |UINT:2
       |vpiStmt:
       \_Assignment: , line:20:5, endln:20:24
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:20:5, endln:20:11
+          |vpiParent:
+          \_Assignment: , line:20:5, endln:20:24
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:20:14, endln:20:24
           |vpiParent:
@@ -1425,9 +1433,6 @@ Design: (unnamed)
           \_Constant: , line:20:23, endln:20:24
             |vpiParent:
             \_Operation: , line:20:14, endln:20:24
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
             |vpiTypespec:
             \_RefTypespec: (work@tb_operators), line:20:23, endln:20:24
               |vpiParent:
@@ -1436,14 +1441,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:20:5, endln:20:11
-          |vpiParent:
-          \_Assignment: , line:20:5, endln:20:24
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
+            |vpiSize:64
+            |vpiDecompile:4
+            |UINT:4
       |vpiStmt:
       \_IfElse: , line:22:5, endln:30:8
         |vpiParent:
@@ -1484,13 +1484,15 @@ Design: (unnamed)
           \_SysFuncCall: ($display), line:23:9, endln:23:31
             |vpiParent:
             \_Begin: (work@tb_operators), line:22:27, endln:24:8
+            |vpiName:
+            \_Identifier: ($display), line:23:10, endln:23:17
+              |vpiParent:
+              \_SysFuncCall: ($display), line:23:9, endln:23:31
+              |vpiName:$display
             |vpiArgument:
             \_Constant: , line:23:18, endln:23:30
               |vpiParent:
               \_SysFuncCall: ($display), line:23:9, endln:23:31
-              |vpiDecompile:"GTE TEST 1"
-              |vpiSize:80
-              |STRING:GTE TEST 1
               |vpiTypespec:
               \_RefTypespec: (work@tb_operators), line:23:18, endln:23:30
                 |vpiParent:
@@ -1499,11 +1501,9 @@ Design: (unnamed)
                 |vpiActual:
                 \_StringTypespec: 
               |vpiConstType:6
-            |vpiName:
-            \_Identifier: ($display), line:23:10, endln:23:17
-              |vpiParent:
-              \_SysFuncCall: ($display), line:23:9, endln:23:31
-              |vpiName:$display
+              |vpiSize:80
+              |vpiDecompile:"GTE TEST 1"
+              |STRING:GTE TEST 1
         |vpiElseStmt:
         \_IfElse: , line:24:14, endln:30:8
           |vpiParent:
@@ -1544,13 +1544,15 @@ Design: (unnamed)
             \_SysFuncCall: ($display), line:25:9, endln:25:31
               |vpiParent:
               \_Begin: (work@tb_operators), line:24:36, endln:26:8
+              |vpiName:
+              \_Identifier: ($display), line:25:10, endln:25:17
+                |vpiParent:
+                \_SysFuncCall: ($display), line:25:9, endln:25:31
+                |vpiName:$display
               |vpiArgument:
               \_Constant: , line:25:18, endln:25:30
                 |vpiParent:
                 \_SysFuncCall: ($display), line:25:9, endln:25:31
-                |vpiDecompile:"GTE TEST 2"
-                |vpiSize:80
-                |STRING:GTE TEST 2
                 |vpiTypespec:
                 \_RefTypespec: (work@tb_operators), line:25:18, endln:25:30
                   |vpiParent:
@@ -1559,11 +1561,9 @@ Design: (unnamed)
                   |vpiActual:
                   \_StringTypespec: 
                 |vpiConstType:6
-              |vpiName:
-              \_Identifier: ($display), line:25:10, endln:25:17
-                |vpiParent:
-                \_SysFuncCall: ($display), line:25:9, endln:25:31
-                |vpiName:$display
+                |vpiSize:80
+                |vpiDecompile:"GTE TEST 2"
+                |STRING:GTE TEST 2
           |vpiElseStmt:
           \_IfElse: , line:26:14, endln:30:8
             |vpiParent:
@@ -1604,13 +1604,15 @@ Design: (unnamed)
               \_SysFuncCall: ($display), line:27:9, endln:27:31
                 |vpiParent:
                 \_Begin: (work@tb_operators), line:26:37, endln:28:8
+                |vpiName:
+                \_Identifier: ($display), line:27:10, endln:27:17
+                  |vpiParent:
+                  \_SysFuncCall: ($display), line:27:9, endln:27:31
+                  |vpiName:$display
                 |vpiArgument:
                 \_Constant: , line:27:18, endln:27:30
                   |vpiParent:
                   \_SysFuncCall: ($display), line:27:9, endln:27:31
-                  |vpiDecompile:"GTE TEST 3"
-                  |vpiSize:80
-                  |STRING:GTE TEST 3
                   |vpiTypespec:
                   \_RefTypespec: (work@tb_operators), line:27:18, endln:27:30
                     |vpiParent:
@@ -1619,11 +1621,9 @@ Design: (unnamed)
                     |vpiActual:
                     \_StringTypespec: 
                   |vpiConstType:6
-                |vpiName:
-                \_Identifier: ($display), line:27:10, endln:27:17
-                  |vpiParent:
-                  \_SysFuncCall: ($display), line:27:9, endln:27:31
-                  |vpiName:$display
+                  |vpiSize:80
+                  |vpiDecompile:"GTE TEST 3"
+                  |STRING:GTE TEST 3
             |vpiElseStmt:
             \_IfStmt: , line:28:14, endln:30:8
               |vpiParent:
@@ -1664,13 +1664,15 @@ Design: (unnamed)
                 \_SysFuncCall: ($display), line:29:9, endln:29:31
                   |vpiParent:
                   \_Begin: (work@tb_operators), line:28:37, endln:30:8
+                  |vpiName:
+                  \_Identifier: ($display), line:29:10, endln:29:17
+                    |vpiParent:
+                    \_SysFuncCall: ($display), line:29:9, endln:29:31
+                    |vpiName:$display
                   |vpiArgument:
                   \_Constant: , line:29:18, endln:29:30
                     |vpiParent:
                     \_SysFuncCall: ($display), line:29:9, endln:29:31
-                    |vpiDecompile:"GTE TEST 3"
-                    |vpiSize:80
-                    |STRING:GTE TEST 3
                     |vpiTypespec:
                     \_RefTypespec: (work@tb_operators), line:29:18, endln:29:30
                       |vpiParent:
@@ -1679,17 +1681,23 @@ Design: (unnamed)
                       |vpiActual:
                       \_StringTypespec: 
                     |vpiConstType:6
-                  |vpiName:
-                  \_Identifier: ($display), line:29:10, endln:29:17
-                    |vpiParent:
-                    \_SysFuncCall: ($display), line:29:9, endln:29:31
-                    |vpiName:$display
+                    |vpiSize:80
+                    |vpiDecompile:"GTE TEST 3"
+                    |STRING:GTE TEST 3
       |vpiStmt:
       \_Assignment: , line:32:5, endln:32:34
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.result), line:32:5, endln:32:11
+          |vpiParent:
+          \_Assignment: , line:32:5, endln:32:34
+          |vpiName:result
+          |vpiFullName:work@tb_operators.result
+          |vpiActual:
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiRhs:
         \_Operation: , line:32:15, endln:32:34
           |vpiParent:
@@ -1711,20 +1719,20 @@ Design: (unnamed)
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
             \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.result), line:32:5, endln:32:11
-          |vpiParent:
-          \_Assignment: , line:32:5, endln:32:34
-          |vpiName:result
-          |vpiFullName:work@tb_operators.result
-          |vpiActual:
-          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:34:5, endln:34:32
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.shifter), line:34:5, endln:34:12
+          |vpiParent:
+          \_Assignment: , line:34:5, endln:34:32
+          |vpiName:shifter
+          |vpiFullName:work@tb_operators.shifter
+          |vpiActual:
+          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
         |vpiRhs:
         \_Operation: , line:34:15, endln:34:32
           |vpiParent:
@@ -1746,20 +1754,20 @@ Design: (unnamed)
             |vpiFullName:work@tb_operators.result
             |vpiActual:
             \_Net: (work@tb_operators.result), line:6:13, endln:6:19
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.shifter), line:34:5, endln:34:12
-          |vpiParent:
-          \_Assignment: , line:34:5, endln:34:32
-          |vpiName:shifter
-          |vpiFullName:work@tb_operators.shifter
-          |vpiActual:
-          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
       |vpiStmt:
       \_Assignment: , line:35:5, endln:35:32
         |vpiParent:
         \_Begin: (work@tb_operators), line:8:9, endln:36:4
         |vpiOpType:82
         |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb_operators.shifter), line:35:5, endln:35:12
+          |vpiParent:
+          \_Assignment: , line:35:5, endln:35:32
+          |vpiName:shifter
+          |vpiFullName:work@tb_operators.shifter
+          |vpiActual:
+          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
         |vpiRhs:
         \_Operation: , line:35:15, endln:35:32
           |vpiParent:
@@ -1781,14 +1789,6 @@ Design: (unnamed)
             |vpiFullName:work@tb_operators.result
             |vpiActual:
             \_Net: (work@tb_operators.result), line:6:13, endln:6:19
-        |vpiLhs:
-        \_RefObj: (work@tb_operators.shifter), line:35:5, endln:35:12
-          |vpiParent:
-          \_Assignment: , line:35:5, endln:35:32
-          |vpiName:shifter
-          |vpiFullName:work@tb_operators.shifter
-          |vpiActual:
-          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
   |vpiParent:
@@ -1869,14 +1869,6 @@ Design: (unnamed)
   \_ContAssign: , line:43:8, endln:43:13
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
-    |vpiRhs:
-    \_RefObj: (work@top.i), line:43:12, endln:43:13
-      |vpiParent:
-      \_ContAssign: , line:43:8, endln:43:13
-      |vpiName:i
-      |vpiFullName:work@top.i
-      |vpiActual:
-      \_Net: (work@top.i), line:40:19, endln:40:20
     |vpiLhs:
     \_RefObj: (work@top.o), line:43:8, endln:43:9
       |vpiParent:
@@ -1885,6 +1877,14 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_Net: (work@top.o), line:40:29, endln:40:30
+    |vpiRhs:
+    \_RefObj: (work@top.i), line:43:12, endln:43:13
+      |vpiParent:
+      \_ContAssign: , line:43:8, endln:43:13
+      |vpiName:i
+      |vpiFullName:work@top.i
+      |vpiActual:
+      \_Net: (work@top.i), line:40:19, endln:40:20
 |vpiTypespec:
 \_InterfaceTypespec: (work@mem_if)
   |vpiParent:

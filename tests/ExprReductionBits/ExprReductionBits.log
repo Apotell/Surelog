@@ -103,12 +103,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ExprReductionBits/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               8
+Constant                                              10
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             3
-IntTypespec                                           11
+IntTypespec                                           13
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
@@ -118,13 +118,13 @@ Parameter                                              1
 Port                                                   1
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           13
+RefTypespec                                           15
 SourceFile                                             1
 SysFuncCall                                            1
 TypedefTypespec                                        1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                56
+Total:                                                62
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExprReductionBits/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -164,7 +164,6 @@ Design: (unnamed)
   \_Parameter: (work@top.PARAM), line:2:19, endln:2:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprReductionBits/dut.sv, line:1:1, endln:8:10
-    |UINT:4
     |vpiTypespec:
     \_RefTypespec: (work@top.PARAM), line:2:15, endln:2:18
       |vpiParent:
@@ -178,13 +177,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:19, endln:2:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprReductionBits/dut.sv, line:1:1, endln:8:10
+    |vpiLhs:
+    \_Parameter: (work@top.PARAM), line:2:19, endln:2:28
     |vpiRhs:
     \_Constant: , line:2:27, endln:2:28
       |vpiParent:
       \_ParamAssign: , line:2:19, endln:2:28
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
       |vpiTypespec:
       \_RefTypespec: (work@top), line:2:27, endln:2:28
         |vpiParent:
@@ -193,8 +191,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@top.PARAM), line:2:19, endln:2:28
+      |vpiSize:64
+      |vpiDecompile:4
+      |UINT:4
   |vpiTypespec:
   \_IntTypespec: , line:2:15, endln:2:18
     |vpiParent:
@@ -220,17 +219,41 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:3:13, endln:6:20
       |vpiName:LOGIC90PB_0_ITEM_0
-      |UINT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (LOGIC90PB_0_ITEM_0), line:4:9, endln:4:31
+        |vpiTypespec:
+        \_RefTypespec: (work@top.LOGIC90PB_0_ITEM_0), line:4:30, endln:4:31
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.LOGIC90PB_0_ITEM_0
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:19
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiEnumConst:
     \_EnumConst: (LOGIC90PB_0_ITEM_1), line:5:9, endln:5:31
       |vpiParent:
       \_EnumTypespec: , line:3:13, endln:6:20
       |vpiName:LOGIC90PB_0_ITEM_1
-      |UINT:1
-      |vpiDecompile:1
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (LOGIC90PB_0_ITEM_1), line:5:9, endln:5:31
+        |vpiTypespec:
+        \_RefTypespec: (work@top.LOGIC90PB_0_ITEM_1), line:5:30, endln:5:31
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.LOGIC90PB_0_ITEM_1
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:19
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiTypespec:
   \_LogicTypespec: , line:3:18, endln:3:23
     |vpiParent:
@@ -258,6 +281,11 @@ Design: (unnamed)
             \_SysFuncCall: ($bits), line:3:24, endln:3:36
               |vpiParent:
               \_Operation: , line:3:24, endln:3:41
+              |vpiName:
+              \_Identifier: ($bits), line:3:25, endln:3:29
+                |vpiParent:
+                \_SysFuncCall: ($bits), line:3:24, endln:3:36
+                |vpiName:$bits
               |vpiArgument:
               \_RefObj: (work@top.PARAM), line:3:30, endln:3:35
                 |vpiParent:
@@ -266,18 +294,10 @@ Design: (unnamed)
                 |vpiFullName:work@top.PARAM
                 |vpiActual:
                 \_Parameter: (work@top.PARAM), line:2:19, endln:2:28
-              |vpiName:
-              \_Identifier: ($bits), line:3:25, endln:3:29
-                |vpiParent:
-                \_SysFuncCall: ($bits), line:3:24, endln:3:36
-                |vpiName:$bits
             |vpiOperand:
             \_Constant: , line:3:39, endln:3:41
               |vpiParent:
               \_Operation: , line:3:24, endln:3:41
-              |vpiDecompile:32
-              |vpiSize:64
-              |UINT:32
               |vpiTypespec:
               \_RefTypespec: (work@top), line:3:39, endln:3:41
                 |vpiParent:
@@ -286,13 +306,13 @@ Design: (unnamed)
                 |vpiActual:
                 \_IntTypespec: 
               |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:32
+              |UINT:32
           |vpiOperand:
           \_Constant: , line:3:44, endln:3:46
             |vpiParent:
             \_Operation: , line:3:24, endln:3:46
-            |vpiDecompile:85
-            |vpiSize:64
-            |UINT:85
             |vpiTypespec:
             \_RefTypespec: (work@top), line:3:44, endln:3:46
               |vpiParent:
@@ -301,6 +321,9 @@ Design: (unnamed)
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:85
+            |UINT:85
         |vpiOperand:
         \_RefObj: (work@top.PARAM), line:3:49, endln:3:54
           |vpiParent:
@@ -313,9 +336,6 @@ Design: (unnamed)
       \_Constant: , line:3:55, endln:3:56
         |vpiParent:
         \_Range: , line:3:23, endln:3:57
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:3:55, endln:3:56
           |vpiParent:
@@ -324,6 +344,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_TypedefTypespec: (logic90pb_0_e), line:6:7, endln:6:20
     |vpiParent:

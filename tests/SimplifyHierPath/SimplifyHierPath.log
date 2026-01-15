@@ -176,7 +176,6 @@ Design: (unnamed)
   \_Parameter: (work@module_scope_Example.v1), line:2:21, endln:2:28
     |vpiParent:
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
-    |UINT:10
     |vpiTypespec:
     \_RefTypespec: (work@module_scope_Example.v1), line:2:14, endln:2:20
       |vpiParent:
@@ -190,13 +189,12 @@ Design: (unnamed)
   \_ParamAssign: , line:2:21, endln:2:28
     |vpiParent:
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_Parameter: (work@module_scope_Example.v1), line:2:21, endln:2:28
     |vpiRhs:
     \_Constant: , line:2:26, endln:2:28
       |vpiParent:
       \_ParamAssign: , line:2:21, endln:2:28
-      |vpiDecompile:10
-      |vpiSize:64
-      |UINT:10
       |vpiTypespec:
       \_RefTypespec: (work@module_scope_Example), line:2:26, endln:2:28
         |vpiParent:
@@ -205,8 +203,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-    |vpiLhs:
-    \_Parameter: (work@module_scope_Example.v1), line:2:21, endln:2:28
+      |vpiSize:64
+      |vpiDecompile:10
+      |UINT:10
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -223,9 +222,6 @@ Design: (unnamed)
       \_Constant: , line:2:15, endln:2:17
         |vpiParent:
         \_Range: , line:2:14, endln:2:20
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@module_scope_Example), line:2:15, endln:2:17
           |vpiParent:
@@ -234,13 +230,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:2:18, endln:2:19
         |vpiParent:
         \_Range: , line:2:14, endln:2:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@module_scope_Example), line:2:18, endln:2:19
           |vpiParent:
@@ -249,6 +245,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiPacked:1
   |vpiTypespec:
   \_LogicTypespec: , line:3:11, endln:3:15
@@ -262,9 +261,6 @@ Design: (unnamed)
       \_Constant: , line:3:17, endln:3:19
         |vpiParent:
         \_Range: , line:3:16, endln:3:22
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@module_scope_Example), line:3:17, endln:3:19
           |vpiParent:
@@ -273,13 +269,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:3:20, endln:3:21
         |vpiParent:
         \_Range: , line:3:16, endln:3:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@module_scope_Example), line:3:20, endln:3:21
           |vpiParent:
@@ -288,6 +284,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -328,10 +327,30 @@ Design: (unnamed)
   \_ContAssign: , line:4:11, endln:4:60
     |vpiParent:
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_HierPath: (module_scope_Example.o1), line:4:31, endln:4:34
+      |vpiParent:
+      \_ContAssign: , line:4:11, endln:4:60
+      |vpiName:module_scope_Example.o1
+      |vpiActual:
+      \_RefObj: (module_scope_Example), line:4:31, endln:4:34
+        |vpiParent:
+        \_HierPath: (module_scope_Example.o1), line:4:31, endln:4:34
+        |vpiName:module_scope_Example
+        |vpiActual:
+        \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
+      |vpiActual:
+      \_RefObj: (o1), line:4:32, endln:4:34
+        |vpiParent:
+        \_HierPath: (module_scope_Example.o1), line:4:31, endln:4:34
+        |vpiName:o1
+        |vpiActual:
+        \_Net: (work@module_scope_Example.o1), line:1:29, endln:1:31
     |vpiRhs:
     \_HierPath: (module_scope_Example.v1), line:4:37, endln:4:60
       |vpiParent:
       \_ContAssign: , line:4:11, endln:4:60
+      |vpiName:module_scope_Example.v1
       |vpiActual:
       \_RefObj: (module_scope_Example), line:4:37, endln:4:57
         |vpiParent:
@@ -347,26 +366,6 @@ Design: (unnamed)
         |vpiFullName:work@module_scope_Example.v1
         |vpiActual:
         \_Parameter: (work@module_scope_Example.v1), line:2:21, endln:2:28
-      |vpiName:module_scope_Example.v1
-    |vpiLhs:
-    \_HierPath: (module_scope_Example.o1), line:4:31, endln:4:34
-      |vpiParent:
-      \_ContAssign: , line:4:11, endln:4:60
-      |vpiActual:
-      \_RefObj: (module_scope_Example), line:4:31, endln:4:34
-        |vpiParent:
-        \_HierPath: (module_scope_Example.o1), line:4:31, endln:4:34
-        |vpiName:module_scope_Example
-        |vpiActual:
-        \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
-      |vpiActual:
-      \_RefObj: (o1), line:4:32, endln:4:34
-        |vpiParent:
-        \_HierPath: (module_scope_Example.o1), line:4:31, endln:4:34
-        |vpiName:o1
-        |vpiActual:
-        \_Net: (work@module_scope_Example.o1), line:1:29, endln:1:31
-      |vpiName:module_scope_Example.o1
 |vpiAllModules:
 \_Module: work@module_scope_top (work@module_scope_top), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:7:1, endln:11:10
   |vpiParent:
@@ -395,9 +394,6 @@ Design: (unnamed)
       \_Constant: , line:8:17, endln:8:19
         |vpiParent:
         \_Range: , line:8:16, endln:8:22
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
         |vpiTypespec:
         \_RefTypespec: (work@module_scope_top), line:8:17, endln:8:19
           |vpiParent:
@@ -406,13 +402,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
       |vpiRightRange:
       \_Constant: , line:8:20, endln:8:21
         |vpiParent:
         \_Range: , line:8:16, endln:8:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@module_scope_top), line:8:20, endln:8:21
           |vpiParent:
@@ -421,6 +417,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:

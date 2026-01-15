@@ -134,14 +134,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-Constant                                               6
+Constant                                               8
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 HierPath                                               1
 Identifier                                             3
-IntTypespec                                            6
+IntTypespec                                            8
 LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         1
@@ -150,14 +150,14 @@ Operation                                              1
 Port                                                   2
 Range                                                  1
 RefObj                                                 4
-RefTypespec                                           16
+RefTypespec                                           18
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                64
+Total:                                                70
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -194,17 +194,41 @@ Design: (unnamed)
       |vpiParent:
       \_EnumTypespec: , line:3:11, endln:3:45
       |vpiName:c
-      |UINT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (c), line:3:23, endln:3:28
+        |vpiTypespec:
+        \_RefTypespec: (work@top.c), line:3:27, endln:3:28
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.c
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:19
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiEnumConst:
     \_EnumConst: (d), line:3:30, endln:3:35
       |vpiParent:
       \_EnumTypespec: , line:3:11, endln:3:45
       |vpiName:d
-      |UINT:1
-      |vpiDecompile:1
-      |vpiSize:64
+      |vpiValue:
+      \_Constant: 
+        |vpiParent:
+        \_EnumConst: (d), line:3:30, endln:3:35
+        |vpiTypespec:
+        \_RefTypespec: (work@top.d), line:3:34, endln:3:35
+          |vpiParent:
+          \_Constant: 
+          |vpiFullName:work@top.d
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:19
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
   |vpiTypespec:
   \_LogicTypespec: , line:3:16, endln:3:21
     |vpiParent:
@@ -274,9 +298,6 @@ Design: (unnamed)
       \_Constant: , line:6:17, endln:6:18
         |vpiParent:
         \_Range: , line:6:16, endln:6:21
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
         |vpiTypespec:
         \_RefTypespec: (work@top), line:6:17, endln:6:18
           |vpiParent:
@@ -285,13 +306,13 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |UINT:1
       |vpiRightRange:
       \_Constant: , line:6:19, endln:6:20
         |vpiParent:
         \_Range: , line:6:16, endln:6:21
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
         |vpiTypespec:
         \_RefTypespec: (work@top), line:6:19, endln:6:20
           |vpiParent:
@@ -300,6 +321,9 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
     |vpiElemTypespec:
     \_RefTypespec: (work@top.cstate_e), line:6:7, endln:6:15
       |vpiParent:
@@ -402,26 +426,6 @@ Design: (unnamed)
   \_ContAssign: , line:11:11, endln:12:46
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-    |vpiRhs:
-    \_HierPath: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
-      |vpiParent:
-      \_ContAssign: , line:11:11, endln:12:46
-      |vpiActual:
-      \_RefObj: (hw2reg_wrap), line:12:19, endln:12:30
-        |vpiParent:
-        \_HierPath: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
-        |vpiName:hw2reg_wrap
-        |vpiActual:
-        \_Net: (work@top.hw2reg_wrap), line:9:18, endln:9:29
-      |vpiActual:
-      \_RefObj: (work@top.class_esc_state), line:12:31, endln:12:46
-        |vpiParent:
-        \_HierPath: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
-        |vpiName:class_esc_state
-        |vpiFullName:work@top.class_esc_state
-        |vpiActual:
-        \_TypespecMember: (class_esc_state), line:6:22, endln:6:37
-      |vpiName:hw2reg_wrap.class_esc_state
     |vpiLhs:
     \_Operation: , line:11:11, endln:12:16
       |vpiParent:
@@ -443,6 +447,26 @@ Design: (unnamed)
         |vpiFullName:work@top.b
         |vpiActual:
         \_Net: (work@top.b), line:2:41, endln:2:42
+    |vpiRhs:
+    \_HierPath: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
+      |vpiParent:
+      \_ContAssign: , line:11:11, endln:12:46
+      |vpiName:hw2reg_wrap.class_esc_state
+      |vpiActual:
+      \_RefObj: (hw2reg_wrap), line:12:19, endln:12:30
+        |vpiParent:
+        \_HierPath: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
+        |vpiName:hw2reg_wrap
+        |vpiActual:
+        \_Net: (work@top.hw2reg_wrap), line:9:18, endln:9:29
+      |vpiActual:
+      \_RefObj: (work@top.class_esc_state), line:12:31, endln:12:46
+        |vpiParent:
+        \_HierPath: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
+        |vpiName:class_esc_state
+        |vpiFullName:work@top.class_esc_state
+        |vpiActual:
+        \_TypespecMember: (class_esc_state), line:6:22, endln:6:37
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

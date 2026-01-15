@@ -105,6 +105,7 @@ Compiler::~Compiler() {
   delete m_design;
   delete m_configSet;
   delete m_librarySet;
+  delete m_compileDesign;
   delete m_commonCompilationUnit;
 
   cleanup_();
@@ -1091,7 +1092,7 @@ bool Compiler::compile() {
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
   if (clp->profile()) {
-    std::string msg = "Scan libraries took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+    std::string msg = "Scan libraries took " + std::to_string(tmr.elapsed()) + "ms\n";
     std::cout << msg << std::endl;
     profile += msg;
     tmr.reset();
@@ -1109,8 +1110,7 @@ bool Compiler::compile() {
   }
 
   if (clp->profile()) {
-    std::string msg = "Preprocessing took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
-    std::cout << msg << std::endl;
+    std::string msg = "Preprocessing took " + std::to_string(tmr.elapsed()) + "ms\n";
     for (const CompileSourceFile* compiler : m_compilers) {
       msg += compiler->getPreprocessor()->getProfileInfo();
     }
@@ -1139,7 +1139,7 @@ bool Compiler::compile() {
   writeUhdmSourceFiles();
 
   if (clp->profile()) {
-    std::string msg = "Parsing took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+    std::string msg = "Parsing took " + std::to_string(tmr.elapsed()) + "ms\n";
     for (const CompileSourceFile* compilerParent : m_compilersParentFiles) {
       msg += compilerParent->getParser()->getProfileInfo();
     }
@@ -1165,7 +1165,7 @@ bool Compiler::compile() {
     if (!compileFileSet_(CompileSourceFile::Action::PythonAPI, true, m_compilersParentFiles)) return false;
 
     if (clp->profile()) {
-      std::string msg = "Python file processing took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+      std::string msg = "Python file processing took " + std::to_string(tmr.elapsed()) + "ms\n";
       std::cout << msg << std::endl;
       profile += msg;
       tmr.reset();
@@ -1179,7 +1179,7 @@ bool Compiler::compile() {
     errors->printMessages(clp->muteStdout());
 
     if (clp->profile()) {
-      std::string msg = "Compilation took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+      std::string msg = "Compilation took " + std::to_string(tmr.elapsed()) + "ms\n";
       std::cout << msg << std::endl;
       profile += msg;
       tmr.reset();
@@ -1194,7 +1194,7 @@ bool Compiler::compile() {
     // delete compileDesign;
   }
   if (clp->profile()) {
-    std::string msg = "Total time " + StringUtils::to_string(tmrTotal.elapsed_rounded()) + "s\n";
+    std::string msg = "Total time " + std::to_string(tmrTotal.elapsed()) + "ms\n";
     profile += msg;
     profile =
         std::string("==============\n") + "PROFILE\n" + std::string("==============\n") + profile + "==============\n";

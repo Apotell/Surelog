@@ -32,26 +32,17 @@
 namespace SURELOG {
 
 class Timer final {
+  using clock_t = std::chrono::high_resolution_clock;
+  using milliseconds_t = std::chrono::milliseconds;
+
  public:
   Timer() : m_beg(clock_t::now()) {}
 
   void reset() { m_beg = clock_t::now(); }
 
-  double elapsed() const { return std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count(); }
-
-  double elapsed_rounded() const {
-    double res = std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count();
-    return round(res);
-  }
-
-  double round(double f) const {
-    return floor(f * 500 + 0.5) / 500;
-    // return std::round(f * 5) / 5; // C++11
-  }
+  uint64_t elapsed() const { return std::chrono::duration_cast<milliseconds_t>(clock_t::now() - m_beg).count(); }
 
  private:
-  using clock_t = std::chrono::high_resolution_clock;
-  using second_t = std::chrono::duration<double, std::ratio<1>>;
   std::chrono::time_point<clock_t> m_beg;
 };
 

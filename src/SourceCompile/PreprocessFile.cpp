@@ -459,9 +459,8 @@ bool PreprocessFile::preprocess() {
     m_antlrParserHandler->m_pptokens->fill();
 
     if (clp->profile()) {
-      // m_profileInfo += "Tokenizer: " + std::to_string (tmr.elapsed_rounded
-      // ())
-      // + " " + fileName + "\n";
+      // m_profileInfo += "Tokenizer: " + std::to_string(tmr.elapsed())
+      // + "ms " + fileName + "\n";
       tmr.reset();
     }
 
@@ -481,7 +480,7 @@ bool PreprocessFile::preprocess() {
       m_antlrParserHandler->m_pptree = m_antlrParserHandler->m_ppparser->top_level_rule();
 
       if (m_macroBody.empty() && clp->profile()) {
-        StrAppend(&m_profileInfo, "PP SSL Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()), "s ",
+        StrAppend(&m_profileInfo, "PP SSL Parsing: ", std::to_string(tmr.elapsed()), "ms ",
                   fileSystem->toPath(m_fileId), "\n");
         tmr.reset();
       }
@@ -495,8 +494,8 @@ bool PreprocessFile::preprocess() {
       m_antlrParserHandler->m_pptree = m_antlrParserHandler->m_ppparser->top_level_rule();
 
       if (m_macroBody.empty() && clp->profile()) {
-        StrAppend(&m_profileInfo, "PP LL  Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()), "s ",
-                  fileSystem->toPath(m_fileId), "\n");
+        StrAppend(&m_profileInfo, "PP LL Parsing: ", std::to_string(tmr.elapsed()), "ms ", fileSystem->toPath(m_fileId),
+                  "\n");
         tmr.reset();
       }
     }
@@ -542,6 +541,8 @@ bool PreprocessFile::preprocess() {
   antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener, m_antlrParserHandler->m_pptree);
 
   if (m_macroBody.empty() && (m_includer == nullptr)) {
+    m_antlrParserHandler->m_ppparser->getTreeTracker().reset();
+
     const auto [lastLine, lastColumn] = getCurrentPosition();
     getSourceFile()->addIncludeFileInfo(
         /* context */ IncludeFileInfo::Context::Include,

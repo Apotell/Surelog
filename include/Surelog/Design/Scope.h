@@ -48,7 +48,7 @@ class Scope : public RTTI {
   using ScopeVector = std::vector<Scope*>;
 
   Scope(std::string_view name, Scope* parent) : m_name(name), m_parentScope(parent) {}
-  ~Scope() override = default;
+  ~Scope() override;
 
   std::string_view getName() const { return m_name; }
   Scope* getParentScope() { return m_parentScope; }
@@ -72,7 +72,7 @@ class Scope : public RTTI {
 
  private:
   const std::string m_name;
-  Scope* const m_parentScope;
+  Scope* const m_parentScope = nullptr;
   VariableMap m_variables;
   DataTypeMap m_usedDataTypes;
   StmtVector m_statements;

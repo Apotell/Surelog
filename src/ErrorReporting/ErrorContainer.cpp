@@ -43,6 +43,7 @@
 #include "Surelog/ErrorReporting/LogListener.h"
 #include "Surelog/ErrorReporting/Waiver.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
+#include "Surelog/Utils/StringUtils.h"
 
 namespace SURELOG {
 ErrorContainer::ErrorContainer(Session* session)
@@ -100,9 +101,9 @@ Error& ErrorContainer::addError(Error& error, const std::string& message, bool r
 std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(ErrorDefinition::ErrorType errorId,
                                                                        const std::vector<Location>& locations,
                                                                        bool reentrantPython) const {
-  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>& infoMap = ErrorDefinition::getErrorInfoMap();
+  const ErrorDefinition::ErrorMap& infoMap = ErrorDefinition::getErrorInfoMap();
 
-  std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>::const_iterator itr = infoMap.find(errorId);
+  ErrorDefinition::ErrorMap::const_iterator itr = infoMap.find(errorId);
   if (itr == infoMap.end()) {
     return std::make_tuple("", false, false);
   }
@@ -141,7 +142,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(ErrorDefi
 
   const Location& loc = locations[0];
   /* Object */
-  std::string text = info.m_errorText;
+  std::string text(info.m_errorText);
   const std::string_view objectName = symbolTable->getSymbol(loc.m_object);
   if (objectName != SymbolTable::getBadSymbol()) {
     size_t objectOffset = text.find("%s");
@@ -175,7 +176,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(ErrorDefi
       size_t objectOffset = text.find("%exloc");
       if ((objectOffset == std::string::npos) && !info.m_extraText.empty()) {
         if (!extraTextAppended) {
-          text += ",\n             " + info.m_extraText;
+          StrAppend(&text, ",\n             ", info.m_extraText);
           extraTextAppended = true;
         }
         objectOffset = text.find("%exloc");
@@ -187,12 +188,12 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(ErrorDefi
       if (!info.m_extraText.empty()) {
         if ((i == 1) && !extraLoc.m_fileId) {
           if (!extraTextAppended) {
-            text += ",\n" + info.m_extraText;
+            StrAppend(&text, ",\n", info.m_extraText);
             extraTextAppended = true;
           }
         } else {
           if (!extraTextAppended) {
-            text += ",\n             " + info.m_extraText;
+            StrAppend(&text, ",\n             ", info.m_extraText);
             extraTextAppended = true;
           }
         }
@@ -292,11 +293,11 @@ void ErrorContainer::appendErrors(ErrorContainer& rhs) {
 }
 
 bool ErrorContainer::hasFatalErrors() const {
-  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>& infoMap = ErrorDefinition::getErrorInfoMap();
+  const ErrorDefinition::ErrorMap& infoMap = ErrorDefinition::getErrorInfoMap();
   bool reportFatalError = false;
   for (const Error& msg : m_errors) {
     ErrorDefinition::ErrorType type = msg.m_errorId;
-    std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>::const_iterator itr = infoMap.find(type);
+    ErrorDefinition::ErrorMap::const_iterator itr = infoMap.find(type);
     if (itr != infoMap.end()) {
       ErrorDefinition::ErrorInfo info = (*itr).second;
       std::string severity;
@@ -352,12 +353,12 @@ bool ErrorContainer::printStats(ErrorContainer::Stats stats, bool muteStdout) {
 }
 
 ErrorContainer::Stats ErrorContainer::getErrorStats() const {
-  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>& infoMap = ErrorDefinition::getErrorInfoMap();
+  const ErrorDefinition::ErrorMap& infoMap = ErrorDefinition::getErrorInfoMap();
   ErrorContainer::Stats stats;
   for (const auto& msg : m_errors) {
     if (!msg.m_waived) {
       ErrorDefinition::ErrorType type = msg.m_errorId;
-      std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>::const_iterator itr = infoMap.find(type);
+      ErrorDefinition::ErrorMap::const_iterator itr = infoMap.find(type);
       if (itr != infoMap.end()) {
         ErrorDefinition::ErrorInfo info = (*itr).second;
         switch (info.m_severity) {

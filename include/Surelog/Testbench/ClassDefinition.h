@@ -64,7 +64,7 @@ class ClassDefinition final : public DesignComponent, public DataType {
   ClassDefinition(Session* session, std::string_view name, Library* library, DesignComponent* container,
                   const FileContent* fC, NodeId nodeId, ClassDefinition* parent, uhdm::Serializer& serializer);
 
-  ~ClassDefinition() final = default;
+  ~ClassDefinition() final;
 
   uint32_t getSize() const final;
   VObjectType getType() const final { return VObjectType::paClass_declaration; }

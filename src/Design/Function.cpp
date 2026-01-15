@@ -26,6 +26,7 @@
 #include <string_view>
 
 #include "Surelog/Design/FileContent.h"
+#include "Surelog/Design/TfPortItem.h"
 #include "Surelog/DesignCompile/CompileHelper.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
 
@@ -37,6 +38,8 @@ Procedure::Procedure(DesignComponent* parent, const FileContent* fC, NodeId id, 
       m_fileContent(fC),
       m_nodeId(id),
       m_name(name) {}
+
+Procedure::~Procedure() { DeleteSequenceContainerPointersAndClear(&m_params); }
 
 bool Function::compile(CompileHelper& compile_helper) {
   bool result = true;

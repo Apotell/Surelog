@@ -72,6 +72,13 @@ ClassDefinition::ClassDefinition(Session* session, std::string_view name, Librar
   setUhdmTypespecModel(tps);
 }
 
+ClassDefinition::~ClassDefinition() {
+  DeleteAssociativeContainerValuePointersAndClear(&m_properties);
+  DeleteAssociativeContainerValuePointersAndClear(&m_tasks);
+  DeleteAssociativeContainerValuePointersAndClear(&m_constraints);
+  DeleteAssociativeContainerValuePointersAndClear(&m_coverGroups);
+}
+
 void ClassDefinition::setContainer(DesignComponent* container) {
   getUhdmModel()->setParent(nullptr, true);
   m_container = container;

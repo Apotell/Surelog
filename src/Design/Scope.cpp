@@ -24,9 +24,19 @@
 
 #include <string_view>
 
+#include "Surelog/Common/Containers.h"
+#include "Surelog/Design/DataType.h"
+#include "Surelog/Design/Statement.h"
+#include "Surelog/Design/TfPortItem.h"
 #include "Surelog/Testbench/Variable.h"
 
 namespace SURELOG {
+Scope::~Scope() {
+  DeleteAssociativeContainerValuePointersAndClear(&m_variables);
+  DeleteAssociativeContainerValuePointersAndClear(&m_usedDataTypes);
+  DeleteSequenceContainerPointersAndClear(&m_statements);
+  DeleteSequenceContainerPointersAndClear(&m_scopes);
+}
 
 void Scope::addVariable(Variable* var) { m_variables.emplace(var->getName(), var); }
 

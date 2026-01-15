@@ -361,10 +361,27 @@ bool CompileModule::collectUdpObjects_() {
         ventry += ": ";
         NodeId Symbol = fC->Child(Output_symbol);
         ventry += fC->SymName(Symbol);
-        uhdm::TableEntry* entry = s.make<uhdm::TableEntry>();
+
+        uhdm::TableEntry* const entry = s.make<uhdm::TableEntry>();
         entry->setParent(defn);
-        entry->setValue(ventry);
-        entry->setSize(nb);
+
+        uhdm::Constant* const c = s.make<uhdm::Constant>();
+        c->setParent(entry);
+        c->setSize(nb);
+        c->setValue(ventry);
+        c->setConstType(vpiStringConst);
+        fC->populateCoreMembers(Level_input_list, Level_input_list, c);
+
+        uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        c->setTypespec(rt);
+        fC->populateCoreMembers(Level_input_list, Level_input_list, rt);
+
+        uhdm::Typespec* const tps = s.make<uhdm::StringTypespec>();
+        tps->setParent(defn);
+        rt->setActual(tps);
+
+        entry->setValue(c);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
         break;
       }
@@ -452,10 +469,26 @@ bool CompileModule::collectUdpObjects_() {
           ventry += "-";
         }
 
-        uhdm::TableEntry* entry = s.make<uhdm::TableEntry>();
+        uhdm::TableEntry* const entry = s.make<uhdm::TableEntry>();
         entry->setParent(defn);
-        entry->setValue(ventry);
-        entry->setSize(nb);
+
+        uhdm::Constant* const c = s.make<uhdm::Constant>();
+        c->setParent(entry);
+        c->setSize(nb);
+        c->setValue(ventry);
+        c->setConstType(vpiStringConst);
+        fC->populateCoreMembers(Level_input_list, Level_input_list, c);
+
+        uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        c->setTypespec(rt);
+        fC->populateCoreMembers(Level_input_list, Level_input_list, rt);
+
+        uhdm::Typespec* const tps = s.make<uhdm::StringTypespec>();
+        tps->setParent(defn);
+        rt->setActual(tps);
+
+        entry->setValue(c);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
         break;
       }

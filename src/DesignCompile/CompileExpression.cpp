@@ -1017,7 +1017,9 @@ uhdm::Any *CompileHelper::getValue(std::string_view name, DesignComponent *compo
           if (n->getName() == name) {
             uhdm::Constant *c = constantFromValue(sval, pexpr);
             fC->populateCoreMembers(nodeId, nodeId, c->getTypespec());
-            c->setValue(n->getValue());
+            if (const uhdm::Constant *const val = static_cast<const uhdm::EnumConst *>(n)->getValue()) {
+              c->setValue(val->getValue());
+            }
             setRange(c, sval);
             result = c;
             break;
@@ -2932,9 +2934,27 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
                    symbols->registerSymbol(StrCat("<", fC->printObject(the_node), "> ", lineText)));
       Error err(ErrorDefinition::UHDM_UNSUPPORTED_EXPR, loc);
       errors->addError(err);
-      exp->setValue(StrCat("STRING:", lineText));
       fC->populateCoreMembers(the_node, the_node, exp);
       exp->setParent(pexpr);
+
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(exp);
+      c->setDecompile(StrCat(lineText.length(), "\'d", lineText));
+      c->setSize(lineText.length());
+      c->setValue(StrCat("STRING:", lineText));
+      c->setConstType(vpiStringConst);
+      fC->populateCoreMembers(the_node, the_node, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(the_node, the_node, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::StringTypespec>();
+      tps->setParent(pexpr);
+      rt->setActual(tps);
+
+      exp->setValue(c);
       result = exp;
     }
   }
@@ -3075,11 +3095,13 @@ bool CompileHelper::errorOnNegativeConstant(DesignComponent *component, Value *v
 bool CompileHelper::errorOnNegativeConstant(DesignComponent *component, uhdm::Expr *exp, ValuedComponentI *instance) {
   FileSystem *const fileSystem = m_session->getFileSystem();
   if (exp == nullptr) return false;
-  if (exp->getUhdmType() != uhdm::UhdmType::Constant) return false;
-  const std::string_view val = exp->getValue();
-  return errorOnNegativeConstant(component, val, instance,
-                                 fileSystem->toPathId(exp->getFile(), m_session->getSymbolTable()), exp->getStartLine(),
-                                 exp->getStartColumn());
+
+  if (uhdm::Constant *const c = any_cast<uhdm::Constant>(exp)) {
+    return errorOnNegativeConstant(component, c->getValue(), instance,
+                                   fileSystem->toPathId(exp->getFile(), m_session->getSymbolTable()),
+                                   exp->getStartLine(), exp->getStartColumn());
+  }
+  return false;
 }
 
 bool CompileHelper::errorOnNegativeConstant(DesignComponent *component, std::string_view val,

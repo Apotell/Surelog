@@ -1443,7 +1443,6 @@ void IntegrityChecker::visitNamedEventArrayCollection(const uhdm::Any* object, c
 void IntegrityChecker::visitNetCollection(const uhdm::Any* object, const uhdm::NetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNetDriversCollection(const uhdm::Any* object, const uhdm::NetDriversCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNetLoadsCollection(const uhdm::Any* object, const uhdm::NetLoadsCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitNetsCollection(const uhdm::Any* object, const uhdm::NetsCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNullStmtCollection(const uhdm::Any* object, const uhdm::NullStmtCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitOperationCollection(const uhdm::Any* object, const uhdm::OperationCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitOrderedWaitCollection(const uhdm::Any* object, const uhdm::OrderedWaitCollection& objects) { reportDuplicates(object, objects); }

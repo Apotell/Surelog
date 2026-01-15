@@ -366,29 +366,30 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports, uhdm::BaseCl
           fC->populateCoreMembers(unpackedDimensions, unpackedDimensions, array_ts);
           for (uhdm::Range* r : *ranges) {
             r->setParent(array_ts);
-            const uhdm::Expr* rrange = r->getRightExpr();
-            if (rrange->getValue() == "STRING:associative") {
-              array_ts->setArrayType(vpiAssocArray);
-              if (const uhdm::RefTypespec* rt = rrange->getTypespec()) {
-                if (const uhdm::Typespec* ag = rt->getActual()) {
-                  uhdm::RefTypespec* cro = s.make<uhdm::RefTypespec>();
-                  cro->setName(ag->getName());
-                  cro->setParent(array_ts);
-                  cro->setFile(array_ts->getFile());
-                  cro->setStartLine(array_ts->getStartLine());
-                  cro->setStartColumn(array_ts->getStartColumn());
-                  cro->setEndLine(array_ts->getEndLine());
-                  cro->setEndColumn(array_ts->getEndColumn());
-                  cro->setActual(const_cast<uhdm::Typespec*>(ag));
-                  array_ts->setIndexTypespec(cro);
+            if (const uhdm::Constant* const c = r->getRightExpr<Constant>()) {
+              if (c->getValue() == "STRING:associative") {
+                array_ts->setArrayType(vpiAssocArray);
+                if (const uhdm::RefTypespec* rt = c->getTypespec()) {
+                  if (const uhdm::Typespec* ag = rt->getActual()) {
+                    uhdm::RefTypespec* cro = s.make<uhdm::RefTypespec>();
+                    cro->setName(ag->getName());
+                    cro->setParent(array_ts);
+                    cro->setFile(array_ts->getFile());
+                    cro->setStartLine(array_ts->getStartLine());
+                    cro->setStartColumn(array_ts->getStartColumn());
+                    cro->setEndLine(array_ts->getEndLine());
+                    cro->setEndColumn(array_ts->getEndColumn());
+                    cro->setActual(const_cast<uhdm::Typespec*>(ag));
+                    array_ts->setIndexTypespec(cro);
+                  }
                 }
+              } else if (c->getValue() == "STRING:unsized") {
+                array_ts->setArrayType(vpiDynamicArray);
+              } else if (c->getValue() == "STRING:$") {
+                array_ts->setArrayType(vpiQueueArray);
+              } else {
+                array_ts->setArrayType(vpiStaticArray);
               }
-            } else if (rrange->getValue() == "STRING:unsized") {
-              array_ts->setArrayType(vpiDynamicArray);
-            } else if (rrange->getValue() == "STRING:$") {
-              array_ts->setArrayType(vpiQueueArray);
-            } else {
-              array_ts->setArrayType(vpiStaticArray);
             }
           }
           if (dest_port->getTypespec() == nullptr) {

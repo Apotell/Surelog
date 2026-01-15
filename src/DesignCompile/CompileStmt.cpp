@@ -552,7 +552,6 @@ uhdm::AnyCollection* CompileHelper::compileStmt(DesignComponent* component, cons
           if (std::vector<uhdm::Range*>* unpackedDimensions =
                   compileRanges(component, fC, value, param, nullptr, unpackedSize, false)) {
             param->setRanges(unpackedDimensions);
-            param->setSize(unpackedSize);
           }
           while (fC->Type(value) == VObjectType::paUnpacked_dimension) {
             value = fC->Sibling(value);
@@ -978,9 +977,28 @@ uhdm::AnyCollection* CompileHelper::compileStmt(DesignComponent* component, cons
                    symbols->registerSymbol(StrCat("<", fC->printObject(the_stmt), "> ", lineText)));
       Error err(ErrorDefinition::UHDM_UNSUPPORTED_STMT, loc);
       errors->addError(err);
-      ustmt->setValue(StrCat("STRING:", lineText));
+
       fC->populateCoreMembers(the_stmt, the_stmt, ustmt);
       ustmt->setParent(pstmt);
+
+      uhdm::Constant* const c = s.make<uhdm::Constant>();
+      c->setParent(ustmt);
+      c->setDecompile(StrCat(lineText.length(), "\'d", lineText));
+      c->setSize(lineText.length());
+      c->setValue(StrCat("STRING:", lineText));
+      c->setConstType(vpiStringConst);
+      fC->populateCoreMembers(the_stmt, the_stmt, c);
+
+      uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(the_stmt, the_stmt, rt);
+
+      uhdm::Typespec* const tps = s.make<uhdm::StringTypespec>();
+      tps->setParent(pstmt);
+      rt->setActual(tps);
+      ustmt->setValue(c);
+
       stmt = ustmt;  // NOLINT
       // std::cout << "UNSUPPORTED STATEMENT: " << fC->getFileName(the_stmt)
       // << ":" << fC->Line(the_stmt) << ":" << std::endl; std::cout << " -> "

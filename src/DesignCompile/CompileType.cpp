@@ -378,8 +378,8 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component, const File
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
     var->setName(signame);
-  } else if (Nets* const nets = any_cast<Nets>(obj)) {
-    nets->setName(signame);
+  } else if (Net* const net = any_cast<Net>(obj)) {
+    net->setName(signame);
   }
 
   if (tps != nullptr) {
@@ -462,8 +462,8 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component, Signal* sig
     }
   }
 
-  if (Nets* const nets = any_cast<Nets>(obj)) {
-    nets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
+  if (Net* const net = any_cast<Net>(obj)) {
+    net->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
   }
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
@@ -848,7 +848,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
       uhdm::Range* r = *itr;
       const uhdm::Expr* rhs = r->getRightExpr();
       if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-        const std::string_view value = rhs->getValue();
+        const std::string_view value = ((uhdm::Constant*)rhs)->getValue();
         if (value == "STRING:$") {
           queue = true;
           unpackedDimensions->erase(itr);
@@ -931,7 +931,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
           }
         }
       } else if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-        const std::string_view value = rhs->getValue();
+        const std::string_view value = ((uhdm::Constant*)rhs)->getValue();
         if (value == "STRING:$") {
           queue = true;
           unpackedDimensions->erase(itr);
@@ -1254,7 +1254,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
               const std::string_view param_name = param->getLhs()->getName();
               if (param_name == name) {
                 const uhdm::Any* rhs = param->getRhs();
-                if (const uhdm::Expr* exp = any_cast<const uhdm::Expr*>(rhs)) {
+                if (const uhdm::Constant* exp = any_cast<const uhdm::Constant*>(rhs)) {
                   uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
                   its->setValue(exp->getValue());
                   result = its;
@@ -1459,9 +1459,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         if (any_cast<uhdm::RefObj>(exp) != nullptr) {
           result = compileTypespec(component, fC, fC->Child(type), InvalidNodeId, result, instance, false);
         } else {
-          uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
-          if (exp->getUhdmType() == uhdm::UhdmType::Constant) {
-            var->setValue(exp->getValue());
+          uhdm::IntegerTypespec* const var = s.make<uhdm::IntegerTypespec>();
+          if (uhdm::Constant* const c = any_cast<uhdm::Constant>(exp)) {
+            var->setValue(c->getValue());
           } else {
             var->setExpr(exp);
             exp->setParent(var, true);

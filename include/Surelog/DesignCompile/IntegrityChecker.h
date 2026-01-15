@@ -399,7 +399,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitNetCollection(const uhdm::Any* object, const uhdm::NetCollection& objects) final;
   void visitNetDriversCollection(const uhdm::Any* object, const uhdm::NetDriversCollection& objects) final;
   void visitNetLoadsCollection(const uhdm::Any* object, const uhdm::NetLoadsCollection& objects) final;
-  void visitNetsCollection(const uhdm::Any* object, const uhdm::NetsCollection& objects) final;
   void visitNullStmtCollection(const uhdm::Any* object, const uhdm::NullStmtCollection& objects) final;
   void visitOperationCollection(const uhdm::Any* object, const uhdm::OperationCollection& objects) final;
   void visitOrderedWaitCollection(const uhdm::Any* object, const uhdm::OrderedWaitCollection& objects) final;

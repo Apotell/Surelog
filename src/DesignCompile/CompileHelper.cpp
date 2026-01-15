@@ -579,15 +579,18 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       econst->setName(enumName);
       econst->setParent(enum_t);
       fC->populateCoreMembers(enum_name_declaration, enum_name_declaration, econst);
-      econst->setValue(value->uhdmValue());
+
+      uhdm::Constant* c = constantFromValue(value, econst);
+      NodeId tmpId = enumValueId ? enumValueId : enumNameId;
+      fC->populateCoreMembers(tmpId, tmpId, c->getTypespec());
+      econst->setValue(c);
       if (enumValueId) {
         if (uhdm::Any* exp = compileExpression(scope, fC, enumValueId, econst, nullptr)) {
-          econst->setDecompile(uhdm::prettyPrint(exp));
+          c->setDecompile(uhdm::prettyPrint(exp));
         }
       } else {
-        econst->setDecompile(value->decompiledValue());
+        c->setDecompile(value->decompiledValue());
       }
-      econst->setSize(value->getSize());
       econsts->emplace_back(econst);
       enum_name_declaration = fC->Sibling(enum_name_declaration);
     }
@@ -3670,11 +3673,6 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
             }
           }
         }
-
-        if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-          uhdm::Constant* c = (uhdm::Constant*)rhs;
-          param->setValue(c->getValue());
-        }
       }
       Param_assignment = fC->Sibling(Param_assignment);
     }
@@ -4257,8 +4255,10 @@ uhdm::AttributeCollection* CompileHelper::compileAttributes(DesignComponent* com
       fC->populateCoreMembers(Attr_spec, Attr_spec, attribute);
       results->emplace_back(attribute);
       if (NodeId Constant_expression = fC->Sibling(Attr_name)) {
-        if (uhdm::Expr* expr = (uhdm::Expr*)compileExpression(component, fC, Constant_expression, attribute)) {
-          attribute->setValue(expr->getValue());
+        if (uhdm::Any* const expr = compileExpression(component, fC, Constant_expression, attribute)) {
+          if (const uhdm::Constant* const c = any_cast<uhdm::Constant>(expr)) {
+            attribute->setValue(c->getValue());
+          }
         }
       }
       nodeId = fC->Sibling(nodeId);
@@ -4566,18 +4566,12 @@ void CompileHelper::adjustUnsized(uhdm::Constant* c, int32_t size) {
 int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop, int32_t opIndex, uhdm::Expr* rhs,
                                     DesignComponent* component, const FileContent* fC, NodeId nodeId,
                                     ValuedComponentI* instance) {
-  bool invalidValue = false;
-  int32_t csize = cop->getSize();
-  if (csize == 0) {
-    uhdm::ExprEval eval(nullptr);
-    uhdm::Expr* vexp = nullptr;
-    if (eval.reduceExpr(cop, component->getUhdmModel(), &vexp, true)) {
-      csize = vexp->getSize();
-    }
-  }
+  uhdm::Constant* constant = any_cast<uhdm::Constant>(cop);
+  if (constant == nullptr) return 0;
 
+  bool invalidValue = false;
   const uhdm::Typespec* rtps = nullptr;
-  if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
+  if (const uhdm::RefTypespec* const rt = rhs->getTypespec()) {
     rtps = rt->getActual();
   }
   if (rtps == nullptr) {
@@ -4585,44 +4579,44 @@ int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop, 
   }
   if (rtps->getUhdmType() == uhdm::UhdmType::StructTypespec) {
     uhdm::StructTypespec* stps = (uhdm::StructTypespec*)rtps;
-    int32_t index = 0;
-    for (uhdm::TypespecMember* member : *stps->getMembers()) {
-      if (index == opIndex) {
+    if (uhdm::TypespecMemberCollection* const members = stps->getMembers()) {
+      if ((opIndex >= 0) && (opIndex < members->size())) {
+        uhdm::TypespecMember* const member = members->at(opIndex);
+
         const uhdm::Typespec* mtps = nullptr;
-        if (const uhdm::RefTypespec* rt = member->getTypespec()) {
+        if (const uhdm::RefTypespec* const rt = member->getTypespec()) {
           mtps = rt->getActual();
         }
+
         int32_t ncsize = Bits(mtps, invalidValue, component, fC, nodeId, instance, false);
         // Fix the size of the member:
-        adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
-        cop->setSize(ncsize);
-        break;
+        adjustUnsized(constant, ncsize);
+        constant->setSize(ncsize);
       }
-      index++;
     }
   } else if (rtps->getUhdmType() == uhdm::UhdmType::ArrayTypespec) {
     uhdm::ArrayTypespec* atps = (uhdm::ArrayTypespec*)rtps;
-    if (const uhdm::RefTypespec* ert = atps->getElemTypespec()) {
+    if (const uhdm::RefTypespec* const ert = atps->getElemTypespec()) {
       int32_t ncsize = Bits(ert->getActual(), invalidValue, component, fC, nodeId, instance, false);
       // Fix the size of the member:
-      adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
-      cop->setSize(ncsize);
+      adjustUnsized(constant, ncsize);
+      constant->setSize(ncsize);
     }
   } else if (rtps->getUhdmType() == uhdm::UhdmType::LogicTypespec) {
     uint64_t fullSize = Bits(rtps, invalidValue, component, fC, nodeId, instance, false);
     uint64_t innerSize = Bits(rtps, invalidValue, component, fC, nodeId, instance, true);
     int32_t ncsize = fullSize / innerSize;
     // Fix the size of the member:
-    adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
-    cop->setSize(ncsize);
+    adjustUnsized(constant, ncsize);
+    constant->setSize(ncsize);
   } else {
     int32_t ncsize = Bits(rtps, invalidValue, component, fC, nodeId, instance, false);
     // Fix the size of the member:
-    adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
-    cop->setSize(ncsize);
+    adjustUnsized(constant, ncsize);
+    constant->setSize(ncsize);
   }
 
-  return cop->getSize();
+  return constant->getSize();
 }
 
 uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId child, const uhdm::Typespec* tps,
@@ -4806,9 +4800,35 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
       }
     }
   }
-  for (uint32_t i = 0; i < size; i++) {
-    if (vars && ((int32_t)i < (int32_t)(vars->size()))) {
-      ((uhdm::Variable*)(*vars)[i])->setValue(StrCat("UINT:", values[i]));
+  if (vars != nullptr) {
+    for (uint32_t i = 0, ni = std::min(size, vars->size()); i < ni; i++) {
+      if (uhdm::Variable* const v = any_cast<uhdm::Variable>(vars->at(i))) {
+        uhdm::Constant* const c = s.make<uhdm::Constant>();
+        c->setFile(rhs->getFile());
+        c->setStartLine(rhs->getStartLine());
+        c->setStartColumn(rhs->getStartColumn());
+        c->setEndLine(rhs->getEndLine());
+        c->setEndColumn(rhs->getEndColumn());
+
+        c->setSize(size);
+        c->setValue(StrCat("UINT:", values[i]));
+        c->setDecompile(StrCat(size, "\'d", values[i]));
+
+        uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        c->setTypespec(rt);
+        rt->setFile(rhs->getFile());
+        rt->setStartLine(rhs->getStartLine());
+        rt->setStartColumn(rhs->getStartColumn());
+        rt->setEndLine(rhs->getEndLine());
+        rt->setEndColumn(rhs->getEndColumn());
+
+        uhdm::IntTypespec* const ts = s.make<uhdm::IntTypespec>();
+        ts->setParent(rhs);
+        rt->setActual(ts);
+
+        v->setValue(c);
+      }
     }
   }
 
@@ -4819,14 +4839,16 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
     c->setStartColumn(rhs->getStartColumn());
     c->setEndLine(rhs->getEndLine());
     c->setEndColumn(rhs->getEndColumn());
-    result = c;
+
     uint64_t value = 0;
     for (uint64_t i = 0; i < patternSize; i++) {
       value |= (values[i]) ? ((uint64_t)1 << (patternSize - 1 - i)) : 0;
     }
-    result->setSize(size);
-    result->setValue(StrCat("UINT:", value));
-    result->setDecompile(StrCat(size, "\'d", value));
+    c->setSize(size);
+    c->setValue(StrCat("UINT:", value));
+    c->setDecompile(StrCat(size, "\'d", value));
+
+    result = c;
 
     uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
     rt->setParent(c);

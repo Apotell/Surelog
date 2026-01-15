@@ -20767,7 +20767,7 @@ BitTypespec                                          118
 ByteTypespec                                           4
 CaseItem                                              63
 CaseStmt                                              15
-Constant                                            1971
+Constant                                            1909
 ContAssign                                             3
 Design                                                 1
 EnumConst                                            358
@@ -20786,7 +20786,7 @@ IfElse                                                 7
 IfStmt                                                 9
 ImmediateAssert                                        7
 ImportTypespec                                         3
-IntTypespec                                         1624
+IntTypespec                                         1593
 LogicTypespec                                        697
 LongIntTypespec                                        2
 Module                                                 8
@@ -20801,7 +20801,7 @@ Port                                                  14
 Range                                                287
 RefModule                                              4
 RefObj                                               790
-RefTypespec                                         2875
+RefTypespec                                         2844
 ReturnStmt                                           106
 SourceFile                                             1
 StringTypespec                                       166
@@ -20817,14 +20817,14 @@ VarSelect                                              2
 Variable                                              38
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                             11638
+Total:                                             11514
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:879:59: Illegal implicit net "id:6841, name:dm::DataCount".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:880:59: Illegal implicit net "id:6845, name:dm::DataAddr".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:879:59: Illegal implicit net "id:6721, name:dm::DataCount".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:880:59: Illegal implicit net "id:6725, name:dm::DataAddr".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArianeElab/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:874:16: Unsupported Typespec: id:6813, type:RefTypespec, name:dm::hartinfo_t.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:879:59: Null Actual: id:6841, type:RefObj, name:dm::DataCount.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:880:59: Null Actual: id:6845, type:RefObj, name:dm::DataAddr.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:874:16: Unsupported Typespec: id:6693, type:RefTypespec, name:dm::hartinfo_t.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:879:59: Null Actual: id:6721, type:RefObj, name:dm::DataCount.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:880:59: Null Actual: id:6725, type:RefObj, name:dm::DataAddr.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -25440,18 +25440,25 @@ Design: (unnamed)
       |vpiParent:
       \_ParamAssign: , line:455:29, endln:455:95
       |vpiOpType:33
-      |vpiReordered:1
       |vpiOperand:
-      \_Constant: , line:455:82, endln:455:94
+      \_RefObj: (riscv::IS_XLEN64), line:455:45, endln:455:54
+        |vpiParent:
+        \_Operation: , line:455:44, endln:455:95
+        |vpiName:IS_XLEN64
+        |vpiFullName:riscv::IS_XLEN64
+        |vpiActual:
+        \_Parameter: (riscv::IS_XLEN64), line:22:16, endln:22:55
+      |vpiOperand:
+      \_Constant: , line:455:56, endln:455:68
         |vpiParent:
         \_Operation: , line:455:44, endln:455:95
         |vpiDecompile:31'h00000000
         |vpiSize:31
         |HEX:00000000
         |vpiTypespec:
-        \_RefTypespec: (riscv), line:455:82, endln:455:94
+        \_RefTypespec: (riscv), line:455:56, endln:455:68
           |vpiParent:
-          \_Constant: , line:455:82, endln:455:94
+          \_Constant: , line:455:56, endln:455:68
           |vpiFullName:riscv
           |vpiActual:
           \_IntTypespec: 
@@ -25470,28 +25477,20 @@ Design: (unnamed)
           |vpiActual:
           \_Parameter: (riscv::IS_XLEN64), line:22:16, endln:22:55
       |vpiOperand:
-      \_Constant: , line:455:56, endln:455:68
+      \_Constant: , line:455:82, endln:455:94
         |vpiParent:
         \_Operation: , line:455:44, endln:455:95
         |vpiDecompile:31'h00000000
         |vpiSize:31
         |HEX:00000000
         |vpiTypespec:
-        \_RefTypespec: (riscv), line:455:56, endln:455:68
+        \_RefTypespec: (riscv), line:455:82, endln:455:94
           |vpiParent:
-          \_Constant: , line:455:56, endln:455:68
+          \_Constant: , line:455:82, endln:455:94
           |vpiFullName:riscv
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:5
-      |vpiOperand:
-      \_RefObj: (riscv::IS_XLEN64), line:455:45, endln:455:54
-        |vpiParent:
-        \_Operation: , line:455:44, endln:455:95
-        |vpiName:IS_XLEN64
-        |vpiFullName:riscv::IS_XLEN64
-        |vpiActual:
-        \_Parameter: (riscv::IS_XLEN64), line:22:16, endln:22:55
     |vpiLhs:
     \_Parameter: (riscv::SSTATUS_SD), line:455:29, endln:455:95
   |vpiParamAssign:
@@ -26016,18 +26015,25 @@ Design: (unnamed)
       |vpiParent:
       \_ParamAssign: , line:478:29, endln:478:95
       |vpiOpType:33
-      |vpiReordered:1
       |vpiOperand:
-      \_Constant: , line:478:82, endln:478:94
+      \_RefObj: (riscv::IS_XLEN64), line:478:45, endln:478:54
+        |vpiParent:
+        \_Operation: , line:478:44, endln:478:95
+        |vpiName:IS_XLEN64
+        |vpiFullName:riscv::IS_XLEN64
+        |vpiActual:
+        \_Parameter: (riscv::IS_XLEN64), line:22:16, endln:22:55
+      |vpiOperand:
+      \_Constant: , line:478:56, endln:478:68
         |vpiParent:
         \_Operation: , line:478:44, endln:478:95
         |vpiDecompile:31'h00000000
         |vpiSize:31
         |HEX:00000000
         |vpiTypespec:
-        \_RefTypespec: (riscv), line:478:82, endln:478:94
+        \_RefTypespec: (riscv), line:478:56, endln:478:68
           |vpiParent:
-          \_Constant: , line:478:82, endln:478:94
+          \_Constant: , line:478:56, endln:478:68
           |vpiFullName:riscv
           |vpiActual:
           \_IntTypespec: 
@@ -26046,28 +26052,20 @@ Design: (unnamed)
           |vpiActual:
           \_Parameter: (riscv::IS_XLEN64), line:22:16, endln:22:55
       |vpiOperand:
-      \_Constant: , line:478:56, endln:478:68
+      \_Constant: , line:478:82, endln:478:94
         |vpiParent:
         \_Operation: , line:478:44, endln:478:95
         |vpiDecompile:31'h00000000
         |vpiSize:31
         |HEX:00000000
         |vpiTypespec:
-        \_RefTypespec: (riscv), line:478:56, endln:478:68
+        \_RefTypespec: (riscv), line:478:82, endln:478:94
           |vpiParent:
-          \_Constant: , line:478:56, endln:478:68
+          \_Constant: , line:478:82, endln:478:94
           |vpiFullName:riscv
           |vpiActual:
           \_IntTypespec: 
         |vpiConstType:5
-      |vpiOperand:
-      \_RefObj: (riscv::IS_XLEN64), line:478:45, endln:478:54
-        |vpiParent:
-        \_Operation: , line:478:44, endln:478:95
-        |vpiName:IS_XLEN64
-        |vpiFullName:riscv::IS_XLEN64
-        |vpiActual:
-        \_Parameter: (riscv::IS_XLEN64), line:22:16, endln:22:55
     |vpiLhs:
     \_Parameter: (riscv::MSTATUS_SD), line:478:29, endln:478:95
   |vpiInternalScope:
@@ -60271,7 +60269,6 @@ Design: (unnamed)
       |vpiName:INT8
       |INT:0
       |vpiDecompile:0
-      |vpiSize:1
     |vpiEnumConst:
     \_EnumConst: (INT16), line:1550:5, endln:1550:10
       |vpiParent:
@@ -60279,7 +60276,6 @@ Design: (unnamed)
       |vpiName:INT16
       |INT:1
       |vpiDecompile:1
-      |vpiSize:1
     |vpiEnumConst:
     \_EnumConst: (INT32), line:1551:5, endln:1551:10
       |vpiParent:
@@ -60287,7 +60283,6 @@ Design: (unnamed)
       |vpiName:INT32
       |INT:2
       |vpiDecompile:2
-      |vpiSize:1
     |vpiEnumConst:
     \_EnumConst: (INT64), line:1552:5, endln:1552:10
       |vpiParent:
@@ -60295,7 +60290,6 @@ Design: (unnamed)
       |vpiName:INT64
       |INT:3
       |vpiDecompile:3
-      |vpiSize:1
   |vpiTypespec:
   \_LogicTypespec: , line:1548:16, endln:1548:21
     |vpiParent:
@@ -60545,7 +60539,6 @@ Design: (unnamed)
       |vpiName:FMADD
       |INT:0
       |vpiDecompile:0
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (FNMSUB), line:1581:12, endln:1581:18
       |vpiParent:
@@ -60553,7 +60546,6 @@ Design: (unnamed)
       |vpiName:FNMSUB
       |INT:1
       |vpiDecompile:1
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (ADD), line:1581:20, endln:1581:23
       |vpiParent:
@@ -60561,7 +60553,6 @@ Design: (unnamed)
       |vpiName:ADD
       |INT:2
       |vpiDecompile:2
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (MUL), line:1581:25, endln:1581:28
       |vpiParent:
@@ -60569,7 +60560,6 @@ Design: (unnamed)
       |vpiName:MUL
       |INT:3
       |vpiDecompile:3
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (DIV), line:1582:5, endln:1582:8
       |vpiParent:
@@ -60577,7 +60567,6 @@ Design: (unnamed)
       |vpiName:DIV
       |INT:4
       |vpiDecompile:4
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (SQRT), line:1582:10, endln:1582:14
       |vpiParent:
@@ -60585,7 +60574,6 @@ Design: (unnamed)
       |vpiName:SQRT
       |INT:5
       |vpiDecompile:5
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (SGNJ), line:1583:5, endln:1583:9
       |vpiParent:
@@ -60593,7 +60581,6 @@ Design: (unnamed)
       |vpiName:SGNJ
       |INT:6
       |vpiDecompile:6
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (MINMAX), line:1583:11, endln:1583:17
       |vpiParent:
@@ -60601,7 +60588,6 @@ Design: (unnamed)
       |vpiName:MINMAX
       |INT:7
       |vpiDecompile:7
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (CMP), line:1583:19, endln:1583:22
       |vpiParent:
@@ -60609,7 +60595,6 @@ Design: (unnamed)
       |vpiName:CMP
       |INT:8
       |vpiDecompile:8
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (CLASSIFY), line:1583:24, endln:1583:32
       |vpiParent:
@@ -60617,7 +60602,6 @@ Design: (unnamed)
       |vpiName:CLASSIFY
       |INT:9
       |vpiDecompile:9
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (F2F), line:1584:5, endln:1584:8
       |vpiParent:
@@ -60625,7 +60609,6 @@ Design: (unnamed)
       |vpiName:F2F
       |INT:10
       |vpiDecompile:10
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (F2I), line:1584:10, endln:1584:13
       |vpiParent:
@@ -60633,7 +60616,6 @@ Design: (unnamed)
       |vpiName:F2I
       |INT:11
       |vpiDecompile:11
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (I2F), line:1584:15, endln:1584:18
       |vpiParent:
@@ -60641,7 +60623,6 @@ Design: (unnamed)
       |vpiName:I2F
       |INT:12
       |vpiDecompile:12
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (CPKAB), line:1584:20, endln:1584:25
       |vpiParent:
@@ -60649,7 +60630,6 @@ Design: (unnamed)
       |vpiName:CPKAB
       |INT:13
       |vpiDecompile:13
-      |vpiSize:4
     |vpiEnumConst:
     \_EnumConst: (CPKCD), line:1584:27, endln:1584:32
       |vpiParent:
@@ -60657,7 +60637,6 @@ Design: (unnamed)
       |vpiName:CPKCD
       |INT:14
       |vpiDecompile:14
-      |vpiSize:4
   |vpiTypespec:
   \_LogicTypespec: , line:1580:16, endln:1580:21
     |vpiParent:

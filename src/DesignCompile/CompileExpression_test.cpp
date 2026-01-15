@@ -68,9 +68,10 @@ TEST(CompileExpression, ExprFromParseTree1) {
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
-    bool invalidValue = false;
-    uhdm::ExprEval eval;
-    EXPECT_EQ(eval.get_value(invalidValue, exp), 16);
+    int64_t val = 0;
+    uhdm::ExprEval eval(nullptr);
+    EXPECT_TRUE(eval.getInt64(exp, &val));
+    EXPECT_EQ(val, 16);
   }
 }
 TEST(CompileExpression, ExprFromParseTree2) {
@@ -98,9 +99,10 @@ TEST(CompileExpression, ExprFromParseTree2) {
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
-    bool invalidValue = false;
-    uhdm::ExprEval eval;
-    EXPECT_EQ(eval.get_value(invalidValue, exp), 1);
+    int64_t val = 0;
+    uhdm::ExprEval eval(nullptr);
+    EXPECT_TRUE(eval.getInt64(exp, &val));
+    EXPECT_EQ(val, 1);
   }
 }
 TEST(CompileExpression, ExprFromParseTree3) {
@@ -130,9 +132,10 @@ TEST(CompileExpression, ExprFromParseTree3) {
     const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
-      bool invalidValue = false;
-      uhdm::ExprEval eval;
-      EXPECT_EQ(eval.get_value(invalidValue, exp2), 6);
+      int64_t val = 0;
+      uhdm::ExprEval eval(nullptr);
+      EXPECT_TRUE(eval.getInt64(exp2, &val));
+      EXPECT_EQ(val, 6);
     }
   }
 }
@@ -169,9 +172,10 @@ TEST(CompileExpression, ExprFromPpTree) {
     const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
-      bool invalidValue = false;
-      uhdm::ExprEval eval;
-      EXPECT_EQ(eval.get_value(invalidValue, exp2), 6);
+      int64_t val = 0;
+      uhdm::ExprEval eval(nullptr);
+      EXPECT_TRUE(eval.getInt64(exp2, &val));
+      EXPECT_EQ(val, 6);
     }
   }
 }

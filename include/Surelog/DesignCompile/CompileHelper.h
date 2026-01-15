@@ -25,6 +25,7 @@
 #define SURELOG_COMPILEHELPER_H
 #pragma once
 
+#include <Surelog/Common/NodeId.h>
 #include <Surelog/Common/PathId.h>
 #include <Surelog/Common/RTTI.h>
 #include <Surelog/Design/ValuedComponentI.h>
@@ -39,6 +40,7 @@
 #include <vector>
 
 // UHDM
+#include <uhdm/ExprEval.h>
 #include <uhdm/uhdm_forward_decl.h>
 
 namespace uhdm {
@@ -47,6 +49,7 @@ class Serializer;
 
 namespace SURELOG {
 class CompileDesign;
+class CompileHelper;
 class DataType;
 class Design;
 class DesignComponent;
@@ -73,6 +76,27 @@ class FScope : public ValuedComponentI {
 };
 
 using Scopes = std::vector<FScope*>;
+
+class ObjectProvider final : public uhdm::ObjectProvider {
+ public:
+  const uhdm::Any* getObject(std::string_view name, const uhdm::Any* inst, const uhdm::Any* pexpr,
+                             bool muteErrors = false) final;
+  const uhdm::TaskFunc* getTaskFunc(std::string_view name, const uhdm::Any* inst, const uhdm::Any* pexpr,
+                                    bool muteErrors = false) final;
+  uhdm::Any* getValue(std::string_view name, const uhdm::Any* inst, const uhdm::Any* pexpr,
+                      bool muteErrors = false) final;
+
+  ObjectProvider(CompileHelper& helper, DesignComponent* component, CompileDesign* compileDesign,
+                 const FileContent* fileContent, NodeId nodeId, ValuedComponentI* instance);
+
+ private:
+  CompileHelper& m_helper;
+  DesignComponent* const m_component = nullptr;
+  CompileDesign* const m_compileDesign = nullptr;
+  const FileContent* const m_fileContent = nullptr;
+  const NodeId m_nodeId;
+  ValuedComponentI* const m_instance = nullptr;
+};
 
 class CompileHelper final {
  public:
@@ -333,9 +357,6 @@ class CompileHelper final {
   bool isMultidimensional(uhdm::Typespec* ts, DesignComponent* component);
 
   bool isDecreasingRange(uhdm::Typespec* ts, DesignComponent* component);
-
-  uhdm::Expr* reduceExpr(uhdm::Any* expr, bool& invalidValue, DesignComponent* component, ValuedComponentI* instance,
-                         PathId fileId, uint32_t lineNumber, uhdm::Any* pexpr, bool muteErrors = false);
 
   int32_t adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop, int32_t opIndex, uhdm::Expr* rhs,
                        DesignComponent* component, const FileContent* fC, NodeId nodeId, ValuedComponentI* instance);

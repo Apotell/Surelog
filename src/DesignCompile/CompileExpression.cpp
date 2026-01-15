@@ -76,6 +76,31 @@
 #include <uhdm/vpi_visitor.h>
 
 namespace SURELOG {
+ObjectProvider::ObjectProvider(CompileHelper &helper, DesignComponent *component, CompileDesign *compileDesign,
+                               const FileContent *fileContent, NodeId nodeId, ValuedComponentI *instance)
+    : m_helper(helper),
+      m_component(component),
+      m_compileDesign(compileDesign),
+      m_fileContent(fileContent),
+      m_nodeId(nodeId),
+      m_instance(instance) {}
+
+const uhdm::Any *ObjectProvider::getObject(std::string_view name, const uhdm::Any *inst, const uhdm::Any *pexpr,
+                                           bool muteErrors /* = false */) {
+  return m_helper.getObject(name, m_component, m_instance, pexpr);
+}
+
+const uhdm::TaskFunc *ObjectProvider::getTaskFunc(std::string_view name, const uhdm::Any *inst, const uhdm::Any *pexpr,
+                                                  bool muteErrors /* = false */) {
+  auto [tf, _] = m_helper.getTaskFunc(name, m_component, m_instance, const_cast<uhdm::Any *>(pexpr));
+  return tf;
+}
+
+uhdm::Any *ObjectProvider::getValue(std::string_view name, const uhdm::Any *inst, const uhdm::Any *pexpr,
+                                    bool muteErrors /* = false */) {
+  return m_helper.getValue(name, m_component, m_fileContent, m_nodeId, m_instance, const_cast<uhdm::Any *>(pexpr),
+                           muteErrors);
+}
 
 bool CompileHelper::substituteAssignedValue(const uhdm::Any *oper) {
   bool substitute = true;
@@ -834,37 +859,13 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
 uhdm::Any *CompileHelper::decodeHierPath(uhdm::HierPath *path, bool &invalidValue, DesignComponent *component,
                                          const FileContent *fC, NodeId nodeId, ValuedComponentI *instance,
                                          uhdm::Any *pexpr, bool muteErrors, bool returnTypespec) {
-  uhdm::GetObjectFunctor getObjectFunctor = [&](std::string_view name, const uhdm::Any *inst,
-                                                const uhdm::Any *pexpr) -> uhdm::Any * {
-    return getObject(name, component, instance, pexpr);
-  };
-  uhdm::GetObjectFunctor getValueFunctor = [&](std::string_view name, const uhdm::Any *inst,
-                                               const uhdm::Any *pexpr) -> uhdm::Any * {
-    return (uhdm::Expr *)getValue(name, component, fC, nodeId, instance, (uhdm::Any *)pexpr, false);
-  };
-  uhdm::GetTaskFuncFunctor getTaskFuncFunctor = [&](std::string_view name, const uhdm::Any *inst) -> uhdm::TaskFunc * {
-    auto ret = getTaskFunc(name, component, instance, pexpr);
-    return ret.first;
-  };
-  uhdm::ExprEval eval(muteErrors);
-  eval.setGetObjectFunctor(getObjectFunctor);
-  eval.setGetValueFunctor(getValueFunctor);
-  eval.setGetTaskFuncFunctor(getTaskFuncFunctor);
-  if (m_exprEvalPlaceHolder == nullptr) {
-    m_exprEvalPlaceHolder = m_compileDesign->getSerializer().make<uhdm::Module>();
-    m_exprEvalPlaceHolder->getParamAssigns(true);
-  } else {
-    m_exprEvalPlaceHolder->getParamAssigns()->erase(m_exprEvalPlaceHolder->getParamAssigns()->begin(),
-                                                    m_exprEvalPlaceHolder->getParamAssigns()->end());
+  ObjectProvider provider(*this, component, m_compileDesign, fC, nodeId, instance);
+  uhdm::ExprEval eval(&provider, muteErrors);
+  uhdm::Any *result = nullptr;
+  if (!eval.reduceHierPath(path, pexpr, returnTypespec, &result, muteErrors)) {
+    return nullptr;
   }
-  uhdm::Any *res = eval.decodeHierPath(path, invalidValue, m_exprEvalPlaceHolder, pexpr, returnTypespec, muteErrors);
-  return res;
-}
-
-uhdm::Expr *CompileHelper::reduceExpr(uhdm::Any *result, bool &invalidValue, DesignComponent *component,
-                                      ValuedComponentI *instance, PathId fileId, uint32_t lineNumber, uhdm::Any *pexpr,
-                                      bool muteErrors) {
-  return any_cast<uhdm::Expr>(result);
+  return result;
 }
 
 uhdm::Any *CompileHelper::getValue(std::string_view name, DesignComponent *component, const FileContent *fC,
@@ -898,7 +899,7 @@ uhdm::Any *CompileHelper::getValue(std::string_view name, DesignComponent *compo
             if (uhdm::RefTypespec *rt = op->getTypespec()) {
               opts = rt->getActual();
             }
-            uhdm::ExprEval eval;
+            uhdm::ExprEval eval(nullptr);
             if (uhdm::Expr *res = eval.flattenPatternAssignments(s, opts, (uhdm::Expr *)result)) {
               if (res->getUhdmType() == uhdm::UhdmType::Operation) {
                 op->setOperands(((uhdm::Operation *)res)->getOperands());
@@ -1026,15 +1027,9 @@ uhdm::Any *CompileHelper::getValue(std::string_view name, DesignComponent *compo
     }
   }
 
-  if (result) {
-    uhdm::UhdmType resultType = result->getUhdmType();
-    if (resultType == uhdm::UhdmType::Constant) {
-    } else if (resultType == uhdm::UhdmType::RefObj) {
-      if (result->getName() != name) {
-        if (uhdm::Any *tmp = getValue(result->getName(), component, fC, nodeId, instance, pexpr, muteErrors)) {
-          result = tmp;
-        }
-      }
+  if ((result != nullptr) && (result->getUhdmType() == uhdm::UhdmType::RefObj) && (result->getName() != name)) {
+    if (uhdm::Any *tmp = getValue(result->getName(), component, fC, nodeId, instance, pexpr, muteErrors)) {
+      result = tmp;
     }
   }
   if (m_checkForLoops) {
@@ -3399,22 +3394,8 @@ uint64_t CompileHelper::Bits(const uhdm::Any *typespec, bool &invalidValue, Desi
     }
   }
 
-  uhdm::GetObjectFunctor getObjectFunctor = [&](std::string_view name, const uhdm::Any *inst,
-                                                const uhdm::Any *pexpr) -> uhdm::Any * {
-    return getObject(name, component, instance, pexpr);
-  };
-  uhdm::GetObjectFunctor getValueFunctor = [&](std::string_view name, const uhdm::Any *inst,
-                                               const uhdm::Any *pexpr) -> uhdm::Any * {
-    return (uhdm::Expr *)getValue(name, component, fC, nodeId, instance, (uhdm::Any *)pexpr, false);
-  };
-  uhdm::GetTaskFuncFunctor getTaskFuncFunctor = [&](std::string_view name, const uhdm::Any *inst) -> uhdm::TaskFunc * {
-    auto ret = getTaskFunc(name, component, instance, nullptr);
-    return ret.first;
-  };
-  uhdm::ExprEval eval;
-  eval.setGetObjectFunctor(getObjectFunctor);
-  eval.setGetValueFunctor(getValueFunctor);
-  eval.setGetTaskFuncFunctor(getTaskFuncFunctor);
+  ObjectProvider provider(*this, component, m_compileDesign, fC, nodeId, instance);
+  uhdm::ExprEval eval(&provider);
   if (m_exprEvalPlaceHolder == nullptr) {
     m_exprEvalPlaceHolder = m_compileDesign->getSerializer().make<uhdm::Module>();
     m_exprEvalPlaceHolder->getParamAssigns(true);
@@ -3422,7 +3403,10 @@ uint64_t CompileHelper::Bits(const uhdm::Any *typespec, bool &invalidValue, Desi
     m_exprEvalPlaceHolder->getParamAssigns()->erase(m_exprEvalPlaceHolder->getParamAssigns()->begin(),
                                                     m_exprEvalPlaceHolder->getParamAssigns()->end());
   }
-  uint64_t size = eval.size(typespec, invalidValue, m_exprEvalPlaceHolder, nullptr, !sizeMode);
+  uint64_t size = 0;
+  if (!eval.getBitCount(typespec, m_exprEvalPlaceHolder, !sizeMode, &size)) {
+    size = 0;
+  }
   if (m_checkForLoops) {
     m_stackLevel--;
   }
@@ -3853,29 +3837,30 @@ uhdm::Any *CompileHelper::compileBound(DesignComponent *component, const FileCon
     }
     if (ranges) {
       uhdm::Range *r = ranges->at(0);
-      uhdm::Expr *lr = r->getLeftExpr();
-      uhdm::Expr *rr = r->getRightExpr();
-      bool invalidValue = false;
-      lr = reduceExpr(lr, invalidValue, component, instance, BadPathId, 0, nullptr, true);
-      uhdm::ExprEval eval;
-      int64_t lrv = eval.get_value(invalidValue, lr);
-      rr = reduceExpr(rr, invalidValue, component, instance, BadPathId, 0, nullptr, true);
-      int64_t rrv = eval.get_value(invalidValue, rr);
-      if (name == "left") {
-        return lr;
-      } else if (name == "right") {
-        return rr;
-      } else if (name == "high") {
-        if (lrv > rrv) {
-          return lr;
-        } else {
-          return rr;
-        }
-      } else if (name == "low") {
-        if (lrv > rrv) {
-          return rr;
-        } else {
-          return lr;
+      uhdm::ExprEval eval(nullptr);
+      uhdm::Expr *lr = nullptr;
+      uhdm::Expr *rr = nullptr;
+      if (eval.reduceExpr(r->getLeftExpr(), r, &lr, true) && eval.reduceExpr(r->getRightExpr(), r, &rr, true)) {
+        int64_t lrv = 0;
+        int64_t rrv = 0;
+        if (eval.getInt64(lr, &lrv) && eval.getInt64(rr, &rrv)) {
+          if (name == "left") {
+            return lr;
+          } else if (name == "right") {
+            return rr;
+          } else if (name == "high") {
+            if (lrv > rrv) {
+              return lr;
+            } else {
+              return rr;
+            }
+          } else if (name == "low") {
+            if (lrv > rrv) {
+              return rr;
+            } else {
+              return lr;
+            }
+          }
         }
       }
     }
@@ -4596,9 +4581,9 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
           uhdm::Expr *index = (uhdm::Expr *)compileExpression(component, fC, Expression, pexpr, instance, muteErrors);
           if (index && index->getUhdmType() == uhdm::UhdmType::Constant) {
             bool invalidValue = false;
-            uhdm::ExprEval eval;
-            uint64_t ind = (uint64_t)eval.get_value(invalidValue, index);
-            if (invalidValue == false && type == uhdm::UhdmType::Operation) {
+            uhdm::ExprEval eval(nullptr);
+            uint64_t ind = 0;
+            if (((invalidValue = !eval.getUInt64(index, &ind))) && (type == uhdm::UhdmType::Operation)) {
               uhdm::Operation *op = (uhdm::Operation *)st;
               int32_t opType = op->getOpType();
               if (opType == vpiAssignmentPatternOp) {
@@ -4743,18 +4728,15 @@ void CompileHelper::reorderAssignmentPattern(DesignComponent *mod, const uhdm::A
           }
         }
       }
-      if (ranges) {
-        if (level < ranges->size()) {
-          uhdm::Range *r = ranges->at(level);
-          uhdm::Expr *lr = (uhdm::Expr *)r->getLeftExpr();
-          uhdm::Expr *rr = (uhdm::Expr *)r->getRightExpr();
-          bool invalidValue = false;
-          uhdm::ExprEval eval;
-          lr = reduceExpr(lr, invalidValue, mod, instance, BadPathId, 0, nullptr, true);
-          int64_t lrv = eval.get_value(invalidValue, lr);
-          rr = reduceExpr(rr, invalidValue, mod, instance, BadPathId, 0, nullptr, true);
-          int64_t rrv = eval.get_value(invalidValue, rr);
-          if (lrv > rrv) {
+      if (ranges && (level < ranges->size())) {
+        uhdm::Range *r = ranges->at(level);
+        uhdm::ExprEval eval(nullptr);
+        uhdm::Expr *lr = nullptr;
+        uhdm::Expr *rr = nullptr;
+        if (eval.reduceExpr(r->getLeftExpr(), r, &lr, true) && eval.reduceExpr(r->getRightExpr(), r, &rr, true)) {
+          int64_t lrv = 0;
+          int64_t rrv = 0;
+          if (eval.getInt64(lr, &lrv) && eval.getInt64(rr, &rrv) && (lrv > rrv)) {
             op->setReordered(true);
             std::reverse(operands->begin(), operands->end());
             if (level == 0) {

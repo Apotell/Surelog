@@ -582,8 +582,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       econst->setValue(value->uhdmValue());
       if (enumValueId) {
         if (uhdm::Any* exp = compileExpression(scope, fC, enumValueId, econst, nullptr)) {
-          uhdm::ExprEval eval;
-          econst->setDecompile(eval.prettyPrint(exp));
+          econst->setDecompile(uhdm::prettyPrint(exp));
         }
       } else {
         econst->setDecompile(value->decompiledValue());
@@ -2233,31 +2232,30 @@ uhdm::ContAssignCollection CompileHelper::compileContinuousAssignment(DesignComp
 
 std::string CompileHelper::decompileHelper(const uhdm::Any* sel) {
   std::string path_name;
-  uhdm::ExprEval eval;
   if (sel == nullptr) {
     return "";
   }
   if (sel->getUhdmType() == uhdm::UhdmType::Constant) {
-    const std::string_view ind = ((uhdm::Expr*)sel)->getDecompile();
+    const std::string_view ind = ((uhdm::Constant*)sel)->getDecompile();
     path_name.append(ind);
   } else if (sel->getUhdmType() == uhdm::UhdmType::HierPath) {
     path_name.append(sel->getName());
   } else if (sel->getUhdmType() == uhdm::UhdmType::RefObj) {
-    const std::string_view ind = ((uhdm::Expr*)sel)->getName();
+    const std::string_view ind = sel->getName();
     path_name.append(ind);
   } else if (sel->getUhdmType() == uhdm::UhdmType::Operation) {
-    path_name.append(eval.prettyPrint(sel));
+    path_name.append(uhdm::prettyPrint(sel));
   } else if (sel->getUhdmType() == uhdm::UhdmType::BitSelect) {
     uhdm::BitSelect* bsel = (uhdm::BitSelect*)sel;
     const uhdm::Expr* index = bsel->getIndex();
     if (index->getUhdmType() == uhdm::UhdmType::Constant) {
-      const std::string_view ind = ((uhdm::Expr*)index)->getDecompile();
+      const std::string_view ind = ((uhdm::Constant*)index)->getDecompile();
       path_name.append("[").append(ind).append("]");
     } else if (index->getUhdmType() == uhdm::UhdmType::RefObj) {
-      const std::string_view ind = ((uhdm::Expr*)index)->getName();
+      const std::string_view ind = index->getName();
       path_name.append("[").append(ind).append("]");
     } else if (index->getUhdmType() == uhdm::UhdmType::Operation) {
-      path_name.append("[" + eval.prettyPrint(index) + "]");
+      path_name.append("[" + uhdm::prettyPrint(index) + "]");
     }
   } else if (const uhdm::PartSelect* pselect = any_cast<const uhdm::PartSelect*>(sel)) {
     std::string selectRange =
@@ -3327,12 +3325,13 @@ bool CompileHelper::isDecreasingRange(uhdm::Typespec* ts, DesignComponent* compo
         r = (*lts->getRanges())[0];
       }
     }
-    if (r) {
-      bool invalidValue = false;
-      uhdm::ExprEval eval;
-      int64_t lv = eval.get_value(invalidValue, r->getLeftExpr());
-      int64_t rv = eval.get_value(invalidValue, r->getRightExpr());
-      if ((invalidValue == false) && (lv > rv)) return true;
+    if (r != nullptr) {
+      uhdm::ExprEval eval(nullptr);
+      int64_t lv = 0;
+      if (!eval.getInt64(r->getLeftExpr(), &lv)) return false;
+      int64_t rv = 0;
+      if (!eval.getInt64(r->getRightExpr(), &rv)) return false;
+      if (lv > rv) return true;
     }
   }
   return false;
@@ -3724,133 +3723,132 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts, DesignCompon
   }
   const bool signedLhs = uhdm::getSigned(ts);
 
-  uhdm::ExprEval eval;
-  int64_t val = eval.get_value(invalidValue, c);
+  uhdm::ExprEval eval(nullptr);
+  int64_t val = 0;
+  if (!eval.getInt64(c, &val)) return result;
   bool constantIsSigned = false;
-  if (!invalidValue) {
-    if (c->getConstType() == vpiUIntConst) {
-      uint64_t mask = NumUtils::getMask(size);
-      uint64_t uval = (uint64_t)val;
-      uval = uval & mask;
-      if (uniquify) {
-        uhdm::Elaborator elaborator(&s, false, true);
-        c = elaborator.clone<>(c, nullptr);
-        result = c;
-      }
-      c->setValue(StrCat("UINT:", uval));
-      c->setDecompile(std::to_string(uval));
-      c->setConstType(vpiUIntConst);
-      c->setSize(size);
-    } else if (c->getConstType() == vpiBinaryConst) {
-      if (const uhdm::RefTypespec* tstmp_rt = c->getTypespec()) {
-        if (const uhdm::Typespec* tstmp = tstmp_rt->getActual()) {
-          if (tstmp->getUhdmType() == uhdm::UhdmType::IntTypespec) {
-            uhdm::IntTypespec* itps = (uhdm::IntTypespec*)tstmp;
-            if (itps->getSigned()) {
-              constantIsSigned = true;
-            }
-            if (!signedLhs) {
-              itps->setSigned(false);
-            }
+  if (c->getConstType() == vpiUIntConst) {
+    uint64_t mask = NumUtils::getMask(size);
+    uint64_t uval = (uint64_t)val;
+    uval = uval & mask;
+    if (uniquify) {
+      uhdm::Elaborator elaborator(&s, false, true);
+      c = elaborator.clone<>(c, nullptr);
+      result = c;
+    }
+    c->setValue(StrCat("UINT:", uval));
+    c->setDecompile(std::to_string(uval));
+    c->setConstType(vpiUIntConst);
+    c->setSize(size);
+  } else if (c->getConstType() == vpiBinaryConst) {
+    if (const uhdm::RefTypespec* tstmp_rt = c->getTypespec()) {
+      if (const uhdm::Typespec* tstmp = tstmp_rt->getActual()) {
+        if (tstmp->getUhdmType() == uhdm::UhdmType::IntTypespec) {
+          uhdm::IntTypespec* itps = (uhdm::IntTypespec*)tstmp;
+          if (itps->getSigned()) {
+            constantIsSigned = true;
           }
-          ts = tstmp;
+          if (!signedLhs) {
+            itps->setSigned(false);
+          }
         }
+        ts = tstmp;
       }
-      if (ts) {
-        uhdm::UhdmType ttype = ts->getUhdmType();
-        if (ttype == uhdm::UhdmType::LogicTypespec) {
-          std::string_view v = c->getValue();
-          v.remove_prefix(4);
-          if (orig_size > size) {
-            if (v.size() > ((uint32_t)(orig_size - size))) v.remove_prefix(orig_size - size);
-            c->setValue("BIN:" + std::string(v));
-            c->setDecompile(v);
-            c->setConstType(vpiBinaryConst);
-            c->setSize(size);
-          }
-        } else if (ttype == uhdm::UhdmType::IntTypespec) {
-          if (constantIsSigned) {
-            uint64_t msb = val & 1 << (orig_size - 1);
-            if (msb) {
-              // 2's complement
-              std::string v = std::string(c->getValue());
-              v.erase(0, 4);
-              if (signedLhs) {
-                const std::string res = twosComplement(v);
-                // Convert to int32_t
-                val = std::strtoll(res.c_str(), nullptr, 2);
-                val = -val;
-              } else {
-                if (size > orig_size) {
-                  for (uint32_t i = 0; i < uint32_t(size - orig_size); i++) {
-                    v += '1';
-                  }
-                  orig_size = size;
+    }
+    if (ts) {
+      uhdm::UhdmType ttype = ts->getUhdmType();
+      if (ttype == uhdm::UhdmType::LogicTypespec) {
+        std::string_view v = c->getValue();
+        v.remove_prefix(4);
+        if (orig_size > size) {
+          if (v.size() > ((uint32_t)(orig_size - size))) v.remove_prefix(orig_size - size);
+          c->setValue("BIN:" + std::string(v));
+          c->setDecompile(v);
+          c->setConstType(vpiBinaryConst);
+          c->setSize(size);
+        }
+      } else if (ttype == uhdm::UhdmType::IntTypespec) {
+        if (constantIsSigned) {
+          uint64_t msb = val & 1 << (orig_size - 1);
+          if (msb) {
+            // 2's complement
+            std::string v = std::string(c->getValue());
+            v.erase(0, 4);
+            if (signedLhs) {
+              const std::string res = twosComplement(v);
+              // Convert to int32_t
+              val = std::strtoll(res.c_str(), nullptr, 2);
+              val = -val;
+            } else {
+              if (size > orig_size) {
+                for (uint32_t i = 0; i < uint32_t(size - orig_size); i++) {
+                  v += '1';
                 }
-                val = std::strtoll(v.c_str(), nullptr, 2);
+                orig_size = size;
               }
-              if (uniquify) {
-                uhdm::Elaborator elaborator(&s, false, true);
-                c = elaborator.clone<>(c, nullptr);
-                result = c;
-              }
-              c->setValue(StrCat("INT:", val));
-              c->setDecompile(std::to_string(val));
-              c->setConstType(vpiIntConst);
-            } else if ((orig_size == 1) && (val == 1)) {
-              uint64_t mask = NumUtils::getMask(size);
-              if (uniquify) {
-                uhdm::Elaborator elaborator(&s, false, true);
-                c = elaborator.clone<>(c, nullptr);
-                result = c;
-              }
-              c->setValue(StrCat("UINT:", mask));
-              c->setDecompile(std::to_string(mask));
-              c->setConstType(vpiUIntConst);
+              val = std::strtoll(v.c_str(), nullptr, 2);
             }
-          } else {
-            if ((orig_size == -1) && (val == 1)) {
-              uint64_t mask = NumUtils::getMask(size);
-              if (uniquify) {
-                uhdm::Elaborator elaborator(&s, false, true);
-                c = elaborator.clone<>(c, nullptr);
-                result = c;
-              }
-              c->setValue(StrCat("UINT:", mask));
-              c->setDecompile(std::to_string(mask));
-              c->setConstType(vpiUIntConst);
+            if (uniquify) {
+              uhdm::Elaborator elaborator(&s, false, true);
+              c = elaborator.clone<>(c, nullptr);
+              result = c;
             }
-          }
-          c->setSize((orig_size < size) ? orig_size : size);
-        }
-      }
-      if (orig_size == -1) {
-        // '1, '0
-        uint64_t uval = (uint64_t)val;
-        if (uval == 1) {
-          if (uniquify) {
-            uhdm::Elaborator elaborator(&s, false, true);
-            c = elaborator.clone<>(c, nullptr);
-            result = c;
-          }
-          if (size <= 64) {
+            c->setValue(StrCat("INT:", val));
+            c->setDecompile(std::to_string(val));
+            c->setConstType(vpiIntConst);
+          } else if ((orig_size == 1) && (val == 1)) {
             uint64_t mask = NumUtils::getMask(size);
-            uval = mask;
-            c->setValue(StrCat("UINT:", uval));
-            c->setDecompile(std::to_string(uval));
+            if (uniquify) {
+              uhdm::Elaborator elaborator(&s, false, true);
+              c = elaborator.clone<>(c, nullptr);
+              result = c;
+            }
+            c->setValue(StrCat("UINT:", mask));
+            c->setDecompile(std::to_string(mask));
             c->setConstType(vpiUIntConst);
-          } else {
-            std::string mask(size, '1');
-            c->setValue("BIN:" + mask);
-            c->setDecompile(mask);
-            c->setConstType(vpiBinaryConst);
+          }
+        } else {
+          if ((orig_size == -1) && (val == 1)) {
+            uint64_t mask = NumUtils::getMask(size);
+            if (uniquify) {
+              uhdm::Elaborator elaborator(&s, false, true);
+              c = elaborator.clone<>(c, nullptr);
+              result = c;
+            }
+            c->setValue(StrCat("UINT:", mask));
+            c->setDecompile(std::to_string(mask));
+            c->setConstType(vpiUIntConst);
           }
         }
-        c->setSize(size);
+        c->setSize((orig_size < size) ? orig_size : size);
       }
-    } else {
+    }
+    if (orig_size == -1) {
+      // '1, '0
+      uint64_t uval = (uint64_t)val;
+      if (uval == 1) {
+        if (uniquify) {
+          uhdm::Elaborator elaborator(&s, false, true);
+          c = elaborator.clone<>(c, nullptr);
+          result = c;
+        }
+        if (size <= 64) {
+          uint64_t mask = NumUtils::getMask(size);
+          uval = mask;
+          c->setValue(StrCat("UINT:", uval));
+          c->setDecompile(std::to_string(uval));
+          c->setConstType(vpiUIntConst);
+        } else {
+          std::string mask(size, '1');
+          c->setValue("BIN:" + mask);
+          c->setDecompile(mask);
+          c->setConstType(vpiBinaryConst);
+        }
+      }
       c->setSize(size);
     }
+  } else {
+    c->setSize(size);
   }
 
   return result;
@@ -4547,10 +4545,9 @@ void CompileHelper::adjustUnsized(uhdm::Constant* c, int32_t size) {
   if (c == nullptr) return;
   int32_t csize = c->getSize();
   if (csize == -1) {
-    uhdm::ExprEval eval;
-    bool invalidValue = false;
-    uint64_t lv = eval.get_uvalue(invalidValue, c);
-    if (lv == 1) {
+    uhdm::ExprEval eval(nullptr);
+    uint64_t lv = 0;
+    if (eval.getUInt64(c, &lv) && (lv == 1)) {
       if (size <= 64) {
         uint64_t mask = NumUtils::getMask(size);
         c->setValue(StrCat("UINT:", mask));
@@ -4569,14 +4566,14 @@ void CompileHelper::adjustUnsized(uhdm::Constant* c, int32_t size) {
 int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop, int32_t opIndex, uhdm::Expr* rhs,
                                     DesignComponent* component, const FileContent* fC, NodeId nodeId,
                                     ValuedComponentI* instance) {
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  SymbolTable* const symbols = m_session->getSymbolTable();
   bool invalidValue = false;
   int32_t csize = cop->getSize();
   if (csize == 0) {
-    uhdm::Expr* vexp = reduceExpr(cop, invalidValue, component, instance, fileSystem->toPathId(cop->getFile(), symbols),
-                                  cop->getStartLine(), nullptr);
-    if (invalidValue == false && vexp) csize = vexp->getSize();
+    uhdm::ExprEval eval(nullptr);
+    uhdm::Expr* vexp = nullptr;
+    if (eval.reduceExpr(cop, component->getUhdmModel(), &vexp, true)) {
+      csize = vexp->getSize();
+    }
   }
 
   const uhdm::Typespec* rtps = nullptr;
@@ -4631,8 +4628,6 @@ int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop, 
 uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId child, const uhdm::Typespec* tps,
                                                    uhdm::Expr* rhs, DesignComponent* component,
                                                    ValuedComponentI* instance) {
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  SymbolTable* const symbolTable = m_session->getSymbolTable();
   uhdm::Serializer& s = m_compileDesign->getSerializer();
 
   uhdm::Expr* result = rhs;
@@ -4647,7 +4642,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
   uint64_t size = Bits(tps, invalidValue, component, fC, child, instance, false);
   uint64_t patternSize = 0;
 
-  uhdm::ExprEval eval(true);
+  uhdm::ExprEval eval(nullptr, true);
   rhs = eval.flattenPatternAssignments(s, tps, rhs);
 
   std::vector<int32_t> values(size, 0);
@@ -4709,21 +4704,17 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
 
               for (uhdm::Any* op : *operands) {
                 bool found = false;
-                int32_t val = 0;
+                int64_t val = 0;
                 if (op->getUhdmType() == uhdm::UhdmType::TaggedPattern) {
                   taggedPattern = true;
                   uhdm::TaggedPattern* tp = (uhdm::TaggedPattern*)op;
                   if (const uhdm::RefTypespec* rt = tp->getTypespec()) {
                     if (const uhdm::Typespec* tpsi = rt->getActual()) {
                       if (tpsi->getName() == member->getName()) {
-                        bool invalidValue = false;
-                        uhdm::ExprEval eval;
-                        val = eval.get_value(invalidValue,
-                                             reduceExpr((uhdm::Any*)tp->getPattern(), invalidValue, component, instance,
-                                                        fileSystem->toPathId(tp->getPattern()->getFile(), symbolTable),
-                                                        tp->getPattern()->getStartLine(), nullptr));
-                        found = true;
-                        if (invalidValue) {
+                        uhdm::ExprEval eval(nullptr);
+                        uhdm::Expr* expr = nullptr;
+                        if (!eval.reduceExpr(tp->getPattern<uhdm::Expr>(), component->getUhdmModel(), &expr, true) ||
+                            !eval.getInt64(expr, &val)) {
                           return result;
                         }
                       }
@@ -4767,13 +4758,15 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
                       std::string_view v = itps->getValue();
                       v.remove_prefix(std::string_view("INT:").length());
                       int64_t index;
-                      if (NumUtils::parseInt64(v, &index)) {
+                      if (NumUtils::parseInt64(v, &index) && (index >= 0) && (index < ((int64_t)size))) {
                         uhdm::Any* pattern = tp->getPattern();
                         if (pattern->getUhdmType() == uhdm::UhdmType::Constant) {
                           uhdm::Constant* c = (uhdm::Constant*)pattern;
-                          uhdm::ExprEval eval;
-                          int32_t val = eval.get_value(invalidValue, c);
-                          if (index >= 0 && index < ((int64_t)size)) values[size - index - 1] = val;
+                          uhdm::ExprEval eval(nullptr);
+                          int64_t val = 0;
+                          if (eval.getInt64(c, &val)) {
+                            values[size - index - 1] = val;
+                          }
                         }
                       }
                     }
@@ -4787,15 +4780,12 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
           int32_t opIndex = 0;
           for (uhdm::Any* op : *operands) {
             uhdm::Expr* cop = (uhdm::Expr*)op;
-            uhdm::ExprEval eval;
-            uhdm::Expr* vexp =
-                reduceExpr(cop, invalidValue, component, instance, fileSystem->toPathId(cop->getFile(), symbolTable),
-                           cop->getStartLine(), nullptr);
-            uint64_t v = eval.get_uvalue(invalidValue, vexp);
+            uhdm::ExprEval eval(nullptr);
+            uhdm::Expr* vexp = nullptr;
+            if (!eval.reduceExpr(cop, component->getUhdmModel(), &vexp, true)) return result;
+            uint64_t v = 0;
+            if (!eval.getUInt64(vexp, &v)) return result;
             int32_t csize = adjustOpSize(tps, cop, opIndex, rhs, component, fC, child, instance);
-            if (invalidValue) {
-              return result;
-            }
             patternSize += csize;
             for (int32_t i = 0; i < csize; i++) {
               if (valIndex > (int32_t)(size - 1)) {
@@ -4911,16 +4901,16 @@ bool CompileHelper::valueRange(Value* val, const uhdm::Typespec* lhstps, const u
     default: break;
   }
   if (r) {
-    bool invalidValue = false;
-    uhdm::Expr* lv =
-        reduceExpr((uhdm::Any*)r->getLeftExpr(), invalidValue, component, instance, BadPathId, 0, nullptr, true);
-    uhdm::Expr* rv =
-        reduceExpr((uhdm::Any*)r->getRightExpr(), invalidValue, component, instance, BadPathId, 0, nullptr, true);
-    uhdm::ExprEval eval;
-    int64_t lvv = eval.get_value(invalidValue, lv);
-    int64_t rvv = eval.get_value(invalidValue, rv);
-    if (invalidValue == false) {
-      val->setRange(lvv, rvv);
+    uhdm::ExprEval eval(nullptr);
+    uhdm::Expr* lv = nullptr;
+    uhdm::Expr* rv = nullptr;
+    if (eval.reduceExpr(r->getLeftExpr(), component->getUhdmModel(), &lv, true) &&
+        eval.reduceExpr(r->getRightExpr(), component->getUhdmModel(), &rv, true)) {
+      int64_t lvv = 0;
+      int64_t rvv = 0;
+      if (eval.getInt64(lv, &lvv) && eval.getInt64(rv, &rvv)) {
+        val->setRange(lvv, rvv);
+      }
     }
   }
   val->setSigned(isSigned);

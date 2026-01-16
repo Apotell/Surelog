@@ -1019,7 +1019,7 @@ void IntegrityChecker::visitBegin(const uhdm::Begin* object) {
   }
 }
 void IntegrityChecker::visitBitSelect(const uhdm::BitSelect* object) {
-  if (object->getActual() == nullptr) reportNullActual(object);
+  if (object->getArray() == nullptr) reportNullActual(object);
 }
 void IntegrityChecker::visitBitTypespec(const uhdm::BitTypespec* object) {}
 void IntegrityChecker::visitBreakStmt(const uhdm::BreakStmt* object) {}
@@ -1118,7 +1118,9 @@ void IntegrityChecker::visitImmediateAssume(const uhdm::ImmediateAssume* object)
 void IntegrityChecker::visitImmediateCover(const uhdm::ImmediateCover* object) {}
 void IntegrityChecker::visitImplication(const uhdm::Implication* object) {}
 void IntegrityChecker::visitImportTypespec(const uhdm::ImportTypespec* object) {}
-void IntegrityChecker::visitIndexedPartSelect(const uhdm::IndexedPartSelect* object) {}
+void IntegrityChecker::visitIndexedPartSelect(const uhdm::IndexedPartSelect* object) {
+  if (object->getArray() == nullptr) reportNullActual(object);
+}
 void IntegrityChecker::visitInitial(const uhdm::Initial* object) {}
 void IntegrityChecker::visitIntTypespec(const uhdm::IntTypespec* object) {}
 void IntegrityChecker::visitIntegerTypespec(const uhdm::IntegerTypespec* object) {}
@@ -1148,7 +1150,7 @@ void IntegrityChecker::visitPackage(const uhdm::Package* object) {}
 void IntegrityChecker::visitParamAssign(const uhdm::ParamAssign* object) {}
 void IntegrityChecker::visitParameter(const uhdm::Parameter* object) {}
 void IntegrityChecker::visitPartSelect(const uhdm::PartSelect* object) {
-  if (object->getActual() == nullptr) reportNullActual(object);
+  if (object->getArray() == nullptr) reportNullActual(object);
 }
 void IntegrityChecker::visitPathTerm(const uhdm::PathTerm* object) {}
 void IntegrityChecker::visitPort(const uhdm::Port* object) {}
@@ -1315,7 +1317,9 @@ void IntegrityChecker::visitUnsupportedExpr(const uhdm::UnsupportedExpr* object)
 void IntegrityChecker::visitUnsupportedStmt(const uhdm::UnsupportedStmt* object) {}
 void IntegrityChecker::visitUnsupportedTypespec(const uhdm::UnsupportedTypespec* object) {}
 void IntegrityChecker::visitUserSystf(const uhdm::UserSystf* object) {}
-void IntegrityChecker::visitVarSelect(const uhdm::VarSelect* object) {}
+void IntegrityChecker::visitVarSelect(const uhdm::VarSelect* object) {
+  if (object->getArray() == nullptr) reportNullActual(object);
+}
 void IntegrityChecker::visitVariable(const uhdm::Variable* object) {}
 void IntegrityChecker::visitVoidTypespec(const uhdm::VoidTypespec* object) {}
 void IntegrityChecker::visitWaitFork(const uhdm::WaitFork* object) {}

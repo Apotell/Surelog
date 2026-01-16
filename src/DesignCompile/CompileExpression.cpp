@@ -70,6 +70,7 @@
 // UHDM
 #include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
+#include <uhdm/Utils.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_user.h>
@@ -1042,7 +1043,7 @@ uhdm::Any *CompileHelper::getValue(std::string_view name, DesignComponent *compo
 
 uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, const FileContent *fC, NodeId Bit_select,
                                                   std::string_view name, uhdm::Any *pexpr, ValuedComponentI *instance,
-                                                  bool muteErrors) {
+                                                  bool muteErrors, std::string completeName) {
   uhdm::Serializer &s = m_compileDesign->getSerializer();
   uhdm::Any *result = nullptr;
   if ((fC->Type(Bit_select) == VObjectType::paConstant_bit_select) && (!fC->Sibling(Bit_select))) {
@@ -1094,13 +1095,42 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
             selParent = s.make<uhdm::BitSelect>();
           }
 
-          uhdm::Expr *sel = (uhdm::Expr *)compileExpression(component, fC, bitexp, selParent, instance, muteErrors);
+          uhdm::Expr *sel =
+              (uhdm::Expr *)compileExpression(component, fC, bitexp, selParent, instance, muteErrors, completeName);
+          // @todo: if sel is constant then 1st create a bitselect and set ref object for this then set sel as index for
+          // this bit select then this bitselect
+          // should be used as index of var select. Basically in case of var select it there is any constant then 1st
+          // create a bit select rather than setting index as sel.
+          uhdm::UhdmType stype = sel->getUhdmType();
+          if (((stype == uhdm::UhdmType::Constant) || (stype == uhdm::UhdmType::RefObj)) &&
+              (selParent->getUhdmType() == uhdm::UhdmType::VarSelect)) {
+            uhdm::BitSelect *temp_bit_select = s.make<uhdm::BitSelect>();
+            temp_bit_select->setParent(selParent);
+            temp_bit_select->setName(name);
+            temp_bit_select->setIndex(sel);
+            fC->populateCoreMembers(Bit_select, Bit_select, temp_bit_select);
+            sel->setParent(temp_bit_select, true);
+
+            uhdm::RefObj *rObj1 = s.make<uhdm::RefObj>();
+            rObj1->setName(completeName);
+            fC->populateCoreMembers(Bit_select, Bit_select, rObj1);
+            rObj1->setParent(temp_bit_select);
+            temp_bit_select->setArray(rObj1, true);
+            std::string stempName = uhdm::prettyPrint(temp_bit_select, 0);
+            temp_bit_select->setName(stempName);
+            sel = temp_bit_select;
+          }
+          uhdm::RefObj *rObj = s.make<uhdm::RefObj>();
+          rObj->setName(completeName);
+          fC->populateCoreMembers(Bit_select, Bit_select, rObj);
 
           if (result) {
             uhdm::VarSelect *var_select = (uhdm::VarSelect *)result;
             var_select->setParent(pexpr);
             var_select->getIndexes(true)->emplace_back(sel);
             sel->setParent(var_select);
+            rObj->setParent(var_select);
+            var_select->setArray(rObj, true);
           } else if (fC->Child(Bit_select) && fC->Sibling(Bit_select)) {
             uhdm::VarSelect *var_select = (uhdm::VarSelect *)selParent;
             var_select->setName(name);
@@ -1110,6 +1140,8 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
             var_select->setParent(pexpr);
             sel->setParent(var_select);
             var_select->getIndexes(true)->emplace_back(sel);
+            rObj->setParent(var_select);
+            var_select->setArray(rObj, true);
             result = var_select;
           } else {
             uhdm::BitSelect *bit_select = (uhdm::BitSelect *)selParent;
@@ -1128,6 +1160,9 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
             }
             if (!selectId) selectId = Bit_select;
             fC->populateCoreMembers(selectId, selectId, bit_select);
+            fC->populateCoreMembers(selectId, selectId, rObj);
+            rObj->setParent(bit_select);
+            bit_select->setArray(rObj, true);
             result = bit_select;
           }
           lastBitExp = bitexp;
@@ -1138,12 +1173,17 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
     } else if (fC->Type(Bit_select) == VObjectType::paPart_select_range ||
                fC->Type(Bit_select) == VObjectType::paConstant_part_select_range) {
       NodeId Constant_range = fC->Child(Bit_select);
-      uhdm::Expr *sel =
-          (uhdm::Expr *)compilePartSelectRange(component, fC, Constant_range, name, pexpr, instance, muteErrors);
+      uhdm::Expr *sel = (uhdm::Expr *)compilePartSelectRange(component, fC, Constant_range, name, pexpr, instance,
+                                                             muteErrors, completeName);
+      uhdm::RefObj *rObj = s.make<uhdm::RefObj>();
+      rObj->setName(completeName);
+
       if (result) {
         uhdm::VarSelect *var_select = (uhdm::VarSelect *)result;
         var_select->getIndexes(true)->emplace_back(sel);
         sel->setParent(var_select, true);
+        rObj->setParent(var_select);
+        var_select->setArray(rObj, true);
       } else if (fC->Child(Bit_select) && fC->Sibling(Bit_select)) {
         uhdm::VarSelect *var_select = s.make<uhdm::VarSelect>();
         var_select->setName(name);
@@ -1153,13 +1193,18 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
         var_select->setParent(pexpr);
         var_select->getIndexes(true)->emplace_back(sel);
         sel->setParent(var_select, true);
+        rObj->setParent(var_select);
+        var_select->setArray(rObj, true);
+        result = var_select;
       } else {
         result = sel;
       }
     } else if ((fC->Type(Bit_select) == VObjectType::STRING_CONST) ||
                (fC->Type(Bit_select) == VObjectType::paPs_or_hierarchical_identifier)) {
       std::string hname(name);
+      std::string tmpCompName(name);
       uhdm::HierPath *path = s.make<uhdm::HierPath>();
+      path->setParent(pexpr, true);
       uhdm::AnyCollection *elems = path->getPathElems(true);
       uhdm::RefObj *r1 = s.make<uhdm::RefObj>();
       r1->setName(name);
@@ -1191,7 +1236,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
           NodeId tmp = fC->Sibling(Bit_select);
           if (((fC->Type(tmp) == VObjectType::paConstant_bit_select) || (fC->Type(tmp) == VObjectType::paBit_select)) &&
               fC->Child(tmp)) {
-            uhdm::Any *sel = compileExpression(component, fC, Bit_select, pexpr, instance, muteErrors);
+            uhdm::Any *sel = compileExpression(component, fC, Bit_select, pexpr, instance, muteErrors, tmpCompName);
             if (sel) {
               hname.append(".");
               if (sel->getUhdmType() == uhdm::UhdmType::HierPath) {
@@ -1243,7 +1288,8 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
 // This is a a very large function and probably should be split into
 // smaller chunks.
 uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const FileContent *fC, NodeId parent,
-                                            uhdm::Any *pexpr, ValuedComponentI *instance, bool muteErrors) {
+                                            uhdm::Any *pexpr, ValuedComponentI *instance, bool muteErrors,
+                                            std::string completeName) {
   if (m_checkForLoops) {
     m_stackLevel++;
   }
@@ -1681,7 +1727,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
         case VObjectType::paAssignment_pattern_expression:
         case VObjectType::paConstant_assignment_pattern_expression:
         case VObjectType::paConst_or_range_expression:
-          result = compileExpression(component, fC, child, pexpr, instance, muteErrors);
+          result = compileExpression(component, fC, child, pexpr, instance, muteErrors, completeName);
           break;
         case VObjectType::paExpression_or_dist: {
           uhdm::Any *pexpr2 = pexpr;
@@ -2266,7 +2312,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
                 }
               } else if (type == VObjectType::paSelect || type == VObjectType::paConstant_select) {
                 NodeId Bit_select = fC->Child(rhs);
-                result = compileSelectExpression(component, fC, Bit_select, name, pexpr, instance, muteErrors);
+                result = compileSelectExpression(component, fC, Bit_select, name, pexpr, instance, muteErrors, name);
                 if (result != nullptr) {
                   fC->populateCoreMembers(rhsbackup, rhs, result);
                 }
@@ -2900,7 +2946,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
         }
         case VObjectType::STRING_CONST:
         case VObjectType::paDollar_root_keyword: {
-          result = compileComplexFuncCall(component, fC, parent, pexpr, instance, muteErrors);
+          result = compileComplexFuncCall(component, fC, parent, pexpr, instance, muteErrors, completeName);
           break;
         }
         case VObjectType::paArray_member_label: {
@@ -3333,7 +3379,8 @@ uhdm::RangeCollection *CompileHelper::compileRanges(DesignComponent *component, 
 
 uhdm::Any *CompileHelper::compilePartSelectRange(DesignComponent *component, const FileContent *fC,
                                                  NodeId Constant_range, std::string_view name, uhdm::Any *pexpr,
-                                                 ValuedComponentI *instance, bool muteErrors) {
+                                                 ValuedComponentI *instance, bool muteErrors,
+                                                 std::string completeName) {
   uhdm::Serializer &s = m_compileDesign->getSerializer();
   uhdm::Any *result = nullptr;
   NodeId Constant_expression = fC->Child(Constant_range);
@@ -3343,7 +3390,8 @@ uhdm::Any *CompileHelper::compilePartSelectRange(DesignComponent *component, con
       part_select->setFullName(name);
     }
     fC->populateCoreMembers(Constant_expression, fC->Sibling(Constant_expression), part_select);
-    if (uhdm::Expr *lexp = (uhdm::Expr *)compileExpression(component, fC, Constant_expression, part_select, instance)) {
+    if (uhdm::Expr *lexp = (uhdm::Expr *)compileExpression(component, fC, Constant_expression, part_select, instance,
+                                                           false, completeName)) {
       lexp->setParent(part_select);
       part_select->setLeftExpr(lexp);
     }
@@ -3355,9 +3403,13 @@ uhdm::Any *CompileHelper::compilePartSelectRange(DesignComponent *component, con
     if (!name.empty() && (name != "CREATE_UNNAMED_PARENT")) {
       part_select->setName(name);
       part_select->setDefName(name);
+    } else {
+      std::string stempName = uhdm::prettyPrint(part_select, 0);
+      part_select->setName(stempName);
     }
     part_select->setParent(pexpr);
     part_select->setConstantSelect(true);
+
     result = part_select;
   } else {
     // constant_indexed_range
@@ -3383,6 +3435,13 @@ uhdm::Any *CompileHelper::compilePartSelectRange(DesignComponent *component, con
     }
     part_select->setParent(pexpr);
     part_select->setConstantSelect(true);
+
+    uhdm::RefObj *rObj = s.make<uhdm::RefObj>();
+    rObj->setName(name);
+    fC->populateCoreMembers(Constant_range, Constant_range, rObj);
+    rObj->setParent(part_select);
+    part_select->setArray(rObj, true);
+
     result = part_select;
   }
   if (result != nullptr) {
@@ -3930,7 +3989,8 @@ uhdm::Any *CompileHelper::compileClog2(DesignComponent *component, const FileCon
 }
 
 uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, const FileContent *fC, NodeId id,
-                                                 uhdm::Any *pexpr, ValuedComponentI *instance, bool muteErrors) {
+                                                 uhdm::Any *pexpr, ValuedComponentI *instance, bool muteErrors,
+                                                 std::string completeName) {
   Design *const design = m_compileDesign->getCompiler()->getDesign();
   NodeId name = (fC->Type(id) == VObjectType::paComplex_func_call) ? fC->Child(id) : id;
   uhdm::Serializer &s = m_compileDesign->getSerializer();
@@ -3995,6 +4055,11 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
             sel->setName(bsname);
             sel->setIndex(select);
           }
+          uhdm::RefObj *rObj = s.make<uhdm::RefObj>();
+          rObj->setName(name);
+          fC->populateCoreMembers(Constant_expresion, Constant_expresion, rObj);
+          rObj->setParent(sel);
+          sel->setArray(rObj, true);
           elems->emplace_back(sel);
         }
       } else {
@@ -4207,9 +4272,11 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
       if (pack && pack->getParameters()) {
         for (uhdm::Any *param : *pack->getParameters()) {
           if (param->getName() == functionname) {
+            if (completeName.empty()) completeName = StrCat(packagename, "::", functionname);
             if ((fC->Type(List_of_arguments) == VObjectType::paSelect) && (fC->Child(List_of_arguments))) {
               result = compileSelectExpression(component, fC, fC->Child(List_of_arguments),
-                                               StrCat(packagename, "::", functionname), pexpr, instance, muteErrors);
+                                               StrCat(packagename, "::", functionname), pexpr, instance, muteErrors,
+                                               completeName);
               if (result)
                 result->setParent(param);
               else
@@ -4285,18 +4352,22 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
 
     if (dotedName) {
       std::string the_name(fC->SymName(name));
+      completeName = the_name;
       if (!hierPath) {
         VObjectType dtype = fC->Type(dotedName);
         VObjectType selectType = fC->Type(selectName);
         if (selectName && (selectType == VObjectType::paConstant_part_select_range)) {
-          result = compileSelectExpression(component, fC, dotedName, "", pexpr, instance, muteErrors);
+          result = compileSelectExpression(component, fC, dotedName, "", pexpr, instance, muteErrors, completeName);
           if (result && (result->getUhdmType() == uhdm::UhdmType::VarSelect)) {
             fC->populateCoreMembers(name, dotedName, result);
-            ((uhdm::VarSelect *)result)->setName(sval);
+            //((uhdm::VarSelect *)result)->setName(sval);
+            std::string stempName = uhdm::prettyPrint(result, 0);
+            ((uhdm::VarSelect *)result)->setName(stempName);
+            //((uhdm::VarSelect *)result)->getArray()->setName(sval);
           }
           return result;
         } else if (Bit_select && (fC->Child(Bit_select) || fC->Sibling(Bit_select))) {
-          result = compileSelectExpression(component, fC, Bit_select, sval, pexpr, instance, muteErrors);
+          result = compileSelectExpression(component, fC, Bit_select, sval, pexpr, instance, muteErrors, completeName);
           if (result && (result->getUhdmType() == uhdm::UhdmType::PartSelect)) {
             fC->populateCoreMembers(name, dotedName, result, true);
           }
@@ -4315,6 +4386,13 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
             the_name += "[" + decompileHelper(index) + "]";
             select->setFullName(the_name);
             select->setName(fC->SymName(name));
+
+            uhdm::RefObj *rObj = s.make<uhdm::RefObj>();
+            rObj->setName(fC->SymName(name));
+            fC->populateCoreMembers(name, name, rObj);
+            rObj->setParent(select);
+            select->setArray(rObj, true);
+
             result = select;
           } else {
             uhdm::RefObj *ref = s.make<uhdm::RefObj>();
@@ -4330,6 +4408,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
       }
 
       uhdm::HierPath *path = s.make<uhdm::HierPath>();
+      path->setParent(pexpr);
       uhdm::AnyCollection *elems = path->getPathElems(true);
       std::string tmpName = the_name;
       bool is_hierarchical = false;
@@ -4338,6 +4417,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
         NodeId BitSelect = fC->Child(dotedName);
         if (dtype == VObjectType::STRING_CONST) {
           the_name.append(".").append(fC->SymName(dotedName));
+          completeName = fC->SymName(dotedName);
           if (!tmpName.empty()) {
             uhdm::RefObj *ref = s.make<uhdm::RefObj>();
             elems->emplace_back(ref);
@@ -4369,7 +4449,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
             }
             if ((fC->Type(BitSelect) == VObjectType::paBit_select) && fC->Child(BitSelect)) {
               if (uhdm::Expr *select = (uhdm::Expr *)compileSelectExpression(component, fC, BitSelect, tmpName, path,
-                                                                             instance, muteErrors)) {
+                                                                             instance, muteErrors, completeName)) {
                 if ((select->getUhdmType() == uhdm::UhdmType::PartSelect) ||
                     (select->getUhdmType() == uhdm::UhdmType::VarSelect)) {
                   fC->populateCoreMembers(name, dotedName, select);
@@ -4381,8 +4461,9 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
               break;
             } else if (fC->Type(BitSelect) == VObjectType::paPart_select_range) {
               if (uhdm::Expr *select = (uhdm::Expr *)compilePartSelectRange(
-                      component, fC, Expression, "CREATE_UNNAMED_PARENT", path, instance, muteErrors)) {
+                      component, fC, Expression, "CREATE_UNNAMED_PARENT", path, instance, muteErrors, completeName)) {
                 the_name += decompileHelper(select);
+                completeName = the_name;
                 // Fix start/end to include the name
                 select->setStartColumn(fC->Column(name));
                 if (uhdm::RefObj *ro = any_cast<uhdm::RefObj *>(select)) {
@@ -4393,9 +4474,11 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
               }
             } else if (Expression && (fC->Type(Expression) == VObjectType::paPart_select_range) &&
                        fC->Child(Expression)) {
-              if (uhdm::Expr *select = (uhdm::Expr *)compilePartSelectRange(
-                      component, fC, fC->Child(Expression), "CREATE_UNNAMED_PARENT", path, instance, muteErrors)) {
+              if (uhdm::Expr *select = (uhdm::Expr *)compilePartSelectRange(component, fC, fC->Child(Expression),
+                                                                            "CREATE_UNNAMED_PARENT", path, instance,
+                                                                            muteErrors, completeName)) {
                 the_name += decompileHelper(select);
+                completeName = the_name;
                 // Fix start/end to include the name
                 select->setStartColumn(fC->Column(name));
                 if (uhdm::RefObj *ro = any_cast<uhdm::RefObj *>(select)) {
@@ -4408,14 +4491,21 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
               uhdm::BitSelect *select = s.make<uhdm::BitSelect>();
               select->setParent(path);
               fC->populateCoreMembers(name, name, select);
-              if (uhdm::Expr *index =
-                      (uhdm::Expr *)compileExpression(component, fC, Expression, select, instance, muteErrors)) {
+              if (uhdm::Expr *index = (uhdm::Expr *)compileExpression(component, fC, Expression, select, instance,
+                                                                      muteErrors, completeName)) {
                 tmpName = the_name;
                 the_name += "[" + decompileHelper(index) + "]";
+                completeName = the_name;
                 select->setName(tmpName);
                 select->setFullName(the_name);
                 select->setIndex(index);
               }
+              uhdm::RefObj *rObj = s.make<uhdm::RefObj>();
+              rObj->setName(tmpName);
+              fC->populateCoreMembers(name, name, rObj);
+              rObj->setParent(select);
+              select->setArray(rObj, true);
+
               elems->emplace_back(select);
             } else {
               uhdm::RefObj *ref = s.make<uhdm::RefObj>();
@@ -4853,6 +4943,11 @@ uhdm::Any *CompileHelper::compilePsOrHierarchicalArrayIdentifier(DesignComponent
             bs->setIndex(any_cast<uhdm::Expr>(expr));
             name.append("[").append(decompileHelper(expr)).append("]");
           }
+          uhdm::RefObj *rObj = s.make<uhdm::RefObj>();
+          rObj->setName(fC->SymName(id));
+          fC->populateCoreMembers(id, Constant_Expression_Id, rObj);
+          rObj->setParent(bs);
+          bs->setArray(rObj, true);
           pathElems->emplace_back(bs);
         } else {
           uhdm::RefObj *const ro = s.make<uhdm::RefObj>();

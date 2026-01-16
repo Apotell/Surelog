@@ -263,11 +263,11 @@ class CompileHelper final {
 
   uhdm::Any* compileExpression(DesignComponent* component, const FileContent* fC, NodeId nodeId,
                                uhdm::Any* pexpr = nullptr, ValuedComponentI* instance = nullptr,
-                               bool muteErrors = false);
+                               bool muteErrors = false, std::string completeName = "");
 
   uhdm::Any* compilePartSelectRange(DesignComponent* component, const FileContent* fC, NodeId Constant_range,
                                     std::string_view name, uhdm::Any* pexpr, ValuedComponentI* instance,
-                                    bool muteErrors);
+                                    bool muteErrors, std::string completeName = "");
 
   uhdm::RangeCollection* compileRanges(DesignComponent* component, const FileContent* fC, NodeId Packed_dimension,
                                        uhdm::Any* pexpr, ValuedComponentI* instance, int32_t& size, bool muteErrors);
@@ -284,7 +284,7 @@ class CompileHelper final {
 
   uhdm::Any* compileSelectExpression(DesignComponent* component, const FileContent* fC, NodeId Bit_select,
                                      std::string_view name, uhdm::Any* pexpr, ValuedComponentI* instance,
-                                     bool muteErrors);
+                                     bool muteErrors, std::string completeName = "");
 
   uhdm::Any* compileBits(DesignComponent* component, const FileContent* fC, NodeId nameId, NodeId List_of_arguments,
                          uhdm::Any* pexpr, ValuedComponentI* instance, bool sizeMode, bool muteErrors);
@@ -302,7 +302,7 @@ class CompileHelper final {
                                     ValuedComponentI* instance);
 
   uhdm::Any* compileComplexFuncCall(DesignComponent* component, const FileContent* fC, NodeId nodeId, uhdm::Any* pexpr,
-                                    ValuedComponentI* instance, bool muteErrors);
+                                    ValuedComponentI* instance, bool muteErrors, std::string completeName = "");
 
   uhdm::AttributeCollection* compileAttributes(DesignComponent* component, const FileContent* fC, NodeId nodeId,
                                                uhdm::Any* pexpr);

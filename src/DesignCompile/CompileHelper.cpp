@@ -4256,8 +4256,8 @@ uhdm::AttributeCollection* CompileHelper::compileAttributes(DesignComponent* com
       results->emplace_back(attribute);
       if (NodeId Constant_expression = fC->Sibling(Attr_name)) {
         if (uhdm::Any* const expr = compileExpression(component, fC, Constant_expression, attribute)) {
-          if (const uhdm::Constant* const c = any_cast<uhdm::Constant>(expr)) {
-            attribute->setValue(c->getValue());
+          if (uhdm::Constant* c = any_cast<uhdm::Constant>(expr)) {
+            attribute->setValue(c);
           }
         }
       }

@@ -4749,17 +4749,19 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
                   if (const uhdm::Typespec* tpsi = rt->getActual()) {
                     if (tpsi->getUhdmType() == uhdm::UhdmType::IntegerTypespec) {
                       uhdm::IntegerTypespec* itps = (uhdm::IntegerTypespec*)tpsi;
-                      std::string_view v = itps->getValue();
-                      v.remove_prefix(std::string_view("INT:").length());
-                      int64_t index;
-                      if (NumUtils::parseInt64(v, &index) && (index >= 0) && (index < ((int64_t)size))) {
-                        uhdm::Any* pattern = tp->getPattern();
-                        if (pattern->getUhdmType() == uhdm::UhdmType::Constant) {
-                          uhdm::Constant* c = (uhdm::Constant*)pattern;
-                          uhdm::ExprEval eval(nullptr);
-                          int64_t val = 0;
-                          if (eval.getInt64(c, &val)) {
-                            values[size - index - 1] = val;
+                      if (const uhdm::Constant* ct = itps->getValue()) {
+                        std::string_view v = ct->getValue();
+                        v.remove_prefix(std::string_view("INT:").length());
+                        int64_t index;
+                        if (NumUtils::parseInt64(v, &index) && (index >= 0) && (index < ((int64_t)size))) {
+                          uhdm::Any* pattern = tp->getPattern();
+                          if (pattern->getUhdmType() == uhdm::UhdmType::Constant) {
+                            uhdm::Constant* c = (uhdm::Constant*)pattern;
+                            uhdm::ExprEval eval(nullptr);
+                            int64_t val = 0;
+                            if (eval.getInt64(c, &val)) {
+                              values[size - index - 1] = val;
+                            }
                           }
                         }
                       }

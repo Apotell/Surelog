@@ -649,7 +649,7 @@ uhdm::TypespecMember* CompileHelper::buildTypespecMember(const FileContent* fC, 
   return var;
 }
 
-IntTypespec* CompileHelper::buildIntTypespec(PathId fileId, std::string_view name, std::string_view value,
+IntTypespec* CompileHelper::buildIntTypespec(PathId fileId, std::string_view name, const uhdm::Constant* exp,
                                              uint32_t line, uint16_t column, uint32_t eline, uint16_t ecolumn) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   /*
@@ -662,7 +662,7 @@ IntTypespec* CompileHelper::buildIntTypespec(PathId fileId, std::string_view nam
   // if (itr == m_cache_int_typespec.end()) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::IntTypespec* var = s.make<uhdm::IntTypespec>();
-  var->setValue(value);
+  var->setValue(const_cast<uhdm::Constant*>(exp));
   var->setFile(fileSystem->toPath(fileId));
   var->setStartLine(line);
   var->setStartColumn(column);
@@ -1083,7 +1083,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         fC->populateCoreMembers(type, type, var);
         result = var;
         if (uhdm::Constant* constant = any_cast<uhdm::Constant*>(res)) {
-          var->setValue(constant->getValue());
+          var->setValue(constant);
         } else {
           var->setExpr((uhdm::Expr*)res);
         }
@@ -1183,7 +1183,23 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         result = compileDatastructureTypespec(component, fC, type, instance, "", typeName);
       } else {
         uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
-        var->setValue(StrCat("INT:", fC->SymName(literal)));
+        //var->setValue(StrCat("INT:", fC->SymName(literal)));
+        uhdm::Constant* const c = s.make<uhdm::Constant>();
+        fC->populateCoreMembers(type, type, c);
+        const std::string_view name = fC->SymName(literal);
+        c->setSize(name.size());
+        c->setValue(StrCat("INT:", name));
+        c->setDecompile(StrCat(size, "\'d", name));
+
+        uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        c->setTypespec(rt);
+        fC->populateCoreMembers(type, type, rt);
+
+        uhdm::IntTypespec* const ts = s.make<uhdm::IntTypespec>();
+        ts->setParent(var);
+        rt->setActual(ts);
+
         fC->populateCoreMembers(type, type, var);
         result = var;
       }
@@ -1254,9 +1270,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
               const std::string_view param_name = param->getLhs()->getName();
               if (param_name == name) {
                 const uhdm::Any* rhs = param->getRhs();
-                if (const uhdm::Constant* exp = any_cast<const uhdm::Constant*>(rhs)) {
+                if (const uhdm::Constant* exp = any_cast<uhdm::Constant*>(rhs)) {
                   uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
-                  its->setValue(exp->getValue());
+                  its->setValue(const_cast<uhdm::Constant*>(exp));
                   result = its;
                 } else {
                   result = (uhdm::Typespec*)rhs;
@@ -1407,7 +1423,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
               if (const uhdm::Constant* exp = any_cast<const uhdm::Constant*>(rhs)) {
                 uhdm::IntTypespec* its = buildIntTypespec(
 
-                    fileSystem->toPathId(param->getFile(), symbols), typeName, exp->getValue(), param->getStartLine(),
+                    fileSystem->toPathId(param->getFile(), symbols), typeName, exp, param->getStartLine(),
                     param->getStartColumn(), param->getStartLine(), param->getStartColumn());
                 result = its;
               } else if (const uhdm::Operation* exp = any_cast<const uhdm::Operation*>(rhs)) {
@@ -1461,7 +1477,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         } else {
           uhdm::IntegerTypespec* const var = s.make<uhdm::IntegerTypespec>();
           if (uhdm::Constant* const c = any_cast<uhdm::Constant>(exp)) {
-            var->setValue(c->getValue());
+            var->setValue(c);
           } else {
             var->setExpr(exp);
             exp->setParent(var, true);

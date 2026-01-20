@@ -1183,8 +1183,10 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         result = compileDatastructureTypespec(component, fC, type, instance, "", typeName);
       } else {
         uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
+        var->setParent(pstmt);
         //var->setValue(StrCat("INT:", fC->SymName(literal)));
         uhdm::Constant* const c = s.make<uhdm::Constant>();
+        c->setParent(var);
         fC->populateCoreMembers(type, type, c);
         const std::string_view name = fC->SymName(literal);
         c->setSize(name.size());
@@ -1199,7 +1201,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         uhdm::IntTypespec* const ts = s.make<uhdm::IntTypespec>();
         ts->setParent(var);
         rt->setActual(ts);
-
+        var->setValue(c);
         fC->populateCoreMembers(type, type, var);
         result = var;
       }

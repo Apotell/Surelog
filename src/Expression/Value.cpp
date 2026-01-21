@@ -260,23 +260,23 @@ std::string SValue::uhdmValue() {
   std::string result;
   switch (valueType) {
     case Value::Type::Scalar:
-      result = "SCAL:";
+      //result = "SCAL:";
       result += std::to_string(m_value.u_int);
       break;
     case Value::Type::Double:
-      result = "REAL:";
+      //result = "REAL:";
       result += std::to_string(m_value.d_int);
       break;
     case Value::Type::Integer:
-      result = "INT:";
+      //result = "INT:";
       result += std::to_string(m_value.s_int);
       break;
     case Value::Type::Unsigned:
-      result = "UINT:";
+      //result = "UINT:";
       result += std::to_string(m_value.u_int);
       break;
     default:
-      result = "INT:";
+      //result = "INT:";
       result += std::to_string(m_value.u_int);
       break;
   }
@@ -793,7 +793,7 @@ int32_t LValue::getSize() const {
 }
 
 std::string LValue::uhdmValue() {
-  std::string result = "INT:";
+  std::string result = "";
   // The value is encoded in int form for the most part.
 
   // if (m_type == Type::Binary)
@@ -804,31 +804,31 @@ std::string LValue::uhdmValue() {
   //  result = "OCT:";
   switch (m_type) {
     case Value::Type::Scalar:
-      result = "SCAL:";
+      //result = "SCAL:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.u_int);
       }
       break;
     case Value::Type::Double:
-      result = "REAL:";
+      //result = "REAL:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.d_int);
       }
       break;
     case Value::Type::Integer:
-      result = "INT:";
+      //result = "INT:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.s_int);
       }
       break;
     case Value::Type::Unsigned:
-      result = "UINT:";
+      //result = "UINT:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.u_int);
       }
       break;
     default:
-      result = "INT:";
+      //result = "INT:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.u_int);
       }

@@ -26,7 +26,7 @@
 #pragma once
 
 #include <Surelog/Expression/Value.h>
-
+#include <uhdm/uhdm_forward_decl.h>
 #include <cstdint>
 #include <string_view>
 
@@ -43,7 +43,7 @@ class ExprBuilder final {
   ExprBuilder(const ExprBuilder& orig) = delete;
 
   Value* evalExpr(const FileContent*, NodeId id, ValuedComponentI* instance = nullptr, bool muteErrors = false);
-  Value* fromVpiValue(std::string_view value, int32_t size);
+  Value* fromVpiValue(std::string_view s, int32_t constType, int32_t size);
   Value* fromString(std::string_view value);
   Value* clone(Value* val);
 

@@ -1190,7 +1190,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         fC->populateCoreMembers(type, type, c);
         const std::string_view name = fC->SymName(literal);
         c->setSize(name.size());
-        c->setValue(StrCat("INT:", name));
+        c->setConstType(vpiIntVal);
+        c->setValue(StrCat("", name));
         c->setDecompile(StrCat(name.size(), "\'d", name));
 
         uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();

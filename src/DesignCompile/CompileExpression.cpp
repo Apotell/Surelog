@@ -472,21 +472,21 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         switch (base) {
           case 'h':
           case 'H': {
-            //v = StrCat("HEX:", v);
+            v = StrCat("", v);
             c->setConstType(vpiHexConst);
             if (!tps) tps = s.make<uhdm::IntTypespec>();
             break;
           }
           case 'b':
           case 'B': {
-            //v = StrCat("BIN:", v);
+            v = StrCat("", v);
             c->setConstType(vpiBinaryConst);
             tps = s.make<uhdm::LogicTypespec>();
             break;
           }
           case 'o':
           case 'O': {
-            //v = StrCat("OCT:", v);
+            v = StrCat("", v);
             c->setConstType(vpiOctConst);
             if (!tps) {
               uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
@@ -497,7 +497,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
           }
           case 'd':
           case 'D': {
-            //v = StrCat("DEC:", v);
+            v = StrCat("", v);
             c->setConstType(vpiDecConst);
             if (!tps) {
               uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
@@ -507,7 +507,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
             break;
           }
           default: {
-            //v = StrCat("BIN:", v);
+            v = StrCat("", v);
             c->setConstType(vpiBinaryConst);
             tps = s.make<uhdm::LogicTypespec>();
             break;
@@ -515,7 +515,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         }
       } else {
         if (!value.empty() && value[0] == '-') {
-          //v = StrCat("INT:", value);
+          v = StrCat("", value);
           c->setConstType(vpiIntConst);
           if (!tps) {
             uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
@@ -523,7 +523,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
             tps = t;
           }
         } else {
-          //v = StrCat("UINT:", value);
+          v = StrCat("", value);
           c->setConstType(vpiUIntConst);
           v = StringUtils::replaceAll(v, "#", "");
           if (!tps) tps = s.make<uhdm::IntTypespec>();

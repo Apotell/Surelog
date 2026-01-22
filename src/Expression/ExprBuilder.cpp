@@ -907,7 +907,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent, ValuedCompone
 
 Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t size) {
   Value* val = nullptr;
-  if (constType == vpiUIntVal) {
+  if (constType == vpiUIntConst) {
     val = m_valueFactory.newLValue();
     uint64_t v = 0;
     //s.remove_prefix(std::string_view("UINT:").length());
@@ -918,7 +918,7 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t 
       val->set(v, Value::Type::Unsigned, size);
     else
       val->set(v);
-  } else if (constType == vpiIntVal) {
+  } else if (constType == vpiIntConst) {
     val = m_valueFactory.newLValue();
     int64_t v = 0;
     //s.remove_prefix(std::string_view("INT:").length());
@@ -929,7 +929,7 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t 
       val->set(v, Value::Type::Integer, size);
     else
       val->set(v);
-  } else if (constType == vpiDecStrVal) {
+  } else if (constType == vpiDecConst) {
     val = m_valueFactory.newLValue();
     int64_t v = 0;
     //s.remove_prefix(std::string_view("DEC:").length());
@@ -940,8 +940,40 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t 
       val->set(v, Value::Type::Integer, size);
     else
       val->set(v);
-  } else if (constType == vpiScalarVal) {
-    //s.remove_prefix(std::string_view("SCAL:").length());
+  } else if (constType == vpiBinaryConst) {
+    //s.remove_prefix(std::string_view("BIN:").length());
+    StValue* sval = (StValue*)m_valueFactory.newStValue();
+    sval->set(s, Value::Type::Binary, (size ? size : s.size()));
+    val = sval;
+  } else if (constType == vpiHexConst) {
+    //s.remove_prefix(std::string_view("HEX:").length());
+    StValue* sval = (StValue*)m_valueFactory.newStValue();
+    sval->set(s, Value::Type::Hexadecimal, (size ? size : (s.size() - 4) * 4));
+    val = sval;
+  } else if (constType == vpiOctConst) {
+    val = m_valueFactory.newLValue();
+    uint64_t v = 0;
+    //s.remove_prefix(std::string_view("OCT:").length());
+    if (NumUtils::parseOctal(s, &v) == nullptr) {
+      v = 0;
+    }
+    if (size)
+      val->set(v, Value::Type::Unsigned, size);
+    else
+      val->set(v, Value::Type::Unsigned, (size ? size : (s.size() - 4) * 4));
+  } else if (constType == vpiStringConst) {
+    val = m_valueFactory.newStValue();
+    val->set(s.data());
+  } else if (constType == vpiRealConst) {
+    val = m_valueFactory.newLValue();
+    //s.remove_prefix(std::string_view("REAL:").length());
+    double v = 0;
+    if (NumUtils::parseDouble(s, &v) == nullptr) {
+      v = 0;
+    }
+    val->set(v);
+  } else if (constType == vpiCaseX || constType == vpiCaseZ) {
+    // s.remove_prefix(std::string_view("SCAL:").length());
     switch (s.front()) {
       case 'Z': break;
       case 'X': break;
@@ -964,39 +996,7 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t 
         }
         break;
     }
-  } else if (constType == vpiBinStrVal) {
-    //s.remove_prefix(std::string_view("BIN:").length());
-    StValue* sval = (StValue*)m_valueFactory.newStValue();
-    sval->set(s, Value::Type::Binary, (size ? size : s.size()));
-    val = sval;
-  } else if (constType == vpiHexStrVal) {
-    //s.remove_prefix(std::string_view("HEX:").length());
-    StValue* sval = (StValue*)m_valueFactory.newStValue();
-    sval->set(s, Value::Type::Hexadecimal, (size ? size : (s.size() - 4) * 4));
-    val = sval;
-  } else if (constType == vpiOctStrVal) {
-    val = m_valueFactory.newLValue();
-    uint64_t v = 0;
-    //s.remove_prefix(std::string_view("OCT:").length());
-    if (NumUtils::parseOctal(s, &v) == nullptr) {
-      v = 0;
-    }
-    if (size)
-      val->set(v, Value::Type::Unsigned, size);
-    else
-      val->set(v, Value::Type::Unsigned, (size ? size : (s.size() - 4) * 4));
-  } else if (constType == vpiStringVal) {
-    val = m_valueFactory.newStValue();
-    val->set(s.data());
-  } else if (constType == vpiRealVal) {
-    val = m_valueFactory.newLValue();
-    //s.remove_prefix(std::string_view("REAL:").length());
-    double v = 0;
-    if (NumUtils::parseDouble(s, &v) == nullptr) {
-      v = 0;
-    }
-    val->set(v);
-  }
+  } 
   return val;
 }
 

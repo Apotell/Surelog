@@ -918,7 +918,7 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t 
       val->set(v, Value::Type::Unsigned, size);
     else
       val->set(v);
-  } else if (constType == vpiIntConst) {
+  } else if (constType == vpiIntConst || constType == vpiNullConst) {
     val = m_valueFactory.newLValue();
     int64_t v = 0;
     //s.remove_prefix(std::string_view("INT:").length());
@@ -961,7 +961,7 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t 
       val->set(v, Value::Type::Unsigned, size);
     else
       val->set(v, Value::Type::Unsigned, (size ? size : (s.size() - 4) * 4));
-  } else if (constType == vpiStringConst) {
+  } else if (constType == vpiStringConst || constType == vpiUnboundedConst) {
     val = m_valueFactory.newStValue();
     val->set(s.data());
   } else if (constType == vpiRealConst) {

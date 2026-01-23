@@ -835,7 +835,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setParent(pscope);
       c->setDecompile(fC->SymName(child));
       c->setSize(value.length() * 8);
-      c->setValue(StrCat("STRING:", value));
+      c->setValue(StrCat("", value));
       c->setConstType(vpiStringConst);
       fC->populateCoreMembers(child, child, c);
 

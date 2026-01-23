@@ -153,7 +153,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
   switch (valueType) {
     case Value::Type::Scalar: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiScalarVal);
+      c->setConstType(vpiScalerConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(1);
@@ -162,7 +162,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::Binary: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiBinStrVal);
+      c->setConstType(vpiBinaryConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -171,7 +171,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::Hexadecimal: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiHexStrVal);
+      c->setConstType(vpiHexConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -180,7 +180,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::Octal: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiOctStrVal);
+      c->setConstType(vpiOctConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -196,16 +196,16 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
       uhdm::IntTypespec* t = s.make<uhdm::IntTypespec>();
       if (valueType == Value::Type::Integer) {
         t->setSigned(true);
-        c->setConstType(vpiIntVal);
+        c->setConstType(vpiIntConst);
       } else {
-        c->setConstType(vpiUIntVal);
+        c->setConstType(vpiUIntConst);
       }
       tps = t;
       break;
     }
     case Value::Type::Double: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiRealVal);
+      c->setConstType(vpiDecConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -214,7 +214,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::String: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiStringVal);
+      c->setConstType(vpiStringConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());

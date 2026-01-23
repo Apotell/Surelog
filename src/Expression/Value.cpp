@@ -1693,7 +1693,7 @@ std::string StValue::uhdmValue() {
   if (result == "STRING:") {
     m_value = StringUtils::unquoted(m_value);
   }
-  result += m_value;
+  result = m_value;
   return result;
 }
 

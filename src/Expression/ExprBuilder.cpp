@@ -972,7 +972,7 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t constType, int32_t 
       v = 0;
     }
     val->set(v);
-  } else if (constType == vpiCaseX || constType == vpiCaseZ) {
+  } else if (constType == vpiScalerConst) {
     // s.remove_prefix(std::string_view("SCAL:").length());
     switch (s.front()) {
       case 'Z': break;

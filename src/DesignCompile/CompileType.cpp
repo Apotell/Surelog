@@ -849,11 +849,11 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
       const uhdm::Expr* rhs = r->getRightExpr();
       if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
         const std::string_view value = ((uhdm::Constant*)rhs)->getValue();
-        if (value == "STRING:$") {
+        if (value == "$") {
           queue = true;
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:associative") {
+        } else if (value == "associative") {
           associative = true;
           const uhdm::Typespec* tp = nullptr;
           if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
@@ -871,7 +871,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
 
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:unsized") {
+        } else if (value == "unsized") {
           dynamic = true;
           unpackedDimensions->erase(itr);
           break;
@@ -932,11 +932,11 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
         }
       } else if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
         const std::string_view value = ((uhdm::Constant*)rhs)->getValue();
-        if (value == "STRING:$") {
+        if (value == "$") {
           queue = true;
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:associative") {
+        } else if (value == "associative") {
           associative = true;
           const uhdm::Typespec* tp = nullptr;
           if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
@@ -954,7 +954,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
 
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:unsized") {
+        } else if (value == "unsized") {
           dynamic = true;
           unpackedDimensions->erase(itr);
           break;

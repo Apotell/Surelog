@@ -4133,6 +4133,8 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
       // TODO: this is a mockup
       uhdm::Constant *cvar = s.make<uhdm::Constant>();
       cvar->setDecompile("this");
+      cvar->setValue("this");
+      cvar->setSize(4);
       cvar->setParent(pexpr);
       cvar->setConstType(vpiStringConst);
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();

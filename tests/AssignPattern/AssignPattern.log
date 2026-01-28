@@ -69,21 +69,21 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignPattern/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               3
+Constant                                               4
 ContAssign                                             2
 Design                                                 1
 Identifier                                             1
-IntTypespec                                            3
+IntTypespec                                            4
 IntegerTypespec                                        1
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              3
 RefObj                                                 2
-RefTypespec                                            4
+RefTypespec                                            5
 SourceFile                                             1
 TaggedPattern                                          1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                27
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -112,7 +112,21 @@ Design: (unnamed)
   \_IntegerTypespec: , line:2:18, endln:2:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
-    |INT:8
+    |vpiValue:
+    \_Constant: , line:2:18, endln:2:19
+      |vpiParent:
+      \_IntegerTypespec: , line:2:18, endln:2:19
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:2:18, endln:2:19
+        |vpiParent:
+        \_Constant: , line:2:18, endln:2:19
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:6
+      |vpiSize:1
+      |vpiDecompile:1'd8
+      |vpiValue:8
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -171,7 +185,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (work@top), line:2:18, endln:2:19
           |vpiParent:
@@ -210,7 +224,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:8
-        |UINT:8
+        |vpiValue:8
       |vpiOperand:
       \_Operation: , line:3:20, endln:3:21
         |vpiParent:
@@ -230,7 +244,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

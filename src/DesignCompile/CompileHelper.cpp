@@ -4749,7 +4749,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
                   if (const uhdm::Typespec* tpsi = rt->getActual()) {
                     if (tpsi->getUhdmType() == uhdm::UhdmType::IntegerTypespec) {
                       uhdm::IntegerTypespec* itps = (uhdm::IntegerTypespec*)tpsi;
-                      if (const uhdm::Constant* ct = itps->getValue()) {
+                      if (const uhdm::Constant* ct = any_cast<uhdm::Constant>(itps->getValue())) {
                         std::string_view v = ct->getValue();
                         //v.remove_prefix(std::string_view("INT:").length());
                         int64_t index;

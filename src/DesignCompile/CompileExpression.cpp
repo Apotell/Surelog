@@ -1017,8 +1017,10 @@ uhdm::Any *CompileHelper::getValue(std::string_view name, DesignComponent *compo
           if (n->getName() == name) {
             uhdm::Constant *c = constantFromValue(sval, pexpr);
             fC->populateCoreMembers(nodeId, nodeId, c->getTypespec());
-            if (const uhdm::Constant *const val = static_cast<const uhdm::EnumConst *>(n)->getValue()) {
-              c->setValue(val->getValue());
+            if (const uhdm::Expr *expr = static_cast<const uhdm::EnumConst *>(n)->getValue()) {
+              if (const uhdm::Constant *const val = any_cast<uhdm::Constant>(expr)) {
+                c->setValue(val->getValue());
+              }
             }
             setRange(c, sval);
             result = c;

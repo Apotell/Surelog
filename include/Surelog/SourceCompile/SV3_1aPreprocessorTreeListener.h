@@ -104,6 +104,9 @@ class SV3_1aPreprocessorTreeListener final : public SV3_1aPpParserBaseListener, 
   void appendPreprocBegin();
   void appendPreprocEnd();
 
+  void appendInactiveBodyBegin();
+  void appendInactiveBodyEnd();
+
  private:
   using token_set_t = std::set<antlr4::Token*>;
 

@@ -60,6 +60,11 @@ static constexpr std::string_view kPreprocBeginSuffix = " !}";
 static constexpr std::string_view kPreprocEndPrefix = "{! ";
 static constexpr std::string_view kPreprocEndSuffix = " >!}";
 
+static constexpr std::string_view kInactiveBodyBeginPrefix = "{!-- ";
+static constexpr std::string_view kInactiveBodyBeginSuffix = " }";
+
+static constexpr std::string_view kInactiveBodyEndPrefix = "{! ";
+static constexpr std::string_view kInactiveBodyEndSuffix = " --!";
 class CommonListenerHelper {
  public:
   virtual ~CommonListenerHelper() = default;

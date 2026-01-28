@@ -472,6 +472,20 @@ void SV3_1aPreprocessorTreeListener::appendPreprocEnd() {
   m_contextToObjectMap.clear();
 }
 
+void SV3_1aPreprocessorTreeListener::appendInactiveBodyBegin() {
+  if (m_pp != m_pp->getSourceFile()) return;
+
+  const size_t index = m_fileContent->getVObjects().size();
+  m_pp->append(StrCat(kInactiveBodyBeginPrefix, index, kInactiveBodyBeginSuffix));
+}
+
+void SV3_1aPreprocessorTreeListener::appendInactiveBodyEnd() {
+  if (m_pp != m_pp->getSourceFile()) return;
+
+  const size_t index = m_fileContent->getVObjects().size();
+  m_pp->append(StrCat(kInactiveBodyEndPrefix, index, kInactiveBodyEndSuffix));
+}
+
 void SV3_1aPreprocessorTreeListener::enterString(SV3_1aPpParser::StringContext *ctx) {
   if (m_inMacroDefinitionParsing || !m_inActiveBranch || m_inProtectedRegion) {
     return;
@@ -1227,7 +1241,10 @@ void SV3_1aPreprocessorTreeListener::exitMacroInstanceNoArgs(SV3_1aPpParser::Mac
 }
 
 void SV3_1aPreprocessorTreeListener::enterMacro_definition(SV3_1aPpParser::Macro_definitionContext *ctx) {
-  if (!m_inActiveBranch || m_inProtectedRegion) return;
+  if (!m_inActiveBranch || m_inProtectedRegion) {
+    appendInactiveBodyBegin();
+    return;
+  }
 
   appendPreprocBegin();
 
@@ -1354,7 +1371,11 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(SV3_1aPpParser::Macro
 }
 
 void SV3_1aPreprocessorTreeListener::exitMacro_definition(SV3_1aPpParser::Macro_definitionContext *ctx) {
-  if (!m_inActiveBranch || m_inProtectedRegion) return;
+  if (!m_inActiveBranch || m_inProtectedRegion) 
+  {
+    appendInactiveBodyEnd();
+    return;
+  }
 
   adjustMacroDefinitionLocation(ctx, addVObject(ctx, VObjectType::ppMacro_definition));
 

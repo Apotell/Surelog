@@ -4003,3 +4003,11 @@ use_clause
   ;
 
 comment: LINE_COMMENT | BLOCK_COMMENT;
+
+inactive_body
+  : INACTIVE_BODY_BEGIN inactive_body_content* INACTIVE_BODY_END
+  ;
+
+inactive_body_content
+  : .
+  ;

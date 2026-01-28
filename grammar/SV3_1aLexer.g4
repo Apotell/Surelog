@@ -34,8 +34,8 @@ channels {
 PREPROC_BEGIN: '{!< ' Decimal_digit+ ' !}' -> channel(PREPROC);
 PREPROC_END: '{! ' Decimal_digit+ ' >!}' -> channel(PREPROC);
 
-INACTIVE_BODY_BEGIN: '{!-- ' Decimal_digit+ ' !}';
-INACTIVE_BODY_END: '{! ' Decimal_digit+ ' --!}';
+INACTIVE_BODY_BEGIN: '{!-- ' Decimal_digit+ ' !}' -> channel(PREPROC);
+INACTIVE_BODY_END: '{! ' Decimal_digit+ ' --!}' -> channel(PREPROC);
 
 QMARK: '?';
 

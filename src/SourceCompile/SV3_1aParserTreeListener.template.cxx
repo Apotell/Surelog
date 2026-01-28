@@ -267,6 +267,30 @@ void SV3_1aParserTreeListener::processPendingTokens(antlr4::tree::ParseTree *tre
         }
       } break;
 
+      case SV3_1aParser::INACTIVE_BODY_BEGIN: {
+        const std::string text = lastToken->getText();
+        std::string_view svtext = text;
+        svtext.remove_prefix(kInactiveBodyBeginPrefix.length());
+
+        uint32_t index = 0;
+        if (NumUtils::parseUint32(svtext, &index)) {
+          int abc = 0;
+          ++abc;
+        }
+      } break;
+
+      case SV3_1aParser::INACTIVE_BODY_END: {
+        const std::string text = lastToken->getText();
+        std::string_view svtext = text;
+        svtext.remove_prefix(kInactiveBodyEndPrefix.length());
+
+        uint32_t index = 0;
+        if (NumUtils::parseUint32(svtext, &index)) {
+          int abc = 0;
+          ++abc;
+        }
+      } break;
+
       case SV3_1aParser::LINE_COMMENT: {
         if (m_paused != 0) break;
 

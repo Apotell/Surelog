@@ -483,6 +483,9 @@ void SV3_1aPreprocessorTreeListener::appendInactiveBodyEnd() {
   if (m_pp != m_pp->getSourceFile()) return;
 
   const size_t index = m_fileContent->getVObjects().size();
+  // TODO(AS):
+  // Add a VObject to the AST tree with all the content collected between the
+  // start of inactive node and end of this inactive node
   m_pp->append(StrCat(kInactiveBodyEndPrefix, index, kInactiveBodyEndSuffix));
 }
 
@@ -1573,6 +1576,11 @@ void SV3_1aPreprocessorTreeListener::exitEveryRule(antlr4::ParserRuleContext *ct
 void SV3_1aPreprocessorTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
   antlr4::Token *const token = node->getSymbol();
   const size_t tokenType = token->getType();
+
+  // TODO(AS):
+  // If processing inactive node, collect the text from input node in a string.
+  // This string content will be passed into the "append inactive end node" call
+  // and will be included as the content for the appendded VObject
 
   if (tokenType == antlr4::Token::EOF) return;
   if (m_tokensToIgnore.find(token) != m_tokensToIgnore.cend()) return;

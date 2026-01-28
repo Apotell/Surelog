@@ -276,6 +276,10 @@ void SV3_1aParserTreeListener::processPendingTokens(antlr4::tree::ParseTree *tre
         if (NumUtils::parseUint32(svtext, &index)) {
           int abc = 0;
           ++abc;
+
+          // TODO(AS):
+          // Get the content of from the preprocessor tree based on the index found here.
+          // Create a new parser object and try to parse that string as actual source.
         }
       } break;
 

@@ -24,19 +24,31 @@ from pathlib import Path
 from threading import Lock
 
 import blacklisted
+from utils import (
+  find_files,
+  generate_tarball,
+  get_platform_id,
+  is_ci_build,
+  is_windows,
+  log,
+  mkdir,
+  restore_directory_state,
+  rmdir,
+  rmtree,
+  snapshot_directory_state,
+  Status,
+  transform_path,
+)
 
 _this_filepath = os.path.realpath(__file__)
 _default_workspace_dirpath = os.path.dirname(os.path.dirname(_this_filepath))
-
-def _is_ci_build():
-  return 'GITHUB_JOB' in os.environ
 
 # Except for the workspace dirpath all paths are expected to be relative
 # either to the workspace directory or the build directory
 _default_test_dirpaths = [ 'tests', os.path.join('third_party', 'tests') ]
 _default_build_dirpath = 'build'
 
-if not _is_ci_build():
+if not is_ci_build():
   # _default_build_dirpath = os.path.join('out', 'build', 'x64-Debug')
   # _default_build_dirpath = os.path.join('out', 'build', 'x64-Release')
   # _default_build_dirpath = os.path.join('out', 'build', 'x64-Clang-Debug')
@@ -44,7 +56,7 @@ if not _is_ci_build():
   pass
 
 _default_output_dirpath = 'regression'
-_default_surelog_filename = 'surelog.exe' if platform.system() == 'Windows' else 'surelog'
+_default_surelog_filename = 'surelog.exe' if is_windows() else 'surelog'
 _default_surelog_filepath = os.path.join('bin', _default_surelog_filename)
 
 _re_status_1 = re.compile(r'^\s*\[\s*(?P<status>\w+)\]\s*:\s*(?P<count>\d+)$')
@@ -82,43 +94,8 @@ _blacklisted_dump_uhdm_tests = {
 }
 
 
-_log_mutex = Lock()
-def log(text, end='\n'):
-  _log_mutex.acquire()
-  try:
-    print(text, end=end, flush=True)
-  finally:
-    _log_mutex.release()
-
-
-@unique
-class Status(Enum):
-  PASS = 0
-  DIFF = -1
-  FAIL = -2
-  FAILDUMP = -3
-  SEGFLT = -4
-  NOGOLD = -5
-  TOOLFAIL = -6
-  EXECERR = -7
-
-  def __str__(self):
-    return str(self.name)
-
-
-def _get_platform_id():
-  system = platform.system()
-  if system == 'Linux':
-    return '.linux'
-  elif system == 'Darwin':
-    return '.osx'
-  elif system == 'Windows':
-    return '.msys' if 'MSYSTEM' in os.environ else '.win'
-
-  return ''
-
 def _get_surelog_log_filepaths(name, golden_dirpath, output_dirpath):
-  platform_id = _get_platform_id()
+  platform_id = get_platform_id()
 
   golden_log_filepath = os.path.join(golden_dirpath, f'{name}{platform_id}.log')
   if os.path.exists(golden_log_filepath):
@@ -128,63 +105,6 @@ def _get_surelog_log_filepaths(name, golden_dirpath, output_dirpath):
     surelog_log_filepath = os.path.join(output_dirpath, f'{name}.log')
 
   return golden_log_filepath, surelog_log_filepath
-
-
-def _transform_path(path):
-  if 'MSYSTEM' not in os.environ:
-    return path
-
-  path = path.replace('/', '\\').replace('\\\\', '\\').replace('\\', '\\\\')
-  result = subprocess.run(['cygpath', '-u', path], capture_output=True, text=True)
-  result.check_returncode()
-  return result.stdout.strip()
-
-
-def _find_files(dirpath, pattern):
-  relpaths = []
-  for filepath in Path(dirpath).rglob(pattern):
-    relpaths.append(os.path.relpath(filepath, dirpath))
-
-  if 'MSYSTEM' in os.environ:
-    relpaths = [relpath.replace('\\', '/') for relpath in relpaths]
-
-  return sorted(relpaths)
-
-
-def _mkdir(dirpath, retries=10):
-  count = 0
-  while count < retries:
-    os.makedirs(dirpath, exist_ok=True)
-
-    if os.path.exists(dirpath):
-      return True
-
-    count += 1
-    time.sleep(0.1)
-
-  return os.path.exists(dirpath)
-
-
-def _rmdir(dirpath, retries=10):
-  count = 0
-  while count < retries:
-    shutil.rmtree(dirpath, ignore_errors=True)
-
-    if not os.path.exists(dirpath):
-      return True
-
-    count += 1
-    time.sleep(0.1)
-
-  shutil.rmtree(dirpath)
-  return not os.path.exists(dirpath)
-
-
-def _rmtree(dirpath, patterns):
-  for pattern in patterns:
-    for path in Path(dirpath).rglob(pattern):
-      if os.path.isdir(path):
-        _rmdir(path)
 
 
 def _scan(dirpaths, filters, shard, num_shards):
@@ -223,37 +143,6 @@ def _scan(dirpaths, filters, shard, num_shards):
     OrderedDict([ (name, all_tests[name]) for name in sorted(filtered_tests, key=lambda t: t.lower()) ]),
     OrderedDict([ (name, all_tests[name]) for name in sorted(blacklisted_tests, key=lambda t: t.lower()) ])
   ]
-
-
-def _snapshot_directory_state(dirpath):
-  snapshot = set()
-  for sub_dirpath, sub_dirnames, filenames in os.walk(dirpath):
-    snapshot.add(sub_dirpath)
-    snapshot.update([os.path.join(sub_dirpath, filename) for filename in filenames])
-
-  return snapshot
-
-
-def _restore_directory_state(dirpath, golden_snapshot, output_dirpath, current_snapshot):
-  dirt = set(current_snapshot).difference(set(golden_snapshot))
-  # Sort based on the length of the string and then chronologically
-  dirt = sorted(dirt, key=lambda item: (len(item), item))
-
-  for path in dirt:
-    if os.path.isdir(path) or os.path.isfile(path):
-      src_rel_path = os.path.relpath(path, dirpath)
-      dst_abs_path = os.path.join(output_dirpath, src_rel_path)
-      try:
-        _mkdir(os.path.dirname(dst_abs_path))
-        shutil.move(path, dst_abs_path)
-      except:
-        print(f'Failed to move {path} to {dst_abs_path}')
-        traceback.print_exc()
-
-
-def _generate_tarball(dirpath):
-  with tarfile.open(dirpath + '.tar.gz', 'w:gz', format=tarfile.GNU_FORMAT) as tarball:
-    tarball.add(dirpath, arcname=os.path.basename(dirpath), recursive=True)
 
 
 def _normalize_log(content, path_mappings):
@@ -368,12 +257,12 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
   cmdline = cmdline.strip()
 
   if '.sh' in cmdline or '.bat' in cmdline:
-    args = ['sh'] + [arg for arg in cmdline.split() if arg] + [_transform_path(binary_filepath)]
+    args = ['sh'] + [arg for arg in cmdline.split() if arg] + [transform_path(binary_filepath)]
   else:
     if '*/*.v' in cmdline:
-      cmdline = cmdline.replace('*/*.v', ' '.join(_find_files(dirpath, '*.v')))
+      cmdline = cmdline.replace('*/*.v', ' '.join(find_files(dirpath, '*.v')))
     if '*/*.sv' in cmdline:
-      cmdline = cmdline.replace('*/*.sv', ' '.join(_find_files(dirpath, '*.sv')))
+      cmdline = cmdline.replace('*/*.sv', ' '.join(find_files(dirpath, '*.sv')))
     if '-mt' in cmdline:
       cmdline = re.sub(r'-mt\s+(max|\d+)', '', cmdline)
 
@@ -389,7 +278,7 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
     for i in range(0, len(parts)):
       if parts[i] and ('*' in parts[i] or '?' in parts[i]):
           if parts[i].endswith('.v') or parts[i].endswith('.sv') or parts[i].endswith('.pkg'):
-            parts[i] = ' '.join(_find_files(dirpath, parts[i]))
+            parts[i] = ' '.join(find_files(dirpath, parts[i]))
 
     parts += ['-mt', (mt or '0')]
     if mp or '-mp' not in cmdline:
@@ -531,9 +420,9 @@ def _run_one(params):
   uhdm_slpp_all_filepath = os.path.join(output_dirpath, 'slpp_all', 'surelog.uhdm')
   uhdm_slpp_unit_filepath = os.path.join(output_dirpath, 'slpp_unit', 'surelog.uhdm')
 
-  _rmtree(dirpath, ['slpp_all', 'slpp_unit'])
-  _rmdir(output_dirpath)
-  _mkdir(output_dirpath)
+  rmtree(dirpath, ['slpp_all', 'slpp_unit'])
+  rmdir(output_dirpath)
+  mkdir(output_dirpath)
 
   result = {
     'TESTNAME': name,
@@ -568,7 +457,7 @@ def _run_one(params):
       print( '\n')
 
       print('Snapshot ...')
-      golden_snapshot = _snapshot_directory_state(dirpath)
+      golden_snapshot = snapshot_directory_state(dirpath)
       print(f'Found {len(golden_snapshot)} files & directories')
       print('\n')
 
@@ -642,12 +531,10 @@ def _run_one(params):
           result['STATUS'] = Status.DIFF
 
       print('Restoring pristine state ...', flush=True)
-      current_snapshot = _snapshot_directory_state(dirpath)
+      current_snapshot = snapshot_directory_state(dirpath)
       print(f'Found {len(current_snapshot)} files & directories')
 
-      _restore_directory_state(
-        dirpath, golden_snapshot,
-        output_dirpath, current_snapshot)
+      restore_directory_state(dirpath, golden_snapshot,output_dirpath, current_snapshot)
       print('\n')
 
       pprint.pprint({'result': result})
@@ -668,9 +555,9 @@ def _run_one(params):
 
     regression_log_strm.flush()
 
-  if _is_ci_build():
-    _generate_tarball(output_dirpath)
-    _rmdir(output_dirpath)
+  if is_ci_build():
+    generate_tarball(output_dirpath)
+    rmdir(output_dirpath)
 
   if completed:
     log(f'... {name} Completed.')
@@ -1153,7 +1040,7 @@ def _main():
   print(f'    filtered-tests: {len(filtered_tests)}')
   print( '\n\n')
 
-  _mkdir(args.output_dirpath)
+  mkdir(args.output_dirpath)
 
   result = 0
   if args.mode == 'run':

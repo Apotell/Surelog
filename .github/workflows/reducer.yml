@@ -10,10 +10,12 @@ on:
       run_id:
         description: 'Run Id'
         required: true
+        default: '21470954121'
         type: string
       run_number:
         description: 'Run Number'
         required: true
+        default: '967'
         type: string
 
 env:
@@ -32,26 +34,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        num_shards: [6]
-        shard: [0, 1, 2, 3, 4, 5]
+        # num_shards: [6]
+        # shard: [0, 1, 2, 3, 4, 5]
+        num_shards: [1]
+        shard: [0]
         config:
         - { os: ubuntu-24.04, artifact-tag: ubuntu-gcc, build-type: release }
 #        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }
 
     steps:
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ env.python3_version }}
-        architecture: 'x64'
-
-    - name: Setup Python Packages
-      run: pip3 install orderedmultidict psutil tabulate
-
     - name: Git Pull
       uses: actions/checkout@v4
       with:
-        submodules: recursive
+        sparse-checkout: scripts
 
     - name: Download build artifact
       uses: actions/download-artifact@v4
@@ -88,6 +83,15 @@ jobs:
         done
 
         ls -lR
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.python3_version }}
+        architecture: 'x64'
+
+    - name: Setup Python Packages
+      run: pip3 install psutil tabulate
 
     - name: Run reduction
       run: |

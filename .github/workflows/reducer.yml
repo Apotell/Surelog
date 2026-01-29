@@ -95,24 +95,29 @@ jobs:
 
     - name: Run reduction
       run: |
-        python3 scripts/reducer.py    \
-          --source-dirpath regression \
+        python3 scripts/reducer.py                                                                    \
+          --build-dirpath build/bin/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} \
+          --reducer-filepath reducer                                                                  \
+          --source-dirpath regression                                                                 \
           --jobs $(nproc)
 
         ls -lR
 
-#    - name: Prepare regression artifacts
-#      if: always()
-#      run: |
-#        ls -l build
-#        cd build
-#        ls -l regression
-#        mv regression ${{ env.regression-artifact-name }}
-#        find ${{ env.regression-artifact-name }} -name "*.tar.gz" | tar czfp ${{ env.regression-artifact-name }}.tar.gz -T -
-#
-#    - name: Archive artifacts
-#      if: always()
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: ${{ env.regression-artifact-name }}
-#        path: build/${{ env.regression-artifact-name }}.tar.gz
+    - name: Prepare regression artifacts
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      if: always()
+      run: |
+        echo "$GITHUB_CONTEXT" > env.txt
+        ls -l regression
+        mv regression ${{ env.reducer-artifact-name }}
+        tar czfp ${{ env.reducer-artifact-name }}.tar.gz ${{ env.reducer-artifact-name }}
+
+    - name: Archive artifacts
+      if: always()
+      uses: actions/upload-artifact@v7
+      with:
+        name: ${{ env.reducer-artifact-name }}
+        path: |
+          ${{ env.reducer-artifact-name }}.tar.gz
+          env.txt

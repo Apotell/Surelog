@@ -464,7 +464,13 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component, Signal* sig
 
   if (Net* const net = any_cast<Net>(obj)) {
     net->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-    if (NodeId idValue = fC->Sibling(signalId)) {
+    NodeId idValue = fC->Sibling(signalId);
+    while (idValue) {
+      if (fC->Type(idValue) == VObjectType::paConstant_expression || fC->Type(idValue) == VObjectType::paExpression)
+        break;
+      idValue = fC->Sibling(idValue);
+    }
+    if (idValue) {
       if(uhdm::Expr* rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr)))
         net->setValue(rhs);
     }

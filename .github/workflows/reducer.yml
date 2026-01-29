@@ -6,6 +6,11 @@ concurrency:
 
 on:
   workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Run Id'
+        required: true
+        type: string
 
 env:
   python3_version: '3.x'
@@ -18,7 +23,7 @@ jobs:
     env:
       build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
       regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
-      reduced-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
+      reducer-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
 
     strategy:
       fail-fast: false
@@ -45,14 +50,16 @@ jobs:
         submodules: recursive
 
     - name: Download build artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: ${{ env.build-artifact-name }}
+        run-id: ${{ github.event.inputs.run_id }}
 
     - name: Download regression artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: ${{ env.regression-artifact-name }}
+        run-id: ${{ github.event.inputs.run_id }}
 
     - name: Extract artifacts
       shell: bash

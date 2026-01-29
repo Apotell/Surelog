@@ -75,16 +75,14 @@ jobs:
         rm ${{ env.regression-artifact-name }}.tar.gz
         mv ${{ env.regression-artifact-name }} regression
 
-        ls -lR
-
-        for archive in regression/*; do
-          if [[ "$archive" != "*.tar.gz" ]]; then
-            tar xzfp $archive
-            rm $archive
-          fi
-        done
-
-        ls -lR
+        pushd regression
+          for archive in *; do
+            if [[ "$archive" != "*.tar.gz" ]]; then
+              tar xzfp $archive
+              rm $archive
+            fi
+          done
+        popd
 
     - name: Setup Python
       uses: actions/setup-python@v5
@@ -97,11 +95,7 @@ jobs:
 
     - name: Run reduction
       run: |
-        python3 scripts/reducer.py              \
-          --jobs $(nproc)                       \
-          --num_shards=${{ matrix.num_shards }} \
-          --shard=${{ matrix.shard }}
-
+        python3 scripts/reducer.py --jobs $(nproc)
         ls -lR
 
 #    - name: Prepare regression artifacts

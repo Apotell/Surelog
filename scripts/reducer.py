@@ -234,8 +234,8 @@ def _run_one(params):
     result['STATUS'] = Status.EXECERR
 
   if is_ci_build():
-    generate_tarball(test_dirpath)
-    rmdir(test_dirpath)
+    generate_tarball(str(test_dirpath))
+    rmdir(str(test_dirpath))
 
   log(f'... {name} Completed.' if completed else f'... {name} FAILED.')
   return result

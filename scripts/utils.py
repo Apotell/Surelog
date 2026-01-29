@@ -142,7 +142,7 @@ def restore_directory_state(dirpath, golden_snapshot, output_dirpath, current_sn
       src_rel_path = os.path.relpath(path, dirpath)
       dst_abs_path = os.path.join(output_dirpath, src_rel_path)
       try:
-        _mkdir(os.path.dirname(dst_abs_path))
+        mkdir(os.path.dirname(dst_abs_path))
         shutil.move(path, dst_abs_path)
       except:
         print(f'Failed to move {path} to {dst_abs_path}')

@@ -1,0 +1,102 @@
+name: reducer
+
+concurrency:
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+
+env:
+  python3_version: '3.x'
+
+jobs:
+  reduction:
+    name: "Reduction | ${{ matrix.artifact-tag }} | ${{ matrix.shard }}"
+    runs-on: ${{ matrix.config.os }}
+
+    env:
+      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
+      regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
+      reduced-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        num_shards: [6]
+        shard: [0, 1, 2, 3, 4, 5]
+        config:
+        - { os: ubuntu-24.04, artifact-tag: ubuntu-gcc, build-type: release }
+#        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }
+
+    steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.python3_version }}
+        architecture: 'x64'
+
+    - name: Setup Python Packages
+      run: pip3 install orderedmultidict psutil tabulate
+
+    - name: Git Pull
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Download build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ env.build-artifact-name }}
+
+    - name: Download regression artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ env.regression-artifact-name }}
+
+    - name: Extract artifacts
+      shell: bash
+      run: |
+        # This has to be a separate step and run under bash since tar on Windows
+        # still doesn't support symlink and the root repository folder is a symlink.
+        tar xzfp ${{ env.build-artifact-name }}.tar.gz
+        rm ${{ env.build-artifact-name }}.tar.gz
+        mv ${{ env.build-artifact-name }} build
+
+        tar xzfp ${{ env.regression-artifact-name }}.tar.gz
+        rm ${{ env.regression-artifact-name }}.tar.gz
+
+        mv ${{ env.regression-artifact-name }} regression
+        for archive in regression; do
+          if [[ "$archive" != "*.tar.gz" ]]; then
+            tar xzfp $archive
+            rm $archive
+          fi
+        done
+
+        ls -lR
+
+    - name: Run reduction
+      run: |
+        python3 scripts/reducer.py              \
+          --jobs $(nproc)                       \
+          --num_shards=${{ matrix.num_shards }} \
+          --shard=${{ matrix.shard }}
+
+        ls -lR
+
+#    - name: Prepare regression artifacts
+#      if: always()
+#      run: |
+#        ls -l build
+#        cd build
+#        ls -l regression
+#        mv regression ${{ env.regression-artifact-name }}
+#        find ${{ env.regression-artifact-name }} -name "*.tar.gz" | tar czfp ${{ env.regression-artifact-name }}.tar.gz -T -
+#
+#    - name: Archive artifacts
+#      if: always()
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: ${{ env.regression-artifact-name }}
+#        path: build/${{ env.regression-artifact-name }}.tar.gz

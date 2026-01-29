@@ -464,6 +464,10 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component, Signal* sig
 
   if (Net* const net = any_cast<Net>(obj)) {
     net->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
+    if (NodeId idValue = fC->Sibling(signalId)) {
+      if(uhdm::Expr* rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr)))
+        net->setValue(rhs);
+    }
   }
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {

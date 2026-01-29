@@ -231,10 +231,10 @@ n<> u<247> t<Top_level_rule> c<1> l<1:1> el<29:1>
                                               n<> u<204> t<Primary_literal> p<205> c<203> l<20:19> el<20:20>
                                                 n<i> u<203> t<STRING_CONST> p<204> l<20:19> el<20:20>
                         n<// $cast> u<216> t<LINE_COMMENT> p<235> s<233> l<22:5> el<22:13>
-                        n<> u<233> t<Statement_or_null> p<235> c<232> s<234> l<23:5> el<23:25>
-                          n<> u<232> t<Statement> p<233> c<231> l<23:5> el<23:25>
-                            n<> u<231> t<Statement_item> p<232> c<230> l<23:5> el<23:25>
-                              n<> u<230> t<Subroutine_call_statement> p<231> c<229> l<23:5> el<23:25>
+                        n<> u<233> t<Statement_or_null> p<235> c<232> s<234> l<23:5> el<23:26>
+                          n<> u<232> t<Statement> p<233> c<231> l<23:5> el<23:26>
+                            n<> u<231> t<Statement_item> p<232> c<230> l<23:5> el<23:26>
+                              n<> u<230> t<Subroutine_call_statement> p<231> c<229> l<23:5> el<23:26>
                                 n<> u<229> t<Subroutine_call> p<230> c<217> l<23:11> el<23:24>
                                   n<> u<217> t<Dollar_keyword> p<229> s<218> l<23:11> el<23:12>
                                   n<cast> u<218> t<STRING_CONST> p<229> s<228> l<23:12> el<23:16>
@@ -251,11 +251,500 @@ n<> u<247> t<Top_level_rule> c<1> l<1:1> el<29:1>
                         n<> u<234> t<END> p<235> l<25:3> el<25:6>
         n<> u<243> t<ENDMODULE> p<244> l<27:1> el<27:10>
 AST_DEBUG_END
-[SNT:PA0207] ${SURELOG_DIR}/tests/ConvFunc01/dut.sv:23:23: Syntax error: missing ')' at ';',
-    void'($cast(i, 3.9);
-                       ^-- ${SURELOG_DIR}/tests/ConvFunc01/dut.sv:23:23:.
+[WRN:PA0205] ${SURELOG_DIR}/tests/ConvFunc01/dut.sv:1:1: No timescale set for "tb".
+[INF:CP0300] Compilation...
+[INF:CP0303] ${SURELOG_DIR}/tests/ConvFunc01/dut.sv:1:1: Compile module "work@tb".
+[INF:UH0706] Creating UHDM Model...
+=== UHDM Object Stats Begin (Non-Elaborated Model) ===
+Assignment                                             8
+Begin                                                  1
+ByteTypespec                                           1
+Constant                                               7
+Design                                                 1
+Identifier                                             6
+Initial                                                1
+IntTypespec                                            6
+LogicTypespec                                          1
+Module                                                 1
+ModuleTypespec                                         1
+Net                                                    1
+Operation                                              2
+Range                                                  1
+RealTypespec                                           3
+RefObj                                                13
+RefTypespec                                           11
+SourceFile                                             1
+SysFuncCall                                            5
+Variable                                               3
+------------------------------------------------------------
+Total:                                                74
+=== UHDM Object Stats End ===
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConvFunc01/slpp_all/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+Design: (unnamed)
+|vpiName:unnamed
+|vpiSourceFiles:
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut.sv
+|vpiAllModules:
+\_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (work@tb), line:1:8, endln:1:10
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiName:work@tb
+  |vpiVariable:
+  \_Variable: (work@tb.i), line:3:7, endln:3:8
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiTypespec:
+    \_RefTypespec: (work@tb.i), line:3:3, endln:3:6
+      |vpiParent:
+      \_Variable: (work@tb.i), line:3:7, endln:3:8
+      |vpiFullName:work@tb.i
+      |vpiActual:
+      \_IntTypespec: , line:3:3, endln:3:6
+    |vpiName:i
+    |vpiFullName:work@tb.i
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariable:
+  \_Variable: (work@tb.r), line:3:15, endln:3:16
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiTypespec:
+    \_RefTypespec: (work@tb.r), line:3:10, endln:3:14
+      |vpiParent:
+      \_Variable: (work@tb.r), line:3:15, endln:3:16
+      |vpiFullName:work@tb.r
+      |vpiActual:
+      \_RealTypespec: , line:3:10, endln:3:14
+    |vpiName:r
+    |vpiFullName:work@tb.r
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariable:
+  \_Variable: (work@tb.b), line:3:23, endln:3:24
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiTypespec:
+    \_RefTypespec: (work@tb.b), line:3:18, endln:3:22
+      |vpiParent:
+      \_Variable: (work@tb.b), line:3:23, endln:3:24
+      |vpiFullName:work@tb.b
+      |vpiActual:
+      \_ByteTypespec: , line:3:18, endln:3:22
+    |vpiName:b
+    |vpiFullName:work@tb.b
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiTypespec:
+  \_IntTypespec: , line:3:3, endln:3:6
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiSigned:1
+  |vpiTypespec:
+  \_RealTypespec: , line:3:10, endln:3:14
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+  |vpiTypespec:
+  \_ByteTypespec: , line:3:18, endln:3:22
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiSigned:1
+  |vpiTypespec:
+  \_LogicTypespec: , line:3:26, endln:3:31
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiRange:
+    \_Range: , line:3:32, endln:3:38
+      |vpiParent:
+      \_LogicTypespec: , line:3:26, endln:3:31
+      |vpiLeftRange:
+      \_Constant: , line:3:33, endln:3:35
+        |vpiParent:
+        \_Range: , line:3:32, endln:3:38
+        |vpiTypespec:
+        \_RefTypespec: (work@tb), line:3:33, endln:3:35
+          |vpiParent:
+          \_Constant: , line:3:33, endln:3:35
+          |vpiFullName:work@tb
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:31
+        |UINT:31
+      |vpiRightRange:
+      \_Constant: , line:3:36, endln:3:37
+        |vpiParent:
+        \_Range: , line:3:32, endln:3:38
+        |vpiTypespec:
+        \_RefTypespec: (work@tb), line:3:36, endln:3:37
+          |vpiParent:
+          \_Constant: , line:3:36, endln:3:37
+          |vpiFullName:work@tb
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |UINT:0
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+  |vpiImportTypespec:
+  \_IntTypespec: , line:3:3, endln:3:6
+  |vpiImportTypespec:
+  \_Variable: (work@tb.i), line:3:7, endln:3:8
+  |vpiImportTypespec:
+  \_RealTypespec: , line:3:10, endln:3:14
+  |vpiImportTypespec:
+  \_Variable: (work@tb.r), line:3:15, endln:3:16
+  |vpiImportTypespec:
+  \_ByteTypespec: , line:3:18, endln:3:22
+  |vpiImportTypespec:
+  \_Variable: (work@tb.b), line:3:23, endln:3:24
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:26, endln:3:31
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_Net: (work@tb.l), line:3:39, endln:3:40
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiTypespec:
+    \_RefTypespec: (work@tb.l), line:3:26, endln:3:38
+      |vpiParent:
+      \_Net: (work@tb.l), line:3:39, endln:3:40
+      |vpiFullName:work@tb.l
+      |vpiActual:
+      \_LogicTypespec: , line:3:26, endln:3:31
+    |vpiName:l
+    |vpiFullName:work@tb.l
+    |vpiNetType:36
+  |vpiDefName:work@tb
+  |vpiNet:
+  \_Net: (work@tb.l), line:3:39, endln:3:40
+  |vpiProcess:
+  \_Initial: , line:5:3, endln:25:6
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+    |vpiStmt:
+    \_Begin: (work@tb), line:5:11, endln:25:6
+      |vpiParent:
+      \_Initial: , line:5:3, endln:25:6
+      |vpiFullName:work@tb
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+      |vpiTypespec:
+      \_RealTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+      |vpiImportTypespec:
+      \_IntTypespec: 
+      |vpiImportTypespec:
+      \_RealTypespec: 
+      |vpiStmt:
+      \_Assignment: , line:7:5, endln:7:11
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.i), line:7:5, endln:7:6
+          |vpiParent:
+          \_Assignment: , line:7:5, endln:7:11
+          |vpiName:i
+          |vpiFullName:work@tb.i
+          |vpiActual:
+          \_Variable: (work@tb.i), line:3:7, endln:3:8
+        |vpiRhs:
+        \_Operation: , line:7:9, endln:7:11
+          |vpiParent:
+          \_Assignment: , line:7:5, endln:7:11
+          |vpiOpType:1
+          |vpiOperand:
+          \_Constant: , line:7:10, endln:7:11
+            |vpiParent:
+            \_Operation: , line:7:9, endln:7:11
+            |vpiTypespec:
+            \_RefTypespec: (work@tb), line:7:10, endln:7:11
+              |vpiParent:
+              \_Constant: , line:7:10, endln:7:11
+              |vpiFullName:work@tb
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:5
+            |UINT:5
+      |vpiStmt:
+      \_Assignment: , line:8:5, endln:8:17
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.r), line:8:5, endln:8:6
+          |vpiParent:
+          \_Assignment: , line:8:5, endln:8:17
+          |vpiName:r
+          |vpiFullName:work@tb.r
+          |vpiActual:
+          \_Variable: (work@tb.r), line:3:15, endln:3:16
+        |vpiRhs:
+        \_SysFuncCall: ($itor), line:8:9, endln:8:17
+          |vpiParent:
+          \_Assignment: , line:8:5, endln:8:17
+          |vpiName:
+          \_Identifier: ($itor), line:8:10, endln:8:14
+            |vpiParent:
+            \_SysFuncCall: ($itor), line:8:9, endln:8:17
+            |vpiName:$itor
+          |vpiArgument:
+          \_RefObj: (work@tb.i), line:8:15, endln:8:16
+            |vpiParent:
+            \_SysFuncCall: ($itor), line:8:9, endln:8:17
+            |vpiName:i
+            |vpiFullName:work@tb.i
+            |vpiActual:
+            \_Variable: (work@tb.i), line:3:7, endln:3:8
+      |vpiStmt:
+      \_Assignment: , line:11:5, endln:11:12
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.r), line:11:5, endln:11:6
+          |vpiParent:
+          \_Assignment: , line:11:5, endln:11:12
+          |vpiName:r
+          |vpiFullName:work@tb.r
+          |vpiActual:
+          \_Variable: (work@tb.r), line:3:15, endln:3:16
+        |vpiRhs:
+        \_Constant: , line:11:9, endln:11:12
+          |vpiParent:
+          \_Assignment: , line:11:5, endln:11:12
+          |vpiTypespec:
+          \_RefTypespec: (work@tb), line:11:9, endln:11:12
+            |vpiParent:
+            \_Constant: , line:11:9, endln:11:12
+            |vpiFullName:work@tb
+            |vpiActual:
+            \_RealTypespec: 
+          |vpiConstType:2
+          |vpiSize:64
+          |vpiDecompile:3.9
+          |REAL:3.900000
+      |vpiStmt:
+      \_Assignment: , line:12:5, endln:12:17
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.i), line:12:5, endln:12:6
+          |vpiParent:
+          \_Assignment: , line:12:5, endln:12:17
+          |vpiName:i
+          |vpiFullName:work@tb.i
+          |vpiActual:
+          \_Variable: (work@tb.i), line:3:7, endln:3:8
+        |vpiRhs:
+        \_SysFuncCall: ($rtoi), line:12:9, endln:12:17
+          |vpiParent:
+          \_Assignment: , line:12:5, endln:12:17
+          |vpiName:
+          \_Identifier: ($rtoi), line:12:10, endln:12:14
+            |vpiParent:
+            \_SysFuncCall: ($rtoi), line:12:9, endln:12:17
+            |vpiName:$rtoi
+          |vpiArgument:
+          \_RefObj: (work@tb.r), line:12:15, endln:12:16
+            |vpiParent:
+            \_SysFuncCall: ($rtoi), line:12:9, endln:12:17
+            |vpiName:r
+            |vpiFullName:work@tb.r
+            |vpiActual:
+            \_Variable: (work@tb.r), line:3:15, endln:3:16
+      |vpiStmt:
+      \_Assignment: , line:15:5, endln:15:12
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.i), line:15:5, endln:15:6
+          |vpiParent:
+          \_Assignment: , line:15:5, endln:15:12
+          |vpiName:i
+          |vpiFullName:work@tb.i
+          |vpiActual:
+          \_Variable: (work@tb.i), line:3:7, endln:3:8
+        |vpiRhs:
+        \_Constant: , line:15:9, endln:15:12
+          |vpiParent:
+          \_Assignment: , line:15:5, endln:15:12
+          |vpiTypespec:
+          \_RefTypespec: (work@tb), line:15:9, endln:15:12
+            |vpiParent:
+            \_Constant: , line:15:9, endln:15:12
+            |vpiFullName:work@tb
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:127
+          |UINT:127
+      |vpiStmt:
+      \_Assignment: , line:16:5, endln:16:19
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.l), line:16:5, endln:16:6
+          |vpiParent:
+          \_Assignment: , line:16:5, endln:16:19
+          |vpiName:l
+          |vpiFullName:work@tb.l
+          |vpiActual:
+          \_Net: (work@tb.l), line:3:39, endln:3:40
+        |vpiRhs:
+        \_SysFuncCall: ($signed), line:16:9, endln:16:19
+          |vpiParent:
+          \_Assignment: , line:16:5, endln:16:19
+          |vpiName:
+          \_Identifier: ($signed), line:16:10, endln:16:16
+            |vpiParent:
+            \_SysFuncCall: ($signed), line:16:9, endln:16:19
+            |vpiName:$signed
+          |vpiArgument:
+          \_RefObj: (work@tb.i), line:16:17, endln:16:18
+            |vpiParent:
+            \_SysFuncCall: ($signed), line:16:9, endln:16:19
+            |vpiName:i
+            |vpiFullName:work@tb.i
+            |vpiActual:
+            \_Variable: (work@tb.i), line:3:7, endln:3:8
+      |vpiStmt:
+      \_Assignment: , line:19:5, endln:19:11
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.i), line:19:5, endln:19:6
+          |vpiParent:
+          \_Assignment: , line:19:5, endln:19:11
+          |vpiName:i
+          |vpiFullName:work@tb.i
+          |vpiActual:
+          \_Variable: (work@tb.i), line:3:7, endln:3:8
+        |vpiRhs:
+        \_Operation: , line:19:9, endln:19:11
+          |vpiParent:
+          \_Assignment: , line:19:5, endln:19:11
+          |vpiOpType:1
+          |vpiOperand:
+          \_Constant: , line:19:10, endln:19:11
+            |vpiParent:
+            \_Operation: , line:19:9, endln:19:11
+            |vpiTypespec:
+            \_RefTypespec: (work@tb), line:19:10, endln:19:11
+              |vpiParent:
+              \_Constant: , line:19:10, endln:19:11
+              |vpiFullName:work@tb
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:9
+            |vpiSize:64
+            |vpiDecompile:1
+            |UINT:1
+      |vpiStmt:
+      \_Assignment: , line:20:5, endln:20:21
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiLhs:
+        \_RefObj: (work@tb.l), line:20:5, endln:20:6
+          |vpiParent:
+          \_Assignment: , line:20:5, endln:20:21
+          |vpiName:l
+          |vpiFullName:work@tb.l
+          |vpiActual:
+          \_Net: (work@tb.l), line:3:39, endln:3:40
+        |vpiRhs:
+        \_SysFuncCall: ($unsigned), line:20:9, endln:20:21
+          |vpiParent:
+          \_Assignment: , line:20:5, endln:20:21
+          |vpiName:
+          \_Identifier: ($unsigned), line:20:10, endln:20:18
+            |vpiParent:
+            \_SysFuncCall: ($unsigned), line:20:9, endln:20:21
+            |vpiName:$unsigned
+          |vpiArgument:
+          \_RefObj: (work@tb.i), line:20:19, endln:20:20
+            |vpiParent:
+            \_SysFuncCall: ($unsigned), line:20:9, endln:20:21
+            |vpiName:i
+            |vpiFullName:work@tb.i
+            |vpiActual:
+            \_Variable: (work@tb.i), line:3:7, endln:3:8
+      |vpiStmt:
+      \_SysFuncCall: ($cast), line:23:11, endln:23:24
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:25:6
+        |vpiName:
+        \_Identifier: ($cast), line:23:12, endln:23:16
+          |vpiParent:
+          \_SysFuncCall: ($cast), line:23:11, endln:23:24
+          |vpiName:$cast
+        |vpiArgument:
+        \_RefObj: (work@tb.i), line:23:17, endln:23:18
+          |vpiParent:
+          \_SysFuncCall: ($cast), line:23:11, endln:23:24
+          |vpiName:i
+          |vpiFullName:work@tb.i
+          |vpiActual:
+          \_Variable: (work@tb.i), line:3:7, endln:3:8
+        |vpiArgument:
+        \_Constant: , line:23:20, endln:23:23
+          |vpiParent:
+          \_SysFuncCall: ($cast), line:23:11, endln:23:24
+          |vpiTypespec:
+          \_RefTypespec: (work@tb), line:23:20, endln:23:23
+            |vpiParent:
+            \_Constant: , line:23:20, endln:23:23
+            |vpiFullName:work@tb
+            |vpiActual:
+            \_RealTypespec: 
+          |vpiConstType:2
+          |vpiSize:64
+          |vpiDecompile:3.9
+          |REAL:3.900000
+|vpiTypespec:
+\_ModuleTypespec: (work@tb)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@tb
+  |vpiModule:
+  \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/ConvFunc01/dut.sv, line:1:1, endln:27:10
+===================
 [  FATAL] : 0
-[ SYNTAX] : 1
+[ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 0
+[WARNING] : 1
 [   NOTE] : 0

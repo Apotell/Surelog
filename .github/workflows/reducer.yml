@@ -73,9 +73,11 @@ jobs:
 
         tar xzfp ${{ env.regression-artifact-name }}.tar.gz
         rm ${{ env.regression-artifact-name }}.tar.gz
-
         mv ${{ env.regression-artifact-name }} regression
-        for archive in regression; do
+
+        ls -lR
+
+        for archive in regression/*; do
           if [[ "$archive" != "*.tar.gz" ]]; then
             tar xzfp $archive
             rm $archive

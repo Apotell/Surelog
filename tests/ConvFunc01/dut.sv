@@ -20,7 +20,7 @@ module tb;
     l = $unsigned(i);
 
     // $cast
-    void'($cast(i, 3.9);
+    void'($cast(i, 3.9));
 
   end
 

@@ -17,12 +17,12 @@ env:
 
 jobs:
   reduction:
-    name: "Reduction | ${{ matrix.artifact-tag }} | ${{ matrix.shard }}"
+    name: "Reducer | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
     runs-on: ${{ matrix.config.os }}
 
     env:
-      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
-      regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
+      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.event.inputs.run_id }}
+      regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.event.inputs.run_id }}_${{ matrix.shard }}
       reducer-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
 
     strategy:

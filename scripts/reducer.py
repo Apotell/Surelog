@@ -307,7 +307,7 @@ def _main():
   parser = argparse.ArgumentParser()
 
   parser.add_argument(
-      '--source-dirpath', dest='source_dirpath', required=False, type=str,
+      '--source-dirpath', dest='source_dirpath', required=True, type=str,
       help='Source directory path, either absolute or relative to workspace directory, to scan for tests.')
   parser.add_argument(
       '--workspace-dirpath', dest='workspace_dirpath', required=False, default=_default_workspace_dirpath, type=str,

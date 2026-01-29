@@ -95,7 +95,10 @@ jobs:
 
     - name: Run reduction
       run: |
-        python3 scripts/reducer.py --jobs $(nproc)
+        python3 scripts/reducer.py    \
+          --source-dirpath regression \
+          --jobs $(nproc)
+
         ls -lR
 
 #    - name: Prepare regression artifacts

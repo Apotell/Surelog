@@ -180,7 +180,7 @@ jobs:
 
     - name: Archive artifacts
       if: always()
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ env.artifact-name }}
         path: out/${{ env.artifact-name }}.tar.gz
@@ -224,7 +224,7 @@ jobs:
         lfs: true
 
     - name: Download artifact
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v6
       with:
         name: ${{ env.build-artifact-name }}
 
@@ -277,7 +277,7 @@ jobs:
 
     - name: Archive artifacts
       if: always()
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ env.regression-artifact-name }}
         path: build/${{ env.regression-artifact-name }}.tar.gz
@@ -314,22 +314,22 @@ jobs:
 #         echo "ARTIFACT_WINDOWS_CL_RELEASE=${{ env.MODULE_NAME }}-windows-cl-release" >> $GITHUB_ENV
 # 
 #     - name: Download artifact (bionic-gcc-debug)
-#       uses: actions/download-artifact@v7
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_BIONIC_GCC_DEBUG }}
 # 
 #     - name: Download artifact (bionic-gcc-release)
-#       uses: actions/download-artifact@v7
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_BIONIC_GCC_RELEASE }}
 # 
 #     - name: Download artifact (windows-cl-debug)
-#       uses: actions/download-artifact@v7
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_WINDOWS_CL_DEBUG }}
 # 
 #     - name: Download artifact (windows-cl-release)
-#       uses: actions/download-artifact@v7
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_WINDOWS_CL_RELEASE }}
 # 
@@ -419,7 +419,7 @@ jobs:
         sparse-checkout-cone-mode: false
 
     - name: Download artifact
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v6
       with:
         path: artifacts
         pattern: ${{ env.regression-artifact-pattern }}
@@ -434,7 +434,7 @@ jobs:
 
     - name: Upload regression artifacts
       if: always()
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ env.statistics-artifact-name }}
         path: ${{ env.statistics-artifact-name }}.log

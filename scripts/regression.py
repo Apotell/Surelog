@@ -5,7 +5,6 @@ import difflib
 import hashlib
 import multiprocessing
 import os
-import platform
 import pprint
 import psutil
 import re
@@ -32,6 +31,7 @@ from utils import (
   is_windows,
   log,
   mkdir,
+  normalize_log,
   restore_directory_state,
   rmdir,
   rmtree,
@@ -143,15 +143,6 @@ def _scan(dirpaths, filters, shard, num_shards):
     OrderedDict([ (name, all_tests[name]) for name in sorted(filtered_tests, key=lambda t: t.lower()) ]),
     OrderedDict([ (name, all_tests[name]) for name in sorted(blacklisted_tests, key=lambda t: t.lower()) ])
   ]
-
-
-def _normalize_log(content, path_mappings):
-  content = re.sub(r'\d+\.\d{3}s', 't.ttts', content)
-  content = re.sub(r'\d+\.\d{6}s', 't.tttttts', content)
-  for path, mapping in path_mappings.items():
-    pattern = re.sub(r'(\\|\/)+', r'(\\\\|\/)+', path)
-    content = re.sub(pattern, mapping, content)
-  return content
 
 
 def _get_log_statistics(filepath):
@@ -484,7 +475,7 @@ def _run_one(params):
         if 'Segmentation fault' in content:
           result['STATUS'] = Status.SEGFLT
 
-        content = _normalize_log(content, {
+        content = normalize_log(content, {
           workspace_dirpath: '${SURELOG_DIR}',
           r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
         })
@@ -659,7 +650,7 @@ def _update_one(params):
       shutil.copy(surelog_log_filepath, golden_log_filepath)
 
       # On Windows, fixup the line endings
-      if platform.system() == 'Windows':
+      if is_windows():
         with open(golden_log_filepath, 'rt', encoding='cp850') as istrm:
           lines = istrm.readlines()
         with open(golden_log_filepath, 'wt', encoding='cp850') as ostrm:
@@ -882,7 +873,7 @@ def _extract_worker(params):
                 dst_log_strm.flush()
 
               # On Windows, fixup the line endings
-              if platform.system() == 'Windows':
+              if is_windows():
                 with open(dst_log_filepath, 'rt', encoding='cp850') as istrm:
                   lines = istrm.readlines()
                 with open(dst_log_filepath, 'wt', encoding='cp850') as ostrm:

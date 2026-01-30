@@ -2,6 +2,7 @@
 
 import os
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -121,6 +122,15 @@ def rmtree(dirpath, patterns):
     for path in Path(dirpath).rglob(pattern):
       if os.path.isdir(path):
         rmdir(path)
+
+
+def normalize_log(content, path_mappings):
+  content = re.sub(r'\d+\.\d{3}s', 't.ttts', content)
+  content = re.sub(r'\d+\.\d{6}s', 't.tttttts', content)
+  for path, mapping in path_mappings.items():
+    pattern = re.sub(r'(\\|\/)+', r'(\\\\|\/)+', path)
+    content = re.sub(pattern, mapping, content)
+  return content
 
 
 def snapshot_directory_state(dirpath):

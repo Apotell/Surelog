@@ -101,15 +101,12 @@ jobs:
           --source-dirpath regression                                                                 \
           --jobs $(nproc)
 
-        ls -lR
-
     - name: Prepare regression artifacts
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       if: always()
       run: |
         echo "$GITHUB_CONTEXT" > env.txt
-        ls -l regression
         mv regression ${{ env.reducer-artifact-name }}
         tar czfp ${{ env.reducer-artifact-name }}.tar.gz ${{ env.reducer-artifact-name }}
 

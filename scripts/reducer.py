@@ -27,6 +27,7 @@ from utils import (
   is_ci_build,
   is_windows,
   log,
+  normalize_log,
   rmdir,
   Status,
 )
@@ -70,14 +71,10 @@ def _scan(dirpath, filters):
     name = test_dirpath.stem
     all_tests[name] = test_dirpath
 
-    slpp_all_dirpath = test_dirpath / 'slpp_all' / 'surelog.uhdm'
-    slpp_unit_dirpath = test_dirpath / 'slpp_unit' / 'surelog.uhdm'
-
-    if slpp_all_dirpath.exists() or slpp_unit_dirpath.exists():
-      if name in _blacklisted:
-        blacklisted_tests.add(name)
-      elif _is_filtered(name):
-        filtered_tests.add(name)
+    if name in _blacklisted:
+      blacklisted_tests.add(name)
+    elif _is_filtered(name):
+      filtered_tests.add(name)
 
   return [
     { name: all_tests[name] for name in sorted(all_tests.keys(), key=lambda t: t.lower()) },
@@ -86,14 +83,47 @@ def _scan(dirpath, filters):
   ]
 
 
-def _run_reducer(name, test_dirpath, uhdm_src_filepath, reducer_filepath):
+def _get_log_statistics(filepath: Path) -> dict[str, int]:
+  statistics = {
+    'BEFORE': 0,
+    'AFTER': 0,
+    'ADDED': 0,
+    'REMOVED': 0,
+  }
+  if not filepath.exists():
+    return statistics
+
+  start_marker = '= BEGIN REDUCTION RESULT ='
+  end_marker = '= END REDUCTION RESULT ='
+  started = False
+
+  with open(filepath, 'rt') as strm:
+    for line in strm:
+      line = line.strip()
+
+      if not started and start_marker in line:
+        started = True
+      elif started and end_marker in line:
+        break
+
+      if started:
+        parts = line.split()
+        if len(parts) == 4:
+          statistics['BEFORE'] = int(parts[0])
+          statistics['AFTER'] = int(parts[1])
+          statistics['ADDED'] = int(parts[2])
+          statistics['REMOVED'] = int(parts[3])
+          break
+
+  return statistics
+
+
+def _run_reducer(name, test_dirpath, uhdm_src_filepath, uhdm_dst_filepath, reducer_log_filepath, reducer_filepath):
   start_dt = datetime.now()
   print(f'start-time: {start_dt}')
 
   reducer_timedelta = timedelta(seconds=0)
 
-  uhdm_dst_filepath = uhdm_src_filepath.parent / 'reduced.uhdm'
-  reducer_log_filepath = uhdm_src_filepath.parent / 'reducer.log'
   args = [reducer_filepath, uhdm_src_filepath, uhdm_dst_filepath]
 
   print('Launching reducer with arguments:')
@@ -171,7 +201,7 @@ def _run_reducer(name, test_dirpath, uhdm_src_filepath, reducer_filepath):
 
 def _run_one(params):
   start_dt = datetime.now()
-  name, test_dirpath, reducer_filepath = params
+  name, test_dirpath, workspace_dirpath, reducer_filepath = params
 
   log(f'Running {name} ...')
 
@@ -195,6 +225,8 @@ def _run_one(params):
   if uhdm_src_filepath:
     regression_log_filepath = uhdm_src_filepath.parent / 'regression.log'
     uhdm_dst_filepath = uhdm_src_filepath.parent / 'reduced.uhdm'
+    reducer_log_filepath = uhdm_src_filepath.parent / 'reducer.log'
+    golden_log_filepath = workspace_dirpath / 'goldens' / name / f'{name}.log'
 
     with open(regression_log_filepath, 'wt') as regression_log_strm, \
               redirect_stdout(regression_log_strm), redirect_stderr(regression_log_strm):
@@ -202,19 +234,47 @@ def _run_one(params):
         print(f'start-time: {start_dt}')
         print( '')
         print( 'Environment:')
-        print(f'        test-name: {name}')
-        print(f'     test-dirpath: {test_dirpath}')
-        print(f' reducer-filepath: {reducer_filepath}')
-        print(f'uhdm-src-filepath: {uhdm_src_filepath}')
-        print(f'uhdm-dst-filepath: {uhdm_dst_filepath}')
+        print(f'           test-name: {name}')
+        print(f'        test-dirpath: {test_dirpath}')
+        print(f'    reducer-filepath: {reducer_filepath}')
+        print(f'   uhdm-src-filepath: {uhdm_src_filepath}')
+        print(f'   uhdm-dst-filepath: {uhdm_dst_filepath}')
+        print(f'reducer-log-filepath: {reducer_log_filepath}')
         print( '\n')
 
         print('Running Reducer ...', flush=True)
         result.update(
-          _run_reducer(name, test_dirpath, uhdm_src_filepath, reducer_filepath)
+          _run_reducer(name, test_dirpath, uhdm_src_filepath, uhdm_dst_filepath,
+                       reducer_log_filepath, reducer_filepath)
         )
         print('\n')
         regression_log_strm.flush()
+
+        print(f'Normalizing surelog log file {reducer_log_filepath}')
+        if os.path.isfile(reducer_log_filepath):
+          content = open(reducer_log_filepath, 'rt').read()
+          if 'Segmentation fault' in content:
+            result['STATUS'] = Status.SEGFLT
+
+          content = normalize_log(content, {
+            str(workspace_dirpath): '${SURELOG_DIR}',
+            r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
+          })
+
+          open(reducer_log_filepath, 'wt').write(content)
+        else:
+          print(f'File not found: {reducer_log_filepath}')
+          result['STATUS'] == Status.FAIL
+        print('\n')
+
+        # If golden file is missing, then fail the test explicitly!
+        # if result['STATUS'] == Status.PASS and not os.path.isfile(golden_log_filepath):
+        #   result['STATUS'] = Status.NOGOLD
+
+        result.update({
+          'golden': _get_log_statistics(golden_log_filepath),
+          'current': _get_log_statistics(reducer_log_filepath)
+        })
 
         pprint.pprint({'result': result})
         print('\n')
@@ -242,7 +302,7 @@ def _run_one(params):
 
 
 def _print_report(results):
-  columns = [ 'TESTNAME', 'STATUS', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM' ]
+  columns = [ 'TESTNAME', 'STATUS', 'BEFORE', 'AFTER', 'ADDED', 'REMOVED', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM' ]
 
   results = sorted(results, key=lambda r: (-r['STATUS'].value, r['TESTNAME']))
 
@@ -261,43 +321,35 @@ def _print_report(results):
 
     summary[result[columns[1]].name] += 1
     rows.append([
-      result[columns[0]],                                     # TESTNAME
-      result[columns[1]].name,                                # STATUS
-      # _get_cell_value(columns[2]),                            # FATAL
-      # _get_cell_value(columns[3]),                            # SYNTAX
-      # _get_cell_value(columns[4]),                            # ERROR
-      # _get_cell_value(columns[5]),                            # WARNING
-      # _get_cell_value(columns[6]),                            # NOTE
-      result.get(columns[2], 0),             # CPU-TIME
-      round(result.get(columns[3], 0) / (1024 * 1024)),  # VTL-MEM
-      round(result.get(columns[4], 0) / (1024 * 1024)),  # PHY-MEM
+      result[columns[0]],                               # TESTNAME
+      result[columns[1]].name,                          # STATUS
+      _get_cell_value(columns[2]),                      # BEFORE
+      _get_cell_value(columns[3]),                      # AFTER
+      _get_cell_value(columns[4]),                      # ADDED
+      _get_cell_value(columns[5]),                      # REMOVED
+      result.get(columns[6], 0),                        # CPU-TIME
+      round(result.get(columns[7], 0) / (1024 * 1024)), # VTL-MEM
+      round(result.get(columns[8], 0) / (1024 * 1024)), # PHY-MEM
     ])
 
+  print('Results:')
   print(tabulate.tabulate(rows, headers=columns, tablefmt="outline", floatfmt=".2f"))
+  print('')
 
-  # longest_cpu_test = max(results, key=lambda result: result.get('CPU-TIME', 0))
-  # total_cpu_time = sum([result.get('CPU-TIME', 0) for result in results])
-  # summary['MAX CPU TIME'] = f'{round(longest_cpu_test.get("CPU-TIME", 0), 2)} ({longest_cpu_test["TESTNAME"]})'
-  # summary['TOTAL CPU TIME'] = str(round(total_cpu_time, 2))
-  # 
-  # longest_wall_test = max(results, key=lambda result: result.get('WALL-TIME', timedelta(seconds=0)))
-  # summary['MAX WALL TIME'] = f'{round(longest_wall_test.get("WALL-TIME", timedelta(seconds=0)).total_seconds())} ({longest_wall_test["TESTNAME"]})'
-  # 
-  # largest_test = max(results, key=lambda result: result.get('PHY-MEM', 0))
-  # summary['MAX MEMORY'] = f'{round(largest_test.get("PHY-MEM", 0) / (1024 * 1024))} ({largest_test["TESTNAME"]})'
+  longest_cpu_test = max(results, key=lambda result: result.get('CPU-TIME', 0))
+  total_cpu_time = sum([result.get('CPU-TIME', 0) for result in results])
+  summary['MAX CPU TIME'] = f'{round(longest_cpu_test.get("CPU-TIME", 0), 2)} ({longest_cpu_test["TESTNAME"]})'
+  summary['TOTAL CPU TIME'] = str(round(total_cpu_time, 2))
+  
+  longest_wall_test = max(results, key=lambda result: result.get('WALL-TIME', timedelta(seconds=0)))
+  summary['MAX WALL TIME'] = f'{round(longest_wall_test.get("WALL-TIME", timedelta(seconds=0)).total_seconds())} ({longest_wall_test["TESTNAME"]})'
+  
+  largest_test = max(results, key=lambda result: result.get('PHY-MEM', 0))
+  summary['MAX MEMORY'] = f'{round(largest_test.get("PHY-MEM", 0) / (1024 * 1024))} ({largest_test["TESTNAME"]})'
 
-
-def _print_summary(summary):
-  rows = [[k, str(v)] for k, v in summary.items()]
-  widths = [max([len(str(row[index])) for row in rows]) for index in range(0, 2)]
-  row_format = '  | ' + ' | '.join([f'{{:{width}}}' for width in widths]) + ' |'
-  separator = '  +-' + '-+-'.join(['-' * width for width in widths]) + '-+'
-
-  print('Summary: ')
-  print(separator)
-  for row in rows:
-    print(row_format.format(*row))
-  print(separator)
+  print('Summary:')
+  print(tabulate.tabulate(list(summary.items()), tablefmt="outline", floatfmt=".2f"))
+  print('')
 
 
 def _main():
@@ -383,7 +435,7 @@ def _main():
     print(f'Running {len(filtered_tests)} tests ...')
 
     params = [
-      (name, args.source_dirpath / name, args.reducer_filepath)
+      (name, args.source_dirpath / name, args.workspace_dirpath, args.reducer_filepath)
       for name in filtered_tests.keys()
     ]
 
@@ -393,8 +445,8 @@ def _main():
       with multiprocessing.Pool(processes=args.jobs) as pool:
         results = pool.map(_run_one, params)
 
+  print('')
   _print_report(results)
-  print('\n')
 
   end_dt = datetime.now()
   delta = round((end_dt - start_dt).total_seconds())

@@ -10,12 +10,12 @@ on:
       run_id:
         description: 'Run Id'
         required: true
-        default: '21470954121'
+        default: '21512425584'
         type: string
       run_number:
         description: 'Run Number'
         required: true
-        default: '967'
+        default: '970'
         type: string
 
 env:
@@ -34,10 +34,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # num_shards: [6]
-        # shard: [0, 1, 2, 3, 4, 5]
-        num_shards: [1]
-        shard: [0]
+        num_shards: [6]
+        shard: [0, 1, 2, 3, 4, 5]
         config:
         - { os: ubuntu-24.04, artifact-tag: ubuntu-gcc, build-type: release }
 #        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }

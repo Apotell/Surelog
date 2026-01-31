@@ -2220,6 +2220,19 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
                 }
               }
             }
+            if (Simple_type) {
+              if (uhdm::Typespec *tps = compileTypespec(component, fC, Simple_type, InvalidNodeId,
+                                                         operation, instance, false)) {
+                if (operation->getTypespec() == nullptr) {
+                  uhdm::RefTypespec *rttps = s.make<uhdm::RefTypespec>();
+                  rttps->setName(fC->SymName(Simple_type));
+                  fC->populateCoreMembers(Simple_type, Simple_type, rttps);
+                  rttps->setParent(operation);
+                  operation->setTypespec(rttps);
+                }
+                operation->getTypespec()->setActual(tps);
+              }
+            }
             result = operation;
           }
           break;

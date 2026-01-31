@@ -204,11 +204,24 @@ def _run_one(params):
   slpp_all_filepath: Path = test_dirpath / 'slpp_all' / 'surelog.uhdm'
   slpp_unit_filepath: Path = test_dirpath / 'slpp_unit' / 'surelog.uhdm'
 
+  source_regression_log_filepath = test_dirpath / 'regression.log'
+  source_test_log_filepath = test_dirpath / f'{name}.log'
+
+  reduction_log_filepath = test_dirpath / 'reduction.log'       # Merge this with source_regression_log_filepath
+  reducer_log_filepath = test_dirpath / 'reducer.log'           # Merge this with source_test_log_filepath
+
+  env_filepath = test_dirpath / 'env.json'
+  env = json_load(env_filepath.open())
+
+  golden_log_filepath = Path(env['regression']['golden-log-filepath'])
+
   uhdm_src_filepath = None
   if slpp_all_filepath.is_file():
     uhdm_src_filepath = slpp_all_filepath
   elif slpp_unit_filepath.is_file():
     uhdm_src_filepath = slpp_unit_filepath
+
+  uhdm_dst_filepath = uhdm_src_filepath.parent / 'reduced.uhdm' if uhdm_src_filepath else None
 
   completed = False
   result = {
@@ -218,46 +231,35 @@ def _run_one(params):
     'current': {},
   }
 
-  if uhdm_src_filepath:
-    env_filepath = test_dirpath / 'env.json'
-    env = json_load(env_filepath.open())
+  env['reducer'] = {
+    'test-dirpath': test_dirpath,
+    'reducer-filepath': reducer_filepath,
+    'uhdm-src-filepath': uhdm_src_filepath,
+    'uhdm-dst-filepath': uhdm_dst_filepath,
+    'reduction-log-filepath': reduction_log_filepath,
+    'reducer-log-filepath': reducer_log_filepath,
+    'golden-log-filepath': golden_log_filepath,
+    'source-regression-log-filepath': source_regression_log_filepath,
+    'source-test-log-filepath': source_test_log_filepath,
+  }
+  json_dump(env, env_filepath.open('w'), indent=2)
 
-    source_regression_log_filepath = test_dirpath / 'regression.log'
-    source_test_log_filepath = test_dirpath / f'{name}.log'
+  with reduction_log_filepath.open('w') as reduction_log_strm, \
+          redirect_stdout(reduction_log_strm), \
+          redirect_stderr(reduction_log_strm):
+    print(f'start-time: {start_dt}')
+    print( '')
+    print( 'Environment:')
+    print(f'           test-name: {name}')
+    print(f'        test-dirpath: {test_dirpath}')
+    print(f'    reducer-filepath: {reducer_filepath}')
+    print(f'   uhdm-src-filepath: {uhdm_src_filepath}')
+    print(f'   uhdm-dst-filepath: {uhdm_dst_filepath}')
+    print(f'reducer-log-filepath: {reducer_log_filepath}')
+    print( '\n')
 
-    reduction_log_filepath = test_dirpath / 'reduction.log'       # Merge this with source_regression_log_filepath
-    uhdm_dst_filepath = uhdm_src_filepath.parent / 'reduced.uhdm'
-    reducer_log_filepath = test_dirpath / 'reducer.log'           # Merge this with source_test_log_filepath
-    golden_log_filepath = Path(env['regression']['golden-log-filepath'])
-
-    env['reducer'] = {
-      'test-dirpath': test_dirpath,
-      'reducer-filepath': reducer_filepath,
-      'uhdm-src-filepath': uhdm_src_filepath,
-      'uhdm-dst-filepath': uhdm_dst_filepath,
-      'reduction-log-filepath': reduction_log_filepath,
-      'reducer-log-filepath': reducer_log_filepath,
-      'golden-log-filepath': golden_log_filepath,
-      'source-regression-log-filepath': source_regression_log_filepath,
-      'source-test-log-filepath': source_test_log_filepath,
-    }
-    json_dump(env, env_filepath.open('w'), indent=2)
-
-    with reduction_log_filepath.open('w') as reduction_log_strm, \
-            redirect_stdout(reduction_log_strm), \
-            redirect_stderr(reduction_log_strm):
-      try:
-        print(f'start-time: {start_dt}')
-        print( '')
-        print( 'Environment:')
-        print(f'           test-name: {name}')
-        print(f'        test-dirpath: {test_dirpath}')
-        print(f'    reducer-filepath: {reducer_filepath}')
-        print(f'   uhdm-src-filepath: {uhdm_src_filepath}')
-        print(f'   uhdm-dst-filepath: {uhdm_dst_filepath}')
-        print(f'reducer-log-filepath: {reducer_log_filepath}')
-        print( '\n')
-
+    try:
+      if uhdm_src_filepath and uhdm_dst_filepath:
         print('Running Reducer ...', flush=True)
         result.update(
           _run_reducer(name, test_dirpath, uhdm_src_filepath, uhdm_dst_filepath,
@@ -265,56 +267,57 @@ def _run_one(params):
         )
         print('\n')
         reduction_log_strm.flush()
-
-        result.update({
-          'golden': _get_log_statistics(golden_log_filepath),
-          'current': _get_log_statistics(reducer_log_filepath)
-        })
-
-        if reducer_log_filepath.is_file():
-          merge_files(source_test_log_filepath, '#**', source_test_log_filepath, reducer_log_filepath)
-          rmfile(reducer_log_filepath)
-        else:
-          print(f'File not found: {reducer_log_filepath}')
-          result['STATUS'] == Status.FAIL
-
-        print(f'Normalizing surelog log file {source_test_log_filepath}')
-        if source_test_log_filepath.is_file():
-          content = source_test_log_filepath.open().read()
-          if 'Segmentation fault' in content:
-            result['STATUS'] = Status.SEGFLT
-
-          content = normalize_log(content, {
-            str(workspace_dirpath.as_posix()): '${SURELOG_DIR}',
-            str(Path(env['regression']['workspace-dirpath']).as_posix()): '${SURELOG_DIR}',
-            r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
-          })
-          source_test_log_filepath.open('w').write(content)
-        else:
-          print(f'File not found: {source_test_log_filepath}')
-          result['STATUS'] == Status.FAIL
-        print('\n')
-
-        # If golden file is missing, then fail the test explicitly!
-        if result['STATUS'] == Status.PASS and not golden_log_filepath.is_file():
-          result['STATUS'] = Status.NOGOLD
-
-        pprint.pprint({'result': result})
-        print('\n')
-
-        end_dt = datetime.now()
-        delta = end_dt - start_dt
-        print(f'end-time: {str(end_dt)} {str(delta)}')
-
-        completed = True
-      except:
+      else:
+        print(f'Failed to find uhdm source database: {uhdm_src_filepath}')
         result['STATUS'] = Status.EXECERR
-        traceback.print_exc()
 
-      reduction_log_strm.flush()
-  else:
-    print('Failed to find uhdm source database!')
-    result['STATUS'] = Status.EXECERR
+      result.update({
+        'golden': _get_log_statistics(golden_log_filepath),
+        'current': _get_log_statistics(reducer_log_filepath)
+      })
+
+      if reducer_log_filepath.is_file():
+        print('Merging test logs ...')
+        merge_files(source_test_log_filepath, '#**', source_test_log_filepath, reducer_log_filepath)
+        rmfile(reducer_log_filepath)
+      else:
+        print(f'File not found: {reducer_log_filepath}')
+        result['STATUS'] == Status.FAIL
+
+      print(f'Normalizing test log file {source_test_log_filepath}')
+      if source_test_log_filepath.is_file():
+        content = source_test_log_filepath.open().read()
+        if 'Segmentation fault' in content:
+          result['STATUS'] = Status.SEGFLT
+
+        content = normalize_log(content, {
+          str(workspace_dirpath.as_posix()): '${SURELOG_DIR}',
+          str(Path(env['regression']['workspace-dirpath']).as_posix()): '${SURELOG_DIR}',
+          r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
+        })
+        source_test_log_filepath.open('w').write(content)
+      else:
+        print(f'File not found: {source_test_log_filepath}')
+        result['STATUS'] == Status.FAIL
+      print('\n')
+
+      # If golden file is missing, then fail the test explicitly!
+      if result['STATUS'] == Status.PASS and not golden_log_filepath.is_file():
+        result['STATUS'] = Status.NOGOLD
+
+      completed = True
+    except:
+      result['STATUS'] = Status.EXECERR
+      traceback.print_exc()
+
+    pprint.pprint({'result': result})
+    print('\n')
+
+    end_dt = datetime.now()
+    delta = end_dt - start_dt
+    print(f'end-time: {str(end_dt)} {str(delta)}')
+
+    reduction_log_strm.flush()
 
   # Merge regression logs
   merge_files(source_regression_log_filepath, '#**', source_regression_log_filepath, reduction_log_filepath)

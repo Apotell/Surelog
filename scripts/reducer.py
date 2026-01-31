@@ -269,37 +269,27 @@ def _run_one(params):
         reduction_log_strm.flush()
       else:
         print(f'Failed to find uhdm source database: {uhdm_src_filepath}')
-        result['STATUS'] = Status.EXECERR
 
       result.update({
         'golden': _get_log_statistics(golden_log_filepath),
         'current': _get_log_statistics(reducer_log_filepath)
       })
 
-      if reducer_log_filepath.is_file():
-        print('Merging test logs ...')
-        merge_files(source_test_log_filepath, '#**', source_test_log_filepath, reducer_log_filepath)
-        rmfile(reducer_log_filepath)
-      else:
-        print(f'File not found: {reducer_log_filepath}')
-        result['STATUS'] == Status.FAIL
+      print('Merging test logs ...')
+      merge_files(source_test_log_filepath, '#**', source_test_log_filepath, reducer_log_filepath)
+      rmfile(reducer_log_filepath)
 
       print(f'Normalizing test log file {source_test_log_filepath}')
-      if source_test_log_filepath.is_file():
-        content = source_test_log_filepath.open().read()
-        if 'Segmentation fault' in content:
-          result['STATUS'] = Status.SEGFLT
+      content = source_test_log_filepath.open().read()
+      if 'Segmentation fault' in content:
+        result['STATUS'] = Status.SEGFLT
 
-        content = normalize_log(content, {
-          str(workspace_dirpath.as_posix()): '${SURELOG_DIR}',
-          str(Path(env['regression']['workspace-dirpath']).as_posix()): '${SURELOG_DIR}',
-          r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
-        })
-        source_test_log_filepath.open('w').write(content)
-      else:
-        print(f'File not found: {source_test_log_filepath}')
-        result['STATUS'] == Status.FAIL
-      print('\n')
+      content = normalize_log(content, {
+        str(workspace_dirpath.as_posix()): '${SURELOG_DIR}',
+        str(Path(env['regression']['workspace-dirpath']).as_posix()): '${SURELOG_DIR}',
+        r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
+      })
+      source_test_log_filepath.open('w').write(content)
 
       # If golden file is missing, then fail the test explicitly!
       if result['STATUS'] == Status.PASS and not golden_log_filepath.is_file():

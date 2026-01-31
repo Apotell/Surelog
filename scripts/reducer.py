@@ -321,7 +321,7 @@ def _run_one(params):
   rmfile(reduction_log_filepath)
 
   if is_ci_build():
-    generate_tarball(str(test_dirpath))
+    generate_tarball(test_dirpath)
     rmdir(str(test_dirpath))
 
   log(f'... {name} Completed.' if completed else f'... {name} FAILED.')

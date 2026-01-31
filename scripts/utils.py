@@ -60,30 +60,15 @@ def get_platform_id() -> str:
   elif system == 'Darwin':
     return '.osx'
   elif system == 'Windows':
-    return '.msys' if 'MSYSTEM' in os.environ else '.win'
+    return '.win'
 
   return ''
-
-
-def transform_path(path: Path) -> Path:
-  if 'MSYSTEM' not in os.environ:
-    return path
-
-  path = str(path)
-  path = path.replace('/', '\\').replace('\\\\', '\\').replace('\\', '\\\\')
-  result = subprocess.run(['cygpath', '-u', path], capture_output=True, text=True)
-  result.check_returncode()
-  return result.stdout.strip()
 
 
 def find_files(dirpath: Path, pattern: list[str]) -> list[Path]:
   relpaths = []
   for filepath in Path(dirpath).rglob(pattern):
     relpaths.append(filepath.relative_to(dirpath))
-
-  if 'MSYSTEM' in os.environ:
-    relpaths = [relpath.as_posix() for relpath in relpaths]
-
   return sorted(relpaths)
 
 

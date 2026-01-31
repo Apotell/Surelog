@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-import difflib
-import hashlib
 import multiprocessing
-import os
-import platform
 import pprint
 import psutil
 import re
@@ -15,11 +11,9 @@ import tabulate
 import time
 import traceback
 import zipfile
-from collections import OrderedDict
 from contextlib import redirect_stdout, redirect_stderr
 from datetime import datetime, timedelta
 from pathlib import Path
-from threading import Lock
 
 from utils import (
   find_files,
@@ -48,8 +42,6 @@ else:
 _default_reducer_filename = Path('uhdm-reduce.exe') if is_windows() else Path('uhdm-reduce')
 _default_reducer_filepath = Path('bin') / _default_reducer_filename
 
-_blacklisted = set()
-
 
 def _scan(dirpath, filters):
   def _is_filtered(name):
@@ -66,20 +58,16 @@ def _scan(dirpath, filters):
 
   all_tests = {}
   filtered_tests = set()
-  blacklisted_tests = set()
   for test_dirpath in dirpath.iterdir():
     name = test_dirpath.stem
     all_tests[name] = test_dirpath
 
-    if name in _blacklisted:
-      blacklisted_tests.add(name)
-    elif _is_filtered(name):
+    if _is_filtered(name):
       filtered_tests.add(name)
 
   return [
     { name: all_tests[name] for name in sorted(all_tests.keys(), key=lambda t: t.lower()) },
     { name: all_tests[name] for name in sorted(filtered_tests, key=lambda t: t.lower()) },
-    { name: all_tests[name] for name in sorted(blacklisted_tests, key=lambda t: t.lower()) }
   ]
 
 
@@ -251,7 +239,7 @@ def _run_one(params):
         regression_log_strm.flush()
 
         print(f'Normalizing surelog log file {reducer_log_filepath}')
-        if os.path.isfile(reducer_log_filepath):
+        if reducer_log_filepath.is_file():
           content = open(reducer_log_filepath, 'rt').read()
           if 'Segmentation fault' in content:
             result['STATUS'] = Status.SEGFLT
@@ -268,7 +256,7 @@ def _run_one(params):
         print('\n')
 
         # If golden file is missing, then fail the test explicitly!
-        # if result['STATUS'] == Status.PASS and not os.path.isfile(golden_log_filepath):
+        # if result['STATUS'] == Status.PASS and not golden_log_filepath.is_file():
         #   result['STATUS'] = Status.NOGOLD
 
         result.update({
@@ -307,7 +295,7 @@ def _print_report(results):
   results = sorted(results, key=lambda r: (-r['STATUS'].value, r['TESTNAME']))
 
   rows = []
-  summary = OrderedDict([(status.name, 0) for status in Status])
+  summary = { status.name : 0 for status in Status }
   summary[''] = ''
   for result in results:
     current = result['current']
@@ -412,21 +400,20 @@ def _main():
     args.filters = filters
 
   args.filters = [text if text.isalnum() else re.compile(text, re.IGNORECASE) for text in args.filters]
-  all_tests, filtered_tests, blacklisted_tests = _scan(args.source_dirpath, args.filters)
+  all_tests, filtered_tests = _scan(args.source_dirpath, args.filters)
 
   if args.jobs > len(filtered_tests):
     args.jobs = len(filtered_tests)
 
   print( 'Environment:')
   print(f'      command-line: {" ".join(sys.argv)}')
-  print(f'   current-dirpath: {os.getcwd()}')
+  print(f'   current-dirpath: {Path.cwd()}')
   print(f' workspace-dirpath: {args.workspace_dirpath}')
   print(f'     build-dirpath: {args.build_dirpath}')
   print(f'  reducer-filepath: {args.reducer_filepath}')
   print(f'    source-dirpath: {args.source_dirpath}')
   print(f'          max-jobs: {args.jobs}')
   print(f'         max-tests: {len(all_tests)}')
-  print(f' blacklisted-tests: {len(blacklisted_tests)}')
   print(f'    filtered-tests: {len(filtered_tests)}')
   print( '\n')
 

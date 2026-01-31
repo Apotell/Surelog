@@ -169,18 +169,20 @@ jobs:
         echo "$GITHUB_CONTEXT" > env.txt
 
         cp deploy/CMakeLists.txt out/install/.
-        cd out
+        pushd out
+          mv install/lib install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
+          mkdir install/lib
+          mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/lib/.
 
-        mv install/lib install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
-        mkdir install/lib
-        mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/lib/.
+          mv install/bin install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
+          mkdir install/bin
+          mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/bin/.
 
-        mv install/bin install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
-        mkdir install/bin
-        mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/bin/.
+          mv install ${{ env.artifact-name }}
+          tar czfp ${{ env.artifact-name }}.tar.gz ${{ env.artifact-name }}
+        popd
 
-        mv install ${{ env.artifact-name }}
-        tar czfp ${{ env.artifact-name }}.tar.gz ${{ env.artifact-name }}
+        mv out/${{ env.artifact-name }}.tar.gz .
 
     - name: Archive artifacts
       if: always()
@@ -188,7 +190,7 @@ jobs:
       with:
         name: ${{ env.artifact-name }}
         path: |
-          out/${{ env.artifact-name }}.tar.gz
+          ${{ env.artifact-name }}.tar.gz
           env.txt
 
 #######################################################################################################################

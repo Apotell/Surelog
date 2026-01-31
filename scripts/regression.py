@@ -3,7 +3,6 @@
 import argparse
 import hashlib
 import multiprocessing
-import os
 import pprint
 import psutil
 import re
@@ -15,12 +14,9 @@ import tarfile
 import time
 import traceback
 import zipfile
-from collections import OrderedDict
 from contextlib import redirect_stdout, redirect_stderr
 from datetime import datetime, timedelta
-from enum import Enum, unique
 from pathlib import Path
-from threading import Lock
 from typing import Any
 
 import blacklisted
@@ -38,7 +34,6 @@ from utils import (
   rmtree,
   snapshot_directory_state,
   Status,
-  transform_path,
 )
 
 _this_filepath = Path(__file__).resolve()
@@ -247,14 +242,11 @@ def _get_run_args(
   cmdline = cmdline.replace('\n', ' ')
   cmdline = cmdline.replace('"', '\\"')
   cmdline = cmdline.replace("'", "\\'")
-  if 'MSYSTEM' in os.environ:
-    cmdline = re.sub(r'[.\\\/]+[\\/]UVM', str(uvm_reldirpath).replace('\\', '/'), cmdline)
-  else:
-    cmdline = re.sub(r'[.\\\/]+[\\/]UVM', str(uvm_reldirpath).replace('\\', '\\\\'), cmdline)
+  cmdline = re.sub(r'[.\\\/]+[\\/]UVM', str(uvm_reldirpath).replace('\\', '\\\\'), cmdline)
   cmdline = cmdline.strip()
 
   if '.sh' in cmdline or '.bat' in cmdline:
-    args = ['sh'] + [arg for arg in cmdline.split() if arg] + [transform_path(binary_filepath)]
+    args = ['sh'] + [arg for arg in cmdline.split() if arg] + [str(binary_filepath)]
   else:
     if '*/*.v' in cmdline:
       cmdline = cmdline.replace('*/*.v', ' '.join(str(p) for p in find_files(dirpath, '*.v')))
@@ -287,22 +279,12 @@ def _get_run_args(
     parts += ['-noreduce', '-noelab'] # Disable reduction & elaboration
 
     rel_output_dirpath = dirpath.relative_to(output_dirpath, walk_up=True)
-    if 'MSYSTEM' in os.environ:
-      rel_output_dirpath = rel_output_dirpath.as_posix()
     parts += ['-o', str(rel_output_dirpath)]
 
     cmdline = ' '.join(['"' + part + '"' if '"' in part else part for part in parts if part])
     print(f'Processed command line: {cmdline}')
 
     args = tool_args_list + [str(binary_filepath)] + cmdline.split()
-
-  # MSYS2 seems to be having some issues when working with quoted
-  # argument on command line, specifically, when passing arguments
-  # as list of strings. The only solution found to be working
-  # reliably is to pass the arguments as a string rather than list
-  # of strings.
-  if '"' in cmdline and 'MSYSTEM' in os.environ:
-    args = ' '.join(args)
 
   return args, tool_log_filepath
 
@@ -557,7 +539,7 @@ def _print_report(results):
   results = sorted(results, key=lambda r: (-r['STATUS'].value, r['TESTNAME']))
 
   rows = []
-  summary = OrderedDict([(status.name, 0) for status in Status])
+  summary = { status.name : 0 for status in Status }
   summary[''] = ''
   for result in results:
     current = result['current']

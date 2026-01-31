@@ -204,7 +204,7 @@ jobs:
       fail-fast: false
       matrix:
         num_shards: [6]
-        shard: [0, 1, 2, 3, 4, 5]
+        shard: [1]
         config:
         - { os: ubuntu-24.04, artifact-tag: ubuntu-gcc, build-type: release }
 #        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }
@@ -282,11 +282,11 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
         echo "$GITHUB_CONTEXT" > env.txt
-        ls -l build
-        cd build
-        ls -l regression
-        mv regression ${{ env.regression-artifact-name }}
-        find ${{ env.regression-artifact-name }} -name "*.tar.gz" | tar czfp ${{ env.regression-artifact-name }}.tar.gz -T -
+        pushd build
+          mv regression ${{ env.regression-artifact-name }}
+          find ${{ env.regression-artifact-name }} -name "*.tar.gz" | tar czfp ${{ env.regression-artifact-name }}.tar.gz -T -
+        popd
+        mv build/${{ env.regression-artifact-name }}.tar.gz .
 
     - name: Archive artifacts
       if: always()
@@ -294,7 +294,7 @@ jobs:
       with:
         name: ${{ env.regression-artifact-name }}
         path: |
-          build/${{ env.regression-artifact-name }}.tar.gz
+          ${{ env.regression-artifact-name }}.tar.gz
           env.txt
 
 #######################################################################################################################

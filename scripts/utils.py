@@ -101,6 +101,21 @@ def rmdir(dirpath: Path, retries=10) -> bool:
   return not dirpath.exists()
 
 
+def rmfile(filepath: Path, retries=10) -> bool:
+  count = 0
+  while count < retries:
+    filepath.unlink(missing_ok=True)
+
+    if not filepath.exists():
+      return True
+
+    count += 1
+    time.sleep(0.1)
+
+  filepath.unlink()
+  return not filepath.exists()
+
+
 def rmtree(dirpath: Path, patterns: list[str]):
   for pattern in patterns:
     for path in Path(dirpath).rglob(pattern):

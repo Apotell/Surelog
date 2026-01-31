@@ -278,7 +278,7 @@ def _get_run_args(
       parts += ['-d', 'uhdm']
     parts += ['-noreduce', '-noelab'] # Disable reduction & elaboration
 
-    rel_output_dirpath = dirpath.relative_to(output_dirpath, walk_up=True)
+    rel_output_dirpath = output_dirpath.relative_to(dirpath, walk_up=True)
     parts += ['-o', str(rel_output_dirpath)]
 
     cmdline = ' '.join(['"' + part + '"' if '"' in part else part for part in parts if part])

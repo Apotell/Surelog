@@ -257,7 +257,7 @@ def _run_one(params):
             result['STATUS'] = Status.SEGFLT
 
           content = normalize_log(content, {
-            str(workspace_dirpath): '${SURELOG_DIR}',
+            str(workspace_dirpath.as_posix()): '${SURELOG_DIR}',
             r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
           })
 

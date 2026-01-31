@@ -144,7 +144,7 @@ def snapshot_directory_state(dirpath: Path) -> set[Path]:
 def restore_directory_state(dirpath: Path, golden_snapshot: set[Path], output_dirpath: Path, current_snapshot: set[Path]):
   dirt = set(current_snapshot).difference(set(golden_snapshot))
   # Sort based on the length of the string and then chronologically
-  dirt = sorted(dirt, key=lambda item: (len(item), item))
+  dirt = sorted(dirt, key=lambda item: (len(str(item)), item))
 
   for path in dirt:
     if path.is_dir() or path.is_file():

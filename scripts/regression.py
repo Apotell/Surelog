@@ -278,9 +278,9 @@ def _get_run_args(
     args = ['sh'] + [arg for arg in cmdline.split() if arg] + [transform_path(binary_filepath)]
   else:
     if '*/*.v' in cmdline:
-      cmdline = cmdline.replace('*/*.v', ' '.join(find_files(dirpath, '*.v')))
+      cmdline = cmdline.replace('*/*.v', ' '.join(str(p) for p in find_files(dirpath, '*.v')))
     if '*/*.sv' in cmdline:
-      cmdline = cmdline.replace('*/*.sv', ' '.join(find_files(dirpath, '*.sv')))
+      cmdline = cmdline.replace('*/*.sv', ' '.join(str(p) for p in find_files(dirpath, '*.sv')))
     if '-mt' in cmdline:
       cmdline = re.sub(r'-mt\s+(max|\d+)', '', cmdline)
 
@@ -296,7 +296,7 @@ def _get_run_args(
     for i in range(0, len(parts)):
       if parts[i] and ('*' in parts[i] or '?' in parts[i]):
           if parts[i].endswith('.v') or parts[i].endswith('.sv') or parts[i].endswith('.pkg'):
-            parts[i] = ' '.join(find_files(dirpath, parts[i]))
+            parts[i] = ' '.join(str(p) for p in find_files(dirpath, parts[i]))
 
     parts += ['-mt', (mt or '0')]
     if mp or '-mp' not in cmdline:

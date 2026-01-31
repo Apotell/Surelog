@@ -100,9 +100,9 @@ jobs:
           --jobs $(nproc)
 
     - name: Prepare regression artifacts
+      if: always()
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
-      if: always()
       run: |
         echo "$GITHUB_CONTEXT" > env.txt
         mv regression ${{ env.reducer-artifact-name }}

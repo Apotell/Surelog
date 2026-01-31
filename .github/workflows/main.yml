@@ -227,7 +227,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        submodules: recursive
+        sparse-checkout: |
+          scripts
+          tests
+          third_party/tests
+          third_party/UVM
         lfs: true
 
     - name: Download artifact
@@ -237,7 +241,7 @@ jobs:
         run-id: '21535012932'
         github-token: ${{ secrets.GHA_DAVENCHE_CI_TOKEN }}
 
-    - name: Extract artifact
+    - name: Extract build artifact
       shell: bash
       run: |
         # This has to be a separate step and run under bash since tar on Windows
@@ -277,7 +281,10 @@ jobs:
 
     - name: Prepare regression artifacts
       if: always()
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
+        echo "$GITHUB_CONTEXT" > env.txt
         ls -l build
         cd build
         ls -l regression
@@ -289,7 +296,9 @@ jobs:
       uses: actions/upload-artifact@v6
       with:
         name: ${{ env.regression-artifact-name }}
-        path: build/${{ env.regression-artifact-name }}.tar.gz
+        path: |
+          build/${{ env.regression-artifact-name }}.tar.gz
+          env.txt
 
 #######################################################################################################################
 # 

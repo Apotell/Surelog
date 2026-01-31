@@ -77,13 +77,13 @@ def mkdir(dirpath: Path, retries=10) -> bool:
   while count < retries:
     os.makedirs(dirpath, exist_ok=True)
 
-    if dirpath.exists():
+    if dirpath.is_dir():
       return True
 
     count += 1
     time.sleep(0.1)
 
-  return dirpath.exists()
+  return dirpath.is_dir()
 
 
 def rmdir(dirpath: Path, retries=10) -> bool:
@@ -91,14 +91,14 @@ def rmdir(dirpath: Path, retries=10) -> bool:
   while count < retries:
     shutil.rmtree(dirpath, ignore_errors=True)
 
-    if not dirpath.exists():
+    if not dirpath.is_dir():
       return True
 
     count += 1
     time.sleep(0.1)
 
   shutil.rmtree(dirpath)
-  return not dirpath.exists()
+  return not dirpath.is_dir()
 
 
 def rmfile(filepath: Path, retries=10) -> bool:
@@ -106,14 +106,14 @@ def rmfile(filepath: Path, retries=10) -> bool:
   while count < retries:
     filepath.unlink(missing_ok=True)
 
-    if not filepath.exists():
+    if not filepath.is_file():
       return True
 
     count += 1
     time.sleep(0.1)
 
   filepath.unlink()
-  return not filepath.exists()
+  return not filepath.is_file()
 
 
 def rmtree(dirpath: Path, patterns: list[str]):
@@ -130,6 +130,25 @@ def normalize_log(content: str, path_mappings: dict[str, str]) -> str:
     pattern = re.sub(r'(\\|\/)+', r'(\\\\|\/)+', str(path))
     content = re.sub(pattern, str(mapping), content)
   return content
+
+
+def merge_files(output_filepath: Path, delimiter: str, *args: list[Path|str]):
+  # NOTE: The output_filepath could be one of the input file i.e. among args as well.
+  # So, collect the content to write and only then dump out to the output file.
+  output_content = ''
+  for path in args:
+    path = Path(path)
+    if path.is_file():
+      content = path.open().read()
+      if output_content:
+        output_content += '\n'
+        output_content += delimiter * (120 // len(delimiter))
+        output_content += '\n\n'
+      output_content += content
+
+  with output_filepath.open('w') as strm:
+    strm.write(output_content)
+    strm.flush()
 
 
 def snapshot_directory_state(dirpath: Path) -> set[Path]:

@@ -17,6 +17,12 @@ import zipfile
 from contextlib import redirect_stdout, redirect_stderr
 from datetime import datetime, timedelta
 from pathlib import Path
+from pathlibutil.json import (
+  load as json_load,
+  dump as json_dump,
+  loads as json_loads,
+  dumps as json_dumps,
+)
 from typing import Any
 
 import blacklisted
@@ -96,7 +102,7 @@ def _get_surelog_log_filepaths(name: str, golden_dirpath: Path, output_dirpath: 
   platform_id = get_platform_id()
 
   golden_log_filepath = golden_dirpath / f'{name}{platform_id}.log'
-  if golden_log_filepath.exists():
+  if golden_log_filepath.is_file():
     surelog_log_filepath = output_dirpath / f'{name}{platform_id}.log'
   else:
     golden_log_filepath = golden_dirpath / f'{name}.log'
@@ -145,7 +151,7 @@ def _scan(dirpaths: list[Path], filters: list[str], shard: int, num_shards: int)
 
 def _get_log_statistics(filepath: Path) -> dict[str, Any]:
   statistics = {}
-  if not filepath.exists():
+  if not filepath.is_file():
     return statistics
 
   uhdm_dump_markers = [
@@ -386,6 +392,7 @@ def _run_one(params):
   log(f'Running {name} ...')
 
   dirpath = filepath.parent
+  env_filepath = output_dirpath / 'env.json'
   regression_log_filepath = output_dirpath / 'regression.log'
   golden_log_filepath, surelog_log_filepath = _get_surelog_log_filepaths(name, dirpath, output_dirpath)
   uvm_reldirpath = (workspace_dirpath / 'third_party' / 'UVM').relative_to(dirpath, walk_up=True)
@@ -395,6 +402,23 @@ def _run_one(params):
   rmtree(dirpath, ['slpp_all', 'slpp_unit'])
   rmdir(output_dirpath)
   mkdir(output_dirpath)
+
+  json_dump({
+    'test-name': name,
+    'regression': {    
+      'test-dirpath': dirpath,
+      'test-filepath': filepath,
+      'workspace-dirpath': workspace_dirpath,
+      'surelog-filepath': surelog_filepath,
+      'uvm-reldirpath': uvm_reldirpath,
+      'output-dirpath': output_dirpath,
+      'golden-log-filepath': golden_log_filepath,
+      'surelog-log-filepath': surelog_log_filepath,
+      'uhdm-slpp_all-filepath': uhdm_slpp_all_filepath,
+      'uhdm-slpp_unit-filepath': uhdm_slpp_unit_filepath,
+      'tool': tool,
+    }
+  }, env_filepath.open('w'), indent=2)
 
   result = {
     'TESTNAME': name,
@@ -547,7 +571,7 @@ def _print_report(results):
 
     def _get_cell_value(name):
       if golden and current.get(name, 0) != golden.get(name, 0):
-        return f'{current.get(name, 0)} ({current.get(name, 0) - golden.get(name, 0)})'
+        return f'{current.get(name, 0)} ({current.get(name, 0) - golden.get(name, 0):+})'
       else:
         return f'{current.get(name, 0)}'
 

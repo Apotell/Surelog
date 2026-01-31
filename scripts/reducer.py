@@ -14,6 +14,12 @@ import zipfile
 from contextlib import redirect_stdout, redirect_stderr
 from datetime import datetime, timedelta
 from pathlib import Path
+from pathlibutil.json import (
+  load as json_load,
+  dump as json_dump,
+  loads as json_loads,
+  dumps as json_dumps,
+)
 
 from utils import (
   find_files,
@@ -21,8 +27,10 @@ from utils import (
   is_ci_build,
   is_windows,
   log,
+  merge_files,
   normalize_log,
   rmdir,
+  rmfile,
   Status,
 )
 
@@ -78,7 +86,7 @@ def _get_log_statistics(filepath: Path) -> dict[str, int]:
     'ADDED': 0,
     'REMOVED': 0,
   }
-  if not filepath.exists():
+  if not filepath.is_file():
     return statistics
 
   start_marker = '= BEGIN REDUCTION RESULT ='
@@ -197,9 +205,9 @@ def _run_one(params):
   slpp_unit_filepath: Path = test_dirpath / 'slpp_unit' / 'surelog.uhdm'
 
   uhdm_src_filepath = None
-  if slpp_all_filepath.exists():
+  if slpp_all_filepath.is_file():
     uhdm_src_filepath = slpp_all_filepath
-  elif slpp_unit_filepath.exists():
+  elif slpp_unit_filepath.is_file():
     uhdm_src_filepath = slpp_unit_filepath
 
   completed = False
@@ -211,13 +219,33 @@ def _run_one(params):
   }
 
   if uhdm_src_filepath:
-    regression_log_filepath = uhdm_src_filepath.parent / 'regression.log'
-    uhdm_dst_filepath = uhdm_src_filepath.parent / 'reduced.uhdm'
-    reducer_log_filepath = uhdm_src_filepath.parent / 'reducer.log'
-    golden_log_filepath = workspace_dirpath / 'goldens' / name / f'{name}.log'
+    env_filepath = test_dirpath / 'env.json'
+    env = json_load(env_filepath.open())
 
-    with open(regression_log_filepath, 'wt') as regression_log_strm, \
-              redirect_stdout(regression_log_strm), redirect_stderr(regression_log_strm):
+    source_regression_log_filepath = test_dirpath / 'regression.log'
+    source_test_log_filepath = test_dirpath / f'{name}.log'
+
+    reduction_log_filepath = test_dirpath / 'reduction.log'       # Merge this with source_regression_log_filepath
+    uhdm_dst_filepath = uhdm_src_filepath.parent / 'reduced.uhdm'
+    reducer_log_filepath = test_dirpath / 'reducer.log'           # Merge this with source_test_log_filepath
+    golden_log_filepath = Path(env['regression']['golden-log-filepath'])
+
+    env['reducer'] = {
+      'test-dirpath': test_dirpath,
+      'reducer-filepath': reducer_filepath,
+      'uhdm-src-filepath': uhdm_src_filepath,
+      'uhdm-dst-filepath': uhdm_dst_filepath,
+      'reduction-log-filepath': reduction_log_filepath,
+      'reducer-log-filepath': reducer_log_filepath,
+      'golden-log-filepath': golden_log_filepath,
+      'source-regression-log-filepath': source_regression_log_filepath,
+      'source-test-log-filepath': source_test_log_filepath,
+    }
+    json_dump(env, env_filepath.open('w'), indent=2)
+
+    with reduction_log_filepath.open('w') as reduction_log_strm, \
+            redirect_stdout(reduction_log_strm), \
+            redirect_stderr(reduction_log_strm):
       try:
         print(f'start-time: {start_dt}')
         print( '')
@@ -236,33 +264,40 @@ def _run_one(params):
                        reducer_log_filepath, reducer_filepath)
         )
         print('\n')
-        regression_log_strm.flush()
-
-        print(f'Normalizing surelog log file {reducer_log_filepath}')
-        if reducer_log_filepath.is_file():
-          content = open(reducer_log_filepath, 'rt').read()
-          if 'Segmentation fault' in content:
-            result['STATUS'] = Status.SEGFLT
-
-          content = normalize_log(content, {
-            str(workspace_dirpath.as_posix()): '${SURELOG_DIR}',
-            r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
-          })
-
-          open(reducer_log_filepath, 'wt').write(content)
-        else:
-          print(f'File not found: {reducer_log_filepath}')
-          result['STATUS'] == Status.FAIL
-        print('\n')
-
-        # If golden file is missing, then fail the test explicitly!
-        # if result['STATUS'] == Status.PASS and not golden_log_filepath.is_file():
-        #   result['STATUS'] = Status.NOGOLD
+        reduction_log_strm.flush()
 
         result.update({
           'golden': _get_log_statistics(golden_log_filepath),
           'current': _get_log_statistics(reducer_log_filepath)
         })
+
+        if reducer_log_filepath.is_file():
+          merge_files(source_test_log_filepath, '#**', source_test_log_filepath, reducer_log_filepath)
+          rmfile(reducer_log_filepath)
+        else:
+          print(f'File not found: {reducer_log_filepath}')
+          result['STATUS'] == Status.FAIL
+
+        print(f'Normalizing surelog log file {source_test_log_filepath}')
+        if source_test_log_filepath.is_file():
+          content = source_test_log_filepath.open().read()
+          if 'Segmentation fault' in content:
+            result['STATUS'] = Status.SEGFLT
+
+          content = normalize_log(content, {
+            str(workspace_dirpath.as_posix()): '${SURELOG_DIR}',
+            str(Path(env['regression']['workspace-dirpath']).as_posix()): '${SURELOG_DIR}',
+            r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
+          })
+          source_test_log_filepath.open('w').write(content)
+        else:
+          print(f'File not found: {source_test_log_filepath}')
+          result['STATUS'] == Status.FAIL
+        print('\n')
+
+        # If golden file is missing, then fail the test explicitly!
+        if result['STATUS'] == Status.PASS and not golden_log_filepath.is_file():
+          result['STATUS'] = Status.NOGOLD
 
         pprint.pprint({'result': result})
         print('\n')
@@ -276,10 +311,14 @@ def _run_one(params):
         result['STATUS'] = Status.EXECERR
         traceback.print_exc()
 
-      regression_log_strm.flush()
+      reduction_log_strm.flush()
   else:
     print('Failed to find uhdm source database!')
     result['STATUS'] = Status.EXECERR
+
+  # Merge regression logs
+  merge_files(source_regression_log_filepath, '#**', source_regression_log_filepath, reduction_log_filepath)
+  rmfile(reduction_log_filepath)
 
   if is_ci_build():
     generate_tarball(str(test_dirpath))
@@ -303,7 +342,7 @@ def _print_report(results):
 
     def _get_cell_value(name):
       if golden and current.get(name, 0) != golden.get(name, 0):
-        return f'{current.get(name, 0)} ({current.get(name, 0) - golden.get(name, 0)})'
+        return f'{current.get(name, 0)} ({current.get(name, 0) - golden.get(name, 0):+})'
       else:
         return f'{current.get(name, 0)}'
 

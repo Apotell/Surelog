@@ -20,7 +20,6 @@ jobs:
   build:
     name: "Build | ${{ matrix.config.artifact-tag }} | ${{ matrix.config.build-type }}"
     runs-on: ${{ matrix.config.os }}
-    if: false
 
     strategy:
       fail-fast: false
@@ -196,22 +195,20 @@ jobs:
 
   regression:
     name: "Regression | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
-    # needs: build
+    needs: build
     runs-on: ${{ matrix.config.os }}
 
     strategy:
       fail-fast: false
       matrix:
         num_shards: [6]
-#        shard: [0, 1, 2, 3, 4, 5]
-        shard: [1]
+        shard: [0, 1, 2, 3, 4, 5]
         config:
         - { os: ubuntu-24.04, artifact-tag: ubuntu-gcc, build-type: release }
 #        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }
 
     env:
-      # build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
-      build-artifact-name: 'Surelog_ubuntu-gcc_release_972'
+      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
       regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
 
     steps:
@@ -238,8 +235,6 @@ jobs:
       uses: actions/download-artifact@v6
       with:
         name: ${{ env.build-artifact-name }}
-        run-id: '21535012932'
-        github-token: ${{ secrets.GHA_DAVENCHE_CI_TOKEN }}
 
     - name: Extract build artifact
       shell: bash
@@ -417,8 +412,7 @@ jobs:
     name: "Linux | Statistics | gcc | release"
     runs-on: ubuntu-24.04
     needs: regression
-    # if: "!cancelled()"
-    if: false
+    if: "!cancelled()"
     env:
       regression-artifact-pattern: "Surelog_regression_ubuntu-gcc_release_*"
       statistics-artifact-name: Surelog_regression_ubuntu-gcc_release_${{ github.run_number }}
@@ -461,7 +455,6 @@ jobs:
 # Code formatting
   CodeFormatting:
     runs-on: ubuntu-24.04
-    if: false
 
     steps:
     - name: Checkout code
@@ -483,7 +476,6 @@ jobs:
 # Code Tideness
   ClangTidy:
     runs-on: ubuntu-24.04
-    if: false
 
     steps:
     - name: Install Dependencies

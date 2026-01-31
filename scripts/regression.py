@@ -21,6 +21,7 @@ from datetime import datetime, timedelta
 from enum import Enum, unique
 from pathlib import Path
 from threading import Lock
+from typing import Any
 
 import blacklisted
 from utils import (
@@ -60,9 +61,6 @@ else:
 _default_output_dirpath = Path('regression')
 _default_surelog_filename = Path('surelog.exe' if is_windows() else 'surelog')
 _default_surelog_filepath = Path('bin') / _default_surelog_filename
-
-_default_reducer_filename = Path('uhdm-reduce.exe' if is_windows() else 'uhdm-reduce')
-_default_reducer_filepath = Path('bin') / _default_reducer_filename
 
 _re_status_1 = re.compile(r'^\s*\[\s*(?P<status>\w+)\]\s*:\s*(?P<count>\d+)$')
 _re_status_2 = re.compile(r'^\s*\|\s*(?P<status>\w+)\s*\|\s*(?P<count1>\d+|\s+)\s*\|\s*(?P<count2>\d+|\s+)\s*\|\s*$')
@@ -144,13 +142,13 @@ def _scan(dirpaths: list[Path], filters: list[str], shard: int, num_shards: int)
             filtered_tests.add(name)
 
   return [
-    OrderedDict([ (name, all_tests[name]) for name in sorted(all_tests.keys(), key=lambda t: t.lower()) ]),
-    OrderedDict([ (name, all_tests[name]) for name in sorted(filtered_tests, key=lambda t: t.lower()) ]),
-    OrderedDict([ (name, all_tests[name]) for name in sorted(blacklisted_tests, key=lambda t: t.lower()) ])
+    { name : all_tests[name] for name in sorted(all_tests.keys(), key=lambda t: t.lower()) },
+    { name : all_tests[name] for name in sorted(filtered_tests, key=lambda t: t.lower()) },
+    { name : all_tests[name] for name in sorted(blacklisted_tests, key=lambda t: t.lower()) }
   ]
 
 
-def _get_log_statistics(filepath: Path):
+def _get_log_statistics(filepath: Path) -> dict[str, Any]:
   statistics = {}
   if not filepath.exists():
     return statistics
@@ -165,10 +163,6 @@ def _get_log_statistics(filepath: Path):
     '=== UHDM Object Stats Begin (Elaborated Model) ===',
     '=== UHDM Object Stats End ==='
   ]
-
-  reducer_result_start_marker = '= BEGIN REDUCTION RESULT ='
-  reducer_result_end_marker = '= END REDUCTION RESULT ='
-  reducer_result_scan_started = False
 
   negatives = {}
   uhdm_dump_started = False
@@ -185,27 +179,12 @@ def _get_log_statistics(filepath: Path):
       elif line in uhdm_stat_dump_markers:
         uhdm_stat_dump_started = not uhdm_stat_dump_started
         continue
-      elif not reducer_result_scan_started and reducer_result_start_marker in line:
-        reducer_result_scan_started = True
-        continue
-      elif reducer_result_scan_started and reducer_result_end_marker in line:
-        reducer_result_scan_started = False
-        continue
 
       if uhdm_stat_dump_started:
         parts = [part.strip() for part in line.split()]
         if len(parts) == 2:
           uhdm_stats[parts[0]] = uhdm_stats.get(parts[0], 0) + int(parts[1])
         continue
-
-      if reducer_result_scan_started:
-        parts = line.split()
-        if len(parts) == 4:
-          statistics['BEFORE'] = int(parts[0])
-          statistics['AFTER'] = int(parts[1])
-          statistics['ADDED'] = int(parts[2])
-          statistics['REMOVED'] = int(parts[3])
-          continue
 
       m = _re_status_2.match(line)
       if m:
@@ -571,8 +550,8 @@ def _run_one(params):
 
 def _print_report(results):
   columns = [
-    'TESTNAME', 'STATUS', 'FATAL', 'SYNTAX', 'ERROR', 'WARNING', 'NOTE',
-    'BEFORE', 'AFTER', 'ADDED', 'REMOVED', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM'
+    'TESTNAME', 'STATUS', 'FATAL', 'SYNTAX', 'ERROR',
+    'WARNING', 'NOTE', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM'
   ]
 
   results = sorted(results, key=lambda r: (-r['STATUS'].value, r['TESTNAME']))
@@ -599,13 +578,9 @@ def _print_report(results):
       _get_cell_value(columns[4]),                            # ERROR
       _get_cell_value(columns[5]),                            # WARNING
       _get_cell_value(columns[6]),                            # NOTE
-      _get_cell_value(columns[7]),                            # BEFORE
-      _get_cell_value(columns[8]),                            # AFTER
-      _get_cell_value(columns[9]),                            # ADDED
-      _get_cell_value(columns[10]),                           # REMOVED
-      '{:.2f}'.format(result.get(columns[11], 0)),            # CPU-TIME
-      str(round(result.get(columns[12], 0) / (1024 * 1024))), # VTL-MEM
-      str(round(result.get(columns[13], 0) / (1024 * 1024))), # PHY-MEM
+      '{:.2f}'.format(result.get(columns[7], 0)),             # CPU-TIME
+      str(round(result.get(columns[8], 0) / (1024 * 1024))),  # VTL-MEM
+      str(round(result.get(columns[9], 0) / (1024 * 1024))),  # PHY-MEM
     ])
 
   print('Results:')

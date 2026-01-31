@@ -13,7 +13,7 @@ from pathlib import Path
 from threading import Lock
 
 
-def is_ci_build():
+def is_ci_build() -> bool:
   return 'GITHUB_JOB' in os.environ
 
 
@@ -41,19 +41,19 @@ class Status(Enum):
     return str(self.name)
 
 
-def is_windows():
+def is_windows() -> bool:
   return platform.system() == 'Windows'
 
 
-def is_linux():
+def is_linux() -> bool:
   return platform.system() == 'Linux'
 
 
-def is_macosx():
+def is_macosx() -> bool:
   return platform.system() == 'Darwin'
 
 
-def get_platform_id():
+def get_platform_id() -> str:
   system = platform.system()
   if system == 'Linux':
     return '.linux'
@@ -65,7 +65,7 @@ def get_platform_id():
   return ''
 
 
-def transform_path(path: Path):
+def transform_path(path: Path) -> Path:
   if 'MSYSTEM' not in os.environ:
     return path
 
@@ -76,7 +76,7 @@ def transform_path(path: Path):
   return result.stdout.strip()
 
 
-def find_files(dirpath: Path, pattern: list[str]):
+def find_files(dirpath: Path, pattern: list[str]) -> list[Path]:
   relpaths = []
   for filepath in Path(dirpath).rglob(pattern):
     relpaths.append(filepath.relative_to(dirpath))
@@ -87,7 +87,7 @@ def find_files(dirpath: Path, pattern: list[str]):
   return sorted(relpaths)
 
 
-def mkdir(dirpath: Path, retries=10):
+def mkdir(dirpath: Path, retries=10) -> bool:
   count = 0
   while count < retries:
     os.makedirs(dirpath, exist_ok=True)
@@ -101,7 +101,7 @@ def mkdir(dirpath: Path, retries=10):
   return dirpath.exists()
 
 
-def rmdir(dirpath: Path, retries=10):
+def rmdir(dirpath: Path, retries=10) -> bool:
   count = 0
   while count < retries:
     shutil.rmtree(dirpath, ignore_errors=True)

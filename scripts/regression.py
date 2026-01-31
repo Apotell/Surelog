@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import difflib
 import hashlib
 import multiprocessing
 import os
@@ -11,6 +10,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tabulate
 import tarfile
 import time
 import traceback
@@ -166,6 +166,10 @@ def _get_log_statistics(filepath: Path):
     '=== UHDM Object Stats End ==='
   ]
 
+  reducer_result_start_marker = '= BEGIN REDUCTION RESULT ='
+  reducer_result_end_marker = '= END REDUCTION RESULT ='
+  reducer_result_scan_started = False
+
   negatives = {}
   uhdm_dump_started = False
   uhdm_stats = {}
@@ -181,12 +185,27 @@ def _get_log_statistics(filepath: Path):
       elif line in uhdm_stat_dump_markers:
         uhdm_stat_dump_started = not uhdm_stat_dump_started
         continue
+      elif not reducer_result_scan_started and reducer_result_start_marker in line:
+        reducer_result_scan_started = True
+        continue
+      elif reducer_result_scan_started and reducer_result_end_marker in line:
+        reducer_result_scan_started = False
+        continue
 
       if uhdm_stat_dump_started:
         parts = [part.strip() for part in line.split()]
         if len(parts) == 2:
           uhdm_stats[parts[0]] = uhdm_stats.get(parts[0], 0) + int(parts[1])
         continue
+
+      if reducer_result_scan_started:
+        parts = line.split()
+        if len(parts) == 4:
+          statistics['BEFORE'] = int(parts[0])
+          statistics['AFTER'] = int(parts[1])
+          statistics['ADDED'] = int(parts[2])
+          statistics['REMOVED'] = int(parts[3])
+          continue
 
       m = _re_status_2.match(line)
       if m:
@@ -399,13 +418,6 @@ def _run_surelog(
   }
 
 
-def _compare_one(lhs_filepath: Path, rhs_filepath: Path, prefilter=lambda x: x):
-  # lhs_content = [prefilter(line) for line in lhs_filepath.open().readlines()]
-  # rhs_content = [prefilter(line) for line in rhs_filepath.open().readlines()]
-  # return [line for line in difflib.unified_diff(lhs_content, rhs_content, fromfile=lhs_filepath, tofile=rhs_filepath, n = 0)]
-  return []
-
-
 def _run_one(params):
   start_dt = datetime.now()
   name, filepath, workspace_dirpath, surelog_filepath, mp, mt, tool, output_dirpath = params
@@ -426,7 +438,6 @@ def _run_one(params):
   result = {
     'TESTNAME': name,
     'STATUS': Status.PASS,
-    'diff-lines': [],
     'golden-log-filepath': golden_log_filepath,
     'surelog-log-filepath': surelog_log_filepath,
     'golden': {},
@@ -539,10 +550,6 @@ def _run_one(params):
       pprint.pprint({'result': result})
       print('\n')
 
-      if result['STATUS'] == Status.DIFF:
-        result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
-        regression_log_strm.writelines(result['diff-lines'])
-
       end_dt = datetime.now()
       delta = end_dt - start_dt
       print(f'end-time: {str(end_dt)} {str(delta)}')
@@ -562,85 +569,10 @@ def _run_one(params):
   return result
 
 
-def _report_one(params):
-  start_dt = datetime.now()
-  name, filepath, output_dirpath = params
-
-  log(f'Comparing {name}')
-
-  dirpath = filepath.parent
-  golden_log_filepath, surelog_log_filepath = _get_surelog_log_filepaths(name, dirpath, output_dirpath)
-  report_log_filepath = output_dirpath / 'report.log'
-
-  result = {
-    'TESTNAME': name,
-    'STATUS': Status.PASS,
-    'diff-lines': [],
-    'golden-log-filepath': golden_log_filepath,
-    'surelog-log-filepath': surelog_log_filepath,
-    'golden': {},
-    'current': {}
-  }
-
-  if not dirpath.is_dir():
-    result['STATUS'] = Status.FAIL
-    return result
-
-  with report_log_filepath.open('wt') as report_log_strm, \
-      redirect_stdout(report_log_strm), \
-      redirect_stderr(report_log_strm):
-
-    print(f'start-time: {start_dt}')
-    print( '')
-    print( 'Environment:')
-    print(f'              test-name: {name}')
-    print(f'           test-dirpath: {dirpath}')
-    print(f'          test-filepath: {filepath}')
-    print(f'    golden-log-filepath: {golden_log_filepath}')
-    print(f'   surelog-log-filepath: {surelog_log_filepath}')
-    print( '\n')
-
-    # If either output file is missing, then fail the test explicitly!
-    if surelog_log_filepath.is_file() != golden_log_filepath.is_file():
-      result['STATUS'] = Status.FAIL
-
-    result.update({
-      'golden': _get_log_statistics(golden_log_filepath),
-      'current': _get_log_statistics(surelog_log_filepath)
-    })
-
-    if result['STATUS'] == Status.PASS:
-      current = result['current']
-      golden = result['golden']
-      if len(current) == len(golden):
-        for k, v in current.items():
-          if v != golden.get(k, 0):
-            result['STATUS'] = Status.DIFF
-            break
-      else:
-          result['STATUS'] = Status.DIFF
-
-    print('Comparison Result:')
-    pprint.pprint(result)
-    print('\n')
-
-    if result['STATUS'] == Status.DIFF:
-      result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
-      report_log_strm.writelines(result['diff-lines'])
-
-    end_dt = datetime.now()
-    delta = end_dt - start_dt
-    print(f'end-time: {str(end_dt)} {str(delta)}')
-
-    report_log_strm.flush()
-
-  return result
-
-
 def _print_report(results):
   columns = [
-    'TESTNAME', 'STATUS', 'FATAL', 'SYNTAX', 'ERROR', 'WARNING',
-    'NOTE', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM'
+    'TESTNAME', 'STATUS', 'FATAL', 'SYNTAX', 'ERROR', 'WARNING', 'NOTE',
+    'BEFORE', 'AFTER', 'ADDED', 'REMOVED', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM'
   ]
 
   results = sorted(results, key=lambda r: (-r['STATUS'].value, r['TESTNAME']))
@@ -667,10 +599,18 @@ def _print_report(results):
       _get_cell_value(columns[4]),                            # ERROR
       _get_cell_value(columns[5]),                            # WARNING
       _get_cell_value(columns[6]),                            # NOTE
-      '{:.2f}'.format(result.get(columns[7], 0)),             # CPU-TIME
-      str(round(result.get(columns[8], 0) / (1024 * 1024))),  # VTL-MEM
-      str(round(result.get(columns[9], 0) / (1024 * 1024))),  # PHY-MEM
+      _get_cell_value(columns[7]),                            # BEFORE
+      _get_cell_value(columns[8]),                            # AFTER
+      _get_cell_value(columns[9]),                            # ADDED
+      _get_cell_value(columns[10]),                           # REMOVED
+      '{:.2f}'.format(result.get(columns[11], 0)),            # CPU-TIME
+      str(round(result.get(columns[12], 0) / (1024 * 1024))), # VTL-MEM
+      str(round(result.get(columns[13], 0) / (1024 * 1024))), # PHY-MEM
     ])
+
+  print('Results:')
+  print(tabulate.tabulate(rows, headers=columns, tablefmt="outline", floatfmt=".2f"))
+  print('')
 
   longest_cpu_test = max(results, key=lambda result: result.get('CPU-TIME', 0))
   total_cpu_time = sum([result.get('CPU-TIME', 0) for result in results])
@@ -683,44 +623,9 @@ def _print_report(results):
   largest_test = max(results, key=lambda result: result.get('PHY-MEM', 0))
   summary['MAX MEMORY'] = f'{round(largest_test.get("PHY-MEM", 0) / (1024 * 1024))} ({largest_test["TESTNAME"]})'
 
-  widths = [max([len(row[index]) for row in [columns] + rows]) for index in range(0, len(columns))]
-  row_format = '  | ' + ' | '.join([f'{{:{"" if i < 2 else ">"}{widths[i]}}}' for i in range(0, len(widths))]) + ' |'
-  separator = '  +-' + '-+-'.join(['-' * width for width in widths]) + '-+'
-
-  print('Results: ')
-  print(separator)
-  print(row_format.format(*columns))
-  print(separator)
-  for row in rows:
-    print(row_format.format(*row))
-  print(separator)
-
-  return summary
-
-
-def _print_diffs(results):
-  max_lines_per_result = 50
-  for result in results:
-    if result['STATUS'] == Status.DIFF:
-      print('=' * 120)
-      print(f'diff {result["golden-log-filepath"]} {result["surelog-log-filepath"]}')
-      sys.stdout.writelines(result['diff-lines'][:max_lines_per_result])
-      if len(result['diff-lines']) > max_lines_per_result:
-        print(f'... and {len(result["diff-lines"]) - max_lines_per_result} more.')
-      print('\n\n')
-
-
-def _print_summary(summary):
-  rows = [[k, str(v)] for k, v in summary.items()]
-  widths = [max([len(str(row[index])) for row in rows]) for index in range(0, 2)]
-  row_format = '  | ' + ' | '.join([f'{{:{width}}}' for width in widths]) + ' |'
-  separator = '  +-' + '-+-'.join(['-' * width for width in widths]) + '-+'
-
-  print('Summary: ')
-  print(separator)
-  for row in rows:
-    print(row_format.format(*row))
-  print(separator)
+  print('Summary:')
+  print(tabulate.tabulate(list(summary.items()), tablefmt="outline", floatfmt=".2f"))
+  print('')
 
 
 def _run(args, tests):
@@ -744,47 +649,10 @@ def _run(args, tests):
     with multiprocessing.Pool(processes=args.jobs) as pool:
       results = pool.map(_run_one, params)
 
-  print('\n\n')
-  summary = _print_report(results)
+  print('')
+  _print_report(results)
 
-  if args.show_diffs:
-    print('\n\n')
-    _print_diffs(results)
-
-  print('\n\n')
-  _print_summary(summary)
-
-  result = sum([entry['STATUS'].value for entry in results])
-  return result
-
-
-def _report(args, tests):
-  if not tests:
-    return 0  # No selected tests
-
-  params = [(
-    name,
-    filepath,
-    args.output_dirpath/ name
-  ) for name, filepath in tests.items()]
-
-  if args.jobs == 0:
-    results = [_report_one(param) for param in params]
-  else:
-    with multiprocessing.Pool(processes=args.jobs) as pool:
-      results = pool.map(_report_one, params)
-
-  print('\n\n')
-  summary = _print_report(results)
-  print('\n\n')
-
-  if args.show_diffs:
-    _print_diffs(results)
-    print('\n\n')
-
-  _print_summary(summary)
-
-  return 0
+  return sum([entry['STATUS'].value for entry in results])
 
 
 def _extract_worker(params):
@@ -904,9 +772,6 @@ def _main():
   parser.add_argument(
       '--jobs', nargs='?', required=False, default=multiprocessing.cpu_count(), type=int,
       help='Run tests in parallel, optionally providing max number of concurrent processes. Set 0 to run sequentially.')
-  parser.add_argument(
-      '--show-diffs', dest='show_diffs', required=False, default=False, action='store_true',
-      help='Show file differences when applicable.')
   parser.add_argument(
       '--tool', dest='tool', choices=['ddd', 'valgrind'], required=False, default=None, type=str,
       help='Run regression test using specified tool.')

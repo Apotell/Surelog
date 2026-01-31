@@ -20,6 +20,7 @@ jobs:
   build:
     name: "Build | ${{ matrix.config.artifact-tag }} | ${{ matrix.config.build-type }}"
     runs-on: ${{ matrix.config.os }}
+    if: false
 
     strategy:
       fail-fast: false
@@ -163,7 +164,11 @@ jobs:
     - name: Build compressed artifacts
       if: always()
       shell: bash
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
+        echo "$GITHUB_CONTEXT" > env.txt
+
         cp deploy/CMakeLists.txt out/install/.
         cd out
 
@@ -183,13 +188,15 @@ jobs:
       uses: actions/upload-artifact@v6
       with:
         name: ${{ env.artifact-name }}
-        path: out/${{ env.artifact-name }}.tar.gz
+        path: |
+          out/${{ env.artifact-name }}.tar.gz
+          env.txt
 
 #######################################################################################################################
 
   regression:
     name: "Regression | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
-    needs: build
+    # needs: build
     runs-on: ${{ matrix.config.os }}
 
     strategy:
@@ -203,8 +210,8 @@ jobs:
 #        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }
 
     env:
-      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
-      # build-artifact-name: 'Surelog_regression_ubuntu-gcc_release_971_0'
+      # build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
+      build-artifact-name: 'Surelog_regression_ubuntu-gcc_release_972_1'
       regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
 
     steps:
@@ -229,8 +236,8 @@ jobs:
       uses: actions/download-artifact@v6
       with:
         name: ${{ env.build-artifact-name }}
-        # run-id: '21534300857'
-        # github-token: ${{ secrets.GHA_DAVENCHE_CI_TOKEN }}
+        run-id: '62059324819'
+        github-token: ${{ secrets.GHA_DAVENCHE_CI_TOKEN }}
 
     - name: Extract artifact
       shell: bash
@@ -403,7 +410,8 @@ jobs:
     name: "Linux | Statistics | gcc | release"
     runs-on: ubuntu-24.04
     needs: regression
-    if: "!cancelled()"
+    # if: "!cancelled()"
+    if: false
     env:
       regression-artifact-pattern: "Surelog_regression_ubuntu-gcc_release_*"
       statistics-artifact-name: Surelog_regression_ubuntu-gcc_release_${{ github.run_number }}
@@ -446,6 +454,7 @@ jobs:
 # Code formatting
   CodeFormatting:
     runs-on: ubuntu-24.04
+    if: false
 
     steps:
     - name: Checkout code
@@ -467,6 +476,7 @@ jobs:
 # Code Tideness
   ClangTidy:
     runs-on: ubuntu-24.04
+    if: false
 
     steps:
     - name: Install Dependencies

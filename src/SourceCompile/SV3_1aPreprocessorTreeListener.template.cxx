@@ -483,9 +483,6 @@ void SV3_1aPreprocessorTreeListener::appendInactiveBodyEnd(antlr4::tree::ParseTr
   if (m_pp != m_pp->getSourceFile()) return;
 
   const size_t index = m_fileContent->getVObjects().size();
-  // TODO(AS):
-  // Add a VObject to the AST tree with all the content collected between the
-  // start of inactive node and end of this inactive node
   addVObject(ctx, m_InactiveBodyContent, VObjectType::INACTIVE_BODY_END);
   m_InactiveBodyContent.clear();
   m_pp->append(StrCat(kInactiveBodyEndPrefix, index, kInactiveBodyEndSuffix));
@@ -623,6 +620,13 @@ void SV3_1aPreprocessorTreeListener::exitIfdef_directive(SV3_1aPpParser::Ifdef_d
   if (m_inActiveBranch) {
     appendPreprocEnd();
     m_passThrough = false;
+  }
+
+  if (!m_inActiveBranch) {
+    // REVISIT(HS): This is not entirely right because we might already be in an inactive
+    // branch and this might be a embedded inactive one without changing state.
+    if (!m_collectInactiveContent) appendInactiveBodyBegin();
+    m_collectInactiveContent = true;
   }
 }
 
@@ -782,6 +786,13 @@ void SV3_1aPreprocessorTreeListener::enterElse_directive(SV3_1aPpParser::Else_di
     appendPreprocBegin();
     m_passThrough = true;
   }
+
+  if (!m_inActiveBranch) {
+    // REVISIT(HS): This is not entirely right because we might already be in an inactive
+    // branch and this might be a embedded inactive one without changing state.
+    appendInactiveBodyEnd(ctx);
+    m_collectInactiveContent = false;
+  }
 }
 
 void SV3_1aPreprocessorTreeListener::exitElse_directive(SV3_1aPpParser::Else_directiveContext *ctx) {
@@ -820,6 +831,8 @@ void SV3_1aPreprocessorTreeListener::enterEndif_directive(SV3_1aPpParser::Endif_
 void SV3_1aPreprocessorTreeListener::exitEndif_directive(SV3_1aPpParser::Endif_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
+  const bool inActiveBranch_backup = m_inActiveBranch;
+
   PreprocessFile::IfElseStack &stack = m_pp->getStack();
   bool unroll = true;
   while (unroll && (!stack.empty())) {
@@ -849,6 +862,10 @@ void SV3_1aPreprocessorTreeListener::exitEndif_directive(SV3_1aPpParser::Endif_d
   if (m_inActiveBranch) m_passThrough = false;
 
   addVObject(ctx, VObjectType::ppEndif_directive);
+
+  if (inActiveBranch_backup != m_inActiveBranch) {
+    appendInactiveBodyEnd(ctx);
+  }
 
   if (!m_passThrough) {
     appendPreprocEnd();
@@ -1579,12 +1596,7 @@ void SV3_1aPreprocessorTreeListener::visitTerminal(antlr4::tree::TerminalNode *n
   antlr4::Token *const token = node->getSymbol();
   const size_t tokenType = token->getType();
 
-  // TODO(AS):
-  // If processing inactive node, collect the text from input node in a string.
-  // This string content will be passed into the "append inactive end node" call
-  // and will be included as the content for the appendded VObject
-
-  if (m_inActiveBranch == false) {
+  if (m_collectInactiveContent) {
     std::string text = token->getText();
     m_InactiveBodyContent.append(text);
   }

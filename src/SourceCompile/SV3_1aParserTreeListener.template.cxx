@@ -279,19 +279,6 @@ void SV3_1aParserTreeListener::processPendingTokens(antlr4::tree::ParseTree *tre
         if (NumUtils::parseUint32(svtext, &index)) {
           int abc = 0;
           ++abc;
-
-          // TODO(AS):
-          // Get the content of from the preprocessor tree based on the index found here.
-          // Create a new parser object and try to parse that string as actual source.
-          
-          Session* const session = m_ppFileContent->getSession();
-          PathId fileId = m_ppFileContent->getFileId();
-          Compiler *const compiler = new Compiler(session);
-          CompilationUnit* const unit = new CompilationUnit(false);
-          Library* const lib = new Library(session, "work");
-          CompileSourceFile* const csf = new CompileSourceFile(session, fileId, compiler, unit, lib);
-          ParseFile* const parser = new ParseFile(session, text, csf, unit, lib);
-          parser->parse();
         }
 
       } break;
@@ -303,8 +290,27 @@ void SV3_1aParserTreeListener::processPendingTokens(antlr4::tree::ParseTree *tre
 
         uint32_t index = 0;
         if (NumUtils::parseUint32(svtext, &index)) {
-          int abc = 0;
-          ++abc;
+          std::string_view content = m_ppFileContent->SymName(NodeId(index));
+
+          CompilationUnit *const unit = m_pf->getCompilationUnit();
+          Library *const lib = m_pf->getLibrary();
+          CompileSourceFile *const csf = m_pf->getCompileSourceFile();
+          ParseFile *const parser = new ParseFile(m_session, content, csf, unit, lib);
+          parser->setFileContent(m_fileContent);
+          parser->parse();
+          delete parser;
+
+          // TODO(AS): The above parser will add VObjects to our primary fileContent.
+          // The other option is to not call the setFileContent above and use a secondary
+          // FileContent. With the alternative approach, we will have to merge the generated
+          // AST back into our primary one.
+          // The above still doesn't have the parsed nodes in the output in logs. The likely
+          // reason is parenting problem. When VObject nodes are added to the AST, they aren't
+          // parented immediately. Parenting happens when the parent itself gets added which
+          // in a left-right tree would be - child first, then parent.
+          // Follow the code in addVObject and CommonListenerHelper::addParentChildRelations
+          // to trace how parenting works and why the nodes from secondary parser aren't
+          // parented correctly.
         }
       } break;
 

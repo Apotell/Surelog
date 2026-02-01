@@ -114,6 +114,7 @@ class SV3_1aPreprocessorTreeListener final : public SV3_1aPpParserBaseListener, 
   token_set_t m_tokensToIgnore;
   std::array<bool, 256> m_charsInOperator;
   std::string m_InactiveBodyContent;
+  bool m_collectInactiveContent = false;
 };
 }  // namespace SURELOG
 

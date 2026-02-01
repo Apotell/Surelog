@@ -105,7 +105,7 @@ class SV3_1aPreprocessorTreeListener final : public SV3_1aPpParserBaseListener, 
   void appendPreprocEnd();
 
   void appendInactiveBodyBegin();
-  void appendInactiveBodyEnd();
+  void appendInactiveBodyEnd(antlr4::tree::ParseTree *ctx);
 
  private:
   using token_set_t = std::set<antlr4::Token*>;
@@ -113,6 +113,7 @@ class SV3_1aPreprocessorTreeListener final : public SV3_1aPpParserBaseListener, 
   bool m_passThrough = false;
   token_set_t m_tokensToIgnore;
   std::array<bool, 256> m_charsInOperator;
+  std::string m_InactiveBodyContent;
 };
 }  // namespace SURELOG
 

@@ -479,13 +479,15 @@ void SV3_1aPreprocessorTreeListener::appendInactiveBodyBegin() {
   m_pp->append(StrCat(kInactiveBodyBeginPrefix, index, kInactiveBodyBeginSuffix));
 }
 
-void SV3_1aPreprocessorTreeListener::appendInactiveBodyEnd() {
+void SV3_1aPreprocessorTreeListener::appendInactiveBodyEnd(antlr4::tree::ParseTree* ctx) {
   if (m_pp != m_pp->getSourceFile()) return;
 
   const size_t index = m_fileContent->getVObjects().size();
   // TODO(AS):
   // Add a VObject to the AST tree with all the content collected between the
   // start of inactive node and end of this inactive node
+  addVObject(ctx, m_InactiveBodyContent, VObjectType::INACTIVE_BODY_END);
+  m_InactiveBodyContent.clear();
   m_pp->append(StrCat(kInactiveBodyEndPrefix, index, kInactiveBodyEndSuffix));
 }
 
@@ -1376,7 +1378,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(SV3_1aPpParser::Macro
 void SV3_1aPreprocessorTreeListener::exitMacro_definition(SV3_1aPpParser::Macro_definitionContext *ctx) {
   if (!m_inActiveBranch || m_inProtectedRegion) 
   {
-    appendInactiveBodyEnd();
+    appendInactiveBodyEnd(ctx);
     return;
   }
 
@@ -1582,6 +1584,10 @@ void SV3_1aPreprocessorTreeListener::visitTerminal(antlr4::tree::TerminalNode *n
   // This string content will be passed into the "append inactive end node" call
   // and will be included as the content for the appendded VObject
 
+  if (m_inActiveBranch == false) {
+    std::string text = token->getText();
+    m_InactiveBodyContent.append(text);
+  }
   if (tokenType == antlr4::Token::EOF) return;
   if (m_tokensToIgnore.find(token) != m_tokensToIgnore.cend()) return;
 
@@ -1673,7 +1679,7 @@ void SV3_1aPreprocessorTreeListener::visitTerminal(antlr4::tree::TerminalNode *n
         skipString && (((antlr4::ParserRuleContext *)node->parent)->getRuleIndex() == SV3_1aPpParser::RuleString);
     if (((tokenType != SV3_1aPpParser::QUOTED_STRING) || !skipString) && (tokenType != SV3_1aPpParser::TICK_LINE__) &&
         (tokenType != SV3_1aPpParser::TICK_FILE__) && (tokenType != SV3_1aPpParser::ESCAPED_IDENTIFIER)) {
-      m_pp->append(tokenText);
+        m_pp->append(tokenText);
     }
   }
 }

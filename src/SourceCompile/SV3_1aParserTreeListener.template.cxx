@@ -31,6 +31,9 @@
 #include <Surelog/Utils/ParseUtils.h>
 #include <Surelog/Utils/StringUtils.h>
 #include <parser/SV3_1aLexer.h>
+#include "Surelog/Common/Session.h"
+#include "Surelog/SourceCompile/CompilationUnit.h"
+#include "Surelog/Library/Library.h"
 
 #include <algorithm>
 #include <iomanip>
@@ -280,7 +283,17 @@ void SV3_1aParserTreeListener::processPendingTokens(antlr4::tree::ParseTree *tre
           // TODO(AS):
           // Get the content of from the preprocessor tree based on the index found here.
           // Create a new parser object and try to parse that string as actual source.
+          
+          Session* const session = m_ppFileContent->getSession();
+          PathId fileId = m_ppFileContent->getFileId();
+          Compiler *const compiler = new Compiler(session);
+          CompilationUnit* const unit = new CompilationUnit(false);
+          Library* const lib = new Library(session, "work");
+          CompileSourceFile* const csf = new CompileSourceFile(session, fileId, compiler, unit, lib);
+          ParseFile* const parser = new ParseFile(session, text, csf, unit, lib);
+          parser->parse();
         }
+
       } break;
 
       case SV3_1aParser::INACTIVE_BODY_END: {

@@ -43,7 +43,7 @@ class ExprBuilder final {
   ExprBuilder(const ExprBuilder& orig) = delete;
 
   Value* evalExpr(const FileContent*, NodeId id, ValuedComponentI* instance = nullptr, bool muteErrors = false);
-  Value* fromVpiValue(std::string_view value, int32_t size);
+  Value* fromVpiValue(std::string_view value, int32_t constType, int32_t size);
   Value* fromString(std::string_view value);
   Value* clone(Value* val);
 

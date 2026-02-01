@@ -64,13 +64,13 @@ TEST(ExprBuilderTest, BasicValueOp) {
     v2.set((int64_t)9);
     v0.plus(&v1, &v2);
     EXPECT_EQ(v0.getValueL(), -1);
-    EXPECT_EQ(v0.uhdmValue(), "INT:-1");
+    EXPECT_EQ(v0.uhdmValue(), "-1");
   }
   {
     ValueFactory factory;
     std::unique_ptr<Value> v0(factory.newStValue());
     v0->set("BLAH");
-    EXPECT_EQ(v0->uhdmValue(), "STRING:BLAH");
+    EXPECT_EQ(v0->uhdmValue(), "BLAH");
   }
 }
 TEST(ExprBuilderTest, BuildFrom) {
@@ -78,20 +78,20 @@ TEST(ExprBuilderTest, BuildFrom) {
     Session session;
     ExprBuilder builder(&session);
 
-    std::unique_ptr<Value> v1(builder.fromVpiValue("HEX:A", 4));
-    std::unique_ptr<Value> v2(builder.fromVpiValue("INT:10", 0));
+    std::unique_ptr<Value> v1(builder.fromVpiValue("A", vpiHexConst, 4));
+    std::unique_ptr<Value> v2(builder.fromVpiValue("10", vpiIntConst, 0));
     std::unique_ptr<Value> v3(builder.fromString("2'b11"));
     std::unique_ptr<Value> v4(builder.fromString("4'hFF_FF"));
     std::unique_ptr<Value> v5(builder.fromString("-0.6"));
-    std::unique_ptr<Value> v6(builder.fromVpiValue("UINT:11", 0));
+    std::unique_ptr<Value> v6(builder.fromVpiValue("11", vpiUIntConst, 0));
     LValue v0;
     v0.equiv(v1.get(), v2.get());
-    EXPECT_EQ(v1->uhdmValue(), "HEX:A");
+    EXPECT_EQ(v1->uhdmValue(), "A");
     EXPECT_EQ(v0.getValueL(), 1);
     EXPECT_EQ(v3->getValueL(), 3);
-    EXPECT_EQ(v4->uhdmValue(), "HEX:FFFF");
+    EXPECT_EQ(v4->uhdmValue(), "FFFF");
     EXPECT_EQ(v5->getValueD(), -0.6);
-    EXPECT_EQ(v6->uhdmValue(), "UINT:11");
+    EXPECT_EQ(v6->uhdmValue(), "11");
   }
 }
 TEST(ExprBuilderTest, ExprFromParseTree1) {

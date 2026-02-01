@@ -256,31 +256,13 @@ void SValue::u_minus(const Value* a) {
 }
 
 std::string SValue::uhdmValue() {
-  Value::Type valueType = getType();
-  std::string result;
-  switch (valueType) {
-    case Value::Type::Scalar:
-      result = "SCAL:";
-      result += std::to_string(m_value.u_int);
-      break;
-    case Value::Type::Double:
-      result = "REAL:";
-      result += std::to_string(m_value.d_int);
-      break;
-    case Value::Type::Integer:
-      result = "INT:";
-      result += std::to_string(m_value.s_int);
-      break;
-    case Value::Type::Unsigned:
-      result = "UINT:";
-      result += std::to_string(m_value.u_int);
-      break;
-    default:
-      result = "INT:";
-      result += std::to_string(m_value.u_int);
-      break;
+  switch (getType()) {
+    case Value::Type::Scalar: return std::to_string(m_value.u_int);
+    case Value::Type::Double: return std::to_string(m_value.d_int);
+    case Value::Type::Integer: return std::to_string(m_value.s_int);
+    case Value::Type::Unsigned: return std::to_string(m_value.u_int);
+    default: return std::to_string(m_value.u_int);
   }
-  return result;
 }
 
 std::string SValue::decompiledValue() {
@@ -793,7 +775,7 @@ int32_t LValue::getSize() const {
 }
 
 std::string LValue::uhdmValue() {
-  std::string result = "INT:";
+  std::string result;
   // The value is encoded in int form for the most part.
 
   // if (m_type == Type::Binary)
@@ -804,31 +786,26 @@ std::string LValue::uhdmValue() {
   //  result = "OCT:";
   switch (m_type) {
     case Value::Type::Scalar:
-      result = "SCAL:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.u_int);
       }
       break;
     case Value::Type::Double:
-      result = "REAL:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.d_int);
       }
       break;
     case Value::Type::Integer:
-      result = "INT:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.s_int);
       }
       break;
     case Value::Type::Unsigned:
-      result = "UINT:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.u_int);
       }
       break;
     default:
-      result = "INT:";
       for (int32_t i = 0; i < m_nbWords; i++) {
         result += std::to_string(m_valueArray[i].m_value.u_int);
       }
@@ -1675,26 +1652,6 @@ void LValue::shiftRight(const Value* a, const Value* b) {
   m_valueArray[0].m_negative = 0;
   m_negative = m_valueArray[0].m_negative;
   m_type = Value::Type::Unsigned;
-}
-
-std::string StValue::uhdmValue() {
-  std::string result = "STRING:";
-  if (m_type == Type::Binary)
-    result = "BIN:";
-  else if (m_type == Type::Double)
-    result = "REAL:";
-  else if (m_type == Type::Hexadecimal)
-    result = "HEX:";
-  else if (m_type == Type::Octal)
-    result = "OCT:";
-  else if (m_type == Type::Scalar)
-    result = "SCAL:";
-  // Remove '"' from the string
-  if (result == "STRING:") {
-    m_value = StringUtils::unquoted(m_value);
-  }
-  result += m_value;
-  return result;
 }
 
 std::string StValue::decompiledValue() {

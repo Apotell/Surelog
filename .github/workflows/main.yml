@@ -117,6 +117,8 @@ jobs:
 
         cmake --build out/build -j `nproc`
         cmake --install out/build
+        cmake --build out/build --target SurelogUnitTests -j `nproc`
+        cd out/build && ctest -C ${{ matrix.config.build-type }} --output-on-failure
 
     - name: Build on Windows
       if: runner.os == 'Windows'
@@ -159,6 +161,10 @@ jobs:
         cmake --build out/build -j %NUMBER_OF_PROCESSORS%
         if %errorlevel% neq 0 exit /b %errorlevel%
         cmake --install out/build
+        if %errorlevel% neq 0 exit /b %errorlevel%
+        cmake --build out/build --target UhdmUnitTests -j %NUMBER_OF_PROCESSORS%
+        if %errorlevel% neq 0 exit /b %errorlevel%
+        cd out/build && ctest -C ${{ matrix.config.build-type }} --output-on-failure
 
     - name: Build compressed artifacts
       if: always()

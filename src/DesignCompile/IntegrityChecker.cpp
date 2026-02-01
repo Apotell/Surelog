@@ -598,7 +598,7 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
 
         // The right is allowed to be zero if it's associative
         if ((parentAsRange->getRightExpr() == object) &&
-            (objectAsConstant->getValue() == "STRING:associative")) {
+            (objectAsConstant->getValue() == "associative")) {
           return;
         }
       }

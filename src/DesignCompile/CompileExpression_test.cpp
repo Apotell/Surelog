@@ -63,14 +63,19 @@ TEST(CompileExpression, ExprFromParseTree1) {
   EXPECT_EQ(assigns.size(), 7);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
+  uhdm::ExprEval eval(nullptr);
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
-    EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
+    ASSERT_NE(exp, nullptr);
+    EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Operation);
+    uhdm::Expr *constant = nullptr;
+    EXPECT_TRUE(eval.reduceExpr(exp, module, &constant, true));
+    ASSERT_NE(constant, nullptr);
+    EXPECT_EQ(constant->getUhdmType(), uhdm::UhdmType::Constant);
     int64_t val = 0;
-    uhdm::ExprEval eval(nullptr);
-    EXPECT_TRUE(eval.getInt64(exp, &val));
+    EXPECT_TRUE(eval.getInt64(constant, &val));
     EXPECT_EQ(val, 16);
   }
 }
@@ -94,14 +99,19 @@ TEST(CompileExpression, ExprFromParseTree2) {
   EXPECT_EQ(assigns.size(), 4);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
+  uhdm::ExprEval eval(nullptr);
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
-    EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
+    ASSERT_NE(exp, nullptr);
+    EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Operation);
+    uhdm::Expr *constant = nullptr;
+    EXPECT_TRUE(eval.reduceExpr(exp, module, &constant, true));
+    ASSERT_NE(constant, nullptr);
+    EXPECT_EQ(constant->getUhdmType(), uhdm::UhdmType::Constant);
     int64_t val = 0;
-    uhdm::ExprEval eval(nullptr);
-    EXPECT_TRUE(eval.getInt64(exp, &val));
+    EXPECT_TRUE(eval.getInt64(constant, &val));
     EXPECT_EQ(val, 1);
   }
 }
@@ -123,18 +133,24 @@ TEST(CompileExpression, ExprFromParseTree3) {
   EXPECT_EQ(assigns.size(), 2);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
+  uhdm::ExprEval eval(nullptr);
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     const std::string_view name = fC->SymName(param);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
+    ASSERT_NE(exp1, nullptr);
     EXPECT_EQ(exp1->getUhdmType(), uhdm::UhdmType::Operation);
     const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
+    ASSERT_NE(exp2, nullptr);
     if (name == "p1") {
-      EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
+      uhdm::Expr *constant = nullptr;
+      EXPECT_TRUE(eval.reduceExpr(exp2, module, &constant, true));
+      ASSERT_NE(constant, nullptr);
+      EXPECT_EQ(constant->getUhdmType(), uhdm::UhdmType::Constant);
       int64_t val = 0;
       uhdm::ExprEval eval(nullptr);
-      EXPECT_TRUE(eval.getInt64(exp2, &val));
+      EXPECT_TRUE(eval.getInt64(constant, &val));
       EXPECT_EQ(val, 6);
     }
   }
@@ -163,18 +179,24 @@ TEST(CompileExpression, ExprFromPpTree) {
   EXPECT_EQ(assigns.size(), 2);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
+  uhdm::ExprEval eval(nullptr);
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     const std::string_view name = fC->SymName(param);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
+    ASSERT_NE(exp1, nullptr);
     EXPECT_EQ(exp1->getUhdmType(), uhdm::UhdmType::Operation);
     const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
+    ASSERT_NE(exp2, nullptr);
     if (name == "p1") {
-      EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
+      uhdm::Expr *constant = nullptr;
+      EXPECT_TRUE(eval.reduceExpr(exp2, module, &constant, true));
+      ASSERT_NE(constant, nullptr);
+      EXPECT_EQ(constant->getUhdmType(), uhdm::UhdmType::Constant);
       int64_t val = 0;
       uhdm::ExprEval eval(nullptr);
-      EXPECT_TRUE(eval.getInt64(exp2, &val));
+      EXPECT_TRUE(eval.getInt64(constant, &val));
       EXPECT_EQ(val, 6);
     }
   }

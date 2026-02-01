@@ -464,6 +464,16 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component, Signal* sig
 
   if (Net* const net = any_cast<Net>(obj)) {
     net->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
+    NodeId idValue = fC->Sibling(signalId);
+    while (idValue && (fC->Type(idValue) != VObjectType::paConstant_expression) &&
+           (fC->Type(idValue) != VObjectType::paExpression)) {
+      idValue = fC->Sibling(idValue);
+    }
+    if (idValue) {
+      if (uhdm::Expr* const rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr))) {
+        net->setValue(rhs);
+      }
+    }
   }
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
@@ -649,7 +659,7 @@ uhdm::TypespecMember* CompileHelper::buildTypespecMember(const FileContent* fC, 
   return var;
 }
 
-IntTypespec* CompileHelper::buildIntTypespec(PathId fileId, std::string_view name, std::string_view value,
+IntTypespec* CompileHelper::buildIntTypespec(PathId fileId, std::string_view name, const uhdm::Constant* value,
                                              uint32_t line, uint16_t column, uint32_t eline, uint16_t ecolumn) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   /*
@@ -662,7 +672,7 @@ IntTypespec* CompileHelper::buildIntTypespec(PathId fileId, std::string_view nam
   // if (itr == m_cache_int_typespec.end()) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::IntTypespec* var = s.make<uhdm::IntTypespec>();
-  var->setValue(value);
+  var->setValue(const_cast<uhdm::Constant*>(value));
   var->setFile(fileSystem->toPath(fileId));
   var->setStartLine(line);
   var->setStartColumn(column);
@@ -849,11 +859,11 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
       const uhdm::Expr* rhs = r->getRightExpr();
       if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
         const std::string_view value = ((uhdm::Constant*)rhs)->getValue();
-        if (value == "STRING:$") {
+        if (value == "$") {
           queue = true;
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:associative") {
+        } else if (value == "associative") {
           associative = true;
           const uhdm::Typespec* tp = nullptr;
           if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
@@ -871,7 +881,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
 
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:unsized") {
+        } else if (value == "unsized") {
           dynamic = true;
           unpackedDimensions->erase(itr);
           break;
@@ -932,11 +942,11 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
         }
       } else if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
         const std::string_view value = ((uhdm::Constant*)rhs)->getValue();
-        if (value == "STRING:$") {
+        if (value == "$") {
           queue = true;
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:associative") {
+        } else if (value == "associative") {
           associative = true;
           const uhdm::Typespec* tp = nullptr;
           if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
@@ -954,7 +964,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
 
           unpackedDimensions->erase(itr);
           break;
-        } else if (value == "STRING:unsized") {
+        } else if (value == "unsized") {
           dynamic = true;
           unpackedDimensions->erase(itr);
           break;
@@ -1083,9 +1093,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         fC->populateCoreMembers(type, type, var);
         result = var;
         if (uhdm::Constant* constant = any_cast<uhdm::Constant*>(res)) {
-          var->setValue(constant->getValue());
+          var->setValue(constant);
         } else {
-          var->setExpr((uhdm::Expr*)res);
+          var->setExpr(any_cast<uhdm::Expr>(res));
         }
       } else {
         uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
@@ -1182,8 +1192,27 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         const std::string_view typeName = fC->SymName(literal);
         result = compileDatastructureTypespec(component, fC, type, instance, "", typeName);
       } else {
-        uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
-        var->setValue(StrCat("INT:", fC->SymName(literal)));
+        uhdm::IntegerTypespec* const var = s.make<uhdm::IntegerTypespec>();
+        var->setParent(pstmt);
+
+        const std::string_view name = fC->SymName(literal);
+        uhdm::Constant* const c = s.make<uhdm::Constant>();
+        c->setParent(var);
+        fC->populateCoreMembers(type, type, c);
+        c->setSize(name.size());
+        c->setConstType(vpiIntVal);
+        c->setValue(name);
+        c->setDecompile(StrCat(name.size(), "\'d", name));
+
+        uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        c->setTypespec(rt);
+        fC->populateCoreMembers(type, type, rt);
+
+        uhdm::IntTypespec* const ts = s.make<uhdm::IntTypespec>();
+        ts->setParent(var);
+        rt->setActual(ts);
+        var->setValue(c);
         fC->populateCoreMembers(type, type, var);
         result = var;
       }
@@ -1253,13 +1282,13 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
             for (uhdm::ParamAssign* param : *param_assigns) {
               const std::string_view param_name = param->getLhs()->getName();
               if (param_name == name) {
-                const uhdm::Any* rhs = param->getRhs();
-                if (const uhdm::Constant* exp = any_cast<const uhdm::Constant*>(rhs)) {
-                  uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
-                  its->setValue(exp->getValue());
+                uhdm::Any* const rhs = param->getRhs();
+                if (uhdm::Constant* const exp = any_cast<uhdm::Constant>(rhs)) {
+                  uhdm::IntTypespec* const its = s.make<uhdm::IntTypespec>();
+                  its->setValue(exp);
                   result = its;
                 } else {
-                  result = (uhdm::Typespec*)rhs;
+                  result = any_cast<uhdm::Typespec>(rhs);
                 }
                 break;
               }
@@ -1405,10 +1434,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
             if (param_name == typeName) {
               const uhdm::Any* rhs = param->getRhs();
               if (const uhdm::Constant* exp = any_cast<const uhdm::Constant*>(rhs)) {
-                uhdm::IntTypespec* its = buildIntTypespec(
-
-                    fileSystem->toPathId(param->getFile(), symbols), typeName, exp->getValue(), param->getStartLine(),
-                    param->getStartColumn(), param->getStartLine(), param->getStartColumn());
+                uhdm::IntTypespec* its = buildIntTypespec(fileSystem->toPathId(param->getFile(), symbols), typeName,
+                                                          exp, param->getStartLine(), param->getStartColumn(),
+                                                          param->getStartLine(), param->getStartColumn());
                 result = its;
               } else if (const uhdm::Operation* exp = any_cast<const uhdm::Operation*>(rhs)) {
                 if (const uhdm::RefTypespec* rt = exp->getTypespec())
@@ -1461,7 +1489,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
         } else {
           uhdm::IntegerTypespec* const var = s.make<uhdm::IntegerTypespec>();
           if (uhdm::Constant* const c = any_cast<uhdm::Constant>(exp)) {
-            var->setValue(c->getValue());
+            var->setValue(c);
           } else {
             var->setExpr(exp);
             exp->setParent(var, true);

@@ -429,7 +429,7 @@ class CompileHelper final {
 
  private:
   // Caches
-  uhdm::IntTypespec* buildIntTypespec(PathId fileId, std::string_view name, std::string_view value, uint32_t line,
+  uhdm::IntTypespec* buildIntTypespec(PathId fileId, std::string_view name, const uhdm::Constant* value, uint32_t line,
                                       uint16_t column, uint32_t eline, uint16_t ecolumn);
   uhdm::TypespecMember* buildTypespecMember(const FileContent* fC, NodeId id);
   uhdm::Typespec* getTypespecFromType(int32_t type, uhdm::Serializer& s);

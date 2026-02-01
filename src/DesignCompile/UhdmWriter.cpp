@@ -367,7 +367,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports, uhdm::BaseCl
           for (uhdm::Range* r : *ranges) {
             r->setParent(array_ts);
             if (const uhdm::Constant* const c = r->getRightExpr<Constant>()) {
-              if (c->getValue() == "STRING:associative") {
+              if (c->getValue() == "associative") {
                 array_ts->setArrayType(vpiAssocArray);
                 if (const uhdm::RefTypespec* rt = c->getTypespec()) {
                   if (const uhdm::Typespec* ag = rt->getActual()) {
@@ -383,9 +383,9 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports, uhdm::BaseCl
                     array_ts->setIndexTypespec(cro);
                   }
                 }
-              } else if (c->getValue() == "STRING:unsized") {
+              } else if (c->getValue() == "unsized") {
                 array_ts->setArrayType(vpiDynamicArray);
-              } else if (c->getValue() == "STRING:$") {
+              } else if (c->getValue() == "$") {
                 array_ts->setArrayType(vpiQueueArray);
               } else {
                 array_ts->setArrayType(vpiStaticArray);

@@ -334,7 +334,7 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Level_input_list = fC->Child(id);
         NodeId Output_symbol = fC->Sibling(Level_input_list);
         NodeId Level_symbol = fC->Child(Level_input_list);
-        std::string ventry = "STRING:";
+        std::string ventry;
         uint32_t nb = 0;
         while (Level_symbol) {
           NodeId Symbol = fC->Child(Level_symbol);
@@ -390,7 +390,7 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Level_input_list = fC->Child(Seq_input_list);
         NodeId Current_state = fC->Sibling(Seq_input_list);
         NodeId Next_state = fC->Sibling(Current_state);
-        std::string ventry = "STRING:";
+        std::string ventry;
         uint32_t nb = 0;
         NodeId Level_symbol = fC->Child(Level_input_list);
         while (Level_symbol) {
@@ -513,7 +513,7 @@ bool CompileModule::collectUdpObjects_() {
 
         uhdm::Constant* c = s.make<uhdm::Constant>();
         c->setParent(assign_stmt);
-        c->setValue(StrCat("UINT:", fC->SymName(Value)));
+        c->setValue(fC->SymName(Value));
         c->setDecompile(fC->SymName(Value));
         c->setSize(64);
         c->setConstType(vpiUIntConst);

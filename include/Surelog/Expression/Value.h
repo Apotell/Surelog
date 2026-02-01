@@ -518,7 +518,7 @@ class StValue final : public Value {
   double getValueD(uint16_t index = 0) const final { return strtod(m_value.c_str(), nullptr); }
   std::string getValueS() const final { return m_value; }
 
-  std::string uhdmValue() final;
+  std::string uhdmValue() final { return m_value; }
   std::string decompiledValue() final;
   int32_t vpiValType() final;
 

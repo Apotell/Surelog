@@ -115,7 +115,7 @@ Value* ModuleInstance::getValue(std::string_view name, ExprBuilder& exprBuilder)
       std::set<std::string> visited;
       const uhdm::Constant* res = resolveFromParamAssign(param_assigns, visited, name);
       if (res) {
-        sval = exprBuilder.fromVpiValue(res->getValue(), res->getSize());
+        sval = exprBuilder.fromVpiValue(res->getValue(), res->getConstType(), res->getSize());
       }
     }
   }

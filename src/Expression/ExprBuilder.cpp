@@ -905,44 +905,68 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent, ValuedCompone
 }
 // NOLINTEND(*.DeadStores)
 
-Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t size) {
+Value* ExprBuilder::fromVpiValue(std::string_view value, int32_t constType, int32_t size) {
   Value* val = nullptr;
-  if (s.find("UINT:") == 0) {
+  if (constType == vpiUIntConst) {
     val = m_valueFactory.newLValue();
     uint64_t v = 0;
-    s.remove_prefix(std::string_view("UINT:").length());
-    if (NumUtils::parseUint64(s, &v) == nullptr) {
+    if (NumUtils::parseUint64(value, &v) == nullptr) {
       v = 0;
     }
     if (size)
       val->set(v, Value::Type::Unsigned, size);
     else
       val->set(v);
-  } else if (s.find("INT:") == 0) {
+  } else if (constType == vpiIntConst || constType == vpiNullConst) {
     val = m_valueFactory.newLValue();
     int64_t v = 0;
-    s.remove_prefix(std::string_view("INT:").length());
-    if (NumUtils::parseInt64(s, &v) == nullptr) {
+    if (NumUtils::parseInt64(value, &v) == nullptr) {
       v = 0;
     }
     if (size)
       val->set(v, Value::Type::Integer, size);
     else
       val->set(v);
-  } else if (s.find("DEC:") == 0) {
+  } else if (constType == vpiDecConst) {
     val = m_valueFactory.newLValue();
     int64_t v = 0;
-    s.remove_prefix(std::string_view("DEC:").length());
-    if (NumUtils::parseInt64(s, &v) == nullptr) {
+    if (NumUtils::parseInt64(value, &v) == nullptr) {
       v = 0;
     }
     if (size)
       val->set(v, Value::Type::Integer, size);
     else
       val->set(v);
-  } else if (s.find("SCAL:") == 0) {
-    s.remove_prefix(std::string_view("SCAL:").length());
-    switch (s.front()) {
+  } else if (constType == vpiBinaryConst) {
+    StValue* sval = (StValue*)m_valueFactory.newStValue();
+    sval->set(value, Value::Type::Binary, (size ? size : value.size()));
+    val = sval;
+  } else if (constType == vpiHexConst) {
+    StValue* sval = (StValue*)m_valueFactory.newStValue();
+    sval->set(value, Value::Type::Hexadecimal, (size ? size : (value.size() - 4) * 4));
+    val = sval;
+  } else if (constType == vpiOctConst) {
+    val = m_valueFactory.newLValue();
+    uint64_t v = 0;
+    if (NumUtils::parseOctal(value, &v) == nullptr) {
+      v = 0;
+    }
+    if (size)
+      val->set(v, Value::Type::Unsigned, size);
+    else
+      val->set(v, Value::Type::Unsigned, (size ? size : (value.size() - 4) * 4));
+  } else if (constType == vpiStringConst || constType == vpiUnboundedConst) {
+    val = m_valueFactory.newStValue();
+    val->set(value.data());
+  } else if (constType == vpiRealConst) {
+    val = m_valueFactory.newLValue();
+    double v = 0;
+    if (NumUtils::parseDouble(value, &v) == nullptr) {
+      v = 0;
+    }
+    val->set(v);
+  } else if (constType == vpiScalarConst) {
+    switch (value.front()) {
       case 'Z': break;
       case 'X': break;
       case 'H': break;
@@ -952,50 +976,18 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t size) {
         // Let's parse 'W'eak don't care as this one.
       case 'W': break;
       default:
-        if (strcasecmp(s.data(), "DontCare") == 0) {
-        } else if (strcasecmp(s.data(), "NoChange") == 0) {
+        if (strcasecmp(value.data(), "DontCare") == 0) {
+        } else if (strcasecmp(value.data(), "NoChange") == 0) {
         } else {
           val = m_valueFactory.newLValue();
           int64_t v = 0;
-          if (NumUtils::parseInt64(s, &v) == nullptr) {
+          if (NumUtils::parseInt64(value, &v) == nullptr) {
             v = 0;
           }
           val->set(v);
         }
         break;
     }
-  } else if (s.find("BIN:") == 0) {
-    s.remove_prefix(std::string_view("BIN:").length());
-    StValue* sval = (StValue*)m_valueFactory.newStValue();
-    sval->set(s, Value::Type::Binary, (size ? size : s.size()));
-    val = sval;
-  } else if (s.find("HEX:") == 0) {
-    s.remove_prefix(std::string_view("HEX:").length());
-    StValue* sval = (StValue*)m_valueFactory.newStValue();
-    sval->set(s, Value::Type::Hexadecimal, (size ? size : (s.size() - 4) * 4));
-    val = sval;
-  } else if (s.find("OCT:") == 0) {
-    val = m_valueFactory.newLValue();
-    uint64_t v = 0;
-    s.remove_prefix(std::string_view("OCT:").length());
-    if (NumUtils::parseOctal(s, &v) == nullptr) {
-      v = 0;
-    }
-    if (size)
-      val->set(v, Value::Type::Unsigned, size);
-    else
-      val->set(v, Value::Type::Unsigned, (size ? size : (s.size() - 4) * 4));
-  } else if (s.find("STRING:") == 0) {
-    val = m_valueFactory.newStValue();
-    val->set(s.data() + std::string_view("STRING:").length());
-  } else if (s.find("REAL:") == 0) {
-    val = m_valueFactory.newLValue();
-    s.remove_prefix(std::string_view("REAL:").length());
-    double v = 0;
-    if (NumUtils::parseDouble(s, &v) == nullptr) {
-      v = 0;
-    }
-    val->set(v);
   }
   return val;
 }

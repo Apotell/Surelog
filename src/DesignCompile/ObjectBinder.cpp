@@ -248,7 +248,7 @@ const uhdm::Any* ObjectBinder::findInTypespec(std::string_view name, RefType ref
     case uhdm::UhdmType::ImportTypespec: {
       const uhdm::ImportTypespec* const it = any_cast<uhdm::ImportTypespec>(scope);
       if (const uhdm::Constant* const i = it->getItem()) {
-        if ((i->getValue() == "STRING:*") || (i->getValue() == StrCat("STRING:", name))) {
+        if ((i->getValue() == "*") || (i->getValue() == name)) {
           if (const uhdm::Package* const p = getPackage(it->getName(), it)) {
             if (const uhdm::Any* const actual = findInPackage(name, refType, p)) {
               return actual;

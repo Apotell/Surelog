@@ -985,7 +985,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(DesignComponent* component, cons
       c->setParent(ustmt);
       c->setDecompile(StrCat(lineText.length(), "\'d", lineText));
       c->setSize(lineText.length());
-      c->setValue(StrCat("STRING:", lineText));
+      c->setValue(lineText);
       c->setConstType(vpiStringConst);
       fC->populateCoreMembers(the_stmt, the_stmt, c);
 

@@ -153,7 +153,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
   switch (valueType) {
     case Value::Type::Scalar: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiScalarVal);
+      c->setConstType(vpiScalarConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(1);
@@ -162,7 +162,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::Binary: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiBinStrVal);
+      c->setConstType(vpiBinaryConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -171,7 +171,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::Hexadecimal: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiHexStrVal);
+      c->setConstType(vpiHexConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -180,7 +180,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::Octal: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiOctStrVal);
+      c->setConstType(vpiOctConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -196,16 +196,16 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
       uhdm::IntTypespec* t = s.make<uhdm::IntTypespec>();
       if (valueType == Value::Type::Integer) {
         t->setSigned(true);
-        c->setConstType(vpiIntVal);
+        c->setConstType(vpiIntConst);
       } else {
-        c->setConstType(vpiUIntVal);
+        c->setConstType(vpiUIntConst);
       }
       tps = t;
       break;
     }
     case Value::Type::Double: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiRealVal);
+      c->setConstType(vpiDecConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -214,7 +214,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
     case Value::Type::String: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiStringVal);
+      c->setConstType(vpiStringConst);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
@@ -559,7 +559,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
         uhdm::Any* exp = compileExpression(scope, fC, enumValueId, pstmt, nullptr);
         if (exp && (exp->getUhdmType() == uhdm::UhdmType::Constant)) {
           uhdm::Constant* c = (uhdm::Constant*)exp;
-          value = m_exprBuilder.fromVpiValue(c->getValue(), c->getSize());
+          value = m_exprBuilder.fromVpiValue(c->getValue(), c->getConstType(), c->getSize());
         } else {
           value = m_exprBuilder.evalExpr(fC, enumValueId, scope);
           value->setValid();
@@ -3155,12 +3155,9 @@ uhdm::AtomicStmt* CompileHelper::compileProceduralTimingControlStmt(DesignCompon
       dc->setDelay(ref);
     } else if ((fC->Type(valueNodeId) == VObjectType::INT_CONST) ||
                (fC->Type(valueNodeId) == VObjectType::REAL_CONST)) {
-      std::string value = (fC->Type(valueNodeId) == VObjectType::INT_CONST) ? "INT:" : "REAL:";
-      value.append(fC->SymName(valueNodeId));
-
       uhdm::Constant* c = s.make<uhdm::Constant>();
       c->setParent(dc);
-      c->setValue(value);
+      c->setValue(fC->SymName(valueNodeId));
       c->setDecompile(fC->SymName(valueNodeId));
       c->setSize(64);
       c->setConstType(fC->Type(valueNodeId) == VObjectType::INT_CONST ? vpiIntConst : vpiRealConst);
@@ -3583,7 +3580,7 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
             if (!invalidValue) size = sizetmp;
           }
           adjustSize(ts, component, fC, nodeId, instance, c);
-          Value* val = m_exprBuilder.fromVpiValue(c->getValue(), size);
+          Value* val = m_exprBuilder.fromVpiValue(c->getValue(), c->getConstType(), size);
           component->setValue(the_name, val, m_exprBuilder);
         } else if (expr && ((exprType == uhdm::UhdmType::Operation) || (exprType == uhdm::UhdmType::FuncCall) ||
                             (exprType == uhdm::UhdmType::SysFuncCall))) {
@@ -3734,7 +3731,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts, DesignCompon
       c = elaborator.clone<>(c, nullptr);
       result = c;
     }
-    c->setValue(StrCat("UINT:", uval));
+    c->setValue(std::to_string(uval));
     c->setDecompile(std::to_string(uval));
     c->setConstType(vpiUIntConst);
     c->setSize(size);
@@ -3760,7 +3757,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts, DesignCompon
         v.remove_prefix(4);
         if (orig_size > size) {
           if (v.size() > ((uint32_t)(orig_size - size))) v.remove_prefix(orig_size - size);
-          c->setValue("BIN:" + std::string(v));
+          c->setValue(v);
           c->setDecompile(v);
           c->setConstType(vpiBinaryConst);
           c->setSize(size);
@@ -3791,7 +3788,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts, DesignCompon
               c = elaborator.clone<>(c, nullptr);
               result = c;
             }
-            c->setValue(StrCat("INT:", val));
+            c->setValue(std::to_string(val));
             c->setDecompile(std::to_string(val));
             c->setConstType(vpiIntConst);
           } else if ((orig_size == 1) && (val == 1)) {
@@ -3801,7 +3798,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts, DesignCompon
               c = elaborator.clone<>(c, nullptr);
               result = c;
             }
-            c->setValue(StrCat("UINT:", mask));
+            c->setValue(std::to_string(mask));
             c->setDecompile(std::to_string(mask));
             c->setConstType(vpiUIntConst);
           }
@@ -3813,7 +3810,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts, DesignCompon
               c = elaborator.clone<>(c, nullptr);
               result = c;
             }
-            c->setValue(StrCat("UINT:", mask));
+            c->setValue(std::to_string(mask));
             c->setDecompile(std::to_string(mask));
             c->setConstType(vpiUIntConst);
           }
@@ -3833,12 +3830,12 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts, DesignCompon
         if (size <= 64) {
           uint64_t mask = NumUtils::getMask(size);
           uval = mask;
-          c->setValue(StrCat("UINT:", uval));
+          c->setValue(std::to_string(uval));
           c->setDecompile(std::to_string(uval));
           c->setConstType(vpiUIntConst);
         } else {
           std::string mask(size, '1');
-          c->setValue("BIN:" + mask);
+          c->setValue(mask);
           c->setDecompile(mask);
           c->setConstType(vpiBinaryConst);
         }
@@ -4085,7 +4082,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(DesignComponent* comp
       } else {
         uhdm::Constant* c = s.make<uhdm::Constant>();
         c->setParent(call);
-        c->setValue("INT:0");
+        c->setValue("0");
         c->setDecompile("0");
         c->setSize(64);
         c->setConstType(vpiIntConst);
@@ -4256,8 +4253,8 @@ uhdm::AttributeCollection* CompileHelper::compileAttributes(DesignComponent* com
       results->emplace_back(attribute);
       if (NodeId Constant_expression = fC->Sibling(Attr_name)) {
         if (uhdm::Any* const expr = compileExpression(component, fC, Constant_expression, attribute)) {
-          if (const uhdm::Constant* const c = any_cast<uhdm::Constant>(expr)) {
-            attribute->setValue(c->getValue());
+          if (uhdm::Constant* const c = any_cast<uhdm::Constant>(expr)) {
+            attribute->setValue(c);
           }
         }
       }
@@ -4550,12 +4547,12 @@ void CompileHelper::adjustUnsized(uhdm::Constant* c, int32_t size) {
     if (eval.getUInt64(c, &lv) && (lv == 1)) {
       if (size <= 64) {
         uint64_t mask = NumUtils::getMask(size);
-        c->setValue(StrCat("UINT:", mask));
+        c->setValue(std::to_string(mask));
         c->setDecompile(std::to_string(mask));
         c->setConstType(vpiUIntConst);
       } else {
         std::string mask(size, '1');
-        c->setValue("BIN:" + mask);
+        c->setValue(mask);
         c->setDecompile(mask);
         c->setConstType(vpiBinaryConst);
       }
@@ -4749,17 +4746,18 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
                   if (const uhdm::Typespec* tpsi = rt->getActual()) {
                     if (tpsi->getUhdmType() == uhdm::UhdmType::IntegerTypespec) {
                       uhdm::IntegerTypespec* itps = (uhdm::IntegerTypespec*)tpsi;
-                      std::string_view v = itps->getValue();
-                      v.remove_prefix(std::string_view("INT:").length());
-                      int64_t index;
-                      if (NumUtils::parseInt64(v, &index) && (index >= 0) && (index < ((int64_t)size))) {
-                        uhdm::Any* pattern = tp->getPattern();
-                        if (pattern->getUhdmType() == uhdm::UhdmType::Constant) {
-                          uhdm::Constant* c = (uhdm::Constant*)pattern;
-                          uhdm::ExprEval eval(nullptr);
-                          int64_t val = 0;
-                          if (eval.getInt64(c, &val)) {
-                            values[size - index - 1] = val;
+                      if (const uhdm::Constant* ct = any_cast<uhdm::Constant>(itps->getValue())) {
+                        std::string_view v = ct->getValue();
+                        int64_t index = 0;
+                        if (NumUtils::parseInt64(v, &index) && (index >= 0) && (index < ((int64_t)size))) {
+                          uhdm::Any* pattern = tp->getPattern();
+                          if (pattern->getUhdmType() == uhdm::UhdmType::Constant) {
+                            uhdm::Constant* c = (uhdm::Constant*)pattern;
+                            uhdm::ExprEval eval(nullptr);
+                            int64_t val = 0;
+                            if (eval.getInt64(c, &val)) {
+                              values[size - index - 1] = val;
+                            }
                           }
                         }
                       }
@@ -4811,8 +4809,9 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
         c->setEndColumn(rhs->getEndColumn());
 
         c->setSize(size);
-        c->setValue(StrCat("UINT:", values[i]));
+        c->setValue(std::to_string(values[i]));
         c->setDecompile(StrCat(size, "\'d", values[i]));
+        c->setConstType(vpiUIntConst);
 
         uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
         rt->setParent(c);
@@ -4845,9 +4844,9 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const FileContent* fC, NodeId
       value |= (values[i]) ? ((uint64_t)1 << (patternSize - 1 - i)) : 0;
     }
     c->setSize(size);
-    c->setValue(StrCat("UINT:", value));
+    c->setValue(std::to_string(value));
     c->setDecompile(StrCat(size, "\'d", value));
-
+    c->setConstType(vpiUIntConst);
     result = c;
 
     uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
@@ -4958,17 +4957,19 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val) {
     ts->getRanges(true)->emplace_back(r);
 
     uhdm::Constant* lc = s.make<uhdm::Constant>();
-    lc->setValue(StrCat("UINT:", lr));
+    lc->setValue(std::to_string(lr));
     r->setLeftExpr(lc);
-
+    lc->setConstType(vpiUIntConst);
+    lc->setSize(64);
     uhdm::RefTypespec* lcrt = s.make<uhdm::RefTypespec>();
     lcrt->setParent(lc);
     lc->setTypespec(lcrt);
 
     uhdm::Constant* rc = s.make<uhdm::Constant>();
-    rc->setValue(StrCat("UINT:", rr));
+    rc->setValue(std::to_string(rr));
     r->setRightExpr(rc);
-
+    rc->setConstType(vpiUIntConst);
+    rc->setSize(64);
     uhdm::RefTypespec* rcrt = s.make<uhdm::RefTypespec>();
     rcrt->setParent(lc);
     rc->setTypespec(rcrt);
@@ -5042,7 +5043,7 @@ bool CompileHelper::elaborationSystemTask(DesignComponent* component, const File
   scall->setName(name);
   uhdm::Constant* c = s.make<uhdm::Constant>();
   c->setParent(scall);
-  c->setValue(StrCat("STRING:", text));
+  c->setValue(text);
   c->setDecompile(text);
   c->setConstType(vpiStringConst);
   scall->getArguments(true)->emplace_back(c);

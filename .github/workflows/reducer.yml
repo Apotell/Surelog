@@ -6,19 +6,30 @@ concurrency:
 
 on:
   workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Run Id'
+        required: true
+        default: '21585516465'
+        type: string
+      run_number:
+        description: 'Run Number'
+        required: true
+        default: '989'
+        type: string
 
 env:
   python3_version: '3.x'
 
 jobs:
   reduction:
-    name: "Reduction | ${{ matrix.artifact-tag }} | ${{ matrix.shard }}"
+    name: "Reducer | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
     runs-on: ${{ matrix.config.os }}
 
     env:
-      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
-      regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
-      reduced-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
+      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.event.inputs.run_number }}
+      regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.event.inputs.run_number }}_${{ matrix.shard }}
+      reducer-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
 
     strategy:
       fail-fast: false
@@ -30,29 +41,28 @@ jobs:
 #        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }
 
     steps:
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ env.python3_version }}
-        architecture: 'x64'
-
-    - name: Setup Python Packages
-      run: pip3 install orderedmultidict psutil tabulate
-
     - name: Git Pull
       uses: actions/checkout@v4
       with:
-        submodules: recursive
+        sparse-checkout: |
+          scripts
+          tests
+          third_party/tests
+        lfs: true
 
     - name: Download build artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         name: ${{ env.build-artifact-name }}
+        run-id: ${{ github.event.inputs.run_id }}
+        github-token: ${{ secrets.GHA_DAVENCHE_CI_TOKEN }}
 
     - name: Download regression artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         name: ${{ env.regression-artifact-name }}
+        run-id: ${{ github.event.inputs.run_id }}
+        github-token: ${{ secrets.GHA_DAVENCHE_CI_TOKEN }}
 
     - name: Extract artifacts
       shell: bash
@@ -65,38 +75,49 @@ jobs:
 
         tar xzfp ${{ env.regression-artifact-name }}.tar.gz
         rm ${{ env.regression-artifact-name }}.tar.gz
-
         mv ${{ env.regression-artifact-name }} regression
-        for archive in regression; do
-          if [[ "$archive" != "*.tar.gz" ]]; then
-            tar xzfp $archive
-            rm $archive
-          fi
-        done
 
-        ls -lR
+        pushd regression
+          for archive in *; do
+            if [[ "$archive" != "*.tar.gz" ]]; then
+              tar xzfp $archive
+              rm $archive
+            fi
+          done
+        popd
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.python3_version }}
+        architecture: 'x64'
+
+    - name: Setup Python Packages
+      run: pip3 install pathlibutil psutil tabulate
 
     - name: Run reduction
       run: |
-        python3 scripts/reducer.py              \
-          --jobs $(nproc)                       \
-          --num_shards=${{ matrix.num_shards }} \
-          --shard=${{ matrix.shard }}
+        python3 scripts/reducer.py                                                                    \
+          --build-dirpath build/bin/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} \
+          --reducer-filepath uhdm-reduce                                                              \
+          --source-dirpath regression                                                                 \
+          --jobs $(nproc)                                                                             \
+          --verbose
 
-        ls -lR
+    - name: Prepare regression artifacts
+      if: always()
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT" > env.txt
+        mv regression ${{ env.reducer-artifact-name }}
+        tar czfp ${{ env.reducer-artifact-name }}.tar.gz ${{ env.reducer-artifact-name }}
 
-#    - name: Prepare regression artifacts
-#      if: always()
-#      run: |
-#        ls -l build
-#        cd build
-#        ls -l regression
-#        mv regression ${{ env.regression-artifact-name }}
-#        find ${{ env.regression-artifact-name }} -name "*.tar.gz" | tar czfp ${{ env.regression-artifact-name }}.tar.gz -T -
-#
-#    - name: Archive artifacts
-#      if: always()
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: ${{ env.regression-artifact-name }}
-#        path: build/${{ env.regression-artifact-name }}.tar.gz
+    - name: Archive artifacts
+      if: always()
+      uses: actions/upload-artifact@v6
+      with:
+        name: ${{ env.reducer-artifact-name }}
+        path: |
+          ${{ env.reducer-artifact-name }}.tar.gz
+          env.txt

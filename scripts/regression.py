@@ -1,51 +1,67 @@
 #!/usr/bin/env python3
 
 import argparse
-import difflib
 import hashlib
 import multiprocessing
-import os
-import platform
 import pprint
 import psutil
 import re
 import shutil
 import subprocess
 import sys
-import tarfile
+import tabulate
 import time
 import traceback
-import zipfile
-from collections import OrderedDict
+
 from contextlib import redirect_stdout, redirect_stderr
 from datetime import datetime, timedelta
-from enum import Enum, unique
 from pathlib import Path
-from threading import Lock
+from pathlibutil.json import (
+  load as json_load,
+  dump as json_dump,
+  loads as json_loads,
+  dumps as json_dumps,
+)
+from typing import Any
 
 import blacklisted
+from utils import (
+  build_filters,
+  find_files,
+  generate_tarball,
+  get_platform_id,
+  is_ci_build,
+  is_windows,
+  log,
+  mkdir,
+  normalize_log,
+  restore_directory_state,
+  rmdir,
+  rmtree,
+  snapshot_directory_state,
+  Status,
+)
 
-_this_filepath = os.path.realpath(__file__)
-_default_workspace_dirpath = os.path.dirname(os.path.dirname(_this_filepath))
-
-def _is_ci_build():
-  return 'GITHUB_JOB' in os.environ
+_this_filepath = Path(__file__).resolve()
+_workspace_dirpath = _this_filepath.parent.parent
 
 # Except for the workspace dirpath all paths are expected to be relative
 # either to the workspace directory or the build directory
-_default_test_dirpaths = [ 'tests', os.path.join('third_party', 'tests') ]
-_default_build_dirpath = 'build'
+_default_test_dirpaths = [ _workspace_dirpath / 'tests', _workspace_dirpath / 'third_party' / 'tests' ]
+_default_build_dirpath = _workspace_dirpath / 'build'
 
-if not _is_ci_build():
-  # _default_build_dirpath = os.path.join('out', 'build', 'x64-Debug')
-  # _default_build_dirpath = os.path.join('out', 'build', 'x64-Release')
-  # _default_build_dirpath = os.path.join('out', 'build', 'x64-Clang-Debug')
-  # _default_build_dirpath = os.path.join('out', 'build', 'x64-Clang-Release')
+if is_ci_build():
+  _default_build_dirpath = _workspace_dirpath / 'build'
+else:
+  _default_build_dirpath = _workspace_dirpath / 'out' / 'build' / 'x64-Debug'
+  # _default_build_dirpath = _workspace_dirpath / 'out' / 'build' / 'x64-Release'
+  # _default_build_dirpath = _workspace_dirpath / 'out' / 'build' / 'x64-Clang-Debug'
+  # _default_build_dirpath = _workspace_dirpath / 'out' / 'build' / 'x64-Clang-Release'
   pass
 
-_default_output_dirpath = 'regression'
-_default_surelog_filename = 'surelog.exe' if platform.system() == 'Windows' else 'surelog'
-_default_surelog_filepath = os.path.join('bin', _default_surelog_filename)
+_default_output_dirpath = Path('regression')
+_default_surelog_filename = Path('surelog.exe' if is_windows() else 'surelog')
+_default_surelog_filepath = Path('bin') / _default_surelog_filename
 
 _re_status_1 = re.compile(r'^\s*\[\s*(?P<status>\w+)\]\s*:\s*(?P<count>\d+)$')
 _re_status_2 = re.compile(r'^\s*\|\s*(?P<status>\w+)\s*\|\s*(?P<count1>\d+|\s+)\s*\|\s*(?P<count2>\d+|\s+)\s*\|\s*$')
@@ -82,112 +98,20 @@ _blacklisted_dump_uhdm_tests = {
 }
 
 
-_log_mutex = Lock()
-def log(text, end='\n'):
-  _log_mutex.acquire()
-  try:
-    print(text, end=end, flush=True)
-  finally:
-    _log_mutex.release()
+def _get_surelog_log_filepaths(name: str, golden_dirpath: Path, output_dirpath: Path):
+  platform_id = get_platform_id()
 
-
-@unique
-class Status(Enum):
-  PASS = 0
-  DIFF = -1
-  FAIL = -2
-  FAILDUMP = -3
-  SEGFLT = -4
-  NOGOLD = -5
-  TOOLFAIL = -6
-  EXECERR = -7
-
-  def __str__(self):
-    return str(self.name)
-
-
-def _get_platform_id():
-  system = platform.system()
-  if system == 'Linux':
-    return '.linux'
-  elif system == 'Darwin':
-    return '.osx'
-  elif system == 'Windows':
-    return '.msys' if 'MSYSTEM' in os.environ else '.win'
-
-  return ''
-
-def _get_surelog_log_filepaths(name, golden_dirpath, output_dirpath):
-  platform_id = _get_platform_id()
-
-  golden_log_filepath = os.path.join(golden_dirpath, f'{name}{platform_id}.log')
-  if os.path.exists(golden_log_filepath):
-    surelog_log_filepath = os.path.join(output_dirpath, f'{name}{platform_id}.log')
+  golden_log_filepath = golden_dirpath / f'{name}{platform_id}.log'
+  if golden_log_filepath.is_file():
+    surelog_log_filepath = output_dirpath / f'{name}{platform_id}.log'
   else:
-    golden_log_filepath = os.path.join(golden_dirpath, f'{name}.log')
-    surelog_log_filepath = os.path.join(output_dirpath, f'{name}.log')
+    golden_log_filepath = golden_dirpath / f'{name}.log'
+    surelog_log_filepath = output_dirpath / f'{name}.log'
 
   return golden_log_filepath, surelog_log_filepath
 
 
-def _transform_path(path):
-  if 'MSYSTEM' not in os.environ:
-    return path
-
-  path = path.replace('/', '\\').replace('\\\\', '\\').replace('\\', '\\\\')
-  result = subprocess.run(['cygpath', '-u', path], capture_output=True, text=True)
-  result.check_returncode()
-  return result.stdout.strip()
-
-
-def _find_files(dirpath, pattern):
-  relpaths = []
-  for filepath in Path(dirpath).rglob(pattern):
-    relpaths.append(os.path.relpath(filepath, dirpath))
-
-  if 'MSYSTEM' in os.environ:
-    relpaths = [relpath.replace('\\', '/') for relpath in relpaths]
-
-  return sorted(relpaths)
-
-
-def _mkdir(dirpath, retries=10):
-  count = 0
-  while count < retries:
-    os.makedirs(dirpath, exist_ok=True)
-
-    if os.path.exists(dirpath):
-      return True
-
-    count += 1
-    time.sleep(0.1)
-
-  return os.path.exists(dirpath)
-
-
-def _rmdir(dirpath, retries=10):
-  count = 0
-  while count < retries:
-    shutil.rmtree(dirpath, ignore_errors=True)
-
-    if not os.path.exists(dirpath):
-      return True
-
-    count += 1
-    time.sleep(0.1)
-
-  shutil.rmtree(dirpath)
-  return not os.path.exists(dirpath)
-
-
-def _rmtree(dirpath, patterns):
-  for pattern in patterns:
-    for path in Path(dirpath).rglob(pattern):
-      if os.path.isdir(path):
-        _rmdir(path)
-
-
-def _scan(dirpaths, filters, shard, num_shards):
+def _scan(dirpaths: list[Path], filters: list[str], shard: int, num_shards: int):
   def _is_filtered(name):
     if int.from_bytes(hashlib.sha256(name.encode()).digest()[:4], 'little') % num_shards != shard:
       return False
@@ -206,11 +130,11 @@ def _scan(dirpaths, filters, shard, num_shards):
   filtered_tests = set()
   blacklisted_tests = set()
   for dirpath in dirpaths:
-    for sub_dirpath, sub_dirnames, filenames in os.walk(dirpath):
+    for sub_dirpath, sub_dirnames, filenames in dirpath.walk():
       for filename in filenames:
         if filename.endswith('.sl'):
           name = filename[:-3]
-          filepath = os.path.join(sub_dirpath, filename)
+          filepath = sub_dirpath / filename
 
           all_tests[name] = filepath
           if blacklisted.is_blacklisted(name):
@@ -219,55 +143,15 @@ def _scan(dirpaths, filters, shard, num_shards):
             filtered_tests.add(name)
 
   return [
-    OrderedDict([ (name, all_tests[name]) for name in sorted(all_tests.keys(), key=lambda t: t.lower()) ]),
-    OrderedDict([ (name, all_tests[name]) for name in sorted(filtered_tests, key=lambda t: t.lower()) ]),
-    OrderedDict([ (name, all_tests[name]) for name in sorted(blacklisted_tests, key=lambda t: t.lower()) ])
+    { name : all_tests[name] for name in sorted(all_tests.keys(), key=lambda t: t.lower()) },
+    { name : all_tests[name] for name in sorted(filtered_tests, key=lambda t: t.lower()) },
+    { name : all_tests[name] for name in sorted(blacklisted_tests, key=lambda t: t.lower()) }
   ]
 
 
-def _snapshot_directory_state(dirpath):
-  snapshot = set()
-  for sub_dirpath, sub_dirnames, filenames in os.walk(dirpath):
-    snapshot.add(sub_dirpath)
-    snapshot.update([os.path.join(sub_dirpath, filename) for filename in filenames])
-
-  return snapshot
-
-
-def _restore_directory_state(dirpath, golden_snapshot, output_dirpath, current_snapshot):
-  dirt = set(current_snapshot).difference(set(golden_snapshot))
-  # Sort based on the length of the string and then chronologically
-  dirt = sorted(dirt, key=lambda item: (len(item), item))
-
-  for path in dirt:
-    if os.path.isdir(path) or os.path.isfile(path):
-      src_rel_path = os.path.relpath(path, dirpath)
-      dst_abs_path = os.path.join(output_dirpath, src_rel_path)
-      try:
-        _mkdir(os.path.dirname(dst_abs_path))
-        shutil.move(path, dst_abs_path)
-      except:
-        print(f'Failed to move {path} to {dst_abs_path}')
-        traceback.print_exc()
-
-
-def _generate_tarball(dirpath):
-  with tarfile.open(dirpath + '.tar.gz', 'w:gz', format=tarfile.GNU_FORMAT) as tarball:
-    tarball.add(dirpath, arcname=os.path.basename(dirpath), recursive=True)
-
-
-def _normalize_log(content, path_mappings):
-  content = re.sub(r'\d+\.\d{3}s', 't.ttts', content)
-  content = re.sub(r'\d+\.\d{6}s', 't.tttttts', content)
-  for path, mapping in path_mappings.items():
-    pattern = re.sub(r'(\\|\/)+', r'(\\\\|\/)+', path)
-    content = re.sub(pattern, mapping, content)
-  return content
-
-
-def _get_log_statistics(filepath):
+def _get_log_statistics(filepath: Path) -> dict[str, Any]:
   statistics = {}
-  if not os.path.isfile(filepath):
+  if not filepath.is_file():
     return statistics
 
   uhdm_dump_markers = [
@@ -286,7 +170,7 @@ def _get_log_statistics(filepath):
   uhdm_stats = {}
   uhdm_stat_dump_started = False
   uhdm_line_count = 0
-  with open(filepath, 'rt', encoding='cp850') as strm:
+  with filepath.open() as strm:
     for line in strm:
       line = line.strip()
 
@@ -331,11 +215,14 @@ def _get_log_statistics(filepath):
   return statistics
 
 
-def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, mt, tool, output_dirpath):
+def _get_run_args(
+  name: str, filepath: Path, dirpath: Path, binary_filepath: Path,
+  uvm_reldirpath: Path, mp: int, mt: int, tool: str, output_dirpath: Path
+):
   tool_log_filepath = None
   tool_args_list = []
   if tool == 'valgrind':
-    tool_log_filepath = os.path.join(output_dirpath, 'valgrind.log')
+    tool_log_filepath = output_dirpath / 'valgrind.log'
     tool_args_list = [
       'valgrind',
       '--tool=memcheck',
@@ -353,7 +240,7 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
     pprint.pprint(tool_args_list)
     print('\n')
 
-  cmdline = open(filepath, 'rt').read().strip()
+  cmdline = filepath.open().read().strip()
   print(f'Loaded command line: {cmdline}')
 
   cmdline = cmdline.replace('\r', '')
@@ -361,19 +248,16 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
   cmdline = cmdline.replace('\n', ' ')
   cmdline = cmdline.replace('"', '\\"')
   cmdline = cmdline.replace("'", "\\'")
-  if 'MSYSTEM' in os.environ:
-    cmdline = re.sub(r'[.\\\/]+[\\/]UVM', uvm_reldirpath.replace('\\', '/'), cmdline)
-  else:
-    cmdline = re.sub(r'[.\\\/]+[\\/]UVM', uvm_reldirpath.replace('\\', '\\\\'), cmdline)
+  cmdline = re.sub(r'[.\\\/]+[\\/]UVM', str(uvm_reldirpath).replace('\\', '\\\\'), cmdline)
   cmdline = cmdline.strip()
 
   if '.sh' in cmdline or '.bat' in cmdline:
-    args = ['sh'] + [arg for arg in cmdline.split() if arg] + [_transform_path(binary_filepath)]
+    args = ['sh'] + [arg for arg in cmdline.split() if arg] + [str(binary_filepath)]
   else:
     if '*/*.v' in cmdline:
-      cmdline = cmdline.replace('*/*.v', ' '.join(_find_files(dirpath, '*.v')))
+      cmdline = cmdline.replace('*/*.v', ' '.join(str(p) for p in find_files(dirpath, '*.v')))
     if '*/*.sv' in cmdline:
-      cmdline = cmdline.replace('*/*.sv', ' '.join(_find_files(dirpath, '*.sv')))
+      cmdline = cmdline.replace('*/*.sv', ' '.join(str(p) for p in find_files(dirpath, '*.sv')))
     if '-mt' in cmdline:
       cmdline = re.sub(r'-mt\s+(max|\d+)', '', cmdline)
 
@@ -389,7 +273,7 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
     for i in range(0, len(parts)):
       if parts[i] and ('*' in parts[i] or '?' in parts[i]):
           if parts[i].endswith('.v') or parts[i].endswith('.sv') or parts[i].endswith('.pkg'):
-            parts[i] = ' '.join(_find_files(dirpath, parts[i]))
+            parts[i] = ' '.join(str(p) for p in find_files(dirpath, parts[i]))
 
     parts += ['-mt', (mt or '0')]
     if mp or '-mp' not in cmdline:
@@ -400,23 +284,13 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
       parts += ['-d', 'uhdm']
     parts += ['-noreduce', '-noelab'] # Disable reduction & elaboration
 
-    rel_output_dirpath = os.path.relpath(output_dirpath, dirpath)
-    if 'MSYSTEM' in os.environ:
-      rel_output_dirpath = rel_output_dirpath.replace('\\', '/')
-    parts += ['-o', rel_output_dirpath]
+    rel_output_dirpath = output_dirpath.relative_to(dirpath, walk_up=True)
+    parts += ['-o', str(rel_output_dirpath)]
 
     cmdline = ' '.join(['"' + part + '"' if '"' in part else part for part in parts if part])
     print(f'Processed command line: {cmdline}')
 
-    args = tool_args_list + [binary_filepath] + cmdline.split()
-
-  # MSYS2 seems to be having some issues when working with quoted
-  # argument on command line, specifically, when passing arguments
-  # as list of strings. The only solution found to be working
-  # reliably is to pass the arguments as a string rather than list
-  # of strings.
-  if '"' in cmdline and 'MSYSTEM' in os.environ:
-    args = ' '.join(args)
+    args = tool_args_list + [str(binary_filepath)] + cmdline.split()
 
   return args, tool_log_filepath
 
@@ -441,7 +315,7 @@ def _run_surelog(
   max_cpu_time = 0
   max_vms_memory = 0
   max_rss_memory = 0
-  with open(surelog_log_filepath, 'wt', encoding='cp850') as surelog_log_strm:
+  with surelog_log_filepath.open('wt') as surelog_log_strm:
     surelog_start_dt = datetime.now()
     try:
       process = subprocess.Popen(
@@ -493,8 +367,8 @@ def _run_surelog(
 
     surelog_log_strm.flush()
 
-  if status == Status.PASS and tool_log_filepath and os.path.isfile(tool_log_filepath):
-    content = open(tool_log_filepath, 'rt').read()
+  if status == Status.PASS and tool_log_filepath and tool_log_filepath.is_file():
+    content = tool_log_filepath.open().read()
     if 'ERROR SUMMARY: 0' not in content:
       status = Status.TOOLFAIL
 
@@ -511,41 +385,51 @@ def _run_surelog(
   }
 
 
-def _compare_one(lhs_filepath, rhs_filepath, prefilter=lambda x: x):
-  # lhs_content = [prefilter(line) for line in open(lhs_filepath, 'rt', encoding='cp850').readlines()]
-  # rhs_content = [prefilter(line) for line in open(rhs_filepath, 'rt', encoding='cp850').readlines()]
-  # return [line for line in difflib.unified_diff(lhs_content, rhs_content, fromfile=lhs_filepath, tofile=rhs_filepath, n = 0)]
-  return []
-
-
 def _run_one(params):
   start_dt = datetime.now()
-  name, filepath, workspace_dirpath, surelog_filepath, mp, mt, tool, output_dirpath = params
+  name, filepath, surelog_filepath, mp, mt, tool, output_dirpath = params
 
   log(f'Running {name} ...')
 
-  dirpath = os.path.dirname(filepath)
-  regression_log_filepath = os.path.join(output_dirpath, 'regression.log')
+  dirpath = filepath.parent
+  env_filepath = output_dirpath / 'env.json'
+  regression_log_filepath = output_dirpath / 'regression.log'
   golden_log_filepath, surelog_log_filepath = _get_surelog_log_filepaths(name, dirpath, output_dirpath)
-  uvm_reldirpath = os.path.relpath(os.path.join(workspace_dirpath, 'third_party', 'UVM'), dirpath)
-  uhdm_slpp_all_filepath = os.path.join(output_dirpath, 'slpp_all', 'surelog.uhdm')
-  uhdm_slpp_unit_filepath = os.path.join(output_dirpath, 'slpp_unit', 'surelog.uhdm')
+  uvm_reldirpath = (_workspace_dirpath / 'third_party' / 'UVM').relative_to(dirpath, walk_up=True)
+  uhdm_slpp_all_filepath = output_dirpath / 'slpp_all' / 'surelog.uhdm'
+  uhdm_slpp_unit_filepath = output_dirpath / 'slpp_unit' / 'surelog.uhdm'
 
-  _rmtree(dirpath, ['slpp_all', 'slpp_unit'])
-  _rmdir(output_dirpath)
-  _mkdir(output_dirpath)
+  rmtree(dirpath, ['slpp_all', 'slpp_unit'])
+  rmdir(output_dirpath)
+  mkdir(output_dirpath)
+
+  json_dump({
+    'test-name': name,
+    'regression': {    
+      'test-dirpath': dirpath,
+      'test-filepath': filepath,
+      'workspace-dirpath': _workspace_dirpath,
+      'surelog-filepath': surelog_filepath,
+      'uvm-reldirpath': uvm_reldirpath,
+      'output-dirpath': output_dirpath,
+      'golden-log-filepath': golden_log_filepath,
+      'surelog-log-filepath': surelog_log_filepath,
+      'uhdm-slpp_all-filepath': uhdm_slpp_all_filepath,
+      'uhdm-slpp_unit-filepath': uhdm_slpp_unit_filepath,
+      'tool': tool,
+    }
+  }, env_filepath.open('w'), indent=2)
 
   result = {
     'TESTNAME': name,
     'STATUS': Status.PASS,
-    'diff-lines': [],
     'golden-log-filepath': golden_log_filepath,
     'surelog-log-filepath': surelog_log_filepath,
     'golden': {},
     'current': {}
   }
 
-  with open(regression_log_filepath, 'wt', encoding='cp850') as regression_log_strm, \
+  with regression_log_filepath.open('wt') as regression_log_strm, \
           redirect_stdout(regression_log_strm), \
           redirect_stderr(regression_log_strm):
     completed = False
@@ -556,7 +440,7 @@ def _run_one(params):
       print(f'               test-name: {name}')
       print(f'            test-dirpath: {dirpath}')
       print(f'           test-filepath: {filepath}')
-      print(f'       workspace-dirpath: {workspace_dirpath}')
+      print(f'       workspace-dirpath: {_workspace_dirpath}')
       print(f'        surelog-filepath: {surelog_filepath}')
       print(f'          uvm-reldirpath: {uvm_reldirpath}')
       print(f'          output-dirpath: {output_dirpath}')
@@ -568,7 +452,7 @@ def _run_one(params):
       print( '\n')
 
       print('Snapshot ...')
-      golden_snapshot = _snapshot_directory_state(dirpath)
+      golden_snapshot = snapshot_directory_state(dirpath)
       print(f'Found {len(golden_snapshot)} files & directories')
       print('\n')
 
@@ -581,33 +465,33 @@ def _run_one(params):
 
       uhdm_src_filepath = None
       if result['STATUS'] == Status.PASS:
-        if os.path.isfile(uhdm_slpp_all_filepath):
+        if uhdm_slpp_all_filepath.is_file():
           uhdm_src_filepath = uhdm_slpp_all_filepath
-        elif os.path.isfile(uhdm_slpp_unit_filepath):
+        elif uhdm_slpp_unit_filepath.is_file():
           uhdm_src_filepath = uhdm_slpp_unit_filepath
         else:
           print(f'File not found: {uhdm_slpp_all_filepath}')
           print(f'File not found: {uhdm_slpp_unit_filepath}')
 
       print(f'Normalizing surelog log file {surelog_log_filepath}')
-      if os.path.isfile(surelog_log_filepath):
-        content = open(surelog_log_filepath, 'rt', encoding='cp850').read()
+      if surelog_log_filepath.is_file():
+        content = surelog_log_filepath.open().read()
         if 'Segmentation fault' in content:
           result['STATUS'] = Status.SEGFLT
 
-        content = _normalize_log(content, {
-          workspace_dirpath: '${SURELOG_DIR}',
+        content = normalize_log(content, {
+          str(_workspace_dirpath.as_posix()): '${SURELOG_DIR}',
           r'\${SURELOG_DIR}/out/build/': r'\${SURELOG_DIR}/build/',
         })
 
-        open(surelog_log_filepath, 'wt', encoding='cp850').write(content)
+        surelog_log_filepath.open('wt').write(content)
       else:
         print(f'File not found: {surelog_log_filepath}')
         result['STATUS'] == Status.FAIL
       print('\n')
 
       # If golden file is missing, then fail the test explicitly!
-      if result['STATUS'] == Status.PASS and not os.path.isfile(golden_log_filepath):
+      if result['STATUS'] == Status.PASS and not golden_log_filepath.is_file():
         result['STATUS'] = Status.NOGOLD
 
       result.update({
@@ -642,20 +526,14 @@ def _run_one(params):
           result['STATUS'] = Status.DIFF
 
       print('Restoring pristine state ...', flush=True)
-      current_snapshot = _snapshot_directory_state(dirpath)
+      current_snapshot = snapshot_directory_state(dirpath)
       print(f'Found {len(current_snapshot)} files & directories')
 
-      _restore_directory_state(
-        dirpath, golden_snapshot,
-        output_dirpath, current_snapshot)
+      restore_directory_state(dirpath, golden_snapshot, output_dirpath, current_snapshot)
       print('\n')
 
       pprint.pprint({'result': result})
       print('\n')
-
-      if result['STATUS'] == Status.DIFF:
-        result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
-        regression_log_strm.writelines(result['diff-lines'])
 
       end_dt = datetime.now()
       delta = end_dt - start_dt
@@ -668,134 +546,24 @@ def _run_one(params):
 
     regression_log_strm.flush()
 
-  if _is_ci_build():
-    _generate_tarball(output_dirpath)
-    _rmdir(output_dirpath)
+  if is_ci_build():
+    generate_tarball(output_dirpath)
+    rmdir(output_dirpath)
 
-  if completed:
-    log(f'... {name} Completed.')
-  else:
-    log(f'... {name} FAILED.')
+  log(f'... {name} Completed.' if completed else f'... {name} FAILED.')
   return result
-
-
-def _report_one(params):
-  start_dt = datetime.now()
-  name, filepath, output_dirpath = params
-
-  log(f'Comparing {name}')
-
-  dirpath = os.path.dirname(filepath)
-  golden_log_filepath, surelog_log_filepath = _get_surelog_log_filepaths(name, dirpath, output_dirpath)
-  report_log_filepath = os.path.join(output_dirpath, 'report.log')
-
-  result = {
-    'TESTNAME': name,
-    'STATUS': Status.PASS,
-    'diff-lines': [],
-    'golden-log-filepath': golden_log_filepath,
-    'surelog-log-filepath': surelog_log_filepath,
-    'golden': {},
-    'current': {}
-  }
-
-  if not os.path.isdir(dirpath):
-    result['STATUS'] = Status.FAIL
-    return result
-
-  with open(report_log_filepath, 'wt', encoding='cp850') as report_log_strm, \
-      redirect_stdout(report_log_strm), \
-      redirect_stderr(report_log_strm):
-
-    print(f'start-time: {start_dt}')
-    print( '')
-    print( 'Environment:')
-    print(f'              test-name: {name}')
-    print(f'           test-dirpath: {dirpath}')
-    print(f'          test-filepath: {filepath}')
-    print(f'    golden-log-filepath: {golden_log_filepath}')
-    print(f'   surelog-log-filepath: {surelog_log_filepath}')
-    print( '\n')
-
-    # If either output file is missing, then fail the test explicitly!
-    if os.path.isfile(surelog_log_filepath) != os.path.isfile(golden_log_filepath):
-      result['STATUS'] = Status.FAIL
-
-    result.update({
-      'golden': _get_log_statistics(golden_log_filepath),
-      'current': _get_log_statistics(surelog_log_filepath)
-    })
-
-    if result['STATUS'] == Status.PASS:
-      current = result['current']
-      golden = result['golden']
-      if len(current) == len(golden):
-        for k, v in current.items():
-          if v != golden.get(k, 0):
-            result['STATUS'] = Status.DIFF
-            break
-      else:
-          result['STATUS'] = Status.DIFF
-
-    print('Comparison Result:')
-    pprint.pprint(result)
-    print('\n')
-
-    if result['STATUS'] == Status.DIFF:
-      result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
-      report_log_strm.writelines(result['diff-lines'])
-
-    end_dt = datetime.now()
-    delta = end_dt - start_dt
-    print(f'end-time: {str(end_dt)} {str(delta)}')
-
-    report_log_strm.flush()
-
-  return result
-
-
-def _update_one(params):
-  name, filepath, output_dirpath = params
-
-  dirpath = os.path.dirname(filepath)
-  golden_log_filepath, surelog_log_filepath = _get_surelog_log_filepaths(name, dirpath, output_dirpath)
-
-  log(f'Updating {name}: {surelog_log_filepath} => {golden_log_filepath}')
-
-  if not os.path.isfile(surelog_log_filepath):
-    log(f'File not found: {surelog_log_filepath}')
-  else:
-    try:
-      if os.path.isfile(golden_log_filepath):
-        os.remove(golden_log_filepath)
-
-      shutil.copy(surelog_log_filepath, golden_log_filepath)
-
-      # On Windows, fixup the line endings
-      if platform.system() == 'Windows':
-        with open(golden_log_filepath, 'rt', encoding='cp850') as istrm:
-          lines = istrm.readlines()
-        with open(golden_log_filepath, 'wt', encoding='cp850') as ostrm:
-          ostrm.writelines(lines)
-          ostrm.flush()
-    except:
-      log(f'Failed to overwrite \"{golden_log_filepath}\" with \"{surelog_log_filepath}\"')
-      traceback.print_exc()
-      return 1
-
-  return 0
 
 
 def _print_report(results):
   columns = [
-    'TESTNAME', 'STATUS', 'FATAL', 'SYNTAX', 'ERROR', 'WARNING',
-    'NOTE', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM'
+    'TESTNAME', 'STATUS', 'FATAL', 'SYNTAX', 'ERROR',
+    'WARNING', 'NOTE', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM'
   ]
 
   results = sorted(results, key=lambda r: (-r['STATUS'].value, r['TESTNAME']))
 
   rows = []
-  summary = OrderedDict([(status.name, 0) for status in Status])
+  summary = { status.name : 0 for status in Status }
   summary[''] = ''
   for result in results:
     current = result['current']
@@ -803,7 +571,7 @@ def _print_report(results):
 
     def _get_cell_value(name):
       if golden and current.get(name, 0) != golden.get(name, 0):
-        return f'{current.get(name, 0)} ({current.get(name, 0) - golden.get(name, 0)})'
+        return f'{current.get(name, 0)} ({current.get(name, 0) - golden.get(name, 0):+})'
       else:
         return f'{current.get(name, 0)}'
 
@@ -821,6 +589,10 @@ def _print_report(results):
       str(round(result.get(columns[9], 0) / (1024 * 1024))),  # PHY-MEM
     ])
 
+  print('Results:')
+  print(tabulate.tabulate(rows, headers=columns, tablefmt="outline", floatfmt=".2f"))
+  print('')
+
   longest_cpu_test = max(results, key=lambda result: result.get('CPU-TIME', 0))
   total_cpu_time = sum([result.get('CPU-TIME', 0) for result in results])
   summary['MAX CPU TIME'] = f'{round(longest_cpu_test.get("CPU-TIME", 0), 2)} ({longest_cpu_test["TESTNAME"]})'
@@ -832,44 +604,9 @@ def _print_report(results):
   largest_test = max(results, key=lambda result: result.get('PHY-MEM', 0))
   summary['MAX MEMORY'] = f'{round(largest_test.get("PHY-MEM", 0) / (1024 * 1024))} ({largest_test["TESTNAME"]})'
 
-  widths = [max([len(row[index]) for row in [columns] + rows]) for index in range(0, len(columns))]
-  row_format = '  | ' + ' | '.join([f'{{:{"" if i < 2 else ">"}{widths[i]}}}' for i in range(0, len(widths))]) + ' |'
-  separator = '  +-' + '-+-'.join(['-' * width for width in widths]) + '-+'
-
-  print('Results: ')
-  print(separator)
-  print(row_format.format(*columns))
-  print(separator)
-  for row in rows:
-    print(row_format.format(*row))
-  print(separator)
-
-  return summary
-
-
-def _print_diffs(results):
-  max_lines_per_result = 50
-  for result in results:
-    if result['STATUS'] == Status.DIFF:
-      print('=' * 120)
-      print(f'diff {result["golden-log-filepath"]} {result["surelog-log-filepath"]}')
-      sys.stdout.writelines(result['diff-lines'][:max_lines_per_result])
-      if len(result['diff-lines']) > max_lines_per_result:
-        print(f'... and {len(result["diff-lines"]) - max_lines_per_result} more.')
-      print('\n\n')
-
-
-def _print_summary(summary):
-  rows = [[k, str(v)] for k, v in summary.items()]
-  widths = [max([len(str(row[index])) for row in rows]) for index in range(0, 2)]
-  row_format = '  | ' + ' | '.join([f'{{:{width}}}' for width in widths]) + ' |'
-  separator = '  +-' + '-+-'.join(['-' * width for width in widths]) + '-+'
-
-  print('Summary: ')
-  print(separator)
-  for row in rows:
-    print(row_format.format(*row))
-  print(separator)
+  print('Summary:')
+  print(tabulate.tabulate(list(summary.items()), tablefmt="outline", floatfmt=".2f"))
+  print('')
 
 
 def _run(args, tests):
@@ -879,12 +616,11 @@ def _run(args, tests):
   params = [(
     name,
     filepath,
-    args.workspace_dirpath,
     args.surelog_filepath,
     args.mp,
     args.mt,
     args.tool,
-    os.path.join(args.output_dirpath, name)
+    args.output_dirpath / name
   ) for name, filepath in tests.items()]
 
   if args.jobs <= 1:
@@ -893,152 +629,10 @@ def _run(args, tests):
     with multiprocessing.Pool(processes=args.jobs) as pool:
       results = pool.map(_run_one, params)
 
-  print('\n\n')
-  summary = _print_report(results)
+  print('')
+  _print_report(results)
 
-  if args.show_diffs:
-    print('\n\n')
-    _print_diffs(results)
-
-  print('\n\n')
-  _print_summary(summary)
-
-  result = sum([entry['STATUS'].value for entry in results])
-  return result
-
-
-def _report(args, tests):
-  if not tests:
-    return 0  # No selected tests
-
-  params = [(
-    name,
-    filepath,
-    os.path.join(args.output_dirpath, name)
-  ) for name, filepath in tests.items()]
-
-  if args.jobs == 0:
-    results = [_report_one(param) for param in params]
-  else:
-    with multiprocessing.Pool(processes=args.jobs) as pool:
-      results = pool.map(_report_one, params)
-
-  print('\n\n')
-  summary = _print_report(results)
-  print('\n\n')
-
-  if args.show_diffs:
-    _print_diffs(results)
-    print('\n\n')
-
-  _print_summary(summary)
-
-  return 0
-
-
-def _update(args, tests):
-  if not tests:
-    return 0  # No selected tests
-
-  params = [(
-    name,
-    filepath,
-    os.path.join(args.output_dirpath, name)
-  ) for name, filepath in tests.items()]
-
-  if args.jobs == 0:
-    results = [_update_one(param) for param in params]
-  else:
-    with multiprocessing.Pool(processes=args.jobs) as pool:
-      results = pool.map(_update_one, params)
-
-  return sum(results)
-
-
-def _extract_worker(params):
-  zipfile_path, archive_name, queue = params
-
-  results = []
-  with zipfile.ZipFile(zipfile_path, 'r') as zipfile_strm:
-    with zipfile_strm.open(f'{archive_name}.tar.gz') as tarfile_strm:
-      with tarfile.open(fileobj=tarfile_strm) as archive_strm:
-        archive_names = set(archive_strm.getnames())
-
-        while not queue.empty():
-          try:
-            params = queue.get(block=False)
-          except queue.Empty:
-            break
-
-          if not params:
-            break
-
-          name, filepath = params
-          test_filepath = f'{archive_name}/{name}.tar.gz'
-
-          if test_filepath not in archive_names:
-            continue
-
-          with tarfile.open(fileobj=archive_strm.extractfile(test_filepath)) as test_strm:
-            src_log_filepath = f'{name}/{name}.log'
-
-            dst_dirpath = os.path.dirname(filepath)
-            dst_log_filepath = os.path.join(dst_dirpath, f'{name}.log')
-
-            log(f'{src_log_filepath} => {dst_log_filepath}')
-
-            try:
-              src_log_strm = test_strm.extractfile(src_log_filepath)
-
-              with open(dst_log_filepath, 'wb') as dst_log_strm:
-                dst_log_strm.write(src_log_strm.read())
-                dst_log_strm.flush()
-
-              # On Windows, fixup the line endings
-              if platform.system() == 'Windows':
-                with open(dst_log_filepath, 'rt', encoding='cp850') as istrm:
-                  lines = istrm.readlines()
-                with open(dst_log_filepath, 'wt', encoding='cp850') as ostrm:
-                  ostrm.writelines(lines)
-                  ostrm.flush()
-
-              results.append(0)
-            except KeyError:
-              log(f'Failed to extract \"{name}/{name}.log\"')
-              traceback.print_exc()
-              results.append(-1)
-
-  return sum(results)
-
-
-def _extract(args, tests):
-  if not tests:
-    return 0  # No selected tests
-
-  if not args.zipfile_path:
-    raise "Missing required archive path"
-
-  if not os.path.isfile(args.zipfile_path):
-    raise "Input archive path is invalid"
-
-  archive_name = os.path.basename(args.zipfile_path)
-  pos = archive_name.find('.')
-  if pos >= 0:
-    archive_name = archive_name[:pos]
-  log(f'archive-name: {archive_name}')
-
-  manager = multiprocessing.Manager()
-  queue = manager.Queue()
-  for name, filepath in tests.items():
-    queue.put((name, filepath))
-
-  if args.jobs == 0:
-    results = _extract_worker((args.zipfile_path, archive_name, queue))
-  else:
-    with multiprocessing.Pool(processes=args.jobs) as pool:
-      results = pool.map(_extract_worker, [(args.zipfile_path, archive_name, queue)] * args.jobs)
-
-  return sum(results)
+  return sum([entry['STATUS'].value for entry in results])
 
 
 def _main():
@@ -1051,11 +645,6 @@ def _main():
 
   parser = argparse.ArgumentParser()
 
-  parser.add_argument(
-      'mode', choices=['run', 'report', 'update', 'extract'], type=str, help='Pick from available choices')
-  parser.add_argument(
-      '--workspace-dirpath', dest='workspace_dirpath', required=False, default=_default_workspace_dirpath, type=str,
-      help='Workspace root, either absolute or relative to current working directory.')
   parser.add_argument(
       '--test-dirpaths', dest='test_dirpaths', required=False, default=_default_test_dirpaths, nargs='*', type=str,
       help='Directories, either absolute or relative to workspace directory, to scan for tests.')
@@ -1074,16 +663,10 @@ def _main():
       '--jobs', nargs='?', required=False, default=multiprocessing.cpu_count(), type=int,
       help='Run tests in parallel, optionally providing max number of concurrent processes. Set 0 to run sequentially.')
   parser.add_argument(
-      '--show-diffs', dest='show_diffs', required=False, default=False, action='store_true',
-      help='Show file differences when applicable.')
-  parser.add_argument(
       '--tool', dest='tool', choices=['ddd', 'valgrind'], required=False, default=None, type=str,
       help='Run regression test using specified tool.')
   parser.add_argument('--mt', dest='mt', default=None, type=str, help='Enable multithreading mode')
   parser.add_argument('--mp', dest='mp', default=None, type=str, help='Enable multiprocessing mode')
-  parser.add_argument(
-      '--zipfile-path', dest='zipfile_path', required=False, type=str,
-      help='Path to zipfile to extract logs from.')
   parser.add_argument('--num_shards', dest='num_shards', required=False,
                       type=int, default=1, help='Number of shards')
   parser.add_argument('--shard', dest='shard', required=False,
@@ -1095,43 +678,32 @@ def _main():
     print("Shard %d out of range 0..%d" % (args.shard, args.num_shards - 1))
     return 1
 
+  args.build_dirpath = Path(args.build_dirpath)
+  args.surelog_filepath = Path(args.surelog_filepath)
+  args.output_dirpath = Path(args.output_dirpath)
+  args.test_dirpaths = [Path(dirpath) for dirpath in args.test_dirpaths]
+
   if (args.jobs == None) or (args.jobs > multiprocessing.cpu_count()):
     args.jobs = multiprocessing.cpu_count()
 
-  if not os.path.isabs(args.workspace_dirpath):
-    args.workspace_dirpath = os.path.abspath(args.workspace_dirpath)
+  if not args.build_dirpath.is_absolute():
+    args.build_dirpath = _workspace_dirpath / args.build_dirpath
+  args.build_dirpath = args.build_dirpath.resolve()
 
-  if not os.path.isabs(args.build_dirpath):
-    args.build_dirpath = os.path.join(args.workspace_dirpath, args.build_dirpath)
-  args.build_dirpath = os.path.abspath(args.build_dirpath)
+  if not args.surelog_filepath.is_absolute():
+    args.surelog_filepath = args.build_dirpath / args.surelog_filepath
+  args.surelog_filepath = args.surelog_filepath.resolve()
 
-  if not os.path.isabs(args.surelog_filepath):
-    args.surelog_filepath = os.path.join(args.build_dirpath, args.surelog_filepath)
-  args.surelog_filepath = os.path.abspath(args.surelog_filepath)
-
-  if not os.path.isabs(args.output_dirpath):
-    args.output_dirpath = os.path.join(args.build_dirpath, args.output_dirpath)
-  args.output_dirpath = os.path.abspath(args.output_dirpath)
+  if not args.output_dirpath.is_absolute():
+    args.output_dirpath = args.build_dirpath / args.output_dirpath
+  args.output_dirpath = args.output_dirpath.resolve()
 
   args.test_dirpaths = [
-    os.path.abspath(dirpath if os.path.isabs(dirpath) else os.path.join(args.workspace_dirpath, dirpath))
+    (dirpath if dirpath.is_absolute() else (_workspace_dirpath / dirpath)).resolve()
     for dirpath in args.test_dirpaths
   ]
 
-  if args.filters:
-    filters = set()
-    for filter in args.filters:
-      if filter.startswith('@'):
-        with open(filter[1:], 'rt') as strm:
-          for line in strm:
-            line = line.strip()
-            if line:
-              filters.add(line.strip())
-      else:
-        filters.add(filter)
-    args.filters = filters
-
-  args.filters = [text if text.isalnum() else re.compile(text, re.IGNORECASE) for text in args.filters]
+  args.filters = build_filters(args.filters)
   all_tests, filtered_tests, blacklisted_tests = _scan(args.test_dirpaths, args.filters, args.shard, args.num_shards)
 
   if args.jobs > len(filtered_tests):
@@ -1139,11 +711,11 @@ def _main():
 
   print( 'Environment:')
   print(f'      command-line: {" ".join(sys.argv)}')
-  print(f'   current-dirpath: {os.getcwd()}')
-  print(f' workspace-dirpath: {args.workspace_dirpath}')
+  print(f'   current-dirpath: {Path.cwd()}')
+  print(f' workspace-dirpath: {_workspace_dirpath}')
   print(f'     build-dirpath: {args.build_dirpath}')
   print(f'  surelog-filepath: {args.surelog_filepath}')
-  print(f'     test-dirpaths: {"; ".join(args.test_dirpaths)}')
+  print(f'     test-dirpaths: {"; ".join(str(p) for p in args.test_dirpaths)}')
   print(f'    output-dirpath: {args.output_dirpath}')
   print(f'   multi-threading: {args.mt}')
   print(f'  multi-processing: {args.mp}')
@@ -1153,21 +725,10 @@ def _main():
   print(f'    filtered-tests: {len(filtered_tests)}')
   print( '\n\n')
 
-  _mkdir(args.output_dirpath)
+  mkdir(args.output_dirpath)
 
-  result = 0
-  if args.mode == 'run':
-    print(f'Running {len(filtered_tests)} tests ...')
-    result = _run(args, filtered_tests)
-  elif args.mode == 'report':
-    print(f'Reporting {len(filtered_tests)} tests ...')
-    result = _report(args, filtered_tests)
-  elif args.mode == 'update':
-    print(f'Updating {len(filtered_tests)} test logs ...')
-    result = _update(args, filtered_tests)
-  elif args.mode == 'extract':
-    print(f'Extracting {len(filtered_tests)} test logs ...')
-    result = _extract(args, filtered_tests)
+  print(f'Running {len(filtered_tests)} tests ...')
+  result = _run(args, filtered_tests)
   print('\n\n')
 
   end_dt = datetime.now()

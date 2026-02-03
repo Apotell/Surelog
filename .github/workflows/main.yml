@@ -59,8 +59,7 @@ jobs:
         vcpkg install zlib zlib:x64-windows
 
     - name: Setup Python Packages
-      run: |
-        pip3 install orderedmultidict
+      run: pip3 install orderedmultidict
 
     - name: Setup Java
       uses: actions/setup-java@v4
@@ -169,27 +168,35 @@ jobs:
     - name: Build compressed artifacts
       if: always()
       shell: bash
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
+        echo "$GITHUB_CONTEXT" > env.txt
+
         cp deploy/CMakeLists.txt out/install/.
-        cd out
+        pushd out
+          mv install/lib install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
+          mkdir install/lib
+          mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/lib/.
 
-        mv install/lib install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
-        mkdir install/lib
-        mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/lib/.
+          mv install/bin install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
+          mkdir install/bin
+          mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/bin/.
 
-        mv install/bin install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}
-        mkdir install/bin
-        mv install/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} install/bin/.
+          mv install ${{ env.artifact-name }}
+          tar czfp ${{ env.artifact-name }}.tar.gz ${{ env.artifact-name }}
+        popd
 
-        mv install ${{ env.artifact-name }}
-        tar czfp ${{ env.artifact-name }}.tar.gz ${{ env.artifact-name }}
+        mv out/${{ env.artifact-name }}.tar.gz .
 
     - name: Archive artifacts
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ env.artifact-name }}
-        path: out/${{ env.artifact-name }}.tar.gz
+        path: |
+          ${{ env.artifact-name }}.tar.gz
+          env.txt
 
 #######################################################################################################################
 
@@ -219,22 +226,24 @@ jobs:
         architecture: 'x64'
 
     - name: Setup Python Packages
-      run: |
-        pip3 install orderedmultidict
-        pip3 install psutil
+      run: pip3 install pathlibutil psutil tabulate
 
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        submodules: recursive
+        sparse-checkout: |
+          scripts
+          tests
+          third_party/tests
+          third_party/UVM
         lfs: true
 
     - name: Download artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         name: ${{ env.build-artifact-name }}
 
-    - name: Extract artifact
+    - name: Extract build artifact
       shell: bash
       run: |
         # This has to be a separate step and run under bash since tar on Windows
@@ -248,7 +257,7 @@ jobs:
       shell: bash
       timeout-minutes: 120
       run: |
-        python3 scripts/regression.py run                                                             \
+        python3 scripts/regression.py                                                                 \
           --build-dirpath build/bin/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} \
           --surelog-filepath surelog                                                                  \
           --output-dirpath ../../regression                                                           \
@@ -262,7 +271,7 @@ jobs:
       shell: cmd
       timeout-minutes: 120
       run: |
-        python3 scripts/regression.py run^
+        python3 scripts/regression.py^
           --build-dirpath build/bin/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}^
           --surelog-filepath surelog.exe^
           --output-dirpath ../../regression^
@@ -274,19 +283,122 @@ jobs:
 
     - name: Prepare regression artifacts
       if: always()
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
-        ls -l build
-        cd build
-        ls -l regression
-        mv regression ${{ env.regression-artifact-name }}
-        find ${{ env.regression-artifact-name }} -name "*.tar.gz" | tar czfp ${{ env.regression-artifact-name }}.tar.gz -T -
+        echo "$GITHUB_CONTEXT" > env.txt
+        pushd build
+          mv regression ${{ env.regression-artifact-name }}
+          find ${{ env.regression-artifact-name }} -name "*.tar.gz" | tar czfp ${{ env.regression-artifact-name }}.tar.gz -T -
+        popd
+        mv build/${{ env.regression-artifact-name }}.tar.gz .
 
     - name: Archive artifacts
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ env.regression-artifact-name }}
-        path: build/${{ env.regression-artifact-name }}.tar.gz
+        path: |
+          ${{ env.regression-artifact-name }}.tar.gz
+          env.txt
+
+#######################################################################################################################
+
+  reducer:
+    name: "Reducer | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
+    needs: regression
+    runs-on: ${{ matrix.config.os }}
+
+    env:
+      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}
+      regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
+      reducer-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        num_shards: [6]
+        shard: [0, 1, 2, 3, 4, 5]
+        config:
+        - { os: ubuntu-24.04, artifact-tag: ubuntu-gcc, build-type: release }
+#        - { os: windows-2022, artifact-tag: windows-cl, build-type: release }
+
+    steps:
+    - name: Git Pull
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: |
+          scripts
+          tests
+          third_party/tests
+        lfs: true
+
+    - name: Download build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ env.build-artifact-name }}
+
+    - name: Download regression artifact
+      uses: actions/download-artifact@v6
+      with:
+        name: ${{ env.regression-artifact-name }}
+
+    - name: Extract artifacts
+      shell: bash
+      run: |
+        # This has to be a separate step and run under bash since tar on Windows
+        # still doesn't support symlink and the root repository folder is a symlink.
+        tar xzfp ${{ env.build-artifact-name }}.tar.gz
+        rm ${{ env.build-artifact-name }}.tar.gz
+        mv ${{ env.build-artifact-name }} build
+
+        tar xzfp ${{ env.regression-artifact-name }}.tar.gz
+        rm ${{ env.regression-artifact-name }}.tar.gz
+        mv ${{ env.regression-artifact-name }} regression
+
+        pushd regression
+          for archive in *; do
+            if [[ "$archive" != "*.tar.gz" ]]; then
+              tar xzfp $archive
+              rm $archive
+            fi
+          done
+        popd
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON3_VERSION }}
+        architecture: 'x64'
+
+    - name: Setup Python Packages
+      run: pip3 install pathlibutil psutil tabulate
+
+    - name: Run reduction
+      run: |
+        python3 scripts/reducer.py                                                                    \
+          --build-dirpath build/bin/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} \
+          --reducer-filepath uhdm-reduce                                                              \
+          --source-dirpath regression                                                                 \
+          --jobs $(nproc)
+
+    - name: Prepare regression artifacts
+      if: always()
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT" > env.txt
+        mv regression ${{ env.reducer-artifact-name }}
+        tar czfp ${{ env.reducer-artifact-name }}.tar.gz ${{ env.reducer-artifact-name }}
+
+    - name: Archive artifacts
+      if: always()
+      uses: actions/upload-artifact@v6
+      with:
+        name: ${{ env.reducer-artifact-name }}
+        path: |
+          ${{ env.reducer-artifact-name }}.tar.gz
+          env.txt
 
 #######################################################################################################################
 # 
@@ -320,22 +432,22 @@ jobs:
 #         echo "ARTIFACT_WINDOWS_CL_RELEASE=${{ env.MODULE_NAME }}-windows-cl-release" >> $GITHUB_ENV
 # 
 #     - name: Download artifact (bionic-gcc-debug)
-#       uses: actions/download-artifact@v2
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_BIONIC_GCC_DEBUG }}
 # 
 #     - name: Download artifact (bionic-gcc-release)
-#       uses: actions/download-artifact@v2
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_BIONIC_GCC_RELEASE }}
 # 
 #     - name: Download artifact (windows-cl-debug)
-#       uses: actions/download-artifact@v2
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_WINDOWS_CL_DEBUG }}
 # 
 #     - name: Download artifact (windows-cl-release)
-#       uses: actions/download-artifact@v2
+#       uses: actions/download-artifact@v6
 #       with:
 #         name: ${{ env.ARTIFACT_WINDOWS_CL_RELEASE }}
 # 
@@ -425,7 +537,7 @@ jobs:
         sparse-checkout-cone-mode: false
 
     - name: Download artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         path: artifacts
         pattern: ${{ env.regression-artifact-pattern }}
@@ -440,7 +552,7 @@ jobs:
 
     - name: Upload regression artifacts
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ env.statistics-artifact-name }}
         path: ${{ env.statistics-artifact-name }}.log
@@ -485,7 +597,7 @@ jobs:
         architecture: x64
 
     - name: Setup Python Packages
-      run: pip3 install build orderedmultidict psutil
+      run: pip3 install build orderedmultidict
 
     - name: Checkout code
       uses: actions/checkout@v4

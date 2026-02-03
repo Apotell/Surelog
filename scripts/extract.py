@@ -14,6 +14,7 @@ import shutil
 import sys
 import tarfile
 import time
+import traceback
 import zipfile
 
 from datetime import datetime
@@ -21,134 +22,157 @@ from enum import Enum, unique
 from pathlib import Path
 from threading import Lock
 
+from utils import (
+  build_filters,
+  is_windows,
+  log,
+  mkdir,
+  rmdir,
+  Status,
+)
+
+_this_filepath = Path(__file__).resolve()
+_default_workspace_dirpath = _this_filepath.parent.parent
 
 _default_dbname = 'surelog.uhdm'
-_platform_ids = ['', '.linux', '.osx', '.msys', '.win']
+_platform_ids = ['', '.linux', '.osx', '.win']
+_default_test_dirpaths = [ _default_workspace_dirpath / 'tests', _default_workspace_dirpath / 'third_party' / 'tests' ]
 
 
-_log_mutex = Lock()
-def log(text, end='\n'):
-  _log_mutex.acquire()
-  try:
-    print(text, end=end, flush=True)
-  finally:
-    _log_mutex.release()
-
-
-@unique
-class Status(Enum):
-  PASS = 0
-  FAIL = -1
-  NULL = -2
-
-  def __str__(self):
-    return str(self.name)
-
-
-def _mkdir(dirpath, retries=10):
-  count = 0
-  while count < retries:
-    os.makedirs(dirpath, exist_ok=True)
-
-    if os.path.exists(dirpath):
+def _scan(dirpaths: list[Path], filters: list[str]):
+  def _is_filtered(name):
+    if not filters:
       return True
-
-    count += 1
-    time.sleep(0.1)
-
-  return os.path.exists(dirpath)
-
-
-def _rmdir(dirpath, retries=10):
-  count = 0
-  while count < retries:
-    shutil.rmtree(dirpath, ignore_errors=True)
-
-    if not os.path.exists(dirpath):
-      return True
-
-    count += 1
-    time.sleep(0.1)
-
-  shutil.rmtree(dirpath)
-  return not os.path.exists(dirpath)
-
-
-def _is_filtered(name, filters):
-  if not filters:
-    return True
-
-  for filter in filters:
-    if isinstance(filter, str):
-      if filter.lower() == name.lower():
+    for filter in filters:
+      if isinstance(filter, str):
+        if filter.lower() == name.lower():
+          return True
+      elif filter.search(name):  # Note: match() reports success only if the match is at index 0
         return True
-    else:
-      if filter.search(name):  # Note: match() reports success only if the match is at index 0
-        return True
+    return False
 
-  return False
+  tests = {}
+  for dirpath in dirpaths:
+    for filepath in dirpath.resolve().rglob('*.sl'):
+      if _is_filtered(filepath.stem):
+        tests[filepath.stem] = filepath
+
+  return { name : tests[name] for name in sorted(tests.keys(), key=lambda t: t.lower()) }
 
 
-def _extract_worker(zip_filepath, output_dirpath, modes, filters):
-  archive_name = Path(zip_filepath).stem
+def _extract_worker(params):
+  zip_filepath, archive_name, modes, output_dirpath, queue = params
 
-  results = {}
+  result = 0
   with zipfile.ZipFile(zip_filepath, 'r') as zipfile_strm:
     with zipfile_strm.open(f'{archive_name}.tar.gz') as tarfile_strm:
       with tarfile.open(fileobj=tarfile_strm) as archive_strm:
-        for test_archive_path in archive_strm.getnames():
-          test_archive_name = Path(Path(test_archive_path).stem).stem
+        archive_names = set(archive_strm.getnames())
 
-          if not _is_filtered(test_archive_name, filters):
+        while not queue.empty():
+          try:
+            params = queue.get(block=False)
+          except queue.Empty:
+            break
+
+          if not params:
+            break
+
+          name, filepath = params
+          test_filepath = f'{archive_name}/{name}.tar.gz'
+
+          if test_filepath not in archive_names:
             continue
 
-          dst_dirpath = os.path.join(output_dirpath, test_archive_name)
-          _mkdir(dst_dirpath)
+          dst_dirpath = output_dirpath / name if output_dirpath else filepath.parent
+          mkdir(dst_dirpath)
 
-          results[test_archive_name] = {mode: Status.NULL for mode in modes}
-
-          with tarfile.open(fileobj=archive_strm.extractfile(test_archive_path)) as test_archive_strm:
+          with tarfile.open(fileobj=archive_strm.extractfile(test_filepath)) as test_strm:
             if 'db' in modes:
               for slpp in ['slpp_all', 'slpp_unit']:
-                src_filepath = f'{test_archive_name}/{slpp}/{_default_dbname}'
+                src_db_filepath = f'{name}/{slpp}/{_default_dbname}'
 
-                if src_filepath in test_archive_strm.getnames():
-                  dst_filepath = os.path.join(dst_dirpath, _default_dbname)
+                if src_db_filepath in test_strm.getnames():
+                  dst_db_dirpath = dst_dirpath / slpp
+                  mkdir(dst_db_dirpath)
+
+                  dst_db_filepath = dst_db_dirpath / _default_dbname
 
                   try:
-                    src_strm = test_archive_strm.extractfile(src_filepath)
+                    src_strm = test_strm.extractfile(src_db_filepath)
 
-                    with open(dst_filepath, 'wb') as dst_strm:
+                    with open(dst_db_filepath, 'wb') as dst_strm:
                       dst_strm.write(src_strm.read())
                       dst_strm.flush()
 
-                    if results[test_archive_name]['db'] == Status.NULL:
-                      results[test_archive_name]['db'] = Status.PASS
                   except Exception:
-                    results[test_archive_name]['db'] = Status.FAIL
+                    log(f'Failed to extract \"{src_db_filepath}\"')
+                    traceback.print_exc()
+                    result += 1
 
                   break
 
             if 'log' in modes:
               for platform_id in _platform_ids:
-                src_filepath = f'{test_archive_name}/{test_archive_name}{platform_id}.log'
+                src_log_filepath = f'{name}/{name}{platform_id}.log'
+                if src_log_filepath in test_strm.getnames():
+                  dst_log_filepath = dst_dirpath / f'{name}{platform_id}.log'
 
-                if src_filepath in test_archive_strm.getnames():
-                  dst_filepath = os.path.join(dst_dirpath, f'{test_archive_name}{platform_id}.log')
+                  log(f'{src_log_filepath} => {dst_log_filepath}')
 
                   try:
-                    src_strm = test_archive_strm.extractfile(src_filepath)
+                    src_log_strm = test_strm.extractfile(src_log_filepath)
 
-                    with open(dst_filepath, 'wb') as dst_strm:
-                      dst_strm.write(src_strm.read())
-                      dst_strm.flush()
+                    with dst_log_filepath.open('wb') as dst_log_strm:
+                      dst_log_strm.write(src_log_strm.read())
+                      dst_log_strm.flush()
 
-                    if results[test_archive_name]['log'] == Status.NULL:
-                      results[test_archive_name]['log'] = Status.PASS
-                  except Exception:
-                    results[test_archive_name]['log'] = Status.FAIL
+                    # On Windows, fixup the line endings
+                    if is_windows():
+                      with dst_log_filepath.open() as istrm:
+                        lines = istrm.readlines()
+                      with dst_log_filepath.open('wt') as ostrm:
+                        ostrm.writelines(lines)
+                        ostrm.flush()
 
-  return results
+                  except KeyError:
+                    log(f'Failed to extract \"{src_log_filepath}\"')
+                    traceback.print_exc()
+                    result += 1
+
+  return result
+
+
+def _extract(args, tests):
+  if not tests:
+    return 0  # No selected tests
+
+  if not args.zip_filepath:
+    raise "Missing required archive path"
+
+  if not args.zip_filepath.is_file():
+    raise "Input archive path is invalid"
+
+  archive_name = args.zip_filepath.name
+  pos = str(archive_name).find('.')
+  if pos >= 0:
+    archive_name = str(archive_name)[:pos]
+
+  manager = multiprocessing.Manager()
+  queue = manager.Queue()
+  for name, filepath in tests.items():
+    queue.put((name, filepath))
+
+  if args.jobs <= 1:
+    results = [_extract_worker((args.zip_filepath, archive_name, args.modes, args.output_dirpath, queue))]
+  else:
+    with multiprocessing.Pool(processes=args.jobs) as pool:
+      results = pool.map(
+        _extract_worker,
+        [(args.zip_filepath, archive_name, args.modes, args.output_dirpath, queue)] * args.jobs
+      )
+
+  return sum(results)
 
 
 def _main():
@@ -156,43 +180,33 @@ def _main():
   print(f'Starting CI artifact extraction @ {str(start_dt)}')
 
   parser = argparse.ArgumentParser()
-  parser.add_argument('modes', nargs='+', choices=['db', 'log'], type=str, help='Pick what to extract from available choices')
+  parser.add_argument('modes', nargs='+', choices=['db', 'log'], type=str, help='Pick what to extract')
   parser.add_argument(
       '--output-dirpath', dest='output_dirpath', required=False, type=str,
-      help='Output directory path to extract to.')
+      help='Output directory path to extract to. If provided, all files are extracted with input directory as root.')
   parser.add_argument(
       '--filters', nargs='+', required=False, default=[], type=str, help='Filter tests matching these regex inputs')
   parser.add_argument(
       '--jobs', nargs='?', required=False, default=multiprocessing.cpu_count(), type=int,
       help='Run tests in parallel, optionally providing max number of concurrent processes. Set 0 to run sequentially.')
   parser.add_argument(
-      '--zip-filepath', dest='zip_filepath', required=False, type=str, help='Path to zipfile to extract logs from.')
+      '--zip-filepath', dest='zip_filepath', required=True, type=str, help='Path to zipfile to extract logs from.')
   args = parser.parse_args()
 
   args.modes = sorted(set(args.modes))
+  args.zip_filepath = Path(args.zip_filepath).resolve()
 
-  if not args.output_dirpath:
-    args.output_dirpath = os.path.dirname(args.zip_filepath)
-  args.output_dirpath = os.path.abspath(args.output_dirpath)
+  if args.output_dirpath:
+    args.output_dirpath = Path(args.output_dirpath).resolve()
+    mkdir(args.output_dirpath)
 
-  if args.filters:
-    filters = set()
-    for filter in args.filters:
-      if filter.startswith('@'):
-        with open(filter[1:], 'rt') as strm:
-          for line in strm:
-            line = line.strip()
-            if line:
-              filters.add(line)
-      else:
-        filters.add(filter)
-    args.filters = filters
-
-  args.filters = [text if text.isalnum() else re.compile(text, re.IGNORECASE) for text in args.filters]
+  args.filters = build_filters(args.filters)
+  tests = _scan(_default_test_dirpaths, args.filters)
 
   if (args.jobs == None) or (args.jobs > multiprocessing.cpu_count()):
     args.jobs = multiprocessing.cpu_count()
-
+  if args.jobs > len(tests):
+    args.jobs = len(tests)
 
   print( 'Environment:')
   print(f'   command-line: {" ".join(sys.argv)}')
@@ -201,28 +215,18 @@ def _main():
   print(f' output-dirpath: {args.output_dirpath}')
   print(f'        filters: {args.filters}')
   print(f'           jobs: {args.jobs}')
-  print( '\n\n')
+  print(f'          tests: {len(tests)}')
+  print( '')
 
-  _mkdir(args.output_dirpath)
-  results = _extract_worker(args.zip_filepath, args.output_dirpath, args.modes, args.filters)
-
-  def _test_failed(v: dict):
-    return sum(0 if s == Status.PASS else 1 for s in v.values()) != 0
-
-  # results = {k: v for result in results for k, v in result.items()}
-  failures = {k: v for k, v in results.items() if _test_failed(v)}
+  print(f'Extracting {args.zip_filepath} ...')
+  result = _extract(args, tests)
 
   end_dt = datetime.now()
   delta = round((end_dt - start_dt).total_seconds())
 
-  if failures:
-    print(f'Following {len(failures)} failed:')
-    pprint.pprint(sorted(failures.keys()))
-
-  print('')
-  print(f'Completed CI artifact extraction @ {str(end_dt)} in {str(delta)} seconds')
-
-  return -1 if failures else 0
+  print( '')
+  print(f'Extraction completed @ {str(end_dt)} in {str(delta)} seconds, with {result} failures.')
+  return result
 
 
 if __name__ == '__main__':

@@ -291,11 +291,12 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitTypespec                                            1
-Constant                                              36
+Constant                                              41
 ContAssign                                             6
 Design                                                 1
 Identifier                                             1
-IntTypespec                                           35
+IntTypespec                                           40
+IntegerTypespec                                        5
 LogicTypespec                                         12
 Module                                                 1
 ModuleTypespec                                         1
@@ -304,10 +305,10 @@ Operation                                             12
 Port                                                   6
 Range                                                 12
 RefObj                                                 6
-RefTypespec                                           48
+RefTypespec                                           58
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                               185
+Total:                                               210
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ContAssignConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -333,9 +334,66 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@static_size_casting (work@static_size_casting), file:${SURELOG_DIR}/tests/ContAssignConst/dut.sv, line:10:1, endln:29:32
   |vpiTypespec:
+  \_IntegerTypespec: , line:21:17, endln:21:18
+    |vpiParent:
+    \_Module: work@static_size_casting (work@static_size_casting), file:${SURELOG_DIR}/tests/ContAssignConst/dut.sv, line:10:1, endln:29:32
+    |vpiValue:
+    \_Constant: , line:21:17, endln:21:18
+      |vpiParent:
+      \_IntegerTypespec: , line:21:17, endln:21:18
+      |vpiTypespec:
+      \_RefTypespec: (work@static_size_casting), line:21:17, endln:21:18
+        |vpiParent:
+        \_Constant: , line:21:17, endln:21:18
+        |vpiFullName:work@static_size_casting
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:6
+      |vpiSize:1
+      |vpiDecompile:1'd8
+      |vpiValue:8
+  |vpiTypespec:
+  \_IntegerTypespec: , line:26:17, endln:26:19
+    |vpiParent:
+    \_Module: work@static_size_casting (work@static_size_casting), file:${SURELOG_DIR}/tests/ContAssignConst/dut.sv, line:10:1, endln:29:32
+    |vpiValue:
+    \_Constant: , line:26:17, endln:26:19
+      |vpiParent:
+      \_IntegerTypespec: , line:26:17, endln:26:19
+      |vpiTypespec:
+      \_RefTypespec: (work@static_size_casting), line:26:17, endln:26:19
+        |vpiParent:
+        \_Constant: , line:26:17, endln:26:19
+        |vpiFullName:work@static_size_casting
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:6
+      |vpiSize:2
+      |vpiDecompile:2'd16
+      |vpiValue:16
+  |vpiTypespec:
   \_BitTypespec: 
     |vpiParent:
     \_Module: work@static_size_casting (work@static_size_casting), file:${SURELOG_DIR}/tests/ContAssignConst/dut.sv, line:10:1, endln:29:32
+  |vpiTypespec:
+  \_IntegerTypespec: , line:27:20, endln:27:21
+    |vpiParent:
+    \_Module: work@static_size_casting (work@static_size_casting), file:${SURELOG_DIR}/tests/ContAssignConst/dut.sv, line:10:1, endln:29:32
+    |vpiValue:
+    \_Constant: , line:27:20, endln:27:21
+      |vpiParent:
+      \_IntegerTypespec: , line:27:20, endln:27:21
+      |vpiTypespec:
+      \_RefTypespec: (work@static_size_casting), line:27:20, endln:27:21
+        |vpiParent:
+        \_Constant: , line:27:20, endln:27:21
+        |vpiFullName:work@static_size_casting
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:6
+      |vpiSize:1
+      |vpiDecompile:1'd2
+      |vpiValue:2
   |vpiTypespec:
   \_LogicTypespec: , line:11:13, endln:11:17
     |vpiParent:
@@ -358,7 +416,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:7
-        |UINT:7
+        |vpiValue:7
       |vpiRightRange:
       \_Constant: , line:11:22, endln:11:23
         |vpiParent:
@@ -373,7 +431,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_LogicTypespec: , line:13:13, endln:13:17
     |vpiParent:
@@ -396,7 +454,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:15
-        |UINT:15
+        |vpiValue:15
       |vpiRightRange:
       \_Constant: , line:13:22, endln:13:23
         |vpiParent:
@@ -411,11 +469,17 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
+  \_IntegerTypespec: , line:21:17, endln:21:18
+  |vpiImportTypespec:
+  \_IntegerTypespec: , line:26:17, endln:26:19
+  |vpiImportTypespec:
   \_BitTypespec: 
+  |vpiImportTypespec:
+  \_IntegerTypespec: , line:27:20, endln:27:21
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:13, endln:11:17
   |vpiImportTypespec:
@@ -626,7 +690,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiOperand:
       \_Constant: , line:20:22, endln:20:24
         |vpiParent:
@@ -641,7 +705,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:15
-        |UINT:15
+        |vpiValue:15
   |vpiContAssign:
   \_ContAssign: , line:21:10, endln:21:28
     |vpiParent:
@@ -658,6 +722,13 @@ Design: (unnamed)
     \_Operation: , line:21:17, endln:21:28
       |vpiParent:
       \_ContAssign: , line:21:10, endln:21:28
+      |vpiTypespec:
+      \_RefTypespec: (work@static_size_casting), line:21:17, endln:21:18
+        |vpiParent:
+        \_Operation: , line:21:17, endln:21:28
+        |vpiFullName:work@static_size_casting
+        |vpiActual:
+        \_IntegerTypespec: , line:21:17, endln:21:18
       |vpiOpType:67
       |vpiOperand:
       \_Operation: , line:21:20, endln:21:27
@@ -678,7 +749,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiOperand:
         \_Constant: , line:21:25, endln:21:27
           |vpiParent:
@@ -693,7 +764,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:15
-          |UINT:15
+          |vpiValue:15
   |vpiContAssign:
   \_ContAssign: , line:24:10, endln:24:24
     |vpiParent:
@@ -725,7 +796,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiOperand:
       \_Constant: , line:24:22, endln:24:24
         |vpiParent:
@@ -740,7 +811,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:15
-        |UINT:15
+        |vpiValue:15
   |vpiContAssign:
   \_ContAssign: , line:25:10, endln:25:28
     |vpiParent:
@@ -757,6 +828,13 @@ Design: (unnamed)
     \_Operation: , line:25:17, endln:25:28
       |vpiParent:
       \_ContAssign: , line:25:10, endln:25:28
+      |vpiTypespec:
+      \_RefTypespec: (work@static_size_casting), line:25:17, endln:25:18
+        |vpiParent:
+        \_Operation: , line:25:17, endln:25:28
+        |vpiFullName:work@static_size_casting
+        |vpiActual:
+        \_IntegerTypespec: , line:21:17, endln:21:18
       |vpiOpType:67
       |vpiOperand:
       \_Operation: , line:25:20, endln:25:27
@@ -777,7 +855,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiOperand:
         \_Constant: , line:25:25, endln:25:27
           |vpiParent:
@@ -792,7 +870,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:15
-          |UINT:15
+          |vpiValue:15
   |vpiContAssign:
   \_ContAssign: , line:26:10, endln:26:33
     |vpiParent:
@@ -809,11 +887,25 @@ Design: (unnamed)
     \_Operation: , line:26:17, endln:26:33
       |vpiParent:
       \_ContAssign: , line:26:10, endln:26:33
+      |vpiTypespec:
+      \_RefTypespec: (work@static_size_casting), line:26:17, endln:26:19
+        |vpiParent:
+        \_Operation: , line:26:17, endln:26:33
+        |vpiFullName:work@static_size_casting
+        |vpiActual:
+        \_IntegerTypespec: , line:26:17, endln:26:19
       |vpiOpType:67
       |vpiOperand:
       \_Operation: , line:26:21, endln:26:32
         |vpiParent:
         \_Operation: , line:26:17, endln:26:33
+        |vpiTypespec:
+        \_RefTypespec: (work@static_size_casting), line:26:21, endln:26:22
+          |vpiParent:
+          \_Operation: , line:26:21, endln:26:32
+          |vpiFullName:work@static_size_casting
+          |vpiActual:
+          \_IntegerTypespec: , line:21:17, endln:21:18
         |vpiOpType:67
         |vpiOperand:
         \_Operation: , line:26:24, endln:26:31
@@ -834,7 +926,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:1
-            |UINT:1
+            |vpiValue:1
           |vpiOperand:
           \_Constant: , line:26:29, endln:26:31
             |vpiParent:
@@ -849,7 +941,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:15
-            |UINT:15
+            |vpiValue:15
   |vpiContAssign:
   \_ContAssign: , line:27:10, endln:27:30
     |vpiParent:
@@ -881,7 +973,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:8
-        |UINT:8
+        |vpiValue:8
       |vpiOperand:
       \_Operation: , line:27:19, endln:27:29
         |vpiParent:
@@ -891,6 +983,13 @@ Design: (unnamed)
         \_Operation: , line:27:20, endln:27:28
           |vpiParent:
           \_Operation: , line:27:19, endln:27:29
+          |vpiTypespec:
+          \_RefTypespec: (work@static_size_casting), line:27:20, endln:27:21
+            |vpiParent:
+            \_Operation: , line:27:20, endln:27:28
+            |vpiFullName:work@static_size_casting
+            |vpiActual:
+            \_IntegerTypespec: , line:27:20, endln:27:21
           |vpiOpType:67
           |vpiOperand:
           \_Constant: , line:27:23, endln:27:27
@@ -906,7 +1005,7 @@ Design: (unnamed)
             |vpiConstType:3
             |vpiSize:1
             |vpiDecompile:1'b1
-            |BIN:1
+            |vpiValue:1
   |vpiEndLabel:static_size_casting
 |vpiTypespec:
 \_ModuleTypespec: (work@static_size_casting)

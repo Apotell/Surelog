@@ -287,13 +287,13 @@ PP TREE: (top_level_rule null_rule (source_text (description (module module)) (d
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Attribute                                              2
-Constant                                              14
+Constant                                              15
 Design                                                 1
 EnumConst                                              8
 EnumTypespec                                           2
 IODecl                                                 4
 Identifier                                            14
-IntTypespec                                           14
+IntTypespec                                           15
 Interface                                              2
 InterfaceTypespec                                      2
 LogicTypespec                                          4
@@ -307,17 +307,17 @@ Parameter                                              1
 Port                                                   4
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           31
+RefTypespec                                           32
 SourceFile                                             1
 TypedefTypespec                                        3
 UnsupportedTypespec                                   11
 Variable                                               3
 ------------------------------------------------------------
-Total:                                               148
+Total:                                               151
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortTest/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:129, type:RefTypespec, name:id_t1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:123, type:RefTypespec, name:DD.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:132, type:RefTypespec, name:id_t1.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:126, type:RefTypespec, name:DD.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -399,7 +399,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -457,7 +457,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:12:33, endln:12:34
         |vpiParent:
@@ -472,7 +472,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_UnsupportedTypespec: (id_t1), line:14:3, endln:14:8
     |vpiParent:
@@ -690,7 +690,21 @@ Design: (unnamed)
       |vpiParent:
       \_Net: (work@dff0_test.n1), line:1:18, endln:1:20
       |vpiName:init
-      |DEC:1
+      |vpiValue:
+      \_Constant: , line:2:13, endln:2:18
+        |vpiParent:
+        \_Attribute: (init), line:2:6, endln:2:18
+        |vpiTypespec:
+        \_RefTypespec: (work@dff0_test.n1.init), line:2:13, endln:2:18
+          |vpiParent:
+          \_Constant: , line:2:13, endln:2:18
+          |vpiFullName:work@dff0_test.n1.init
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:1
+        |vpiSize:32
+        |vpiDecompile:32'd1
+        |vpiValue:1
     |vpiName:n1
     |vpiFullName:work@dff0_test.n1
     |vpiNetType:48
@@ -710,6 +724,21 @@ Design: (unnamed)
     |vpiName:n1
     |vpiFullName:work@dff0_test.n1
     |vpiNetType:48
+    |vpiValue:
+    \_Constant: , line:4:12, endln:4:17
+      |vpiParent:
+      \_Net: (work@dff0_test.n1), line:4:7, endln:4:9
+      |vpiTypespec:
+      \_RefTypespec: (work@dff0_test.n1), line:4:12, endln:4:17
+        |vpiParent:
+        \_Constant: , line:4:12, endln:4:17
+        |vpiFullName:work@dff0_test.n1
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:1
+      |vpiSize:32
+      |vpiDecompile:32'd0
+      |vpiValue:0
   |vpiDefName:work@dff0_test
   |vpiNet:
   \_Net: (work@dff0_test.n1), line:1:18, endln:1:20
@@ -752,10 +781,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl1.IDLE
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:0
-        |INT:0
+        |vpiValue:0
     |vpiEnumConst:
     \_EnumConst: (WRITE), line:38:21, endln:38:26
       |vpiParent:
@@ -772,10 +801,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl1.WRITE
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:1
-        |INT:1
+        |vpiValue:1
     |vpiEnumConst:
     \_EnumConst: (READ), line:38:27, endln:38:31
       |vpiParent:
@@ -792,10 +821,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl1.READ
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:2
-        |INT:2
+        |vpiValue:2
     |vpiEnumConst:
     \_EnumConst: (DONE), line:38:32, endln:38:36
       |vpiParent:
@@ -812,10 +841,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl1.DONE
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:3
-        |INT:3
+        |vpiValue:3
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -919,10 +948,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl2.IDLE
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:0
-        |INT:0
+        |vpiValue:0
     |vpiEnumConst:
     \_EnumConst: (WRITE), line:47:21, endln:47:26
       |vpiParent:
@@ -939,10 +968,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl2.WRITE
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:1
-        |INT:1
+        |vpiValue:1
     |vpiEnumConst:
     \_EnumConst: (READ), line:47:27, endln:47:31
       |vpiParent:
@@ -959,10 +988,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl2.READ
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:2
-        |INT:2
+        |vpiValue:2
     |vpiEnumConst:
     \_EnumConst: (DONE), line:47:32, endln:47:36
       |vpiParent:
@@ -979,10 +1008,10 @@ Design: (unnamed)
           |vpiFullName:work@memory_ctrl2.DONE
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:6
+        |vpiConstType:7
         |vpiSize:64
         |vpiDecompile:3
-        |INT:3
+        |vpiValue:3
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:

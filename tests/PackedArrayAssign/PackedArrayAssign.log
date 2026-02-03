@@ -124,27 +124,27 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
 BitSelect                                              1
-Constant                                               7
+Constant                                               9
 ContAssign                                             1
 Design                                                 1
 Identifier                                             2
-IntTypespec                                            7
+IntTypespec                                            9
 LogicTypespec                                          3
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
-Operation                                              1
+Operation                                              2
 Port                                                   1
 Range                                                  2
 RefObj                                                 1
-RefTypespec                                           13
+RefTypespec                                           15
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                51
+Total:                                                58
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -220,7 +220,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:9
-        |UINT:9
+        |vpiValue:9
       |vpiRightRange:
       \_Constant: , line:3:16, endln:3:17
         |vpiParent:
@@ -235,7 +235,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -266,7 +266,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:6:20, endln:6:21
         |vpiParent:
@@ -281,7 +281,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@top.filter_ctl_t), line:6:4, endln:6:16
       |vpiParent:
@@ -337,6 +337,41 @@ Design: (unnamed)
       \_ArrayTypespec: , line:6:4, endln:6:22
     |vpiName:a
     |vpiFullName:work@top.a
+    |vpiValue:
+    \_Operation: , line:6:27, endln:6:43
+      |vpiParent:
+      \_Net: (work@top.a), line:6:23, endln:6:24
+      |vpiOpType:75
+      |vpiOperand:
+      \_Constant: , line:6:29, endln:6:35
+        |vpiParent:
+        \_Operation: , line:6:27, endln:6:43
+        |vpiTypespec:
+        \_RefTypespec: (work@top.a), line:6:29, endln:6:35
+          |vpiParent:
+          \_Constant: , line:6:29, endln:6:35
+          |vpiFullName:work@top.a
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:1
+        |vpiSize:10
+        |vpiDecompile:10'd15
+        |vpiValue:15
+      |vpiOperand:
+      \_Constant: , line:6:37, endln:6:42
+        |vpiParent:
+        \_Operation: , line:6:27, endln:6:43
+        |vpiTypespec:
+        \_RefTypespec: (work@top.a), line:6:37, endln:6:42
+          |vpiParent:
+          \_Constant: , line:6:37, endln:6:42
+          |vpiFullName:work@top.a
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:1
+        |vpiSize:10
+        |vpiDecompile:10'd0
+        |vpiValue:0
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.o), line:1:31, endln:1:32
@@ -389,7 +424,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

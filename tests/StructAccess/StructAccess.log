@@ -251,19 +251,19 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-BitSelect                                              2
+BitSelect                                              5
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              18
+Constant                                              21
 ContAssign                                             2
 Design                                                 1
 EnumConst                                              6
 EnumTypespec                                           2
 Function                                               9
-HierPath                                               3
+HierPath                                               6
 IODecl                                                11
 Identifier                                            32
-IntTypespec                                           24
+IntTypespec                                           27
 LogicTypespec                                          9
 Module                                                 2
 ModuleTypespec                                         1
@@ -271,8 +271,8 @@ Net                                                    7
 Operation                                              1
 Package                                                1
 Range                                                  2
-RefObj                                                 9
-RefTypespec                                           46
+RefObj                                                14
+RefTypespec                                           49
 SourceFile                                             1
 StructTypespec                                         2
 Task                                                   9
@@ -280,7 +280,7 @@ TypedefTypespec                                        4
 TypespecMember                                         3
 UnsupportedTypespec                                    7
 ------------------------------------------------------------
-Total:                                               231
+Total:                                               251
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructAccess/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -405,7 +405,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -738,10 +738,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::FINISHED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:0
-          |INT:0
+          |vpiValue:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
@@ -758,10 +758,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::RUNNING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:1
-          |INT:1
+          |vpiValue:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
@@ -778,10 +778,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::WAITING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:2
-          |INT:2
+          |vpiValue:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
@@ -798,10 +798,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::SUSPENDED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:3
-          |INT:3
+          |vpiValue:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
@@ -818,10 +818,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::KILLED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:4
-          |INT:4
+          |vpiValue:4
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -927,7 +927,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -980,7 +980,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -1033,7 +1033,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -1093,7 +1093,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1257,10 +1257,10 @@ Design: (unnamed)
           |vpiFullName:work@top.PMP_MODE_OFF
           |vpiActual:
           \_LogicTypespec: 
-        |vpiConstType:1
+        |vpiConstType:3
         |vpiSize:2
         |vpiDecompile:2'b00
-        |BIN:00
+        |vpiValue:00
   |vpiTypespec:
   \_LogicTypespec: , line:3:15, endln:3:20
     |vpiParent:
@@ -1283,7 +1283,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:3:24, endln:3:25
         |vpiParent:
@@ -1298,7 +1298,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -1435,7 +1435,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:4
-          |UINT:4
+          |vpiValue:4
     |vpiElemTypespec:
     \_RefTypespec: (work@top.pmp_cfg_t), line:16:2, endln:16:11
       |vpiParent:
@@ -1521,6 +1521,29 @@ Design: (unnamed)
     |vpiName:t
     |vpiFullName:work@top.t
     |vpiNetType:36
+    |vpiValue:
+    \_BitSelect: (work@top.t.enum_test), line:22:21, endln:22:24
+      |vpiParent:
+      \_Net: (work@top.t), line:22:8, endln:22:9
+      |vpiName:enum_test
+      |vpiFullName:work@top.t.enum_test
+      |vpiActual:
+      \_Net: (work@top.enum_test), line:18:15, endln:18:24
+      |vpiIndex:
+      \_Constant: , line:22:22, endln:22:23
+        |vpiParent:
+        \_BitSelect: (work@top.t.enum_test), line:22:21, endln:22:24
+        |vpiTypespec:
+        \_RefTypespec: (work@top.t.enum_test), line:22:22, endln:22:23
+          |vpiParent:
+          \_Constant: , line:22:22, endln:22:23
+          |vpiFullName:work@top.t.enum_test
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_Net: (work@top.first), line:24:15, endln:24:20
     |vpiParent:
@@ -1535,6 +1558,42 @@ Design: (unnamed)
       \_TypedefTypespec: (pmp_cfg_enum), line:5:4, endln:5:16
     |vpiName:first
     |vpiFullName:work@top.first
+    |vpiValue:
+    \_HierPath: (csr_pmp_cfg_i[0].mode), line:24:23, endln:24:44
+      |vpiParent:
+      \_Net: (work@top.first), line:24:15, endln:24:20
+      |vpiName:csr_pmp_cfg_i[0].mode
+      |vpiActual:
+      \_BitSelect: (csr_pmp_cfg_i[0]), line:24:23, endln:24:36
+        |vpiParent:
+        \_HierPath: (csr_pmp_cfg_i[0].mode), line:24:23, endln:24:44
+        |vpiName:csr_pmp_cfg_i
+        |vpiFullName:csr_pmp_cfg_i[0]
+        |vpiActual:
+        \_Net: (work@top.csr_pmp_cfg_i), line:16:17, endln:16:30
+        |vpiIndex:
+        \_Constant: , line:24:37, endln:24:38
+          |vpiParent:
+          \_BitSelect: (csr_pmp_cfg_i[0]), line:24:23, endln:24:36
+          |vpiTypespec:
+          \_RefTypespec: (work@top.first.csr_pmp_cfg_i[0].mode.csr_pmp_cfg_i), line:24:37, endln:24:38
+            |vpiParent:
+            \_Constant: , line:24:37, endln:24:38
+            |vpiFullName:work@top.first.csr_pmp_cfg_i[0].mode.csr_pmp_cfg_i
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+      |vpiActual:
+      \_RefObj: (work@top.first.mode), line:24:40, endln:24:44
+        |vpiParent:
+        \_HierPath: (csr_pmp_cfg_i[0].mode), line:24:23, endln:24:44
+        |vpiName:mode
+        |vpiFullName:work@top.first.mode
+        |vpiActual:
+        \_TypespecMember: (mode), line:12:17, endln:12:21
   |vpiImportTypespec:
   \_Net: (work@top.second), line:25:8, endln:25:14
     |vpiParent:
@@ -1549,6 +1608,41 @@ Design: (unnamed)
     |vpiName:second
     |vpiFullName:work@top.second
     |vpiNetType:36
+    |vpiValue:
+    \_HierPath: (csr_pmp_cfg_ie.mode[0]), line:25:17, endln:25:39
+      |vpiParent:
+      \_Net: (work@top.second), line:25:8, endln:25:14
+      |vpiName:csr_pmp_cfg_ie.mode[0]
+      |vpiActual:
+      \_RefObj: (csr_pmp_cfg_ie), line:25:17, endln:25:31
+        |vpiParent:
+        \_HierPath: (csr_pmp_cfg_ie.mode[0]), line:25:17, endln:25:39
+        |vpiName:csr_pmp_cfg_ie
+        |vpiActual:
+        \_Net: (work@top.csr_pmp_cfg_ie), line:17:17, endln:17:31
+      |vpiActual:
+      \_BitSelect: (work@top.second.csr_pmp_cfg_ie.mode[0].mode), line:25:36, endln:25:39
+        |vpiParent:
+        \_HierPath: (csr_pmp_cfg_ie.mode[0]), line:25:17, endln:25:39
+        |vpiName:mode
+        |vpiFullName:work@top.second.csr_pmp_cfg_ie.mode[0].mode
+        |vpiActual:
+        \_TypespecMember: (mode), line:12:17, endln:12:21
+        |vpiIndex:
+        \_Constant: , line:25:37, endln:25:38
+          |vpiParent:
+          \_BitSelect: (work@top.second.csr_pmp_cfg_ie.mode[0].mode), line:25:36, endln:25:39
+          |vpiTypespec:
+          \_RefTypespec: (work@top.second.csr_pmp_cfg_ie.mode[0].mode), line:25:37, endln:25:38
+            |vpiParent:
+            \_Constant: , line:25:37, endln:25:38
+            |vpiFullName:work@top.second.csr_pmp_cfg_ie.mode[0].mode
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
   |vpiImportTypespec:
   \_Net: (work@top.third), line:26:8, endln:26:13
     |vpiParent:
@@ -1563,6 +1657,33 @@ Design: (unnamed)
     |vpiName:third
     |vpiFullName:work@top.third
     |vpiNetType:36
+    |vpiValue:
+    \_HierPath: (csr_pmp_cfg_ie.struct_var.a), line:26:16, endln:26:43
+      |vpiParent:
+      \_Net: (work@top.third), line:26:8, endln:26:13
+      |vpiName:csr_pmp_cfg_ie.struct_var.a
+      |vpiActual:
+      \_RefObj: (csr_pmp_cfg_ie), line:26:16, endln:26:30
+        |vpiParent:
+        \_HierPath: (csr_pmp_cfg_ie.struct_var.a), line:26:16, endln:26:43
+        |vpiName:csr_pmp_cfg_ie
+        |vpiActual:
+        \_Net: (work@top.csr_pmp_cfg_ie), line:17:17, endln:17:31
+      |vpiActual:
+      \_RefObj: (struct_var), line:26:31, endln:26:41
+        |vpiParent:
+        \_HierPath: (csr_pmp_cfg_ie.struct_var.a), line:26:16, endln:26:43
+        |vpiName:struct_var
+        |vpiActual:
+        \_TypespecMember: (struct_var), line:13:19, endln:13:29
+      |vpiActual:
+      \_RefObj: (work@top.third.a), line:26:42, endln:26:43
+        |vpiParent:
+        \_HierPath: (csr_pmp_cfg_ie.struct_var.a), line:26:16, endln:26:43
+        |vpiName:a
+        |vpiFullName:work@top.third.a
+        |vpiActual:
+        \_TypespecMember: (a), line:8:10, endln:8:11
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.csr_pmp_cfg_i), line:16:17, endln:16:30

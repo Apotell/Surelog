@@ -325,14 +325,14 @@ Begin                                                  2
 BitTypespec                                            1
 ClassDefn                                              1
 ClassTypespec                                          1
-Constant                                               7
+Constant                                               8
 Design                                                 1
 ForkStmt                                               4
 FuncCall                                               3
 Identifier                                            22
 IfStmt                                                 1
 Initial                                                3
-IntTypespec                                            3
+IntTypespec                                            4
 Interface                                              4
 InterfaceTypespec                                      4
 LogicTypespec                                          1
@@ -342,13 +342,13 @@ Net                                                    1
 Operation                                              1
 Package                                                1
 RefObj                                                 2
-RefTypespec                                            9
+RefTypespec                                           10
 SourceFile                                             1
 StringTypespec                                         4
 SysFuncCall                                            1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                96
+Total:                                                99
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BadLabel/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -486,7 +486,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
     |vpiEndLabel:name1
   |vpiTypespec:
   \_IntTypespec: 
@@ -514,6 +514,21 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@block_tb.a
     |vpiNetType:48
+    |vpiValue:
+    \_Constant: , line:61:10, endln:61:11
+      |vpiParent:
+      \_Net: (work@block_tb.a), line:61:6, endln:61:7
+      |vpiTypespec:
+      \_RefTypespec: (work@block_tb.a), line:61:10, endln:61:11
+        |vpiParent:
+        \_Constant: , line:61:10, endln:61:11
+        |vpiFullName:work@block_tb.a
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
   |vpiDefName:work@block_tb
   |vpiNet:
   \_Net: (work@block_tb.a), line:61:6, endln:61:7
@@ -559,9 +574,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-      |vpiSize:64
+      |vpiSize:1
       |vpiDecompile:0
-      |UINT:0
+      |vpiValue:0
   |vpiInternalScope:
   \_Module: work@test::sub (work@test::sub), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:34:4, endln:35:19
     |vpiParent:
@@ -677,7 +692,7 @@ Design: (unnamed)
             |vpiConstType:6
             |vpiSize:48
             |vpiDecompile:"PASSED"
-            |STRING:PASSED
+            |vpiValue:PASSED
       |vpiEndLabel:dummy_label_bad
   |vpiProcess:
   \_Initial: , line:40:1, endln:54:6
@@ -720,7 +735,7 @@ Design: (unnamed)
               \_StringTypespec: 
             |vpiConstType:6
             |vpiDecompile:""
-            |STRING:
+            |vpiValue:
         |vpiEndLabel:n2
       |vpiInternalScope:
       \_ForkStmt: (work@test), line:46:4, endln:48:13
@@ -749,7 +764,7 @@ Design: (unnamed)
               \_StringTypespec: 
             |vpiConstType:6
             |vpiDecompile:""
-            |STRING:
+            |vpiValue:
         |vpiEndLabel:n2
       |vpiInternalScope:
       \_ForkStmt: (work@test.n1), line:50:3, endln:52:7
@@ -783,7 +798,7 @@ Design: (unnamed)
               \_StringTypespec: 
             |vpiConstType:6
             |vpiDecompile:""
-            |STRING:
+            |vpiValue:
       |vpiTypespec:
       \_StringTypespec: 
         |vpiParent:

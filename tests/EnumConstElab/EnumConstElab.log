@@ -343,7 +343,7 @@ Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           2
 Identifier                                             7
-IntTypespec                                           15
+IntTypespec                                           16
 LogicTypespec                                         13
 Module                                                 5
 ModuleTypespec                                         3
@@ -353,7 +353,7 @@ Parameter                                              3
 Range                                                  7
 RefModule                                              2
 RefObj                                                 3
-RefTypespec                                           41
+RefTypespec                                           42
 SourceFile                                             1
 StringTypespec                                         4
 StructTypespec                                         2
@@ -363,9 +363,10 @@ TypespecMember                                         4
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               158
+Total:                                               160
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstElab/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/EnumConstElab/dut.sv:3:12: Invalid Name id:30, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -403,6 +404,14 @@ Design: (unnamed)
     \_Operation: , line:3:12, endln:3:24
       |vpiParent:
       \_Variable: (work@prim_subreg.a), line:3:8, endln:3:9
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_subreg.a.int), line:3:12, endln:3:15
+        |vpiParent:
+        \_Operation: , line:3:12, endln:3:24
+        |vpiName:int
+        |vpiFullName:work@prim_subreg.a.int
+        |vpiActual:
+        \_IntTypespec: , line:3:4, endln:3:7
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@prim_subreg.a.RESVAL), line:3:17, endln:3:23
@@ -445,7 +454,7 @@ Design: (unnamed)
       |vpiConstType:3
       |vpiSize:-1
       |vpiDecompile:'0
-      |BIN:0
+      |vpiValue:0
   |vpiTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
     |vpiParent:
@@ -468,7 +477,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:4
-        |UINT:4
+        |vpiValue:4
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
         |vpiParent:
@@ -483,7 +492,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -580,7 +589,7 @@ Design: (unnamed)
           |vpiConstType:3
           |vpiSize:-1
           |vpiDecompile:'1
-          |BIN:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (work@prim_subreg_shadow.b), line:18:7, endln:18:8
           |vpiParent:
@@ -656,7 +665,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:2
-        |UINT:2
+        |vpiValue:2
       |vpiRightRange:
       \_Constant: , line:8:16, endln:8:17
         |vpiParent:
@@ -671,7 +680,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -698,7 +707,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:9:16, endln:9:17
         |vpiParent:
@@ -713,7 +722,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_EnumTypespec: , line:12:12, endln:14:12
     |vpiParent:
@@ -741,10 +750,10 @@ Design: (unnamed)
           |vpiFullName:work@prim_subreg_shadow.ENUM_ITEM
           |vpiActual:
           \_LogicTypespec: 
-        |vpiConstType:1
+        |vpiConstType:3
         |vpiSize:3
         |vpiDecompile:3'b000
-        |BIN:000
+        |vpiValue:000
   |vpiTypespec:
   \_LogicTypespec: 
     |vpiParent:
@@ -881,7 +890,7 @@ Design: (unnamed)
           |vpiConstType:3
           |vpiSize:-1
           |vpiDecompile:'0
-          |BIN:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (work@top.b), line:38:7, endln:38:8
           |vpiParent:
@@ -957,7 +966,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:28:16, endln:28:17
         |vpiParent:
@@ -972,7 +981,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -999,7 +1008,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:2
-        |UINT:2
+        |vpiValue:2
       |vpiRightRange:
       \_Constant: , line:29:16, endln:29:17
         |vpiParent:
@@ -1014,7 +1023,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_EnumTypespec: , line:32:12, endln:34:12
     |vpiParent:
@@ -1042,10 +1051,10 @@ Design: (unnamed)
           |vpiFullName:work@top.ENUM_ITEM
           |vpiActual:
           \_LogicTypespec: 
-        |vpiConstType:1
+        |vpiConstType:3
         |vpiSize:2
         |vpiDecompile:2'b11
-        |BIN:11
+        |vpiValue:11
   |vpiTypespec:
   \_LogicTypespec: 
     |vpiParent:
@@ -1124,6 +1133,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0

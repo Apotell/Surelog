@@ -189,7 +189,7 @@ Design                                                 1
 FuncCall                                               1
 GenIf                                                  1
 Identifier                                             3
-IntTypespec                                            7
+IntTypespec                                            8
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
@@ -197,13 +197,14 @@ ParamAssign                                            2
 Parameter                                              2
 Port                                                   1
 RefObj                                                 2
-RefTypespec                                            7
+RefTypespec                                            8
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                38
+Total:                                                40
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncBindGen/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/FuncBindGen/dut.sv:11:18: Invalid Name id:33, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -284,7 +285,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:500
-      |UINT:500
+      |vpiValue:500
   |vpiParamAssign:
   \_ParamAssign: , line:3:28, endln:3:41
     |vpiParent:
@@ -305,7 +306,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:3
-      |UINT:3
+      |vpiValue:3
   |vpiInternalScope:
   \_Begin: (work@top.gen_block), line:5:19, endln:12:7
     |vpiParent:
@@ -316,6 +317,13 @@ Design: (unnamed)
       \_Begin: (work@top.gen_block), line:5:19, endln:12:7
       |vpiName:gen_block
     |vpiFullName:work@top.gen_block
+    |vpiTypespec:
+    \_IntTypespec: , line:11:18, endln:11:21
+      |vpiParent:
+      \_Begin: (work@top.gen_block), line:5:19, endln:12:7
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_IntTypespec: , line:11:18, endln:11:21
     |vpiStmt:
     \_ContAssign: , line:11:14, endln:11:42
       |vpiParent:
@@ -332,6 +340,14 @@ Design: (unnamed)
       \_Operation: , line:11:18, endln:11:42
         |vpiParent:
         \_ContAssign: , line:11:14, endln:11:42
+        |vpiTypespec:
+        \_RefTypespec: (work@top.gen_block.int), line:11:18, endln:11:21
+          |vpiParent:
+          \_Operation: , line:11:18, endln:11:42
+          |vpiName:int
+          |vpiFullName:work@top.gen_block.int
+          |vpiActual:
+          \_IntTypespec: , line:11:18, endln:11:21
         |vpiOpType:67
         |vpiOperand:
         \_FuncCall: (get_casted_param), line:11:23, endln:11:41
@@ -408,7 +424,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:2
-        |UINT:2
+        |vpiValue:2
     |vpiStmt:
     \_Begin: (work@top.gen_block), line:5:19, endln:12:7
 |vpiTypespec:
@@ -421,6 +437,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

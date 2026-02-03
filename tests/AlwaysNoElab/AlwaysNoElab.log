@@ -182,17 +182,18 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
 RefObj                                                 5
-RefTypespec                                           33
+RefTypespec                                           34
 SourceFile                                             1
 SysFuncCall                                            1
 Task                                                   9
 TypedefTypespec                                        1
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               188
+Total:                                               190
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AlwaysNoElab/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/AlwaysNoElab/dut.sv:9:22: Unsupported Typespec: id:36, type:RefTypespec, name:NumBitsDeviceSel.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -315,7 +316,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -648,10 +649,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::FINISHED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:0
-          |INT:0
+          |vpiValue:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
@@ -668,10 +669,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::RUNNING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:1
-          |INT:1
+          |vpiValue:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
@@ -688,10 +689,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::WAITING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:2
-          |INT:2
+          |vpiValue:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
@@ -708,10 +709,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::SUSPENDED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:3
-          |INT:3
+          |vpiValue:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
@@ -728,10 +729,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::KILLED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:4
-          |INT:4
+          |vpiValue:4
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -837,7 +838,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -890,7 +891,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -943,7 +944,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -1003,7 +1004,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1167,9 +1168,9 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: 
       |vpiConstType:9
-      |vpiSize:64
+      |vpiSize:32
       |vpiDecompile:2
-      |UINT:2
+      |vpiValue:2
   |vpiParameter:
   \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:30
     |vpiParent:
@@ -1217,7 +1218,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:1
-      |UINT:1
+      |vpiValue:1
   |vpiParamAssign:
   \_ParamAssign: , line:5:27, endln:5:83
     |vpiParent:
@@ -1256,7 +1257,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiOperand:
       \_SysFuncCall: ($clog2), line:5:62, endln:5:79
         |vpiParent:
@@ -1288,7 +1289,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
   |vpiTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
     |vpiParent:
@@ -1337,7 +1338,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:6:29, endln:6:30
         |vpiParent:
@@ -1352,7 +1353,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
   |vpiImportTypespec:
@@ -1389,6 +1390,13 @@ Design: (unnamed)
       |vpiParent:
       \_Always: , line:8:3, endln:10:6
       |vpiFullName:work@dut
+      |vpiTypespec:
+      \_UnsupportedTypespec: (NumBitsDeviceSel), line:9:22, endln:9:38
+        |vpiParent:
+        \_Begin: (work@dut), line:8:15, endln:10:6
+        |vpiName:NumBitsDeviceSel
+      |vpiImportTypespec:
+      \_UnsupportedTypespec: (NumBitsDeviceSel), line:9:22, endln:9:38
       |vpiStmt:
       \_Assignment: , line:9:5, endln:9:47
         |vpiParent:
@@ -1407,6 +1415,14 @@ Design: (unnamed)
         \_Operation: , line:9:22, endln:9:47
           |vpiParent:
           \_Assignment: , line:9:5, endln:9:47
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.NumBitsDeviceSel), line:9:22, endln:9:38
+            |vpiParent:
+            \_Operation: , line:9:22, endln:9:47
+            |vpiName:NumBitsDeviceSel
+            |vpiFullName:work@dut.NumBitsDeviceSel
+            |vpiActual:
+            \_UnsupportedTypespec: (NumBitsDeviceSel), line:9:22, endln:9:38
           |vpiOpType:67
           |vpiOperand:
           \_RefObj: (work@dut.device), line:9:40, endln:9:46
@@ -1427,6 +1443,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

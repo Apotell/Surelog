@@ -155,10 +155,10 @@ AST_DEBUG_END
 Always                                                 1
 Assignment                                             2
 Begin                                                  1
-BitTypespec                                            1
+BitTypespec                                            3
 CaseItem                                               2
 CaseStmt                                               1
-Constant                                               5
+Constant                                               7
 Design                                                 1
 HierPath                                               1
 Identifier                                             2
@@ -167,17 +167,20 @@ IntTypespec                                            8
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
+Operation                                              1
 Port                                                   1
 RefObj                                                 3
-RefTypespec                                           11
+RefTypespec                                           15
 SourceFile                                             1
+StringTypespec                                         2
 StructTypespec                                         1
+TaggedPattern                                          2
 TypedefTypespec                                        1
 TypespecMember                                         2
 UnsupportedTypespec                                    1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                51
+Total:                                                64
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstExpand/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -263,6 +266,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+  |vpiTypespec:
+  \_StringTypespec: , line:7:43, endln:7:52
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
   |vpiImportTypespec:
   \_TypedefTypespec: (mac_bignum_operation_t), line:5:6, endln:5:28
   |vpiImportTypespec:
@@ -285,6 +296,68 @@ Design: (unnamed)
       \_TypedefTypespec: (mac_bignum_operation_t), line:5:6, endln:5:28
     |vpiName:operation_i
     |vpiFullName:work@top.operation_i
+    |vpiValue:
+    \_Operation: , line:7:41, endln:7:70
+      |vpiParent:
+      \_Net: (work@top.operation_i), line:7:27, endln:7:38
+      |vpiOpType:75
+      |vpiOperand:
+      \_TaggedPattern: , line:7:43, endln:7:56
+        |vpiParent:
+        \_Operation: , line:7:41, endln:7:70
+        |vpiPattern:
+        \_Constant: , line:7:54, endln:7:56
+          |vpiParent:
+          \_TaggedPattern: , line:7:43, endln:7:56
+          |vpiTypespec:
+          \_RefTypespec: (work@top.operation_i), line:7:54, endln:7:56
+            |vpiParent:
+            \_Constant: , line:7:54, endln:7:56
+            |vpiFullName:work@top.operation_i
+            |vpiActual:
+            \_BitTypespec: 
+          |vpiConstType:3
+          |vpiSize:-1
+          |vpiDecompile:'1
+          |vpiValue:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top.operation_i.operand_a), line:7:43, endln:7:52
+          |vpiParent:
+          \_TaggedPattern: , line:7:43, endln:7:56
+          |vpiName:operand_a
+          |vpiFullName:work@top.operation_i.operand_a
+          |vpiActual:
+          \_StringTypespec: , line:7:43, endln:7:52
+      |vpiOperand:
+      \_TaggedPattern: , line:7:58, endln:7:69
+        |vpiParent:
+        \_Operation: , line:7:41, endln:7:70
+        |vpiPattern:
+        \_Constant: , line:7:67, endln:7:69
+          |vpiParent:
+          \_TaggedPattern: , line:7:58, endln:7:69
+          |vpiTypespec:
+          \_RefTypespec: (work@top.operation_i), line:7:67, endln:7:69
+            |vpiParent:
+            \_Constant: , line:7:67, endln:7:69
+            |vpiFullName:work@top.operation_i
+            |vpiActual:
+            \_BitTypespec: 
+          |vpiConstType:3
+          |vpiSize:-1
+          |vpiDecompile:'0
+          |vpiValue:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.operation_i), line:7:58, endln:7:65
+          |vpiParent:
+          \_TaggedPattern: , line:7:58, endln:7:69
+          |vpiFullName:work@top.operation_i
+          |vpiActual:
+          \_StringTypespec: , line:7:43, endln:7:52
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: , line:7:43, endln:7:52
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.operation_i), line:7:27, endln:7:38
@@ -342,7 +415,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiCaseItem:
         \_CaseItem: , line:11:10, endln:11:46
           |vpiParent:
@@ -361,7 +434,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:0
-            |UINT:0
+            |vpiValue:0
           |vpiStmt:
           \_Assignment: , line:11:13, endln:11:45
             |vpiParent:
@@ -412,7 +485,7 @@ Design: (unnamed)
                   |vpiConstType:9
                   |vpiSize:64
                   |vpiDecompile:0
-                  |UINT:0
+                  |vpiValue:0
                 |vpiWidthExpr:
                 \_Constant: , line:11:42, endln:11:44
                   |vpiParent:
@@ -427,7 +500,7 @@ Design: (unnamed)
                   |vpiConstType:9
                   |vpiSize:64
                   |vpiDecompile:32
-                  |UINT:32
+                  |vpiValue:32
         |vpiCaseItem:
         \_CaseItem: , line:12:10, endln:12:26
           |vpiParent:
@@ -460,7 +533,7 @@ Design: (unnamed)
               |vpiConstType:3
               |vpiSize:-1
               |vpiDecompile:'0
-              |BIN:0
+              |vpiValue:0
     |vpiAlwaysType:2
 |vpiTypespec:
 \_ModuleTypespec: (work@top)

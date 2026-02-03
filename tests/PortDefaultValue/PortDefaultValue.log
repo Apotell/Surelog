@@ -64,10 +64,10 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PortDefaultValue/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               5
+Constant                                               6
 Design                                                 1
 Identifier                                             2
-IntTypespec                                            5
+IntTypespec                                            6
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -75,10 +75,10 @@ Net                                                    1
 Port                                                   1
 Range                                                  2
 RefModule                                              1
-RefTypespec                                            7
+RefTypespec                                            8
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                32
+Total:                                                35
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PortDefaultValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -121,7 +121,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:7
-        |UINT:7
+        |vpiValue:7
       |vpiRightRange:
       \_Constant: , line:7:10, endln:7:11
         |vpiParent:
@@ -136,7 +136,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -158,6 +158,21 @@ Design: (unnamed)
       \_LogicTypespec: , line:7:7, endln:7:12
     |vpiName:datain
     |vpiFullName:work@bus_conn.datain
+    |vpiValue:
+    \_Constant: , line:7:22, endln:7:27
+      |vpiParent:
+      \_Net: (work@bus_conn.datain), line:7:13, endln:7:19
+      |vpiTypespec:
+      \_RefTypespec: (work@bus_conn.datain), line:7:22, endln:7:27
+        |vpiParent:
+        \_Constant: , line:7:22, endln:7:27
+        |vpiFullName:work@bus_conn.datain
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:5
+      |vpiSize:8
+      |vpiDecompile:8'hFF
+      |vpiValue:FF
   |vpiDefName:work@bus_conn
   |vpiNet:
   \_Net: (work@bus_conn.datain), line:7:13, endln:7:19
@@ -181,7 +196,7 @@ Design: (unnamed)
       |vpiConstType:5
       |vpiSize:8
       |vpiDecompile:8'hFF
-      |HEX:FF
+      |vpiValue:FF
     |vpiTypespec:
     \_RefTypespec: (work@bus_conn.datain), line:7:7, endln:7:12
       |vpiParent:

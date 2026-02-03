@@ -216,15 +216,15 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/HierMultiSelect/dut.sv:1:1: Compile module "work@dm_csrs".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-BitSelect                                              3
+BitSelect                                              4
 ByteTypespec                                           1
-Constant                                              13
+Constant                                              16
 ContAssign                                             4
 Design                                                 1
-HierPath                                               7
+HierPath                                               8
 Identifier                                             2
-IndexedPartSelect                                      3
-IntTypespec                                           13
+IndexedPartSelect                                      4
+IntTypespec                                           16
 LogicTypespec                                          1
 MethodFuncCall                                         1
 Module                                                 1
@@ -232,12 +232,12 @@ ModuleTypespec                                         1
 Net                                                    1
 Operation                                              5
 RefObj                                                11
-RefTypespec                                           15
+RefTypespec                                           18
 SourceFile                                             1
 VarSelect                                              1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                86
+Total:                                                98
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierMultiSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -326,6 +326,74 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@dm_csrs.c
     |vpiNetType:36
+    |vpiValue:
+    \_HierPath: (a[0].source[6-:2]), line:6:13, endln:6:31
+      |vpiParent:
+      \_Net: (work@dm_csrs.c), line:6:9, endln:6:10
+      |vpiName:a[0].source[6-:2]
+      |vpiActual:
+      \_BitSelect: (a[0]), line:6:13, endln:6:14
+        |vpiParent:
+        \_HierPath: (a[0].source[6-:2]), line:6:13, endln:6:31
+        |vpiName:a
+        |vpiFullName:a[0]
+        |vpiActual:
+        \_Net: (work@dm_csrs.a), line:6:13, endln:6:14
+        |vpiIndex:
+        \_Constant: , line:6:15, endln:6:16
+          |vpiParent:
+          \_BitSelect: (a[0]), line:6:13, endln:6:14
+          |vpiTypespec:
+          \_RefTypespec: (work@dm_csrs.c.a[0].source[6-:2].a), line:6:15, endln:6:16
+            |vpiParent:
+            \_Constant: , line:6:15, endln:6:16
+            |vpiFullName:work@dm_csrs.c.a[0].source[6-:2].a
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+      |vpiActual:
+      \_IndexedPartSelect: (a[0].source[6-:2]), line:6:18, endln:6:31
+        |vpiParent:
+        \_HierPath: (a[0].source[6-:2]), line:6:13, endln:6:31
+        |vpiName:source
+        |vpiFullName:a[0].source[6-:2]
+        |vpiActual:
+        \_Net: (work@dm_csrs.source), line:6:18, endln:6:31
+        |vpiConstantSelect:1
+        |vpiIndexedPartSelectType:2
+        |vpiBaseExpr:
+        \_Constant: , line:6:25, endln:6:26
+          |vpiParent:
+          \_IndexedPartSelect: (a[0].source[6-:2]), line:6:18, endln:6:31
+          |vpiTypespec:
+          \_RefTypespec: (work@dm_csrs.c.a[0].source[6-:2].source), line:6:25, endln:6:26
+            |vpiParent:
+            \_Constant: , line:6:25, endln:6:26
+            |vpiFullName:work@dm_csrs.c.a[0].source[6-:2].source
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:6
+          |vpiValue:6
+        |vpiWidthExpr:
+        \_Constant: , line:6:30, endln:6:31
+          |vpiParent:
+          \_IndexedPartSelect: (a[0].source[6-:2]), line:6:18, endln:6:31
+          |vpiTypespec:
+          \_RefTypespec: (work@dm_csrs.c.a[0].source[6-:2].source), line:6:30, endln:6:31
+            |vpiParent:
+            \_Constant: , line:6:30, endln:6:31
+            |vpiFullName:work@dm_csrs.c.a[0].source[6-:2].source
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |vpiValue:2
   |vpiImportTypespec:
   \_ByteTypespec: , line:7:3, endln:7:7
   |vpiImportTypespec:
@@ -408,6 +476,20 @@ Design: (unnamed)
     |vpiFullName:work@dm_csrs.nonce
     |vpiNetType:1
   |vpiImportTypespec:
+  \_Net: (work@dm_csrs.a), line:6:13, endln:6:14
+    |vpiParent:
+    \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:a
+    |vpiFullName:work@dm_csrs.a
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@dm_csrs.source), line:6:18, endln:6:31
+    |vpiParent:
+    \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:source
+    |vpiFullName:work@dm_csrs.source
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_Net: (work@dm_csrs.b), line:7:12, endln:7:13
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
@@ -439,6 +521,10 @@ Design: (unnamed)
   \_Net: (work@dm_csrs.sram_otp_key_o), line:5:10, endln:5:24
   |vpiNet:
   \_Net: (work@dm_csrs.nonce), line:5:30, endln:5:35
+  |vpiNet:
+  \_Net: (work@dm_csrs.a), line:6:13, endln:6:14
+  |vpiNet:
+  \_Net: (work@dm_csrs.source), line:6:18, endln:6:31
   |vpiNet:
   \_Net: (work@dm_csrs.b), line:7:12, endln:7:13
   |vpiContAssign:
@@ -518,7 +604,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:8
-          |UINT:8
+          |vpiValue:8
         |vpiOperand:
         \_RefObj: (work@dm_csrs.kmac_mask_o.i), line:3:24, endln:3:25
           |vpiParent:
@@ -541,7 +627,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:8
-        |UINT:8
+        |vpiValue:8
     |vpiRhs:
     \_Operation: , line:3:32, endln:3:58
       |vpiParent:
@@ -561,7 +647,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:8
-        |UINT:8
+        |vpiValue:8
       |vpiOperand:
       \_Operation: , line:3:34, endln:3:57
         |vpiParent:
@@ -641,7 +727,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiIndex:
         \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
           |vpiParent:
@@ -672,7 +758,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:1
-              |UINT:1
+              |vpiValue:1
             |vpiOperand:
             \_Constant: , line:4:38, endln:4:40
               |vpiParent:
@@ -687,7 +773,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:32
-              |UINT:32
+              |vpiValue:32
           |vpiWidthExpr:
           \_Constant: , line:4:44, endln:4:46
             |vpiParent:
@@ -702,7 +788,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:32
-            |UINT:32
+            |vpiValue:32
   |vpiContAssign:
   \_ContAssign: , line:5:10, endln:5:39
     |vpiParent:
@@ -739,7 +825,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:2
-            |UINT:2
+            |vpiValue:2
           |vpiOperand:
           \_Constant: , line:5:27, endln:5:28
             |vpiParent:
@@ -754,7 +840,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:2
-            |UINT:2
+            |vpiValue:2
       |vpiActual:
       \_RefObj: (sram_otp_key_o[2 - 2].nonce), line:5:30, endln:5:35
         |vpiParent:
@@ -777,7 +863,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:1
-      |UINT:1
+      |vpiValue:1
 |vpiTypespec:
 \_ModuleTypespec: (work@dm_csrs)
   |vpiParent:

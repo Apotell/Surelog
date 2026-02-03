@@ -118,7 +118,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              17
+Constant                                              19
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -126,7 +126,8 @@ Function                                               9
 IODecl                                                11
 Identifier                                            32
 ImportTypespec                                         1
-IntTypespec                                           25
+IntTypespec                                           27
+IntegerTypespec                                        2
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
@@ -135,7 +136,7 @@ Package                                                2
 ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
-RefTypespec                                           40
+RefTypespec                                           44
 SourceFile                                             1
 StringTypespec                                         5
 StructTypespec                                         1
@@ -145,7 +146,7 @@ TypedefTypespec                                        2
 TypespecMember                                         1
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                               201
+Total:                                               211
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LargeHexCast/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -270,7 +271,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -603,10 +604,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::FINISHED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:0
-          |INT:0
+          |vpiValue:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
@@ -623,10 +624,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::RUNNING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:1
-          |INT:1
+          |vpiValue:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
@@ -643,10 +644,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::WAITING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:2
-          |INT:2
+          |vpiValue:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
@@ -663,10 +664,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::SUSPENDED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:3
-          |INT:3
+          |vpiValue:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
@@ -683,10 +684,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::KILLED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:4
-          |INT:4
+          |vpiValue:4
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -792,7 +793,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -845,7 +846,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -898,7 +899,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -958,7 +959,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1142,6 +1143,13 @@ Design: (unnamed)
         \_Operation: , line:7:15, endln:7:53
           |vpiParent:
           \_TaggedPattern: , line:7:7, endln:7:53
+          |vpiTypespec:
+          \_RefTypespec: (kmac_pkg), line:7:15, endln:7:17
+            |vpiParent:
+            \_Operation: , line:7:15, endln:7:53
+            |vpiFullName:kmac_pkg
+            |vpiActual:
+            \_IntegerTypespec: , line:7:15, endln:7:17
           |vpiOpType:67
           |vpiOperand:
           \_Constant: , line:7:19, endln:7:52
@@ -1157,7 +1165,7 @@ Design: (unnamed)
             |vpiConstType:5
             |vpiSize:96
             |vpiDecompile:96'h4c5254435f4d4f5240010001
-            |HEX:4c5254435f4d4f5240010001
+            |vpiValue:4c5254435f4d4f5240010001
         |vpiTypespec:
         \_RefTypespec: (kmac_pkg::Prefix), line:7:7, endln:7:13
           |vpiParent:
@@ -1195,7 +1203,7 @@ Design: (unnamed)
           |vpiConstType:5
           |vpiSize:96
           |vpiDecompile:96'h4c5254435f4d4f5240010001
-          |HEX:4c5254435f4d4f5240010001
+          |vpiValue:4c5254435f4d4f5240010001
         |vpiTypespec:
         \_RefTypespec: (kmac_pkg::Prefix), line:11:7, endln:11:13
           |vpiParent:
@@ -1259,7 +1267,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:95
-        |UINT:95
+        |vpiValue:95
       |vpiRightRange:
       \_Constant: , line:3:17, endln:3:18
         |vpiParent:
@@ -1274,11 +1282,30 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  |vpiTypespec:
+  \_IntegerTypespec: , line:7:15, endln:7:17
+    |vpiParent:
+    \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+    |vpiValue:
+    \_Constant: , line:7:15, endln:7:17
+      |vpiParent:
+      \_IntegerTypespec: , line:7:15, endln:7:17
+      |vpiTypespec:
+      \_RefTypespec: (kmac_pkg), line:7:15, endln:7:17
+        |vpiParent:
+        \_Constant: , line:7:15, endln:7:17
+        |vpiFullName:kmac_pkg
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:6
+      |vpiSize:2
+      |vpiDecompile:2'd96
+      |vpiValue:96
   |vpiTypespec:
   \_StringTypespec: , line:7:7, endln:7:13
     |vpiParent:
@@ -1291,6 +1318,8 @@ Design: (unnamed)
   \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
   \_IntTypespec: 
+  |vpiImportTypespec:
+  \_IntegerTypespec: , line:7:15, endln:7:17
   |vpiImportTypespec:
   \_StringTypespec: , line:7:7, endln:7:13
   |vpiDefName:kmac_pkg
@@ -1324,10 +1353,10 @@ Design: (unnamed)
         |vpiFullName:work@kmac_entropy.kmac_pkg
         |vpiActual:
         \_StringTypespec: 
-      |vpiConstType:8
+      |vpiConstType:6
       |vpiSize:8
       |vpiDecompile:*
-      |STRING:*
+      |vpiValue:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:

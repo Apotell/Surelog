@@ -193,7 +193,7 @@ ContAssign                                             1
 Design                                                 1
 Identifier                                             5
 ImportTypespec                                         1
-IntTypespec                                            5
+IntTypespec                                            6
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -205,7 +205,7 @@ Parameter                                              1
 Port                                                   5
 RefModule                                              1
 RefObj                                                 4
-RefTypespec                                           21
+RefTypespec                                           22
 SourceFile                                             1
 StringTypespec                                         5
 StructTypespec                                         1
@@ -215,9 +215,10 @@ TypespecMember                                         2
 UnsupportedTypespec                                    3
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                88
+Total:                                                90
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamTypespec2/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:18:15: Invalid Name id:62, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -279,7 +280,7 @@ Design: (unnamed)
           |vpiConstType:3
           |vpiSize:1
           |vpiDecompile:1'b0
-          |BIN:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (prim_esc_pkg::esc_p), line:7:41, endln:7:46
           |vpiParent:
@@ -306,7 +307,7 @@ Design: (unnamed)
           |vpiConstType:3
           |vpiSize:1
           |vpiDecompile:1'b1
-          |BIN:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (prim_esc_pkg::esc_n), line:8:41, endln:8:46
           |vpiParent:
@@ -403,7 +404,7 @@ Design: (unnamed)
       \_Variable: (work@nmi_gen.x), line:16:15, endln:16:16
       |vpiFullName:work@nmi_gen.x
       |vpiActual:
-      \_IntTypespec: , line:16:11, endln:16:14
+      \_IntTypespec: , line:18:15, endln:18:18
     |vpiName:x
     |vpiFullName:work@nmi_gen.x
     |vpiRandType:1
@@ -428,16 +429,16 @@ Design: (unnamed)
         |vpiFullName:work@nmi_gen.prim_esc_pkg
         |vpiActual:
         \_StringTypespec: 
-      |vpiConstType:8
+      |vpiConstType:6
       |vpiSize:8
       |vpiDecompile:*
-      |STRING:*
+      |vpiValue:*
   |vpiTypespec:
   \_StringTypespec: 
     |vpiParent:
     \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
   |vpiTypespec:
-  \_IntTypespec: , line:16:11, endln:16:14
+  \_IntTypespec: , line:18:15, endln:18:18
     |vpiParent:
     \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
     |vpiSigned:1
@@ -445,6 +446,8 @@ Design: (unnamed)
   \_ImportTypespec: (prim_esc_pkg), line:13:11, endln:13:26
   |vpiImportTypespec:
   \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: , line:18:15, endln:18:18
   |vpiImportTypespec:
   \_Net: (work@nmi_gen.a), line:15:25, endln:15:26
     |vpiParent:
@@ -459,8 +462,6 @@ Design: (unnamed)
       \_TypedefTypespec: (prim_esc_pkg::esc_tx_t), line:5:5, endln:5:13
     |vpiName:a
     |vpiFullName:work@nmi_gen.a
-  |vpiImportTypespec:
-  \_IntTypespec: , line:16:11, endln:16:14
   |vpiImportTypespec:
   \_Variable: (work@nmi_gen.x), line:16:15, endln:16:16
   |vpiDefName:work@nmi_gen
@@ -492,7 +493,7 @@ Design: (unnamed)
       \_Port: (x), line:16:15, endln:16:16
       |vpiFullName:work@nmi_gen.x
       |vpiActual:
-      \_IntTypespec: , line:16:11, endln:16:14
+      \_IntTypespec: , line:18:15, endln:18:18
   |vpiContAssign:
   \_ContAssign: , line:18:11, endln:18:22
     |vpiParent:
@@ -509,6 +510,14 @@ Design: (unnamed)
     \_Operation: , line:18:15, endln:18:22
       |vpiParent:
       \_ContAssign: , line:18:11, endln:18:22
+      |vpiTypespec:
+      \_RefTypespec: (work@nmi_gen.int), line:18:15, endln:18:18
+        |vpiParent:
+        \_Operation: , line:18:15, endln:18:22
+        |vpiName:int
+        |vpiFullName:work@nmi_gen.int
+        |vpiActual:
+        \_IntTypespec: , line:18:15, endln:18:18
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@nmi_gen.a), line:18:20, endln:18:21
@@ -610,7 +619,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:3
-          |UINT:3
+          |vpiValue:3
         |vpiOperand:
         \_Operation: , line:23:12, endln:23:42
           |vpiParent:
@@ -648,6 +657,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0

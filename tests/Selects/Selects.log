@@ -150,26 +150,26 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          2
-BitSelect                                              2
-Constant                                               6
+BitSelect                                              4
+Constant                                               8
 Design                                                 1
-HierPath                                               2
+HierPath                                               4
 Identifier                                             3
-IntTypespec                                            6
+IntTypespec                                            8
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    4
 Range                                                  2
-RefObj                                                 3
-RefTypespec                                           16
+RefObj                                                 6
+RefTypespec                                           18
 SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         2
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                62
+Total:                                                75
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Selects/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -286,7 +286,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
       |vpiRightRange:
       \_Constant: , line:8:43, endln:8:44
         |vpiParent:
@@ -301,7 +301,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@t.rstmgr_reg2hw_sw_rst_ctrl_n_mreg_t), line:8:5, endln:8:39
       |vpiParent:
@@ -333,7 +333,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
       |vpiRightRange:
       \_Constant: , line:12:41, endln:12:42
         |vpiParent:
@@ -348,7 +348,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@t.rstmgr_reg2hw_sw_rst_ctrl_n_mreg_t), line:12:3, endln:12:37
       |vpiParent:
@@ -415,6 +415,49 @@ Design: (unnamed)
     |vpiName:X
     |vpiFullName:work@t.X
     |vpiNetType:36
+    |vpiValue:
+    \_HierPath: (reg2hw.sw_rst_ctrl_n[0].q), line:14:13, endln:14:38
+      |vpiParent:
+      \_Net: (work@t.X), line:14:9, endln:14:10
+      |vpiName:reg2hw.sw_rst_ctrl_n[0].q
+      |vpiActual:
+      \_RefObj: (reg2hw), line:14:13, endln:14:19
+        |vpiParent:
+        \_HierPath: (reg2hw.sw_rst_ctrl_n[0].q), line:14:13, endln:14:38
+        |vpiName:reg2hw
+        |vpiActual:
+        \_Net: (work@t.reg2hw), line:11:19, endln:11:25
+      |vpiActual:
+      \_BitSelect: (reg2hw.sw_rst_ctrl_n[0]), line:14:20, endln:14:33
+        |vpiParent:
+        \_HierPath: (reg2hw.sw_rst_ctrl_n[0].q), line:14:13, endln:14:38
+        |vpiName:reg2hw.sw_rst_ctrl_n
+        |vpiFullName:reg2hw.sw_rst_ctrl_n[0]
+        |vpiActual:
+        \_TypespecMember: (sw_rst_ctrl_n), line:8:46, endln:8:59
+        |vpiIndex:
+        \_Constant: , line:14:34, endln:14:35
+          |vpiParent:
+          \_BitSelect: (reg2hw.sw_rst_ctrl_n[0]), line:14:20, endln:14:33
+          |vpiTypespec:
+          \_RefTypespec: (work@t.X.reg2hw.sw_rst_ctrl_n[0].q.reg2hw.sw_rst_ctrl_n), line:14:34, endln:14:35
+            |vpiParent:
+            \_Constant: , line:14:34, endln:14:35
+            |vpiFullName:work@t.X.reg2hw.sw_rst_ctrl_n[0].q.reg2hw.sw_rst_ctrl_n
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+      |vpiActual:
+      \_RefObj: (work@t.X.q), line:14:37, endln:14:38
+        |vpiParent:
+        \_HierPath: (reg2hw.sw_rst_ctrl_n[0].q), line:14:13, endln:14:38
+        |vpiName:q
+        |vpiFullName:work@t.X.q
+        |vpiActual:
+        \_TypespecMember: (q), line:4:18, endln:4:19
   |vpiImportTypespec:
   \_Net: (work@t.Y), line:15:9, endln:15:10
     |vpiParent:
@@ -429,6 +472,42 @@ Design: (unnamed)
     |vpiName:Y
     |vpiFullName:work@t.Y
     |vpiNetType:36
+    |vpiValue:
+    \_HierPath: (sw_rst_ctrl_n[0].q), line:15:13, endln:15:31
+      |vpiParent:
+      \_Net: (work@t.Y), line:15:9, endln:15:10
+      |vpiName:sw_rst_ctrl_n[0].q
+      |vpiActual:
+      \_BitSelect: (sw_rst_ctrl_n[0]), line:15:13, endln:15:26
+        |vpiParent:
+        \_HierPath: (sw_rst_ctrl_n[0].q), line:15:13, endln:15:31
+        |vpiName:sw_rst_ctrl_n
+        |vpiFullName:sw_rst_ctrl_n[0]
+        |vpiActual:
+        \_Net: (work@t.sw_rst_ctrl_n), line:12:44, endln:12:57
+        |vpiIndex:
+        \_Constant: , line:15:27, endln:15:28
+          |vpiParent:
+          \_BitSelect: (sw_rst_ctrl_n[0]), line:15:13, endln:15:26
+          |vpiTypespec:
+          \_RefTypespec: (work@t.Y.sw_rst_ctrl_n[0].q.sw_rst_ctrl_n), line:15:27, endln:15:28
+            |vpiParent:
+            \_Constant: , line:15:27, endln:15:28
+            |vpiFullName:work@t.Y.sw_rst_ctrl_n[0].q.sw_rst_ctrl_n
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+      |vpiActual:
+      \_RefObj: (work@t.Y.q), line:15:30, endln:15:31
+        |vpiParent:
+        \_HierPath: (sw_rst_ctrl_n[0].q), line:15:13, endln:15:31
+        |vpiName:q
+        |vpiFullName:work@t.Y.q
+        |vpiActual:
+        \_TypespecMember: (q), line:4:18, endln:4:19
   |vpiDefName:work@t
   |vpiNet:
   \_Net: (work@t.reg2hw), line:11:19, endln:11:25

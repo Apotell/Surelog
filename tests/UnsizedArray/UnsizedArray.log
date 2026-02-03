@@ -50,19 +50,19 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
 ByteTypespec                                           1
-Constant                                               5
+Constant                                               8
 Design                                                 1
 Identifier                                             1
-IntTypespec                                            4
+IntTypespec                                            7
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    1
-Operation                                              1
+Operation                                              2
 Range                                                  1
-RefTypespec                                            7
+RefTypespec                                           10
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                27
+Total:                                                37
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -123,6 +123,56 @@ Design: (unnamed)
       \_ArrayTypespec: , line:2:10, endln:2:24
     |vpiName:b
     |vpiFullName:work@top.b
+    |vpiValue:
+    \_Operation: , line:2:15, endln:2:24
+      |vpiParent:
+      \_Net: (work@top.b), line:2:9, endln:2:10
+      |vpiOpType:33
+      |vpiOperand:
+      \_Constant: , line:2:16, endln:2:17
+        |vpiParent:
+        \_Operation: , line:2:15, endln:2:24
+        |vpiTypespec:
+        \_RefTypespec: (work@top.b), line:2:16, endln:2:17
+          |vpiParent:
+          \_Constant: , line:2:16, endln:2:17
+          |vpiFullName:work@top.b
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
+      |vpiOperand:
+      \_Constant: , line:2:19, endln:2:20
+        |vpiParent:
+        \_Operation: , line:2:15, endln:2:24
+        |vpiTypespec:
+        \_RefTypespec: (work@top.b), line:2:19, endln:2:20
+          |vpiParent:
+          \_Constant: , line:2:19, endln:2:20
+          |vpiFullName:work@top.b
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
+      |vpiOperand:
+      \_Constant: , line:2:22, endln:2:23
+        |vpiParent:
+        \_Operation: , line:2:15, endln:2:24
+        |vpiTypespec:
+        \_RefTypespec: (work@top.b), line:2:22, endln:2:23
+          |vpiParent:
+          \_Constant: , line:2:22, endln:2:23
+          |vpiFullName:work@top.b
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.b), line:2:9, endln:2:10

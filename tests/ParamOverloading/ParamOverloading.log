@@ -317,7 +317,7 @@ BitTypespec                                            3
 Constant                                              15
 Design                                                 1
 Identifier                                             5
-IntTypespec                                           13
+IntTypespec                                           14
 LogicTypespec                                          5
 Module                                                 3
 ModuleTypespec                                         3
@@ -327,7 +327,7 @@ Parameter                                              5
 Range                                                  5
 RefModule                                              2
 RefObj                                                 3
-RefTypespec                                           27
+RefTypespec                                           28
 SourceFile                                             1
 StringTypespec                                         2
 StructTypespec                                         2
@@ -337,9 +337,10 @@ TypespecMember                                         4
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               114
+Total:                                               116
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverloading/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/ParamOverloading/dut.sv:4:12: Invalid Name id:30, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -377,6 +378,14 @@ Design: (unnamed)
     \_Operation: , line:4:12, endln:4:24
       |vpiParent:
       \_Variable: (work@prim_subreg.a), line:4:8, endln:4:9
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_subreg.a.int), line:4:12, endln:4:15
+        |vpiParent:
+        \_Operation: , line:4:12, endln:4:24
+        |vpiName:int
+        |vpiFullName:work@prim_subreg.a.int
+        |vpiActual:
+        \_IntTypespec: , line:4:4, endln:4:7
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@prim_subreg.a.RESVAL), line:4:17, endln:4:23
@@ -419,7 +428,7 @@ Design: (unnamed)
       |vpiConstType:3
       |vpiSize:-1
       |vpiDecompile:'0
-      |BIN:0
+      |vpiValue:0
   |vpiTypespec:
   \_LogicTypespec: , line:3:14, endln:3:19
     |vpiParent:
@@ -442,7 +451,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:4
-        |UINT:4
+        |vpiValue:4
       |vpiRightRange:
       \_Constant: , line:3:23, endln:3:24
         |vpiParent:
@@ -457,7 +466,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -534,7 +543,7 @@ Design: (unnamed)
           |vpiConstType:3
           |vpiSize:-1
           |vpiDecompile:'0
-          |BIN:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (work@prim_subreg_shadow.a), line:14:7, endln:14:8
           |vpiParent:
@@ -561,7 +570,7 @@ Design: (unnamed)
           |vpiConstType:3
           |vpiSize:-1
           |vpiDecompile:'1
-          |BIN:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (work@prim_subreg_shadow.b), line:15:7, endln:15:8
           |vpiParent:
@@ -637,7 +646,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:2
-        |UINT:2
+        |vpiValue:2
       |vpiRightRange:
       \_Constant: , line:9:16, endln:9:17
         |vpiParent:
@@ -652,7 +661,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -679,7 +688,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:10:16, endln:10:17
         |vpiParent:
@@ -694,7 +703,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_BitTypespec: 
     |vpiParent:
@@ -788,7 +797,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:1
-      |UINT:1
+      |vpiValue:1
   |vpiParamAssign:
   \_ParamAssign: , line:30:14, endln:30:20
     |vpiParent:
@@ -809,7 +818,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:0
-      |UINT:0
+      |vpiValue:0
   |vpiParamAssign:
   \_ParamAssign: , line:32:24, endln:36:5
     |vpiParent:
@@ -904,7 +913,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:26:16, endln:26:17
         |vpiParent:
@@ -919,7 +928,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -946,7 +955,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:2
-        |UINT:2
+        |vpiValue:2
       |vpiRightRange:
       \_Constant: , line:27:16, endln:27:17
         |vpiParent:
@@ -961,7 +970,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_ModuleTypespec: (work@prim_subreg_shadow)
     |vpiParent:
@@ -1002,6 +1011,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0

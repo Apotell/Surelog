@@ -180,22 +180,22 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ComplexVarSelect/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-BitSelect                                              1
-Constant                                              18
+BitSelect                                              2
+Constant                                              26
 Design                                                 1
 Identifier                                             1
-IntTypespec                                           17
-LogicTypespec                                          5
+IntTypespec                                           24
+LogicTypespec                                          6
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    4
-PartSelect                                             3
+PartSelect                                             6
 Range                                                  5
-RefTypespec                                           22
+RefTypespec                                           30
 SourceFile                                             1
-VarSelect                                              1
+VarSelect                                              2
 ------------------------------------------------------------
-Total:                                                82
+Total:                                               111
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexVarSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -238,7 +238,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:2:13, endln:2:14
         |vpiParent:
@@ -253,7 +253,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiRange:
     \_Range: , line:2:15, endln:2:20
       |vpiParent:
@@ -272,7 +272,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:5
-        |UINT:5
+        |vpiValue:5
       |vpiRightRange:
       \_Constant: , line:2:18, endln:2:19
         |vpiParent:
@@ -287,7 +287,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -314,7 +314,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:3:13, endln:3:14
         |vpiParent:
@@ -329,7 +329,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_LogicTypespec: 
     |vpiParent:
@@ -356,7 +356,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:5
-        |UINT:5
+        |vpiValue:5
       |vpiRightRange:
       \_Constant: , line:5:13, endln:5:14
         |vpiParent:
@@ -371,7 +371,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:4, endln:2:9
   |vpiImportTypespec:
@@ -390,6 +390,21 @@ Design: (unnamed)
     |vpiName:iccm_bank_dout_hi
     |vpiFullName:work@top.iccm_bank_dout_hi
     |vpiNetType:36
+    |vpiValue:
+    \_Constant: , line:2:41, endln:2:48
+      |vpiParent:
+      \_Net: (work@top.iccm_bank_dout_hi), line:2:21, endln:2:38
+      |vpiTypespec:
+      \_RefTypespec: (work@top.iccm_bank_dout_hi), line:2:41, endln:2:48
+        |vpiParent:
+        \_Constant: , line:2:41, endln:2:48
+        |vpiFullName:work@top.iccm_bank_dout_hi
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:5
+      |vpiSize:12
+      |vpiDecompile:12'hABC
+      |vpiValue:ABC
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:4, endln:3:9
   |vpiImportTypespec:
@@ -408,6 +423,21 @@ Design: (unnamed)
     |vpiName:iccm_rw_addr_q
     |vpiFullName:work@top.iccm_rw_addr_q
     |vpiNetType:36
+    |vpiValue:
+    \_Constant: , line:3:33, endln:3:38
+      |vpiParent:
+      \_Net: (work@top.iccm_rw_addr_q), line:3:16, endln:3:30
+      |vpiTypespec:
+      \_RefTypespec: (work@top.iccm_rw_addr_q), line:3:33, endln:3:38
+        |vpiParent:
+        \_Constant: , line:3:33, endln:3:38
+        |vpiFullName:work@top.iccm_rw_addr_q
+        |vpiActual:
+        \_LogicTypespec: 
+      |vpiConstType:3
+      |vpiSize:2
+      |vpiDecompile:2'b10
+      |vpiValue:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:4, endln:5:9
   |vpiImportTypespec:
@@ -424,6 +454,94 @@ Design: (unnamed)
     |vpiName:x
     |vpiFullName:work@top.x
     |vpiNetType:36
+    |vpiValue:
+    \_VarSelect: (work@top.x.iccm_bank_dout_hi), line:5:20, endln:5:63
+      |vpiParent:
+      \_Net: (work@top.x), line:5:16, endln:5:17
+      |vpiName:iccm_bank_dout_hi
+      |vpiFullName:work@top.x.iccm_bank_dout_hi
+      |vpiActual:
+      \_Net: (work@top.iccm_bank_dout_hi), line:2:21, endln:2:38
+      |vpiIndex:
+      \_PartSelect: iccm_rw_addr_q (work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q), line:5:38, endln:5:57
+        |vpiParent:
+        \_VarSelect: (work@top.x.iccm_bank_dout_hi), line:5:20, endln:5:63
+        |vpiName:iccm_rw_addr_q
+        |vpiFullName:work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q
+        |vpiDefName:iccm_rw_addr_q
+        |vpiActual:
+        \_Net: (work@top.iccm_rw_addr_q), line:3:16, endln:3:30
+        |vpiConstantSelect:1
+        |vpiLeftRange:
+        \_Constant: , line:5:53, endln:5:54
+          |vpiParent:
+          \_PartSelect: iccm_rw_addr_q (work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q), line:5:38, endln:5:57
+          |vpiTypespec:
+          \_RefTypespec: (work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q), line:5:53, endln:5:54
+            |vpiParent:
+            \_Constant: , line:5:53, endln:5:54
+            |vpiFullName:work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+        |vpiRightRange:
+        \_Constant: , line:5:55, endln:5:56
+          |vpiParent:
+          \_PartSelect: iccm_rw_addr_q (work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q), line:5:38, endln:5:57
+          |vpiTypespec:
+          \_RefTypespec: (work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q), line:5:55, endln:5:56
+            |vpiParent:
+            \_Constant: , line:5:55, endln:5:56
+            |vpiFullName:work@top.x.iccm_bank_dout_hi.iccm_rw_addr_q
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+      |vpiIndex:
+      \_PartSelect: iccm_bank_dout_hi (work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi), line:5:59, endln:5:62
+        |vpiParent:
+        \_VarSelect: (work@top.x.iccm_bank_dout_hi), line:5:20, endln:5:63
+        |vpiName:iccm_bank_dout_hi
+        |vpiFullName:work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi
+        |vpiDefName:iccm_bank_dout_hi
+        |vpiActual:
+        \_Net: (work@top.iccm_bank_dout_hi), line:2:21, endln:2:38
+        |vpiConstantSelect:1
+        |vpiLeftRange:
+        \_Constant: , line:5:59, endln:5:60
+          |vpiParent:
+          \_PartSelect: iccm_bank_dout_hi (work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi), line:5:59, endln:5:62
+          |vpiTypespec:
+          \_RefTypespec: (work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi), line:5:59, endln:5:60
+            |vpiParent:
+            \_Constant: , line:5:59, endln:5:60
+            |vpiFullName:work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:5
+          |vpiValue:5
+        |vpiRightRange:
+        \_Constant: , line:5:61, endln:5:62
+          |vpiParent:
+          \_PartSelect: iccm_bank_dout_hi (work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi), line:5:59, endln:5:62
+          |vpiTypespec:
+          \_RefTypespec: (work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi), line:5:61, endln:5:62
+            |vpiParent:
+            \_Constant: , line:5:61, endln:5:62
+            |vpiFullName:work@top.x.iccm_bank_dout_hi.iccm_bank_dout_hi
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
   |vpiImportTypespec:
   \_Net: (work@top.y), line:6:16, endln:6:17
     |vpiParent:
@@ -438,6 +556,54 @@ Design: (unnamed)
     |vpiName:y
     |vpiFullName:work@top.y
     |vpiNetType:36
+    |vpiValue:
+    \_BitSelect: (work@top.y.iccm_bank_dout_hi), line:6:37, endln:6:58
+      |vpiParent:
+      \_Net: (work@top.y), line:6:16, endln:6:17
+      |vpiName:iccm_bank_dout_hi
+      |vpiFullName:work@top.y.iccm_bank_dout_hi
+      |vpiActual:
+      \_Net: (work@top.iccm_bank_dout_hi), line:2:21, endln:2:38
+      |vpiIndex:
+      \_PartSelect: iccm_rw_addr_q (work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q), line:6:38, endln:6:57
+        |vpiParent:
+        \_BitSelect: (work@top.y.iccm_bank_dout_hi), line:6:37, endln:6:58
+        |vpiName:iccm_rw_addr_q
+        |vpiFullName:work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q
+        |vpiDefName:iccm_rw_addr_q
+        |vpiActual:
+        \_Net: (work@top.iccm_rw_addr_q), line:3:16, endln:3:30
+        |vpiConstantSelect:1
+        |vpiLeftRange:
+        \_Constant: , line:6:53, endln:6:54
+          |vpiParent:
+          \_PartSelect: iccm_rw_addr_q (work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q), line:6:38, endln:6:57
+          |vpiTypespec:
+          \_RefTypespec: (work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q), line:6:53, endln:6:54
+            |vpiParent:
+            \_Constant: , line:6:53, endln:6:54
+            |vpiFullName:work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+        |vpiRightRange:
+        \_Constant: , line:6:55, endln:6:56
+          |vpiParent:
+          \_PartSelect: iccm_rw_addr_q (work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q), line:6:38, endln:6:57
+          |vpiTypespec:
+          \_RefTypespec: (work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q), line:6:55, endln:6:56
+            |vpiParent:
+            \_Constant: , line:6:55, endln:6:56
+            |vpiFullName:work@top.y.iccm_bank_dout_hi.iccm_rw_addr_q
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.iccm_bank_dout_hi), line:2:21, endln:2:38

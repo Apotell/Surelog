@@ -122,17 +122,17 @@ LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    4
-Operation                                              1
+Operation                                              2
 Package                                                1
 Range                                                  1
-RefObj                                                 2
+RefObj                                                 4
 RefTypespec                                           29
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                               162
+Total:                                               165
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ContAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -257,7 +257,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
@@ -590,10 +590,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::FINISHED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:0
-          |INT:0
+          |vpiValue:0
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
@@ -610,10 +610,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::RUNNING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:1
-          |INT:1
+          |vpiValue:1
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
@@ -630,10 +630,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::WAITING
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:2
-          |INT:2
+          |vpiValue:2
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
@@ -650,10 +650,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::SUSPENDED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:3
-          |INT:3
+          |vpiValue:3
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
@@ -670,10 +670,10 @@ Design: (unnamed)
             |vpiFullName:builtin::process::KILLED
             |vpiActual:
             \_IntTypespec: 
-          |vpiConstType:6
+          |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:4
-          |INT:4
+          |vpiValue:4
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -779,7 +779,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
@@ -832,7 +832,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
@@ -885,7 +885,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
@@ -945,7 +945,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
@@ -1118,7 +1118,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:2
-          |UINT:2
+          |vpiValue:2
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:3:3, endln:3:7
       |vpiParent:
@@ -1160,6 +1160,19 @@ Design: (unnamed)
     |vpiName:ena
     |vpiFullName:work@top.ena
     |vpiNetType:1
+    |vpiValue:
+    \_Operation: , line:5:14, endln:5:22
+      |vpiParent:
+      \_Net: (work@top.ena), line:5:8, endln:5:11
+      |vpiOpType:8
+      |vpiOperand:
+      \_RefObj: (work@top.ena.clkcnt), line:5:16, endln:5:22
+        |vpiParent:
+        \_Operation: , line:5:14, endln:5:22
+        |vpiName:clkcnt
+        |vpiFullName:work@top.ena.clkcnt
+        |vpiActual:
+        \_Net: (work@top.clkcnt), line:5:16, endln:5:22
   |vpiImportTypespec:
   \_Net: (work@top.__debug_req_ready), line:7:13, endln:7:30
     |vpiParent:
@@ -1174,6 +1187,14 @@ Design: (unnamed)
     |vpiName:__debug_req_ready
     |vpiFullName:work@top.__debug_req_ready
     |vpiNetType:1
+    |vpiValue:
+    \_RefObj: (work@top.__debug_req_ready.debug_req_ready), line:7:33, endln:7:48
+      |vpiParent:
+      \_Net: (work@top.__debug_req_ready), line:7:13, endln:7:30
+      |vpiName:debug_req_ready
+      |vpiFullName:work@top.__debug_req_ready.debug_req_ready
+      |vpiActual:
+      \_Net: (work@top.debug_req_ready), line:7:33, endln:7:48
   |vpiImportTypespec:
   \_Net: (work@top.toto), line:9:8, endln:9:12
     |vpiParent:
@@ -1202,6 +1223,20 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@top.b
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@top.clkcnt), line:5:16, endln:5:22
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
+    |vpiName:clkcnt
+    |vpiFullName:work@top.clkcnt
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@top.debug_req_ready), line:7:33, endln:7:48
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
+    |vpiName:debug_req_ready
+    |vpiFullName:work@top.debug_req_ready
+    |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.intf2), line:3:13, endln:3:18
@@ -1215,6 +1250,10 @@ Design: (unnamed)
   \_Net: (work@top.a), line:11:10, endln:11:11
   |vpiNet:
   \_Net: (work@top.b), line:11:14, endln:11:15
+  |vpiNet:
+  \_Net: (work@top.clkcnt), line:5:16, endln:5:22
+  |vpiNet:
+  \_Net: (work@top.debug_req_ready), line:7:33, endln:7:48
   |vpiContAssign:
   \_ContAssign: , line:11:10, endln:11:15
     |vpiParent:

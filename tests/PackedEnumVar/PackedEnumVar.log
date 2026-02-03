@@ -189,23 +189,24 @@ EnumTypespec                                           1
 FuncCall                                               1
 Function                                               1
 Identifier                                             4
-IntTypespec                                            9
+IntTypespec                                           10
 LogicTypespec                                          7
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              1
 Range                                                  3
 RefObj                                                 4
-RefTypespec                                           21
+RefTypespec                                           22
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                88
+Total:                                                90
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnumVar/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/PackedEnumVar/dut.sv:16:15: Invalid Name id:87, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -234,7 +235,7 @@ Design: (unnamed)
       \_Variable: (work@top.o), line:8:17, endln:8:18
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:8:4, endln:8:7
+      \_IntTypespec: , line:16:15, endln:16:18
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiRandType:1
@@ -293,7 +294,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:1
-            |UINT:1
+            |vpiValue:1
           |vpiRightRange:
           \_Constant: , line:10:17, endln:10:18
             |vpiParent:
@@ -308,7 +309,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:0
-            |UINT:0
+            |vpiValue:0
         |vpiElemTypespec:
         \_RefTypespec: (work@top.get_BA.sp2v_e), line:10:7, endln:10:13
           |vpiParent:
@@ -352,7 +353,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:0
-            |UINT:0
+            |vpiValue:0
         |vpiRhs:
         \_RefObj: (work@top.get_BA.B), line:11:16, endln:11:17
           |vpiParent:
@@ -389,7 +390,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:1
-            |UINT:1
+            |vpiValue:1
         |vpiRhs:
         \_RefObj: (work@top.get_BA.A), line:12:16, endln:12:17
           |vpiParent:
@@ -436,7 +437,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiRightRange:
         \_Constant: , line:9:33, endln:9:34
           |vpiParent:
@@ -451,7 +452,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
       |vpiElemTypespec:
       \_RefTypespec: (work@top.get_BA.sp2v_e), line:9:23, endln:9:29
         |vpiParent:
@@ -503,10 +504,10 @@ Design: (unnamed)
           |vpiFullName:work@top.A
           |vpiActual:
           \_LogicTypespec: 
-        |vpiConstType:1
+        |vpiConstType:3
         |vpiSize:3
         |vpiDecompile:3'b000
-        |BIN:000
+        |vpiValue:000
     |vpiEnumConst:
     \_EnumConst: (B), line:4:7, endln:4:17
       |vpiParent:
@@ -523,10 +524,10 @@ Design: (unnamed)
           |vpiFullName:work@top.B
           |vpiActual:
           \_LogicTypespec: 
-        |vpiConstType:1
+        |vpiConstType:3
         |vpiSize:3
         |vpiDecompile:3'b111
-        |BIN:111
+        |vpiValue:111
   |vpiTypespec:
   \_LogicTypespec: , line:2:17, endln:2:22
     |vpiParent:
@@ -549,7 +550,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:2
-        |UINT:2
+        |vpiValue:2
       |vpiRightRange:
       \_Constant: , line:2:26, endln:2:27
         |vpiParent:
@@ -564,7 +565,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -590,7 +591,7 @@ Design: (unnamed)
       |vpiActual:
       \_EnumTypespec: , line:2:12, endln:5:12
   |vpiTypespec:
-  \_IntTypespec: , line:8:4, endln:8:7
+  \_IntTypespec: , line:16:15, endln:16:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
     |vpiSigned:1
@@ -607,7 +608,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
   |vpiImportTypespec:
-  \_IntTypespec: , line:8:4, endln:8:7
+  \_IntTypespec: , line:16:15, endln:16:18
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:8:17, endln:8:18
   |vpiDefName:work@top
@@ -629,6 +630,14 @@ Design: (unnamed)
     \_Operation: , line:16:15, endln:16:29
       |vpiParent:
       \_ContAssign: , line:16:11, endln:16:29
+      |vpiTypespec:
+      \_RefTypespec: (work@top.int), line:16:15, endln:16:18
+        |vpiParent:
+        \_Operation: , line:16:15, endln:16:29
+        |vpiName:int
+        |vpiFullName:work@top.int
+        |vpiActual:
+        \_IntTypespec: , line:16:15, endln:16:18
       |vpiOpType:67
       |vpiOperand:
       \_FuncCall: (get_BA), line:16:20, endln:16:28
@@ -651,6 +660,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

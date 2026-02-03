@@ -455,7 +455,7 @@ Design                                                 1
 Identifier                                             3
 ImmediateAssert                                        1
 IntTypespec                                            6
-LogicTypespec                                          4
+LogicTypespec                                          8
 Module                                                 2
 ModuleTypespec                                         2
 Net                                                    5
@@ -466,13 +466,18 @@ PropertyDecl                                           1
 PropertySpec                                           2
 Range                                                  3
 RefObj                                                 7
-RefTypespec                                           14
+RefTypespec                                           20
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                79
+Total:                                                91
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Assertions/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/Assertions/dut.sv:10:2: Invalid Name id:43, type:RefTypespec, name:logic.
+[ERR:IG0814] ${SURELOG_DIR}/tests/Assertions/dut.sv:10:16: Invalid Name id:48, type:RefTypespec, name:logic.
+[ERR:IG0814] ${SURELOG_DIR}/tests/Assertions/dut.sv:10:34: Invalid Name id:54, type:RefTypespec, name:logic.
+[ERR:IG0814] ${SURELOG_DIR}/tests/Assertions/dut.sv:10:48: Invalid Name id:59, type:RefTypespec, name:logic.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -539,6 +544,14 @@ Design: (unnamed)
           \_Operation: , line:10:2, endln:10:11
             |vpiParent:
             \_Operation: , line:10:2, endln:10:25
+            |vpiTypespec:
+            \_RefTypespec: (work@m.toggles.logic), line:10:2, endln:10:7
+              |vpiParent:
+              \_Operation: , line:10:2, endln:10:11
+              |vpiName:logic
+              |vpiFullName:work@m.toggles.logic
+              |vpiActual:
+              \_LogicTypespec: , line:10:2, endln:10:7
             |vpiOpType:67
             |vpiOperand:
             \_RefObj: (work@m.toggles.x), line:10:9, endln:10:10
@@ -552,6 +565,14 @@ Design: (unnamed)
           \_Operation: , line:10:16, endln:10:25
             |vpiParent:
             \_Operation: , line:10:2, endln:10:25
+            |vpiTypespec:
+            \_RefTypespec: (work@m.toggles.logic), line:10:16, endln:10:21
+              |vpiParent:
+              \_Operation: , line:10:16, endln:10:25
+              |vpiName:logic
+              |vpiFullName:work@m.toggles.logic
+              |vpiActual:
+              \_LogicTypespec: , line:10:2, endln:10:7
             |vpiOpType:67
             |vpiOperand:
             \_RefObj: (work@m.toggles.y), line:10:23, endln:10:24
@@ -575,6 +596,14 @@ Design: (unnamed)
             \_Operation: , line:10:34, endln:10:43
               |vpiParent:
               \_Operation: , line:10:34, endln:10:57
+              |vpiTypespec:
+              \_RefTypespec: (work@m.toggles.logic), line:10:34, endln:10:39
+                |vpiParent:
+                \_Operation: , line:10:34, endln:10:43
+                |vpiName:logic
+                |vpiFullName:work@m.toggles.logic
+                |vpiActual:
+                \_LogicTypespec: , line:10:2, endln:10:7
               |vpiOpType:67
               |vpiOperand:
               \_RefObj: (work@m.toggles.x), line:10:41, endln:10:42
@@ -588,6 +617,14 @@ Design: (unnamed)
             \_Operation: , line:10:48, endln:10:57
               |vpiParent:
               \_Operation: , line:10:34, endln:10:57
+              |vpiTypespec:
+              \_RefTypespec: (work@m.toggles.logic), line:10:48, endln:10:53
+                |vpiParent:
+                \_Operation: , line:10:48, endln:10:57
+                |vpiName:logic
+                |vpiFullName:work@m.toggles.logic
+                |vpiActual:
+                \_LogicTypespec: , line:10:2, endln:10:7
               |vpiOpType:67
               |vpiOperand:
               \_RefObj: (work@m.toggles.y), line:10:55, endln:10:56
@@ -650,7 +687,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:15
-        |UINT:15
+        |vpiValue:15
       |vpiRightRange:
       \_Constant: , line:4:17, endln:4:18
         |vpiParent:
@@ -665,7 +702,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@m), line:4:9, endln:4:12
       |vpiParent:
@@ -691,6 +728,10 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:4:9, endln:4:19
   |vpiTypespec:
+  \_LogicTypespec: , line:10:2, endln:10:7
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+  |vpiTypespec:
   \_LogicTypespec: , line:2:1, endln:2:6
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
@@ -712,7 +753,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:15
-        |UINT:15
+        |vpiValue:15
       |vpiRightRange:
       \_Constant: , line:2:11, endln:2:12
         |vpiParent:
@@ -727,11 +768,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
-  |vpiTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiParent:
-    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+        |vpiValue:0
   |vpiImportTypespec:
   \_BitTypespec: , line:4:9, endln:4:12
   |vpiImportTypespec:
@@ -754,6 +791,14 @@ Design: (unnamed)
       \_Operation: , line:8:12, endln:8:20
         |vpiParent:
         \_Operation: , line:8:12, endln:8:32
+        |vpiTypespec:
+        \_RefTypespec: (work@m.bits), line:8:12, endln:8:16
+          |vpiParent:
+          \_Operation: , line:8:12, endln:8:20
+          |vpiName:bits
+          |vpiFullName:work@m.bits
+          |vpiActual:
+          \_TypedefTypespec: (bits), line:4:20, endln:4:24
         |vpiOpType:67
         |vpiOperand:
         \_RefObj: (work@m.a), line:8:18, endln:8:19
@@ -767,6 +812,14 @@ Design: (unnamed)
       \_Operation: , line:8:24, endln:8:32
         |vpiParent:
         \_Operation: , line:8:12, endln:8:32
+        |vpiTypespec:
+        \_RefTypespec: (work@m.bits), line:8:24, endln:8:28
+          |vpiParent:
+          \_Operation: , line:8:24, endln:8:32
+          |vpiName:bits
+          |vpiFullName:work@m.bits
+          |vpiActual:
+          \_TypedefTypespec: (bits), line:4:20, endln:4:24
         |vpiOpType:67
         |vpiOperand:
         \_RefObj: (work@m.b), line:8:30, endln:8:31
@@ -776,6 +829,8 @@ Design: (unnamed)
           |vpiFullName:work@m.b
           |vpiActual:
           \_Net: (work@m.b), line:2:17, endln:2:18
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:10:2, endln:10:7
   |vpiImportTypespec:
   \_Net: (work@m.clock), line:1:16, endln:1:21
     |vpiParent:
@@ -813,8 +868,6 @@ Design: (unnamed)
     |vpiFullName:work@m.b
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:6
-  |vpiImportTypespec:
   \_Net: (work@m.c), line:3:7, endln:3:8
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
@@ -824,7 +877,7 @@ Design: (unnamed)
       \_Net: (work@m.c), line:3:7, endln:3:8
       |vpiFullName:work@m.c
       |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:6
+      \_LogicTypespec: , line:10:2, endln:10:7
     |vpiName:c
     |vpiFullName:work@m.c
     |vpiNetType:36
@@ -838,7 +891,7 @@ Design: (unnamed)
       \_Net: (work@m.d), line:3:10, endln:3:11
       |vpiFullName:work@m.d
       |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:6
+      \_LogicTypespec: , line:10:2, endln:10:7
     |vpiName:d
     |vpiFullName:work@m.d
     |vpiNetType:36
@@ -897,6 +950,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 4
 [WARNING] : 2
 [   NOTE] : 0

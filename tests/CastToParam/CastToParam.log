@@ -109,14 +109,17 @@ Operation                                              2
 ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
-RefObj                                                 2
-RefTypespec                                            7
+RefObj                                                 3
+RefTypespec                                            8
 ReturnStmt                                             1
 SourceFile                                             1
+UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                35
+Total:                                                38
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastToParam/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/CastToParam/dut.sv:9:15: Unsupported Typespec: id:38, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/CastToParam/dut.sv:9:15: Missing name: id:38, type:RefTypespec, name:.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -181,7 +184,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:3
-      |UINT:3
+      |vpiValue:3
   |vpiParamAssign:
   \_ParamAssign: , line:3:27, endln:3:41
     |vpiParent:
@@ -202,7 +205,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:15
-      |UINT:15
+      |vpiValue:15
   |vpiInternalScope:
   \_Function: (work@top.get_casted_depth), line:8:4, endln:10:15
     |vpiParent:
@@ -248,7 +251,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:1
-            |UINT:1
+            |vpiValue:1
         |vpiRightRange:
         \_Constant: , line:8:36, endln:8:37
           |vpiParent:
@@ -263,15 +266,22 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
       \_Function: (work@top.get_casted_depth), line:8:4, endln:10:15
+    |vpiTypespec:
+    \_UnsupportedTypespec: (PTR_WIDTH), line:9:15, endln:9:24
+      |vpiParent:
+      \_Function: (work@top.get_casted_depth), line:8:4, endln:10:15
+      |vpiName:PTR_WIDTH
     |vpiImportTypespec:
     \_LogicTypespec: , line:8:23, endln:8:38
     |vpiImportTypespec:
     \_IntTypespec: 
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (PTR_WIDTH), line:9:15, endln:9:24
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -289,6 +299,13 @@ Design: (unnamed)
       \_Operation: , line:9:14, endln:9:33
         |vpiParent:
         \_ReturnStmt: , line:9:7, endln:9:33
+        |vpiTypespec:
+        \_RefTypespec: (work@top.get_casted_depth), line:9:15, endln:9:24
+          |vpiParent:
+          \_Operation: , line:9:14, endln:9:33
+          |vpiFullName:work@top.get_casted_depth
+          |vpiActual:
+          \_UnsupportedTypespec: (PTR_WIDTH), line:9:15, endln:9:24
         |vpiOpType:67
         |vpiOperand:
         \_RefObj: (work@top.get_casted_depth.Depth), line:9:27, endln:9:32
@@ -325,6 +342,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0

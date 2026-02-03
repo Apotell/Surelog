@@ -146,10 +146,10 @@ LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    3
-Operation                                              1
+Operation                                              2
 Port                                                   2
 Range                                                  1
-RefObj                                                 4
+RefObj                                                 6
 RefTypespec                                           18
 SourceFile                                             1
 StructTypespec                                         1
@@ -157,7 +157,7 @@ TypedefTypespec                                        2
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                70
+Total:                                                73
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -205,10 +205,10 @@ Design: (unnamed)
           |vpiFullName:work@top.c
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:19
+        |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiEnumConst:
     \_EnumConst: (d), line:3:30, endln:3:35
       |vpiParent:
@@ -225,10 +225,10 @@ Design: (unnamed)
           |vpiFullName:work@top.d
           |vpiActual:
           \_IntTypespec: 
-        |vpiConstType:19
+        |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
   |vpiTypespec:
   \_LogicTypespec: , line:3:16, endln:3:21
     |vpiParent:
@@ -308,7 +308,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:6:19, endln:6:20
         |vpiParent:
@@ -323,7 +323,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@top.cstate_e), line:6:7, endln:6:15
       |vpiParent:
@@ -389,6 +389,27 @@ Design: (unnamed)
       \_TypedefTypespec: (hw2reg_wrap_t), line:7:6, endln:7:19
     |vpiName:hw2reg_wrap
     |vpiFullName:work@top.hw2reg_wrap
+    |vpiValue:
+    \_Operation: , line:9:32, endln:9:40
+      |vpiParent:
+      \_Net: (work@top.hw2reg_wrap), line:9:18, endln:9:29
+      |vpiOpType:33
+      |vpiOperand:
+      \_RefObj: (work@top.hw2reg_wrap.c), line:9:34, endln:9:35
+        |vpiParent:
+        \_Operation: , line:9:32, endln:9:40
+        |vpiName:c
+        |vpiFullName:work@top.hw2reg_wrap.c
+        |vpiActual:
+        \_EnumConst: (c), line:3:23, endln:3:28
+      |vpiOperand:
+      \_RefObj: (work@top.hw2reg_wrap.d), line:9:37, endln:9:38
+        |vpiParent:
+        \_Operation: , line:9:32, endln:9:40
+        |vpiName:d
+        |vpiFullName:work@top.hw2reg_wrap.d
+        |vpiActual:
+        \_EnumConst: (d), line:3:30, endln:3:35
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.a), line:2:25, endln:2:26

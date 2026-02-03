@@ -364,7 +364,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  4
-BitSelect                                              3
+BitSelect                                              5
 Constant                                              18
 ContAssign                                             5
 Design                                                 1
@@ -383,12 +383,12 @@ ParamAssign                                            1
 Parameter                                              1
 Port                                                   3
 Range                                                  6
-RefObj                                                31
+RefObj                                                33
 RefTypespec                                           28
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                               169
+Total:                                               173
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CarryAdd/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -441,7 +441,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:2
-      |UINT:2
+      |vpiValue:2
   |vpiInternalScope:
   \_GenRegion: (work@carryadd), line:9:1, endln:20:12
     |vpiParent:
@@ -659,7 +659,7 @@ Design: (unnamed)
                           |vpiConstType:9
                           |vpiSize:64
                           |vpiDecompile:1
-                          |UINT:1
+                          |vpiValue:1
                     |vpiActual:
                     \_RefObj: (work@carryadd.STAGE.C), line:16:76, endln:16:77
                       |vpiParent:
@@ -746,7 +746,7 @@ Design: (unnamed)
                         |vpiConstType:9
                         |vpiSize:64
                         |vpiDecompile:1
-                        |UINT:1
+                        |vpiValue:1
                   |vpiActual:
                   \_RefObj: (work@carryadd.STAGE.C), line:17:59, endln:17:60
                     |vpiParent:
@@ -781,6 +781,22 @@ Design: (unnamed)
             |vpiName:IN1
             |vpiFullName:work@carryadd.STAGE.IN1
             |vpiNetType:1
+            |vpiValue:
+            \_BitSelect: (work@carryadd.STAGE.IN1.a), line:11:29, endln:11:32
+              |vpiParent:
+              \_Net: (work@carryadd.STAGE.IN1), line:11:22, endln:11:25
+              |vpiName:a
+              |vpiFullName:work@carryadd.STAGE.IN1.a
+              |vpiActual:
+              \_Net: (work@carryadd.a), line:1:17, endln:1:18
+              |vpiIndex:
+              \_RefObj: (work@carryadd.STAGE.IN1.i), line:11:30, endln:11:31
+                |vpiParent:
+                \_BitSelect: (work@carryadd.STAGE.IN1.a), line:11:29, endln:11:32
+                |vpiName:i
+                |vpiFullName:work@carryadd.STAGE.IN1.i
+                |vpiActual:
+                \_Variable: (work@carryadd.i), line:10:14, endln:10:15
           |vpiImportTypespec:
           \_Net: (work@carryadd.STAGE.IN2), line:11:34, endln:11:37
             |vpiParent:
@@ -795,6 +811,22 @@ Design: (unnamed)
             |vpiName:IN2
             |vpiFullName:work@carryadd.STAGE.IN2
             |vpiNetType:1
+            |vpiValue:
+            \_BitSelect: (work@carryadd.STAGE.IN2.b), line:11:41, endln:11:44
+              |vpiParent:
+              \_Net: (work@carryadd.STAGE.IN2), line:11:34, endln:11:37
+              |vpiName:b
+              |vpiFullName:work@carryadd.STAGE.IN2.b
+              |vpiActual:
+              \_Net: (work@carryadd.b), line:1:20, endln:1:21
+              |vpiIndex:
+              \_RefObj: (work@carryadd.STAGE.IN2.i), line:11:42, endln:11:43
+                |vpiParent:
+                \_BitSelect: (work@carryadd.STAGE.IN2.b), line:11:41, endln:11:44
+                |vpiName:i
+                |vpiFullName:work@carryadd.STAGE.IN2.i
+                |vpiActual:
+                \_Variable: (work@carryadd.i), line:10:14, endln:10:15
           |vpiImportTypespec:
           \_Net: (work@carryadd.STAGE.C), line:12:22, endln:12:23
             |vpiParent:
@@ -854,7 +886,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiStmt:
             \_Begin: (work@carryadd.STAGE), line:14:25, endln:14:61
             |vpiElseStmt:
@@ -915,7 +947,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:0
-            |UINT:0
+            |vpiValue:0
         |vpiCondition:
         \_Operation: , line:10:21, endln:10:30
           |vpiParent:
@@ -977,7 +1009,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:1
-              |UINT:1
+              |vpiValue:1
         |vpiStmt:
         \_Begin: (work@carryadd.STAGE), line:10:41, endln:19:12
       |vpiStmt:
@@ -1023,7 +1055,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:5:16, endln:5:17
         |vpiParent:
@@ -1038,7 +1070,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:

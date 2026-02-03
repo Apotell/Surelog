@@ -8,28 +8,28 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-BitSelect                                              1
-Constant                                              10
+BitSelect                                              2
+Constant                                              15
 Design                                                 1
-HierPath                                               2
+HierPath                                               4
 Identifier                                             2
-IndexedPartSelect                                      2
-IntTypespec                                           10
+IndexedPartSelect                                      4
+IntTypespec                                           15
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    4
 Operation                                              1
 Range                                                  3
-RefObj                                                 1
-RefTypespec                                           17
+RefObj                                                 2
+RefTypespec                                           22
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                66
+Total:                                                87
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/RangeSelect/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -105,7 +105,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:7
-        |UINT:7
+        |vpiValue:7
       |vpiRightRange:
       \_Constant: , line:3:16, endln:3:17
         |vpiParent:
@@ -120,7 +120,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiTypespec:
   \_IntTypespec: 
     |vpiParent:
@@ -153,7 +153,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:4
-          |UINT:4
+          |vpiValue:4
     |vpiElemTypespec:
     \_RefTypespec: (work@top.tl_h2d_t), line:6:4, endln:6:12
       |vpiParent:
@@ -188,7 +188,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:9:13, endln:9:14
         |vpiParent:
@@ -203,7 +203,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_TypedefTypespec: (tl_h2d_t), line:4:6, endln:4:14
   |vpiImportTypespec:
@@ -257,6 +257,74 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@top.c
     |vpiNetType:36
+    |vpiValue:
+    \_HierPath: (a[0].source[6-:2]), line:8:14, endln:8:32
+      |vpiParent:
+      \_Net: (work@top.c), line:8:10, endln:8:11
+      |vpiName:a[0].source[6-:2]
+      |vpiActual:
+      \_BitSelect: (a[0]), line:8:14, endln:8:15
+        |vpiParent:
+        \_HierPath: (a[0].source[6-:2]), line:8:14, endln:8:32
+        |vpiName:a
+        |vpiFullName:a[0]
+        |vpiActual:
+        \_Net: (work@top.a), line:6:13, endln:6:14
+        |vpiIndex:
+        \_Constant: , line:8:16, endln:8:17
+          |vpiParent:
+          \_BitSelect: (a[0]), line:8:14, endln:8:15
+          |vpiTypespec:
+          \_RefTypespec: (work@top.c.a[0].source[6-:2].a), line:8:16, endln:8:17
+            |vpiParent:
+            \_Constant: , line:8:16, endln:8:17
+            |vpiFullName:work@top.c.a[0].source[6-:2].a
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+      |vpiActual:
+      \_IndexedPartSelect: (a[0].source[6-:2]), line:8:19, endln:8:32
+        |vpiParent:
+        \_HierPath: (a[0].source[6-:2]), line:8:14, endln:8:32
+        |vpiName:source
+        |vpiFullName:a[0].source[6-:2]
+        |vpiActual:
+        \_TypespecMember: (source), line:3:19, endln:3:25
+        |vpiConstantSelect:1
+        |vpiIndexedPartSelectType:2
+        |vpiBaseExpr:
+        \_Constant: , line:8:26, endln:8:27
+          |vpiParent:
+          \_IndexedPartSelect: (a[0].source[6-:2]), line:8:19, endln:8:32
+          |vpiTypespec:
+          \_RefTypespec: (work@top.c.a[0].source[6-:2].source), line:8:26, endln:8:27
+            |vpiParent:
+            \_Constant: , line:8:26, endln:8:27
+            |vpiFullName:work@top.c.a[0].source[6-:2].source
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:6
+          |vpiValue:6
+        |vpiWidthExpr:
+        \_Constant: , line:8:31, endln:8:32
+          |vpiParent:
+          \_IndexedPartSelect: (a[0].source[6-:2]), line:8:19, endln:8:32
+          |vpiTypespec:
+          \_RefTypespec: (work@top.c.a[0].source[6-:2].source), line:8:31, endln:8:32
+            |vpiParent:
+            \_Constant: , line:8:31, endln:8:32
+            |vpiFullName:work@top.c.a[0].source[6-:2].source
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |vpiValue:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:4, endln:9:9
   |vpiImportTypespec:
@@ -273,6 +341,58 @@ Design: (unnamed)
     |vpiName:d
     |vpiFullName:work@top.d
     |vpiNetType:36
+    |vpiValue:
+    \_HierPath: (b.source[6-:2]), line:9:20, endln:9:35
+      |vpiParent:
+      \_Net: (work@top.d), line:9:16, endln:9:17
+      |vpiName:b.source[6-:2]
+      |vpiActual:
+      \_RefObj: (b), line:9:20, endln:9:21
+        |vpiParent:
+        \_HierPath: (b.source[6-:2]), line:9:20, endln:9:35
+        |vpiName:b
+        |vpiActual:
+        \_Net: (work@top.b), line:7:13, endln:7:14
+      |vpiActual:
+      \_IndexedPartSelect: (b.source[6-:2]), line:9:22, endln:9:35
+        |vpiParent:
+        \_HierPath: (b.source[6-:2]), line:9:20, endln:9:35
+        |vpiName:source
+        |vpiFullName:b.source[6-:2]
+        |vpiActual:
+        \_TypespecMember: (source), line:3:19, endln:3:25
+        |vpiConstantSelect:1
+        |vpiIndexedPartSelectType:2
+        |vpiBaseExpr:
+        \_Constant: , line:9:29, endln:9:30
+          |vpiParent:
+          \_IndexedPartSelect: (b.source[6-:2]), line:9:22, endln:9:35
+          |vpiTypespec:
+          \_RefTypespec: (work@top.d.b.source[6-:2].source), line:9:29, endln:9:30
+            |vpiParent:
+            \_Constant: , line:9:29, endln:9:30
+            |vpiFullName:work@top.d.b.source[6-:2].source
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:6
+          |vpiValue:6
+        |vpiWidthExpr:
+        \_Constant: , line:9:34, endln:9:35
+          |vpiParent:
+          \_IndexedPartSelect: (b.source[6-:2]), line:9:22, endln:9:35
+          |vpiTypespec:
+          \_RefTypespec: (work@top.d.b.source[6-:2].source), line:9:34, endln:9:35
+            |vpiParent:
+            \_Constant: , line:9:34, endln:9:35
+            |vpiFullName:work@top.d.b.source[6-:2].source
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:2
+          |vpiValue:2
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.a), line:6:13, endln:6:14

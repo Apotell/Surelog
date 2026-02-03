@@ -226,7 +226,7 @@ ContAssign                                             4
 Design                                                 1
 GenIf                                                  4
 GenRegion                                              1
-HierPath                                               6
+HierPath                                               7
 Identifier                                             5
 IntTypespec                                            5
 LogicTypespec                                          6
@@ -234,11 +234,11 @@ Module                                                 1
 ModuleTypespec                                         1
 Net                                                    5
 Port                                                   1
-RefObj                                                17
+RefObj                                                21
 RefTypespec                                           11
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                79
+Total:                                                84
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Illegal implicit net "id:59, name:Z".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Illegal implicit net "id:60, name:A".
@@ -353,6 +353,40 @@ Design: (unnamed)
                 |vpiName:z
                 |vpiFullName:work@genblk_dive_top.Z.A.B.C.z
                 |vpiNetType:1
+                |vpiValue:
+                \_HierPath: (A.B.C.x), line:12:58, endln:12:65
+                  |vpiParent:
+                  \_Net: (work@genblk_dive_top.Z.A.B.C.z), line:12:54, endln:12:55
+                  |vpiName:A.B.C.x
+                  |vpiActual:
+                  \_RefObj: (A), line:12:58, endln:12:59
+                    |vpiParent:
+                    \_HierPath: (A.B.C.x), line:12:58, endln:12:65
+                    |vpiName:A
+                    |vpiActual:
+                    \_Begin: (work@genblk_dive_top.Z.A), line:5:32, endln:17:28
+                  |vpiActual:
+                  \_RefObj: (B), line:12:60, endln:12:61
+                    |vpiParent:
+                    \_HierPath: (A.B.C.x), line:12:58, endln:12:65
+                    |vpiName:B
+                    |vpiActual:
+                    \_Begin: (work@genblk_dive_top.Z.A.B), line:7:40, endln:15:36
+                  |vpiActual:
+                  \_RefObj: (C), line:12:62, endln:12:63
+                    |vpiParent:
+                    \_HierPath: (A.B.C.x), line:12:58, endln:12:65
+                    |vpiName:C
+                    |vpiActual:
+                    \_Begin: (work@genblk_dive_top.Z.A.B.C), line:9:48, endln:13:44
+                  |vpiActual:
+                  \_RefObj: (work@genblk_dive_top.Z.A.B.C.z.x), line:12:64, endln:12:65
+                    |vpiParent:
+                    \_HierPath: (A.B.C.x), line:12:58, endln:12:65
+                    |vpiName:x
+                    |vpiFullName:work@genblk_dive_top.Z.A.B.C.z.x
+                    |vpiActual:
+                    \_Net: (work@genblk_dive_top.Z.A.B.C.x), line:10:54, endln:10:55
               |vpiStmt:
               \_ContAssign: , line:11:56, endln:11:63
                 |vpiParent:
@@ -390,7 +424,7 @@ Design: (unnamed)
                   |vpiConstType:9
                   |vpiSize:64
                   |vpiDecompile:0
-                  |UINT:0
+                  |vpiValue:0
             |vpiTypespec:
             \_LogicTypespec: , line:8:41, endln:8:45
               |vpiParent:
@@ -429,7 +463,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:1
-                |UINT:1
+                |vpiValue:1
               |vpiStmt:
               \_Begin: (work@genblk_dive_top.Z.A.B.C), line:9:48, endln:13:44
             |vpiStmt:
@@ -527,7 +561,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:1
-              |UINT:1
+              |vpiValue:1
             |vpiStmt:
             \_Begin: (work@genblk_dive_top.Z.A.B), line:7:40, endln:15:36
           |vpiStmt:
@@ -598,7 +632,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:1
-            |UINT:1
+            |vpiValue:1
           |vpiStmt:
           \_Begin: (work@genblk_dive_top.Z.A), line:5:32, endln:17:28
       |vpiStmt:
@@ -619,7 +653,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
         |vpiStmt:
         \_Begin: (work@genblk_dive_top.Z), line:4:24, endln:18:20
     |vpiStmt:

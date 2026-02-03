@@ -105,25 +105,25 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PatternOrder/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-BitTypespec                                            1
-Constant                                               4
+BitTypespec                                            2
+Constant                                               8
 Design                                                 1
 Identifier                                             1
-IntTypespec                                            4
+IntTypespec                                            7
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
-Operation                                              3
-RealTypespec                                           3
-RefTypespec                                           16
+Operation                                              6
+RealTypespec                                           4
+RefTypespec                                           24
 SourceFile                                             1
-StringTypespec                                         3
+StringTypespec                                         6
 StructTypespec                                         3
-TaggedPattern                                          4
+TaggedPattern                                          8
 TypespecMember                                         7
 ------------------------------------------------------------
-Total:                                                56
+Total:                                                83
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PatternOrder/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -272,6 +272,127 @@ Design: (unnamed)
       \_StructTypespec: , line:2:4, endln:8:2
     |vpiName:ABC
     |vpiFullName:work@top.ABC
+    |vpiValue:
+    \_Operation: , line:8:9, endln:8:57
+      |vpiParent:
+      \_Net: (work@top.ABC), line:8:3, endln:8:6
+      |vpiOpType:75
+      |vpiOperand:
+      \_TaggedPattern: , line:8:11, endln:8:28
+        |vpiParent:
+        \_Operation: , line:8:9, endln:8:57
+        |vpiPattern:
+        \_Operation: , line:8:16, endln:8:28
+          |vpiParent:
+          \_TaggedPattern: , line:8:11, endln:8:28
+          |vpiOpType:75
+          |vpiOperand:
+          \_Constant: , line:8:18, endln:8:22
+            |vpiParent:
+            \_Operation: , line:8:16, endln:8:28
+            |vpiTypespec:
+            \_RefTypespec: (work@top.ABC), line:8:18, endln:8:22
+              |vpiParent:
+              \_Constant: , line:8:18, endln:8:22
+              |vpiFullName:work@top.ABC
+              |vpiActual:
+              \_BitTypespec: 
+            |vpiConstType:3
+            |vpiSize:1
+            |vpiDecompile:1'b1
+            |vpiValue:1
+          |vpiOperand:
+          \_Constant: , line:8:24, endln:8:27
+            |vpiParent:
+            \_Operation: , line:8:16, endln:8:28
+            |vpiTypespec:
+            \_RefTypespec: (work@top.ABC), line:8:24, endln:8:27
+              |vpiParent:
+              \_Constant: , line:8:24, endln:8:27
+              |vpiFullName:work@top.ABC
+              |vpiActual:
+              \_RealTypespec: 
+            |vpiConstType:2
+            |vpiSize:64
+            |vpiDecompile:1.0
+            |vpiValue:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top.ABC.BC1), line:8:11, endln:8:14
+          |vpiParent:
+          \_TaggedPattern: , line:8:11, endln:8:28
+          |vpiName:BC1
+          |vpiFullName:work@top.ABC.BC1
+          |vpiActual:
+          \_StringTypespec: , line:8:11, endln:8:14
+      |vpiOperand:
+      \_TaggedPattern: , line:8:30, endln:8:36
+        |vpiParent:
+        \_Operation: , line:8:9, endln:8:57
+        |vpiPattern:
+        \_Constant: , line:8:35, endln:8:36
+          |vpiParent:
+          \_TaggedPattern: , line:8:30, endln:8:36
+          |vpiTypespec:
+          \_RefTypespec: (work@top.ABC), line:8:35, endln:8:36
+            |vpiParent:
+            \_Constant: , line:8:35, endln:8:36
+            |vpiFullName:work@top.ABC
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.ABC), line:8:30, endln:8:33
+          |vpiParent:
+          \_TaggedPattern: , line:8:30, endln:8:36
+          |vpiFullName:work@top.ABC
+          |vpiActual:
+          \_IntTypespec: , line:3:3, endln:3:6
+      |vpiOperand:
+      \_TaggedPattern: , line:8:38, endln:8:56
+        |vpiParent:
+        \_Operation: , line:8:9, endln:8:57
+        |vpiPattern:
+        \_Operation: , line:8:43, endln:8:56
+          |vpiParent:
+          \_TaggedPattern: , line:8:38, endln:8:56
+          |vpiOpType:75
+          |vpiOperand:
+          \_TaggedPattern: , line:8:45, endln:8:55
+            |vpiParent:
+            \_Operation: , line:8:43, endln:8:56
+            |vpiPattern:
+            \_Constant: , line:8:54, endln:8:55
+              |vpiParent:
+              \_TaggedPattern: , line:8:45, endln:8:55
+              |vpiTypespec:
+              \_RefTypespec: (work@top.ABC), line:8:54, endln:8:55
+                |vpiParent:
+                \_Constant: , line:8:54, endln:8:55
+                |vpiFullName:work@top.ABC
+                |vpiActual:
+                \_IntTypespec: 
+              |vpiConstType:9
+              |vpiSize:64
+              |vpiDecompile:0
+              |vpiValue:0
+            |vpiTypespec:
+            \_RefTypespec: (work@top.ABC), line:8:45, endln:8:52
+              |vpiParent:
+              \_TaggedPattern: , line:8:45, endln:8:55
+              |vpiFullName:work@top.ABC
+              |vpiActual:
+              \_StringTypespec: , line:8:11, endln:8:14
+        |vpiTypespec:
+        \_RefTypespec: (work@top.ABC.BC2), line:8:38, endln:8:41
+          |vpiParent:
+          \_TaggedPattern: , line:8:38, endln:8:56
+          |vpiName:BC2
+          |vpiFullName:work@top.ABC.BC2
+          |vpiActual:
+          \_StringTypespec: , line:8:11, endln:8:14
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.ABC), line:8:3, endln:8:6

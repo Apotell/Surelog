@@ -111,7 +111,7 @@ Constant                                               2
 ContAssign                                             1
 Design                                                 1
 Identifier                                             1
-IntTypespec                                            3
+IntTypespec                                            4
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
@@ -120,13 +120,14 @@ ParamAssign                                            3
 Parameter                                              3
 Port                                                   1
 RefObj                                                 4
-RefTypespec                                            5
+RefTypespec                                            6
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                32
+Total:                                                34
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DecValue/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/DecValue/dut.sv:6:15: Invalid Name id:28, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -206,7 +207,7 @@ Design: (unnamed)
       |vpiConstType:3
       |vpiSize:-1
       |vpiDecompile:'X
-      |BIN:X
+      |vpiValue:X
   |vpiParamAssign:
   \_ParamAssign: , line:3:14, endln:3:20
     |vpiParent:
@@ -227,7 +228,7 @@ Design: (unnamed)
       |vpiConstType:3
       |vpiSize:-1
       |vpiDecompile:'X
-      |BIN:X
+      |vpiValue:X
   |vpiParamAssign:
   \_ParamAssign: , line:4:19, endln:4:28
     |vpiParent:
@@ -300,6 +301,14 @@ Design: (unnamed)
     \_Operation: , line:6:15, endln:6:22
       |vpiParent:
       \_ContAssign: , line:6:11, endln:6:22
+      |vpiTypespec:
+      \_RefTypespec: (work@top.int), line:6:15, endln:6:18
+        |vpiParent:
+        \_Operation: , line:6:15, endln:6:22
+        |vpiName:int
+        |vpiFullName:work@top.int
+        |vpiActual:
+        \_IntTypespec: , line:4:15, endln:4:18
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@top.C), line:6:20, endln:6:21
@@ -319,6 +328,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

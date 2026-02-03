@@ -82,8 +82,8 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/InstArray/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-BitTypespec                                            1
-Constant                                               7
+BitTypespec                                            2
+Constant                                               8
 Design                                                 1
 Identifier                                             2
 IntTypespec                                            6
@@ -95,10 +95,10 @@ Net                                                    2
 Port                                                   3
 Range                                                  3
 RefObj                                                 1
-RefTypespec                                           10
+RefTypespec                                           11
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                44
+Total:                                                47
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InstArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -129,6 +129,21 @@ Design: (unnamed)
     \_Module: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/InstArray/dut.sv, line:6:1, endln:8:10
     |vpiName:datain
     |vpiFullName:work@bus_conn.datain
+    |vpiValue:
+    \_Constant: , line:7:16, endln:7:20
+      |vpiParent:
+      \_Net: (work@bus_conn.datain), line:7:7, endln:7:13
+      |vpiTypespec:
+      \_RefTypespec: (work@bus_conn.datain), line:7:16, endln:7:20
+        |vpiParent:
+        \_Constant: , line:7:16, endln:7:20
+        |vpiFullName:work@bus_conn.datain
+        |vpiActual:
+        \_BitTypespec: 
+      |vpiConstType:3
+      |vpiSize:1
+      |vpiDecompile:1'b1
+      |vpiValue:1
   |vpiImportTypespec:
   \_BitTypespec: 
   |vpiDefName:work@bus_conn
@@ -154,7 +169,7 @@ Design: (unnamed)
       |vpiConstType:3
       |vpiSize:1
       |vpiDecompile:1'b1
-      |BIN:1
+      |vpiValue:1
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InstArray/dut.sv, line:2:1, endln:4:10
   |vpiParent:
@@ -197,7 +212,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:2:21, endln:2:22
         |vpiParent:
@@ -212,7 +227,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -270,7 +285,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
-        |UINT:1
+        |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:3:19, endln:3:20
         |vpiParent:
@@ -285,7 +300,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@top.u1.bus_conn), line:3:3, endln:3:11
       |vpiParent:

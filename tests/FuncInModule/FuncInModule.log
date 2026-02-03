@@ -1009,7 +1009,7 @@ Assignment                                            21
 Begin                                                 11
 BitSelect                                              9
 BitTypespec                                           11
-Constant                                              61
+Constant                                              62
 Design                                                 1
 ForStmt                                                2
 FuncCall                                               3
@@ -1017,7 +1017,8 @@ Function                                               3
 IODecl                                                 3
 Identifier                                             7
 IfElse                                                 3
-IntTypespec                                           69
+IntTypespec                                           70
+IntegerTypespec                                        1
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
@@ -1027,13 +1028,13 @@ ParamAssign                                            5
 Parameter                                              5
 Range                                                 20
 RefObj                                                48
-RefTypespec                                           91
+RefTypespec                                           93
 ReturnStmt                                             3
 SourceFile                                             1
 Variable                                               8
 WhileStmt                                              1
 ------------------------------------------------------------
-Total:                                               428
+Total:                                               433
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncInModule/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1142,7 +1143,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:2
-      |UINT:2
+      |vpiValue:2
   |vpiParamAssign:
   \_ParamAssign: , line:4:17, endln:4:26
     |vpiParent:
@@ -1163,7 +1164,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:4
-      |UINT:4
+      |vpiValue:4
   |vpiParamAssign:
   \_ParamAssign: , line:65:33, endln:65:66
     |vpiParent:
@@ -1289,7 +1290,7 @@ Design: (unnamed)
                   |vpiConstType:9
                   |vpiSize:64
                   |vpiDecompile:1
-                  |UINT:1
+                  |vpiValue:1
               |vpiRightRange:
               \_Constant: , line:11:14, endln:11:15
                 |vpiParent:
@@ -1304,7 +1305,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiRange:
             \_Range: , line:11:16, endln:11:22
               |vpiParent:
@@ -1323,7 +1324,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:15
-                |UINT:15
+                |vpiValue:15
               |vpiRightRange:
               \_Constant: , line:11:20, endln:11:21
                 |vpiParent:
@@ -1338,7 +1339,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiElemTypespec:
             \_RefTypespec: (work@rggen_or_reducer.get_sub_n_list), line:11:5, endln:11:8
               |vpiParent:
@@ -1374,7 +1375,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:15
-                |UINT:15
+                |vpiValue:15
               |vpiRightRange:
               \_Constant: , line:13:13, endln:13:14
                 |vpiParent:
@@ -1389,7 +1390,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiElemTypespec:
             \_RefTypespec: (work@rggen_or_reducer.get_sub_n_list), line:13:5, endln:13:8
               |vpiParent:
@@ -1420,7 +1421,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:15
-                |UINT:15
+                |vpiValue:15
               |vpiRightRange:
               \_Constant: , line:14:13, endln:14:14
                 |vpiParent:
@@ -1435,7 +1436,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiElemTypespec:
             \_RefTypespec: (work@rggen_or_reducer.get_sub_n_list), line:14:5, endln:14:8
               |vpiParent:
@@ -1448,6 +1449,25 @@ Design: (unnamed)
           \_BitTypespec: 
             |vpiParent:
             \_Begin: (work@rggen_or_reducer.get_sub_n_list)
+          |vpiTypespec:
+          \_IntegerTypespec: , line:18:19, endln:18:21
+            |vpiParent:
+            \_Begin: (work@rggen_or_reducer.get_sub_n_list)
+            |vpiValue:
+            \_Constant: , line:18:19, endln:18:21
+              |vpiParent:
+              \_IntegerTypespec: , line:18:19, endln:18:21
+              |vpiTypespec:
+              \_RefTypespec: (work@rggen_or_reducer.get_sub_n_list), line:18:19, endln:18:21
+                |vpiParent:
+                \_Constant: , line:18:19, endln:18:21
+                |vpiFullName:work@rggen_or_reducer.get_sub_n_list
+                |vpiActual:
+                \_IntTypespec: 
+              |vpiConstType:6
+              |vpiSize:2
+              |vpiDecompile:2'd16
+              |vpiValue:16
           |vpiImportTypespec:
           \_BitTypespec: , line:11:5, endln:11:8
           |vpiImportTypespec:
@@ -1470,6 +1490,8 @@ Design: (unnamed)
           \_Variable: (work@rggen_or_reducer.get_sub_n_list.half_n), line:14:23, endln:14:29
           |vpiImportTypespec:
           \_BitTypespec: 
+          |vpiImportTypespec:
+          \_IntegerTypespec: , line:18:19, endln:18:21
           |vpiStmt:
           \_Assignment: , line:16:5, endln:16:21
             |vpiParent:
@@ -1498,7 +1520,7 @@ Design: (unnamed)
               |vpiConstType:3
               |vpiSize:-1
               |vpiDecompile:'0
-              |BIN:0
+              |vpiValue:0
           |vpiStmt:
           \_Assignment: , line:17:5, endln:17:20
             |vpiParent:
@@ -1527,7 +1549,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiStmt:
           \_Assignment: , line:18:5, endln:18:25
             |vpiParent:
@@ -1546,6 +1568,13 @@ Design: (unnamed)
             \_Operation: , line:18:19, endln:18:25
               |vpiParent:
               \_Assignment: , line:18:5, endln:18:25
+              |vpiTypespec:
+              \_RefTypespec: (work@rggen_or_reducer.get_sub_n_list), line:18:19, endln:18:21
+                |vpiParent:
+                \_Operation: , line:18:19, endln:18:25
+                |vpiFullName:work@rggen_or_reducer.get_sub_n_list
+                |vpiActual:
+                \_IntegerTypespec: , line:18:19, endln:18:21
               |vpiOpType:67
               |vpiOperand:
               \_RefObj: (work@rggen_or_reducer.get_sub_n_list.n), line:18:23, endln:18:24
@@ -1586,7 +1615,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiStmt:
             \_Begin: (work@rggen_or_reducer.get_sub_n_list), line:19:27, endln:33:8
               |vpiParent:
@@ -1639,7 +1668,7 @@ Design: (unnamed)
                     |vpiConstType:9
                     |vpiSize:64
                     |vpiDecompile:2
-                    |UINT:2
+                    |vpiValue:2
               |vpiStmt:
               \_IfElse: , line:21:7, endln:29:10
                 |vpiParent:
@@ -1676,7 +1705,7 @@ Design: (unnamed)
                       |vpiConstType:9
                       |vpiSize:64
                       |vpiDecompile:4
-                      |UINT:4
+                      |vpiValue:4
                   |vpiOperand:
                   \_Operation: , line:21:31, endln:21:42
                     |vpiParent:
@@ -1704,7 +1733,7 @@ Design: (unnamed)
                       |vpiConstType:9
                       |vpiSize:64
                       |vpiDecompile:4
-                      |UINT:4
+                      |vpiValue:4
                 |vpiStmt:
                 \_Begin: (work@rggen_or_reducer.get_sub_n_list), line:21:45, endln:23:10
                   |vpiParent:
@@ -1771,7 +1800,7 @@ Design: (unnamed)
                       |vpiConstType:9
                       |vpiSize:64
                       |vpiDecompile:4
-                      |UINT:4
+                      |vpiValue:4
                   |vpiStmt:
                   \_Begin: (work@rggen_or_reducer.get_sub_n_list), line:24:32, endln:26:10
                     |vpiParent:
@@ -1819,7 +1848,7 @@ Design: (unnamed)
                         |vpiConstType:9
                         |vpiSize:64
                         |vpiDecompile:4
-                        |UINT:4
+                        |vpiValue:4
                   |vpiElseStmt:
                   \_Begin: (work@rggen_or_reducer.get_sub_n_list), line:27:12, endln:29:10
                     |vpiParent:
@@ -1913,7 +1942,7 @@ Design: (unnamed)
                   |vpiConstType:9
                   |vpiSize:64
                   |vpiDecompile:1
-                  |UINT:1
+                  |vpiValue:1
           |vpiStmt:
           \_ReturnStmt: , line:35:5, endln:35:16
             |vpiParent:
@@ -1969,7 +1998,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:1
-                |UINT:1
+                |vpiValue:1
             |vpiRightRange:
             \_Constant: , line:10:31, endln:10:32
               |vpiParent:
@@ -1984,7 +2013,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiRange:
           \_Range: , line:10:33, endln:10:39
             |vpiParent:
@@ -2003,7 +2032,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:15
-              |UINT:15
+              |vpiValue:15
             |vpiRightRange:
             \_Constant: , line:10:37, endln:10:38
               |vpiParent:
@@ -2018,7 +2047,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiElemTypespec:
           \_RefTypespec: (work@rggen_or_reducer.get_sub_n_list), line:10:22, endln:10:25
             |vpiParent:
@@ -2175,7 +2204,7 @@ Design: (unnamed)
                     |vpiConstType:9
                     |vpiSize:64
                     |vpiDecompile:0
-                    |UINT:0
+                    |vpiValue:0
                 |vpiStmt:
                 \_Begin: (work@rggen_or_reducer.get_offset_list), line:43:19, endln:45:10
                   |vpiParent:
@@ -2223,7 +2252,7 @@ Design: (unnamed)
                       |vpiConstType:9
                       |vpiSize:64
                       |vpiDecompile:0
-                      |UINT:0
+                      |vpiValue:0
                 |vpiElseStmt:
                 \_Begin: (work@rggen_or_reducer.get_offset_list), line:46:12, endln:48:10
                   |vpiParent:
@@ -2297,7 +2326,7 @@ Design: (unnamed)
                             |vpiConstType:9
                             |vpiSize:64
                             |vpiDecompile:1
-                            |UINT:1
+                            |vpiValue:1
                       |vpiOperand:
                       \_BitSelect: (work@rggen_or_reducer.get_offset_list.list), line:47:41, endln:47:46
                         |vpiParent:
@@ -2333,7 +2362,7 @@ Design: (unnamed)
                             |vpiConstType:9
                             |vpiSize:64
                             |vpiDecompile:1
-                            |UINT:1
+                            |vpiValue:1
             |vpiForInitStmt:
             \_Assignment: , line:42:10, endln:42:19
               |vpiParent:
@@ -2354,7 +2383,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiForIncStmt:
             \_Operation: , line:42:26, endln:42:29
               |vpiParent:
@@ -2434,7 +2463,7 @@ Design: (unnamed)
                   |vpiConstType:9
                   |vpiSize:64
                   |vpiDecompile:1
-                  |UINT:1
+                  |vpiValue:1
               |vpiRightRange:
               \_Constant: , line:40:14, endln:40:15
                 |vpiParent:
@@ -2449,7 +2478,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiRange:
             \_Range: , line:40:16, endln:40:22
               |vpiParent:
@@ -2468,7 +2497,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:15
-                |UINT:15
+                |vpiValue:15
               |vpiRightRange:
               \_Constant: , line:40:20, endln:40:21
                 |vpiParent:
@@ -2483,7 +2512,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiElemTypespec:
             \_RefTypespec: (work@rggen_or_reducer.get_offset_list), line:40:5, endln:40:8
               |vpiParent:
@@ -2566,7 +2595,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:1
-                |UINT:1
+                |vpiValue:1
             |vpiRightRange:
             \_Constant: , line:39:31, endln:39:32
               |vpiParent:
@@ -2581,7 +2610,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiRange:
           \_Range: , line:39:33, endln:39:39
             |vpiParent:
@@ -2600,7 +2629,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:15
-              |UINT:15
+              |vpiValue:15
             |vpiRightRange:
             \_Constant: , line:39:37, endln:39:38
               |vpiParent:
@@ -2615,7 +2644,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiElemTypespec:
           \_RefTypespec: (work@rggen_or_reducer.get_offset_list), line:39:22, endln:39:25
             |vpiParent:
@@ -2659,7 +2688,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:1
-                |UINT:1
+                |vpiValue:1
             |vpiRightRange:
             \_Constant: , line:39:65, endln:39:66
               |vpiParent:
@@ -2674,7 +2703,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiRange:
           \_Range: , line:39:67, endln:39:73
             |vpiParent:
@@ -2693,7 +2722,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:15
-              |UINT:15
+              |vpiValue:15
             |vpiRightRange:
             \_Constant: , line:39:71, endln:39:72
               |vpiParent:
@@ -2708,7 +2737,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiElemTypespec:
           \_RefTypespec: (work@rggen_or_reducer.get_offset_list), line:39:56, endln:39:59
             |vpiParent:
@@ -2883,7 +2912,7 @@ Design: (unnamed)
                       |vpiConstType:9
                       |vpiSize:64
                       |vpiDecompile:0
-                      |UINT:0
+                      |vpiValue:0
                   |vpiOperand:
                   \_Constant: , line:59:42, endln:59:43
                     |vpiParent:
@@ -2898,7 +2927,7 @@ Design: (unnamed)
                     |vpiConstType:9
                     |vpiSize:64
                     |vpiDecompile:1
-                    |UINT:1
+                    |vpiValue:1
                   |vpiOperand:
                   \_Constant: , line:59:46, endln:59:47
                     |vpiParent:
@@ -2913,7 +2942,7 @@ Design: (unnamed)
                     |vpiConstType:9
                     |vpiSize:64
                     |vpiDecompile:0
-                    |UINT:0
+                    |vpiValue:0
             |vpiForInitStmt:
             \_Assignment: , line:58:10, endln:58:19
               |vpiParent:
@@ -2934,7 +2963,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:0
-                |UINT:0
+                |vpiValue:0
             |vpiForIncStmt:
             \_Operation: , line:58:26, endln:58:29
               |vpiParent:
@@ -3016,7 +3045,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiStmt:
           \_ForStmt: (work@rggen_or_reducer.get_next_n), line:58:5, endln:60:8
           |vpiStmt:
@@ -3079,7 +3108,7 @@ Design: (unnamed)
                 |vpiConstType:9
                 |vpiSize:64
                 |vpiDecompile:1
-                |UINT:1
+                |vpiValue:1
             |vpiRightRange:
             \_Constant: , line:54:46, endln:54:47
               |vpiParent:
@@ -3094,7 +3123,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiRange:
           \_Range: , line:54:48, endln:54:54
             |vpiParent:
@@ -3113,7 +3142,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:15
-              |UINT:15
+              |vpiValue:15
             |vpiRightRange:
             \_Constant: , line:54:52, endln:54:53
               |vpiParent:
@@ -3128,7 +3157,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
-              |UINT:0
+              |vpiValue:0
           |vpiElemTypespec:
           \_RefTypespec: (work@rggen_or_reducer.get_next_n), line:54:37, endln:54:40
             |vpiParent:
@@ -3231,7 +3260,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:65:24, endln:65:25
         |vpiParent:
@@ -3246,7 +3275,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiRange:
     \_Range: , line:65:26, endln:65:32
       |vpiParent:
@@ -3265,7 +3294,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:15
-        |UINT:15
+        |vpiValue:15
       |vpiRightRange:
       \_Constant: , line:65:30, endln:65:31
         |vpiParent:
@@ -3280,7 +3309,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@rggen_or_reducer), line:65:15, endln:65:18
       |vpiParent:
@@ -3324,7 +3353,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:66:24, endln:66:25
         |vpiParent:
@@ -3339,7 +3368,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiRange:
     \_Range: , line:66:26, endln:66:32
       |vpiParent:
@@ -3358,7 +3387,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:15
-        |UINT:15
+        |vpiValue:15
       |vpiRightRange:
       \_Constant: , line:66:30, endln:66:31
         |vpiParent:
@@ -3373,7 +3402,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiElemTypespec:
     \_RefTypespec: (work@rggen_or_reducer), line:66:15, endln:66:18
       |vpiParent:
@@ -3417,7 +3446,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:69:19, endln:69:20
         |vpiParent:
@@ -3432,7 +3461,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
     |vpiRange:
     \_Range: , line:69:21, endln:69:32
       |vpiParent:
@@ -3464,7 +3493,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
-          |UINT:1
+          |vpiValue:1
       |vpiRightRange:
       \_Constant: , line:69:30, endln:69:31
         |vpiParent:
@@ -3479,7 +3508,7 @@ Design: (unnamed)
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
-        |UINT:0
+        |vpiValue:0
   |vpiImportTypespec:
   \_Function: (work@rggen_or_reducer.get_sub_n_list), line:10:3, endln:36:14
   |vpiImportTypespec:

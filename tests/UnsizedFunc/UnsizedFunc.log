@@ -201,7 +201,7 @@ FuncCall                                               1
 Function                                               1
 Identifier                                             4
 Initial                                                1
-IntTypespec                                           10
+IntTypespec                                           11
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -213,14 +213,15 @@ Port                                                   3
 Range                                                  2
 RefModule                                              1
 RefObj                                                 5
-RefTypespec                                           13
+RefTypespec                                           14
 ReturnStmt                                             1
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                69
+Total:                                                71
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedFunc/slpp_all/surelog.uhdm ...
+[ERR:IG0814] ${SURELOG_DIR}/tests/UnsizedFunc/dut.sv:11:11: Invalid Name id:56, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -287,7 +288,7 @@ Design: (unnamed)
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:12
-      |UINT:12
+      |vpiValue:12
   |vpiInternalScope:
   \_Function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
     |vpiParent:
@@ -338,7 +339,7 @@ Design: (unnamed)
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:1
-              |UINT:1
+              |vpiValue:1
           |vpiRightRange:
           \_Constant: , line:6:23, endln:6:24
             |vpiParent:
@@ -353,7 +354,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:0
-            |UINT:0
+            |vpiValue:0
       |vpiTypespec:
       \_IntTypespec: 
         |vpiParent:
@@ -408,7 +409,7 @@ Design: (unnamed)
           |vpiConstType:3
           |vpiSize:-1
           |vpiDecompile:'1
-          |BIN:1
+          |vpiValue:1
       |vpiStmt:
       \_ReturnStmt: , line:7:7, endln:7:15
         |vpiParent:
@@ -456,7 +457,7 @@ Design: (unnamed)
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:1
-            |UINT:1
+            |vpiValue:1
         |vpiRightRange:
         \_Constant: , line:5:39, endln:5:40
           |vpiParent:
@@ -471,7 +472,7 @@ Design: (unnamed)
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
-          |UINT:0
+          |vpiValue:0
     |vpiTypespec:
     \_IntTypespec: 
       |vpiParent:
@@ -539,6 +540,13 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:10:4, endln:12:7
       |vpiFullName:work@prim_lfsr
+      |vpiTypespec:
+      \_IntTypespec: , line:11:11, endln:11:14
+        |vpiParent:
+        \_Begin: (work@prim_lfsr), line:10:12, endln:12:7
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:11:11, endln:11:14
       |vpiStmt:
       \_Assignment: , line:11:7, endln:11:25
         |vpiParent:
@@ -557,6 +565,14 @@ Design: (unnamed)
         \_Operation: , line:11:11, endln:11:25
           |vpiParent:
           \_Assignment: , line:11:7, endln:11:25
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_lfsr.int), line:11:11, endln:11:14
+            |vpiParent:
+            \_Operation: , line:11:11, endln:11:25
+            |vpiName:int
+            |vpiFullName:work@prim_lfsr.int
+            |vpiActual:
+            \_IntTypespec: , line:11:11, endln:11:14
           |vpiOpType:67
           |vpiOperand:
           \_FuncCall: (get_1s), line:11:16, endln:11:24
@@ -656,6 +672,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

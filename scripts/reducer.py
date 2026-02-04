@@ -123,7 +123,7 @@ def _run_reducer(name, test_dirpath, uhdm_src_filepath, uhdm_dst_filepath, reduc
 
   args = [reducer_filepath, uhdm_src_filepath, uhdm_dst_filepath]
   if verbose:
-    args.append['-v']
+    args.append('-v')
 
   print('Launching reducer with arguments:')
   pprint.pprint(args)

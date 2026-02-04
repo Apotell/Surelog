@@ -328,11 +328,15 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component, const File
       case uhdm::UhdmType::EnumTypespec:
       case uhdm::UhdmType::IntegerTypespec:
       case uhdm::UhdmType::TimeTypespec: {
+        uhdm::Variable* var = s.make<uhdm::Variable>();
+        //VObjectType::paNetType_Wire
         if (isInModule) {
-          obj = s.make<uhdm::Net>();
-        } else {
-          obj = s.make<uhdm::Variable>();
+          if (UhdmWriter::getVpiNetType(subnettype))
+            var->setNetType(UhdmWriter::getVpiNetType(subnettype));
+          else
+            var->setNetType(vpiWire);
         }
+        obj = var;
       } break;
       case uhdm::UhdmType::BitTypespec:
       case uhdm::UhdmType::ByteTypespec:
@@ -369,17 +373,18 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component, const File
   }
   // default type (fallback)
   if (obj == nullptr) {
+    uhdm::Variable* var = s.make<uhdm::Variable>();
     if (isInModule) {
-      obj = s.make<uhdm::Net>();
-    } else {
-      obj = s.make<uhdm::Variable>();
+      if (UhdmWriter::getVpiNetType(subnettype))
+        var->setNetType(UhdmWriter::getVpiNetType(subnettype));
+      else
+        var->setNetType(vpiWire);
     }
+    obj = var;
   }
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
     var->setName(signame);
-  } else if (Net* const net = any_cast<Net>(obj)) {
-    net->setName(signame);
   }
 
   if (tps != nullptr) {
@@ -462,37 +467,50 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component, Signal* sig
     }
   }
 
-  if (Net* const net = any_cast<Net>(obj)) {
-    net->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-    NodeId idValue = fC->Sibling(signalId);
-    while (idValue && (fC->Type(idValue) != VObjectType::paConstant_expression) &&
-           (fC->Type(idValue) != VObjectType::paExpression)) {
-      idValue = fC->Sibling(idValue);
-    }
-    if (idValue) {
-      if (uhdm::Expr* const rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr))) {
-        net->setValue(rhs);
-      }
-    }
-  }
+  //if (Net* const net = any_cast<Net>(obj)) {
+  //  net->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
+  //  NodeId idValue = fC->Sibling(signalId);
+  //  while (idValue && (fC->Type(idValue) != VObjectType::paConstant_expression) &&
+  //         (fC->Type(idValue) != VObjectType::paExpression)) {
+  //    idValue = fC->Sibling(idValue);
+  //  }
+  //  if (idValue) {
+  //    if (uhdm::Expr* const rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr))) {
+  //      net->setValue(rhs);
+  //    }
+  //  }
+  //}
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
-    var->setConstantVariable(sig->isConst());
-    var->setIsRandomized(sig->isRand() || sig->isRandc());
-    var->setAutomatic(!sig->isStatic());
-    if (sig->isRand()) {
-      var->setRandType(vpiRand);
-    } else if (sig->isRandc()) {
-      var->setRandType(vpiRandC);
+    if (var->getNetType()) {
+      NodeId idValue = fC->Sibling(signalId);
+      while (idValue && (fC->Type(idValue) != VObjectType::paConstant_expression) &&
+             (fC->Type(idValue) != VObjectType::paExpression)) {
+        idValue = fC->Sibling(idValue);
+      }
+      if (idValue) {
+        if (uhdm::Expr* const rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr))) {
+          var->setValue(rhs);
+        }
+      }
     } else {
-      var->setRandType(vpiNotRand);
-    }
-    if (sig->isProtected()) {
-      var->setVisibility(vpiProtectedVis);
-    } else if (sig->isLocal()) {
-      var->setVisibility(vpiLocalVis);
-    } else {
-      var->setVisibility(vpiPublicVis);
+      var->setConstantVariable(sig->isConst());
+      var->setIsRandomized(sig->isRand() || sig->isRandc());
+      var->setAutomatic(!sig->isStatic());
+      if (sig->isRand()) {
+        var->setRandType(vpiRand);
+      } else if (sig->isRandc()) {
+        var->setRandType(vpiRandC);
+      } else {
+        var->setRandType(vpiNotRand);
+      }
+      if (sig->isProtected()) {
+        var->setVisibility(vpiProtectedVis);
+      } else if (sig->isLocal()) {
+        var->setVisibility(vpiLocalVis);
+      } else {
+        var->setVisibility(vpiPublicVis);
+      }
     }
   }
   return obj;

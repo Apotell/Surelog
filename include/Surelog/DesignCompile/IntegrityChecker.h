@@ -201,7 +201,7 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitMulticlockSequenceExpr(const uhdm::MulticlockSequenceExpr* object) final;
   void visitNamedEvent(const uhdm::NamedEvent* object) final;
   void visitNamedEventArray(const uhdm::NamedEventArray* object) final;
-  void visitNet(const uhdm::Net* object) final;
+  //void visitNet(const uhdm::Net* object) final;
   void visitNullStmt(const uhdm::NullStmt* object) final;
   void visitOperation(const uhdm::Operation* object) final;
   void visitOrderedWait(const uhdm::OrderedWait* object) final;
@@ -396,7 +396,7 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitMulticlockSequenceExprCollection(const uhdm::Any* object, const uhdm::MulticlockSequenceExprCollection& objects) final;
   void visitNamedEventCollection(const uhdm::Any* object, const uhdm::NamedEventCollection& objects) final;
   void visitNamedEventArrayCollection(const uhdm::Any* object, const uhdm::NamedEventArrayCollection& objects) final;
-  void visitNetCollection(const uhdm::Any* object, const uhdm::NetCollection& objects) final;
+  //void visitNetCollection(const uhdm::Any* object, const uhdm::NetCollection& objects) final;
   void visitNetDriversCollection(const uhdm::Any* object, const uhdm::NetDriversCollection& objects) final;
   void visitNetLoadsCollection(const uhdm::Any* object, const uhdm::NetLoadsCollection& objects) final;
   void visitNullStmtCollection(const uhdm::Any* object, const uhdm::NullStmtCollection& objects) final;

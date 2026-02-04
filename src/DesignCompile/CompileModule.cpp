@@ -29,6 +29,7 @@
 #include "Surelog/Common/Session.h"
 #include "Surelog/Common/SymbolId.h"
 #include "Surelog/Design/ClockingBlock.h"
+#include "Surelog/Design/DesignElement.h"
 #include "Surelog/Design/FileCNodeId.h"
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/Design/ModuleDefinition.h"
@@ -38,6 +39,7 @@
 #include "Surelog/Design/ValuedComponentI.h"
 #include "Surelog/DesignCompile/CompileDesign.h"
 #include "Surelog/DesignCompile/CompileHelper.h"
+#include "Surelog/DesignCompile/UhdmWriter.h"
 #include "Surelog/ErrorReporting/Error.h"
 #include "Surelog/ErrorReporting/ErrorContainer.h"
 #include "Surelog/ErrorReporting/ErrorDefinition.h"
@@ -61,7 +63,7 @@
 #include <uhdm/initial.h>
 #include <uhdm/io_decl.h>
 #include <uhdm/module_array.h>
-#include <uhdm/net.h>
+//#include <uhdm/net.h>
 #include <uhdm/property_decl.h>
 #include <uhdm/ref_module.h>
 #include <uhdm/ref_obj.h>
@@ -271,14 +273,14 @@ bool CompileModule::collectUdpObjects_() {
       case VObjectType::paUdp_output_declaration:
       case VObjectType::paUdp_reg_declaration: {
         NodeId Output = fC->Child(id);
-        uhdm::Net* net = s.make<uhdm::Net>();
+        uhdm::Variable* net = s.make<uhdm::Variable>();
         if (fC->Type(Output) == VObjectType::paAttribute_instance) {
           if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_module, fC, Output, net)) {
             net->setAttributes(attributes);
           }
           while (fC->Type(Output) == VObjectType::paAttribute_instance) Output = fC->Sibling(Output);
         }
-
+        net->setNetType(UhdmWriter::getVpiNetType(m_module->getDesignElement()->m_defaultNetType));
         const std::string_view outputname = fC->SymName(Output);
         fC->populateCoreMembers(Output, Output, net);
         if (std::vector<uhdm::IODecl*>* ios = defn->getIODecls()) {
@@ -309,12 +311,13 @@ bool CompileModule::collectUdpObjects_() {
         while (Identifier) {
           const std::string_view inputname = fC->SymName(Identifier);
           if (std::vector<uhdm::IODecl*>* ios = defn->getIODecls()) {
-            uhdm::Net* net = s.make<uhdm::Net>();
+            uhdm::Variable* net = s.make<uhdm::Variable>();
             fC->populateCoreMembers(Identifier, Identifier, net);
             if (attributes != nullptr) {
               net->setAttributes(attributes);
               for (auto a : *attributes) a->setParent(net);
             }
+            net->setNetType(UhdmWriter::getVpiNetType(m_module->getDesignElement()->m_defaultNetType));
             for (auto io : *ios) {
               if (io->getName() == inputname) {
                 io->setExpr(net);

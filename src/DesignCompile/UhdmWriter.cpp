@@ -470,9 +470,9 @@ void UhdmWriter::writeNets(DesignComponent* mod, const std::vector<Signal*>& ori
                            uhdm::Serializer& s, SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
                            SignalMap& portMap, ModuleInstance* instance /* = nullptr */) {
   for (auto& orig_net : orig_nets) {
-    uhdm::Net* dest_net = nullptr;
+    uhdm::Variable* dest_net = nullptr;
     if (instance == nullptr) {
-      dest_net = s.make<uhdm::Net>();
+      dest_net = s.make<uhdm::Variable>();
     }
     if (dest_net) {
       const FileContent* fC = orig_net->getFileContent();

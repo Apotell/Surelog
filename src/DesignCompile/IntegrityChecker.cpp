@@ -50,7 +50,7 @@ IntegrityChecker::IntegrityChecker(Session* session)
           uhdm::UhdmType::Modport,
           uhdm::UhdmType::ModuleTypespec,
           uhdm::UhdmType::NamedEvent,
-          uhdm::UhdmType::Net,
+          //uhdm::UhdmType::Net,
           uhdm::UhdmType::Package,
           uhdm::UhdmType::Parameter,
           uhdm::UhdmType::Port,
@@ -402,10 +402,6 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
       // (* uhdm::Attribute*) interface <interface_name>;
       // (* uhdm::Attribute*) package <package_name>;
       // (* uhdm::Attribute*) program <program_name>;
-      expectedRelation = LineColumnRelation::Before;
-    } else if (parent->Cast<uhdm::Net>() != nullptr) {
-      // (* uhdm::Attribute*) input <logic_name>;
-      // (* uhdm::Attribute*) output <logic_name>;
       expectedRelation = LineColumnRelation::Before;
     } else if (parent->Cast<uhdm::Port>() != nullptr) {
       // (* uhdm::Attribute*) input <port_name>
@@ -884,7 +880,7 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
       uhdm::UhdmType::ModuleTypespec,
       uhdm::UhdmType::NamedEvent,
       uhdm::UhdmType::NamedEventArray,
-      uhdm::UhdmType::Net,
+      //uhdm::UhdmType::Net,
       uhdm::UhdmType::ParamAssign,
       uhdm::UhdmType::Parameter,
       uhdm::UhdmType::PropertyDecl,
@@ -922,7 +918,7 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
     }
   }
 
-  const std::set<uhdm::UhdmType> allowedUdpChildren{uhdm::UhdmType::Net, uhdm::UhdmType::IODecl,
+  const std::set<uhdm::UhdmType> allowedUdpChildren{uhdm::UhdmType::Variable, uhdm::UhdmType::IODecl,
                                                     uhdm::UhdmType::TableEntry};
   bool expectUdpDefn = (allowedUdpChildren.find(object->getUhdmType()) != allowedUdpChildren.cend());
 
@@ -1140,7 +1136,7 @@ void IntegrityChecker::visitModuleTypespec(const uhdm::ModuleTypespec* object) {
 void IntegrityChecker::visitMulticlockSequenceExpr(const uhdm::MulticlockSequenceExpr* object) {}
 void IntegrityChecker::visitNamedEvent(const uhdm::NamedEvent* object) {}
 void IntegrityChecker::visitNamedEventArray(const uhdm::NamedEventArray* object) {}
-void IntegrityChecker::visitNet(const uhdm::Net* object) {}
+//void IntegrityChecker::visitNet(const uhdm::Net* object) {}
 void IntegrityChecker::visitNullStmt(const uhdm::NullStmt* object) {}
 void IntegrityChecker::visitOperation(const uhdm::Operation* object) {}
 void IntegrityChecker::visitOrderedWait(const uhdm::OrderedWait* object) {}
@@ -1440,7 +1436,7 @@ void IntegrityChecker::visitModuleTypespecCollection(const uhdm::Any* object, co
 void IntegrityChecker::visitMulticlockSequenceExprCollection(const uhdm::Any* object, const uhdm::MulticlockSequenceExprCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNamedEventCollection(const uhdm::Any* object, const uhdm::NamedEventCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNamedEventArrayCollection(const uhdm::Any* object, const uhdm::NamedEventArrayCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitNetCollection(const uhdm::Any* object, const uhdm::NetCollection& objects) { reportDuplicates(object, objects); }
+//void IntegrityChecker::visitNetCollection(const uhdm::Any* object, const uhdm::NetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNetDriversCollection(const uhdm::Any* object, const uhdm::NetDriversCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNetLoadsCollection(const uhdm::Any* object, const uhdm::NetLoadsCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitNullStmtCollection(const uhdm::Any* object, const uhdm::NullStmtCollection& objects) { reportDuplicates(object, objects); }

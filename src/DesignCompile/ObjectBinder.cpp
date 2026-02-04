@@ -411,7 +411,7 @@ const uhdm::Any* ObjectBinder::findInScope(std::string_view name, RefType refTyp
 const uhdm::Any* ObjectBinder::findInInstance(std::string_view name, RefType refType, const uhdm::Instance* scope) {
   if (scope == nullptr) return nullptr;
 
-  if (const uhdm::Any* const actual = findInCollection(name, refType, scope->getNets(), scope)) {
+  if (const uhdm::Any* const actual = findInCollection(name, refType, scope->getVariables(), scope)) {
     return actual;
   } else if (const uhdm::Any* const actual = findInCollection(name, refType, scope->getTaskFuncs(), scope)) {
     return actual;
@@ -1027,7 +1027,7 @@ const uhdm::Any* ObjectBinder::getHierPathElemPrefix(const uhdm::Any* object) {
 
   if (const uhdm::ArrayTypespec* const at = uhdm::getTypespec<uhdm::ArrayTypespec>(ro)) {
     return uhdm::getElemTypespec(at);
-  } else if (const uhdm::Net* const ln = ro->getActual<uhdm::Net>()) {
+  } else if (const uhdm::Variable* const ln = ro->getActual<uhdm::Variable>()) {
     // Ideally logic_net::Typespec should be valid but for
     // too many (or rather most) cases, the Typespec isn't set.
     // So, use the corresponding port in the parent module to
@@ -1293,7 +1293,7 @@ bool ObjectBinder::createDefaultNets() {
     if (defaultNetType != VObjectType::NO_TYPE) {
       const uhdm::Scope* const parent = uhdm::getParent<uhdm::Scope>(object);
 
-      uhdm::Net* const net = m_serializer.make<uhdm::Net>();
+      uhdm::Variable* const net = m_serializer.make<uhdm::Variable>();
       net->setName(object->getName());
       net->setParent(const_cast<uhdm::Scope*>(parent));
       net->setNetType(UhdmWriter::getVpiNetType(defaultNetType));

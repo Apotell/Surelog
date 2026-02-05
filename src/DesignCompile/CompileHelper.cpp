@@ -581,6 +581,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       fC->populateCoreMembers(enum_name_declaration, enum_name_declaration, econst);
       fC->populateCoreMembers(enumNameId, enumNameId, econst->getNameObj());
       uhdm::Constant* c = constantFromValue(value, econst);
+
       NodeId tmpId = enumValueId ? enumValueId : enumNameId;
       fC->populateCoreMembers(tmpId, tmpId, c->getTypespec());
       econst->setValue(c);
@@ -3533,7 +3534,7 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
 
       uhdm::Parameter* param = s.make<uhdm::Parameter>();
       param->setParent(pany);
-      fC->populateCoreMembers(Param_assignment, Param_assignment, param);
+      fC->populateCoreMembers(name, name, param);
       Parameter* p = new Parameter(fC, name, fC->SymName(name), fC->Child(Data_type_or_implicit), port_param);
       while (fC->Type(value) == VObjectType::paUnpacked_dimension) {
         value = fC->Sibling(value);

@@ -426,7 +426,8 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       rt->setParent(c);
       c->setTypespec(rt);
-      fC->populateCoreMembers(child, child, rt);
+      // fC->populateCoreMembers(child, child, rt);
+      rt->setFile(fC->getName());
 
       uhdm::Typespec *tps = nullptr;
       std::string value = std::string(fC->SymName(child));
@@ -570,7 +571,8 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       rt->setParent(c);
       c->setTypespec(rt);
-      fC->populateCoreMembers(child, child, rt);
+      // fC->populateCoreMembers(child, child, rt);
+      rt->setFile(fC->getName());
 
       uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
       tps->setParent(pscope);
@@ -614,7 +616,8 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       rt->setParent(c);
       c->setTypespec(rt);
-      fC->populateCoreMembers(child, child, rt);
+      // fC->populateCoreMembers(child, child, rt);
+      rt->setFile(fC->getName());
 
       uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
       tps->setParent(pscope);
@@ -641,7 +644,8 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       rt->setParent(c);
       c->setTypespec(rt);
-      fC->populateCoreMembers(child, child, rt);
+      //fC->populateCoreMembers(child, child, rt);
+      rt->setFile(fC->getName());
 
       uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
       tps->setParent(pscope);

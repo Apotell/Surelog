@@ -306,6 +306,7 @@ jobs:
 
   reducer:
     name: "Reducer | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
+    if: always()
     needs: regression
     runs-on: ${{ matrix.config.os }}
 

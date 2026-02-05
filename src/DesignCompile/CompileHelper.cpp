@@ -579,7 +579,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       econst->setName(enumName);
       econst->setParent(enum_t);
       fC->populateCoreMembers(enum_name_declaration, enum_name_declaration, econst);
-
+      fC->populateCoreMembers(enumNameId, enumNameId, econst->getNameObj());
       uhdm::Constant* c = constantFromValue(value, econst);
       NodeId tmpId = enumValueId ? enumValueId : enumNameId;
       fC->populateCoreMembers(tmpId, tmpId, c->getTypespec());

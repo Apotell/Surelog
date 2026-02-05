@@ -1223,7 +1223,8 @@ void IntegrityChecker::visitRefTypespec(const uhdm::RefTypespec* object) {
     if (isRefVar && isValidName(object)) {
       reportInvalidName(object);
     }
-  } else if (const uhdm::Any* const actual = object->getActual()) {
+  }
+  if (const uhdm::Any* const actual = object->getActual()) {
     if (actual->getUhdmType() == uhdm::UhdmType::UnsupportedTypespec) {
       reportUnsupportedTypespec(object);
     }

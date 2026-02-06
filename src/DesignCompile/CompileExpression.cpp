@@ -690,7 +690,8 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       rt->setParent(c);
       c->setTypespec(rt);
-      fC->populateCoreMembers(child, child, rt);
+      // fC->populateCoreMembers(child, child, rt);
+      rt->setFile(fC->getName());
 
       uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
       tps->setParent(pscope);
@@ -1164,7 +1165,8 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
       r1->setFullName(name);
       elems->emplace_back(r1);
       r1->setParent(path);
-      fC->populateCoreMembers(fC->Parent(Bit_select), fC->Child(fC->Parent(Bit_select)), r1);
+      // fC->populateCoreMembers(fC->Parent(Bit_select), fC->Child(fC->Parent(Bit_select)), r1);
+      r1->setFile(fC->getName());
       while (Bit_select) {
         if ((fC->Type(Bit_select) == VObjectType::paPs_or_hierarchical_identifier)) {
           uhdm::RefObj *r = s.make<uhdm::RefObj>();
@@ -1211,7 +1213,8 @@ uhdm::Any *CompileHelper::compileSelectExpression(DesignComponent *component, co
             r2->setName(fC->SymName(Bit_select));
             r2->setFullName(fC->SymName(Bit_select));
             r2->setParent(path);
-            fC->populateCoreMembers(Bit_select, Bit_select, r2);
+            // fC->populateCoreMembers(Bit_select, Bit_select, r2);
+            r2->setFile(fC->getName());
             elems->emplace_back(r2);
             hname.append(".").append(fC->SymName(Bit_select));
           }

@@ -3468,16 +3468,21 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
     while (Param_assignment) {
       NodeId Identifier = fC->Child(Param_assignment);
       NodeId Constant_param_expression = fC->Sibling(Identifier);
+      uhdm::Parameter* params = s.make<uhdm::Parameter>();
       uhdm::TypeParameter* p = s.make<uhdm::TypeParameter>();
-      p->setName(fC->SymName(Identifier));
+      p->setName(fC->SymName(Param_assignment));
       p->setParent(pany);
-      fC->populateCoreMembers(Identifier, Identifier, p);
+      params->setName(fC->SymName(Identifier));
+      params->setParent(pany);
+      fC->populateCoreMembers(Param_assignment, Param_assignment, p);
+      fC->populateCoreMembers(Identifier, Identifier, params);
       NodeId Data_type = fC->Child(Constant_param_expression);
       if (uhdm::Typespec* tps = compileTypespec(component, fC, Data_type, InvalidNodeId, p, nullptr, false)) {
         if (p->getTypespec() == nullptr) {
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           setRefTypespecName(tpsRef, tps, tps->getName());
-          fC->populateCoreMembers(Data_type, Data_type, tpsRef);
+          // fC->populateCoreMembers(Data_type, Data_type, tpsRef);
+          tpsRef->setFile(fC->getName());
           tpsRef->setParent(p);
           p->setTypespec(tpsRef);
         }

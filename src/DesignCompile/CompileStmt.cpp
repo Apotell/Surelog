@@ -288,6 +288,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(DesignComponent* component, cons
       if (endLabelId) {
         endLabel = fC->SymName(endLabelId);
         begin->setEndLabel(endLabel);
+        fC->populateCoreMembers(endLabelId, endLabelId, begin->getEndLabelObj());
       }
       stmt = begin;
       scope = begin;

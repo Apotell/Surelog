@@ -1,28 +1,20 @@
 module tb;
-
-  int i; real r; byte b; logic [31:0] l;
+  int i; real r; logic [31:0] l;
 
   initial begin
     // $itor
-    i = -5; 
-    r = $itor(i);
+    r = $itor(-5);
 
     // $rtoi
-    r = 3.9;
-    i = $rtoi(r);
+    i = $rtoi(3.9);
 
     // $signed
-    i = 127;   
-    l = $signed(i);
+    l = $signed(127);
 
     // $unsigned
-    i = -1; 
-    l = $unsigned(i);
+    l = $unsigned(-1);
 
     // $cast
-    void'($cast(i, 3.9);
-
+    void'($cast(i, 3.9));
   end
-
 endmodule
-

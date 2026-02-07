@@ -1,32 +1,16 @@
 module tb;
 
-  real a, res;
+  real res = 0.0;
 
   initial begin
-    
-    a = 1;
-    res = $clog2(a);
-
-    a = 1.0;
-    res = $ln(a);
-
-    a = 1.0;
-    res = $log10(a);
-
-    a = 1.0;
-    res = $exp(a);
-
-    a = 1.0;
-    res = $sqrt(a);
-
-    a = 1.1;
-    res = $floor(a);
-
-    a = 1.1;
-    res = $ceil(a);
-
+    res = $clog2(1);
+    res = $ln(1.0);
+    res = $log10(1.0);
+    res = $exp(1.0);
+    res = $sqrt(1.0);
+    res = $floor(1.1);
+    res = $ceil(1.1);
     $finish;
   end
 
 endmodule
-	

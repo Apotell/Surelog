@@ -82,6 +82,9 @@ NodeId CommonListenerHelper::addVObject(ParseTree* tree, SymbolId sym, VObjectTy
                                         bool skipParenting /* = false */) {
   auto [fid, sl, sc, el, ec] = getFileLine(tree, nullptr);
 
+  if(objtype == VObjectType::INACTIVE_BODY_END){
+    int abc = 0;
+  }
   NodeId objectIndex = m_fileContent->addObject(sym, fid, objtype, sl, sc, el, ec);
   VObject* const inserted = m_fileContent->MutableObject(objectIndex);
   PathId ppFileId;

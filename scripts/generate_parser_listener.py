@@ -841,7 +841,7 @@ def _generate_SV3_1aParserTreeListener_cpp(tokens: list, rules: list, template_f
   rule_case_statements = [f'      case SV3_1aParser::Rule{rule}: addVObject(ctx, VObjectType::pa{rule}); break;' for rule in rules]
   visit_case_statements = [
     f'    case SV3_1aParser::{token}: nodeId = addVObject(node, VObjectType::{token}); break;'
-    for token in tokens if token not in ['ESCAPED_IDENTIFIER', 'PREPROC_BEGIN', 'PREPROC_END']
+    for token in tokens if token not in ['ESCAPED_IDENTIFIER', 'PREPROC_BEGIN', 'PREPROC_END', 'INACTIVE_BODY_BEGIN', 'INACTIVE_BODY_END']
   ]
 
   content = open(template_filepath, 'rt').read()

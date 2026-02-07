@@ -158,15 +158,16 @@ std::string FileContent::printObjects() const {
   for (const PathId& include : includes) {
     strm << "INCL f<" << (RawPathId)include << ">: " << fileSystem->toPath(include) << "\n";
   }
-  if (const NodeId id = getRootNode()) {
-    printTree(strm, id, 0);
-  } else {
+  // if (const NodeId id = getRootNode()) {
+  //   printTree(strm, id, 0);
+  // } else {
     for (size_t i = 0, ni = m_objects.size(); i < ni; ++i) {
-      if (m_objects[i].m_type == VObjectType::PREPROC_END) {
-        printTree(strm, NodeId(i), 0);
-      }
+      // if (m_objects[i].m_type == VObjectType::PREPROC_END) {
+      //   printTree(strm, NodeId(i), 0);
+      // }
+      strm << printObject(NodeId(i)) << "\n";
     }
-  }
+  // }
   strm << "AST_DEBUG_END\n";
   return strm.str();
 }

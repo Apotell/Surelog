@@ -252,6 +252,15 @@ void SV3_1aParserTreeListener::processPendingTokens(antlr4::tree::ParseTree *tre
     antlr4::Token *const lastToken = m_tokens->get(m_lastVisitedTokenIndex);
     ++m_lastVisitedTokenIndex;
 
+    NodeId root = m_fileContent->getRootNode();
+    std::cout << "==== root: " << root << std::endl;
+    NodeId topLevelRule = m_fileContent->sl_collect(root, VObjectType::paTop_level_rule);
+    std::cout << "==== topLevelRule: " << topLevelRule << std::endl;
+    VObject topLevelRuleObj = m_fileContent->Object(topLevelRule);
+    uint32_t count = m_fileContent->getSize();
+    std::cout << "==== count: " << count << std::endl;
+    std::cout << "==== lastToken->getType(): " << lastToken->getType() << std::endl;
+
     switch (lastToken->getType()) {
       case SV3_1aParser::PREPROC_BEGIN: {
         visitPreprocBegin(lastToken);
@@ -296,9 +305,30 @@ void SV3_1aParserTreeListener::processPendingTokens(antlr4::tree::ParseTree *tre
           Library *const lib = m_pf->getLibrary();
           CompileSourceFile *const csf = m_pf->getCompileSourceFile();
           ParseFile *const parser = new ParseFile(m_session, content, csf, unit, lib);
+
           parser->setFileContent(m_fileContent);
+          
+          uint32_t before = m_fileContent->getSize();
+          std::cout << "Before Inactive Body Parse: " << before << " objects." << std::endl;
           parser->parse();
+          uint32_t after = m_fileContent->getSize();
+          std::cout << "After Inactive Body Parse: " << after << " objects." << std::endl;
+
+          NodeId sub_root = m_fileContent->getRootNode();
+          NodeId sub_topLevelRule = m_fileContent->sl_collect(sub_root, VObjectType::paTop_level_rule);
+          NodeId sub_description = m_fileContent->sl_collect(sub_topLevelRule, VObjectType::paDescription);
+          NodeId inactiveNodeId = addVObject( lastToken, content, VObjectType::INACTIVE_BODY_END);
+          VObject &inactiveNode = *m_fileContent->MutableObject(inactiveNodeId);
+          VObject & descriptionNode = *m_fileContent->MutableObject(sub_description);
+          inactiveNode.m_child = sub_description;
+          descriptionNode.m_parent = inactiveNodeId;
+          VObject subDescObj = m_fileContent->Object(sub_description);
+          // subDescObj.m_parent = NodeId(index + after - before);
+          // VObject mainParentObj = mainFileContent->Object(NodeId(index + after - before));
+          // mainParentObj.m_child = sub_description;
+
           delete parser;
+
 
           // TODO(AS): The above parser will add VObjects to our primary fileContent.
           // The other option is to not call the setFileContent above and use a secondary

@@ -577,6 +577,7 @@ bool ParseFile::parse() {
       m_usingCachedVersion = true;
       if (debug_AstModel && m_fileId) {
         m_fileContent->printTree(std::cout);
+        // std::cout << m_fileContent->printObjects() << std::endl;
       }
       if (clp->debugCache()) {
         std::cout << "PARSER CACHE USED FOR: " << fileSystem->toPath(getFileId(0)) << std::endl;
@@ -593,6 +594,7 @@ bool ParseFile::parse() {
         m_usingCachedVersion = true;
         if (debug_AstModel && m_fileId) {
           child->m_fileContent->printTree(std::cout);
+            // std::cout << child->m_fileContent->printObjects() << std::endl;
         }
       } else {
         ok = false;
@@ -644,6 +646,7 @@ bool ParseFile::parse() {
 
       if (debug_AstModel && m_fileId) {
         m_fileContent->printTree(std::cout);
+        // std::cout << m_fileContent->printObjects() << std::endl;
       }
 
       if (clp->profile()) {
@@ -692,6 +695,7 @@ bool ParseFile::parse() {
 
           if (debug_AstModel && m_fileId) {
             child->m_fileContent->printTree(std::cout);
+              // std::cout << child->m_fileContent->printObjects() << std::endl;
           }
 
           ParseCache cache(m_session, child);

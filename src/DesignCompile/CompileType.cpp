@@ -488,11 +488,12 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component, Signal* sig
              (fC->Type(idValue) != VObjectType::paExpression)) {
         idValue = fC->Sibling(idValue);
       }
-      if (idValue) {
-        if (uhdm::Expr* const rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr))) {
-          var->setValue(rhs);
-        }
-      }
+      // Test code
+      //if (idValue) {
+      //  if (uhdm::Expr* const rhs = any_cast<uhdm::Expr>(compileExpression(component, fC, idValue, obj, nullptr))) {
+      //    var->setValue(rhs);
+      //  }
+      //}
     } else {
       var->setConstantVariable(sig->isConst());
       var->setIsRandomized(sig->isRand() || sig->isRandc());

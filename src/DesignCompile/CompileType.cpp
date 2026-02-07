@@ -704,7 +704,8 @@ uhdm::Typespec* CompileHelper::compileBuiltinTypespec(DesignComponent* component
       }
       uhdm::LogicTypespec* var = s.make<uhdm::LogicTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? sign : type, var);
+      // fC->populateCoreMembers(type, isSigned ? sign : type, var);
+      var->setFile(fC->getName());
       result = var;
       break;
     }

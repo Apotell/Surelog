@@ -1934,10 +1934,11 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component, const F
   while (package_import_item_id) {
     uhdm::ImportTypespec* import_stmt = s.make<uhdm::ImportTypespec>();
     import_stmt->setParent(pscope);
-    fC->populateCoreMembers(package_import_item_id, package_import_item_id, import_stmt);
+    // fC->populateCoreMembers(package_import_item_id, package_import_item_id, import_stmt);
     import_stmt->setName(fC->SymName(package_import_item_id));
+    import_stmt->setFile(fC->getName());
     NodeId package_name_id = fC->Child(package_import_item_id);
-    fC->populateCoreMembers(package_name_id, package_name_id, import_stmt->getNameObj());
+    fC->populateCoreMembers(package_import_item_id, package_import_item_id, import_stmt->getNameObj());
     NodeId item_name_id = fC->Sibling(package_name_id);
     Value* item_name = m_exprBuilder.getValueFactory().newStValue();
     if (item_name_id) {
@@ -1949,8 +1950,9 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component, const F
       imported_item->setParent(import_stmt);
       // In case of "*" item_name_id will be 0
       NodeId nodeId = item_name_id ? item_name_id : package_import_item_id;
-      fC->populateCoreMembers(nodeId, nodeId, imported_item);
-      fC->populateCoreMembers(nodeId, nodeId, imported_item->getTypespec());
+      // fC->populateCoreMembers(nodeId, nodeId, imported_item);
+      // fC->populateCoreMembers(nodeId, nodeId, imported_item->getTypespec());
+      imported_item->setFile(fC->getName());
       import_stmt->setItem(imported_item);
     }
     m_exprBuilder.deleteValue(item_name);

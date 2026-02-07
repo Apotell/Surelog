@@ -4210,8 +4210,9 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component, con
             }
           }
           uhdm::Constant *c = constantFromValue(val, pexpr);
-          fC->populateCoreMembers(Class_scope_name, Class_scope_name, c);
-          fC->populateCoreMembers(Class_scope_name, Class_scope_name, c->getTypespec());
+          // fC->populateCoreMembers(Class_scope_name, Class_scope_name, c);
+          // fC->populateCoreMembers(Class_scope_name, Class_scope_name, c->getTypespec());
+          c->setFile(fC->getName());
           result = c;
           return result;
         }

@@ -51,6 +51,7 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
   using ReverseComponentMap = std::map<const uhdm::BaseClass*, const ValuedComponentI*>;
   using Unbounded = uhdm::AnySet;
   using Searched = uhdm::AnySet;
+  using TypespecUses = std::map<const uhdm::Any*, const uhdm::RefTypespec*>;
 
   enum class RefType {
     Object,
@@ -136,6 +137,7 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
   ReverseComponentMap m_reverseComponentMap;
   Unbounded m_unbounded;
   Searched m_searched;
+  TypespecUses m_typespecUses;
 };
 
 };  // namespace SURELOG

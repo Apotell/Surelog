@@ -423,6 +423,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports, uhdm::BaseCl
           dest_port->setTypespec(dest_port_rt);
           fC->populateCoreMembers(orig_port->getTypespecId(), orig_port->getTypespecId(), dest_port_rt);
         }
+        ts->setParent(dest_port);
         dest_port->getTypespec()->setActual(ts);
       }
     }
@@ -1295,6 +1296,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
   uhdm::Design* d = nullptr;
   if (m_design) {
     d = m_design->getUhdmDesign();
+    const uhdm::ScopedScope scopedScope(d);
     vpiHandle designHandle = s.makeUhdmHandle(UhdmType::Design, d);
     std::string designName = "unnamed";
     const auto& topLevelModules = m_design->getTopLevelModuleInstances();

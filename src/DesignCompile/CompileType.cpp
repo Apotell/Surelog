@@ -71,7 +71,7 @@ namespace SURELOG {
 using namespace uhdm;  // NOLINT (using a bunch of them)
 
 uhdm::Any* CompileHelper::compileVariable(DesignComponent* component, const FileContent* fC, NodeId declarationId,
-                                          NodeId nameId, NodeId unpackedDimId, uhdm::Any* pstmt,
+                                          NodeId nameId, NodeId unpackedDimId, uhdm::Typespec* ts, uhdm::Any* pstmt,
                                           SURELOG::ValuedComponentI* instance, bool muteErrors) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::Any* result = nullptr;
@@ -138,11 +138,12 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component, const File
     return path;
   }
 
-  uhdm::Typespec* ts = nullptr;
   VObjectType decl_type = fC->Type(declarationId);
   if ((decl_type != VObjectType::paPs_or_hierarchical_identifier) &&
       (decl_type != VObjectType::paImplicit_class_handle) && (decl_type != VObjectType::STRING_CONST)) {
-    ts = compileTypespec(component, fC, declarationId, unpackedDimId, pstmt, instance, true);
+    if (ts == nullptr) {
+      ts = compileTypespec(component, fC, declarationId, unpackedDimId, pstmt, instance, true);
+    }
     if ((ts != nullptr) && (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
       result = s.make<uhdm::Variable>();
       result->setParent(pstmt);

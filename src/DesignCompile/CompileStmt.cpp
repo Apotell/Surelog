@@ -1041,6 +1041,7 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(DesignComponent* comp
       if (fC->Type(List_of_variable_decl_assignments) == VObjectType::paPacked_dimension) {
         List_of_variable_decl_assignments = fC->Sibling(List_of_variable_decl_assignments);
       }
+      uhdm::Typespec* ts = nullptr;
       NodeId Variable_decl_assignment = fC->Child(List_of_variable_decl_assignments);
       while (Variable_decl_assignment) {
         NodeId Var = Variable_decl_assignment;
@@ -1053,11 +1054,16 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(DesignComponent* comp
         fC->populateCoreMembers(Variable_decl_assignment, Variable_decl_assignment, assign_stmt);
 
         NodeId UnpackedDimensionsStartId = fC->Sibling(Var);
-        if (uhdm::Any* var = compileVariable(component, fC, Data_type, Var, UnpackedDimensionsStartId, assign_stmt,
+        if (uhdm::Any* var = compileVariable(component, fC, Data_type, Var, UnpackedDimensionsStartId, ts, assign_stmt,
                                              instance, false)) {
           fC->populateCoreMembers(Var, Var, var);
           if (uhdm::Expr* const expr = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(expr);
+            if (uhdm::RefTypespec* const rt = expr->getTypespec()) {
+              if (uhdm::Typespec* const t = rt->getActual()) {
+                ts = t;
+              }
+            }
           }
           if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
             v->setConstantVariable(const_status);
@@ -1411,7 +1417,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             std::map<std::string, uhdm::IODecl*>::iterator itr = ioMap.find(name);
             if (itr == ioMap.end()) {
               if (uhdm::Any* var =
-                      compileVariable(component, fC, Data_type, nameId, InvalidNodeId, parent, nullptr, false)) {
+                      compileVariable(component, fC, Data_type, nameId, InvalidNodeId, ts, parent, nullptr, false)) {
                 // if (uhdm::Any* var = compileVariable(component, fC,
                 //  nameId, VObjectType::NO_TYPE, Data_type,
                 // ts)) {
@@ -2123,14 +2129,15 @@ bool CompileHelper::compileFunction(DesignComponent* component, const FileConten
                 func->getParamAssigns(true)->emplace_back(pst);
             } else if (stmt_type == uhdm::UhdmType::Assignment) {
               uhdm::Assignment* stmt = (uhdm::Assignment*)st;
-              if ((stmt->getRhs() == nullptr) || stmt->getLhs<uhdm::Variable>()) {
+              if (stmt->getRhs() == nullptr) {
                 // Declaration
-                if (stmt->getRhs() != nullptr) {
-                  stmts->emplace_back(st);
-                } else {
-                  if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>()) var->setParent(begin);
+                if (uhdm::Variable* const lhs = stmt->getLhs<uhdm::Variable>()) {
+                  lhs->setParent(begin, true);
                   // s.Erase(stmt);
+                } else if (uhdm::Net* const net = stmt->getLhs<uhdm::Net>()) {
+                  net->setParent(begin, true);
                 }
+                stmt->setParent(nullptr);
               } else {
                 stmts->emplace_back(st);
               }
@@ -2613,6 +2620,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component, const FileC
   if (For_initialization) {
     NodeId For_variable_declaration = fC->Child(For_initialization);
     if (fC->Type(For_variable_declaration) == VObjectType::paFor_variable_declaration) {
+      uhdm::Typespec* ts = nullptr;
       while (For_variable_declaration) {
         uhdm::AnyCollection* stmts = for_stmt->getForInitStmts(true);
         NodeId Data_type = fC->Child(For_variable_declaration);
@@ -2623,9 +2631,14 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component, const FileC
         fC->populateCoreMembers(For_variable_declaration, For_variable_declaration, assign_stmt);
 
         if (uhdm::Any* var =
-                compileVariable(component, fC, Data_type, Var, InvalidNodeId, assign_stmt, nullptr, false)) {
+                compileVariable(component, fC, Data_type, Var, InvalidNodeId, ts, assign_stmt, nullptr, false)) {
           if (uhdm::Expr* const v = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(v);
+            if (uhdm::RefTypespec* const rt = v->getTypespec()) {
+              if (uhdm::Typespec* const t = rt->getActual()) {
+                ts = t;
+              }
+            }
           }
           if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
             v->setName(fC->SymName(Var));

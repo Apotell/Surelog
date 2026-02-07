@@ -956,7 +956,10 @@ void ObjectBinder::visitRefTypespec(const uhdm::RefTypespec* object) {
     const_cast<uhdm::RefTypespec*>(object)->setActual(nullptr);
   }
 
-  if (object->getActual() != nullptr) return;
+  if (object->getActual() != nullptr) {
+    m_typespecUses.emplace(object->getActual(), object);
+    return;
+  }
 
   std::string_view name = object->getName();
   if (std::string_view::size_type pos = name.find('.'); pos != std::string_view::npos) {
@@ -982,6 +985,7 @@ void ObjectBinder::visitRefTypespec(const uhdm::RefTypespec* object) {
 
   if ((object_Actual_typespec != nullptr) && (object->getActual() == nullptr)) {
     const_cast<uhdm::RefTypespec*>(object)->setActual(const_cast<uhdm::Typespec*>(object_Actual_typespec), true);
+    m_typespecUses.emplace(object_Actual_typespec, object);
   }
 }
 
@@ -1186,7 +1190,8 @@ const uhdm::Any* ObjectBinder::find(std::string_view name, RefType refType, cons
       } break;
     }
 
-    scope = scope->getParent();
+    TypespecUses::const_iterator it = m_typespecUses.find(scope);
+    scope = (it != m_typespecUses.cend()) ? it->second : scope->getParent();
   }
 
   for (ForwardComponentMap::const_reference entry : m_forwardComponentMap) {
@@ -1289,9 +1294,20 @@ bool ObjectBinder::createDefaultNets() {
       }
     }
 
-    VObjectType defaultNetType = getDefaultNetType(object);
+    const uhdm::Any* context = object;
+    const uhdm::Any* p = object;
+    while (p != nullptr) {
+      TypespecUses::const_iterator it = m_typespecUses.find(p);
+      if (it != m_typespecUses.end()) {
+        context = it->second;
+        break;
+      }
+      p = p->getParent();
+    }
+
+    VObjectType defaultNetType = getDefaultNetType(context);
     if (defaultNetType != VObjectType::NO_TYPE) {
-      const uhdm::Scope* const parent = uhdm::getParent<uhdm::Scope>(object);
+      const uhdm::Scope* const parent = uhdm::getParent<uhdm::Scope>(context);
 
       uhdm::Net* const net = m_serializer.make<uhdm::Net>();
       net->setName(object->getName());

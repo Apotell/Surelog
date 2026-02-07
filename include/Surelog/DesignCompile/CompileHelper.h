@@ -92,7 +92,6 @@ class ObjectProvider final : public uhdm::ObjectProvider {
  private:
   CompileHelper& m_helper;
   DesignComponent* const m_component = nullptr;
-  CompileDesign* const m_compileDesign = nullptr;
   const FileContent* const m_fileContent = nullptr;
   const NodeId m_nodeId;
   ValuedComponentI* const m_instance = nullptr;
@@ -213,7 +212,8 @@ class CompileHelper final {
                                    bool muteError = false);
 
   uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC, NodeId declarationId, NodeId nameId,
-                             NodeId unpackedDimId, uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors);
+                             NodeId unpackedDimId, uhdm::Typespec* tps, uhdm::Any* pstmt, ValuedComponentI* instance,
+                             bool muteErrors);
   uhdm::Any* compileSignals(DesignComponent* component, Signal* sig, uhdm::Typespec* tps);
 
   uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC, NodeId nameId, VObjectType subnettype,

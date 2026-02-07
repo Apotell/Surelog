@@ -70,6 +70,7 @@
 // UHDM
 #include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
+#include <uhdm/Utils.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_user.h>
@@ -78,12 +79,7 @@
 namespace SURELOG {
 ObjectProvider::ObjectProvider(CompileHelper &helper, DesignComponent *component, CompileDesign *compileDesign,
                                const FileContent *fileContent, NodeId nodeId, ValuedComponentI *instance)
-    : m_helper(helper),
-      m_component(component),
-      m_compileDesign(compileDesign),
-      m_fileContent(fileContent),
-      m_nodeId(nodeId),
-      m_instance(instance) {}
+    : m_helper(helper), m_component(component), m_fileContent(fileContent), m_nodeId(nodeId), m_instance(instance) {}
 
 const uhdm::Any *ObjectProvider::getObject(std::string_view name, const uhdm::Any *inst, const uhdm::Any *pexpr,
                                            bool muteErrors /* = false */) {
@@ -386,30 +382,48 @@ std::pair<uhdm::TaskFunc *, DesignComponent *> CompileHelper::getTaskFunc(std::s
 
 static bool largeInt(std::string_view str) {
   bool isSigned = false;
+  int32_t formatType = vpiDecConst;
   size_t pos = str.find('\'');
   if (pos != std::string::npos) {
+    if ((str[pos + 1] == 'h') || (str[pos + 1] == 'H')) {
+      formatType = vpiHexConst;
+    } else if ((str[pos + 1] == 'o') || (str[pos + 1] == 'O')) {
+      formatType = vpiOctConst;
+    } else if ((str[pos + 1] == 'b') || (str[pos + 1] == 'B')) {
+      formatType = vpiBinaryConst;
+    }
     if (str.find_first_of("sS") != std::string::npos) {
       isSigned = true;
-      str = str.substr(pos + 3);
+      str.remove_prefix(pos + 3);
     } else {
-      str = str.substr(pos + 2);
+      str.remove_prefix(pos + 2);
     }
   }
   std::string value(str);
   value = StringUtils::replaceAll(value, "_", "");
-  bool isLarge = false;
-  if (value.size() > 20) {
-    isLarge = true;
-  } else if (value.size() == 20) {
-    if (isSigned) {
-      int64_t test = 0;
-      isLarge = NumUtils::parseInt64(value, &test) == nullptr;
+  if (isSigned) {
+    int32_t test = 0;
+    if (formatType == vpiHexConst) {
+      return NumUtils::parseHex(value, &test) == nullptr;
+    } else if (formatType == vpiOctConst) {
+      return NumUtils::parseOctal(value, &test) == nullptr;
+    } else if (formatType == vpiBinaryConst) {
+      return value.length() > 32;
     } else {
-      uint64_t test = 0;
-      isLarge = NumUtils::parseUint64(value, &test) == nullptr;
+      return NumUtils::parseInt32(value, &test) == nullptr;
+    }
+  } else {
+    uint32_t test = 0;
+    if (formatType == vpiHexConst) {
+      return NumUtils::parseHex(value, &test) == nullptr;
+    } else if (formatType == vpiOctConst) {
+      return NumUtils::parseOctal(value, &test) == nullptr;
+    } else if (formatType == vpiBinaryConst) {
+      return value.length() > 32;
+    } else {
+      return NumUtils::parseUint32(value, &test) == nullptr;
     }
   }
-  return isLarge;
 }
 
 uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child, uhdm::Serializer &s,
@@ -433,8 +447,9 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       value.erase(std::remove(value.begin(), value.end(), '_'), value.end());
       std::string v;
       c->setDecompile(value);
-      bool tickNumber = (value.find('\'') != std::string::npos);
-      if (tickNumber || largeInt(value)) {
+      const bool large = largeInt(value);
+      const bool tickNumber = (value.find('\'') != std::string::npos);
+      if (tickNumber || large) {
         char base = 'd';
         uint32_t i = 0;
         std::string size(value);
@@ -473,7 +488,13 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
           case 'h':
           case 'H': {
             c->setConstType(vpiHexConst);
-            if (!tps) tps = s.make<uhdm::IntTypespec>();
+            if (!tps) {
+              if (large) {
+                tps = s.make<uhdm::LongIntTypespec>();
+              } else {
+                tps = s.make<uhdm::IntTypespec>();
+              }
+            }
             break;
           }
           case 'b':
@@ -486,9 +507,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
           case 'O': {
             c->setConstType(vpiOctConst);
             if (!tps) {
-              uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
-              t->setSigned(true);
-              tps = t;
+              if (large) {
+                tps = s.make<uhdm::LongIntTypespec>();
+              } else {
+                tps = s.make<uhdm::IntTypespec>();
+              }
             }
             break;
           }
@@ -496,9 +519,15 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
           case 'D': {
             c->setConstType(vpiDecConst);
             if (!tps) {
-              uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
-              t->setSigned(true);
-              tps = t;
+              if (large) {
+                uhdm::LongIntTypespec *t = s.make<uhdm::LongIntTypespec>();
+                t->setSigned(true);
+                tps = t;
+              } else {
+                uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
+                t->setSigned(true);
+                tps = t;
+              }
             }
             break;
           }
@@ -513,14 +542,30 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         if (!value.empty() && value[0] == '-') {
           c->setConstType(vpiIntConst);
           if (!tps) {
-            uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
-            t->setSigned(true);
-            tps = t;
+            if (large) {
+              uhdm::LongIntTypespec *t = s.make<uhdm::LongIntTypespec>();
+              t->setSigned(true);
+              tps = t;
+            } else {
+              uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
+              t->setSigned(true);
+              tps = t;
+            }
           }
         } else {
           c->setConstType(vpiUIntConst);
           v = StringUtils::replaceAll(v, "#", "");
-          if (!tps) tps = s.make<uhdm::IntTypespec>();
+          if (!tps) {
+            if (large) {
+              uhdm::LongIntTypespec *t = s.make<uhdm::LongIntTypespec>();
+              t->setSigned(true);
+              tps = t;
+            } else {
+              uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
+              t->setSigned(true);
+              tps = t;
+            }
+          }
         }
         c->setSize(64);
       }
@@ -814,10 +859,9 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setTypespec(rt);
       fC->populateCoreMembers(child, child, rt);
 
-      uhdm::IntTypespec *tps = s.make<uhdm::IntTypespec>();
+      uhdm::TimeTypespec *tps = s.make<uhdm::TimeTypespec>();
       tps->setParent(pscope);
       rt->setActual(tps);
-      tps->setSigned(false);
 
       result = c;
       break;
@@ -2216,7 +2260,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
               if (uhdm::Typespec *const tps =
                       compileTypespec(component, fC, Simple_type, InvalidNodeId, operation, instance, false)) {
                 uhdm::RefTypespec *rttps = s.make<uhdm::RefTypespec>();
-                rttps->setName(fC->SymName(Simple_type));
+                if (!uhdm::isNumericType(tps)) rttps->setName(fC->SymName(Simple_type));
                 fC->populateCoreMembers(Simple_type, Simple_type, rttps);
                 rttps->setParent(operation);
                 operation->setTypespec(rttps);
@@ -2314,10 +2358,18 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
             rt->setParent(c);
             c->setTypespec(rt);
 
-            uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+            uhdm::Typespec *ts = nullptr;
+            if (sval->getSize() > 32) {
+              uhdm::LongIntTypespec *lit = s.make<uhdm::LongIntTypespec>();
+              lit->setSigned(sval->isSigned());
+              ts = lit;
+            } else {
+              uhdm::IntTypespec *it = s.make<uhdm::IntTypespec>();
+              it->setSigned(sval->isSigned());
+              ts = it;
+            }
             ts->setParent(pexpr);
             rt->setActual(ts);
-            ts->setSigned(sval->isSigned());
 
             result = c;
           }

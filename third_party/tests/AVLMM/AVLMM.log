@@ -24,7 +24,7 @@ BitTypespec                                           12
 BreakStmt                                              2
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                             168
+Constant                                             164
 DelayControl                                           1
 Design                                                 1
 EnumConst                                              9
@@ -43,24 +43,24 @@ IfElse                                                13
 IfStmt                                                10
 ImportTypespec                                         2
 Initial                                                2
-IntTypespec                                          186
-LogicTypespec                                         17
+IntTypespec                                          181
+LogicTypespec                                         15
 MethodFuncCall                                        13
 Module                                                 4
 ModuleTypespec                                         3
 NamedEvent                                             1
 Net                                                   11
-Operation                                            108
+Operation                                            106
 Package                                                1
 ParamAssign                                           12
 Parameter                                             12
 Port                                                   2
 PreprocMacroDefinition                                14
 PreprocMacroInstance                                  86
-Range                                                 32
+Range                                                 30
 RefModule                                              2
-RefObj                                               567
-RefTypespec                                          321
+RefObj                                               565
+RefTypespec                                          317
 Repeat                                                 1
 ReturnStmt                                            11
 SourceFile                                             2
@@ -71,12 +71,12 @@ Task                                                  21
 TaskCall                                              22
 TypedefTypespec                                        6
 TypespecMember                                        10
-UnsupportedTypespec                                   63
+UnsupportedTypespec                                   58
 VarSelect                                              2
 Variable                                              56
 WaitStmt                                               1
 ------------------------------------------------------------
-Total:                                              2584
+Total:                                              2558
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AVLMM/slpp_unit/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv:11:4: Null Actual: id:121, type:RefModule, name:dut.
@@ -793,7 +793,7 @@ Design: (unnamed)
                 \_Variable: (work@test_program.configure_and_push_command_to_master_0.i), line:99:19, endln:99:20
                 |vpiFullName:work@test_program.configure_and_push_command_to_master_0.i
                 |vpiActual:
-                \_IntTypespec: , line:99:15, endln:99:18
+                \_IntTypespec: 
               |vpiName:i
               |vpiFullName:work@test_program.configure_and_push_command_to_master_0.i
             |vpiInternalScope:
@@ -1001,21 +1001,8 @@ Design: (unnamed)
                     \_TypespecMember: (burstcount), line:56:37, endln:56:47
               |vpiStmt:
               \_Begin: (work@test_program.configure_and_push_command_to_master_0), line:99:51, endln:103:13
-            |vpiTypespec:
-            \_IntTypespec: , line:99:15, endln:99:18
-              |vpiParent:
-              \_Begin: (work@test_program.configure_and_push_command_to_master_0), line:97:31, endln:104:10
-              |vpiSigned:1
-            |vpiTypespec:
-            \_IntTypespec: 
-              |vpiParent:
-              \_Begin: (work@test_program.configure_and_push_command_to_master_0), line:97:31, endln:104:10
-            |vpiImportTypespec:
-            \_IntTypespec: , line:99:15, endln:99:18
             |vpiImportTypespec:
             \_Variable: (work@test_program.configure_and_push_command_to_master_0.i), line:99:19, endln:99:20
-            |vpiImportTypespec:
-            \_IntTypespec: 
             |vpiImportTypespec:
             \_Net: (work@test_program.configure_and_push_command_to_master_0.REQ_WRITE), line:98:39, endln:98:48
               |vpiParent:
@@ -1044,12 +1031,6 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:97:7, endln:107:10
             |vpiFullName:work@test_program.configure_and_push_command_to_master_0
-            |vpiTypespec:
-            \_IntTypespec: 
-              |vpiParent:
-              \_Begin: (work@test_program.configure_and_push_command_to_master_0), line:104:16, endln:107:10
-            |vpiImportTypespec:
-            \_IntTypespec: 
             |vpiImportTypespec:
             \_Net: (work@test_program.configure_and_push_command_to_master_0.REQ_READ), line:105:39, endln:105:47
               |vpiParent:
@@ -1213,7 +1194,10 @@ Design: (unnamed)
     |vpiObject:
     \_Assignment: , line:99:15, endln:99:24
     |vpiObject:
-    \_IntTypespec: , line:99:15, endln:99:18
+    \_IntTypespec: 
+      |vpiParent:
+      \_Design: (unnamed)
+      |vpiSigned:1
     |vpiObject:
     \_Variable: (work@test_program.configure_and_push_command_to_master_0.i), line:99:19, endln:99:20
     |vpiObject:
@@ -1491,15 +1475,6 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (work@test_program), line:197:53, endln:206:7
             |vpiName:Response
-          |vpiTypespec:
-          \_UnsupportedTypespec: (Response), line:200:7, endln:200:15
-            |vpiParent:
-            \_Begin: (work@test_program), line:197:53, endln:206:7
-            |vpiName:Response
-          |vpiTypespec:
-          \_IntTypespec: 
-            |vpiParent:
-            \_Begin: (work@test_program), line:197:53, endln:206:7
           |vpiImportTypespec:
           \_UnsupportedTypespec: (Command), line:199:7, endln:199:14
           |vpiImportTypespec:
@@ -1509,11 +1484,7 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_Variable: (work@test_program.actual_rsp), line:200:16, endln:200:26
           |vpiImportTypespec:
-          \_UnsupportedTypespec: (Response), line:200:7, endln:200:15
-          |vpiImportTypespec:
           \_Variable: (work@test_program.exp_rsp), line:200:28, endln:200:35
-          |vpiImportTypespec:
-          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:202:7, endln:202:53
             |vpiParent:
@@ -1627,7 +1598,7 @@ Design: (unnamed)
                       \_Variable: (work@test_program.get_read_response_from_master_0.i), line:220:16, endln:220:17
                       |vpiFullName:work@test_program.get_read_response_from_master_0.i
                       |vpiActual:
-                      \_IntTypespec: , line:220:12, endln:220:15
+                      \_IntTypespec: 
                     |vpiName:i
                     |vpiFullName:work@test_program.get_read_response_from_master_0.i
                   |vpiInternalScope:
@@ -1801,25 +1772,12 @@ Design: (unnamed)
                     |vpiParent:
                     \_Begin: (work@test_program.get_read_response_from_master_0)
                     |vpiName:Response
-                  |vpiTypespec:
-                  \_IntTypespec: , line:220:12, endln:220:15
-                    |vpiParent:
-                    \_Begin: (work@test_program.get_read_response_from_master_0)
-                    |vpiSigned:1
-                  |vpiTypespec:
-                  \_IntTypespec: 
-                    |vpiParent:
-                    \_Begin: (work@test_program.get_read_response_from_master_0)
                   |vpiImportTypespec:
                   \_UnsupportedTypespec: (Response), line:216:7, endln:216:15
                   |vpiImportTypespec:
                   \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:216:16, endln:216:19
                   |vpiImportTypespec:
-                  \_IntTypespec: , line:220:12, endln:220:15
-                  |vpiImportTypespec:
                   \_Variable: (work@test_program.get_read_response_from_master_0.i), line:220:16, endln:220:17
-                  |vpiImportTypespec:
-                  \_IntTypespec: 
                   |vpiImportTypespec:
                   \_Net: (work@test_program.get_read_response_from_master_0.master_0), line:8:32, endln:8:40
                     |vpiParent:
@@ -2002,18 +1960,11 @@ Design: (unnamed)
                       \_Variable: (work@test_program.get_expected_read_response.slave_id), line:523:16, endln:523:24
                       |vpiFullName:work@test_program.get_expected_read_response.slave_id
                       |vpiActual:
-                      \_IntTypespec: , line:523:7, endln:523:10
+                      \_IntTypespec: 
                     |vpiName:slave_id
                     |vpiFullName:work@test_program.get_expected_read_response.slave_id
-                  |vpiTypespec:
-                  \_IntTypespec: , line:523:7, endln:523:10
-                    |vpiParent:
-                    \_Begin: (work@test_program.get_expected_read_response)
-                    |vpiSigned:1
                   |vpiImportTypespec:
                   \_Variable: (work@test_program.get_expected_read_response.rsp), line:522:16, endln:522:19
-                  |vpiImportTypespec:
-                  \_IntTypespec: , line:523:7, endln:523:10
                   |vpiImportTypespec:
                   \_Variable: (work@test_program.get_expected_read_response.slave_id), line:523:16, endln:523:24
                   |vpiStmt:
@@ -2181,7 +2132,7 @@ Design: (unnamed)
                     \_Variable: (work@test_program.verify_response.i), line:535:16, endln:535:17
                     |vpiFullName:work@test_program.verify_response.i
                     |vpiActual:
-                    \_IntTypespec: , line:535:12, endln:535:15
+                    \_IntTypespec: 
                   |vpiName:i
                   |vpiFullName:work@test_program.verify_response.i
                 |vpiInternalScope:
@@ -2194,12 +2145,6 @@ Design: (unnamed)
                     |vpiParent:
                     \_ForStmt: (work@test_program.verify_response), line:535:7, endln:537:10
                     |vpiFullName:work@test_program.verify_response
-                    |vpiTypespec:
-                    \_StringTypespec: 
-                      |vpiParent:
-                      \_Begin: (work@test_program.verify_response), line:535:55, endln:537:10
-                    |vpiImportTypespec:
-                    \_StringTypespec: 
                     |vpiStmt:
                     \_TaskCall: (assert_equals), line:536:10, endln:536:79
                       |vpiParent:
@@ -2234,7 +2179,7 @@ Design: (unnamed)
                               \_Variable: (work@test_program.assert_equals.data_comparison_msg), line:484:14, endln:484:33
                               |vpiFullName:work@test_program.assert_equals.data_comparison_msg
                               |vpiActual:
-                              \_StringTypespec: , line:484:7, endln:484:13
+                              \_StringTypespec: 
                             |vpiName:data_comparison_msg
                             |vpiFullName:work@test_program.assert_equals.data_comparison_msg
                           |vpiInternalScope:
@@ -2277,18 +2222,6 @@ Design: (unnamed)
                                 |vpiParent:
                                 \_IfElse: , line:487:10, endln:499:13
                                 |vpiFullName:work@test_program.assert_equals
-                                |vpiTypespec:
-                                \_StringTypespec: 
-                                  |vpiParent:
-                                  \_Begin: (work@test_program.assert_equals), line:491:19, endln:499:13
-                                |vpiTypespec:
-                                \_IntTypespec: 
-                                  |vpiParent:
-                                  \_Begin: (work@test_program.assert_equals), line:491:19, endln:499:13
-                                |vpiImportTypespec:
-                                \_StringTypespec: 
-                                |vpiImportTypespec:
-                                \_IntTypespec: 
                                 |vpiImportTypespec:
                                 \_Net: (work@test_program.assert_equals.VERBOSITY_ERROR), line:496:19, endln:496:34
                                   |vpiParent:
@@ -2412,68 +2345,10 @@ Design: (unnamed)
                                   \_Begin: (work@test_program.assert_equals), line:491:19, endln:499:13
                                   |vpiLabel:assert_fail
                                   |vpiBlocking:1
-                          |vpiTypespec:
-                          \_StringTypespec: , line:484:7, endln:484:13
-                            |vpiParent:
-                            \_Begin: (work@test_program.assert_equals), line:484:7, endln:500:10
-                          |vpiImportTypespec:
-                          \_StringTypespec: , line:484:7, endln:484:13
                           |vpiImportTypespec:
                           \_Variable: (work@test_program.assert_equals.data_comparison_msg), line:484:14, endln:484:33
                           |vpiStmt:
                           \_Begin: (work@test_program.assert_equals), line:486:7, endln:500:10
-                        |vpiTypespec:
-                        \_StringTypespec: , line:480:7, endln:480:13
-                          |vpiParent:
-                          \_Task: (work@test_program.assert_equals), line:479:4, endln:501:11
-                        |vpiTypespec:
-                        \_LogicTypespec: , line:481:7, endln:481:12
-                          |vpiParent:
-                          \_Task: (work@test_program.assert_equals), line:479:4, endln:501:11
-                          |vpiRange:
-                          \_Range: , line:481:13, endln:481:21
-                            |vpiParent:
-                            \_LogicTypespec: , line:481:7, endln:481:12
-                            |vpiLeftRange:
-                            \_Constant: , line:481:14, endln:481:18
-                              |vpiParent:
-                              \_Range: , line:481:13, endln:481:21
-                              |vpiTypespec:
-                              \_RefTypespec: (work@test_program.assert_equals), line:481:14, endln:481:18
-                                |vpiParent:
-                                \_Constant: , line:481:14, endln:481:18
-                                |vpiFullName:work@test_program.assert_equals
-                                |vpiActual:
-                                \_IntTypespec: 
-                              |vpiConstType:9
-                              |vpiSize:64
-                              |vpiDecompile:1023
-                              |vpiValue:1023
-                            |vpiRightRange:
-                            \_Constant: , line:481:19, endln:481:20
-                              |vpiParent:
-                              \_Range: , line:481:13, endln:481:21
-                              |vpiTypespec:
-                              \_RefTypespec: (work@test_program.assert_equals), line:481:19, endln:481:20
-                                |vpiParent:
-                                \_Constant: , line:481:19, endln:481:20
-                                |vpiFullName:work@test_program.assert_equals
-                                |vpiActual:
-                                \_IntTypespec: 
-                              |vpiConstType:9
-                              |vpiSize:64
-                              |vpiDecompile:0
-                              |vpiValue:0
-                        |vpiTypespec:
-                        \_IntTypespec: 
-                          |vpiParent:
-                          \_Task: (work@test_program.assert_equals), line:479:4, endln:501:11
-                        |vpiImportTypespec:
-                        \_StringTypespec: , line:480:7, endln:480:13
-                        |vpiImportTypespec:
-                        \_LogicTypespec: , line:481:7, endln:481:12
-                        |vpiImportTypespec:
-                        \_IntTypespec: 
                         |vpiVisibility:1
                         |vpiAutomatic:1
                         |vpiIODecl:
@@ -2488,7 +2363,7 @@ Design: (unnamed)
                             \_IODecl: (message), line:480:14, endln:480:21
                             |vpiFullName:work@test_program.assert_equals.message
                             |vpiActual:
-                            \_StringTypespec: , line:480:7, endln:480:13
+                            \_StringTypespec: 
                         |vpiIODecl:
                         \_IODecl: (expected_obj), line:481:22, endln:481:34
                           |vpiParent:
@@ -2657,27 +2532,8 @@ Design: (unnamed)
                         \_TypespecMember: (burstcount), line:66:37, endln:66:47
                   |vpiStmt:
                   \_Begin: (work@test_program.verify_response), line:535:55, endln:537:10
-                |vpiTypespec:
-                \_StringTypespec: 
-                  |vpiParent:
-                  \_Begin: (work@test_program.verify_response), line:534:7, endln:537:10
-                |vpiTypespec:
-                \_IntTypespec: , line:535:12, endln:535:15
-                  |vpiParent:
-                  \_Begin: (work@test_program.verify_response), line:534:7, endln:537:10
-                  |vpiSigned:1
-                |vpiTypespec:
-                \_IntTypespec: 
-                  |vpiParent:
-                  \_Begin: (work@test_program.verify_response), line:534:7, endln:537:10
-                |vpiImportTypespec:
-                \_StringTypespec: 
-                |vpiImportTypespec:
-                \_IntTypespec: , line:535:12, endln:535:15
                 |vpiImportTypespec:
                 \_Variable: (work@test_program.verify_response.i), line:535:16, endln:535:17
-                |vpiImportTypespec:
-                \_IntTypespec: 
                 |vpiStmt:
                 \_TaskCall: (assert_equals), line:534:7, endln:534:83
                   |vpiParent:
@@ -2813,8 +2669,6 @@ Design: (unnamed)
     \_Variable: (work@test_program.actual_rsp), line:200:16, endln:200:26
     |vpiObject:
     \_RefTypespec: (work@test_program.actual_rsp.Response), line:200:7, endln:200:15
-    |vpiObject:
-    \_UnsupportedTypespec: (Response), line:200:7, endln:200:15
     |vpiObject:
     \_Variable: (work@test_program.exp_rsp), line:200:28, endln:200:35
     |vpiObject:
@@ -3015,7 +2869,7 @@ Design: (unnamed)
     |vpiObject:
     \_Assignment: , line:220:12, endln:220:21
     |vpiObject:
-    \_IntTypespec: , line:220:12, endln:220:15
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.get_read_response_from_master_0.i), line:220:16, endln:220:17
     |vpiObject:
@@ -3214,7 +3068,7 @@ Design: (unnamed)
               \_Variable: (work@test_program.backpressure_cycles), line:120:21, endln:120:40
               |vpiFullName:work@test_program.backpressure_cycles
               |vpiActual:
-              \_IntTypespec: , line:120:17, endln:120:20
+              \_IntTypespec: 
             |vpiName:backpressure_cycles
             |vpiFullName:work@test_program.backpressure_cycles
             |vpiAutomatic:1
@@ -3228,7 +3082,7 @@ Design: (unnamed)
               \_Variable: (work@test_program.i), line:123:16, endln:123:17
               |vpiFullName:work@test_program.i
               |vpiActual:
-              \_IntTypespec: , line:120:17, endln:120:20
+              \_IntTypespec: 
             |vpiName:i
             |vpiFullName:work@test_program.i
           |vpiInternalScope:
@@ -3241,12 +3095,6 @@ Design: (unnamed)
               |vpiParent:
               \_ForStmt: (work@test_program), line:123:7, endln:126:10
               |vpiFullName:work@test_program
-              |vpiTypespec:
-              \_IntTypespec: 
-                |vpiParent:
-                \_Begin: (work@test_program), line:123:43, endln:126:10
-              |vpiImportTypespec:
-              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:124:10, endln:124:75
                 |vpiParent:
@@ -3378,30 +3226,14 @@ Design: (unnamed)
             \_Begin: (work@test_program), line:115:46, endln:138:7
             |vpiName:Command
           |vpiTypespec:
-          \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
-            |vpiParent:
-            \_Begin: (work@test_program), line:115:46, endln:138:7
-            |vpiName:Command
-          |vpiTypespec:
           \_UnsupportedTypespec: (Response), line:118:7, endln:118:15
             |vpiParent:
             \_Begin: (work@test_program), line:115:46, endln:138:7
             |vpiName:Response
-          |vpiTypespec:
-          \_IntTypespec: , line:120:17, endln:120:20
-            |vpiParent:
-            \_Begin: (work@test_program), line:115:46, endln:138:7
-            |vpiSigned:1
-          |vpiTypespec:
-          \_IntTypespec: 
-            |vpiParent:
-            \_Begin: (work@test_program), line:115:46, endln:138:7
           |vpiImportTypespec:
           \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
           |vpiImportTypespec:
           \_Variable: (work@test_program.actual_cmd), line:117:19, endln:117:29
-          |vpiImportTypespec:
-          \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
           |vpiImportTypespec:
           \_Variable: (work@test_program.exp_cmd), line:117:31, endln:117:38
           |vpiImportTypespec:
@@ -3409,13 +3241,9 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_Variable: (work@test_program.rsp), line:118:19, endln:118:22
           |vpiImportTypespec:
-          \_IntTypespec: , line:120:17, endln:120:20
-          |vpiImportTypespec:
           \_Variable: (work@test_program.backpressure_cycles), line:120:21, endln:120:40
           |vpiImportTypespec:
           \_Variable: (work@test_program.i), line:123:16, endln:123:17
-          |vpiImportTypespec:
-          \_IntTypespec: 
           |vpiStmt:
           \_ForStmt: (work@test_program), line:123:7, endln:126:10
           |vpiStmt:
@@ -3736,7 +3564,7 @@ Design: (unnamed)
                           \_Variable: (work@test_program.get_command_from_slave_0.i), line:151:18, endln:151:19
                           |vpiFullName:work@test_program.get_command_from_slave_0.i
                           |vpiActual:
-                          \_IntTypespec: , line:151:14, endln:151:17
+                          \_IntTypespec: 
                         |vpiName:i
                         |vpiFullName:work@test_program.get_command_from_slave_0.i
                       |vpiInternalScope:
@@ -3992,21 +3820,8 @@ Design: (unnamed)
                               \_TypespecMember: (burstcount), line:56:37, endln:56:47
                         |vpiStmt:
                         \_Begin: (work@test_program.get_command_from_slave_0), line:151:50, endln:154:13
-                      |vpiTypespec:
-                      \_IntTypespec: , line:151:14, endln:151:17
-                        |vpiParent:
-                        \_Begin: (work@test_program.get_command_from_slave_0), line:149:55, endln:155:10
-                        |vpiSigned:1
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.get_command_from_slave_0), line:149:55, endln:155:10
-                      |vpiImportTypespec:
-                      \_IntTypespec: , line:151:14, endln:151:17
                       |vpiImportTypespec:
                       \_Variable: (work@test_program.get_command_from_slave_0.i), line:151:18, endln:151:19
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_Assignment: , line:150:10, endln:150:27
                         |vpiParent:
@@ -4173,26 +3988,13 @@ Design: (unnamed)
                       \_Variable: (work@test_program.get_expected_command_for_slave.found), line:432:11, endln:432:16
                       |vpiFullName:work@test_program.get_expected_command_for_slave.found
                       |vpiActual:
-                      \_IntTypespec: , line:432:7, endln:432:10
+                      \_IntTypespec: 
                     |vpiName:found
                     |vpiFullName:work@test_program.get_expected_command_for_slave.found
-                  |vpiTypespec:
-                  \_IntTypespec: , line:432:7, endln:432:10
-                    |vpiParent:
-                    \_Begin: (work@test_program.get_expected_command_for_slave)
-                    |vpiSigned:1
-                  |vpiTypespec:
-                  \_IntTypespec: 
-                    |vpiParent:
-                    \_Begin: (work@test_program.get_expected_command_for_slave)
                   |vpiImportTypespec:
                   \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:431:15, endln:431:22
                   |vpiImportTypespec:
-                  \_IntTypespec: , line:432:7, endln:432:10
-                  |vpiImportTypespec:
                   \_Variable: (work@test_program.get_expected_command_for_slave.found), line:432:11, endln:432:16
-                  |vpiImportTypespec:
-                  \_IntTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:432:11, endln:432:20
                     |vpiParent:
@@ -4360,12 +4162,6 @@ Design: (unnamed)
                               |vpiParent:
                               \_IfStmt: , line:437:13, endln:441:16
                               |vpiFullName:work@test_program.get_expected_command_for_slave
-                              |vpiTypespec:
-                              \_IntTypespec: 
-                                |vpiParent:
-                                \_Begin: (work@test_program.get_expected_command_for_slave), line:437:43, endln:441:16
-                              |vpiImportTypespec:
-                              \_IntTypespec: 
                               |vpiStmt:
                               \_MethodFuncCall: (delete), line:438:52, endln:438:61
                                 |vpiParent:
@@ -4472,16 +4268,10 @@ Design: (unnamed)
                       \_UnsupportedTypespec: 
                         |vpiParent:
                         \_Begin: (work@test_program.get_expected_command_for_slave), line:434:31, endln:446:10
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.get_expected_command_for_slave), line:434:31, endln:446:10
                       |vpiImportTypespec:
                       \_UnsupportedTypespec: 
                       |vpiImportTypespec:
                       \_UnsupportedTypespec: 
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:435:10, endln:442:13
                       |vpiStmt:
@@ -4672,12 +4462,6 @@ Design: (unnamed)
                               |vpiParent:
                               \_IfStmt: , line:449:13, endln:453:16
                               |vpiFullName:work@test_program.get_expected_command_for_slave
-                              |vpiTypespec:
-                              \_IntTypespec: 
-                                |vpiParent:
-                                \_Begin: (work@test_program.get_expected_command_for_slave), line:449:43, endln:453:16
-                              |vpiImportTypespec:
-                              \_IntTypespec: 
                               |vpiStmt:
                               \_MethodFuncCall: (delete), line:450:51, endln:450:60
                                 |vpiParent:
@@ -4784,16 +4568,10 @@ Design: (unnamed)
                       \_UnsupportedTypespec: 
                         |vpiParent:
                         \_Begin: (work@test_program.get_expected_command_for_slave), line:446:16, endln:458:10
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.get_expected_command_for_slave), line:446:16, endln:458:10
                       |vpiImportTypespec:
                       \_UnsupportedTypespec: 
                       |vpiImportTypespec:
                       \_UnsupportedTypespec: 
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:447:10, endln:454:13
                       |vpiStmt:
@@ -4889,13 +4667,6 @@ Design: (unnamed)
                       |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
                       |vpiActual:
                       \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:431:15, endln:431:22
-                |vpiTypespec:
-                \_IntTypespec: , line:428:7, endln:428:10
-                  |vpiParent:
-                  \_Function: (work@test_program.get_expected_command_for_slave), line:426:4, endln:461:15
-                  |vpiSigned:1
-                |vpiImportTypespec:
-                \_IntTypespec: , line:428:7, endln:428:10
                 |vpiVisibility:1
                 |vpiAutomatic:1
                 |vpiReturn:
@@ -4932,7 +4703,7 @@ Design: (unnamed)
                     \_IODecl: (slave_id), line:428:15, endln:428:23
                     |vpiFullName:work@test_program.get_expected_command_for_slave.slave_id
                     |vpiActual:
-                    \_IntTypespec: , line:428:7, endln:428:10
+                    \_IntTypespec: 
                 |vpiStmt:
                 \_Begin: (work@test_program.get_expected_command_for_slave)
               |vpiArgument:
@@ -4982,12 +4753,6 @@ Design: (unnamed)
                 |vpiParent:
                 \_Task: (work@test_program.verify_command), line:463:4, endln:477:11
                 |vpiFullName:work@test_program.verify_command
-                |vpiTypespec:
-                \_StringTypespec: 
-                  |vpiParent:
-                  \_Begin: (work@test_program.verify_command), line:467:7, endln:475:10
-                |vpiImportTypespec:
-                \_StringTypespec: 
                 |vpiStmt:
                 \_TaskCall: (assert_equals), line:467:7, endln:467:68
                   |vpiParent:
@@ -5172,7 +4937,7 @@ Design: (unnamed)
                         \_Variable: (work@test_program.verify_command.i), line:471:19, endln:471:20
                         |vpiFullName:work@test_program.verify_command.i
                         |vpiActual:
-                        \_IntTypespec: , line:471:15, endln:471:18
+                        \_IntTypespec: 
                       |vpiName:i
                       |vpiFullName:work@test_program.verify_command.i
                     |vpiInternalScope:
@@ -5185,12 +4950,6 @@ Design: (unnamed)
                         |vpiParent:
                         \_ForStmt: (work@test_program.verify_command), line:471:10, endln:474:13
                         |vpiFullName:work@test_program.verify_command
-                        |vpiTypespec:
-                        \_StringTypespec: 
-                          |vpiParent:
-                          \_Begin: (work@test_program.verify_command), line:471:58, endln:474:13
-                        |vpiImportTypespec:
-                        \_StringTypespec: 
                         |vpiStmt:
                         \_TaskCall: (assert_equals), line:472:13, endln:472:83
                           |vpiParent:
@@ -5424,21 +5183,8 @@ Design: (unnamed)
                             \_TypespecMember: (burstcount), line:56:37, endln:56:47
                       |vpiStmt:
                       \_Begin: (work@test_program.verify_command), line:471:58, endln:474:13
-                    |vpiTypespec:
-                    \_IntTypespec: , line:471:15, endln:471:18
-                      |vpiParent:
-                      \_Begin: (work@test_program.verify_command), line:470:38, endln:475:10
-                      |vpiSigned:1
-                    |vpiTypespec:
-                    \_IntTypespec: 
-                      |vpiParent:
-                      \_Begin: (work@test_program.verify_command), line:470:38, endln:475:10
-                    |vpiImportTypespec:
-                    \_IntTypespec: , line:471:15, endln:471:18
                     |vpiImportTypespec:
                     \_Variable: (work@test_program.verify_command.i), line:471:19, endln:471:20
-                    |vpiImportTypespec:
-                    \_IntTypespec: 
                     |vpiStmt:
                     \_ForStmt: (work@test_program.verify_command), line:471:10, endln:474:13
               |vpiVisibility:1
@@ -5593,7 +5339,7 @@ Design: (unnamed)
                           \_Variable: (work@test_program.create_response.i), line:510:16, endln:510:17
                           |vpiFullName:work@test_program.create_response.i
                           |vpiActual:
-                          \_IntTypespec: , line:510:12, endln:510:15
+                          \_IntTypespec: 
                         |vpiName:i
                         |vpiFullName:work@test_program.create_response.i
                       |vpiInternalScope:
@@ -5606,12 +5352,6 @@ Design: (unnamed)
                           |vpiParent:
                           \_ForStmt: (work@test_program.create_response), line:510:7, endln:513:10
                           |vpiFullName:work@test_program.create_response
-                          |vpiTypespec:
-                          \_IntTypespec: 
-                            |vpiParent:
-                            \_Begin: (work@test_program.create_response), line:510:43, endln:513:10
-                          |vpiImportTypespec:
-                          \_IntTypespec: 
                           |vpiStmt:
                           \_Assignment: , line:511:10, endln:511:37
                             |vpiParent:
@@ -5778,23 +5518,10 @@ Design: (unnamed)
                             \_IODecl: (burstcount), line:504:18, endln:504:28
                         |vpiStmt:
                         \_Begin: (work@test_program.create_response), line:510:43, endln:513:10
-                      |vpiTypespec:
-                      \_IntTypespec: , line:510:12, endln:510:15
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_response)
-                        |vpiSigned:1
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_response)
                       |vpiImportTypespec:
                       \_Variable: (work@test_program.create_response.rsp), line:507:16, endln:507:19
                       |vpiImportTypespec:
-                      \_IntTypespec: , line:510:12, endln:510:15
-                      |vpiImportTypespec:
                       \_Variable: (work@test_program.create_response.i), line:510:16, endln:510:17
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_Assignment: , line:509:7, endln:509:40
                         |vpiParent:
@@ -5922,7 +5649,7 @@ Design: (unnamed)
                         \_Variable: (work@test_program.configure_and_push_response_to_slave_0.read_response_latency), line:175:11, endln:175:32
                         |vpiFullName:work@test_program.configure_and_push_response_to_slave_0.read_response_latency
                         |vpiActual:
-                        \_IntTypespec: , line:175:7, endln:175:10
+                        \_IntTypespec: 
                       |vpiName:read_response_latency
                       |vpiFullName:work@test_program.configure_and_push_response_to_slave_0.read_response_latency
                     |vpiVariable:
@@ -5935,7 +5662,7 @@ Design: (unnamed)
                         \_Variable: (work@test_program.configure_and_push_response_to_slave_0.i), line:179:16, endln:179:17
                         |vpiFullName:work@test_program.configure_and_push_response_to_slave_0.i
                         |vpiActual:
-                        \_IntTypespec: , line:175:7, endln:175:10
+                        \_IntTypespec: 
                       |vpiName:i
                       |vpiFullName:work@test_program.configure_and_push_response_to_slave_0.i
                     |vpiInternalScope:
@@ -5948,12 +5675,6 @@ Design: (unnamed)
                         |vpiParent:
                         \_ForStmt: (work@test_program.configure_and_push_response_to_slave_0), line:179:7, endln:190:10
                         |vpiFullName:work@test_program.configure_and_push_response_to_slave_0
-                        |vpiTypespec:
-                        \_IntTypespec: 
-                          |vpiParent:
-                          \_Begin: (work@test_program.configure_and_push_response_to_slave_0), line:179:48, endln:190:10
-                        |vpiImportTypespec:
-                        \_IntTypespec: 
                         |vpiStmt:
                         \_FuncCall: ($root.tb.dut.slave_0.set_response_data), line:180:10, endln:180:51
                           |vpiParent:
@@ -6310,23 +6031,10 @@ Design: (unnamed)
                             \_TypespecMember: (burstcount), line:66:37, endln:66:47
                       |vpiStmt:
                       \_Begin: (work@test_program.configure_and_push_response_to_slave_0), line:179:48, endln:190:10
-                    |vpiTypespec:
-                    \_IntTypespec: , line:175:7, endln:175:10
-                      |vpiParent:
-                      \_Begin: (work@test_program.configure_and_push_response_to_slave_0), line:175:7, endln:192:110
-                      |vpiSigned:1
-                    |vpiTypespec:
-                    \_IntTypespec: 
-                      |vpiParent:
-                      \_Begin: (work@test_program.configure_and_push_response_to_slave_0), line:175:7, endln:192:110
-                    |vpiImportTypespec:
-                    \_IntTypespec: , line:175:7, endln:175:10
                     |vpiImportTypespec:
                     \_Variable: (work@test_program.configure_and_push_response_to_slave_0.read_response_latency), line:175:11, endln:175:32
                     |vpiImportTypespec:
                     \_Variable: (work@test_program.configure_and_push_response_to_slave_0.i), line:179:16, endln:179:17
-                    |vpiImportTypespec:
-                    \_IntTypespec: 
                     |vpiImportTypespec:
                     \_Net: (work@test_program.configure_and_push_response_to_slave_0.REQ_READ), line:177:36, endln:177:44
                       |vpiParent:
@@ -6543,8 +6251,6 @@ Design: (unnamed)
     |vpiObject:
     \_RefTypespec: (work@test_program.actual_cmd.Command), line:117:7, endln:117:14
     |vpiObject:
-    \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
-    |vpiObject:
     \_Variable: (work@test_program.exp_cmd), line:117:31, endln:117:38
     |vpiObject:
     \_RefTypespec: (work@test_program.exp_cmd.Command), line:117:7, endln:117:14
@@ -6555,7 +6261,7 @@ Design: (unnamed)
     |vpiObject:
     \_RefTypespec: (work@test_program.rsp.Response), line:118:7, endln:118:15
     |vpiObject:
-    \_IntTypespec: , line:120:17, endln:120:20
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.backpressure_cycles), line:120:21, endln:120:40
     |vpiObject:
@@ -6874,7 +6580,7 @@ Design: (unnamed)
     |vpiObject:
     \_Assignment: , line:151:14, endln:151:23
     |vpiObject:
-    \_IntTypespec: , line:151:14, endln:151:17
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.get_command_from_slave_0.i), line:151:18, endln:151:19
     |vpiObject:
@@ -7017,12 +6723,6 @@ Design: (unnamed)
           |vpiParent:
           \_EventControl: , line:164:11, endln:164:33
           |vpiFullName:work@test_program
-          |vpiTypespec:
-          \_IntTypespec: 
-            |vpiParent:
-            \_Begin: (work@test_program), line:164:34, endln:168:7
-          |vpiImportTypespec:
-          \_IntTypespec: 
           |vpiStmt:
           \_IfStmt: , line:165:7, endln:167:10
             |vpiParent:
@@ -7099,10 +6799,7 @@ Design: (unnamed)
     |vpiObject:
     \_Operation: , line:166:10, endln:166:39
     |vpiObject:
-    \_IntTypespec: , line:163:4, endln:163:7
-      |vpiParent:
-      \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-      |vpiSigned:1
+    \_IntTypespec: 
     |vpiObject:
     \_Constant: , line:163:38, endln:163:39
       |vpiParent:
@@ -7130,7 +6827,7 @@ Design: (unnamed)
         \_Variable: (work@test_program.pending_read_cycles_slave_0), line:163:8, endln:163:35
         |vpiFullName:work@test_program.pending_read_cycles_slave_0
         |vpiActual:
-        \_IntTypespec: , line:163:4, endln:163:7
+        \_IntTypespec: 
       |vpiName:pending_read_cycles_slave_0
       |vpiFullName:work@test_program.pending_read_cycles_slave_0
       |vpiRandType:1
@@ -7269,7 +6966,7 @@ Design: (unnamed)
     |vpiObject:
     \_Begin: (work@test_program.configure_and_push_response_to_slave_0), line:175:7, endln:192:110
     |vpiObject:
-    \_IntTypespec: , line:175:7, endln:175:10
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.configure_and_push_response_to_slave_0.read_response_latency), line:175:11, endln:175:32
     |vpiObject:
@@ -7812,7 +7509,7 @@ Design: (unnamed)
                 \_Variable: (work@test_program.configure_and_push_command_to_master_1.i), line:99:19, endln:99:20
                 |vpiFullName:work@test_program.configure_and_push_command_to_master_1.i
                 |vpiActual:
-                \_IntTypespec: , line:99:15, endln:99:18
+                \_IntTypespec: 
               |vpiName:i
               |vpiFullName:work@test_program.configure_and_push_command_to_master_1.i
             |vpiInternalScope:
@@ -8020,21 +7717,8 @@ Design: (unnamed)
                     \_TypespecMember: (burstcount), line:56:37, endln:56:47
               |vpiStmt:
               \_Begin: (work@test_program.configure_and_push_command_to_master_1), line:99:51, endln:103:13
-            |vpiTypespec:
-            \_IntTypespec: , line:99:15, endln:99:18
-              |vpiParent:
-              \_Begin: (work@test_program.configure_and_push_command_to_master_1), line:97:31, endln:104:10
-              |vpiSigned:1
-            |vpiTypespec:
-            \_IntTypespec: 
-              |vpiParent:
-              \_Begin: (work@test_program.configure_and_push_command_to_master_1), line:97:31, endln:104:10
-            |vpiImportTypespec:
-            \_IntTypespec: , line:99:15, endln:99:18
             |vpiImportTypespec:
             \_Variable: (work@test_program.configure_and_push_command_to_master_1.i), line:99:19, endln:99:20
-            |vpiImportTypespec:
-            \_IntTypespec: 
             |vpiImportTypespec:
             \_Net: (work@test_program.configure_and_push_command_to_master_1.REQ_WRITE), line:98:39, endln:98:48
               |vpiParent:
@@ -8063,12 +7747,6 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:97:7, endln:107:10
             |vpiFullName:work@test_program.configure_and_push_command_to_master_1
-            |vpiTypespec:
-            \_IntTypespec: 
-              |vpiParent:
-              \_Begin: (work@test_program.configure_and_push_command_to_master_1), line:104:16, endln:107:10
-            |vpiImportTypespec:
-            \_IntTypespec: 
             |vpiImportTypespec:
             \_Net: (work@test_program.configure_and_push_command_to_master_1.REQ_READ), line:105:39, endln:105:47
               |vpiParent:
@@ -8232,7 +7910,7 @@ Design: (unnamed)
     |vpiObject:
     \_Assignment: , line:99:15, endln:99:24
     |vpiObject:
-    \_IntTypespec: , line:99:15, endln:99:18
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.configure_and_push_command_to_master_1.i), line:99:19, endln:99:20
     |vpiObject:
@@ -8510,15 +8188,6 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (work@test_program), line:197:53, endln:206:7
             |vpiName:Response
-          |vpiTypespec:
-          \_UnsupportedTypespec: (Response), line:200:7, endln:200:15
-            |vpiParent:
-            \_Begin: (work@test_program), line:197:53, endln:206:7
-            |vpiName:Response
-          |vpiTypespec:
-          \_IntTypespec: 
-            |vpiParent:
-            \_Begin: (work@test_program), line:197:53, endln:206:7
           |vpiImportTypespec:
           \_UnsupportedTypespec: (Command), line:199:7, endln:199:14
           |vpiImportTypespec:
@@ -8528,11 +8197,7 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_Variable: (work@test_program.actual_rsp), line:200:16, endln:200:26
           |vpiImportTypespec:
-          \_UnsupportedTypespec: (Response), line:200:7, endln:200:15
-          |vpiImportTypespec:
           \_Variable: (work@test_program.exp_rsp), line:200:28, endln:200:35
-          |vpiImportTypespec:
-          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:202:7, endln:202:53
             |vpiParent:
@@ -8646,7 +8311,7 @@ Design: (unnamed)
                       \_Variable: (work@test_program.get_read_response_from_master_1.i), line:220:16, endln:220:17
                       |vpiFullName:work@test_program.get_read_response_from_master_1.i
                       |vpiActual:
-                      \_IntTypespec: , line:220:12, endln:220:15
+                      \_IntTypespec: 
                     |vpiName:i
                     |vpiFullName:work@test_program.get_read_response_from_master_1.i
                   |vpiInternalScope:
@@ -8820,25 +8485,12 @@ Design: (unnamed)
                     |vpiParent:
                     \_Begin: (work@test_program.get_read_response_from_master_1)
                     |vpiName:Response
-                  |vpiTypespec:
-                  \_IntTypespec: , line:220:12, endln:220:15
-                    |vpiParent:
-                    \_Begin: (work@test_program.get_read_response_from_master_1)
-                    |vpiSigned:1
-                  |vpiTypespec:
-                  \_IntTypespec: 
-                    |vpiParent:
-                    \_Begin: (work@test_program.get_read_response_from_master_1)
                   |vpiImportTypespec:
                   \_UnsupportedTypespec: (Response), line:216:7, endln:216:15
                   |vpiImportTypespec:
                   \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:216:16, endln:216:19
                   |vpiImportTypespec:
-                  \_IntTypespec: , line:220:12, endln:220:15
-                  |vpiImportTypespec:
                   \_Variable: (work@test_program.get_read_response_from_master_1.i), line:220:16, endln:220:17
-                  |vpiImportTypespec:
-                  \_IntTypespec: 
                   |vpiImportTypespec:
                   \_Net: (work@test_program.get_read_response_from_master_1.master_1), line:9:32, endln:9:40
                     |vpiParent:
@@ -9039,8 +8691,6 @@ Design: (unnamed)
     |vpiObject:
     \_RefTypespec: (work@test_program.actual_rsp.Response), line:200:7, endln:200:15
     |vpiObject:
-    \_UnsupportedTypespec: (Response), line:200:7, endln:200:15
-    |vpiObject:
     \_Variable: (work@test_program.exp_rsp), line:200:28, endln:200:35
     |vpiObject:
     \_RefTypespec: (work@test_program.exp_rsp.Response), line:200:7, endln:200:15
@@ -9240,7 +8890,7 @@ Design: (unnamed)
     |vpiObject:
     \_Assignment: , line:220:12, endln:220:21
     |vpiObject:
-    \_IntTypespec: , line:220:12, endln:220:15
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.get_read_response_from_master_1.i), line:220:16, endln:220:17
     |vpiObject:
@@ -9439,7 +9089,7 @@ Design: (unnamed)
               \_Variable: (work@test_program.backpressure_cycles), line:120:21, endln:120:40
               |vpiFullName:work@test_program.backpressure_cycles
               |vpiActual:
-              \_IntTypespec: , line:120:17, endln:120:20
+              \_IntTypespec: 
             |vpiName:backpressure_cycles
             |vpiFullName:work@test_program.backpressure_cycles
             |vpiAutomatic:1
@@ -9453,7 +9103,7 @@ Design: (unnamed)
               \_Variable: (work@test_program.i), line:123:16, endln:123:17
               |vpiFullName:work@test_program.i
               |vpiActual:
-              \_IntTypespec: , line:120:17, endln:120:20
+              \_IntTypespec: 
             |vpiName:i
             |vpiFullName:work@test_program.i
           |vpiInternalScope:
@@ -9466,12 +9116,6 @@ Design: (unnamed)
               |vpiParent:
               \_ForStmt: (work@test_program), line:123:7, endln:126:10
               |vpiFullName:work@test_program
-              |vpiTypespec:
-              \_IntTypespec: 
-                |vpiParent:
-                \_Begin: (work@test_program), line:123:43, endln:126:10
-              |vpiImportTypespec:
-              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:124:10, endln:124:75
                 |vpiParent:
@@ -9603,30 +9247,14 @@ Design: (unnamed)
             \_Begin: (work@test_program), line:115:46, endln:138:7
             |vpiName:Command
           |vpiTypespec:
-          \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
-            |vpiParent:
-            \_Begin: (work@test_program), line:115:46, endln:138:7
-            |vpiName:Command
-          |vpiTypespec:
           \_UnsupportedTypespec: (Response), line:118:7, endln:118:15
             |vpiParent:
             \_Begin: (work@test_program), line:115:46, endln:138:7
             |vpiName:Response
-          |vpiTypespec:
-          \_IntTypespec: , line:120:17, endln:120:20
-            |vpiParent:
-            \_Begin: (work@test_program), line:115:46, endln:138:7
-            |vpiSigned:1
-          |vpiTypespec:
-          \_IntTypespec: 
-            |vpiParent:
-            \_Begin: (work@test_program), line:115:46, endln:138:7
           |vpiImportTypespec:
           \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
           |vpiImportTypespec:
           \_Variable: (work@test_program.actual_cmd), line:117:19, endln:117:29
-          |vpiImportTypespec:
-          \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
           |vpiImportTypespec:
           \_Variable: (work@test_program.exp_cmd), line:117:31, endln:117:38
           |vpiImportTypespec:
@@ -9634,13 +9262,9 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_Variable: (work@test_program.rsp), line:118:19, endln:118:22
           |vpiImportTypespec:
-          \_IntTypespec: , line:120:17, endln:120:20
-          |vpiImportTypespec:
           \_Variable: (work@test_program.backpressure_cycles), line:120:21, endln:120:40
           |vpiImportTypespec:
           \_Variable: (work@test_program.i), line:123:16, endln:123:17
-          |vpiImportTypespec:
-          \_IntTypespec: 
           |vpiStmt:
           \_ForStmt: (work@test_program), line:123:7, endln:126:10
           |vpiStmt:
@@ -9961,7 +9585,7 @@ Design: (unnamed)
                           \_Variable: (work@test_program.get_command_from_slave_1.i), line:151:18, endln:151:19
                           |vpiFullName:work@test_program.get_command_from_slave_1.i
                           |vpiActual:
-                          \_IntTypespec: , line:151:14, endln:151:17
+                          \_IntTypespec: 
                         |vpiName:i
                         |vpiFullName:work@test_program.get_command_from_slave_1.i
                       |vpiInternalScope:
@@ -10217,21 +9841,8 @@ Design: (unnamed)
                               \_TypespecMember: (burstcount), line:56:37, endln:56:47
                         |vpiStmt:
                         \_Begin: (work@test_program.get_command_from_slave_1), line:151:50, endln:154:13
-                      |vpiTypespec:
-                      \_IntTypespec: , line:151:14, endln:151:17
-                        |vpiParent:
-                        \_Begin: (work@test_program.get_command_from_slave_1), line:149:55, endln:155:10
-                        |vpiSigned:1
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.get_command_from_slave_1), line:149:55, endln:155:10
-                      |vpiImportTypespec:
-                      \_IntTypespec: , line:151:14, endln:151:17
                       |vpiImportTypespec:
                       \_Variable: (work@test_program.get_command_from_slave_1.i), line:151:18, endln:151:19
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_Assignment: , line:150:10, endln:150:27
                         |vpiParent:
@@ -10532,7 +10143,7 @@ Design: (unnamed)
                         \_Variable: (work@test_program.configure_and_push_response_to_slave_1.read_response_latency), line:175:11, endln:175:32
                         |vpiFullName:work@test_program.configure_and_push_response_to_slave_1.read_response_latency
                         |vpiActual:
-                        \_IntTypespec: , line:175:7, endln:175:10
+                        \_IntTypespec: 
                       |vpiName:read_response_latency
                       |vpiFullName:work@test_program.configure_and_push_response_to_slave_1.read_response_latency
                     |vpiVariable:
@@ -10545,7 +10156,7 @@ Design: (unnamed)
                         \_Variable: (work@test_program.configure_and_push_response_to_slave_1.i), line:179:16, endln:179:17
                         |vpiFullName:work@test_program.configure_and_push_response_to_slave_1.i
                         |vpiActual:
-                        \_IntTypespec: , line:175:7, endln:175:10
+                        \_IntTypespec: 
                       |vpiName:i
                       |vpiFullName:work@test_program.configure_and_push_response_to_slave_1.i
                     |vpiInternalScope:
@@ -10558,12 +10169,6 @@ Design: (unnamed)
                         |vpiParent:
                         \_ForStmt: (work@test_program.configure_and_push_response_to_slave_1), line:179:7, endln:190:10
                         |vpiFullName:work@test_program.configure_and_push_response_to_slave_1
-                        |vpiTypespec:
-                        \_IntTypespec: 
-                          |vpiParent:
-                          \_Begin: (work@test_program.configure_and_push_response_to_slave_1), line:179:48, endln:190:10
-                        |vpiImportTypespec:
-                        \_IntTypespec: 
                         |vpiStmt:
                         \_FuncCall: ($root.tb.dut.slave_1.set_response_data), line:180:10, endln:180:51
                           |vpiParent:
@@ -10920,23 +10525,10 @@ Design: (unnamed)
                             \_TypespecMember: (burstcount), line:66:37, endln:66:47
                       |vpiStmt:
                       \_Begin: (work@test_program.configure_and_push_response_to_slave_1), line:179:48, endln:190:10
-                    |vpiTypespec:
-                    \_IntTypespec: , line:175:7, endln:175:10
-                      |vpiParent:
-                      \_Begin: (work@test_program.configure_and_push_response_to_slave_1), line:175:7, endln:192:110
-                      |vpiSigned:1
-                    |vpiTypespec:
-                    \_IntTypespec: 
-                      |vpiParent:
-                      \_Begin: (work@test_program.configure_and_push_response_to_slave_1), line:175:7, endln:192:110
-                    |vpiImportTypespec:
-                    \_IntTypespec: , line:175:7, endln:175:10
                     |vpiImportTypespec:
                     \_Variable: (work@test_program.configure_and_push_response_to_slave_1.read_response_latency), line:175:11, endln:175:32
                     |vpiImportTypespec:
                     \_Variable: (work@test_program.configure_and_push_response_to_slave_1.i), line:179:16, endln:179:17
-                    |vpiImportTypespec:
-                    \_IntTypespec: 
                     |vpiImportTypespec:
                     \_Net: (work@test_program.configure_and_push_response_to_slave_1.REQ_READ), line:177:36, endln:177:44
                       |vpiParent:
@@ -11153,8 +10745,6 @@ Design: (unnamed)
     |vpiObject:
     \_RefTypespec: (work@test_program.actual_cmd.Command), line:117:7, endln:117:14
     |vpiObject:
-    \_UnsupportedTypespec: (Command), line:117:7, endln:117:14
-    |vpiObject:
     \_Variable: (work@test_program.exp_cmd), line:117:31, endln:117:38
     |vpiObject:
     \_RefTypespec: (work@test_program.exp_cmd.Command), line:117:7, endln:117:14
@@ -11165,7 +10755,7 @@ Design: (unnamed)
     |vpiObject:
     \_RefTypespec: (work@test_program.rsp.Response), line:118:7, endln:118:15
     |vpiObject:
-    \_IntTypespec: , line:120:17, endln:120:20
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.backpressure_cycles), line:120:21, endln:120:40
     |vpiObject:
@@ -11484,7 +11074,7 @@ Design: (unnamed)
     |vpiObject:
     \_Assignment: , line:151:14, endln:151:23
     |vpiObject:
-    \_IntTypespec: , line:151:14, endln:151:17
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.get_command_from_slave_1.i), line:151:18, endln:151:19
     |vpiObject:
@@ -11627,12 +11217,6 @@ Design: (unnamed)
           |vpiParent:
           \_EventControl: , line:164:11, endln:164:33
           |vpiFullName:work@test_program
-          |vpiTypespec:
-          \_IntTypespec: 
-            |vpiParent:
-            \_Begin: (work@test_program), line:164:34, endln:168:7
-          |vpiImportTypespec:
-          \_IntTypespec: 
           |vpiStmt:
           \_IfStmt: , line:165:7, endln:167:10
             |vpiParent:
@@ -11709,7 +11293,7 @@ Design: (unnamed)
     |vpiObject:
     \_Operation: , line:166:10, endln:166:39
     |vpiObject:
-    \_IntTypespec: , line:163:4, endln:163:7
+    \_IntTypespec: 
     |vpiObject:
     \_Constant: , line:163:38, endln:163:39
       |vpiParent:
@@ -11737,7 +11321,7 @@ Design: (unnamed)
         \_Variable: (work@test_program.pending_read_cycles_slave_1), line:163:8, endln:163:35
         |vpiFullName:work@test_program.pending_read_cycles_slave_1
         |vpiActual:
-        \_IntTypespec: , line:163:4, endln:163:7
+        \_IntTypespec: 
       |vpiName:pending_read_cycles_slave_1
       |vpiFullName:work@test_program.pending_read_cycles_slave_1
       |vpiRandType:1
@@ -11876,7 +11460,7 @@ Design: (unnamed)
     |vpiObject:
     \_Begin: (work@test_program.configure_and_push_response_to_slave_1), line:175:7, endln:192:110
     |vpiObject:
-    \_IntTypespec: , line:175:7, endln:175:10
+    \_IntTypespec: 
     |vpiObject:
     \_Variable: (work@test_program.configure_and_push_response_to_slave_1.read_response_latency), line:175:11, endln:175:32
     |vpiObject:
@@ -12190,19 +11774,6 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiName:new
       |vpiFullName:builtin::mailbox::new
-      |vpiTypespec:
-      \_IntTypespec: , line:3:19, endln:3:22
-        |vpiParent:
-        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-        |vpiSigned:1
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
-      |vpiImportTypespec:
-      \_IntTypespec: , line:3:19, endln:3:22
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -12231,7 +11802,7 @@ Design: (unnamed)
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
           |vpiActual:
-          \_IntTypespec: , line:3:19, endln:3:22
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -12242,13 +11813,6 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiName:num
       |vpiFullName:builtin::mailbox::num
-      |vpiTypespec:
-      \_IntTypespec: , line:6:14, endln:6:17
-        |vpiParent:
-        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: , line:6:14, endln:6:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -12257,7 +11821,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiFullName:builtin::mailbox::num
         |vpiActual:
-        \_IntTypespec: , line:6:14, endln:6:17
+        \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -12286,12 +11850,6 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
         |vpiName:try_put
       |vpiFullName:builtin::mailbox::try_put
-      |vpiTypespec:
-      \_LogicTypespec: 
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-      |vpiImportTypespec:
-      \_LogicTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -12300,7 +11858,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
         |vpiFullName:builtin::mailbox::try_put
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:5:4, endln:5:7
       |vpiIODecl:
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
@@ -12335,13 +11893,6 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
-      |vpiTypespec:
-      \_IntTypespec: , line:18:14, endln:18:17
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: , line:18:14, endln:18:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -12350,7 +11901,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiFullName:builtin::mailbox::try_get
         |vpiActual:
-        \_IntTypespec: , line:18:14, endln:18:17
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -12385,13 +11936,6 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
-      |vpiTypespec:
-      \_IntTypespec: , line:24:14, endln:24:17
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: , line:24:14, endln:24:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -12400,7 +11944,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiFullName:builtin::mailbox::try_peek
         |vpiActual:
-        \_IntTypespec: , line:24:14, endln:24:17
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -12642,11 +12186,6 @@ Design: (unnamed)
           |vpiDecompile:4
           |vpiValue:4
     |vpiTypespec:
-    \_IntTypespec: 
-      |vpiParent:
-      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/AVLMM/builtin.sv, line:30:3, endln:52:11
-      |vpiSigned:1
-    |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/AVLMM/builtin.sv, line:30:3, endln:52:11
@@ -12664,8 +12203,6 @@ Design: (unnamed)
         \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
-    |vpiImportTypespec:
-    \_IntTypespec: 
     |vpiImportTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
@@ -12712,19 +12249,6 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiName:new
       |vpiFullName:builtin::semaphore::new
-      |vpiTypespec:
-      \_IntTypespec: , line:57:18, endln:57:21
-        |vpiParent:
-        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-        |vpiSigned:1
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
-      |vpiImportTypespec:
-      \_IntTypespec: , line:57:18, endln:57:21
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -12753,7 +12277,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
           |vpiActual:
-          \_IntTypespec: , line:57:18, endln:57:21
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
@@ -12764,19 +12288,6 @@ Design: (unnamed)
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiName:put
       |vpiFullName:builtin::semaphore::put
-      |vpiTypespec:
-      \_IntTypespec: , line:60:14, endln:60:17
-        |vpiParent:
-        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-        |vpiSigned:1
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
-      |vpiImportTypespec:
-      \_IntTypespec: , line:60:14, endln:60:17
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -12806,7 +12317,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
           |vpiActual:
-          \_IntTypespec: , line:60:14, endln:60:17
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiParent:
@@ -12817,19 +12328,6 @@ Design: (unnamed)
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiName:get
       |vpiFullName:builtin::semaphore::get
-      |vpiTypespec:
-      \_IntTypespec: , line:63:14, endln:63:17
-        |vpiParent:
-        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-        |vpiSigned:1
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
-      |vpiImportTypespec:
-      \_IntTypespec: , line:63:14, endln:63:17
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -12859,7 +12357,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
           |vpiActual:
-          \_IntTypespec: , line:63:14, endln:63:17
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiParent:
@@ -12870,19 +12368,6 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
-      |vpiTypespec:
-      \_IntTypespec: , line:66:14, endln:66:17
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-      |vpiImportTypespec:
-      \_IntTypespec: , line:66:14, endln:66:17
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -12891,7 +12376,7 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiFullName:builtin::semaphore::try_get
         |vpiActual:
-        \_IntTypespec: , line:66:14, endln:66:17
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -12919,7 +12404,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
           |vpiActual:
-          \_IntTypespec: , line:66:14, endln:66:17
+          \_IntTypespec: 
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiImportTypespec:
@@ -13106,10 +12591,6 @@ Design: (unnamed)
       |vpiDecompile:10
       |vpiValue:10
   |vpiTypespec:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv, line:3:1, endln:30:10
-  |vpiTypespec:
   \_ModuleTypespec: (avlm_avls_2x2)
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv, line:3:1, endln:30:10
@@ -13121,22 +12602,8 @@ Design: (unnamed)
     |vpiName:work@test_program
     |vpiModule:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-  |vpiTypespec:
-  \_LogicTypespec: , line:5:4, endln:5:7
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv, line:3:1, endln:30:10
-  |vpiTypespec:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv, line:3:1, endln:30:10
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_ModuleTypespec: (avlm_avls_2x2)
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:5:4, endln:5:7
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@tb.clk), line:5:8, endln:5:11
     |vpiParent:
@@ -13258,12 +12725,6 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:25:4, endln:28:7
       |vpiFullName:work@tb
-      |vpiTypespec:
-      \_BitTypespec: 
-        |vpiParent:
-        \_Begin: (work@tb), line:25:12, endln:28:7
-      |vpiImportTypespec:
-      \_BitTypespec: 
       |vpiStmt:
       \_Repeat: , line:26:7, endln:26:50
         |vpiParent:
@@ -13390,7 +12851,7 @@ Design: (unnamed)
       \_Variable: (work@test_program.test_success), line:255:5, endln:255:17
       |vpiFullName:work@test_program.test_success
       |vpiActual:
-      \_BitTypespec: , line:41:17, endln:41:20
+      \_BitTypespec: 
     |vpiName:test_success
     |vpiFullName:work@test_program.test_success
     |vpiRandType:1
@@ -13779,7 +13240,7 @@ Design: (unnamed)
           \_Variable: (work@test_program.master_send_commands.master_id), line:296:19, endln:296:28
           |vpiFullName:work@test_program.master_send_commands.master_id
           |vpiActual:
-          \_IntTypespec: , line:296:7, endln:296:10
+          \_IntTypespec: 
         |vpiName:master_id
         |vpiFullName:work@test_program.master_send_commands.master_id
       |vpiVariable:
@@ -13792,7 +13253,7 @@ Design: (unnamed)
           \_Variable: (work@test_program.master_send_commands.slave_id), line:296:30, endln:296:38
           |vpiFullName:work@test_program.master_send_commands.slave_id
           |vpiActual:
-          \_IntTypespec: , line:296:7, endln:296:10
+          \_IntTypespec: 
         |vpiName:slave_id
         |vpiFullName:work@test_program.master_send_commands.slave_id
       |vpiVariable:
@@ -13805,7 +13266,7 @@ Design: (unnamed)
           \_Variable: (work@test_program.master_send_commands.i), line:298:16, endln:298:17
           |vpiFullName:work@test_program.master_send_commands.i
           |vpiActual:
-          \_IntTypespec: , line:296:7, endln:296:10
+          \_IntTypespec: 
         |vpiName:i
         |vpiFullName:work@test_program.master_send_commands.i
       |vpiInternalScope:
@@ -13818,12 +13279,6 @@ Design: (unnamed)
           |vpiParent:
           \_ForStmt: (work@test_program.master_send_commands), line:298:7, endln:310:10
           |vpiFullName:work@test_program.master_send_commands
-          |vpiTypespec:
-          \_IntTypespec: 
-            |vpiParent:
-            \_Begin: (work@test_program.master_send_commands), line:298:45, endln:310:10
-          |vpiImportTypespec:
-          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:301:10, endln:301:58
             |vpiParent:
@@ -13996,14 +13451,8 @@ Design: (unnamed)
                       \_TypedefTypespec: (Command), line:62:6, endln:62:13
                     |vpiName:cmd
                     |vpiFullName:work@test_program.create_command.cmd
-                  |vpiTypespec:
-                  \_IntTypespec: 
-                    |vpiParent:
-                    \_Begin: (work@test_program.create_command)
                   |vpiImportTypespec:
                   \_Variable: (work@test_program.create_command.cmd), line:320:15, endln:320:18
-                  |vpiImportTypespec:
-                  \_IntTypespec: 
                   |vpiStmt:
                   \_IfElse: , line:322:7, endln:326:10
                     |vpiParent:
@@ -14097,14 +13546,8 @@ Design: (unnamed)
                                   \_TypedefTypespec: (Burstcount), line:39:37, endln:39:47
                                 |vpiName:burstcount
                                 |vpiFullName:work@test_program.randomize_burstcount.burstcount
-                              |vpiTypespec:
-                              \_IntTypespec: 
-                                |vpiParent:
-                                \_Begin: (work@test_program.randomize_burstcount)
                               |vpiImportTypespec:
                               \_Variable: (work@test_program.randomize_burstcount.burstcount), line:347:18, endln:347:28
-                              |vpiImportTypespec:
-                              \_IntTypespec: 
                               |vpiStmt:
                               \_Assignment: , line:349:7, endln:349:48
                                 |vpiParent:
@@ -14180,12 +13623,6 @@ Design: (unnamed)
                       |vpiParent:
                       \_IfElse: , line:322:7, endln:326:10
                       |vpiFullName:work@test_program.create_command
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_command), line:324:16, endln:326:10
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_Assignment: , line:325:10, endln:325:40
                         |vpiParent:
@@ -14308,79 +13745,32 @@ Design: (unnamed)
                           |vpiParent:
                           \_Function: (work@test_program.generate_random_aligned_address), line:353:4, endln:362:15
                           |vpiFullName:work@test_program.generate_random_aligned_address
-                          |vpiTypespec:
-                          \_LogicTypespec: , line:356:7, endln:356:12
+                          |vpiImportTypespec:
+                          \_Net: (work@test_program.generate_random_aligned_address.base_addr), line:356:26, endln:356:35
                             |vpiParent:
                             \_Begin: (work@test_program.generate_random_aligned_address)
-                            |vpiRange:
-                            \_Range: , line:356:13, endln:356:25
+                            |vpiTypespec:
+                            \_RefTypespec: (work@test_program.generate_random_aligned_address.base_addr), line:356:7, endln:356:25
                               |vpiParent:
-                              \_LogicTypespec: , line:356:7, endln:356:12
-                              |vpiLeftRange:
-                              \_Operation: , line:356:14, endln:356:22
-                                |vpiParent:
-                                \_Range: , line:356:13, endln:356:25
-                                |vpiOpType:11
-                                |vpiOperand:
-                                \_RefObj: (work@test_program.generate_random_aligned_address.ADDR_W), line:356:14, endln:356:20
-                                  |vpiParent:
-                                  \_Operation: , line:356:14, endln:356:22
-                                  |vpiName:ADDR_W
-                                  |vpiFullName:work@test_program.generate_random_aligned_address.ADDR_W
-                                  |vpiActual:
-                                  \_Parameter: (work@test_program.ADDR_W), line:21:15, endln:21:44
-                                |vpiOperand:
-                                \_Constant: , line:356:21, endln:356:22
-                                  |vpiParent:
-                                  \_Operation: , line:356:14, endln:356:22
-                                  |vpiTypespec:
-                                  \_RefTypespec: (work@test_program.generate_random_aligned_address), line:356:21, endln:356:22
-                                    |vpiParent:
-                                    \_Constant: , line:356:21, endln:356:22
-                                    |vpiFullName:work@test_program.generate_random_aligned_address
-                                    |vpiActual:
-                                    \_IntTypespec: 
-                                  |vpiConstType:9
-                                  |vpiSize:64
-                                  |vpiDecompile:1
-                                  |vpiValue:1
-                              |vpiRightRange:
-                              \_Constant: , line:356:23, endln:356:24
-                                |vpiParent:
-                                \_Range: , line:356:13, endln:356:25
-                                |vpiTypespec:
-                                \_RefTypespec: (work@test_program.generate_random_aligned_address), line:356:23, endln:356:24
-                                  |vpiParent:
-                                  \_Constant: , line:356:23, endln:356:24
-                                  |vpiFullName:work@test_program.generate_random_aligned_address
-                                  |vpiActual:
-                                  \_IntTypespec: 
-                                |vpiConstType:9
-                                |vpiSize:64
-                                |vpiDecompile:0
-                                |vpiValue:0
-                          |vpiTypespec:
-                          \_IntTypespec: 
-                            |vpiParent:
-                            \_Begin: (work@test_program.generate_random_aligned_address)
-                          |vpiImportTypespec:
-                          \_LogicTypespec: , line:356:7, endln:356:12
-                          |vpiImportTypespec:
-                          \_IntTypespec: 
-                          |vpiImportTypespec:
-                          \_Net: (work@test_program.generate_random_aligned_address.base_addr), line:358:7, endln:358:16
-                            |vpiParent:
-                            \_Begin: (work@test_program.generate_random_aligned_address)
+                              \_Net: (work@test_program.generate_random_aligned_address.base_addr), line:356:26, endln:356:35
+                              |vpiFullName:work@test_program.generate_random_aligned_address.base_addr
+                              |vpiActual:
+                              \_LogicTypespec: , line:57:8, endln:57:13
                             |vpiName:base_addr
                             |vpiFullName:work@test_program.generate_random_aligned_address.base_addr
-                            |vpiNetType:1
                           |vpiImportTypespec:
-                          \_Net: (work@test_program.generate_random_aligned_address.addr), line:359:7, endln:359:11
+                          \_Net: (work@test_program.generate_random_aligned_address.addr), line:356:37, endln:356:41
                             |vpiParent:
                             \_Begin: (work@test_program.generate_random_aligned_address)
+                            |vpiTypespec:
+                            \_RefTypespec: (work@test_program.generate_random_aligned_address.addr), line:356:7, endln:356:25
+                              |vpiParent:
+                              \_Net: (work@test_program.generate_random_aligned_address.addr), line:356:37, endln:356:41
+                              |vpiFullName:work@test_program.generate_random_aligned_address.addr
+                              |vpiActual:
+                              \_LogicTypespec: , line:57:8, endln:57:13
                             |vpiName:addr
                             |vpiFullName:work@test_program.generate_random_aligned_address.addr
-                            |vpiNetType:1
                           |vpiStmt:
                           \_Assignment: , line:358:7, endln:358:40
                             |vpiParent:
@@ -14394,7 +13784,7 @@ Design: (unnamed)
                               |vpiName:base_addr
                               |vpiFullName:work@test_program.generate_random_aligned_address.base_addr
                               |vpiActual:
-                              \_Net: (work@test_program.generate_random_aligned_address.base_addr), line:358:7, endln:358:16
+                              \_Net: (work@test_program.generate_random_aligned_address.base_addr), line:356:26, endln:356:35
                             |vpiRhs:
                             \_Operation: , line:358:19, endln:358:40
                               |vpiParent:
@@ -14429,7 +13819,7 @@ Design: (unnamed)
                               |vpiName:addr
                               |vpiFullName:work@test_program.generate_random_aligned_address.addr
                               |vpiActual:
-                              \_Net: (work@test_program.generate_random_aligned_address.addr), line:359:7, endln:359:11
+                              \_Net: (work@test_program.generate_random_aligned_address.addr), line:356:37, endln:356:41
                             |vpiRhs:
                             \_Operation: , line:359:14, endln:359:48
                               |vpiParent:
@@ -14442,7 +13832,7 @@ Design: (unnamed)
                                 |vpiName:base_addr
                                 |vpiFullName:work@test_program.generate_random_aligned_address.base_addr
                                 |vpiActual:
-                                \_Net: (work@test_program.generate_random_aligned_address.base_addr), line:358:7, endln:358:16
+                                \_Net: (work@test_program.generate_random_aligned_address.base_addr), line:356:26, endln:356:35
                               |vpiOperand:
                               \_Operation: , line:359:27, endln:359:47
                                 |vpiParent:
@@ -14486,7 +13876,7 @@ Design: (unnamed)
                                   |vpiName:addr
                                   |vpiFullName:work@test_program.generate_random_aligned_address.addr
                                   |vpiActual:
-                                  \_Net: (work@test_program.generate_random_aligned_address.addr), line:359:7, endln:359:11
+                                  \_Net: (work@test_program.generate_random_aligned_address.addr), line:356:37, endln:356:41
                                 |vpiOperand:
                                 \_RefObj: (work@test_program.generate_random_aligned_address.NUM_SYMBOLS), line:361:22, endln:361:33
                                   |vpiParent:
@@ -14503,72 +13893,6 @@ Design: (unnamed)
                                 |vpiFullName:work@test_program.generate_random_aligned_address.NUM_SYMBOLS
                                 |vpiActual:
                                 \_Parameter: (work@test_program.NUM_SYMBOLS), line:24:15, endln:24:43
-                        |vpiTypespec:
-                        \_LogicTypespec: , line:353:23, endln:353:28
-                          |vpiParent:
-                          \_Function: (work@test_program.generate_random_aligned_address), line:353:4, endln:362:15
-                          |vpiRange:
-                          \_Range: , line:353:29, endln:353:42
-                            |vpiParent:
-                            \_LogicTypespec: , line:353:23, endln:353:28
-                            |vpiLeftRange:
-                            \_Operation: , line:353:30, endln:353:38
-                              |vpiParent:
-                              \_Range: , line:353:29, endln:353:42
-                              |vpiOpType:11
-                              |vpiOperand:
-                              \_RefObj: (work@test_program.generate_random_aligned_address.ADDR_W), line:353:30, endln:353:36
-                                |vpiParent:
-                                \_Operation: , line:353:30, endln:353:38
-                                |vpiName:ADDR_W
-                                |vpiFullName:work@test_program.generate_random_aligned_address.ADDR_W
-                                |vpiActual:
-                                \_Parameter: (work@test_program.ADDR_W), line:21:15, endln:21:44
-                              |vpiOperand:
-                              \_Constant: , line:353:37, endln:353:38
-                                |vpiParent:
-                                \_Operation: , line:353:30, endln:353:38
-                                |vpiTypespec:
-                                \_RefTypespec: (work@test_program.generate_random_aligned_address), line:353:37, endln:353:38
-                                  |vpiParent:
-                                  \_Constant: , line:353:37, endln:353:38
-                                  |vpiFullName:work@test_program.generate_random_aligned_address
-                                  |vpiActual:
-                                  \_IntTypespec: 
-                                |vpiConstType:9
-                                |vpiSize:64
-                                |vpiDecompile:1
-                                |vpiValue:1
-                            |vpiRightRange:
-                            \_Constant: , line:353:40, endln:353:41
-                              |vpiParent:
-                              \_Range: , line:353:29, endln:353:42
-                              |vpiTypespec:
-                              \_RefTypespec: (work@test_program.generate_random_aligned_address), line:353:40, endln:353:41
-                                |vpiParent:
-                                \_Constant: , line:353:40, endln:353:41
-                                |vpiFullName:work@test_program.generate_random_aligned_address
-                                |vpiActual:
-                                \_IntTypespec: 
-                              |vpiConstType:9
-                              |vpiSize:64
-                              |vpiDecompile:0
-                              |vpiValue:0
-                        |vpiTypespec:
-                        \_IntTypespec: 
-                          |vpiParent:
-                          \_Function: (work@test_program.generate_random_aligned_address), line:353:4, endln:362:15
-                        |vpiTypespec:
-                        \_IntTypespec: , line:354:7, endln:354:10
-                          |vpiParent:
-                          \_Function: (work@test_program.generate_random_aligned_address), line:353:4, endln:362:15
-                          |vpiSigned:1
-                        |vpiImportTypespec:
-                        \_LogicTypespec: , line:353:23, endln:353:28
-                        |vpiImportTypespec:
-                        \_IntTypespec: 
-                        |vpiImportTypespec:
-                        \_IntTypespec: , line:354:7, endln:354:10
                         |vpiVisibility:1
                         |vpiAutomatic:1
                         |vpiReturn:
@@ -14577,7 +13901,7 @@ Design: (unnamed)
                           \_Function: (work@test_program.generate_random_aligned_address), line:353:4, endln:362:15
                           |vpiFullName:work@test_program.generate_random_aligned_address
                           |vpiActual:
-                          \_LogicTypespec: , line:353:23, endln:353:28
+                          \_LogicTypespec: , line:57:8, endln:57:13
                         |vpiIODecl:
                         \_IODecl: (slave_id), line:354:11, endln:354:19
                           |vpiParent:
@@ -14590,7 +13914,7 @@ Design: (unnamed)
                             \_IODecl: (slave_id), line:354:11, endln:354:19
                             |vpiFullName:work@test_program.generate_random_aligned_address.slave_id
                             |vpiActual:
-                            \_IntTypespec: , line:354:7, endln:354:10
+                            \_IntTypespec: 
                         |vpiStmt:
                         \_Begin: (work@test_program.generate_random_aligned_address)
                       |vpiArgument:
@@ -14698,7 +14022,7 @@ Design: (unnamed)
                           \_Variable: (work@test_program.create_command.i), line:333:19, endln:333:20
                           |vpiFullName:work@test_program.create_command.i
                           |vpiActual:
-                          \_IntTypespec: , line:333:15, endln:333:18
+                          \_IntTypespec: 
                         |vpiName:i
                         |vpiFullName:work@test_program.create_command.i
                       |vpiInternalScope:
@@ -14711,18 +14035,6 @@ Design: (unnamed)
                           |vpiParent:
                           \_ForStmt: (work@test_program.create_command), line:333:10, endln:337:13
                           |vpiFullName:work@test_program.create_command
-                          |vpiTypespec:
-                          \_BitTypespec: 
-                            |vpiParent:
-                            \_Begin: (work@test_program.create_command), line:333:51, endln:337:13
-                          |vpiTypespec:
-                          \_IntTypespec: 
-                            |vpiParent:
-                            \_Begin: (work@test_program.create_command), line:333:51, endln:337:13
-                          |vpiImportTypespec:
-                          \_BitTypespec: 
-                          |vpiImportTypespec:
-                          \_IntTypespec: 
                           |vpiStmt:
                           \_Assignment: , line:334:13, endln:334:43
                             |vpiParent:
@@ -14968,21 +14280,8 @@ Design: (unnamed)
                               \_TypespecMember: (burstcount), line:56:37, endln:56:47
                         |vpiStmt:
                         \_Begin: (work@test_program.create_command), line:333:51, endln:337:13
-                      |vpiTypespec:
-                      \_IntTypespec: , line:333:15, endln:333:18
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_command), line:332:27, endln:338:10
-                        |vpiSigned:1
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_command), line:332:27, endln:338:10
-                      |vpiImportTypespec:
-                      \_IntTypespec: , line:333:15, endln:333:18
                       |vpiImportTypespec:
                       \_Variable: (work@test_program.create_command.i), line:333:19, endln:333:20
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_ForStmt: (work@test_program.create_command), line:333:10, endln:337:13
                     |vpiElseStmt:
@@ -14990,12 +14289,6 @@ Design: (unnamed)
                       |vpiParent:
                       \_IfElse: , line:332:7, endln:340:10
                       |vpiFullName:work@test_program.create_command
-                      |vpiTypespec:
-                      \_IntTypespec: 
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_command), line:338:16, endln:340:10
-                      |vpiImportTypespec:
-                      \_IntTypespec: 
                       |vpiStmt:
                       \_Assignment: , line:339:10, endln:339:68
                         |vpiParent:
@@ -15081,13 +14374,6 @@ Design: (unnamed)
                       |vpiFullName:work@test_program.create_command.cmd
                       |vpiActual:
                       \_Variable: (work@test_program.create_command.cmd), line:320:15, endln:320:18
-                |vpiTypespec:
-                \_IntTypespec: , line:317:7, endln:317:10
-                  |vpiParent:
-                  \_Function: (work@test_program.create_command), line:314:4, endln:343:15
-                  |vpiSigned:1
-                |vpiImportTypespec:
-                \_IntTypespec: , line:317:7, endln:317:10
                 |vpiVisibility:1
                 |vpiAutomatic:1
                 |vpiReturn:
@@ -15138,7 +14424,7 @@ Design: (unnamed)
                     \_IODecl: (slave_id), line:317:22, endln:317:30
                     |vpiFullName:work@test_program.create_command.slave_id
                     |vpiActual:
-                    \_IntTypespec: , line:317:7, endln:317:10
+                    \_IntTypespec: 
                 |vpiStmt:
                 \_Begin: (work@test_program.create_command)
               |vpiArgument:
@@ -15208,13 +14494,6 @@ Design: (unnamed)
                       \_Task: (work@test_program.save_command_master), line:375:4, endln:386:11
                       |vpiName:save_command_master
                     |vpiFullName:work@test_program.save_command_master
-                    |vpiTypespec:
-                    \_IntTypespec: , line:377:7, endln:377:10
-                      |vpiParent:
-                      \_Task: (work@test_program.save_command_master), line:375:4, endln:386:11
-                      |vpiSigned:1
-                    |vpiImportTypespec:
-                    \_IntTypespec: , line:377:7, endln:377:10
                     |vpiVisibility:1
                     |vpiAutomatic:1
                     |vpiIODecl:
@@ -15243,7 +14522,7 @@ Design: (unnamed)
                         \_IODecl: (master_id), line:377:16, endln:377:25
                         |vpiFullName:work@test_program.save_command_master.master_id
                         |vpiActual:
-                        \_IntTypespec: , line:377:7, endln:377:10
+                        \_IntTypespec: 
                     |vpiStmt:
                     \_IfElse: , line:380:10, endln:384:13
                       |vpiParent:
@@ -15440,91 +14719,37 @@ Design: (unnamed)
                                   \_Variable: (work@test_program.translate_master_to_slave_address.slave_id), line:405:11, endln:405:19
                                   |vpiFullName:work@test_program.translate_master_to_slave_address.slave_id
                                   |vpiActual:
-                                  \_IntTypespec: , line:405:7, endln:405:10
+                                  \_IntTypespec: 
                                 |vpiName:slave_id
                                 |vpiFullName:work@test_program.translate_master_to_slave_address.slave_id
-                              |vpiTypespec:
-                              \_IntTypespec: , line:405:7, endln:405:10
-                                |vpiParent:
-                                \_Begin: (work@test_program.translate_master_to_slave_address)
-                                |vpiSigned:1
-                              |vpiTypespec:
-                              \_LogicTypespec: , line:406:7, endln:406:12
-                                |vpiParent:
-                                \_Begin: (work@test_program.translate_master_to_slave_address)
-                                |vpiRange:
-                                \_Range: , line:406:13, endln:406:25
-                                  |vpiParent:
-                                  \_LogicTypespec: , line:406:7, endln:406:12
-                                  |vpiLeftRange:
-                                  \_Operation: , line:406:14, endln:406:22
-                                    |vpiParent:
-                                    \_Range: , line:406:13, endln:406:25
-                                    |vpiOpType:11
-                                    |vpiOperand:
-                                    \_RefObj: (work@test_program.translate_master_to_slave_address.ADDR_W), line:406:14, endln:406:20
-                                      |vpiParent:
-                                      \_Operation: , line:406:14, endln:406:22
-                                      |vpiName:ADDR_W
-                                      |vpiFullName:work@test_program.translate_master_to_slave_address.ADDR_W
-                                      |vpiActual:
-                                      \_Parameter: (work@test_program.ADDR_W), line:21:15, endln:21:44
-                                    |vpiOperand:
-                                    \_Constant: , line:406:21, endln:406:22
-                                      |vpiParent:
-                                      \_Operation: , line:406:14, endln:406:22
-                                      |vpiTypespec:
-                                      \_RefTypespec: (work@test_program.translate_master_to_slave_address), line:406:21, endln:406:22
-                                        |vpiParent:
-                                        \_Constant: , line:406:21, endln:406:22
-                                        |vpiFullName:work@test_program.translate_master_to_slave_address
-                                        |vpiActual:
-                                        \_IntTypespec: 
-                                      |vpiConstType:9
-                                      |vpiSize:64
-                                      |vpiDecompile:1
-                                      |vpiValue:1
-                                  |vpiRightRange:
-                                  \_Constant: , line:406:23, endln:406:24
-                                    |vpiParent:
-                                    \_Range: , line:406:13, endln:406:25
-                                    |vpiTypespec:
-                                    \_RefTypespec: (work@test_program.translate_master_to_slave_address), line:406:23, endln:406:24
-                                      |vpiParent:
-                                      \_Constant: , line:406:23, endln:406:24
-                                      |vpiFullName:work@test_program.translate_master_to_slave_address
-                                      |vpiActual:
-                                      \_IntTypespec: 
-                                    |vpiConstType:9
-                                    |vpiSize:64
-                                    |vpiDecompile:0
-                                    |vpiValue:0
-                              |vpiTypespec:
-                              \_IntTypespec: 
-                                |vpiParent:
-                                \_Begin: (work@test_program.translate_master_to_slave_address)
-                              |vpiImportTypespec:
-                              \_IntTypespec: , line:405:7, endln:405:10
                               |vpiImportTypespec:
                               \_Variable: (work@test_program.translate_master_to_slave_address.slave_id), line:405:11, endln:405:19
                               |vpiImportTypespec:
-                              \_LogicTypespec: , line:406:7, endln:406:12
-                              |vpiImportTypespec:
-                              \_IntTypespec: 
-                              |vpiImportTypespec:
-                              \_Net: (work@test_program.translate_master_to_slave_address.base_addr), line:408:7, endln:408:16
+                              \_Net: (work@test_program.translate_master_to_slave_address.base_addr), line:406:26, endln:406:35
                                 |vpiParent:
                                 \_Begin: (work@test_program.translate_master_to_slave_address)
+                                |vpiTypespec:
+                                \_RefTypespec: (work@test_program.translate_master_to_slave_address.base_addr), line:406:7, endln:406:25
+                                  |vpiParent:
+                                  \_Net: (work@test_program.translate_master_to_slave_address.base_addr), line:406:26, endln:406:35
+                                  |vpiFullName:work@test_program.translate_master_to_slave_address.base_addr
+                                  |vpiActual:
+                                  \_LogicTypespec: , line:57:8, endln:57:13
                                 |vpiName:base_addr
                                 |vpiFullName:work@test_program.translate_master_to_slave_address.base_addr
-                                |vpiNetType:1
                               |vpiImportTypespec:
-                              \_Net: (work@test_program.translate_master_to_slave_address.offset), line:409:7, endln:409:13
+                              \_Net: (work@test_program.translate_master_to_slave_address.offset), line:406:37, endln:406:43
                                 |vpiParent:
                                 \_Begin: (work@test_program.translate_master_to_slave_address)
+                                |vpiTypespec:
+                                \_RefTypespec: (work@test_program.translate_master_to_slave_address.offset), line:406:7, endln:406:25
+                                  |vpiParent:
+                                  \_Net: (work@test_program.translate_master_to_slave_address.offset), line:406:37, endln:406:43
+                                  |vpiFullName:work@test_program.translate_master_to_slave_address.offset
+                                  |vpiActual:
+                                  \_LogicTypespec: , line:57:8, endln:57:13
                                 |vpiName:offset
                                 |vpiFullName:work@test_program.translate_master_to_slave_address.offset
-                                |vpiNetType:1
                               |vpiStmt:
                               \_Assignment: , line:405:11, endln:405:39
                                 |vpiParent:
@@ -15567,7 +14792,7 @@ Design: (unnamed)
                                   |vpiName:base_addr
                                   |vpiFullName:work@test_program.translate_master_to_slave_address.base_addr
                                   |vpiActual:
-                                  \_Net: (work@test_program.translate_master_to_slave_address.base_addr), line:408:7, endln:408:16
+                                  \_Net: (work@test_program.translate_master_to_slave_address.base_addr), line:406:26, endln:406:35
                                 |vpiRhs:
                                 \_Operation: , line:408:19, endln:408:40
                                   |vpiParent:
@@ -15602,7 +14827,7 @@ Design: (unnamed)
                                   |vpiName:offset
                                   |vpiFullName:work@test_program.translate_master_to_slave_address.offset
                                   |vpiActual:
-                                  \_Net: (work@test_program.translate_master_to_slave_address.offset), line:409:7, endln:409:13
+                                  \_Net: (work@test_program.translate_master_to_slave_address.offset), line:406:37, endln:406:43
                                 |vpiRhs:
                                 \_Operation: , line:409:16, endln:409:32
                                   |vpiParent:
@@ -15623,7 +14848,7 @@ Design: (unnamed)
                                     |vpiName:base_addr
                                     |vpiFullName:work@test_program.translate_master_to_slave_address.base_addr
                                     |vpiActual:
-                                    \_Net: (work@test_program.translate_master_to_slave_address.base_addr), line:408:7, endln:408:16
+                                    \_Net: (work@test_program.translate_master_to_slave_address.base_addr), line:406:26, endln:406:35
                               |vpiStmt:
                               \_ReturnStmt: , line:411:7, endln:411:35
                                 |vpiParent:
@@ -15640,7 +14865,7 @@ Design: (unnamed)
                                     |vpiName:offset
                                     |vpiFullName:work@test_program.translate_master_to_slave_address.offset
                                     |vpiActual:
-                                    \_Net: (work@test_program.translate_master_to_slave_address.offset), line:409:7, endln:409:13
+                                    \_Net: (work@test_program.translate_master_to_slave_address.offset), line:406:37, endln:406:43
                                   |vpiOperand:
                                   \_RefObj: (work@test_program.translate_master_to_slave_address.NUM_SYMBOLS), line:411:24, endln:411:35
                                     |vpiParent:
@@ -15649,65 +14874,6 @@ Design: (unnamed)
                                     |vpiFullName:work@test_program.translate_master_to_slave_address.NUM_SYMBOLS
                                     |vpiActual:
                                     \_Parameter: (work@test_program.NUM_SYMBOLS), line:24:15, endln:24:43
-                            |vpiTypespec:
-                            \_LogicTypespec: , line:402:23, endln:402:28
-                              |vpiParent:
-                              \_Function: (work@test_program.translate_master_to_slave_address), line:402:4, endln:412:15
-                              |vpiRange:
-                              \_Range: , line:402:29, endln:402:42
-                                |vpiParent:
-                                \_LogicTypespec: , line:402:23, endln:402:28
-                                |vpiLeftRange:
-                                \_Operation: , line:402:30, endln:402:38
-                                  |vpiParent:
-                                  \_Range: , line:402:29, endln:402:42
-                                  |vpiOpType:11
-                                  |vpiOperand:
-                                  \_RefObj: (work@test_program.translate_master_to_slave_address.ADDR_W), line:402:30, endln:402:36
-                                    |vpiParent:
-                                    \_Operation: , line:402:30, endln:402:38
-                                    |vpiName:ADDR_W
-                                    |vpiFullName:work@test_program.translate_master_to_slave_address.ADDR_W
-                                    |vpiActual:
-                                    \_Parameter: (work@test_program.ADDR_W), line:21:15, endln:21:44
-                                  |vpiOperand:
-                                  \_Constant: , line:402:37, endln:402:38
-                                    |vpiParent:
-                                    \_Operation: , line:402:30, endln:402:38
-                                    |vpiTypespec:
-                                    \_RefTypespec: (work@test_program.translate_master_to_slave_address), line:402:37, endln:402:38
-                                      |vpiParent:
-                                      \_Constant: , line:402:37, endln:402:38
-                                      |vpiFullName:work@test_program.translate_master_to_slave_address
-                                      |vpiActual:
-                                      \_IntTypespec: 
-                                    |vpiConstType:9
-                                    |vpiSize:64
-                                    |vpiDecompile:1
-                                    |vpiValue:1
-                                |vpiRightRange:
-                                \_Constant: , line:402:40, endln:402:41
-                                  |vpiParent:
-                                  \_Range: , line:402:29, endln:402:42
-                                  |vpiTypespec:
-                                  \_RefTypespec: (work@test_program.translate_master_to_slave_address), line:402:40, endln:402:41
-                                    |vpiParent:
-                                    \_Constant: , line:402:40, endln:402:41
-                                    |vpiFullName:work@test_program.translate_master_to_slave_address
-                                    |vpiActual:
-                                    \_IntTypespec: 
-                                  |vpiConstType:9
-                                  |vpiSize:64
-                                  |vpiDecompile:0
-                                  |vpiValue:0
-                            |vpiTypespec:
-                            \_IntTypespec: 
-                              |vpiParent:
-                              \_Function: (work@test_program.translate_master_to_slave_address), line:402:4, endln:412:15
-                            |vpiImportTypespec:
-                            \_LogicTypespec: , line:402:23, endln:402:28
-                            |vpiImportTypespec:
-                            \_IntTypespec: 
                             |vpiVisibility:1
                             |vpiAutomatic:1
                             |vpiReturn:
@@ -15716,7 +14882,7 @@ Design: (unnamed)
                               \_Function: (work@test_program.translate_master_to_slave_address), line:402:4, endln:412:15
                               |vpiFullName:work@test_program.translate_master_to_slave_address
                               |vpiActual:
-                              \_LogicTypespec: , line:402:23, endln:402:28
+                              \_LogicTypespec: , line:57:8, endln:57:13
                             |vpiIODecl:
                             \_IODecl: (addr), line:403:28, endln:403:32
                               |vpiParent:
@@ -15729,7 +14895,7 @@ Design: (unnamed)
                                 \_IODecl: (addr), line:403:28, endln:403:32
                                 |vpiFullName:work@test_program.translate_master_to_slave_address.addr
                                 |vpiActual:
-                                \_LogicTypespec: , line:402:23, endln:402:28
+                                \_LogicTypespec: , line:57:8, endln:57:13
                             |vpiStmt:
                             \_Begin: (work@test_program.translate_master_to_slave_address)
                           |vpiArgument:
@@ -15849,13 +15015,6 @@ Design: (unnamed)
                               |vpiFullName:work@test_program.save_command_slave.read_command_queue_slave
                               |vpiActual:
                               \_Net: (work@test_program.read_command_queue_slave), line:80:10, endln:80:34
-                    |vpiTypespec:
-                    \_IntTypespec: , line:390:7, endln:390:10
-                      |vpiParent:
-                      \_Task: (work@test_program.save_command_slave), line:388:4, endln:400:11
-                      |vpiSigned:1
-                    |vpiImportTypespec:
-                    \_IntTypespec: , line:390:7, endln:390:10
                     |vpiVisibility:1
                     |vpiAutomatic:1
                     |vpiIODecl:
@@ -15884,7 +15043,7 @@ Design: (unnamed)
                         \_IODecl: (slave_id), line:390:16, endln:390:24
                         |vpiFullName:work@test_program.save_command_slave.slave_id
                         |vpiActual:
-                        \_IntTypespec: , line:390:7, endln:390:10
+                        \_IntTypespec: 
                     |vpiStmt:
                     \_Begin: (work@test_program.save_command_slave), line:393:7, endln:398:10
                   |vpiArgument:
@@ -15922,19 +15081,6 @@ Design: (unnamed)
                       \_Task: (work@test_program.configure_and_push_command_to_master), line:414:4, endln:424:11
                       |vpiName:configure_and_push_command_to_master
                     |vpiFullName:work@test_program.configure_and_push_command_to_master
-                    |vpiTypespec:
-                    \_IntTypespec: , line:416:7, endln:416:10
-                      |vpiParent:
-                      \_Task: (work@test_program.configure_and_push_command_to_master), line:414:4, endln:424:11
-                      |vpiSigned:1
-                    |vpiTypespec:
-                    \_IntTypespec: 
-                      |vpiParent:
-                      \_Task: (work@test_program.configure_and_push_command_to_master), line:414:4, endln:424:11
-                    |vpiImportTypespec:
-                    \_IntTypespec: , line:416:7, endln:416:10
-                    |vpiImportTypespec:
-                    \_IntTypespec: 
                     |vpiVisibility:1
                     |vpiAutomatic:1
                     |vpiIODecl:
@@ -15963,7 +15109,7 @@ Design: (unnamed)
                         \_IODecl: (master_id), line:416:16, endln:416:25
                         |vpiFullName:work@test_program.configure_and_push_command_to_master.master_id
                         |vpiActual:
-                        \_IntTypespec: , line:416:7, endln:416:10
+                        \_IntTypespec: 
                     |vpiStmt:
                     \_IfElse: , line:418:7, endln:422:10
                       |vpiParent:
@@ -16092,13 +15238,6 @@ Design: (unnamed)
                     |vpiFullName:work@test_program.queue_command.master_id
                     |vpiActual:
                     \_IODecl: (master_id), line:366:16, endln:366:25
-              |vpiTypespec:
-              \_IntTypespec: , line:366:7, endln:366:10
-                |vpiParent:
-                \_Task: (work@test_program.queue_command), line:364:4, endln:373:11
-                |vpiSigned:1
-              |vpiImportTypespec:
-              \_IntTypespec: , line:366:7, endln:366:10
               |vpiVisibility:1
               |vpiAutomatic:1
               |vpiIODecl:
@@ -16127,7 +15266,7 @@ Design: (unnamed)
                   \_IODecl: (master_id), line:366:16, endln:366:25
                   |vpiFullName:work@test_program.queue_command.master_id
                   |vpiActual:
-                  \_IntTypespec: , line:366:7, endln:366:10
+                  \_IntTypespec: 
               |vpiIODecl:
               \_IODecl: (slave_id), line:367:16, endln:367:24
                 |vpiParent:
@@ -16140,7 +15279,7 @@ Design: (unnamed)
                   \_IODecl: (slave_id), line:367:16, endln:367:24
                   |vpiFullName:work@test_program.queue_command.slave_id
                   |vpiActual:
-                  \_IntTypespec: , line:366:7, endln:366:10
+                  \_IntTypespec: 
               |vpiStmt:
               \_Begin: (work@test_program.queue_command), line:370:7, endln:372:60
             |vpiArgument:
@@ -16224,15 +15363,6 @@ Design: (unnamed)
             \_IODecl: (num_command), line:289:22, endln:289:33
         |vpiStmt:
         \_Begin: (work@test_program.master_send_commands), line:298:45, endln:310:10
-      |vpiTypespec:
-      \_IntTypespec: , line:296:7, endln:296:10
-        |vpiParent:
-        \_Begin: (work@test_program.master_send_commands), line:294:7, endln:310:10
-        |vpiSigned:1
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program.master_send_commands), line:294:7, endln:310:10
       |vpiImportTypespec:
       \_Variable: (work@test_program.master_send_commands.cmd), line:294:19, endln:294:22
       |vpiImportTypespec:
@@ -16240,24 +15370,13 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_Variable: (work@test_program.master_send_commands.exp_rsp), line:295:24, endln:295:31
       |vpiImportTypespec:
-      \_IntTypespec: , line:296:7, endln:296:10
-      |vpiImportTypespec:
       \_Variable: (work@test_program.master_send_commands.master_id), line:296:19, endln:296:28
       |vpiImportTypespec:
       \_Variable: (work@test_program.master_send_commands.slave_id), line:296:30, endln:296:38
       |vpiImportTypespec:
       \_Variable: (work@test_program.master_send_commands.i), line:298:16, endln:298:17
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiStmt:
       \_ForStmt: (work@test_program.master_send_commands), line:298:7, endln:310:10
-    |vpiTypespec:
-    \_IntTypespec: , line:289:7, endln:289:10
-      |vpiParent:
-      \_Task: (work@test_program.master_send_commands), line:288:4, endln:312:11
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntTypespec: , line:289:7, endln:289:10
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiIODecl:
@@ -16272,7 +15391,7 @@ Design: (unnamed)
         \_IODecl: (num_command), line:289:22, endln:289:33
         |vpiFullName:work@test_program.master_send_commands.num_command
         |vpiActual:
-        \_IntTypespec: , line:289:7, endln:289:10
+        \_IntTypespec: 
     |vpiIODecl:
     \_IODecl: (trans), line:290:22, endln:290:27
       |vpiParent:
@@ -16356,10 +15475,6 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiValue:*
   |vpiTypespec:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-  |vpiTypespec:
   \_ImportTypespec: (avalon_mm_pkg), line:16:11, endln:16:27
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
@@ -16383,61 +15498,6 @@ Design: (unnamed)
       |vpiSize:8
       |vpiDecompile:*
       |vpiValue:*
-  |vpiTypespec:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-  |vpiTypespec:
-  \_LogicTypespec: , line:39:12, endln:39:17
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-    |vpiRange:
-    \_Range: , line:39:18, endln:39:31
-      |vpiParent:
-      \_LogicTypespec: , line:39:12, endln:39:17
-      |vpiLeftRange:
-      \_Operation: , line:39:19, endln:39:28
-        |vpiParent:
-        \_Range: , line:39:18, endln:39:31
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@test_program.BURST_W), line:39:19, endln:39:26
-          |vpiParent:
-          \_Operation: , line:39:19, endln:39:28
-          |vpiName:BURST_W
-          |vpiFullName:work@test_program.BURST_W
-          |vpiActual:
-          \_Parameter: (work@test_program.BURST_W), line:27:15, endln:27:43
-        |vpiOperand:
-        \_Constant: , line:39:27, endln:39:28
-          |vpiParent:
-          \_Operation: , line:39:19, endln:39:28
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program), line:39:27, endln:39:28
-            |vpiParent:
-            \_Constant: , line:39:27, endln:39:28
-            |vpiFullName:work@test_program
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
-          |vpiSize:64
-          |vpiDecompile:1
-          |vpiValue:1
-      |vpiRightRange:
-      \_Constant: , line:39:29, endln:39:30
-        |vpiParent:
-        \_Range: , line:39:18, endln:39:31
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program), line:39:29, endln:39:30
-          |vpiParent:
-          \_Constant: , line:39:29, endln:39:30
-          |vpiFullName:work@test_program
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:0
-        |vpiValue:0
   |vpiTypespec:
   \_TypedefTypespec: (Burstcount), line:39:37, endln:39:47
     |vpiParent:
@@ -16464,7 +15524,7 @@ Design: (unnamed)
       \_EnumTypespec: , line:41:12, endln:45:17
       |vpiFullName:work@test_program
       |vpiActual:
-      \_BitTypespec: , line:41:17, endln:41:20
+      \_BitTypespec: 
     |vpiEnumConst:
     \_EnumConst: (WRITE), line:43:8, endln:43:17
       |vpiParent:
@@ -16506,10 +15566,6 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiValue:1
   |vpiTypespec:
-  \_BitTypespec: , line:41:17, endln:41:20
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-  |vpiTypespec:
   \_TypedefTypespec: (Transaction), line:45:6, endln:45:17
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
@@ -16535,7 +15591,7 @@ Design: (unnamed)
       \_EnumTypespec: , line:47:12, endln:51:15
       |vpiFullName:work@test_program
       |vpiActual:
-      \_BitTypespec: , line:41:17, endln:41:20
+      \_BitTypespec: 
     |vpiEnumConst:
     \_EnumConst: (NOBURST), line:49:8, endln:49:19
       |vpiParent:
@@ -16699,108 +15755,6 @@ Design: (unnamed)
         |vpiActual:
         \_ArrayTypespec: , line:61:8, endln:61:63
   |vpiTypespec:
-  \_LogicTypespec: , line:57:8, endln:57:13
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-    |vpiRange:
-    \_Range: , line:57:14, endln:57:27
-      |vpiParent:
-      \_LogicTypespec: , line:57:8, endln:57:13
-      |vpiLeftRange:
-      \_Operation: , line:57:15, endln:57:23
-        |vpiParent:
-        \_Range: , line:57:14, endln:57:27
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@test_program.ADDR_W), line:57:15, endln:57:21
-          |vpiParent:
-          \_Operation: , line:57:15, endln:57:23
-          |vpiName:ADDR_W
-          |vpiFullName:work@test_program.ADDR_W
-          |vpiActual:
-          \_Parameter: (work@test_program.ADDR_W), line:21:15, endln:21:44
-        |vpiOperand:
-        \_Constant: , line:57:22, endln:57:23
-          |vpiParent:
-          \_Operation: , line:57:15, endln:57:23
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program), line:57:22, endln:57:23
-            |vpiParent:
-            \_Constant: , line:57:22, endln:57:23
-            |vpiFullName:work@test_program
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
-          |vpiSize:64
-          |vpiDecompile:1
-          |vpiValue:1
-      |vpiRightRange:
-      \_Constant: , line:57:25, endln:57:26
-        |vpiParent:
-        \_Range: , line:57:14, endln:57:27
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program), line:57:25, endln:57:26
-          |vpiParent:
-          \_Constant: , line:57:25, endln:57:26
-          |vpiFullName:work@test_program
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:0
-        |vpiValue:0
-  |vpiTypespec:
-  \_LogicTypespec: , line:58:8, endln:58:13
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-    |vpiRange:
-    \_Range: , line:58:14, endln:58:26
-      |vpiParent:
-      \_LogicTypespec: , line:58:8, endln:58:13
-      |vpiLeftRange:
-      \_Operation: , line:58:15, endln:58:23
-        |vpiParent:
-        \_Range: , line:58:14, endln:58:26
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@test_program.DATA_W), line:58:15, endln:58:21
-          |vpiParent:
-          \_Operation: , line:58:15, endln:58:23
-          |vpiName:DATA_W
-          |vpiFullName:work@test_program.DATA_W
-          |vpiActual:
-          \_Parameter: (work@test_program.DATA_W), line:25:15, endln:25:64
-        |vpiOperand:
-        \_Constant: , line:58:22, endln:58:23
-          |vpiParent:
-          \_Operation: , line:58:15, endln:58:23
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program), line:58:22, endln:58:23
-            |vpiParent:
-            \_Constant: , line:58:22, endln:58:23
-            |vpiFullName:work@test_program
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
-          |vpiSize:64
-          |vpiDecompile:1
-          |vpiValue:1
-      |vpiRightRange:
-      \_Constant: , line:58:24, endln:58:25
-        |vpiParent:
-        \_Range: , line:58:14, endln:58:26
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program), line:58:24, endln:58:25
-          |vpiParent:
-          \_Constant: , line:58:24, endln:58:25
-          |vpiFullName:work@test_program
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:0
-        |vpiValue:0
-  |vpiTypespec:
   \_ArrayTypespec: , line:58:48, endln:58:63
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
@@ -16859,57 +15813,6 @@ Design: (unnamed)
       |vpiFullName:work@test_program
       |vpiActual:
       \_LogicTypespec: , line:58:8, endln:58:13
-  |vpiTypespec:
-  \_LogicTypespec: , line:59:8, endln:59:13
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
-    |vpiRange:
-    \_Range: , line:59:14, endln:59:31
-      |vpiParent:
-      \_LogicTypespec: , line:59:8, endln:59:13
-      |vpiLeftRange:
-      \_Operation: , line:59:15, endln:59:28
-        |vpiParent:
-        \_Range: , line:59:14, endln:59:31
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@test_program.NUM_SYMBOLS), line:59:15, endln:59:26
-          |vpiParent:
-          \_Operation: , line:59:15, endln:59:28
-          |vpiName:NUM_SYMBOLS
-          |vpiFullName:work@test_program.NUM_SYMBOLS
-          |vpiActual:
-          \_Parameter: (work@test_program.NUM_SYMBOLS), line:24:15, endln:24:43
-        |vpiOperand:
-        \_Constant: , line:59:27, endln:59:28
-          |vpiParent:
-          \_Operation: , line:59:15, endln:59:28
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program), line:59:27, endln:59:28
-            |vpiParent:
-            \_Constant: , line:59:27, endln:59:28
-            |vpiFullName:work@test_program
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
-          |vpiSize:64
-          |vpiDecompile:1
-          |vpiValue:1
-      |vpiRightRange:
-      \_Constant: , line:59:29, endln:59:30
-        |vpiParent:
-        \_Range: , line:59:14, endln:59:31
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program), line:59:29, endln:59:30
-          |vpiParent:
-          \_Constant: , line:59:29, endln:59:30
-          |vpiFullName:work@test_program
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:0
-        |vpiValue:0
   |vpiTypespec:
   \_ArrayTypespec: , line:59:48, endln:59:63
     |vpiParent:
@@ -17013,7 +15916,7 @@ Design: (unnamed)
       \_ArrayTypespec: , line:60:8, endln:60:18
       |vpiFullName:work@test_program
       |vpiActual:
-      \_BitTypespec: , line:41:17, endln:41:20
+      \_BitTypespec: 
     |vpiPacked:1
   |vpiTypespec:
   \_ArrayTypespec: , line:61:8, endln:61:18
@@ -17059,7 +15962,7 @@ Design: (unnamed)
       \_ArrayTypespec: , line:61:8, endln:61:18
       |vpiFullName:work@test_program
       |vpiActual:
-      \_BitTypespec: , line:41:17, endln:41:20
+      \_BitTypespec: 
     |vpiPacked:1
   |vpiTypespec:
   \_ArrayTypespec: , line:61:8, endln:61:63
@@ -17280,7 +16183,7 @@ Design: (unnamed)
       \_ArrayTypespec: , line:68:7, endln:68:17
       |vpiFullName:work@test_program
       |vpiActual:
-      \_BitTypespec: , line:41:17, endln:41:20
+      \_BitTypespec: 
     |vpiPacked:1
   |vpiTypespec:
   \_ArrayTypespec: , line:68:7, endln:68:61
@@ -17437,15 +16340,11 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (Response), line:69:6, endln:69:14
   |vpiTypespec:
-  \_IntTypespec: , line:163:4, endln:163:7
-  |vpiTypespec:
   \_EventTypespec: , line:261:1, endln:261:6
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv, line:13:1, endln:541:10
   |vpiImportTypespec:
   \_ImportTypespec: (verbosity_pkg), line:15:11, endln:15:27
-  |vpiImportTypespec:
-  \_StringTypespec: 
   |vpiImportTypespec:
   \_ImportTypespec: (avalon_mm_pkg), line:16:11, endln:16:27
   |vpiImportTypespec:
@@ -17495,15 +16394,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Task: (work@test_program.verify_response), line:530:4, endln:539:11
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:39:12, endln:39:17
-  |vpiImportTypespec:
   \_TypedefTypespec: (Burstcount), line:39:37, endln:39:47
   |vpiImportTypespec:
   \_EnumTypespec: , line:41:12, endln:45:17
-  |vpiImportTypespec:
-  \_BitTypespec: , line:41:17, endln:41:20
   |vpiImportTypespec:
   \_TypedefTypespec: (Transaction), line:45:6, endln:45:17
   |vpiImportTypespec:
@@ -17515,13 +16408,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:53:12, endln:62:5
   |vpiImportTypespec:
-  \_LogicTypespec: , line:57:8, endln:57:13
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:58:8, endln:58:13
-  |vpiImportTypespec:
   \_ArrayTypespec: , line:58:48, endln:58:63
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:59:8, endln:59:13
   |vpiImportTypespec:
   \_ArrayTypespec: , line:59:48, endln:59:63
   |vpiImportTypespec:
@@ -17615,8 +16502,6 @@ Design: (unnamed)
       \_ArrayTypespec: , line:83:35, endln:83:51
     |vpiName:read_response_queue_slave
     |vpiFullName:work@test_program.read_response_queue_slave
-  |vpiImportTypespec:
-  \_IntTypespec: , line:163:4, endln:163:7
   |vpiImportTypespec:
   \_Variable: (work@test_program.pending_read_cycles_slave_0), line:163:8, endln:163:35
   |vpiImportTypespec:
@@ -17806,18 +16691,6 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:267:4, endln:286:7
       |vpiFullName:work@test_program
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program), line:267:12, endln:286:7
-      |vpiTypespec:
-      \_StringTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program), line:267:12, endln:286:7
-      |vpiImportTypespec:
-      \_IntTypespec: 
-      |vpiImportTypespec:
-      \_StringTypespec: 
       |vpiImportTypespec:
       \_Net: (work@test_program.VERBOSITY_INFO), line:269:21, endln:269:35
         |vpiParent:
@@ -18205,6 +17078,252 @@ Design: (unnamed)
           |vpiDecompile:"Master has sent out all commands"
           |vpiValue:Master has sent out all commands
 |vpiTypespec:
+\_IntTypespec: 
+|vpiTypespec:
+\_BitTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_LogicTypespec: , line:5:4, endln:5:7
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_StringTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_LogicTypespec: , line:39:12, endln:39:17
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:39:18, endln:39:31
+    |vpiParent:
+    \_LogicTypespec: , line:39:12, endln:39:17
+    |vpiLeftRange:
+    \_Operation: , line:39:19, endln:39:28
+      |vpiParent:
+      \_Range: , line:39:18, endln:39:31
+      |vpiOpType:11
+      |vpiOperand:
+      \_RefObj: (BURST_W), line:39:19, endln:39:26
+        |vpiParent:
+        \_Operation: , line:39:19, endln:39:28
+        |vpiName:BURST_W
+        |vpiActual:
+        \_Parameter: (work@test_program.BURST_W), line:27:15, endln:27:43
+      |vpiOperand:
+      \_Constant: , line:39:27, endln:39:28
+        |vpiParent:
+        \_Operation: , line:39:19, endln:39:28
+        |vpiTypespec:
+        \_RefTypespec: , line:39:27, endln:39:28
+          |vpiParent:
+          \_Constant: , line:39:27, endln:39:28
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
+    |vpiRightRange:
+    \_Constant: , line:39:29, endln:39:30
+      |vpiParent:
+      \_Range: , line:39:18, endln:39:31
+      |vpiTypespec:
+      \_RefTypespec: , line:39:29, endln:39:30
+        |vpiParent:
+        \_Constant: , line:39:29, endln:39:30
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
+|vpiTypespec:
+\_LogicTypespec: , line:57:8, endln:57:13
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:57:14, endln:57:27
+    |vpiParent:
+    \_LogicTypespec: , line:57:8, endln:57:13
+    |vpiLeftRange:
+    \_Operation: , line:57:15, endln:57:23
+      |vpiParent:
+      \_Range: , line:57:14, endln:57:27
+      |vpiOpType:11
+      |vpiOperand:
+      \_RefObj: (ADDR_W), line:57:15, endln:57:21
+        |vpiParent:
+        \_Operation: , line:57:15, endln:57:23
+        |vpiName:ADDR_W
+        |vpiActual:
+        \_Parameter: (work@test_program.ADDR_W), line:21:15, endln:21:44
+      |vpiOperand:
+      \_Constant: , line:57:22, endln:57:23
+        |vpiParent:
+        \_Operation: , line:57:15, endln:57:23
+        |vpiTypespec:
+        \_RefTypespec: , line:57:22, endln:57:23
+          |vpiParent:
+          \_Constant: , line:57:22, endln:57:23
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
+    |vpiRightRange:
+    \_Constant: , line:57:25, endln:57:26
+      |vpiParent:
+      \_Range: , line:57:14, endln:57:27
+      |vpiTypespec:
+      \_RefTypespec: , line:57:25, endln:57:26
+        |vpiParent:
+        \_Constant: , line:57:25, endln:57:26
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
+|vpiTypespec:
+\_LogicTypespec: , line:58:8, endln:58:13
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:58:14, endln:58:26
+    |vpiParent:
+    \_LogicTypespec: , line:58:8, endln:58:13
+    |vpiLeftRange:
+    \_Operation: , line:58:15, endln:58:23
+      |vpiParent:
+      \_Range: , line:58:14, endln:58:26
+      |vpiOpType:11
+      |vpiOperand:
+      \_RefObj: (DATA_W), line:58:15, endln:58:21
+        |vpiParent:
+        \_Operation: , line:58:15, endln:58:23
+        |vpiName:DATA_W
+        |vpiActual:
+        \_Parameter: (work@test_program.DATA_W), line:25:15, endln:25:64
+      |vpiOperand:
+      \_Constant: , line:58:22, endln:58:23
+        |vpiParent:
+        \_Operation: , line:58:15, endln:58:23
+        |vpiTypespec:
+        \_RefTypespec: , line:58:22, endln:58:23
+          |vpiParent:
+          \_Constant: , line:58:22, endln:58:23
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
+    |vpiRightRange:
+    \_Constant: , line:58:24, endln:58:25
+      |vpiParent:
+      \_Range: , line:58:14, endln:58:26
+      |vpiTypespec:
+      \_RefTypespec: , line:58:24, endln:58:25
+        |vpiParent:
+        \_Constant: , line:58:24, endln:58:25
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
+|vpiTypespec:
+\_LogicTypespec: , line:59:8, endln:59:13
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:59:14, endln:59:31
+    |vpiParent:
+    \_LogicTypespec: , line:59:8, endln:59:13
+    |vpiLeftRange:
+    \_Operation: , line:59:15, endln:59:28
+      |vpiParent:
+      \_Range: , line:59:14, endln:59:31
+      |vpiOpType:11
+      |vpiOperand:
+      \_RefObj: (NUM_SYMBOLS), line:59:15, endln:59:26
+        |vpiParent:
+        \_Operation: , line:59:15, endln:59:28
+        |vpiName:NUM_SYMBOLS
+        |vpiActual:
+        \_Parameter: (work@test_program.NUM_SYMBOLS), line:24:15, endln:24:43
+      |vpiOperand:
+      \_Constant: , line:59:27, endln:59:28
+        |vpiParent:
+        \_Operation: , line:59:15, endln:59:28
+        |vpiTypespec:
+        \_RefTypespec: , line:59:27, endln:59:28
+          |vpiParent:
+          \_Constant: , line:59:27, endln:59:28
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
+    |vpiRightRange:
+    \_Constant: , line:59:29, endln:59:30
+      |vpiParent:
+      \_Range: , line:59:14, endln:59:31
+      |vpiTypespec:
+      \_RefTypespec: , line:59:29, endln:59:30
+        |vpiParent:
+        \_Constant: , line:59:29, endln:59:30
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
+|vpiTypespec:
+\_LogicTypespec: , line:481:7, endln:481:12
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:481:13, endln:481:21
+    |vpiParent:
+    \_LogicTypespec: , line:481:7, endln:481:12
+    |vpiLeftRange:
+    \_Constant: , line:481:14, endln:481:18
+      |vpiParent:
+      \_Range: , line:481:13, endln:481:21
+      |vpiTypespec:
+      \_RefTypespec: , line:481:14, endln:481:18
+        |vpiParent:
+        \_Constant: , line:481:14, endln:481:18
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:1023
+      |vpiValue:1023
+    |vpiRightRange:
+    \_Constant: , line:481:19, endln:481:20
+      |vpiParent:
+      \_Range: , line:481:13, endln:481:21
+      |vpiTypespec:
+      \_RefTypespec: , line:481:19, endln:481:20
+        |vpiParent:
+        \_Constant: , line:481:19, endln:481:20
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
+|vpiTypespec:
 \_ModuleTypespec: (work@tb)
   |vpiParent:
   \_Design: (unnamed)
@@ -18227,12 +17346,11 @@ COMMAND: ${SURELOG_DIR}/regression/AVLMM/slpp_unit/surelog.uhdm ${SURELOG_DIR}/r
 ==================== BEGIN REDUCTION RESULT ====================
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
-Constant                           143     141       2         4
-IntTypespec                         88      89       1         0
-Operation                          104     102       0         2
-RefTypespec                        292     290       2         4
+Constant                           135     133       2         4
+Operation                          100      98       0         2
+RefTypespec                        288     286       2         4
 ----------------------------------------------------------------
-Others                            1736    1736       0         0
+Others                            1710    1710       0         0
 ----------------------------------------------------------------
-                                  2363    2358       5        10
+                                  2233    2227       4        10
 ===================== END REDUCTION RESULT =====================

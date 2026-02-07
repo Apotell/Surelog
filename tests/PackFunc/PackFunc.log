@@ -142,26 +142,26 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             1
 Begin                                                  1
-Constant                                               6
+Constant                                               4
 Design                                                 1
 Function                                               1
 IODecl                                                 1
-Identifier                                             6
-IntTypespec                                            6
-LogicTypespec                                          3
-Operation                                              2
+Identifier                                             5
+IntTypespec                                            4
+LogicTypespec                                          2
+Operation                                              1
 Package                                                2
-Range                                                  3
-RefObj                                                 4
-RefTypespec                                           12
+Range                                                  2
+RefObj                                                 3
+RefTypespec                                           10
 SourceFile                                             1
 StructTypespec                                         1
-SysFuncCall                                            2
+SysFuncCall                                            1
 TypedefTypespec                                        1
 TypespecMember                                         1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                57
+Total:                                                45
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -215,56 +215,10 @@ Design: (unnamed)
         |vpiFullName:b::vc
         |vpiActual:
         \_LogicTypespec: , line:3:5, endln:3:10
-  |vpiTypespec:
-  \_LogicTypespec: , line:3:5, endln:3:10
-    |vpiParent:
-    \_Package: b (b), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
-    |vpiRange:
-    \_Range: , line:3:11, endln:3:17
-      |vpiParent:
-      \_LogicTypespec: , line:3:5, endln:3:10
-      |vpiLeftRange:
-      \_Constant: , line:3:12, endln:3:14
-        |vpiParent:
-        \_Range: , line:3:11, endln:3:17
-        |vpiTypespec:
-        \_RefTypespec: (b), line:3:12, endln:3:14
-          |vpiParent:
-          \_Constant: , line:3:12, endln:3:14
-          |vpiFullName:b
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:10
-        |vpiValue:10
-      |vpiRightRange:
-      \_Constant: , line:3:15, endln:3:16
-        |vpiParent:
-        \_Range: , line:3:11, endln:3:17
-        |vpiTypespec:
-        \_RefTypespec: (b), line:3:15, endln:3:16
-          |vpiParent:
-          \_Constant: , line:3:15, endln:3:16
-          |vpiFullName:b
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:0
-        |vpiValue:0
-  |vpiTypespec:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Package: b (b), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
   |vpiImportTypespec:
   \_TypedefTypespec: (b::foo_bar_t), line:4:5, endln:4:14
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:4:4
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:5, endln:3:10
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:b
 |vpiAllPackages:
 \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
@@ -312,70 +266,6 @@ Design: (unnamed)
           |vpiFullName:aa::foo_bar::y
           |vpiActual:
           \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
-    |vpiTypespec:
-    \_LogicTypespec: , line:15:5, endln:15:8
-      |vpiParent:
-      \_Function: (aa::foo_bar), line:10:3, endln:21:14
-      |vpiRange:
-      \_Range: , line:15:9, endln:15:23
-        |vpiParent:
-        \_LogicTypespec: , line:15:5, endln:15:8
-        |vpiLeftRange:
-        \_Operation: , line:15:10, endln:15:20
-          |vpiParent:
-          \_Range: , line:15:9, endln:15:23
-          |vpiOpType:11
-          |vpiOperand:
-          \_SysFuncCall: ($bits), line:15:10, endln:15:18
-            |vpiParent:
-            \_Operation: , line:15:10, endln:15:20
-            |vpiName:
-            \_Identifier: ($bits), line:15:11, endln:15:15
-              |vpiParent:
-              \_SysFuncCall: ($bits), line:15:10, endln:15:18
-              |vpiName:$bits
-            |vpiArgument:
-            \_RefObj: (aa::foo_bar::a), line:15:16, endln:15:17
-              |vpiParent:
-              \_SysFuncCall: ($bits), line:15:10, endln:15:18
-              |vpiName:a
-              |vpiFullName:aa::foo_bar::a
-              |vpiActual:
-              \_IODecl: (a), line:12:24, endln:12:25
-          |vpiOperand:
-          \_Constant: , line:15:19, endln:15:20
-            |vpiParent:
-            \_Operation: , line:15:10, endln:15:20
-            |vpiTypespec:
-            \_RefTypespec: (aa::foo_bar), line:15:19, endln:15:20
-              |vpiParent:
-              \_Constant: , line:15:19, endln:15:20
-              |vpiFullName:aa::foo_bar
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
-            |vpiSize:64
-            |vpiDecompile:1
-            |vpiValue:1
-        |vpiRightRange:
-        \_Constant: , line:15:21, endln:15:22
-          |vpiParent:
-          \_Range: , line:15:9, endln:15:23
-          |vpiTypespec:
-          \_RefTypespec: (aa::foo_bar), line:15:21, endln:15:22
-            |vpiParent:
-            \_Constant: , line:15:21, endln:15:22
-            |vpiFullName:aa::foo_bar
-            |vpiActual:
-            \_IntTypespec: 
-          |vpiConstType:9
-          |vpiSize:64
-          |vpiDecompile:0
-          |vpiValue:0
-    |vpiTypespec:
-    \_IntTypespec: 
-      |vpiParent:
-      \_Function: (aa::foo_bar), line:10:3, endln:21:14
     |vpiImportTypespec:
     \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
       |vpiParent:
@@ -391,10 +281,6 @@ Design: (unnamed)
       |vpiName:y
       |vpiFullName:aa::foo_bar::y
       |vpiAutomatic:1
-    |vpiImportTypespec:
-    \_LogicTypespec: , line:15:5, endln:15:8
-    |vpiImportTypespec:
-    \_IntTypespec: 
     |vpiImportTypespec:
     \_Variable: (aa::foo_bar::a_vec), line:15:24, endln:15:29
       |vpiParent:
@@ -442,6 +328,104 @@ Design: (unnamed)
   |vpiDefName:aa
   |vpiTaskFunc:
   \_Function: (aa::foo_bar), line:10:3, endln:21:14
+|vpiTypespec:
+\_LogicTypespec: , line:3:5, endln:3:10
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:3:11, endln:3:17
+    |vpiParent:
+    \_LogicTypespec: , line:3:5, endln:3:10
+    |vpiLeftRange:
+    \_Constant: , line:3:12, endln:3:14
+      |vpiParent:
+      \_Range: , line:3:11, endln:3:17
+      |vpiTypespec:
+      \_RefTypespec: , line:3:12, endln:3:14
+        |vpiParent:
+        \_Constant: , line:3:12, endln:3:14
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:10
+      |vpiValue:10
+    |vpiRightRange:
+    \_Constant: , line:3:15, endln:3:16
+      |vpiParent:
+      \_Range: , line:3:11, endln:3:17
+      |vpiTypespec:
+      \_RefTypespec: , line:3:15, endln:3:16
+        |vpiParent:
+        \_Constant: , line:3:15, endln:3:16
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
+|vpiTypespec:
+\_LogicTypespec: , line:15:5, endln:15:8
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:15:9, endln:15:23
+    |vpiParent:
+    \_LogicTypespec: , line:15:5, endln:15:8
+    |vpiLeftRange:
+    \_Operation: , line:15:10, endln:15:20
+      |vpiParent:
+      \_Range: , line:15:9, endln:15:23
+      |vpiOpType:11
+      |vpiOperand:
+      \_SysFuncCall: ($bits), line:15:10, endln:15:18
+        |vpiParent:
+        \_Operation: , line:15:10, endln:15:20
+        |vpiName:
+        \_Identifier: ($bits), line:15:11, endln:15:15
+          |vpiParent:
+          \_SysFuncCall: ($bits), line:15:10, endln:15:18
+          |vpiName:$bits
+        |vpiArgument:
+        \_RefObj: (a), line:15:16, endln:15:17
+          |vpiParent:
+          \_SysFuncCall: ($bits), line:15:10, endln:15:18
+          |vpiName:a
+          |vpiActual:
+          \_IODecl: (a), line:12:24, endln:12:25
+      |vpiOperand:
+      \_Constant: , line:15:19, endln:15:20
+        |vpiParent:
+        \_Operation: , line:15:10, endln:15:20
+        |vpiTypespec:
+        \_RefTypespec: , line:15:19, endln:15:20
+          |vpiParent:
+          \_Constant: , line:15:19, endln:15:20
+          |vpiActual:
+          \_IntTypespec: 
+        |vpiConstType:9
+        |vpiSize:64
+        |vpiDecompile:1
+        |vpiValue:1
+    |vpiRightRange:
+    \_Constant: , line:15:21, endln:15:22
+      |vpiParent:
+      \_Range: , line:15:9, endln:15:23
+      |vpiTypespec:
+      \_RefTypespec: , line:15:21, endln:15:22
+        |vpiParent:
+        \_Constant: , line:15:21, endln:15:22
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -457,7 +441,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackFunc/slpp_all/surelog.uhdm ${SURELOG_DIR}
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              43      43       0         0
+Others                              42      42       0         0
 ----------------------------------------------------------------
-                                    43      43       0         0
+                                    42      42       0         0
 ===================== END REDUCTION RESULT =====================

@@ -185,12 +185,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RewriteNonConstForLoopCond/dut.sv, line:1:1, endln:20:10
     |vpiName:work@top
-  |vpiTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RewriteNonConstForLoopCond/dut.sv, line:1:1, endln:20:10
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:6
   |vpiImportTypespec:
   \_Net: (work@top.found), line:3:24, endln:3:29
     |vpiParent:
@@ -240,12 +234,6 @@ Design: (unnamed)
           |vpiParent:
           \_ForStmt: (work@top), line:10:9, endln:16:12
           |vpiFullName:work@top
-          |vpiTypespec:
-          \_BitTypespec: 
-            |vpiParent:
-            \_Begin: (work@top), line:10:46, endln:16:12
-          |vpiImportTypespec:
-          \_BitTypespec: 
           |vpiImportTypespec:
           \_Net: (work@top.cond), line:11:16, endln:11:20
             |vpiParent:
@@ -335,7 +323,7 @@ Design: (unnamed)
               \_Constant: , line:10:20, endln:10:21
               |vpiFullName:work@top
               |vpiActual:
-              \_IntTypespec: 
+              \_IntTypespec: , line:10:14, endln:10:17
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:0
@@ -381,7 +369,7 @@ Design: (unnamed)
                 \_Constant: , line:10:25, endln:10:27
                 |vpiFullName:work@top
                 |vpiActual:
-                \_IntTypespec: 
+                \_IntTypespec: , line:10:14, endln:10:17
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:32
@@ -409,34 +397,15 @@ Design: (unnamed)
                 \_Constant: , line:10:38, endln:10:39
                 |vpiFullName:work@top
                 |vpiActual:
-                \_IntTypespec: 
+                \_IntTypespec: , line:10:14, endln:10:17
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
               |vpiValue:0
         |vpiStmt:
         \_Begin: (work@top), line:10:46, endln:16:12
-      |vpiTypespec:
-      \_BitTypespec: 
-        |vpiParent:
-        \_Begin: (work@top), line:6:6, endln:17:9
-      |vpiTypespec:
-      \_IntTypespec: , line:10:14, endln:10:17
-        |vpiParent:
-        \_Begin: (work@top), line:6:6, endln:17:9
-        |vpiSigned:1
-      |vpiTypespec:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Begin: (work@top), line:6:6, endln:17:9
-      |vpiImportTypespec:
-      \_BitTypespec: 
-      |vpiImportTypespec:
-      \_IntTypespec: , line:10:14, endln:10:17
       |vpiImportTypespec:
       \_Variable: (work@top.i), line:10:18, endln:10:19
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiStmt:
       \_Assignment: , line:8:9, endln:8:21
         |vpiParent:
@@ -470,6 +439,19 @@ Design: (unnamed)
       \_ForStmt: (work@top), line:10:9, endln:16:12
     |vpiAlwaysType:2
 |vpiTypespec:
+\_BitTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_IntTypespec: , line:10:14, endln:10:17
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
+|vpiTypespec:
+\_LogicTypespec: , line:3:1, endln:3:6
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:
   \_Design: (unnamed)
@@ -491,7 +473,7 @@ COMMAND: ${SURELOG_DIR}/regression/RewriteNonConstForLoopCond/slpp_all/surelog.u
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              47      47       0         0
+Others                              45      45       0         0
 ----------------------------------------------------------------
-                                    47      47       0         0
+                                    45      45       0         0
 ===================== END REDUCTION RESULT =====================

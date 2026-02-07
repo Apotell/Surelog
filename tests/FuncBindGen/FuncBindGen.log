@@ -204,7 +204,6 @@ Variable                                               1
 Total:                                                40
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncBindGen/slpp_all/surelog.uhdm ...
-[ERR:IG0814] ${SURELOG_DIR}/tests/FuncBindGen/dut.sv:11:18: Invalid Name id:33, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -233,7 +232,7 @@ Design: (unnamed)
       \_Variable: (work@top.o), line:1:23, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:1:19, endln:1:22
+      \_IntTypespec: 
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiRandType:1
@@ -317,13 +316,6 @@ Design: (unnamed)
       \_Begin: (work@top.gen_block), line:5:19, endln:12:7
       |vpiName:gen_block
     |vpiFullName:work@top.gen_block
-    |vpiTypespec:
-    \_IntTypespec: , line:11:18, endln:11:21
-      |vpiParent:
-      \_Begin: (work@top.gen_block), line:5:19, endln:12:7
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntTypespec: , line:11:18, endln:11:21
     |vpiStmt:
     \_ContAssign: , line:11:14, endln:11:42
       |vpiParent:
@@ -341,13 +333,12 @@ Design: (unnamed)
         |vpiParent:
         \_ContAssign: , line:11:14, endln:11:42
         |vpiTypespec:
-        \_RefTypespec: (work@top.gen_block.int), line:11:18, endln:11:21
+        \_RefTypespec: (work@top.gen_block), line:11:18, endln:11:21
           |vpiParent:
           \_Operation: , line:11:18, endln:11:42
-          |vpiName:int
-          |vpiFullName:work@top.gen_block.int
+          |vpiFullName:work@top.gen_block
           |vpiActual:
-          \_IntTypespec: , line:11:18, endln:11:21
+          \_IntTypespec: 
         |vpiOpType:67
         |vpiOperand:
         \_FuncCall: (get_casted_param), line:11:23, endln:11:41
@@ -358,25 +349,6 @@ Design: (unnamed)
             |vpiParent:
             \_FuncCall: (get_casted_param), line:11:23, endln:11:41
             |vpiName:get_casted_param
-  |vpiTypespec:
-  \_IntTypespec: , line:2:15, endln:2:27
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncBindGen/dut.sv, line:1:1, endln:14:10
-  |vpiTypespec:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncBindGen/dut.sv, line:1:1, endln:14:10
-  |vpiTypespec:
-  \_IntTypespec: , line:1:19, endln:1:22
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncBindGen/dut.sv, line:1:1, endln:14:10
-    |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntTypespec: , line:2:15, endln:2:27
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:1:23, endln:1:24
   |vpiDefName:work@top
@@ -392,7 +364,7 @@ Design: (unnamed)
       \_Port: (o), line:1:23, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:1:19, endln:1:22
+      \_IntTypespec: 
   |vpiGenStmt:
   \_GenIf: , line:5:4, endln:12:7
     |vpiParent:
@@ -428,6 +400,15 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@top.gen_block), line:5:19, endln:12:7
 |vpiTypespec:
+\_IntTypespec: , line:2:15, endln:2:27
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
+|vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:
   \_Design: (unnamed)
@@ -437,7 +418,7 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
 
@@ -449,7 +430,7 @@ COMMAND: ${SURELOG_DIR}/regression/FuncBindGen/slpp_all/surelog.uhdm ${SURELOG_D
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              36      36       0         0
+Others                              34      34       0         0
 ----------------------------------------------------------------
-                                    36      36       0         0
+                                    34      34       0         0
 ===================== END REDUCTION RESULT =====================

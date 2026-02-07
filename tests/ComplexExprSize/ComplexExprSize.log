@@ -120,52 +120,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
     |vpiName:work@top
-  |vpiTypespec:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
-  |vpiTypespec:
-  \_LogicTypespec: , line:2:10, endln:2:14
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:2:15, endln:2:21
-      |vpiParent:
-      \_LogicTypespec: , line:2:10, endln:2:14
-      |vpiLeftRange:
-      \_Constant: , line:2:16, endln:2:18
-        |vpiParent:
-        \_Range: , line:2:15, endln:2:21
-        |vpiTypespec:
-        \_RefTypespec: (work@top), line:2:16, endln:2:18
-          |vpiParent:
-          \_Constant: , line:2:16, endln:2:18
-          |vpiFullName:work@top
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:31
-        |vpiValue:31
-      |vpiRightRange:
-      \_Constant: , line:2:19, endln:2:20
-        |vpiParent:
-        \_Range: , line:2:15, endln:2:21
-        |vpiTypespec:
-        \_RefTypespec: (work@top), line:2:19, endln:2:20
-          |vpiParent:
-          \_Constant: , line:2:19, endln:2:20
-          |vpiFullName:work@top
-          |vpiActual:
-          \_IntTypespec: 
-        |vpiConstType:9
-        |vpiSize:64
-        |vpiDecompile:0
-        |vpiValue:0
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:2:10, endln:2:14
   |vpiImportTypespec:
   \_Net: (work@top.out), line:1:13, endln:1:16
     |vpiParent:
@@ -257,6 +211,51 @@ Design: (unnamed)
                 |vpiDecompile:8'ha4
                 |vpiValue:a4
 |vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_LogicTypespec: , line:2:10, endln:2:14
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:2:15, endln:2:21
+    |vpiParent:
+    \_LogicTypespec: , line:2:10, endln:2:14
+    |vpiLeftRange:
+    \_Constant: , line:2:16, endln:2:18
+      |vpiParent:
+      \_Range: , line:2:15, endln:2:21
+      |vpiTypespec:
+      \_RefTypespec: , line:2:16, endln:2:18
+        |vpiParent:
+        \_Constant: , line:2:16, endln:2:18
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:31
+      |vpiValue:31
+    |vpiRightRange:
+    \_Constant: , line:2:19, endln:2:20
+      |vpiParent:
+      \_Range: , line:2:15, endln:2:21
+      |vpiTypespec:
+      \_RefTypespec: , line:2:19, endln:2:20
+        |vpiParent:
+        \_Constant: , line:2:19, endln:2:20
+        |vpiActual:
+        \_IntTypespec: 
+      |vpiConstType:9
+      |vpiSize:64
+      |vpiDecompile:0
+      |vpiValue:0
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
+|vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:
   \_Design: (unnamed)
@@ -278,11 +277,12 @@ COMMAND: ${SURELOG_DIR}/regression/ComplexExprSize/slpp_all/surelog.uhdm ${SUREL
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 Constant                             3       3       1         1
-IntTypespec                          1       2       1         0
-Operation                            3       2       0         1
+Identifier                           3       2       0         1
+Operation                            3       1       0         2
 RefTypespec                          5       5       1         1
+SysFuncCall                          2       1       0         1
 ----------------------------------------------------------------
-Others                              15      15       0         0
+Others                              12      12       0         0
 ----------------------------------------------------------------
-                                    27      27       3         3
+                                    28      24       2         6
 ===================== END REDUCTION RESULT =====================

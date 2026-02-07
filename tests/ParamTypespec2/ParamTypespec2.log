@@ -218,7 +218,6 @@ Variable                                               2
 Total:                                                90
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamTypespec2/slpp_all/surelog.uhdm ...
-[ERR:IG0814] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:18:15: Invalid Name id:62, type:RefTypespec, name:int.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -361,28 +360,10 @@ Design: (unnamed)
         |vpiFullName:prim_esc_pkg::esc_n
         |vpiActual:
         \_LogicTypespec: , line:3:5, endln:3:10
-  |vpiTypespec:
-  \_LogicTypespec: , line:3:5, endln:3:10
-    |vpiParent:
-    \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
-  |vpiTypespec:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
-  |vpiTypespec:
-  \_StringTypespec: , line:7:41, endln:7:46
-    |vpiParent:
-    \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
   |vpiImportTypespec:
   \_TypedefTypespec: (prim_esc_pkg::esc_tx_t), line:5:5, endln:5:13
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:5:4
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:5, endln:3:10
-  |vpiImportTypespec:
-  \_BitTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: , line:7:41, endln:7:46
   |vpiDefName:prim_esc_pkg
   |vpiEndLabel:prim_esc_pkg
 |vpiAllModules:
@@ -428,26 +409,13 @@ Design: (unnamed)
         \_Constant: , line:13:11, endln:13:26
         |vpiFullName:work@nmi_gen.prim_esc_pkg
         |vpiActual:
-        \_StringTypespec: 
+        \_StringTypespec: , line:7:41, endln:7:46
       |vpiConstType:6
       |vpiSize:8
       |vpiDecompile:*
       |vpiValue:*
-  |vpiTypespec:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
-  |vpiTypespec:
-  \_IntTypespec: , line:18:15, endln:18:18
-    |vpiParent:
-    \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (prim_esc_pkg), line:13:11, endln:13:26
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: , line:18:15, endln:18:18
   |vpiImportTypespec:
   \_Net: (work@nmi_gen.a), line:15:25, endln:15:26
     |vpiParent:
@@ -511,11 +479,10 @@ Design: (unnamed)
       |vpiParent:
       \_ContAssign: , line:18:11, endln:18:22
       |vpiTypespec:
-      \_RefTypespec: (work@nmi_gen.int), line:18:15, endln:18:18
+      \_RefTypespec: (work@nmi_gen), line:18:15, endln:18:18
         |vpiParent:
         \_Operation: , line:18:15, endln:18:22
-        |vpiName:int
-        |vpiFullName:work@nmi_gen.int
+        |vpiFullName:work@nmi_gen
         |vpiActual:
         \_IntTypespec: , line:18:15, endln:18:18
       |vpiOpType:67
@@ -546,7 +513,7 @@ Design: (unnamed)
       \_Variable: (work@top.o), line:21:23, endln:21:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:21:19, endln:21:22
+      \_IntTypespec: , line:18:15, endln:18:18
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiRandType:1
@@ -558,19 +525,6 @@ Design: (unnamed)
     |vpiName:work@nmi_gen
     |vpiModule:
     \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
-  |vpiTypespec:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:21:1, endln:26:10
-  |vpiTypespec:
-  \_IntTypespec: , line:21:19, endln:21:22
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:21:1, endln:26:10
-    |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: , line:21:19, endln:21:22
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:21:23, endln:21:24
   |vpiDefName:work@top
@@ -586,7 +540,7 @@ Design: (unnamed)
       \_Port: (o), line:21:23, endln:21:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:21:19, endln:21:22
+      \_IntTypespec: , line:18:15, endln:18:18
   |vpiRefModule:
   \_RefModule: work@nmi_gen (u_nmi_gen), line:22:4, endln:22:11
     |vpiParent:
@@ -615,7 +569,7 @@ Design: (unnamed)
             \_Constant: , line:23:11, endln:23:12
             |vpiFullName:work@top.u_nmi_gen.a
             |vpiActual:
-            \_IntTypespec: 
+            \_IntTypespec: , line:18:15, endln:18:18
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:3
@@ -646,6 +600,23 @@ Design: (unnamed)
         |vpiActual:
         \_Variable: (work@top.o), line:21:23, endln:21:24
 |vpiTypespec:
+\_LogicTypespec: , line:3:5, endln:3:10
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_BitTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_StringTypespec: , line:7:41, endln:7:46
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_IntTypespec: , line:18:15, endln:18:18
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
+|vpiTypespec:
 \_ModuleTypespec: (work@nmi_gen)
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
@@ -657,7 +628,7 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
 
@@ -669,7 +640,7 @@ COMMAND: ${SURELOG_DIR}/regression/ParamTypespec2/slpp_all/surelog.uhdm ${SURELO
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              67      67       0         0
+Others                              64      64       0         0
 ----------------------------------------------------------------
-                                    67      67       0         0
+                                    64      64       0         0
 ===================== END REDUCTION RESULT =====================

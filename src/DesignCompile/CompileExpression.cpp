@@ -3056,7 +3056,7 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(DesignComponent *component, c
           NodeId Constant_primary = fC->Child(Constant_expression);
           if (!Constant_primary) {
             uhdm::StringTypespec *tps = s.make<uhdm::StringTypespec>();
-            fC->populateCoreMembers(Constant_expression, Constant_expression, tps);
+            // fC->populateCoreMembers(Constant_expression, Constant_expression, tps);
             tps->setParent(pattern);
             if (pattern->getTypespec() == nullptr) {
               uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();

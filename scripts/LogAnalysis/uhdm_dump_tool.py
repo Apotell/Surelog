@@ -7,7 +7,7 @@ import functools
 from pathlib import Path
 
 
-CONSOLIDATED_NAME = "consolidated_output.txt"
+CONSOLIDATED_NAME = "presitine.txt"
 PARSED_OUTPUT_NAME = "parsed_output.txt"
 def append_consolidated(consolidated_path, folder, width, parsed_file):
     if not parsed_file.exists():

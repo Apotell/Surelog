@@ -11,11 +11,138 @@ RESULT_RE = re.compile(r">>\s*result: decompile:")
 TYPE_ID_RE = re.compile(r"^\s*([^:]+):.*?\bid:(\d+)")
 INVALID_RE = re.compile(r">>\s*invalidValue:\s*(\d+)")
 LOC_RE = re.compile(r"line:(\d+):(\d+),\s*endln:(\d+):(\d+)")
+OPTYPE_RE = re.compile(r"\|vpiOpType:(\d+)")
+
+VPI_OP_MAP = {
+    1: "MinusOp",
+    2: "PlusOp",
+    3: "NotOp",
+    4: "BitNegOp",
+    5: "UnaryAndOp",
+    6: "UnaryNandOp",
+    7: "UnaryOrOp",
+    8: "UnaryNorOp",
+    9: "UnaryXorOp",
+    10: "UnaryXNorOp",
+    11: "SubOp",
+    12: "DivOp",
+    13: "ModOp",
+    14: "EqOp",
+    15: "NeqOp",
+    16: "CaseEqOp",
+    17: "CaseNeqOp",
+    18: "GtOp",
+    19: "GeOp",
+    20: "LtOp",
+    21: "LeOp",
+    22: "LShiftOp",
+    23: "RShiftOp",
+    24: "AddOp",
+    25: "MultOp",
+    26: "LogAndOp",
+    27: "LogOrOp",
+    28: "BitAndOp",
+    29: "BitOrOp",
+    30: "BitXorOp",
+    31: "BitXNorOp",
+    32: "ConditionOp",
+    33: "ConcatOp",
+    34: "MultiConcatOp",
+    35: "EventOrOp",
+    36: "NullOp",
+    37: "ListOp",
+    38: "MinTypMaxOp",
+    39: "PosedgeOp",
+    40: "NegedgeOp",
+    41: "ArithLShiftOp",
+    42: "ArithRShiftOp",
+    43: "PowerOp",
+
+    50: "ImplyOp",
+    51: "NonOverlapImplyOp",
+    52: "OverlapImplyOp",
+    53: "UnaryCycleDelayOp",
+    54: "CycleDelayOp",
+    55: "IntersectOp",
+    56: "FirstMatchOp",
+    57: "ThroughoutOp",
+    58: "WithinOp",
+    59: "RepeatOp",
+    60: "ConsecutiveRepeatOp",
+    61: "GotoRepeatOp",
+
+    62: "PostIncOp",
+    63: "PreIncOp",
+    64: "PostDecOp",
+    65: "PreDecOp",
+
+    66: "MatchOp",
+    67: "CastOp",
+    68: "IffOp",
+    69: "WildEqOp",
+    70: "WildNeqOp",
+
+    71: "StreamLROp",
+    72: "StreamRLOp",
+
+    73: "MatchedOp",
+    74: "TriggeredOp",
+    75: "AssignmentPatternOp",
+    76: "MultiAssignmentPatternOp",
+    77: "IfOp",
+    78: "IfElseOp",
+    79: "CompAndOp",
+    80: "CompOrOp",
+    81: "TypeOp",
+    82: "AssignmentOp",
+
+    83: "AcceptOnOp",
+    84: "RejectOnOp",
+    85: "SyncAcceptOnOp",
+    86: "SyncRejectOnOp",
+    87: "OverlapFollowedByOp",
+    88: "NonOverlapFollowedByOp",
+    89: "NexttimeOp",
+    90: "AlwaysOp",
+    91: "EventuallyOp",
+    92: "UntilOp",
+    93: "UntilWithOp",
+    94: "ImpliesOp",
+    95: "InsideOp",
+}
+
+TYPE_MAP = {
+    "operation": "Operation",
+    "ref_obj": "RefObj",
+    "bit_select": "BitSelect",
+    "func_call": "FuncCall",
+    "hier_path": "HierPath",
+    "int_var": "Variable",
+    "integer_var": "Variable",
+    "logic_var": "Variable",
+    "class_var": "Variable",
+    "ref_var": "Variable",
+    "io_decl": "IODecl",
+    "part_select": "PartSelect",
+    "indexed_part_select": "IndexedPartSelect",
+    "sys_func_call": "SysFuncCall",
+    "logic_net": "Net",
+    "enum_const": "EnumConst",
+    "var_select": "VarSelect",
+    "constant":"Constant"
+}
+
+def normalize_type(t):
+    if t is None:
+        return None
+    return TYPE_MAP.get(t, t)
+
 
 def parse_block(block_lines):
     input_type = input_id = None
     sl = sc = el = ec = None
     output_type = output_id = None
+    input_op = None
 
     i = 0
     while i < len(block_lines):
@@ -33,6 +160,12 @@ def parse_block(block_lines):
                 if lm:
                     sl, sc, el, ec = lm.groups()
 
+        # capture vpiOpType anywhere in block
+        om = OPTYPE_RE.search(line)
+        if om:
+            op_num = int(om.group(1))
+            input_op = VPI_OP_MAP.get(op_num)
+
         if RESULT_RE.search(line):
             if i + 1 < len(block_lines):
                 m = TYPE_ID_RE.search(block_lines[i + 1])
@@ -41,7 +174,16 @@ def parse_block(block_lines):
 
         i += 1
 
+    # normalize types
+    input_type = normalize_type(input_type)
+    output_type = normalize_type(output_type)
+
+    # append op name to input type
+    if input_type == "Operation" and input_op:
+        input_type = f"{input_type}:{input_op}"
+
     return input_type, input_id, sl, sc, el, ec, output_type, output_id
+
 
 def sort_and_dedup_stage3(rows):
     rows.sort(key=functools.cmp_to_key(sort_2))
@@ -53,7 +195,7 @@ def sort_and_dedup_stage4(rows):
     for r in rows:
         itype, iid, sl, sc, el, ec, otype, oid = r
 
-        if itype == "constant" and otype == "constant":
+        if itype == "Constant" and otype == "Constant":
             continue
 
         final_rows.append(r)
@@ -129,11 +271,7 @@ def main(log_file, cout_file):
         if depth > 0:
             current_block.append(line)
 
-    header = (
-        f"{'InputObjType':<25} {'InputObjId':<8}  "
-        f"{'Start':<15} {'End':<15}  "
-        f"{'OutputObjType':<25} {'OutputObjId':<8}"
-    )
+    header = "InputObjType | InputObjId | sl | sc | el | ec | OutputObjType | OutputObjId"
 
     print(header)
     print("-" * len(header))
@@ -149,14 +287,21 @@ def main(log_file, cout_file):
         out.write("-" * len(header) + "\n")
 
         for r in rows:
-            start = f"({r[2]},{r[3]})" if r[2] else "-"
-            end = f"({r[4]},{r[5]})" if r[4] else "-"
+            sl = r[2] or "-"
+            sc = r[3] or "-"
+            el = r[4] or "-"
+            ec = r[5] or "-"
 
-            line = (
-                f"{(r[0] or '-'):25} {(r[1] or '-'):8}  "
-                f"{start:15} {end:15} "
-                f"{(r[6] or '-'):25} {(r[7] or '-'):8}"
-            )
+            line = " | ".join([
+                str(r[0] or "-"),
+                str(r[1] or "-"),
+                str(sl),
+                str(sc),
+                str(el),
+                str(ec),
+                str(r[6] or "-"),
+                str(r[7] or "-"),
+            ])
 
             print(line)
             out.write(line + "\n")

@@ -132,6 +132,16 @@ TYPE_MAP = {
     "constant":"Constant"
 }
 
+DETAIL_TYPES = {
+    "FuncCall",
+    "SysFuncCall",
+    "Variable",
+    "IODecl",
+    "EnumConst",
+    "Net",
+}
+
+
 def normalize_type(t):
     if t is None:
         return None
@@ -148,7 +158,7 @@ def load_tsv(tsv_file):
             while len(parts) < 9:
                 parts.append(None)
 
-            itype, iid, sl, sc, el, ec, otype, oid, optype = parts
+            itype, iid, sl, sc, el, ec, otype, oid, optype, idetail = parts
 
             iid = int(iid) if iid and iid != "-" else None
             oid = int(oid) if oid and oid != "-" else None
@@ -168,6 +178,9 @@ def load_tsv(tsv_file):
                 op_name = VPI_OP_MAP.get(int(optype))
                 if op_name:
                     itype = f"{itype}:{op_name}"
+
+            elif itype in DETAIL_TYPES and idetail and idetail != "-":
+                itype = f"{itype}:{idetail}"
 
             rows.append((itype, iid, sl, sc, el, ec, otype, oid))
 

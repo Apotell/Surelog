@@ -288,6 +288,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(DesignComponent* component, cons
       if (endLabelId) {
         endLabel = fC->SymName(endLabelId);
         begin->setEndLabel(endLabel);
+        fC->populateCoreMembers(endLabelId, endLabelId, begin->getEndLabelObj());
       }
       stmt = begin;
       scope = begin;
@@ -366,6 +367,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(DesignComponent* component, cons
       if (endLabelId) {
         endLabel = fC->SymName(endLabelId);
         fork->setEndLabel(endLabel);
+        fC->populateCoreMembers(endLabelId, endLabelId, fork->getEndLabelObj());
       }
       stmt = fork;
       scope = fork;
@@ -1548,11 +1550,13 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(DesignComponent* co
         if (name.empty() || (name == SymbolTable::getBadSymbol())) {
           name = fC->SymName(refName);
         }
+        tsRef->setActual(ts);
         setRefTypespecName(tsRef, ts, name);
         decl->setTypespec(tsRef);
         fC->populateCoreMembers(refName, refName, tsRef);
+      } else {
+        decl->getTypespec()->setActual(ts);
       }
-      decl->getTypespec()->setActual(ts);
     }
 
     const std::string_view name = fC->SymName(tf_param_name);
@@ -1957,7 +1961,7 @@ bool CompileHelper::compileFunction(DesignComponent* component, const FileConten
     constructor = true;
   }
   NodeId Tf_port_list;
-  NodeId beginNameId, endNameId;
+  NodeId beginNameId, endNameId, endLabelId;
   if (constructor) {
     Tf_port_list = fC->Child(func_decl);
     name = "new";
@@ -1967,6 +1971,8 @@ bool CompileHelper::compileFunction(DesignComponent* component, const FileConten
       Function_body_declaration = func_decl;
     else
       Function_body_declaration = fC->Child(func_decl);
+    endLabelId = fC->sl_collect(Function_body_declaration, VObjectType::ENDFUNCTION);
+    endLabelId = fC->Sibling(endLabelId);
 
     if ((fC->Type(Function_body_declaration) == VObjectType::paLifetime_Automatic) ||
         (fC->Type(Function_body_declaration) == VObjectType::paLifetime_Static)) {
@@ -2005,6 +2011,10 @@ bool CompileHelper::compileFunction(DesignComponent* component, const FileConten
     func->setName(name);
     if (beginNameId && endNameId) {
       fC->populateCoreMembers(beginNameId, endNameId, func->getNameObj());
+    }
+    if (endLabelId) {
+      func->setEndLabel(fC->SymName(endLabelId));
+      fC->populateCoreMembers(endLabelId, endLabelId, func->getEndLabelObj());
     }
     if (className.empty()) {
       func->setParent(pscope);

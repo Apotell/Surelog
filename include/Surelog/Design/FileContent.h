@@ -77,10 +77,10 @@ class FileContent final : public DesignComponent {
   NodeId sl_get(NodeId parent,
                 VObjectType type) const;  // Get first child item of type
 
-  NodeId sl_parent(NodeId parent,
+  NodeId sl_parent(NodeId child,
                    VObjectType type) const;  // Get first parent item of type
 
-  NodeId sl_parent(NodeId parent, const VObjectTypeUnorderedSet& types,
+  NodeId sl_parent(NodeId child, const VObjectTypeUnorderedSet& types,
                    VObjectType& actualType) const;  // Get first parent item of type
 
   std::vector<NodeId> sl_get_all(NodeId parent, VObjectType type) const;  // get all child items of type

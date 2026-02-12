@@ -46,6 +46,7 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
 
  private:
   static bool isUVMMember(const uhdm::Any* object);
+  static bool isBuiltInMember(const uhdm::Any* object);
   static bool isImplicitFunctionReturnType(const uhdm::RefTypespec* object);
   static std::string_view stripDecorations(std::string_view name);
   static bool areNamedSame(const uhdm::Any* object, const uhdm::Any* actual);

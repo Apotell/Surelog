@@ -48,6 +48,7 @@
 // UHDM
 #include <uhdm/containers.h>
 #include <uhdm/final_stmt.h>
+#include <uhdm/identifier.h>
 #include <uhdm/initial.h>
 #include <uhdm/program.h>
 #include <uhdm/property_decl.h>
@@ -340,6 +341,10 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
           if (fC->Type(fC->Parent(id)) != VObjectType::paProgram_declaration) break;
           const std::string_view endLabel = fC->SymName(id);
           m_program->setEndLabel(endLabel);
+          if (uhdm::Program* const p = m_program->getUhdmModel<uhdm::Program>()) {
+            p->setEndLabel(endLabel);
+            fC->populateCoreMembers(id, id, p->getEndLabelObj());
+          }
           std::string_view moduleName = StringUtils::ltrim_until(m_program->getName(), '@');
           if (endLabel != moduleName) {
             Location loc(fC->getFileId(m_program->getNodeIds()[0]), fC->Line(m_program->getNodeIds()[0]),

@@ -236,6 +236,10 @@ bool CompileClass::compile() {
 
         const std::string_view endLabel = fC->SymName(id);
         m_class->setEndLabel(endLabel);
+        if (uhdm::ClassDefn* const cd = m_class->getUhdmModel<uhdm::ClassDefn>()) {
+          cd->setEndLabel(endLabel);
+          fC->populateCoreMembers(id, id, cd->getEndLabelObj());
+        }
         std::string_view moduleName = StringUtils::ltrim_until(m_class->getName(), '@');
         if (endLabel != moduleName) {
           Location loc(fC->getFileId(m_class->getNodeIds()[0]), fC->Line(m_class->getNodeIds()[0]),

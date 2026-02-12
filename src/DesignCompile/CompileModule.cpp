@@ -374,8 +374,8 @@ bool CompileModule::collectUdpObjects_() {
 
         uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
         rt->setParent(c);
+        rt->setFile(fC->getName());
         c->setTypespec(rt);
-        fC->populateCoreMembers(Level_input_list, Level_input_list, rt);
 
         uhdm::Typespec* const tps = s.make<uhdm::StringTypespec>();
         tps->setParent(defn);
@@ -481,8 +481,8 @@ bool CompileModule::collectUdpObjects_() {
 
         uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
         rt->setParent(c);
+        rt->setFile(fC->getName());
         c->setTypespec(rt);
-        fC->populateCoreMembers(Level_input_list, Level_input_list, rt);
 
         uhdm::Typespec* const tps = s.make<uhdm::StringTypespec>();
         tps->setParent(defn);
@@ -500,7 +500,7 @@ bool CompileModule::collectUdpObjects_() {
         defn->setInitial(init);
         fC->populateCoreMembers(id, id, init);
 
-        uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
+        uhdm::Assignment* const assign_stmt = s.make<uhdm::Assignment>();
         assign_stmt->setParent(init);
         init->setStmt(assign_stmt);
         fC->populateCoreMembers(id, id, assign_stmt);
@@ -511,7 +511,7 @@ bool CompileModule::collectUdpObjects_() {
         fC->populateCoreMembers(Identifier, Identifier, ref);
         assign_stmt->setLhs(ref);
 
-        uhdm::Constant* c = s.make<uhdm::Constant>();
+        uhdm::Constant* const c = s.make<uhdm::Constant>();
         c->setParent(assign_stmt);
         c->setValue(fC->SymName(Value));
         c->setDecompile(fC->SymName(Value));
@@ -520,12 +520,12 @@ bool CompileModule::collectUdpObjects_() {
         fC->populateCoreMembers(Value, Value, c);
         assign_stmt->setRhs(c);
 
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+        uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
         rt->setParent(c);
+        rt->setFile(fC->getName());
         c->setTypespec(rt);
-        fC->populateCoreMembers(Value, Value, rt);
 
-        uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+        uhdm::IntTypespec* const ts = s.make<uhdm::IntTypespec>();
         ts->setParent(assign_stmt);
         rt->setActual(ts);
         break;
@@ -897,6 +897,10 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
             if (fC->Type(fC->Parent(id)) != VObjectType::paModule_declaration) break;
             const std::string_view endLabel = fC->SymName(id);
             m_module->setEndLabel(endLabel);
+            if (uhdm::Module* const m = m_module->getUhdmModel<uhdm::Module>()) {
+              m->setEndLabel(endLabel);
+              fC->populateCoreMembers(id, id, m->getEndLabelObj());
+            }
             std::string_view moduleName = m_module->getName();
             moduleName = StringUtils::ltrim_until(moduleName, '@');
             moduleName = StringUtils::ltrim_until(moduleName, ':');
@@ -1343,6 +1347,10 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
             NodeId label = fC->Child(InterfaceIdentifier);
             const std::string_view endLabel = fC->SymName(label);
             m_module->setEndLabel(endLabel);
+            if (uhdm::Interface* const i = m_module->getUhdmModel<uhdm::Interface>()) {
+              i->setEndLabel(endLabel);
+              fC->populateCoreMembers(label, label, i->getEndLabelObj());
+            }
             std::string_view moduleName = m_module->getName();
             moduleName = StringUtils::ltrim_until(moduleName, '@');
             moduleName = StringUtils::ltrim_until(moduleName, ':');

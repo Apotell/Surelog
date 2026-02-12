@@ -566,6 +566,7 @@ uhdm::Typespec* CompileHelper::compileTypeParameter(DesignComponent* component, 
       if (tparam->getTypespec() == nullptr) {
         uhdm::RefTypespec* override_specRef = s.make<uhdm::RefTypespec>();
         override_specRef->setParent(tparam);
+        setRefTypespecName(override_specRef, override_spec, override_spec->getName());
         tparam->setTypespec(override_specRef);
       }
       tparam->getTypespec()->setActual(override_spec);
@@ -574,6 +575,7 @@ uhdm::Typespec* CompileHelper::compileTypeParameter(DesignComponent* component, 
       if (tparam->getTypespec() == nullptr) {
         uhdm::RefTypespec* override_specRef = s.make<uhdm::RefTypespec>();
         override_specRef->setParent(tparam);
+        setRefTypespecName(override_specRef, override_spec, override_spec->getName());
         tparam->setTypespec(override_specRef);
       }
       tparam->getTypespec()->setActual(override_spec);
@@ -652,11 +654,7 @@ uhdm::TypespecMember* CompileHelper::buildTypespecMember(const FileContent* fC, 
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::TypespecMember* var = s.make<uhdm::TypespecMember>();
   var->setName(fC->SymName(id));
-  if (NodeId siblingId = fC->Sibling(id)) {
-    fC->populateCoreMembers(id, siblingId, var);
-  } else {
-    fC->populateCoreMembers(id, id, var);
-  }
+  fC->populateCoreMembers(id, id, var);
   return var;
 }
 
@@ -705,7 +703,6 @@ uhdm::Typespec* CompileHelper::compileBuiltinTypespec(DesignComponent* component
       }
       uhdm::LogicTypespec* var = s.make<uhdm::LogicTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? sign : type, var);
       result = var;
       break;
     }
@@ -998,11 +995,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(DesignComponent* component
       ert->setActual(ts);
       taps->setElemTypespec(ert);
       ert->setName(ts->getName());
-      ert->setFile(ts->getFile());
-      ert->setStartLine(ts->getStartLine());
-      ert->setStartColumn(ts->getStartColumn());
-      ert->setEndLine(ts->getEndLine());
-      ert->setEndColumn(ts->getEndColumn());
+      fC->populateCoreMembers(nodeId, nodeId, ert);
     }
     retts = taps;
   }
@@ -1207,8 +1200,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
 
         uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
         rt->setParent(c);
+        rt->setFile(fC->getName());
         c->setTypespec(rt);
-        fC->populateCoreMembers(type, type, rt);
 
         uhdm::IntTypespec* const ts = s.make<uhdm::IntTypespec>();
         ts->setParent(var);

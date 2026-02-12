@@ -23,6 +23,7 @@
  * Created on June 8, 2017, 8:22 PM
  */
 
+#include <uhdm/Utils.h>
 #include <uhdm/uhdm_types.h>
 
 #include <cstdint>
@@ -411,11 +412,11 @@ NodeId FileContent::sl_get(NodeId parent, VObjectType type) const {
   return InvalidNodeId;
 }
 
-NodeId FileContent::sl_parent(NodeId parent, const VObjectTypeUnorderedSet& types, VObjectType& actualType) const {
-  if (!parent) return InvalidNodeId;
+NodeId FileContent::sl_parent(NodeId child, const VObjectTypeUnorderedSet& types, VObjectType& actualType) const {
+  if (!child) return InvalidNodeId;
   if (m_objects.empty()) return InvalidNodeId;
-  if (parent >= m_objects.size()) return InvalidNodeId;
-  NodeId id = parent;
+  if (child >= m_objects.size()) return InvalidNodeId;
+  NodeId id = child;
   while (id) {
     const VObject& current = Object(id);
     if (types.find(current.m_type) != types.end()) {
@@ -427,11 +428,11 @@ NodeId FileContent::sl_parent(NodeId parent, const VObjectTypeUnorderedSet& type
   return InvalidNodeId;
 }
 
-NodeId FileContent::sl_parent(NodeId parent, VObjectType type) const {
-  if (!parent) return InvalidNodeId;
+NodeId FileContent::sl_parent(NodeId child, VObjectType type) const {
+  if (!child) return InvalidNodeId;
   if (m_objects.empty()) return InvalidNodeId;
-  if (parent >= m_objects.size()) return InvalidNodeId;
-  NodeId id = parent;
+  if (child >= m_objects.size()) return InvalidNodeId;
+  NodeId id = child;
   while (id) {
     const VObject& current = Object(id);
     if (current.m_type == type) {
@@ -661,8 +662,12 @@ const DesignElement* FileContent::getDesignElement(std::string_view name) const 
 
 void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex, uhdm::Any* instance,
                                       bool force /* = false */) const {
+  bool ignorePosition = false;
+  if (uhdm::Typespec* const ts = any_cast<uhdm::Typespec>(instance)) {
+    ignorePosition = uhdm::isBuiltinTypespec(ts);
+  }
   NodeId cacheStartIndex, cacheEndIndex;
-  if (startIndex && ((instance->getStartLine() == 0) || force)) {
+  if (startIndex && ((instance->getStartLine() == 0) || force) && !ignorePosition) {
     if (startIndex < m_objects.size()) {
       const VObject& object = m_objects[startIndex];
       instance->setStartLine(object.m_startLine);
@@ -674,7 +679,7 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex, uhdm::
     }
   }
 
-  if (endIndex && ((instance->getEndLine() == 0) || force)) {
+  if (endIndex && ((instance->getEndLine() == 0) || force) && !ignorePosition) {
     if (endIndex < m_objects.size()) {
       // For packed/unpacked dimenion, include all ranges!
       if (instance->getUhdmType() != uhdm::UhdmType::Range) {

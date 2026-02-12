@@ -566,7 +566,6 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, uhdm::Serializer& s, uhdm
     m_componentMap.emplace(classDef, c);
     c->setParent(parent);
     classDef->getUhdmTypespecModel()->setParent(parent);
-    c->setEndLabel(classDef->getEndLabel());
     c->setTaskFuncDecls(classDef->getTaskFuncDecls());
 
     // Typepecs
@@ -727,10 +726,6 @@ void reInstanceTypespec(Serializer& serializer, uhdm::Any* root, uhdm::Package* 
 void UhdmWriter::writePackage(Package* pack, uhdm::Package* p, uhdm::Serializer& s) {
   const uhdm::ScopedScope scopedScope(p);
 
-  if (!pack->getEndLabel().empty()) {
-    p->setEndLabel(pack->getEndLabel());
-  }
-
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = pack->getClassDefinitions();
   writeClasses(orig_classes, s, p);
@@ -818,8 +813,6 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m, uhdm::Seria
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
-
-  m->setEndLabel(mod->getEndLabel());
 
   // Let decls
   if (!mod->getLetStmts().empty()) {
@@ -954,8 +947,6 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, uhdm::Interface* m, uhdm:
   SignalMap portMap;
   SignalMap netMap;
 
-  m->setEndLabel(mod->getEndLabel());
-
   // Let decls
   if (!mod->getLetStmts().empty()) {
     uhdm::LetDeclCollection* decls = m->getLetDecls(true);
@@ -1059,8 +1050,6 @@ void UhdmWriter::writeProgram(Program* mod, uhdm::Program* m, uhdm::Serializer& 
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
-
-  m->setEndLabel(mod->getEndLabel());
 
   // Typepecs
   uhdm::TypespecCollection* typespecs = m->getTypespecs(true);

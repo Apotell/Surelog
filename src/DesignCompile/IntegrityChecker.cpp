@@ -75,7 +75,6 @@ IntegrityChecker::IntegrityChecker(Session* session)
           uhdm::UhdmType::Begin,
           uhdm::UhdmType::Design,
           // TODO(HS): Remove this once identifier location is fixed
-          uhdm::UhdmType::Identifier,
           uhdm::UhdmType::RefTypespec,
       },
       m_typesWithMissingParent{
@@ -85,7 +84,6 @@ IntegrityChecker::IntegrityChecker(Session* session)
           uhdm::UhdmType::Begin,
           uhdm::UhdmType::Design,
           // TODO(HS): Remove this once identifier location is fixed
-          uhdm::UhdmType::Identifier,
           uhdm::UhdmType::RefTypespec,
           uhdm::UhdmType::SourceFile,
       } {}
@@ -104,6 +102,16 @@ bool IntegrityChecker::isUVMMember(const uhdm::Any* object) {
   std::string_view filepath = object->getFile();
   return (filepath.find("\\uvm_") != std::string_view::npos) || (filepath.find("/uvm_") != std::string_view::npos) ||
          (filepath.find("\\ovm_") != std::string_view::npos) || (filepath.find("/ovm_") != std::string_view::npos);
+}
+
+bool IntegrityChecker::isBuiltInMember(const uhdm::Any* object) {
+  while (object != nullptr) {
+    if ((object->getUhdmType() == uhdm::UhdmType::Package) && (object->getName() == "builtin")) {
+      return true;
+    }
+    object = object->getParent();
+  }
+  return false;
 }
 
 bool IntegrityChecker::isValidFile(const uhdm::Any* object) {
@@ -1110,7 +1118,14 @@ void IntegrityChecker::visitGenScope(const uhdm::GenScope* object) {}
 void IntegrityChecker::visitGenScopeArray(const uhdm::GenScopeArray* object) {}
 void IntegrityChecker::visitHierPath(const uhdm::HierPath* object) {}
 void IntegrityChecker::visitIODecl(const uhdm::IODecl* object) {}
-void IntegrityChecker::visitIdentifier(const uhdm::Identifier* object) {}
+void IntegrityChecker::visitIdentifier(const uhdm::Identifier* object) {
+  // TODO(HS): Do typespecs really need a location? Especially, since RefTypespec
+  // are the ones that are actually the location provider.
+  if (object->getParent<uhdm::Typespec>() != nullptr) return;
+  if (object->getName().empty()) reportMissingName(object);
+  if (!isBuiltInMember(object) && !isValidLocation(object)) reportMissingLocation(object);
+  if (!isBuiltInMember(object) && !isValidFile(object)) reportMissingFile(object);
+}
 void IntegrityChecker::visitIfElse(const uhdm::IfElse* object) {}
 void IntegrityChecker::visitIfStmt(const uhdm::IfStmt* object) {}
 void IntegrityChecker::visitImmediateAssert(const uhdm::ImmediateAssert* object) {}
@@ -1202,10 +1217,14 @@ void IntegrityChecker::visitRefTypespec(const uhdm::RefTypespec* object) {
   if (parent == nullptr) return;
 
   const uhdm::Variable* const parentAsVariable = object->getParent<uhdm::Variable>();
+  const uhdm::Constant* const parentAsConstant = object->getParent<uhdm::Constant>();
 
   if (!isImplicitFunctionReturnType(object)) {
-    if (!isValidLocation(object) && (parentAsVariable == nullptr)) {
-      reportMissingLocation(object);
+    if (parentAsVariable == nullptr) {
+      if (((parentAsConstant != nullptr) && isValidLocation(object)) ||
+          ((parentAsConstant == nullptr) && !isValidLocation(object))) {
+        reportMissingLocation(object);
+      }
     }
     if (!isValidFile(object)) {
       reportMissingFile(object);

@@ -45,6 +45,7 @@
 #include <uhdm/BaseClass.h>
 #include <uhdm/Serializer.h>
 #include <uhdm/containers.h>
+#include <uhdm/identifier.h>
 #include <uhdm/package.h>
 #include <uhdm/property_decl.h>
 #include <uhdm/sequence_decl.h>
@@ -267,6 +268,10 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
             if (fC->Type(fC->Parent(id)) != VObjectType::paPackage_declaration) break;
             const std::string_view endLabel = fC->SymName(id);
             m_package->setEndLabel(endLabel);
+            if (uhdm::Package* const p = m_package->getUhdmModel<uhdm::Package>()) {
+              p->setEndLabel(endLabel);
+              fC->populateCoreMembers(id, id, p->getEndLabelObj());
+            }
             std::string_view moduleName = StringUtils::ltrim_until(m_package->getName(), '@');
             if (endLabel != moduleName) {
               Location loc(fC->getFileId(m_package->getNodeIds()[0]), fC->Line(m_package->getNodeIds()[0]),

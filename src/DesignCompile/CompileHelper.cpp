@@ -227,9 +227,12 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
     }
   }
   if (c != nullptr) {
-    uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+    uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
     rt->setParent(c);
-    c->setParent(pexpr);
+    if (pexpr != nullptr) {
+      rt->setFile(pexpr->getFile());
+      c->setParent(pexpr);
+    }
     c->setTypespec(rt);
     if (tps != nullptr) {
       tps->setParent(pexpr);
@@ -530,6 +533,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
     the_enum->getFileContent()->populateCoreMembers(data_type, type_name, enum_t);
 
     // Enum basetype
+    uhdm::Typespec* baseTypespec = nullptr;
     if (uhdm::Typespec* tps = compileTypespec(scope, fC, enum_base_type, Variable_dimension, pstmt, nullptr, false)) {
       the_enum->setBaseTypespec(tps);
 
@@ -539,6 +543,8 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       baseTypeRef->setActual(tps);
       fC->populateCoreMembers(enum_base_type, enum_base_type, baseTypeRef);
       enum_t->setBaseTypespec(baseTypeRef);
+
+      baseTypespec = tps;
     }
 
     // Enum values
@@ -579,17 +585,32 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       econst->setName(enumName);
       econst->setParent(enum_t);
       fC->populateCoreMembers(enum_name_declaration, enum_name_declaration, econst);
+      fC->populateCoreMembers(enumNameId, enumNameId, econst->getNameObj());
 
-      uhdm::Constant* c = constantFromValue(value, econst);
       NodeId tmpId = enumValueId ? enumValueId : enumNameId;
-      fC->populateCoreMembers(tmpId, tmpId, c->getTypespec());
-      econst->setValue(c);
       if (enumValueId) {
         if (uhdm::Any* exp = compileExpression(scope, fC, enumValueId, econst, nullptr)) {
-          c->setDecompile(uhdm::prettyPrint(exp));
+          if (uhdm::Constant* const constant = any_cast<uhdm::Constant>(exp)) {
+            econst->setValue(constant);
+            if (baseTypespec != nullptr) {
+              if (uhdm::RefTypespec* const rt = constant->getTypespec()) {
+                // If we have a valid base typespec, use that as the "true" typespec
+                rt->setActual(baseTypespec, true);
+              }
+            }
+          }
         }
       } else {
+        uhdm::Constant* c = constantFromValue(value, econst);
+        econst->setValue(c);
         c->setDecompile(value->decompiledValue());
+        if (uhdm::RefTypespec* const rt = c->getTypespec()) {
+          rt->setFile(fC->getName());
+          if (baseTypespec != nullptr) {
+            // If we have a valid base typespec, use that as the "true" typespec
+            rt->setActual(baseTypespec, true);
+          }
+        }
       }
       econsts->emplace_back(econst);
       enum_name_declaration = fC->Sibling(enum_name_declaration);
@@ -690,7 +711,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
         typedefTypespec->setName(fullName);
         fC->populateCoreMembers(type_name, type_name, typedefTypespec->getNameObj());
         typedefTypespec->setParent(pstmt);
-        fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+        fC->populateCoreMembers(data_type, type_name, typedefTypespec);
 
         uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
         refTypespec->setName(ts->getName());
@@ -1933,23 +1954,21 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component, const F
   while (package_import_item_id) {
     uhdm::ImportTypespec* import_stmt = s.make<uhdm::ImportTypespec>();
     import_stmt->setParent(pscope);
-    fC->populateCoreMembers(package_import_item_id, package_import_item_id, import_stmt);
     import_stmt->setName(fC->SymName(package_import_item_id));
+    fC->populateCoreMembers(package_import_item_id, package_import_item_id, import_stmt);
     NodeId package_name_id = fC->Child(package_import_item_id);
     fC->populateCoreMembers(package_name_id, package_name_id, import_stmt->getNameObj());
-    NodeId item_name_id = fC->Sibling(package_name_id);
+    NodeId itemNameId = fC->Sibling(package_name_id);
     Value* item_name = m_exprBuilder.getValueFactory().newStValue();
-    if (item_name_id) {
-      item_name->set(fC->SymName(item_name_id));
+    if (itemNameId) {
+      item_name->set(fC->SymName(itemNameId));
     } else {
       item_name->set("*");
     }
-    if (uhdm::Constant* imported_item = constantFromValue(item_name, import_stmt)) {
+    if (uhdm::Constant* const imported_item = constantFromValue(item_name, import_stmt)) {
       imported_item->setParent(import_stmt);
-      // In case of "*" item_name_id will be 0
-      NodeId nodeId = item_name_id ? item_name_id : package_import_item_id;
-      fC->populateCoreMembers(nodeId, nodeId, imported_item);
-      fC->populateCoreMembers(nodeId, nodeId, imported_item->getTypespec());
+      // In case of "*" itemNameId will be 0
+      if (itemNameId) fC->populateCoreMembers(itemNameId, itemNameId, imported_item);
       import_stmt->setItem(imported_item);
     }
     m_exprBuilder.deleteValue(item_name);
@@ -3434,22 +3453,31 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       } else {
         ntype = InvalidNodeId;
       }
-      uhdm::TypeParameter* p = s.make<uhdm::TypeParameter>();
+      uhdm::ParamAssign* const paramAssign = s.make<uhdm::ParamAssign>();
+      paramAssign->setParent(pany);
+      fC->populateCoreMembers(typeAssignId, typeAssignId, paramAssign);
+
+      if (ntype) {
+        uhdm::RefTypespec* const rhs = s.make<uhdm::RefTypespec>();
+        fC->populateCoreMembers(ntype, ntype, rhs);
+        rhs->setParent(paramAssign);
+        paramAssign->setRhs(rhs);
+      }
+
+      uhdm::TypeParameter* const p = s.make<uhdm::TypeParameter>();
       p->setName(fC->SymName(typeNameId));
       p->setParent(pany);
-      fC->populateCoreMembers(typeNameId, typeNameId, p);
       p->setLocalParam(localParam);
+      fC->populateCoreMembers(typeNameId, typeNameId, p);
+      paramAssign->setLhs(p);
+
       if (ntype) {
-        if (uhdm::Typespec* tps = compileTypespec(component, fC, ntype, InvalidNodeId, p, nullptr, false)) {
-          if (p->getTypespec() == nullptr) {
-            uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-            setRefTypespecName(tpsRef, tps, tps->getName());
-            fC->populateCoreMembers(ntype, ntype, tpsRef);
-            tpsRef->setParent(p);
-            p->setTypespec(tpsRef);
-          }
-          p->getTypespec()->setActual(tps);
+        if (uhdm::Typespec* const tps = compileTypespec(component, fC, ntype, InvalidNodeId, p, nullptr, false)) {
           tps->setParent(p);
+          if (uhdm::RefTypespec* const rhs = paramAssign->getRhs<uhdm::RefTypespec>()) {
+            rhs->setActual(tps);
+            setRefTypespecName(rhs, tps, tps->getName());
+          }
         }
       }
       parameters->emplace_back(p);
@@ -3467,26 +3495,35 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
     while (Param_assignment) {
       NodeId Identifier = fC->Child(Param_assignment);
       NodeId Constant_param_expression = fC->Sibling(Identifier);
-      uhdm::TypeParameter* p = s.make<uhdm::TypeParameter>();
+      NodeId Data_type = fC->Child(Constant_param_expression);
+
+      uhdm::ParamAssign* const paramAssign = s.make<uhdm::ParamAssign>();
+      paramAssign->setParent(pany);
+      fC->populateCoreMembers(Param_assignment, Param_assignment, paramAssign);
+
+      if (Data_type) {
+        uhdm::RefTypespec* const rhs = s.make<uhdm::RefTypespec>();
+        fC->populateCoreMembers(Data_type, Data_type, rhs);
+        rhs->setParent(paramAssign);
+        paramAssign->setRhs(rhs);
+      }
+
+      uhdm::TypeParameter* const p = s.make<uhdm::TypeParameter>();
       p->setName(fC->SymName(Identifier));
       p->setParent(pany);
       fC->populateCoreMembers(Identifier, Identifier, p);
-      NodeId Data_type = fC->Child(Constant_param_expression);
-      if (uhdm::Typespec* tps = compileTypespec(component, fC, Data_type, InvalidNodeId, p, nullptr, false)) {
-        if (p->getTypespec() == nullptr) {
-          uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-          setRefTypespecName(tpsRef, tps, tps->getName());
-          fC->populateCoreMembers(Data_type, Data_type, tpsRef);
-          tpsRef->setParent(p);
-          p->setTypespec(tpsRef);
-        }
-        p->getTypespec()->setActual(tps);
+      paramAssign->setLhs(p);
+
+      if (uhdm::Typespec* const tps = compileTypespec(component, fC, Data_type, InvalidNodeId, p, nullptr, false)) {
         tps->setParent(p);
+        if (uhdm::RefTypespec* const rhs = paramAssign->getRhs<uhdm::RefTypespec>()) {
+          rhs->setActual(tps);
+          setRefTypespecName(rhs, tps, tps->getName());
+        }
       }
-      if (localParam) {
-        p->setLocalParam(true);
-      }
+      p->setLocalParam(localParam);
       parameters->emplace_back(p);
+
       Parameter* param = new Parameter(fC, Identifier, fC->SymName(Identifier), Constant_param_expression, port_param);
       param->setTypeParam();
       param->setUhdmParam(p);
@@ -3533,7 +3570,7 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
 
       uhdm::Parameter* param = s.make<uhdm::Parameter>();
       param->setParent(pany);
-      fC->populateCoreMembers(Param_assignment, Param_assignment, param);
+      fC->populateCoreMembers(name, name, param);
       Parameter* p = new Parameter(fC, name, fC->SymName(name), fC->Child(Data_type_or_implicit), port_param);
       while (fC->Type(value) == VObjectType::paUnpacked_dimension) {
         value = fC->Sibling(value);
@@ -4080,7 +4117,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(DesignComponent* comp
           exp->setParent(call);
         }
       } else {
-        uhdm::Constant* c = s.make<uhdm::Constant>();
+        uhdm::Constant* const c = s.make<uhdm::Constant>();
         c->setParent(call);
         c->setValue("0");
         c->setDecompile("0");
@@ -4088,12 +4125,12 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(DesignComponent* comp
         c->setConstType(vpiIntConst);
         fC->populateCoreMembers(argumentNode, argumentNode, c);
 
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+        uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
         rt->setParent(c);
+        rt->setFile(fC->getName());
         c->setTypespec(rt);
-        fC->populateCoreMembers(argumentNode, argumentNode, rt);
 
-        uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+        uhdm::IntTypespec* const ts = s.make<uhdm::IntTypespec>();
         ts->setParent(call);
         rt->setActual(ts);
 

@@ -137,52 +137,41 @@ def normalize_type(t):
         return None
     return TYPE_MAP.get(t, t)
 
+def load_tsv(tsv_file):
+    rows = []
 
-def parse_block(block_lines):
-    input_type = input_id = None
-    sl = sc = el = ec = None
-    output_type = output_id = None
-    input_op = None
+    with open(tsv_file, "r", errors="ignore") as f:
+        for line in f:
+            parts = line.rstrip("\n").split("\t")
 
-    i = 0
-    while i < len(block_lines):
-        line = block_lines[i]
+            # pad safety
+            while len(parts) < 9:
+                parts.append(None)
 
-        if OBJ_RE.search(line):
-            if i + 1 < len(block_lines):
-                obj_line = block_lines[i + 1]
+            itype, iid, sl, sc, el, ec, otype, oid, optype = parts
 
-                m = TYPE_ID_RE.search(obj_line)
-                if m:
-                    input_type, input_id = m.group(1), int(m.group(2))
+            iid = int(iid) if iid and iid != "-" else None
+            oid = int(oid) if oid and oid != "-" else None
 
-                lm = LOC_RE.search(obj_line)
-                if lm:
-                    sl, sc, el, ec = lm.groups()
+            # normalize location
+            sl = sl if sl != "-" else None
+            sc = sc if sc != "-" else None
+            el = el if el != "-" else None
+            ec = ec if ec != "-" else None
 
-        # capture vpiOpType anywhere in block
-        om = OPTYPE_RE.search(line)
-        if om:
-            op_num = int(om.group(1))
-            input_op = VPI_OP_MAP.get(op_num)
+            # normalize types
+            itype = normalize_type(itype)
+            otype = normalize_type(otype)
 
-        if RESULT_RE.search(line):
-            if i + 1 < len(block_lines):
-                m = TYPE_ID_RE.search(block_lines[i + 1])
-                if m:
-                    output_type, output_id = m.groups()
+            # append operation name
+            if itype == "Operation" and optype and optype != "-":
+                op_name = VPI_OP_MAP.get(int(optype))
+                if op_name:
+                    itype = f"{itype}:{op_name}"
 
-        i += 1
+            rows.append((itype, iid, sl, sc, el, ec, otype, oid))
 
-    # normalize types
-    input_type = normalize_type(input_type)
-    output_type = normalize_type(output_type)
-
-    # append op name to input type
-    if input_type == "Operation" and input_op:
-        input_type = f"{input_type}:{input_op}"
-
-    return input_type, input_id, sl, sc, el, ec, output_type, output_id
+    return rows
 
 
 def sort_and_dedup_stage3(rows):
@@ -247,30 +236,9 @@ def sort_2(lhs, rhs):
         return -1 if int(oid0) < int(oid1) else 1
     return 0
 
-def main(log_file, cout_file):
-    text = Path(log_file).read_text(errors="ignore").splitlines()
-
-    rows = []
-    current_block = []
-    depth = 0
-
-    for line in text:
-        if START_RE.search(line):
-            if depth == 0:
-                current_block = []
-            depth += 1
-            continue
-
-        if END_RE.search(line):
-            depth -= 1
-            if depth == 0:
-                row = parse_block(current_block)
-                rows.append(row)
-            continue
-
-        if depth > 0:
-            current_block.append(line)
-
+def main(tsv_file):
+    print("main")
+    rows = load_tsv(tsv_file)
     header = "InputObjType | InputObjId | sl | sc | el | ec | OutputObjType | OutputObjId"
 
     print(header)
@@ -280,7 +248,8 @@ def main(log_file, cout_file):
     rows = sort_and_dedup_stage3(rows)
     rows = sort_and_dedup_stage4(rows)
 
-    output_file = Path(log_file).parent / "parsed_output.txt"
+    output_file = Path(tsv_file).parent / "parsed_output.txt"
+    print(output_file)
 
     with open(output_file, "w", encoding="utf-8") as out:
         out.write(header + "\n")
@@ -309,8 +278,8 @@ def main(log_file, cout_file):
     print("\nSaved parsed output to:", output_file)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python parse_expreval_log.py <expreval.log> <cout.log>")
+    if len(sys.argv) != 2:
+        print("Usage: python LogAnalyzer.py <compact.tsv>")
         sys.exit(1)
 
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1])

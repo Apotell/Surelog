@@ -189,7 +189,7 @@ Begin                                                  1
 Constant                                               2
 Design                                                 1
 IODecl                                                 3
-Identifier                                             4
+Identifier                                             5
 ImmediateAssert                                        3
 IntTypespec                                            2
 LetDecl                                                3
@@ -205,7 +205,7 @@ SeqFormalDecl                                          3
 SourceFile                                             1
 SysFuncCall                                            3
 ------------------------------------------------------------
-Total:                                                45
+Total:                                                46
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LetExpr/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -236,7 +236,7 @@ Design: (unnamed)
       \_Net: (work@m.a), line:3:7, endln:3:8
       |vpiFullName:work@m.a
       |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:6
+      \_LogicTypespec: 
     |vpiName:a
     |vpiFullName:work@m.a
     |vpiNetType:36
@@ -308,7 +308,7 @@ Design: (unnamed)
         |vpiParent:
         \_SysFuncCall: ($past), line:6:13, endln:6:40
         |vpiTypespec:
-        \_RefTypespec: (work@m.p2), line:6:21, endln:6:21
+        \_RefTypespec: (work@m.p2)
           |vpiParent:
           \_Constant: , line:6:21, endln:6:21
           |vpiFullName:work@m.p2
@@ -323,7 +323,7 @@ Design: (unnamed)
         |vpiParent:
         \_SysFuncCall: ($past), line:6:13, endln:6:40
         |vpiTypespec:
-        \_RefTypespec: (work@m.p2), line:6:22, endln:6:22
+        \_RefTypespec: (work@m.p2)
           |vpiParent:
           \_Constant: , line:6:22, endln:6:22
           |vpiFullName:work@m.p2
@@ -476,13 +476,17 @@ Design: (unnamed)
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
     |vpiName:x
     |vpiDirection:3
-  |vpiEndLabel:m
+  |vpiEndLabel:
+  \_Identifier: (m), line:16:13, endln:16:14
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
+    |vpiName:m
 |vpiTypespec:
 \_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:3:1, endln:3:6
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -507,7 +511,7 @@ COMMAND: ${SURELOG_DIR}/regression/LetExpr/slpp_all/surelog.uhdm ${SURELOG_DIR}/
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              46      46       0         0
+Others                              47      47       0         0
 ----------------------------------------------------------------
-                                    46      46       0         0
+                                    47      47       0         0
 ===================== END REDUCTION RESULT =====================

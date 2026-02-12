@@ -88,7 +88,7 @@ AST_DEBUG_END
 ArrayTypespec                                          1
 Constant                                               4
 Design                                                 1
-Identifier                                             4
+Identifier                                             6
 IntTypespec                                            4
 LogicTypespec                                          1
 Package                                                2
@@ -100,7 +100,7 @@ TypedefTypespec                                        2
 TypespecMember                                         2
 UnionTypespec                                          1
 ------------------------------------------------------------
-Total:                                                35
+Total:                                                37
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageMemberTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -153,13 +153,17 @@ Design: (unnamed)
         \_TypespecMember: (a), line:3:11, endln:3:12
         |vpiFullName:foo_flags::a
         |vpiActual:
-        \_LogicTypespec: , line:3:5, endln:3:10
+        \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (foo_flags::common_flags_t), line:4:5, endln:4:19
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:4:4
   |vpiDefName:foo_flags
-  |vpiEndLabel:foo_flags
+  |vpiEndLabel:
+  \_Identifier: (foo_flags), line:5:14, endln:5:23
+    |vpiParent:
+    \_Package: foo_flags (foo_flags), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:1:1, endln:5:23
+    |vpiName:foo_flags
 |vpiAllPackages:
 \_Package: goog (goog), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:17:1, endln:31:17
   |vpiParent:
@@ -215,7 +219,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:27:29, endln:27:34
         |vpiTypespec:
-        \_RefTypespec: (goog), line:27:30, endln:27:31
+        \_RefTypespec: (goog)
           |vpiParent:
           \_Constant: , line:27:30, endln:27:31
           |vpiFullName:goog
@@ -230,7 +234,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:27:29, endln:27:34
         |vpiTypespec:
-        \_RefTypespec: (goog), line:27:32, endln:27:33
+        \_RefTypespec: (goog)
           |vpiParent:
           \_Constant: , line:27:32, endln:27:33
           |vpiFullName:goog
@@ -249,7 +253,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:27:34, endln:27:39
         |vpiTypespec:
-        \_RefTypespec: (goog), line:27:35, endln:27:36
+        \_RefTypespec: (goog)
           |vpiParent:
           \_Constant: , line:27:35, endln:27:36
           |vpiFullName:goog
@@ -264,7 +268,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:27:34, endln:27:39
         |vpiTypespec:
-        \_RefTypespec: (goog), line:27:37, endln:27:38
+        \_RefTypespec: (goog)
           |vpiParent:
           \_Constant: , line:27:37, endln:27:38
           |vpiFullName:goog
@@ -275,7 +279,7 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiValue:0
     |vpiElemTypespec:
-    \_RefTypespec: (goog::foo_flags::common_flags_t), line:4:5, endln:4:19
+    \_RefTypespec: (goog::foo_flags::common_flags_t), line:27:2, endln:27:39
       |vpiParent:
       \_ArrayTypespec: , line:27:2, endln:27:39
       |vpiName:foo_flags::common_flags_t
@@ -290,9 +294,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:27:2, endln:27:39
   |vpiDefName:goog
-  |vpiEndLabel:goog
+  |vpiEndLabel:
+  \_Identifier: (goog), line:31:13, endln:31:17
+    |vpiParent:
+    \_Package: goog (goog), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:17:1, endln:31:17
+    |vpiName:goog
 |vpiTypespec:
-\_LogicTypespec: , line:3:5, endln:3:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -315,7 +323,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackageMemberTypespec/slpp_all/surelog.uhdm $
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              32      32       0         0
+Others                              34      34       0         0
 ----------------------------------------------------------------
-                                    32      32       0         0
+                                    34      34       0         0
 ===================== END REDUCTION RESULT =====================

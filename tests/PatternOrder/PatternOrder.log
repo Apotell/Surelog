@@ -108,7 +108,7 @@ AST_DEBUG_END
 BitTypespec                                            2
 Constant                                               8
 Design                                                 1
-Identifier                                             1
+Identifier                                             2
 IntTypespec                                            7
 LogicTypespec                                          2
 Module                                                 1
@@ -123,7 +123,7 @@ StructTypespec                                         3
 TaggedPattern                                          8
 TypespecMember                                         7
 ------------------------------------------------------------
-Total:                                                83
+Total:                                                84
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PatternOrder/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -159,7 +159,7 @@ Design: (unnamed)
         \_TypespecMember: (A), line:3:7, endln:3:8
         |vpiFullName:work@top.A
         |vpiActual:
-        \_IntTypespec: , line:3:3, endln:3:6
+        \_IntTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (BC1), line:7:5, endln:7:8
       |vpiParent:
@@ -199,7 +199,7 @@ Design: (unnamed)
         \_TypespecMember: (B), line:5:11, endln:5:12
         |vpiFullName:work@top.B
         |vpiActual:
-        \_LogicTypespec: , line:5:5, endln:5:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (C), line:6:10, endln:6:11
       |vpiParent:
@@ -211,7 +211,7 @@ Design: (unnamed)
         \_TypespecMember: (C), line:6:10, endln:6:11
         |vpiFullName:work@top.C
         |vpiActual:
-        \_RealTypespec: , line:6:5, endln:6:9
+        \_RealTypespec: 
   |vpiImportTypespec:
   \_StructTypespec: , line:2:4, endln:8:2
   |vpiImportTypespec:
@@ -248,7 +248,7 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:8:16, endln:8:28
             |vpiTypespec:
-            \_RefTypespec: (work@top.ABC), line:8:18, endln:8:22
+            \_RefTypespec: (work@top.ABC)
               |vpiParent:
               \_Constant: , line:8:18, endln:8:22
               |vpiFullName:work@top.ABC
@@ -263,12 +263,12 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:8:16, endln:8:28
             |vpiTypespec:
-            \_RefTypespec: (work@top.ABC), line:8:24, endln:8:27
+            \_RefTypespec: (work@top.ABC)
               |vpiParent:
               \_Constant: , line:8:24, endln:8:27
               |vpiFullName:work@top.ABC
               |vpiActual:
-              \_RealTypespec: , line:6:5, endln:6:9
+              \_RealTypespec: 
             |vpiConstType:2
             |vpiSize:64
             |vpiDecompile:1.0
@@ -280,7 +280,7 @@ Design: (unnamed)
           |vpiName:BC1
           |vpiFullName:work@top.ABC.BC1
           |vpiActual:
-          \_StringTypespec: , line:8:11, endln:8:14
+          \_StringTypespec: 
       |vpiOperand:
       \_TaggedPattern: , line:8:30, endln:8:36
         |vpiParent:
@@ -290,12 +290,12 @@ Design: (unnamed)
           |vpiParent:
           \_TaggedPattern: , line:8:30, endln:8:36
           |vpiTypespec:
-          \_RefTypespec: (work@top.ABC), line:8:35, endln:8:36
+          \_RefTypespec: (work@top.ABC)
             |vpiParent:
             \_Constant: , line:8:35, endln:8:36
             |vpiFullName:work@top.ABC
             |vpiActual:
-            \_IntTypespec: , line:3:3, endln:3:6
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
@@ -306,7 +306,7 @@ Design: (unnamed)
           \_TaggedPattern: , line:8:30, endln:8:36
           |vpiFullName:work@top.ABC
           |vpiActual:
-          \_IntTypespec: , line:3:3, endln:3:6
+          \_IntTypespec: 
       |vpiOperand:
       \_TaggedPattern: , line:8:38, endln:8:56
         |vpiParent:
@@ -325,12 +325,12 @@ Design: (unnamed)
               |vpiParent:
               \_TaggedPattern: , line:8:45, endln:8:55
               |vpiTypespec:
-              \_RefTypespec: (work@top.ABC), line:8:54, endln:8:55
+              \_RefTypespec: (work@top.ABC)
                 |vpiParent:
                 \_Constant: , line:8:54, endln:8:55
                 |vpiFullName:work@top.ABC
                 |vpiActual:
-                \_IntTypespec: , line:3:3, endln:3:6
+                \_IntTypespec: 
               |vpiConstType:9
               |vpiSize:64
               |vpiDecompile:0
@@ -341,7 +341,7 @@ Design: (unnamed)
               \_TaggedPattern: , line:8:45, endln:8:55
               |vpiFullName:work@top.ABC
               |vpiActual:
-              \_StringTypespec: , line:8:11, endln:8:14
+              \_StringTypespec: 
         |vpiTypespec:
         \_RefTypespec: (work@top.ABC.BC2), line:8:38, endln:8:41
           |vpiParent:
@@ -349,22 +349,26 @@ Design: (unnamed)
           |vpiName:BC2
           |vpiFullName:work@top.ABC.BC2
           |vpiActual:
-          \_StringTypespec: , line:8:11, endln:8:14
+          \_StringTypespec: 
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.ABC), line:8:3, endln:8:6
-  |vpiEndLabel:top
+  |vpiEndLabel:
+  \_Identifier: (top), line:10:13, endln:10:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiName:top
 |vpiTypespec:
-\_IntTypespec: , line:3:3, endln:3:6
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:5:5, endln:5:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_RealTypespec: , line:6:5, endln:6:9
+\_RealTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -372,7 +376,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_StringTypespec: , line:8:11, endln:8:14
+\_StringTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -397,7 +401,7 @@ COMMAND: ${SURELOG_DIR}/regression/PatternOrder/slpp_all/surelog.uhdm ${SURELOG_
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              43      43       0         0
+Others                              44      44       0         0
 ----------------------------------------------------------------
-                                    43      43       0         0
+                                    44      44       0         0
 ===================== END REDUCTION RESULT =====================

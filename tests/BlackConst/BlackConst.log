@@ -1393,7 +1393,7 @@ Design                                                 1
 EnumConst                                             10
 EnumTypespec                                           3
 GenIf                                                  1
-Identifier                                            28
+Identifier                                            38
 IndexedPartSelect                                      1
 Initial                                                1
 IntTypespec                                           96
@@ -1418,7 +1418,7 @@ TypedefTypespec                                       10
 TypespecMember                                        25
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                               635
+Total:                                               645
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1640,7 +1640,7 @@ Design: (unnamed)
             \_TypespecMember: (hit), line:21:11, endln:21:14
             |vpiFullName:work@top.hit
             |vpiActual:
-            \_LogicTypespec: , line:21:5, endln:21:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (data), line:22:32, endln:22:36
           |vpiParent:
@@ -1652,7 +1652,7 @@ Design: (unnamed)
             \_TypespecMember: (data), line:22:32, endln:22:36
             |vpiFullName:work@top.data
             |vpiActual:
-            \_LogicTypespec: , line:22:5, endln:22:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (size), line:23:9, endln:23:13
           |vpiParent:
@@ -1676,7 +1676,7 @@ Design: (unnamed)
             \_TypespecMember: (addr), line:24:31, endln:24:35
             |vpiFullName:work@top.addr
             |vpiActual:
-            \_LogicTypespec: , line:24:5, endln:24:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (msg_type), line:25:9, endln:25:17
           |vpiParent:
@@ -1702,63 +1702,53 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
       |vpiObject:
-      \_LogicTypespec: , line:21:5, endln:21:10
-        |vpiParent:
-        \_Design: (unnamed)
-      |vpiObject:
       \_TypespecMember: (hit), line:21:11, endln:21:14
       |vpiObject:
       \_RefTypespec: (work@top.hit), line:21:5, endln:21:10
       |vpiObject:
-      \_LogicTypespec: , line:22:5, endln:22:10
+      \_Range: , line:22:11, endln:22:31
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:22:11, endln:22:31
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:22:12, endln:22:28
           |vpiParent:
-          \_LogicTypespec: , line:22:5, endln:22:10
-          |vpiLeftRange:
-          \_Operation: , line:22:12, endln:22:28
+          \_Range: , line:22:11, endln:22:31
+          |vpiOpType:11
+          |vpiOperand:
+          \_RefObj: (dword_width_gp), line:22:12, endln:22:26
             |vpiParent:
-            \_Range: , line:22:11, endln:22:31
-            |vpiOpType:11
-            |vpiOperand:
-            \_RefObj: (dword_width_gp), line:22:12, endln:22:26
-              |vpiParent:
-              \_Operation: , line:22:12, endln:22:28
-              |vpiName:dword_width_gp
-              |vpiActual:
-              \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
-            |vpiOperand:
-            \_Constant: , line:22:27, endln:22:28
-              |vpiParent:
-              \_Operation: , line:22:12, endln:22:28
-              |vpiTypespec:
-              \_RefTypespec: , line:22:27, endln:22:28
-                |vpiParent:
-                \_Constant: , line:22:27, endln:22:28
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:22:29, endln:22:30
+            \_Operation: , line:22:12, endln:22:28
+            |vpiName:dword_width_gp
+            |vpiActual:
+            \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
+          |vpiOperand:
+          \_Constant: , line:22:27, endln:22:28
             |vpiParent:
-            \_Range: , line:22:11, endln:22:31
+            \_Operation: , line:22:12, endln:22:28
             |vpiTypespec:
-            \_RefTypespec: , line:22:29, endln:22:30
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:22:29, endln:22:30
+              \_Constant: , line:22:27, endln:22:28
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:22:11, endln:22:31
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:22:29, endln:22:30
+          |vpiParent:
+          \_Range: , line:22:11, endln:22:31
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:22:29, endln:22:30
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_RefObj: (dword_width_gp), line:22:12, endln:22:26
       |vpiObject:
@@ -1766,74 +1756,59 @@ Design: (unnamed)
       |vpiObject:
       \_Constant: , line:22:27, endln:22:28
       |vpiObject:
-      \_RefTypespec: , line:22:27, endln:22:28
-      |vpiObject:
       \_Constant: , line:22:29, endln:22:30
-      |vpiObject:
-      \_RefTypespec: , line:22:29, endln:22:30
       |vpiObject:
       \_TypespecMember: (data), line:22:32, endln:22:36
       |vpiObject:
       \_RefTypespec: (work@top.data), line:22:5, endln:22:31
       |vpiObject:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Design: (unnamed)
-        |vpiSigned:1
-      |vpiObject:
       \_TypespecMember: (size), line:23:9, endln:23:13
       |vpiObject:
       \_RefTypespec: (work@top.size), line:23:5, endln:23:8
       |vpiObject:
-      \_LogicTypespec: , line:24:5, endln:24:10
+      \_Range: , line:24:11, endln:24:30
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:24:11, endln:24:30
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:24:12, endln:24:27
           |vpiParent:
-          \_LogicTypespec: , line:24:5, endln:24:10
-          |vpiLeftRange:
-          \_Operation: , line:24:12, endln:24:27
+          \_Range: , line:24:11, endln:24:30
+          |vpiOpType:11
+          |vpiOperand:
+          \_RefObj: (paddr_width_p), line:24:12, endln:24:25
             |vpiParent:
-            \_Range: , line:24:11, endln:24:30
-            |vpiOpType:11
-            |vpiOperand:
-            \_RefObj: (paddr_width_p), line:24:12, endln:24:25
-              |vpiParent:
-              \_Operation: , line:24:12, endln:24:27
-              |vpiName:paddr_width_p
-              |vpiActual:
-              \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:35
-            |vpiOperand:
-            \_Constant: , line:24:26, endln:24:27
-              |vpiParent:
-              \_Operation: , line:24:12, endln:24:27
-              |vpiTypespec:
-              \_RefTypespec: , line:24:26, endln:24:27
-                |vpiParent:
-                \_Constant: , line:24:26, endln:24:27
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:24:28, endln:24:29
+            \_Operation: , line:24:12, endln:24:27
+            |vpiName:paddr_width_p
+            |vpiActual:
+            \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:30
+          |vpiOperand:
+          \_Constant: , line:24:26, endln:24:27
             |vpiParent:
-            \_Range: , line:24:11, endln:24:30
+            \_Operation: , line:24:12, endln:24:27
             |vpiTypespec:
-            \_RefTypespec: , line:24:28, endln:24:29
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:24:28, endln:24:29
+              \_Constant: , line:24:26, endln:24:27
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:24:11, endln:24:30
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:24:28, endln:24:29
+          |vpiParent:
+          \_Range: , line:24:11, endln:24:30
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:24:28, endln:24:29
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_RefObj: (paddr_width_p), line:24:12, endln:24:25
       |vpiObject:
@@ -1841,11 +1816,7 @@ Design: (unnamed)
       |vpiObject:
       \_Constant: , line:24:26, endln:24:27
       |vpiObject:
-      \_RefTypespec: , line:24:26, endln:24:27
-      |vpiObject:
       \_Constant: , line:24:28, endln:24:29
-      |vpiObject:
-      \_RefTypespec: , line:24:28, endln:24:29
       |vpiObject:
       \_TypespecMember: (addr), line:24:31, endln:24:35
       |vpiObject:
@@ -1888,7 +1859,7 @@ Design: (unnamed)
           \_Operation: , line:6:30, endln:6:42
           |vpiName:assoc_p
           |vpiActual:
-          \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
+          \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
         |vpiObject:
         \_Operation: , line:6:30, endln:6:42
           |vpiParent:
@@ -1901,7 +1872,7 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:6:30, endln:6:42
             |vpiTypespec:
-            \_RefTypespec: , line:6:41, endln:6:42
+            \_RefTypespec: 
               |vpiParent:
               \_Constant: , line:6:41, endln:6:42
               |vpiActual:
@@ -1912,8 +1883,6 @@ Design: (unnamed)
             |vpiValue:1
         |vpiObject:
         \_Constant: , line:6:41, endln:6:42
-        |vpiObject:
-        \_RefTypespec: , line:6:41, endln:6:42
         |vpiObject:
         \_Operation: , line:6:29, endln:6:67
           |vpiParent:
@@ -1926,7 +1895,7 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:6:29, endln:6:67
             |vpiTypespec:
-            \_RefTypespec: , line:6:46, endln:6:47
+            \_RefTypespec: 
               |vpiParent:
               \_Constant: , line:6:46, endln:6:47
               |vpiActual:
@@ -1950,11 +1919,9 @@ Design: (unnamed)
               \_SysFuncCall: ($clog2), line:6:50, endln:6:67
               |vpiName:assoc_p
               |vpiActual:
-              \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
+              \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
         |vpiObject:
         \_Constant: , line:6:46, endln:6:47
-        |vpiObject:
-        \_RefTypespec: , line:6:46, endln:6:47
         |vpiObject:
         \_SysFuncCall: ($clog2), line:6:50, endln:6:67
         |vpiObject:
@@ -2003,7 +1970,7 @@ Design: (unnamed)
             \_TypespecMember: (hit_or_repl_way), line:35:42, endln:35:57
             |vpiFullName:work@top.hit_or_repl_way
             |vpiActual:
-            \_LogicTypespec: , line:35:5, endln:35:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (dirty), line:36:11, endln:36:16
           |vpiParent:
@@ -2015,68 +1982,56 @@ Design: (unnamed)
             \_TypespecMember: (dirty), line:36:11, endln:36:16
             |vpiFullName:work@top.dirty
             |vpiActual:
-            \_LogicTypespec: , line:21:5, endln:21:10
+            \_LogicTypespec: 
       |vpiObject:
-      \_LogicTypespec: , line:35:5, endln:35:10
+      \_Range: , line:35:11, endln:35:41
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:35:11, endln:35:41
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:35:12, endln:35:38
           |vpiParent:
-          \_LogicTypespec: , line:35:5, endln:35:10
-          |vpiLeftRange:
-          \_Operation: , line:35:12, endln:35:38
+          \_Range: , line:35:11, endln:35:41
+          |vpiOpType:11
+          |vpiOperand:
+          \_Operation: , line:6:29, endln:6:67
+          |vpiOperand:
+          \_Constant: , line:35:37, endln:35:38
             |vpiParent:
-            \_Range: , line:35:11, endln:35:41
-            |vpiOpType:11
-            |vpiOperand:
-            \_Operation: , line:6:29, endln:6:67
-            |vpiOperand:
-            \_Constant: , line:35:37, endln:35:38
-              |vpiParent:
-              \_Operation: , line:35:12, endln:35:38
-              |vpiTypespec:
-              \_RefTypespec: , line:35:37, endln:35:38
-                |vpiParent:
-                \_Constant: , line:35:37, endln:35:38
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:35:39, endln:35:40
-            |vpiParent:
-            \_Range: , line:35:11, endln:35:41
+            \_Operation: , line:35:12, endln:35:38
             |vpiTypespec:
-            \_RefTypespec: , line:35:39, endln:35:40
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:35:39, endln:35:40
+              \_Constant: , line:35:37, endln:35:38
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:35:11, endln:35:41
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:35:39, endln:35:40
+          |vpiParent:
+          \_Range: , line:35:11, endln:35:41
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:35:39, endln:35:40
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_Operation: , line:35:12, endln:35:38
       |vpiObject:
       \_Constant: , line:35:37, endln:35:38
       |vpiObject:
-      \_RefTypespec: , line:35:37, endln:35:38
-      |vpiObject:
       \_Constant: , line:35:39, endln:35:40
-      |vpiObject:
-      \_RefTypespec: , line:35:39, endln:35:40
       |vpiObject:
       \_TypespecMember: (hit_or_repl_way), line:35:42, endln:35:57
       |vpiObject:
       \_RefTypespec: (work@top.hit_or_repl_way), line:35:5, endln:35:41
-      |vpiObject:
-      \_LogicTypespec: , line:21:5, endln:21:10
       |vpiObject:
       \_TypespecMember: (dirty), line:36:11, endln:36:16
       |vpiObject:
@@ -2111,7 +2066,7 @@ Design: (unnamed)
           \_Operation: , line:6:30, endln:6:41
           |vpiName:sets_p
           |vpiActual:
-          \_Parameter: (work@top.sets_p), line:149:17, endln:149:28
+          \_Parameter: (work@top.sets_p), line:149:17, endln:149:23
         |vpiObject:
         \_Operation: , line:6:30, endln:6:41
           |vpiParent:
@@ -2124,7 +2079,7 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:6:30, endln:6:41
             |vpiTypespec:
-            \_RefTypespec: , line:6:40, endln:6:41
+            \_RefTypespec: 
               |vpiParent:
               \_Constant: , line:6:40, endln:6:41
               |vpiActual:
@@ -2135,8 +2090,6 @@ Design: (unnamed)
             |vpiValue:1
         |vpiObject:
         \_Constant: , line:6:40, endln:6:41
-        |vpiObject:
-        \_RefTypespec: , line:6:40, endln:6:41
         |vpiObject:
         \_Operation: , line:6:29, endln:6:65
           |vpiParent:
@@ -2149,7 +2102,7 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:6:29, endln:6:65
             |vpiTypespec:
-            \_RefTypespec: , line:6:45, endln:6:46
+            \_RefTypespec: 
               |vpiParent:
               \_Constant: , line:6:45, endln:6:46
               |vpiActual:
@@ -2173,11 +2126,9 @@ Design: (unnamed)
               \_SysFuncCall: ($clog2), line:6:49, endln:6:65
               |vpiName:sets_p
               |vpiActual:
-              \_Parameter: (work@top.sets_p), line:149:17, endln:149:28
+              \_Parameter: (work@top.sets_p), line:149:17, endln:149:23
         |vpiObject:
         \_Constant: , line:6:45, endln:6:46
-        |vpiObject:
-        \_RefTypespec: , line:6:45, endln:6:46
         |vpiObject:
         \_SysFuncCall: ($clog2), line:6:49, endln:6:65
         |vpiObject:
@@ -2241,7 +2192,7 @@ Design: (unnamed)
             \_TypespecMember: (index), line:76:52, endln:76:57
             |vpiFullName:work@top.index
             |vpiActual:
-            \_LogicTypespec: , line:76:5, endln:76:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (way_id), line:77:53, endln:77:59
           |vpiParent:
@@ -2253,7 +2204,7 @@ Design: (unnamed)
             \_TypespecMember: (way_id), line:77:53, endln:77:59
             |vpiFullName:work@top.way_id
             |vpiActual:
-            \_LogicTypespec: , line:35:5, endln:35:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (data), line:78:52, endln:78:56
           |vpiParent:
@@ -2265,7 +2216,7 @@ Design: (unnamed)
             \_TypespecMember: (data), line:78:52, endln:78:56
             |vpiFullName:work@top.data
             |vpiActual:
-            \_LogicTypespec: , line:78:5, endln:78:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (fill_index), line:79:46, endln:79:56
           |vpiParent:
@@ -2277,7 +2228,7 @@ Design: (unnamed)
             \_TypespecMember: (fill_index), line:79:46, endln:79:56
             |vpiFullName:work@top.fill_index
             |vpiActual:
-            \_LogicTypespec: , line:79:5, endln:79:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (opcode), line:80:53, endln:80:59
           |vpiParent:
@@ -2292,120 +2243,102 @@ Design: (unnamed)
             |vpiActual:
             \_TypedefTypespec: (bp_cache_data_mem_opcode_e), line:49:5, endln:49:31
       |vpiObject:
-      \_LogicTypespec: , line:76:5, endln:76:10
+      \_Range: , line:76:11, endln:76:40
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:76:11, endln:76:40
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:76:12, endln:76:37
           |vpiParent:
-          \_LogicTypespec: , line:76:5, endln:76:10
-          |vpiLeftRange:
-          \_Operation: , line:76:12, endln:76:37
+          \_Range: , line:76:11, endln:76:40
+          |vpiOpType:11
+          |vpiOperand:
+          \_Operation: , line:6:29, endln:6:65
+          |vpiOperand:
+          \_Constant: , line:76:36, endln:76:37
             |vpiParent:
-            \_Range: , line:76:11, endln:76:40
-            |vpiOpType:11
-            |vpiOperand:
-            \_Operation: , line:6:29, endln:6:65
-            |vpiOperand:
-            \_Constant: , line:76:36, endln:76:37
-              |vpiParent:
-              \_Operation: , line:76:12, endln:76:37
-              |vpiTypespec:
-              \_RefTypespec: , line:76:36, endln:76:37
-                |vpiParent:
-                \_Constant: , line:76:36, endln:76:37
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:76:38, endln:76:39
-            |vpiParent:
-            \_Range: , line:76:11, endln:76:40
+            \_Operation: , line:76:12, endln:76:37
             |vpiTypespec:
-            \_RefTypespec: , line:76:38, endln:76:39
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:76:38, endln:76:39
+              \_Constant: , line:76:36, endln:76:37
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:76:11, endln:76:40
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:76:38, endln:76:39
+          |vpiParent:
+          \_Range: , line:76:11, endln:76:40
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:76:38, endln:76:39
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_Operation: , line:76:12, endln:76:37
       |vpiObject:
       \_Constant: , line:76:36, endln:76:37
       |vpiObject:
-      \_RefTypespec: , line:76:36, endln:76:37
-      |vpiObject:
       \_Constant: , line:76:38, endln:76:39
-      |vpiObject:
-      \_RefTypespec: , line:76:38, endln:76:39
       |vpiObject:
       \_TypespecMember: (index), line:76:52, endln:76:57
       |vpiObject:
       \_RefTypespec: (work@top.index), line:76:5, endln:76:40
       |vpiObject:
-      \_LogicTypespec: , line:35:5, endln:35:10
-      |vpiObject:
       \_TypespecMember: (way_id), line:77:53, endln:77:59
       |vpiObject:
       \_RefTypespec: (work@top.way_id), line:77:5, endln:77:41
       |vpiObject:
-      \_LogicTypespec: , line:78:5, endln:78:10
+      \_Range: , line:78:11, endln:78:29
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:78:11, endln:78:29
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:78:12, endln:78:26
           |vpiParent:
-          \_LogicTypespec: , line:78:5, endln:78:10
-          |vpiLeftRange:
-          \_Operation: , line:78:12, endln:78:26
+          \_Range: , line:78:11, endln:78:29
+          |vpiOpType:11
+          |vpiOperand:
+          \_RefObj: (fill_width_p), line:78:12, endln:78:24
             |vpiParent:
-            \_Range: , line:78:11, endln:78:29
-            |vpiOpType:11
-            |vpiOperand:
-            \_RefObj: (fill_width_p), line:78:12, endln:78:24
-              |vpiParent:
-              \_Operation: , line:78:12, endln:78:26
-              |vpiName:fill_width_p
-              |vpiActual:
-              \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:34
-            |vpiOperand:
-            \_Constant: , line:78:25, endln:78:26
-              |vpiParent:
-              \_Operation: , line:78:12, endln:78:26
-              |vpiTypespec:
-              \_RefTypespec: , line:78:25, endln:78:26
-                |vpiParent:
-                \_Constant: , line:78:25, endln:78:26
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:78:27, endln:78:28
+            \_Operation: , line:78:12, endln:78:26
+            |vpiName:fill_width_p
+            |vpiActual:
+            \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:29
+          |vpiOperand:
+          \_Constant: , line:78:25, endln:78:26
             |vpiParent:
-            \_Range: , line:78:11, endln:78:29
+            \_Operation: , line:78:12, endln:78:26
             |vpiTypespec:
-            \_RefTypespec: , line:78:27, endln:78:28
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:78:27, endln:78:28
+              \_Constant: , line:78:25, endln:78:26
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:78:11, endln:78:29
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:78:27, endln:78:28
+          |vpiParent:
+          \_Range: , line:78:11, endln:78:29
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:78:27, endln:78:28
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_RefObj: (fill_width_p), line:78:12, endln:78:24
       |vpiObject:
@@ -2413,77 +2346,67 @@ Design: (unnamed)
       |vpiObject:
       \_Constant: , line:78:25, endln:78:26
       |vpiObject:
-      \_RefTypespec: , line:78:25, endln:78:26
-      |vpiObject:
       \_Constant: , line:78:27, endln:78:28
-      |vpiObject:
-      \_RefTypespec: , line:78:27, endln:78:28
       |vpiObject:
       \_TypespecMember: (data), line:78:52, endln:78:56
       |vpiObject:
       \_RefTypespec: (work@top.data), line:78:5, endln:78:29
       |vpiObject:
-      \_LogicTypespec: , line:79:5, endln:79:10
+      \_Range: , line:79:11, endln:79:45
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:79:11, endln:79:45
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:79:12, endln:79:42
           |vpiParent:
-          \_LogicTypespec: , line:79:5, endln:79:10
-          |vpiLeftRange:
-          \_Operation: , line:79:12, endln:79:42
+          \_Range: , line:79:11, endln:79:45
+          |vpiOpType:11
+          |vpiOperand:
+          \_Operation: , line:79:13, endln:79:39
             |vpiParent:
-            \_Range: , line:79:11, endln:79:45
-            |vpiOpType:11
+            \_Operation: , line:79:12, endln:79:42
+            |vpiOpType:12
             |vpiOperand:
-            \_Operation: , line:79:13, endln:79:39
+            \_RefObj: (block_width_p), line:79:13, endln:79:26
               |vpiParent:
-              \_Operation: , line:79:12, endln:79:42
-              |vpiOpType:12
-              |vpiOperand:
-              \_RefObj: (block_width_p), line:79:13, endln:79:26
-                |vpiParent:
-                \_Operation: , line:79:13, endln:79:39
-                |vpiName:block_width_p
-                |vpiActual:
-                \_Parameter: (work@top.block_width_p), line:151:17, endln:151:35
-              |vpiOperand:
-              \_RefObj: (fill_width_p), line:79:27, endln:79:39
-                |vpiParent:
-                \_Operation: , line:79:13, endln:79:39
-                |vpiName:fill_width_p
-                |vpiActual:
-                \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:34
+              \_Operation: , line:79:13, endln:79:39
+              |vpiName:block_width_p
+              |vpiActual:
+              \_Parameter: (work@top.block_width_p), line:151:17, endln:151:30
             |vpiOperand:
-            \_Constant: , line:79:41, endln:79:42
+            \_RefObj: (fill_width_p), line:79:27, endln:79:39
               |vpiParent:
-              \_Operation: , line:79:12, endln:79:42
-              |vpiTypespec:
-              \_RefTypespec: , line:79:41, endln:79:42
-                |vpiParent:
-                \_Constant: , line:79:41, endln:79:42
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:79:43, endln:79:44
+              \_Operation: , line:79:13, endln:79:39
+              |vpiName:fill_width_p
+              |vpiActual:
+              \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:29
+          |vpiOperand:
+          \_Constant: , line:79:41, endln:79:42
             |vpiParent:
-            \_Range: , line:79:11, endln:79:45
+            \_Operation: , line:79:12, endln:79:42
             |vpiTypespec:
-            \_RefTypespec: , line:79:43, endln:79:44
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:79:43, endln:79:44
+              \_Constant: , line:79:41, endln:79:42
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:79:11, endln:79:45
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:79:43, endln:79:44
+          |vpiParent:
+          \_Range: , line:79:11, endln:79:45
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:79:43, endln:79:44
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_RefObj: (block_width_p), line:79:13, endln:79:26
       |vpiObject:
@@ -2495,11 +2418,7 @@ Design: (unnamed)
       |vpiObject:
       \_Constant: , line:79:41, endln:79:42
       |vpiObject:
-      \_RefTypespec: , line:79:41, endln:79:42
-      |vpiObject:
       \_Constant: , line:79:43, endln:79:44
-      |vpiObject:
-      \_RefTypespec: , line:79:43, endln:79:44
       |vpiObject:
       \_TypespecMember: (fill_index), line:79:46, endln:79:56
       |vpiObject:
@@ -2594,7 +2513,7 @@ Design: (unnamed)
             \_TypespecMember: (index), line:90:48, endln:90:53
             |vpiFullName:work@top.index
             |vpiActual:
-            \_LogicTypespec: , line:76:5, endln:76:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (way_id), line:91:48, endln:91:54
           |vpiParent:
@@ -2606,7 +2525,7 @@ Design: (unnamed)
             \_TypespecMember: (way_id), line:91:48, endln:91:54
             |vpiFullName:work@top.way_id
             |vpiActual:
-            \_LogicTypespec: , line:35:5, endln:35:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (state), line:92:37, endln:92:42
           |vpiParent:
@@ -2630,7 +2549,7 @@ Design: (unnamed)
             \_TypespecMember: (tag), line:93:49, endln:93:52
             |vpiFullName:work@top.tag
             |vpiActual:
-            \_LogicTypespec: , line:93:5, endln:93:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (opcode), line:94:27, endln:94:33
           |vpiParent:
@@ -2644,73 +2563,61 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
       |vpiObject:
-      \_LogicTypespec: , line:76:5, endln:76:10
-      |vpiObject:
       \_TypespecMember: (index), line:90:48, endln:90:53
       |vpiObject:
       \_RefTypespec: (work@top.index), line:90:5, endln:90:40
-      |vpiObject:
-      \_LogicTypespec: , line:35:5, endln:35:10
       |vpiObject:
       \_TypespecMember: (way_id), line:91:48, endln:91:54
       |vpiObject:
       \_RefTypespec: (work@top.way_id), line:91:4, endln:91:40
       |vpiObject:
-      \_IntTypespec: 
-      |vpiObject:
       \_TypespecMember: (state), line:92:37, endln:92:42
       |vpiObject:
       \_RefTypespec: (work@top.state), line:92:5, endln:92:8
       |vpiObject:
-      \_LogicTypespec: , line:93:5, endln:93:10
+      \_Range: , line:93:11, endln:93:29
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:93:11, endln:93:29
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:93:12, endln:93:26
           |vpiParent:
-          \_LogicTypespec: , line:93:5, endln:93:10
-          |vpiLeftRange:
-          \_Operation: , line:93:12, endln:93:26
+          \_Range: , line:93:11, endln:93:29
+          |vpiOpType:11
+          |vpiOperand:
+          \_RefObj: (ctag_width_p), line:93:12, endln:93:24
             |vpiParent:
-            \_Range: , line:93:11, endln:93:29
-            |vpiOpType:11
-            |vpiOperand:
-            \_RefObj: (ctag_width_p), line:93:12, endln:93:24
-              |vpiParent:
-              \_Operation: , line:93:12, endln:93:26
-              |vpiName:ctag_width_p
-              |vpiActual:
-              \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:35
-            |vpiOperand:
-            \_Constant: , line:93:25, endln:93:26
-              |vpiParent:
-              \_Operation: , line:93:12, endln:93:26
-              |vpiTypespec:
-              \_RefTypespec: , line:93:25, endln:93:26
-                |vpiParent:
-                \_Constant: , line:93:25, endln:93:26
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:93:27, endln:93:28
+            \_Operation: , line:93:12, endln:93:26
+            |vpiName:ctag_width_p
+            |vpiActual:
+            \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:30
+          |vpiOperand:
+          \_Constant: , line:93:25, endln:93:26
             |vpiParent:
-            \_Range: , line:93:11, endln:93:29
+            \_Operation: , line:93:12, endln:93:26
             |vpiTypespec:
-            \_RefTypespec: , line:93:27, endln:93:28
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:93:27, endln:93:28
+              \_Constant: , line:93:25, endln:93:26
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:93:11, endln:93:29
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:93:27, endln:93:28
+          |vpiParent:
+          \_Range: , line:93:11, endln:93:29
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:93:27, endln:93:28
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_RefObj: (ctag_width_p), line:93:12, endln:93:24
       |vpiObject:
@@ -2718,11 +2625,7 @@ Design: (unnamed)
       |vpiObject:
       \_Constant: , line:93:25, endln:93:26
       |vpiObject:
-      \_RefTypespec: , line:93:25, endln:93:26
-      |vpiObject:
       \_Constant: , line:93:27, endln:93:28
-      |vpiObject:
-      \_RefTypespec: , line:93:27, endln:93:28
       |vpiObject:
       \_TypespecMember: (tag), line:93:49, endln:93:52
       |vpiObject:
@@ -2782,7 +2685,7 @@ Design: (unnamed)
             \_TypespecMember: (state), line:102:40, endln:102:45
             |vpiFullName:work@top.state
             |vpiActual:
-            \_LogicTypespec: , line:102:5, endln:102:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (tag), line:103:40, endln:103:43
           |vpiParent:
@@ -2794,66 +2697,60 @@ Design: (unnamed)
             \_TypespecMember: (tag), line:103:40, endln:103:43
             |vpiFullName:work@top.tag
             |vpiActual:
-            \_LogicTypespec: , line:93:5, endln:93:10
+            \_LogicTypespec: 
       |vpiObject:
-      \_LogicTypespec: , line:102:5, endln:102:10
+      \_Range: , line:102:11, endln:102:39
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:102:11, endln:102:39
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:102:12, endln:102:36
           |vpiParent:
-          \_LogicTypespec: , line:102:5, endln:102:10
-          |vpiLeftRange:
-          \_Operation: , line:102:12, endln:102:36
+          \_Range: , line:102:11, endln:102:39
+          |vpiOpType:11
+          |vpiOperand:
+          \_SysFuncCall: ($bits), line:102:12, endln:102:34
             |vpiParent:
-            \_Range: , line:102:11, endln:102:39
-            |vpiOpType:11
-            |vpiOperand:
-            \_SysFuncCall: ($bits), line:102:12, endln:102:34
+            \_Operation: , line:102:12, endln:102:36
+            |vpiName:
+            \_Identifier: ($bits), line:102:13, endln:102:17
               |vpiParent:
-              \_Operation: , line:102:12, endln:102:36
-              |vpiName:
-              \_Identifier: ($bits), line:102:13, endln:102:17
-                |vpiParent:
-                \_SysFuncCall: ($bits), line:102:12, endln:102:34
-                |vpiName:$bits
-              |vpiArgument:
-              \_RefObj: (bp_coh_states_e), line:102:18, endln:102:33
-                |vpiParent:
-                \_SysFuncCall: ($bits), line:102:12, endln:102:34
-                |vpiName:bp_coh_states_e
-                |vpiActual:
-                \_Net: (work@top.bp_coh_states_e), line:145:14, endln:145:29
-            |vpiOperand:
-            \_Constant: , line:102:35, endln:102:36
+              \_SysFuncCall: ($bits), line:102:12, endln:102:34
+              |vpiName:$bits
+            |vpiArgument:
+            \_RefObj: (bp_coh_states_e), line:102:18, endln:102:33
               |vpiParent:
-              \_Operation: , line:102:12, endln:102:36
-              |vpiTypespec:
-              \_RefTypespec: , line:102:35, endln:102:36
-                |vpiParent:
-                \_Constant: , line:102:35, endln:102:36
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:102:37, endln:102:38
+              \_SysFuncCall: ($bits), line:102:12, endln:102:34
+              |vpiName:bp_coh_states_e
+              |vpiActual:
+              \_Net: (work@top.bp_coh_states_e), line:145:14, endln:145:29
+          |vpiOperand:
+          \_Constant: , line:102:35, endln:102:36
             |vpiParent:
-            \_Range: , line:102:11, endln:102:39
+            \_Operation: , line:102:12, endln:102:36
             |vpiTypespec:
-            \_RefTypespec: , line:102:37, endln:102:38
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:102:37, endln:102:38
+              \_Constant: , line:102:35, endln:102:36
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:102:11, endln:102:39
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:102:37, endln:102:38
+          |vpiParent:
+          \_Range: , line:102:11, endln:102:39
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:102:37, endln:102:38
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_SysFuncCall: ($bits), line:102:12, endln:102:34
       |vpiObject:
@@ -2865,17 +2762,11 @@ Design: (unnamed)
       |vpiObject:
       \_Constant: , line:102:35, endln:102:36
       |vpiObject:
-      \_RefTypespec: , line:102:35, endln:102:36
-      |vpiObject:
       \_Constant: , line:102:37, endln:102:38
-      |vpiObject:
-      \_RefTypespec: , line:102:37, endln:102:38
       |vpiObject:
       \_TypespecMember: (state), line:102:40, endln:102:45
       |vpiObject:
       \_RefTypespec: (work@top.state), line:102:5, endln:102:39
-      |vpiObject:
-      \_LogicTypespec: , line:93:5, endln:93:10
       |vpiObject:
       \_TypespecMember: (tag), line:103:40, endln:103:43
       |vpiObject:
@@ -2961,7 +2852,7 @@ Design: (unnamed)
             \_TypespecMember: (index), line:112:44, endln:112:49
             |vpiFullName:work@top.index
             |vpiActual:
-            \_LogicTypespec: , line:76:5, endln:76:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (way_id), line:113:45, endln:113:51
           |vpiParent:
@@ -2973,7 +2864,7 @@ Design: (unnamed)
             \_TypespecMember: (way_id), line:113:45, endln:113:51
             |vpiFullName:work@top.way_id
             |vpiActual:
-            \_LogicTypespec: , line:35:5, endln:35:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (opcode), line:114:22, endln:114:28
           |vpiParent:
@@ -2987,19 +2878,13 @@ Design: (unnamed)
             |vpiActual:
             \_IntTypespec: 
       |vpiObject:
-      \_LogicTypespec: , line:76:5, endln:76:10
-      |vpiObject:
       \_TypespecMember: (index), line:112:44, endln:112:49
       |vpiObject:
       \_RefTypespec: (work@top.index), line:112:5, endln:112:40
       |vpiObject:
-      \_LogicTypespec: , line:35:5, endln:35:10
-      |vpiObject:
       \_TypespecMember: (way_id), line:113:45, endln:113:51
       |vpiObject:
       \_RefTypespec: (work@top.way_id), line:113:5, endln:113:41
-      |vpiObject:
-      \_IntTypespec: 
       |vpiObject:
       \_TypespecMember: (opcode), line:114:22, endln:114:28
       |vpiObject:
@@ -3034,7 +2919,7 @@ Design: (unnamed)
           \_Operation: , line:7:32, endln:7:45
           |vpiName:assoc_p
           |vpiActual:
-          \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
+          \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
         |vpiObject:
         \_Operation: , line:7:32, endln:7:45
           |vpiParent:
@@ -3047,7 +2932,7 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:7:32, endln:7:45
             |vpiTypespec:
-            \_RefTypespec: , line:7:43, endln:7:44
+            \_RefTypespec: 
               |vpiParent:
               \_Constant: , line:7:43, endln:7:44
               |vpiActual:
@@ -3058,8 +2943,6 @@ Design: (unnamed)
             |vpiValue:2
         |vpiObject:
         \_Constant: , line:7:43, endln:7:44
-        |vpiObject:
-        \_RefTypespec: , line:7:43, endln:7:44
         |vpiObject:
         \_Operation: , line:7:30, endln:7:69
           |vpiParent:
@@ -3072,7 +2955,7 @@ Design: (unnamed)
             |vpiParent:
             \_Operation: , line:7:30, endln:7:69
             |vpiTypespec:
-            \_RefTypespec: , line:7:50, endln:7:51
+            \_RefTypespec: 
               |vpiParent:
               \_Constant: , line:7:50, endln:7:51
               |vpiActual:
@@ -3092,13 +2975,13 @@ Design: (unnamed)
               \_Operation: , line:7:55, endln:7:68
               |vpiName:assoc_p
               |vpiActual:
-              \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
+              \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
             |vpiOperand:
             \_Constant: , line:7:66, endln:7:67
               |vpiParent:
               \_Operation: , line:7:55, endln:7:68
               |vpiTypespec:
-              \_RefTypespec: , line:7:66, endln:7:67
+              \_RefTypespec: 
                 |vpiParent:
                 \_Constant: , line:7:66, endln:7:67
                 |vpiActual:
@@ -3110,15 +2993,11 @@ Design: (unnamed)
         |vpiObject:
         \_Constant: , line:7:50, endln:7:51
         |vpiObject:
-        \_RefTypespec: , line:7:50, endln:7:51
-        |vpiObject:
         \_RefObj: (assoc_p), line:7:56, endln:7:63
         |vpiObject:
         \_Operation: , line:7:55, endln:7:68
         |vpiObject:
         \_Constant: , line:7:66, endln:7:67
-        |vpiObject:
-        \_RefTypespec: , line:7:66, endln:7:67
       |vpiSectionStartLine:120
       |vpiSectionStartColumn:63
       |vpiSectionEndLine:125
@@ -3161,7 +3040,7 @@ Design: (unnamed)
             \_TypespecMember: (lru), line:123:43, endln:123:46
             |vpiFullName:work@top.lru
             |vpiActual:
-            \_LogicTypespec: , line:123:5, endln:123:10
+            \_LogicTypespec: 
         |vpiTypespecMember:
         \_TypespecMember: (dirty), line:124:43, endln:124:48
           |vpiParent:
@@ -3173,91 +3052,77 @@ Design: (unnamed)
             \_TypespecMember: (dirty), line:124:43, endln:124:48
             |vpiFullName:work@top.dirty
             |vpiActual:
-            \_LogicTypespec: , line:124:5, endln:124:10
-      |vpiObject:
-      \_LogicTypespec: , line:123:5, endln:123:10
-        |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:123:11, endln:123:42
-          |vpiParent:
-          \_LogicTypespec: , line:123:5, endln:123:10
-          |vpiLeftRange:
-          \_Operation: , line:7:30, endln:7:69
-          |vpiRightRange:
-          \_Constant: , line:123:40, endln:123:41
-            |vpiParent:
-            \_Range: , line:123:11, endln:123:42
-            |vpiTypespec:
-            \_RefTypespec: , line:123:40, endln:123:41
-              |vpiParent:
-              \_Constant: , line:123:40, endln:123:41
-              |vpiActual:
-              \_IntTypespec: 
-            |vpiConstType:9
-            |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
+            \_LogicTypespec: 
       |vpiObject:
       \_Range: , line:123:11, endln:123:42
+        |vpiParent:
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:7:30, endln:7:69
+        |vpiRightRange:
+        \_Constant: , line:123:40, endln:123:41
+          |vpiParent:
+          \_Range: , line:123:11, endln:123:42
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:123:40, endln:123:41
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_Constant: , line:123:40, endln:123:41
-      |vpiObject:
-      \_RefTypespec: , line:123:40, endln:123:41
       |vpiObject:
       \_TypespecMember: (lru), line:123:43, endln:123:46
       |vpiObject:
       \_RefTypespec: (work@top.lru), line:123:5, endln:123:42
       |vpiObject:
-      \_LogicTypespec: , line:124:5, endln:124:10
+      \_Range: , line:124:11, endln:124:24
         |vpiParent:
-        \_Design: (unnamed)
-        |vpiRange:
-        \_Range: , line:124:11, endln:124:24
+        \_LogicTypespec: 
+        |vpiLeftRange:
+        \_Operation: , line:124:12, endln:124:21
           |vpiParent:
-          \_LogicTypespec: , line:124:5, endln:124:10
-          |vpiLeftRange:
-          \_Operation: , line:124:12, endln:124:21
+          \_Range: , line:124:11, endln:124:24
+          |vpiOpType:11
+          |vpiOperand:
+          \_RefObj: (assoc_p), line:124:12, endln:124:19
             |vpiParent:
-            \_Range: , line:124:11, endln:124:24
-            |vpiOpType:11
-            |vpiOperand:
-            \_RefObj: (assoc_p), line:124:12, endln:124:19
-              |vpiParent:
-              \_Operation: , line:124:12, endln:124:21
-              |vpiName:assoc_p
-              |vpiActual:
-              \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
-            |vpiOperand:
-            \_Constant: , line:124:20, endln:124:21
-              |vpiParent:
-              \_Operation: , line:124:12, endln:124:21
-              |vpiTypespec:
-              \_RefTypespec: , line:124:20, endln:124:21
-                |vpiParent:
-                \_Constant: , line:124:20, endln:124:21
-                |vpiActual:
-                \_IntTypespec: 
-              |vpiConstType:9
-              |vpiSize:64
-              |vpiDecompile:1
-              |vpiValue:1
-          |vpiRightRange:
-          \_Constant: , line:124:22, endln:124:23
+            \_Operation: , line:124:12, endln:124:21
+            |vpiName:assoc_p
+            |vpiActual:
+            \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
+          |vpiOperand:
+          \_Constant: , line:124:20, endln:124:21
             |vpiParent:
-            \_Range: , line:124:11, endln:124:24
+            \_Operation: , line:124:12, endln:124:21
             |vpiTypespec:
-            \_RefTypespec: , line:124:22, endln:124:23
+            \_RefTypespec: 
               |vpiParent:
-              \_Constant: , line:124:22, endln:124:23
+              \_Constant: , line:124:20, endln:124:21
               |vpiActual:
               \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
-            |vpiDecompile:0
-            |vpiValue:0
-      |vpiObject:
-      \_Range: , line:124:11, endln:124:24
+            |vpiDecompile:1
+            |vpiValue:1
+        |vpiRightRange:
+        \_Constant: , line:124:22, endln:124:23
+          |vpiParent:
+          \_Range: , line:124:11, endln:124:24
+          |vpiTypespec:
+          \_RefTypespec: 
+            |vpiParent:
+            \_Constant: , line:124:22, endln:124:23
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:9
+          |vpiSize:64
+          |vpiDecompile:0
+          |vpiValue:0
       |vpiObject:
       \_RefObj: (assoc_p), line:124:12, endln:124:19
       |vpiObject:
@@ -3265,11 +3130,7 @@ Design: (unnamed)
       |vpiObject:
       \_Constant: , line:124:20, endln:124:21
       |vpiObject:
-      \_RefTypespec: , line:124:20, endln:124:21
-      |vpiObject:
       \_Constant: , line:124:22, endln:124:23
-      |vpiObject:
-      \_RefTypespec: , line:124:22, endln:124:23
       |vpiObject:
       \_TypespecMember: (dirty), line:124:43, endln:124:48
       |vpiObject:
@@ -3313,7 +3174,7 @@ Design: (unnamed)
         |vpiName:dword_width_gp
         |vpiFullName:work@top.pc_sext_li.dword_width_gp
         |vpiActual:
-        \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+        \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
       |vpiObject:
       \_Operation: , line:4:25, endln:4:49
         |vpiParent:
@@ -3356,7 +3217,7 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:4:24, endln:4:54
           |vpiTypespec:
-          \_RefTypespec: (work@top.pc_sext_li), line:4:52, endln:4:53
+          \_RefTypespec: (work@top.pc_sext_li)
             |vpiParent:
             \_Constant: , line:4:52, endln:4:53
             |vpiFullName:work@top.pc_sext_li
@@ -3368,8 +3229,6 @@ Design: (unnamed)
           |vpiValue:0
       |vpiObject:
       \_Constant: , line:4:52, endln:4:53
-      |vpiObject:
-      \_RefTypespec: (work@top.pc_sext_li), line:4:52, endln:4:53
       |vpiObject:
       \_Operation: , line:4:23, endln:4:90
         |vpiParent:
@@ -3389,7 +3248,7 @@ Design: (unnamed)
             |vpiName:dword_width_gp
             |vpiFullName:work@top.pc_sext_li.dword_width_gp
             |vpiActual:
-            \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+            \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
           |vpiOperand:
           \_SysFuncCall: ($bits), line:4:74, endln:4:83
             |vpiParent:
@@ -3412,7 +3271,7 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:4:23, endln:4:90
           |vpiTypespec:
-          \_RefTypespec: (work@top.pc_sext_li), line:4:88, endln:4:89
+          \_RefTypespec: (work@top.pc_sext_li)
             |vpiParent:
             \_Constant: , line:4:88, endln:4:89
             |vpiFullName:work@top.pc_sext_li
@@ -3434,8 +3293,6 @@ Design: (unnamed)
       \_RefObj: (work@top.pc_sext_li.pc), line:4:80, endln:4:82
       |vpiObject:
       \_Constant: , line:4:88, endln:4:89
-      |vpiObject:
-      \_RefTypespec: (work@top.pc_sext_li), line:4:88, endln:4:89
     |vpiPreprocMacroInstance:
     \_PreprocMacroInstance: (BSG_MIN), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:10:68, endln:10:103
       |vpiParent:
@@ -3458,7 +3315,7 @@ Design: (unnamed)
         |vpiName:dword_width_gp
         |vpiFullName:work@top.pc_sext_li.pc.dword_width_gp
         |vpiActual:
-        \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+        \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
       |vpiObject:
       \_Operation: , line:5:24, endln:5:52
         |vpiParent:
@@ -3503,7 +3360,7 @@ Design: (unnamed)
           |vpiName:dword_width_gp
           |vpiFullName:work@top.pc_sext_li.pc.dword_width_gp
           |vpiActual:
-          \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+          \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
         |vpiOperand:
         \_SysFuncCall: ($bits), line:5:76, endln:5:85
           |vpiParent:
@@ -3589,7 +3446,7 @@ Design: (unnamed)
                 |vpiParent:
                 \_Operation: , line:10:46, endln:10:57
                 |vpiTypespec:
-                \_RefTypespec: (work@top.pc_sext_li.pc), line:10:56, endln:10:57
+                \_RefTypespec: (work@top.pc_sext_li.pc)
                   |vpiParent:
                   \_Constant: , line:10:56, endln:10:57
                   |vpiFullName:work@top.pc_sext_li.pc
@@ -3615,7 +3472,7 @@ Design: (unnamed)
           |vpiParent:
           \_IndexedPartSelect: pc (work@top.pc_sext_li.pc), line:10:65, endln:10:103
           |vpiTypespec:
-          \_RefTypespec: (work@top.pc_sext_li.pc), line:10:65, endln:10:66
+          \_RefTypespec: (work@top.pc_sext_li.pc)
             |vpiParent:
             \_Constant: , line:10:65, endln:10:66
             |vpiFullName:work@top.pc_sext_li.pc
@@ -3644,13 +3501,9 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:10:56, endln:10:57
     |vpiObject:
-    \_RefTypespec: (work@top.pc_sext_li.pc), line:10:56, endln:10:57
-    |vpiObject:
     \_IndexedPartSelect: pc (work@top.pc_sext_li.pc), line:10:65, endln:10:103
     |vpiObject:
     \_Constant: , line:10:65, endln:10:66
-    |vpiObject:
-    \_RefTypespec: (work@top.pc_sext_li.pc), line:10:65, endln:10:66
   |vpiPreprocMacroInstance:
   \_PreprocMacroInstance: (BSG_EASY), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:156:18, endln:156:47
     |vpiParent:
@@ -3680,7 +3533,7 @@ Design: (unnamed)
         |vpiName:dword_width_gp
         |vpiFullName:work@top.dword_width_gp
         |vpiActual:
-        \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+        \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
       |vpiObject:
       \_Operation: , line:4:25, endln:4:49
         |vpiParent:
@@ -3723,7 +3576,7 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:4:24, endln:4:54
           |vpiTypespec:
-          \_RefTypespec: (work@top), line:4:52, endln:4:53
+          \_RefTypespec: (work@top)
             |vpiParent:
             \_Constant: , line:4:52, endln:4:53
             |vpiFullName:work@top
@@ -3735,8 +3588,6 @@ Design: (unnamed)
           |vpiValue:0
       |vpiObject:
       \_Constant: , line:4:52, endln:4:53
-      |vpiObject:
-      \_RefTypespec: (work@top), line:4:52, endln:4:53
       |vpiObject:
       \_Operation: , line:4:23, endln:4:90
         |vpiParent:
@@ -3756,7 +3607,7 @@ Design: (unnamed)
             |vpiName:dword_width_gp
             |vpiFullName:work@top.dword_width_gp
             |vpiActual:
-            \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+            \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
           |vpiOperand:
           \_SysFuncCall: ($bits), line:4:74, endln:4:83
             |vpiParent:
@@ -3779,7 +3630,7 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:4:23, endln:4:90
           |vpiTypespec:
-          \_RefTypespec: (work@top), line:4:88, endln:4:89
+          \_RefTypespec: (work@top)
             |vpiParent:
             \_Constant: , line:4:88, endln:4:89
             |vpiFullName:work@top
@@ -3801,8 +3652,6 @@ Design: (unnamed)
       \_RefObj: (work@top.pc), line:4:80, endln:4:82
       |vpiObject:
       \_Constant: , line:4:88, endln:4:89
-      |vpiObject:
-      \_RefTypespec: (work@top), line:4:88, endln:4:89
     |vpiSectionStartLine:12
     |vpiSectionStartColumn:30
     |vpiSectionEndLine:13
@@ -3828,7 +3677,7 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:13:40, endln:13:46
           |vpiTypespec:
-          \_RefTypespec: (work@top), line:13:41, endln:13:45
+          \_RefTypespec: (work@top)
             |vpiParent:
             \_Constant: , line:13:41, endln:13:45
             |vpiFullName:work@top
@@ -3842,8 +3691,6 @@ Design: (unnamed)
     \_Operation: , line:13:40, endln:13:46
     |vpiObject:
     \_Constant: , line:13:41, endln:13:45
-    |vpiObject:
-    \_RefTypespec: (work@top), line:13:41, endln:13:45
 |vpiAllModules:
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:1:1, endln:2:10
   |vpiParent:
@@ -3864,91 +3711,91 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:work@top
   |vpiParameter:
-  \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+  \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:dword_width_gp
     |vpiFullName:work@top.dword_width_gp
   |vpiParameter:
-  \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:35
+  \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.paddr_width_p), line:147:13, endln:147:16
       |vpiParent:
-      \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:35
+      \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:30
       |vpiFullName:work@top.paddr_width_p
       |vpiActual:
       \_IntTypespec: 
     |vpiName:paddr_width_p
     |vpiFullName:work@top.paddr_width_p
   |vpiParameter:
-  \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
+  \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.assoc_p), line:148:13, endln:148:16
       |vpiParent:
-      \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
+      \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
       |vpiFullName:work@top.assoc_p
       |vpiActual:
       \_IntTypespec: 
     |vpiName:assoc_p
     |vpiFullName:work@top.assoc_p
   |vpiParameter:
-  \_Parameter: (work@top.sets_p), line:149:17, endln:149:28
+  \_Parameter: (work@top.sets_p), line:149:17, endln:149:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.sets_p), line:149:13, endln:149:16
       |vpiParent:
-      \_Parameter: (work@top.sets_p), line:149:17, endln:149:28
+      \_Parameter: (work@top.sets_p), line:149:17, endln:149:23
       |vpiFullName:work@top.sets_p
       |vpiActual:
       \_IntTypespec: 
     |vpiName:sets_p
     |vpiFullName:work@top.sets_p
   |vpiParameter:
-  \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:34
+  \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:29
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.fill_width_p), line:150:13, endln:150:16
       |vpiParent:
-      \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:34
+      \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:29
       |vpiFullName:work@top.fill_width_p
       |vpiActual:
       \_IntTypespec: 
     |vpiName:fill_width_p
     |vpiFullName:work@top.fill_width_p
   |vpiParameter:
-  \_Parameter: (work@top.block_width_p), line:151:17, endln:151:35
+  \_Parameter: (work@top.block_width_p), line:151:17, endln:151:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.block_width_p), line:151:13, endln:151:16
       |vpiParent:
-      \_Parameter: (work@top.block_width_p), line:151:17, endln:151:35
+      \_Parameter: (work@top.block_width_p), line:151:17, endln:151:30
       |vpiFullName:work@top.block_width_p
       |vpiActual:
       \_IntTypespec: 
     |vpiName:block_width_p
     |vpiFullName:work@top.block_width_p
   |vpiParameter:
-  \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:35
+  \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.ctag_width_p), line:152:13, endln:152:16
       |vpiParent:
-      \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:35
+      \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:30
       |vpiFullName:work@top.ctag_width_p
       |vpiActual:
       \_IntTypespec: 
     |vpiName:ctag_width_p
     |vpiFullName:work@top.ctag_width_p
   |vpiParameter:
-  \_Parameter: (work@top.easy), line:156:11, endln:156:47
+  \_Parameter: (work@top.easy), line:156:11, endln:156:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:easy
@@ -3958,13 +3805,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:32
+    \_Parameter: (work@top.dword_width_gp), line:143:13, endln:143:27
     |vpiRhs:
     \_Constant: , line:143:30, endln:143:32
       |vpiParent:
       \_ParamAssign: , line:143:13, endln:143:32
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:143:30, endln:143:32
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:143:30, endln:143:32
         |vpiFullName:work@top
@@ -3979,13 +3826,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:35
+    \_Parameter: (work@top.paddr_width_p), line:147:17, endln:147:30
     |vpiRhs:
     \_Constant: , line:147:33, endln:147:35
       |vpiParent:
       \_ParamAssign: , line:147:17, endln:147:35
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:147:33, endln:147:35
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:147:33, endln:147:35
         |vpiFullName:work@top
@@ -4000,13 +3847,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.assoc_p), line:148:17, endln:148:29
+    \_Parameter: (work@top.assoc_p), line:148:17, endln:148:24
     |vpiRhs:
     \_Constant: , line:148:27, endln:148:29
       |vpiParent:
       \_ParamAssign: , line:148:17, endln:148:29
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:148:27, endln:148:29
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:148:27, endln:148:29
         |vpiFullName:work@top
@@ -4021,13 +3868,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.sets_p), line:149:17, endln:149:28
+    \_Parameter: (work@top.sets_p), line:149:17, endln:149:23
     |vpiRhs:
     \_Constant: , line:149:26, endln:149:28
       |vpiParent:
       \_ParamAssign: , line:149:17, endln:149:28
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:149:26, endln:149:28
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:149:26, endln:149:28
         |vpiFullName:work@top
@@ -4042,13 +3889,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:34
+    \_Parameter: (work@top.fill_width_p), line:150:17, endln:150:29
     |vpiRhs:
     \_Constant: , line:150:32, endln:150:34
       |vpiParent:
       \_ParamAssign: , line:150:17, endln:150:34
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:150:32, endln:150:34
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:150:32, endln:150:34
         |vpiFullName:work@top
@@ -4063,13 +3910,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.block_width_p), line:151:17, endln:151:35
+    \_Parameter: (work@top.block_width_p), line:151:17, endln:151:30
     |vpiRhs:
     \_Constant: , line:151:33, endln:151:35
       |vpiParent:
       \_ParamAssign: , line:151:17, endln:151:35
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:151:33, endln:151:35
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:151:33, endln:151:35
         |vpiFullName:work@top
@@ -4084,13 +3931,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:35
+    \_Parameter: (work@top.ctag_width_p), line:152:18, endln:152:30
     |vpiRhs:
     \_Constant: , line:152:33, endln:152:35
       |vpiParent:
       \_ParamAssign: , line:152:18, endln:152:35
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:152:33, endln:152:35
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:152:33, endln:152:35
         |vpiFullName:work@top
@@ -4105,7 +3952,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiLhs:
-    \_Parameter: (work@top.easy), line:156:11, endln:156:47
+    \_Parameter: (work@top.easy), line:156:11, endln:156:15
     |vpiRhs:
     \_Operation: , line:13:3, endln:13:47
   |vpiInternalScope:
@@ -4198,7 +4045,7 @@ Design: (unnamed)
       \_Net: (work@top.pc), line:144:15, endln:144:17
       |vpiFullName:work@top.pc
       |vpiActual:
-      \_LogicTypespec: , line:144:3, endln:144:7
+      \_LogicTypespec: 
     |vpiName:pc
     |vpiFullName:work@top.pc
     |vpiNetType:1
@@ -4212,7 +4059,7 @@ Design: (unnamed)
       \_Net: (work@top.bp_coh_states_e), line:145:14, endln:145:29
       |vpiFullName:work@top.bp_coh_states_e
       |vpiActual:
-      \_LogicTypespec: , line:144:3, endln:144:7
+      \_LogicTypespec: 
     |vpiName:bp_coh_states_e
     |vpiFullName:work@top.bp_coh_states_e
     |vpiNetType:48
@@ -4226,7 +4073,7 @@ Design: (unnamed)
       \_Net: (work@top.pc_sext_li), line:154:27, endln:154:37
       |vpiFullName:work@top.pc_sext_li
       |vpiActual:
-      \_LogicTypespec: , line:22:5, endln:22:10
+      \_LogicTypespec: 
     |vpiName:pc_sext_li
     |vpiFullName:work@top.pc_sext_li
     |vpiNetType:1
@@ -4257,7 +4104,7 @@ Design: (unnamed)
         |vpiParent:
         \_SysFuncCall: ($display), line:162:11, endln:162:36
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:162:20, endln:162:30
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:162:20, endln:162:30
           |vpiFullName:work@top
@@ -4274,7 +4121,7 @@ Design: (unnamed)
         |vpiName:easy
         |vpiFullName:work@top.easy
         |vpiActual:
-        \_Parameter: (work@top.easy), line:156:11, endln:156:47
+        \_Parameter: (work@top.easy), line:156:11, endln:156:15
   |vpiContAssign:
   \_ContAssign: , line:146:10, endln:146:17
     |vpiParent:
@@ -4292,7 +4139,7 @@ Design: (unnamed)
       |vpiParent:
       \_ContAssign: , line:146:10, endln:146:17
       |vpiTypespec:
-      \_RefTypespec: (work@top), line:146:15, endln:146:17
+      \_RefTypespec: (work@top)
         |vpiParent:
         \_Constant: , line:146:15, endln:146:17
         |vpiFullName:work@top
@@ -4318,18 +4165,18 @@ Design: (unnamed)
         |vpiName:easy
         |vpiFullName:work@top.easy
         |vpiActual:
-        \_Parameter: (work@top.easy), line:156:11, endln:156:47
+        \_Parameter: (work@top.easy), line:156:11, endln:156:15
       |vpiOperand:
       \_Constant: , line:158:13, endln:158:52
         |vpiParent:
         \_Operation: , line:158:5, endln:158:52
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:158:13, endln:158:52
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:158:13, endln:158:52
           |vpiFullName:work@top
           |vpiActual:
-          \_LogicTypespec: , line:21:5, endln:21:10
+          \_LogicTypespec: 
         |vpiConstType:3
         |vpiSize:35
         |vpiDecompile:35'b11111111111111111111111111111111111
@@ -4345,23 +4192,27 @@ Design: (unnamed)
     |vpiParent:
     \_EnumTypespec: , line:42:11, endln:49:31
     |vpiActual:
-    \_LogicTypespec: , line:42:16, endln:42:21
+    \_LogicTypespec: 
   |vpiEnumConst:
   \_EnumConst: (e_cache_data_mem_write), line:44:4, endln:44:26
     |vpiParent:
     \_EnumTypespec: , line:42:11, endln:49:31
-    |vpiName:e_cache_data_mem_write
+    |vpiName:
+    \_Identifier: (e_cache_data_mem_write), line:44:4, endln:44:26
+      |vpiParent:
+      \_EnumConst: (e_cache_data_mem_write), line:44:4, endln:44:26
+      |vpiName:e_cache_data_mem_write
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_data_mem_write), line:44:4, endln:44:26
       |vpiTypespec:
-      \_RefTypespec: (e_cache_data_mem_write), line:44:4, endln:44:26
+      \_RefTypespec: (e_cache_data_mem_write)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_data_mem_write
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:2
       |vpiDecompile:0
@@ -4370,18 +4221,22 @@ Design: (unnamed)
   \_EnumConst: (e_cache_data_mem_read), line:46:5, endln:46:26
     |vpiParent:
     \_EnumTypespec: , line:42:11, endln:49:31
-    |vpiName:e_cache_data_mem_read
+    |vpiName:
+    \_Identifier: (e_cache_data_mem_read), line:46:5, endln:46:26
+      |vpiParent:
+      \_EnumConst: (e_cache_data_mem_read), line:46:5, endln:46:26
+      |vpiName:e_cache_data_mem_read
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_data_mem_read), line:46:5, endln:46:26
       |vpiTypespec:
-      \_RefTypespec: (e_cache_data_mem_read), line:46:5, endln:46:26
+      \_RefTypespec: (e_cache_data_mem_read)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_data_mem_read
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:2
       |vpiDecompile:1
@@ -4390,36 +4245,40 @@ Design: (unnamed)
   \_EnumConst: (e_cache_data_mem_uncached), line:48:5, endln:48:30
     |vpiParent:
     \_EnumTypespec: , line:42:11, endln:49:31
-    |vpiName:e_cache_data_mem_uncached
+    |vpiName:
+    \_Identifier: (e_cache_data_mem_uncached), line:48:5, endln:48:30
+      |vpiParent:
+      \_EnumConst: (e_cache_data_mem_uncached), line:48:5, endln:48:30
+      |vpiName:e_cache_data_mem_uncached
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_data_mem_uncached), line:48:5, endln:48:30
       |vpiTypespec:
-      \_RefTypespec: (e_cache_data_mem_uncached), line:48:5, endln:48:30
+      \_RefTypespec: (e_cache_data_mem_uncached)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_data_mem_uncached
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:2
       |vpiDecompile:2
       |vpiValue:2
 |vpiTypespec:
-\_LogicTypespec: , line:42:16, endln:42:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:42:22, endln:42:27
     |vpiParent:
-    \_LogicTypespec: , line:42:16, endln:42:21
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:42:23, endln:42:24
       |vpiParent:
       \_Range: , line:42:22, endln:42:27
       |vpiTypespec:
-      \_RefTypespec: , line:42:23, endln:42:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:42:23, endln:42:24
         |vpiActual:
@@ -4433,7 +4292,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:42:22, endln:42:27
       |vpiTypespec:
-      \_RefTypespec: , line:42:25, endln:42:26
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:42:25, endln:42:26
         |vpiActual:
@@ -4444,6 +4303,9 @@ Design: (unnamed)
       |vpiValue:0
 |vpiTypespec:
 \_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
 |vpiTypespec:
 \_TypedefTypespec: (bp_cache_data_mem_opcode_e), line:49:5, endln:49:31
   |vpiParent:
@@ -4469,23 +4331,27 @@ Design: (unnamed)
     |vpiParent:
     \_EnumTypespec: , line:52:11, endln:61:30
     |vpiActual:
-    \_LogicTypespec: , line:52:16, endln:52:21
+    \_LogicTypespec: 
   |vpiEnumConst:
   \_EnumConst: (e_cache_tag_mem_set_clear), line:54:4, endln:54:29
     |vpiParent:
     \_EnumTypespec: , line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_set_clear
+    |vpiName:
+    \_Identifier: (e_cache_tag_mem_set_clear), line:54:4, endln:54:29
+      |vpiParent:
+      \_EnumConst: (e_cache_tag_mem_set_clear), line:54:4, endln:54:29
+      |vpiName:e_cache_tag_mem_set_clear
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_tag_mem_set_clear), line:54:4, endln:54:29
       |vpiTypespec:
-      \_RefTypespec: (e_cache_tag_mem_set_clear), line:54:4, endln:54:29
+      \_RefTypespec: (e_cache_tag_mem_set_clear)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_tag_mem_set_clear
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:3
       |vpiDecompile:0
@@ -4494,18 +4360,22 @@ Design: (unnamed)
   \_EnumConst: (e_cache_tag_mem_set_tag), line:56:5, endln:56:28
     |vpiParent:
     \_EnumTypespec: , line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_set_tag
+    |vpiName:
+    \_Identifier: (e_cache_tag_mem_set_tag), line:56:5, endln:56:28
+      |vpiParent:
+      \_EnumConst: (e_cache_tag_mem_set_tag), line:56:5, endln:56:28
+      |vpiName:e_cache_tag_mem_set_tag
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_tag_mem_set_tag), line:56:5, endln:56:28
       |vpiTypespec:
-      \_RefTypespec: (e_cache_tag_mem_set_tag), line:56:5, endln:56:28
+      \_RefTypespec: (e_cache_tag_mem_set_tag)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_tag_mem_set_tag
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:3
       |vpiDecompile:1
@@ -4514,18 +4384,22 @@ Design: (unnamed)
   \_EnumConst: (e_cache_tag_mem_set_state), line:58:5, endln:58:30
     |vpiParent:
     \_EnumTypespec: , line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_set_state
+    |vpiName:
+    \_Identifier: (e_cache_tag_mem_set_state), line:58:5, endln:58:30
+      |vpiParent:
+      \_EnumConst: (e_cache_tag_mem_set_state), line:58:5, endln:58:30
+      |vpiName:e_cache_tag_mem_set_state
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_tag_mem_set_state), line:58:5, endln:58:30
       |vpiTypespec:
-      \_RefTypespec: (e_cache_tag_mem_set_state), line:58:5, endln:58:30
+      \_RefTypespec: (e_cache_tag_mem_set_state)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_tag_mem_set_state
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:3
       |vpiDecompile:2
@@ -4534,36 +4408,40 @@ Design: (unnamed)
   \_EnumConst: (e_cache_tag_mem_read), line:60:5, endln:60:25
     |vpiParent:
     \_EnumTypespec: , line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_read
+    |vpiName:
+    \_Identifier: (e_cache_tag_mem_read), line:60:5, endln:60:25
+      |vpiParent:
+      \_EnumConst: (e_cache_tag_mem_read), line:60:5, endln:60:25
+      |vpiName:e_cache_tag_mem_read
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_tag_mem_read), line:60:5, endln:60:25
       |vpiTypespec:
-      \_RefTypespec: (e_cache_tag_mem_read), line:60:5, endln:60:25
+      \_RefTypespec: (e_cache_tag_mem_read)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_tag_mem_read
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:3
       |vpiDecompile:3
       |vpiValue:3
 |vpiTypespec:
-\_LogicTypespec: , line:52:16, endln:52:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:52:22, endln:52:27
     |vpiParent:
-    \_LogicTypespec: , line:52:16, endln:52:21
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:52:23, endln:52:24
       |vpiParent:
       \_Range: , line:52:22, endln:52:27
       |vpiTypespec:
-      \_RefTypespec: , line:52:23, endln:52:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:52:23, endln:52:24
         |vpiActual:
@@ -4577,7 +4455,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:52:22, endln:52:27
       |vpiTypespec:
-      \_RefTypespec: , line:52:25, endln:52:26
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:52:25, endln:52:26
         |vpiActual:
@@ -4611,23 +4489,27 @@ Design: (unnamed)
     |vpiParent:
     \_EnumTypespec: , line:64:11, endln:71:31
     |vpiActual:
-    \_LogicTypespec: , line:42:16, endln:42:21
+    \_LogicTypespec: 
   |vpiEnumConst:
   \_EnumConst: (e_cache_stat_mem_set_clear), line:66:4, endln:66:30
     |vpiParent:
     \_EnumTypespec: , line:64:11, endln:71:31
-    |vpiName:e_cache_stat_mem_set_clear
+    |vpiName:
+    \_Identifier: (e_cache_stat_mem_set_clear), line:66:4, endln:66:30
+      |vpiParent:
+      \_EnumConst: (e_cache_stat_mem_set_clear), line:66:4, endln:66:30
+      |vpiName:e_cache_stat_mem_set_clear
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_stat_mem_set_clear), line:66:4, endln:66:30
       |vpiTypespec:
-      \_RefTypespec: (e_cache_stat_mem_set_clear), line:66:4, endln:66:30
+      \_RefTypespec: (e_cache_stat_mem_set_clear)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_stat_mem_set_clear
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:2
       |vpiDecompile:0
@@ -4636,18 +4518,22 @@ Design: (unnamed)
   \_EnumConst: (e_cache_stat_mem_read), line:68:5, endln:68:26
     |vpiParent:
     \_EnumTypespec: , line:64:11, endln:71:31
-    |vpiName:e_cache_stat_mem_read
+    |vpiName:
+    \_Identifier: (e_cache_stat_mem_read), line:68:5, endln:68:26
+      |vpiParent:
+      \_EnumConst: (e_cache_stat_mem_read), line:68:5, endln:68:26
+      |vpiName:e_cache_stat_mem_read
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_stat_mem_read), line:68:5, endln:68:26
       |vpiTypespec:
-      \_RefTypespec: (e_cache_stat_mem_read), line:68:5, endln:68:26
+      \_RefTypespec: (e_cache_stat_mem_read)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_stat_mem_read
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:2
       |vpiDecompile:1
@@ -4656,18 +4542,22 @@ Design: (unnamed)
   \_EnumConst: (e_cache_stat_mem_clear_dirty), line:70:5, endln:70:33
     |vpiParent:
     \_EnumTypespec: , line:64:11, endln:71:31
-    |vpiName:e_cache_stat_mem_clear_dirty
+    |vpiName:
+    \_Identifier: (e_cache_stat_mem_clear_dirty), line:70:5, endln:70:33
+      |vpiParent:
+      \_EnumConst: (e_cache_stat_mem_clear_dirty), line:70:5, endln:70:33
+      |vpiName:e_cache_stat_mem_clear_dirty
     |vpiValue:
     \_Constant: 
       |vpiParent:
       \_EnumConst: (e_cache_stat_mem_clear_dirty), line:70:5, endln:70:33
       |vpiTypespec:
-      \_RefTypespec: (e_cache_stat_mem_clear_dirty), line:70:5, endln:70:33
+      \_RefTypespec: (e_cache_stat_mem_clear_dirty)
         |vpiParent:
         \_Constant: 
         |vpiFullName:e_cache_stat_mem_clear_dirty
         |vpiActual:
-        \_IntTypespec: 
+        \_LogicTypespec: 
       |vpiConstType:7
       |vpiSize:2
       |vpiDecompile:2
@@ -4689,27 +4579,69 @@ Design: (unnamed)
     |vpiActual:
     \_EnumTypespec: , line:64:11, endln:71:31
 |vpiTypespec:
-\_LogicTypespec: , line:21:5, endln:21:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:22:5, endln:22:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:22:11, endln:22:31
 |vpiTypespec:
-\_LogicTypespec: , line:24:5, endln:24:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:24:11, endln:24:30
 |vpiTypespec:
-\_LogicTypespec: , line:35:5, endln:35:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:35:11, endln:35:41
 |vpiTypespec:
-\_LogicTypespec: , line:76:5, endln:76:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:76:11, endln:76:40
 |vpiTypespec:
-\_LogicTypespec: , line:78:5, endln:78:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:78:11, endln:78:29
 |vpiTypespec:
-\_LogicTypespec: , line:79:5, endln:79:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:79:11, endln:79:45
 |vpiTypespec:
-\_LogicTypespec: , line:93:5, endln:93:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:93:11, endln:93:29
 |vpiTypespec:
-\_LogicTypespec: , line:102:5, endln:102:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:102:11, endln:102:39
 |vpiTypespec:
-\_LogicTypespec: , line:123:5, endln:123:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:123:11, endln:123:42
 |vpiTypespec:
-\_LogicTypespec: , line:124:5, endln:124:10
+\_LogicTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:124:11, endln:124:24
 |vpiTypespec:
 \_BitTypespec: 
   |vpiParent:
@@ -4719,19 +4651,19 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:144:3, endln:144:7
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:144:8, endln:144:14
     |vpiParent:
-    \_LogicTypespec: , line:144:3, endln:144:7
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:144:9, endln:144:11
       |vpiParent:
       \_Range: , line:144:8, endln:144:14
       |vpiTypespec:
-      \_RefTypespec: , line:144:9, endln:144:11
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:144:9, endln:144:11
         |vpiActual:
@@ -4745,7 +4677,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:144:8, endln:144:14
       |vpiTypespec:
-      \_RefTypespec: , line:144:12, endln:144:13
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:144:12, endln:144:13
         |vpiActual:
@@ -4778,7 +4710,7 @@ COMMAND: ${SURELOG_DIR}/regression/BlackConst/slpp_all/surelog.uhdm ${SURELOG_DI
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                             424     424       0         0
+Others                             434     434       0         0
 ----------------------------------------------------------------
-                                   424     424       0         0
+                                   434     434       0         0
 ===================== END REDUCTION RESULT =====================

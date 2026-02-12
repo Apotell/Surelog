@@ -9,13 +9,13 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitTypespec                                            4
-Constant                                               7
+Constant                                               5
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
-Identifier                                             5
+Identifier                                             7
 ImportTypespec                                         1
-LogicTypespec                                          3
+LogicTypespec                                          1
 Module                                                 3
 ModuleTypespec                                         2
 Net                                                    2
@@ -23,12 +23,12 @@ Package                                                1
 Port                                                   3
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                           13
+RefTypespec                                           11
 SourceFile                                             1
 StringTypespec                                         1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                53
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -59,23 +59,27 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:9, endln:5:12
       |vpiFullName:aes_pkg
       |vpiActual:
-      \_LogicTypespec: , line:2:14, endln:2:19
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (CIPH_FWD), line:3:3, endln:3:18
       |vpiParent:
       \_EnumTypespec: , line:2:9, endln:5:12
-      |vpiName:CIPH_FWD
+      |vpiName:
+      \_Identifier: (CIPH_FWD), line:3:3, endln:3:11
+        |vpiParent:
+        \_EnumConst: (CIPH_FWD), line:3:3, endln:3:18
+        |vpiName:CIPH_FWD
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:14, endln:3:18
         |vpiParent:
         \_EnumConst: (CIPH_FWD), line:3:3, endln:3:18
         |vpiTypespec:
-        \_RefTypespec: (aes_pkg::CIPH_FWD), line:3:14, endln:3:18
+        \_RefTypespec: (aes_pkg::CIPH_FWD)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:14, endln:3:18
           |vpiFullName:aes_pkg::CIPH_FWD
           |vpiActual:
-          \_LogicTypespec: , line:2:14, endln:2:19
+          \_LogicTypespec: 
         |vpiConstType:3
         |vpiSize:1
         |vpiDecompile:1'b0
@@ -84,18 +88,22 @@ Design: (unnamed)
     \_EnumConst: (CIPH_INV), line:4:3, endln:4:18
       |vpiParent:
       \_EnumTypespec: , line:2:9, endln:5:12
-      |vpiName:CIPH_INV
+      |vpiName:
+      \_Identifier: (CIPH_INV), line:4:3, endln:4:11
+        |vpiParent:
+        \_EnumConst: (CIPH_INV), line:4:3, endln:4:18
+        |vpiName:CIPH_INV
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:4:14, endln:4:18
         |vpiParent:
         \_EnumConst: (CIPH_INV), line:4:3, endln:4:18
         |vpiTypespec:
-        \_RefTypespec: (aes_pkg::CIPH_INV), line:4:14, endln:4:18
+        \_RefTypespec: (aes_pkg::CIPH_INV)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:4:14, endln:4:18
           |vpiFullName:aes_pkg::CIPH_INV
           |vpiActual:
-          \_LogicTypespec: , line:2:14, endln:2:19
+          \_LogicTypespec: 
         |vpiConstType:3
         |vpiSize:1
         |vpiDecompile:1'b1
@@ -140,13 +148,13 @@ Design: (unnamed)
       \_ImportTypespec: (aes_pkg), line:16:10, endln:16:20
       |vpiName:aes_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:16:10, endln:16:20
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (aes_pkg), line:16:10, endln:16:20
       |vpiTypespec:
-      \_RefTypespec: (work@cipher_core.aes_pkg), line:16:10, endln:16:20
+      \_RefTypespec: (work@cipher_core.aes_pkg)
         |vpiParent:
-        \_Constant: , line:16:10, endln:16:20
+        \_Constant: 
         |vpiFullName:work@cipher_core.aes_pkg
         |vpiActual:
         \_StringTypespec: 
@@ -256,7 +264,7 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (aes_pkg::ciph_op_e), line:5:3, endln:5:12
 |vpiTypespec:
-\_LogicTypespec: , line:2:14, endln:2:19
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -291,7 +299,7 @@ COMMAND: ${SURELOG_DIR}/regression/ConstPort/slpp_all/surelog.uhdm ${SURELOG_DIR
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              39      39       0         0
+Others                              41      41       0         0
 ----------------------------------------------------------------
-                                    39      39       0         0
+                                    41      41       0         0
 ===================== END REDUCTION RESULT =====================

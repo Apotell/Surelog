@@ -179,16 +179,16 @@ ArrayTypespec                                          1
 Assignment                                             2
 Begin                                                  2
 BitSelect                                              1
-Constant                                              11
+Constant                                              10
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
 EventControl                                           1
 GenFor                                                 1
-Identifier                                             4
+Identifier                                             5
 ImportTypespec                                         1
 IntTypespec                                            7
-LogicTypespec                                          5
+LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
@@ -197,13 +197,13 @@ Package                                                1
 Port                                                   1
 Range                                                  3
 RefObj                                                 5
-RefTypespec                                           15
+RefTypespec                                           14
 SourceFile                                             1
 StringTypespec                                         1
 TypedefTypespec                                        1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                79
+Total:                                                77
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignSubs/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -234,20 +234,24 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:10, endln:4:15
       |vpiFullName:pkg
       |vpiActual:
-      \_LogicTypespec: , line:2:15, endln:2:20
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (PRIV_LVL_M), line:3:3, endln:3:21
       |vpiParent:
       \_EnumTypespec: , line:2:10, endln:4:15
-      |vpiName:PRIV_LVL_M
+      |vpiName:
+      \_Identifier: (PRIV_LVL_M), line:3:3, endln:3:13
+        |vpiParent:
+        \_EnumConst: (PRIV_LVL_M), line:3:3, endln:3:21
+        |vpiName:PRIV_LVL_M
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:16, endln:3:21
         |vpiParent:
         \_EnumConst: (PRIV_LVL_M), line:3:3, endln:3:21
         |vpiTypespec:
-        \_RefTypespec: (pkg::PRIV_LVL_M), line:3:16, endln:3:21
+        \_RefTypespec: (pkg::PRIV_LVL_M)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:16, endln:3:21
           |vpiFullName:pkg::PRIV_LVL_M
           |vpiActual:
           \_LogicTypespec: 
@@ -376,7 +380,7 @@ Design: (unnamed)
         |vpiParent:
         \_Assignment: , line:14:7, endln:14:19
         |vpiTypespec:
-        \_RefTypespec: (work@dut), line:14:18, endln:14:19
+        \_RefTypespec: (work@dut)
           |vpiParent:
           \_Constant: , line:14:18, endln:14:19
           |vpiFullName:work@dut
@@ -404,7 +408,7 @@ Design: (unnamed)
         |vpiParent:
         \_Operation: , line:14:21, endln:14:26
         |vpiTypespec:
-        \_RefTypespec: (work@dut), line:14:25, endln:14:26
+        \_RefTypespec: (work@dut)
           |vpiParent:
           \_Constant: , line:14:25, endln:14:26
           |vpiFullName:work@dut
@@ -439,13 +443,13 @@ Design: (unnamed)
       \_ImportTypespec: (pkg), line:10:9, endln:10:15
       |vpiName:pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:10:9, endln:10:15
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (pkg), line:10:9, endln:10:15
       |vpiTypespec:
-      \_RefTypespec: (work@dut.pkg), line:10:9, endln:10:15
+      \_RefTypespec: (work@dut.pkg)
         |vpiParent:
-        \_Constant: , line:10:9, endln:10:15
+        \_Constant: 
         |vpiFullName:work@dut.pkg
         |vpiActual:
         \_StringTypespec: 
@@ -472,7 +476,7 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:12:17, endln:12:18
           |vpiTypespec:
-          \_RefTypespec: (work@dut), line:12:17, endln:12:18
+          \_RefTypespec: (work@dut)
             |vpiParent:
             \_Constant: , line:12:17, endln:12:18
             |vpiFullName:work@dut
@@ -488,7 +492,7 @@ Design: (unnamed)
       \_ArrayTypespec: , line:12:16, endln:12:19
       |vpiFullName:work@dut
       |vpiActual:
-      \_LogicTypespec: , line:2:15, endln:2:20
+      \_LogicTypespec: 
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:10:9, endln:10:15
   |vpiImportTypespec:
@@ -525,19 +529,19 @@ Design: (unnamed)
     |vpiName:a0
     |vpiDirection:1
 |vpiTypespec:
-\_LogicTypespec: , line:2:15, endln:2:20
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:21, endln:2:26
     |vpiParent:
-    \_LogicTypespec: , line:2:15, endln:2:20
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:2:22, endln:2:23
       |vpiParent:
       \_Range: , line:2:21, endln:2:26
       |vpiTypespec:
-      \_RefTypespec: , line:2:22, endln:2:23
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:22, endln:2:23
         |vpiActual:
@@ -551,7 +555,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:21, endln:2:26
       |vpiTypespec:
-      \_RefTypespec: , line:2:24, endln:2:25
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:24, endln:2:25
         |vpiActual:
@@ -595,7 +599,7 @@ COMMAND: ${SURELOG_DIR}/regression/AssignSubs/slpp_all/surelog.uhdm ${SURELOG_DI
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              60      60       0         0
+Others                              61      61       0         0
 ----------------------------------------------------------------
-                                    60      60       0         0
+                                    61      61       0         0
 ===================== END REDUCTION RESULT =====================

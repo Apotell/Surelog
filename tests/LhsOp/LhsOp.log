@@ -134,14 +134,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-Constant                                               8
+Constant                                               6
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 HierPath                                               1
-Identifier                                             3
-IntTypespec                                            8
+Identifier                                             5
+IntTypespec                                            6
 LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         1
@@ -150,14 +150,14 @@ Operation                                              2
 Port                                                   2
 Range                                                  1
 RefObj                                                 6
-RefTypespec                                           18
+RefTypespec                                           16
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                73
+Total:                                                69
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -188,23 +188,27 @@ Design: (unnamed)
       \_EnumTypespec: , line:3:11, endln:3:45
       |vpiFullName:work@top
       |vpiActual:
-      \_LogicTypespec: , line:3:16, endln:3:21
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (c), line:3:23, endln:3:28
       |vpiParent:
       \_EnumTypespec: , line:3:11, endln:3:45
-      |vpiName:c
+      |vpiName:
+      \_Identifier: (c), line:3:23, endln:3:24
+        |vpiParent:
+        \_EnumConst: (c), line:3:23, endln:3:28
+        |vpiName:c
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:27, endln:3:28
         |vpiParent:
         \_EnumConst: (c), line:3:23, endln:3:28
         |vpiTypespec:
-        \_RefTypespec: (work@top.c), line:3:27, endln:3:28
+        \_RefTypespec: (work@top.c)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:27, endln:3:28
           |vpiFullName:work@top.c
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
@@ -213,18 +217,22 @@ Design: (unnamed)
     \_EnumConst: (d), line:3:30, endln:3:35
       |vpiParent:
       \_EnumTypespec: , line:3:11, endln:3:45
-      |vpiName:d
+      |vpiName:
+      \_Identifier: (d), line:3:30, endln:3:31
+        |vpiParent:
+        \_EnumConst: (d), line:3:30, endln:3:35
+        |vpiName:d
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:34, endln:3:35
         |vpiParent:
         \_EnumConst: (d), line:3:30, endln:3:35
         |vpiTypespec:
-        \_RefTypespec: (work@top.d), line:3:34, endln:3:35
+        \_RefTypespec: (work@top.d)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:34, endln:3:35
           |vpiFullName:work@top.d
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
@@ -291,7 +299,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:6:16, endln:6:21
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:6:17, endln:6:18
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:6:17, endln:6:18
           |vpiFullName:work@top
@@ -306,7 +314,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:6:16, endln:6:21
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:6:19, endln:6:20
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:6:19, endln:6:20
           |vpiFullName:work@top
@@ -317,7 +325,7 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiValue:0
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.cstate_e), line:6:7, endln:6:15
+    \_RefTypespec: (work@top.cstate_e), line:6:7, endln:6:21
       |vpiParent:
       \_ArrayTypespec: , line:6:7, endln:6:21
       |vpiName:cstate_e
@@ -345,7 +353,7 @@ Design: (unnamed)
       \_Net: (work@top.a), line:2:25, endln:2:26
       |vpiFullName:work@top.a
       |vpiActual:
-      \_LogicTypespec: , line:3:16, endln:3:21
+      \_LogicTypespec: 
     |vpiName:a
     |vpiFullName:work@top.a
     |vpiNetType:36
@@ -359,7 +367,7 @@ Design: (unnamed)
       \_Net: (work@top.b), line:2:41, endln:2:42
       |vpiFullName:work@top.b
       |vpiActual:
-      \_LogicTypespec: , line:3:16, endln:3:21
+      \_LogicTypespec: 
     |vpiName:b
     |vpiFullName:work@top.b
     |vpiNetType:36
@@ -417,7 +425,7 @@ Design: (unnamed)
       \_Port: (a), line:2:25, endln:2:26
       |vpiFullName:work@top.a
       |vpiActual:
-      \_LogicTypespec: , line:3:16, endln:3:21
+      \_LogicTypespec: 
   |vpiPort:
   \_Port: (b), line:2:41, endln:2:42
     |vpiParent:
@@ -430,7 +438,7 @@ Design: (unnamed)
       \_Port: (b), line:2:41, endln:2:42
       |vpiFullName:work@top.b
       |vpiActual:
-      \_LogicTypespec: , line:3:16, endln:3:21
+      \_LogicTypespec: 
   |vpiContAssign:
   \_ContAssign: , line:11:11, endln:12:46
     |vpiParent:
@@ -477,7 +485,7 @@ Design: (unnamed)
         |vpiActual:
         \_TypespecMember: (class_esc_state), line:6:22, endln:6:37
 |vpiTypespec:
-\_LogicTypespec: , line:3:16, endln:3:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -485,10 +493,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
-|vpiTypespec:
-\_IntTypespec: 
-  |vpiParent:
-  \_Design: (unnamed)
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:
@@ -511,7 +515,7 @@ COMMAND: ${SURELOG_DIR}/regression/LhsOp/slpp_all/surelog.uhdm ${SURELOG_DIR}/re
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              52      52       0         0
+Others                              53      53       0         0
 ----------------------------------------------------------------
-                                    52      52       0         0
+                                    53      53       0         0
 ===================== END REDUCTION RESULT =====================

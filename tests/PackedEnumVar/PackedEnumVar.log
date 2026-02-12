@@ -181,29 +181,29 @@ ArrayTypespec                                          2
 Assignment                                             3
 Begin                                                  1
 BitSelect                                              2
-Constant                                              14
+Constant                                              12
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 FuncCall                                               1
 Function                                               1
-Identifier                                             4
+Identifier                                             6
 IntTypespec                                           10
-LogicTypespec                                          7
+LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              1
 Range                                                  3
 RefObj                                                 4
-RefTypespec                                           22
+RefTypespec                                           20
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                90
+Total:                                                86
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnumVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -280,7 +280,7 @@ Design: (unnamed)
             |vpiParent:
             \_Range: , line:10:14, endln:10:19
             |vpiTypespec:
-            \_RefTypespec: (work@top.get_BA), line:10:15, endln:10:16
+            \_RefTypespec: (work@top.get_BA)
               |vpiParent:
               \_Constant: , line:10:15, endln:10:16
               |vpiFullName:work@top.get_BA
@@ -295,7 +295,7 @@ Design: (unnamed)
             |vpiParent:
             \_Range: , line:10:14, endln:10:19
             |vpiTypespec:
-            \_RefTypespec: (work@top.get_BA), line:10:17, endln:10:18
+            \_RefTypespec: (work@top.get_BA)
               |vpiParent:
               \_Constant: , line:10:17, endln:10:18
               |vpiFullName:work@top.get_BA
@@ -306,7 +306,7 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiValue:0
         |vpiElemTypespec:
-        \_RefTypespec: (work@top.get_BA.sp2v_e), line:10:7, endln:10:13
+        \_RefTypespec: (work@top.get_BA.sp2v_e), line:10:7, endln:10:19
           |vpiParent:
           \_ArrayTypespec: , line:10:7, endln:10:19
           |vpiName:sp2v_e
@@ -337,7 +337,7 @@ Design: (unnamed)
             |vpiParent:
             \_BitSelect: (work@top.get_BA.out), line:11:10, endln:11:13
             |vpiTypespec:
-            \_RefTypespec: (work@top.get_BA.out), line:11:11, endln:11:12
+            \_RefTypespec: (work@top.get_BA.out)
               |vpiParent:
               \_Constant: , line:11:11, endln:11:12
               |vpiFullName:work@top.get_BA.out
@@ -374,7 +374,7 @@ Design: (unnamed)
             |vpiParent:
             \_BitSelect: (work@top.get_BA.out), line:12:10, endln:12:13
             |vpiTypespec:
-            \_RefTypespec: (work@top.get_BA.out), line:12:11, endln:12:12
+            \_RefTypespec: (work@top.get_BA.out)
               |vpiParent:
               \_Constant: , line:12:11, endln:12:12
               |vpiFullName:work@top.get_BA.out
@@ -417,7 +417,7 @@ Design: (unnamed)
           |vpiParent:
           \_Range: , line:9:30, endln:9:35
           |vpiTypespec:
-          \_RefTypespec: (work@top.get_BA), line:9:31, endln:9:32
+          \_RefTypespec: (work@top.get_BA)
             |vpiParent:
             \_Constant: , line:9:31, endln:9:32
             |vpiFullName:work@top.get_BA
@@ -432,7 +432,7 @@ Design: (unnamed)
           |vpiParent:
           \_Range: , line:9:30, endln:9:35
           |vpiTypespec:
-          \_RefTypespec: (work@top.get_BA), line:9:33, endln:9:34
+          \_RefTypespec: (work@top.get_BA)
             |vpiParent:
             \_Constant: , line:9:33, endln:9:34
             |vpiFullName:work@top.get_BA
@@ -443,7 +443,7 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiValue:0
       |vpiElemTypespec:
-      \_RefTypespec: (work@top.get_BA.sp2v_e), line:9:23, endln:9:29
+      \_RefTypespec: (work@top.get_BA.sp2v_e), line:9:23, endln:9:35
         |vpiParent:
         \_ArrayTypespec: , line:9:23, endln:9:35
         |vpiName:sp2v_e
@@ -474,20 +474,24 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:12, endln:5:12
       |vpiFullName:work@top
       |vpiActual:
-      \_LogicTypespec: , line:2:17, endln:2:22
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (A), line:3:7, endln:3:17
       |vpiParent:
       \_EnumTypespec: , line:2:12, endln:5:12
-      |vpiName:A
+      |vpiName:
+      \_Identifier: (A), line:3:7, endln:3:8
+        |vpiParent:
+        \_EnumConst: (A), line:3:7, endln:3:17
+        |vpiName:A
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:11, endln:3:17
         |vpiParent:
         \_EnumConst: (A), line:3:7, endln:3:17
         |vpiTypespec:
-        \_RefTypespec: (work@top.A), line:3:11, endln:3:17
+        \_RefTypespec: (work@top.A)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:11, endln:3:17
           |vpiFullName:work@top.A
           |vpiActual:
           \_LogicTypespec: 
@@ -499,15 +503,19 @@ Design: (unnamed)
     \_EnumConst: (B), line:4:7, endln:4:17
       |vpiParent:
       \_EnumTypespec: , line:2:12, endln:5:12
-      |vpiName:B
+      |vpiName:
+      \_Identifier: (B), line:4:7, endln:4:8
+        |vpiParent:
+        \_EnumConst: (B), line:4:7, endln:4:17
+        |vpiName:B
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:4:11, endln:4:17
         |vpiParent:
         \_EnumConst: (B), line:4:7, endln:4:17
         |vpiTypespec:
-        \_RefTypespec: (work@top.B), line:4:11, endln:4:17
+        \_RefTypespec: (work@top.B)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:4:11, endln:4:17
           |vpiFullName:work@top.B
           |vpiActual:
           \_LogicTypespec: 
@@ -578,19 +586,19 @@ Design: (unnamed)
         |vpiTaskFunc:
         \_Function: (work@top.get_BA), line:9:4, endln:14:15
 |vpiTypespec:
-\_LogicTypespec: , line:2:17, endln:2:22
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:23, endln:2:28
     |vpiParent:
-    \_LogicTypespec: , line:2:17, endln:2:22
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:2:24, endln:2:25
       |vpiParent:
       \_Range: , line:2:23, endln:2:28
       |vpiTypespec:
-      \_RefTypespec: , line:2:24, endln:2:25
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:24, endln:2:25
         |vpiActual:
@@ -604,7 +612,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:23, endln:2:28
       |vpiTypespec:
-      \_RefTypespec: , line:2:26, endln:2:27
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:26, endln:2:27
         |vpiActual:
@@ -644,7 +652,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackedEnumVar/slpp_all/surelog.uhdm ${SURELOG
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              64      64       0         0
+Others                              66      66       0         0
 ----------------------------------------------------------------
-                                    64      64       0         0
+                                    66      66       0         0
 ===================== END REDUCTION RESULT =====================

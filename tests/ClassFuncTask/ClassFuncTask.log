@@ -22,7 +22,7 @@ IntTypespec                                           10
 MethodFuncCall                                         1
 Operation                                              1
 Package                                                1
-ParamAssign                                            1
+ParamAssign                                            4
 Parameter                                              1
 Range                                                  1
 RefObj                                                 9
@@ -34,19 +34,21 @@ Task                                                   1
 TypeParameter                                          3
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                73
+Total:                                                76
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Illegal implicit net "id:27, name:name".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Illegal implicit net "id:28, name:parent".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Illegal implicit net "id:29, name:UVM_PORT".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Illegal implicit net "id:30, name:min_size".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Illegal implicit net "id:31, name:max_size".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Illegal implicit net "id:28, name:name".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Illegal implicit net "id:29, name:parent".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Illegal implicit net "id:30, name:UVM_PORT".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Illegal implicit net "id:31, name:min_size".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Illegal implicit net "id:32, name:max_size".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFuncTask/slpp_unit/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Null Actual: id:27, type:RefObj, name:name.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Null Actual: id:28, type:RefObj, name:parent.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Null Actual: id:29, type:RefObj, name:UVM_PORT.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Null Actual: id:30, type:RefObj, name:min_size.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Null Actual: id:31, type:RefObj, name:max_size.
+[ERR:IG0801] Missing location information: id:19, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:19, type:Identifier, name:new.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Null Actual: id:28, type:RefObj, name:name.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Null Actual: id:29, type:RefObj, name:parent.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Null Actual: id:30, type:RefObj, name:UVM_PORT.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Null Actual: id:31, type:RefObj, name:min_size.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Null Actual: id:32, type:RefObj, name:max_size.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -92,7 +94,7 @@ Design: (unnamed)
       |vpiRandType:1
       |vpiVisibility:1
     |vpiParameter:
-    \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
+    \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:31
       |vpiParent:
       \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
       |vpiName:WIDTH
@@ -102,18 +104,18 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
       |vpiLhs:
-      \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
+      \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:31
       |vpiRhs:
       \_Constant: , line:5:32, endln:5:33
         |vpiParent:
         \_ParamAssign: , line:5:26, endln:5:33
         |vpiTypespec:
-        \_RefTypespec: (pack::Vector), line:5:32, endln:5:33
+        \_RefTypespec: (pack::Vector)
           |vpiParent:
           \_Constant: , line:5:32, endln:5:33
           |vpiFullName:pack::Vector
           |vpiActual:
-          \_IntTypespec: , line:12:18, endln:12:21
+          \_IntTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
@@ -138,18 +140,18 @@ Design: (unnamed)
             |vpiName:WIDTH
             |vpiFullName:pack::Vector::WIDTH
             |vpiActual:
-            \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
+            \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:31
           |vpiOperand:
           \_Constant: , line:6:14, endln:6:15
             |vpiParent:
             \_Operation: , line:6:8, endln:6:15
             |vpiTypespec:
-            \_RefTypespec: (pack::Vector), line:6:14, endln:6:15
+            \_RefTypespec: (pack::Vector)
               |vpiParent:
               \_Constant: , line:6:14, endln:6:15
               |vpiFullName:pack::Vector
               |vpiActual:
-              \_IntTypespec: , line:12:18, endln:12:21
+              \_IntTypespec: 
             |vpiConstType:9
             |vpiSize:64
             |vpiDecompile:1
@@ -159,23 +161,23 @@ Design: (unnamed)
           |vpiParent:
           \_Range: , line:6:7, endln:6:18
           |vpiTypespec:
-          \_RefTypespec: (pack::Vector), line:6:16, endln:6:17
+          \_RefTypespec: (pack::Vector)
             |vpiParent:
             \_Constant: , line:6:16, endln:6:17
             |vpiFullName:pack::Vector
             |vpiActual:
-            \_IntTypespec: , line:12:18, endln:12:21
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
           |vpiValue:0
       |vpiElemTypespec:
-      \_RefTypespec: (pack::Vector), line:6:3, endln:6:6
+      \_RefTypespec: (pack::Vector), line:6:3, endln:6:18
         |vpiParent:
         \_ArrayTypespec: , line:6:3, endln:6:18
         |vpiFullName:pack::Vector
         |vpiActual:
-        \_BitTypespec: , line:6:3, endln:6:6
+        \_BitTypespec: 
       |vpiPacked:1
     |vpiImportTypespec:
     \_ArrayTypespec: , line:6:3, endln:6:18
@@ -197,26 +199,38 @@ Design: (unnamed)
       \_ClassDefn: (pack::ovm_queue), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:9:1, endln:10:9
       |vpiName:T
       |vpiFullName:pack::ovm_queue::T
-      |vpiTypespec:
-      \_RefTypespec: (pack::ovm_queue::T), line:9:26, endln:9:29
-        |vpiParent:
-        \_TypeParameter: (pack::ovm_queue::T), line:9:24, endln:9:25
-        |vpiFullName:pack::ovm_queue::T
-        |vpiActual:
-        \_IntTypespec: , line:12:18, endln:12:21
     |vpiParameter:
     \_TypeParameter: (pack::ovm_queue::Q), line:9:36, endln:9:37
       |vpiParent:
       \_ClassDefn: (pack::ovm_queue), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:9:1, endln:10:9
       |vpiName:Q
       |vpiFullName:pack::ovm_queue::Q
-      |vpiTypespec:
-      \_RefTypespec: (pack::ovm_queue::Q), line:9:38, endln:9:46
+    |vpiParamAssign:
+    \_ParamAssign: , line:9:24, endln:9:29
+      |vpiParent:
+      \_ClassDefn: (pack::ovm_queue), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:9:1, endln:10:9
+      |vpiLhs:
+      \_TypeParameter: (pack::ovm_queue::T), line:9:24, endln:9:25
+      |vpiRhs:
+      \_RefTypespec: (pack::ovm_queue), line:9:26, endln:9:29
         |vpiParent:
-        \_TypeParameter: (pack::ovm_queue::Q), line:9:36, endln:9:37
-        |vpiFullName:pack::ovm_queue::Q
+        \_ParamAssign: , line:9:24, endln:9:29
+        |vpiFullName:pack::ovm_queue
         |vpiActual:
-        \_ShortIntTypespec: , line:9:38, endln:9:46
+        \_IntTypespec: 
+    |vpiParamAssign:
+    \_ParamAssign: , line:9:36, endln:9:46
+      |vpiParent:
+      \_ClassDefn: (pack::ovm_queue), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:9:1, endln:10:9
+      |vpiLhs:
+      \_TypeParameter: (pack::ovm_queue::Q), line:9:36, endln:9:37
+      |vpiRhs:
+      \_RefTypespec: (pack::ovm_queue), line:9:38, endln:9:46
+        |vpiParent:
+        \_ParamAssign: , line:9:36, endln:9:46
+        |vpiFullName:pack::ovm_queue
+        |vpiActual:
+        \_ShortIntTypespec: 
     |vpiTypespec:
     \_TypeParameter: (pack::ovm_queue::T), line:9:24, endln:9:25
     |vpiTypespec:
@@ -245,7 +259,7 @@ Design: (unnamed)
         \_Variable: (pack::C::x), line:13:7, endln:13:8
         |vpiFullName:pack::C::x
         |vpiActual:
-        \_IntTypespec: , line:12:18, endln:12:21
+        \_IntTypespec: 
       |vpiName:x
       |vpiFullName:pack::C::x
       |vpiAutomatic:1
@@ -257,13 +271,19 @@ Design: (unnamed)
       \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
       |vpiName:T
       |vpiFullName:pack::C::T
-      |vpiTypespec:
-      \_RefTypespec: (pack::C::T), line:12:18, endln:12:21
+    |vpiParamAssign:
+    \_ParamAssign: , line:12:16, endln:12:21
+      |vpiParent:
+      \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
+      |vpiLhs:
+      \_TypeParameter: (pack::C::T), line:12:16, endln:12:17
+      |vpiRhs:
+      \_RefTypespec: (pack::C), line:12:18, endln:12:21
         |vpiParent:
-        \_TypeParameter: (pack::C::T), line:12:16, endln:12:17
-        |vpiFullName:pack::C::T
+        \_ParamAssign: , line:12:16, endln:12:21
+        |vpiFullName:pack::C
         |vpiActual:
-        \_IntTypespec: , line:12:18, endln:12:21
+        \_IntTypespec: 
     |vpiInternalScope:
     \_Function: (pack::C::new), line:15:3, endln:17:14
       |vpiParent:
@@ -286,12 +306,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (bound), line:15:21, endln:15:26
           |vpiTypespec:
-          \_RefTypespec: (pack::C::new::bound), line:15:29, endln:15:30
+          \_RefTypespec: (pack::C::new::bound)
             |vpiParent:
             \_Constant: , line:15:29, endln:15:30
             |vpiFullName:pack::C::new::bound
             |vpiActual:
-            \_IntTypespec: , line:12:18, endln:12:21
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
@@ -302,7 +322,7 @@ Design: (unnamed)
           \_IODecl: (bound), line:15:21, endln:15:26
           |vpiFullName:pack::C::new::bound
           |vpiActual:
-          \_IntTypespec: , line:12:18, endln:12:21
+          \_IntTypespec: 
       |vpiStmt:
       \_MethodFuncCall: (super.new), line:16:15, endln:16:57
         |vpiParent:
@@ -366,7 +386,7 @@ Design: (unnamed)
           \_IODecl: (i), line:19:17, endln:19:18
           |vpiFullName:pack::C::set::i
           |vpiActual:
-          \_IntTypespec: , line:12:18, endln:12:21
+          \_IntTypespec: 
       |vpiStmt:
       \_Assignment: , line:20:5, endln:20:10
         |vpiParent:
@@ -407,7 +427,7 @@ Design: (unnamed)
         \_Function: (pack::C::get), line:22:3, endln:24:14
         |vpiFullName:pack::C::get
         |vpiActual:
-        \_IntTypespec: , line:12:18, endln:12:21
+        \_IntTypespec: 
       |vpiStmt:
       \_ReturnStmt: , line:23:5, endln:23:13
         |vpiParent:
@@ -479,23 +499,23 @@ Design: (unnamed)
   |vpiClassDefn:
   \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
 |vpiTypespec:
-\_IntTypespec: , line:12:18, endln:12:21
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_BitTypespec: , line:6:3, endln:6:6
+\_BitTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_ShortIntTypespec: , line:9:38, endln:9:46
+\_ShortIntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 10
+[  ERROR] : 12
 [WARNING] : 1
 [   NOTE] : 0
 
@@ -507,7 +527,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassFuncTask/slpp_unit/surelog.uhdm ${SURELO
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              64      64       0         0
+Others                              67      67       0         0
 ----------------------------------------------------------------
-                                    64      64       0         0
+                                    67      67       0         0
 ===================== END REDUCTION RESULT =====================

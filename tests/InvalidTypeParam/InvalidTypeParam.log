@@ -74,6 +74,7 @@ InterfaceTypespec                                      1
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
+ParamAssign                                            1
 RefModule                                              1
 RefTypespec                                            2
 SourceFile                                             1
@@ -81,7 +82,7 @@ TypeParameter                                          1
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                17
+Total:                                                18
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InvalidTypeParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -124,6 +125,12 @@ Design: (unnamed)
     \_Interface: work@Interface (work@Interface), file:${SURELOG_DIR}/tests/InvalidTypeParam/dut.sv, line:1:1, endln:4:13
     |vpiName:P
     |vpiFullName:work@Interface.P
+  |vpiParamAssign:
+  \_ParamAssign: , line:2:20, endln:2:21
+    |vpiParent:
+    \_Interface: work@Interface (work@Interface), file:${SURELOG_DIR}/tests/InvalidTypeParam/dut.sv, line:1:1, endln:4:13
+    |vpiLhs:
+    \_TypeParameter: (work@Interface.P), line:2:20, endln:2:21
   |vpiTypespec:
   \_TypeParameter: (work@Interface.P), line:2:20, endln:2:21
   |vpiImportTypespec:
@@ -200,7 +207,7 @@ COMMAND: ${SURELOG_DIR}/regression/InvalidTypeParam/slpp_all/surelog.uhdm ${SURE
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              15      15       0         0
+Others                              16      16       0         0
 ----------------------------------------------------------------
-                                    15      15       0         0
+                                    16      16       0         0
 ===================== END REDUCTION RESULT =====================

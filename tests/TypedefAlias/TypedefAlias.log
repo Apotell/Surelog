@@ -11,7 +11,7 @@
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               2
 Design                                                 1
-Identifier                                             8
+Identifier                                            10
 IntTypespec                                            2
 LogicTypespec                                          2
 Module                                                 1
@@ -26,7 +26,7 @@ TypedefTypespec                                        5
 TypespecMember                                         1
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                43
+Total:                                                45
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefAlias/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -79,7 +79,7 @@ Design: (unnamed)
         \_TypespecMember: (q), line:3:20, endln:3:21
         |vpiFullName:package1::q
         |vpiActual:
-        \_LogicTypespec: , line:3:7, endln:3:12
+        \_LogicTypespec: 
   |vpiTypespec:
   \_TypedefTypespec: (package1::type_alias), line:6:28, endln:6:38
     |vpiParent:
@@ -104,7 +104,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (package1::type_alias), line:6:28, endln:6:38
   |vpiDefName:package1
-  |vpiEndLabel:package1
+  |vpiEndLabel:
+  \_Identifier: (package1), line:7:14, endln:7:22
+    |vpiParent:
+    \_Package: package1 (package1), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:1:1, endln:7:22
+    |vpiName:package1
 |vpiAllPackages:
 \_Package: package2 (package2), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:9:1, endln:11:22
   |vpiParent:
@@ -134,7 +138,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (package2::type_alias), line:10:28, endln:10:38
   |vpiDefName:package2
-  |vpiEndLabel:package2
+  |vpiEndLabel:
+  \_Identifier: (package2), line:11:14, endln:11:22
+    |vpiParent:
+    \_Package: package2 (package2), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:9:1, endln:11:22
+    |vpiName:package2
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
   |vpiParent:
@@ -145,21 +153,21 @@ Design: (unnamed)
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
     |vpiName:work@test
   |vpiTypespec:
-  \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+  \_TypedefTypespec: (t_two_bits), line:16:13, endln:16:35
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
     |vpiName:
     \_Identifier: (t_two_bits), line:16:25, endln:16:35
       |vpiParent:
-      \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+      \_TypedefTypespec: (t_two_bits), line:16:13, endln:16:35
       |vpiName:t_two_bits
     |vpiTypedefAlias:
     \_RefTypespec: (work@test.t_two_bits), line:16:13, endln:16:18
       |vpiParent:
-      \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+      \_TypedefTypespec: (t_two_bits), line:16:13, endln:16:35
       |vpiFullName:work@test.t_two_bits
       |vpiActual:
-      \_LogicTypespec: , line:16:13, endln:16:18
+      \_LogicTypespec: 
   |vpiTypespec:
   \_TypedefTypespec: (t_two_bits_copy), line:17:24, endln:17:39
     |vpiParent:
@@ -176,9 +184,9 @@ Design: (unnamed)
       |vpiName:t_two_bits
       |vpiFullName:work@test.t_two_bits_copy.t_two_bits
       |vpiActual:
-      \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+      \_TypedefTypespec: (t_two_bits), line:16:13, endln:16:35
   |vpiImportTypespec:
-  \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+  \_TypedefTypespec: (t_two_bits), line:16:13, endln:16:35
   |vpiImportTypespec:
   \_TypedefTypespec: (t_two_bits_copy), line:17:24, endln:17:39
   |vpiImportTypespec:
@@ -192,7 +200,7 @@ Design: (unnamed)
       |vpiName:t_two_bits
       |vpiFullName:work@test.kkkk.t_two_bits
       |vpiActual:
-      \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+      \_TypedefTypespec: (t_two_bits), line:16:13, endln:16:35
     |vpiName:kkkk
     |vpiFullName:work@test.kkkk
   |vpiImportTypespec:
@@ -215,23 +223,23 @@ Design: (unnamed)
   |vpiNet:
   \_Net: (work@test.zzzz), line:19:21, endln:19:25
 |vpiTypespec:
-\_LogicTypespec: , line:3:7, endln:3:12
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:16:13, endln:16:18
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:16:19, endln:16:24
     |vpiParent:
-    \_LogicTypespec: , line:16:13, endln:16:18
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:16:20, endln:16:21
       |vpiParent:
       \_Range: , line:16:19, endln:16:24
       |vpiTypespec:
-      \_RefTypespec: , line:16:20, endln:16:21
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:16:20, endln:16:21
         |vpiActual:
@@ -245,7 +253,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:16:19, endln:16:24
       |vpiTypespec:
-      \_RefTypespec: , line:16:22, endln:16:23
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:16:22, endln:16:23
         |vpiActual:
@@ -281,7 +289,7 @@ COMMAND: ${SURELOG_DIR}/regression/TypedefAlias/slpp_unit/surelog.uhdm ${SURELOG
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              39      39       0         0
+Others                              41      41       0         0
 ----------------------------------------------------------------
-                                    39      39       0         0
+                                    41      41       0         0
 ===================== END REDUCTION RESULT =====================

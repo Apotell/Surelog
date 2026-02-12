@@ -307,7 +307,7 @@ LogicTypespec                                          3
 Module                                                 3
 ModuleTypespec                                         3
 Net                                                    5
-ParamAssign                                            2
+ParamAssign                                            6
 Parameter                                              2
 Range                                                  1
 RefModule                                              5
@@ -317,7 +317,7 @@ SourceFile                                             1
 TypeParameter                                          4
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                60
+Total:                                                64
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamIndex/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -344,15 +344,8 @@ Design: (unnamed)
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiName:TP1
     |vpiFullName:work@bottom.TP1
-    |vpiTypespec:
-    \_RefTypespec: (work@bottom.TP1), line:19:38, endln:19:43
-      |vpiParent:
-      \_TypeParameter: (work@bottom.TP1), line:19:32, endln:19:35
-      |vpiFullName:work@bottom.TP1
-      |vpiActual:
-      \_LogicTypespec: , line:19:38, endln:19:43
   |vpiParameter:
-  \_Parameter: (work@bottom.SIZE), line:19:55, endln:19:62
+  \_Parameter: (work@bottom.SIZE), line:19:55, endln:19:59
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiName:SIZE
@@ -363,38 +356,44 @@ Design: (unnamed)
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiName:TP2
     |vpiFullName:work@bottom.TP2
-    |vpiTypespec:
-    \_RefTypespec: (work@bottom.TP2), line:19:85, endln:19:88
-      |vpiParent:
-      \_TypeParameter: (work@bottom.TP2), line:19:79, endln:19:82
-      |vpiFullName:work@bottom.TP2
-      |vpiActual:
-      \_IntTypespec: 
   |vpiParameter:
-  \_Parameter: (work@bottom.PPP), line:19:104, endln:19:114
+  \_Parameter: (work@bottom.PPP), line:19:104, endln:19:107
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiTypespec:
     \_RefTypespec: (work@bottom.PPP), line:19:100, endln:19:103
       |vpiParent:
-      \_Parameter: (work@bottom.PPP), line:19:104, endln:19:114
+      \_Parameter: (work@bottom.PPP), line:19:104, endln:19:107
       |vpiFullName:work@bottom.PPP
       |vpiActual:
       \_IntTypespec: 
     |vpiName:PPP
     |vpiFullName:work@bottom.PPP
   |vpiParamAssign:
+  \_ParamAssign: , line:19:32, endln:19:43
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
+    |vpiLhs:
+    \_TypeParameter: (work@bottom.TP1), line:19:32, endln:19:35
+    |vpiRhs:
+    \_RefTypespec: (work@bottom), line:19:38, endln:19:43
+      |vpiParent:
+      \_ParamAssign: , line:19:32, endln:19:43
+      |vpiFullName:work@bottom
+      |vpiActual:
+      \_LogicTypespec: 
+  |vpiParamAssign:
   \_ParamAssign: , line:19:55, endln:19:62
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiLhs:
-    \_Parameter: (work@bottom.SIZE), line:19:55, endln:19:62
+    \_Parameter: (work@bottom.SIZE), line:19:55, endln:19:59
     |vpiRhs:
     \_Constant: , line:19:60, endln:19:62
       |vpiParent:
       \_ParamAssign: , line:19:55, endln:19:62
       |vpiTypespec:
-      \_RefTypespec: (work@bottom), line:19:60, endln:19:62
+      \_RefTypespec: (work@bottom)
         |vpiParent:
         \_Constant: , line:19:60, endln:19:62
         |vpiFullName:work@bottom
@@ -405,17 +404,30 @@ Design: (unnamed)
       |vpiDecompile:10
       |vpiValue:10
   |vpiParamAssign:
+  \_ParamAssign: , line:19:79, endln:19:88
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
+    |vpiLhs:
+    \_TypeParameter: (work@bottom.TP2), line:19:79, endln:19:82
+    |vpiRhs:
+    \_RefTypespec: (work@bottom), line:19:85, endln:19:88
+      |vpiParent:
+      \_ParamAssign: , line:19:79, endln:19:88
+      |vpiFullName:work@bottom
+      |vpiActual:
+      \_IntTypespec: 
+  |vpiParamAssign:
   \_ParamAssign: , line:19:104, endln:19:114
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiLhs:
-    \_Parameter: (work@bottom.PPP), line:19:104, endln:19:114
+    \_Parameter: (work@bottom.PPP), line:19:104, endln:19:107
     |vpiRhs:
     \_Constant: , line:19:110, endln:19:114
       |vpiParent:
       \_ParamAssign: , line:19:104, endln:19:114
       |vpiTypespec:
-      \_RefTypespec: (work@bottom), line:19:110, endln:19:114
+      \_RefTypespec: (work@bottom)
         |vpiParent:
         \_Constant: , line:19:110, endln:19:114
         |vpiFullName:work@bottom
@@ -457,7 +469,7 @@ Design: (unnamed)
       \_Net: (work@bottom.a), line:21:20, endln:21:21
       |vpiFullName:work@bottom.a
       |vpiActual:
-      \_LogicTypespec: , line:21:5, endln:21:10
+      \_LogicTypespec: 
     |vpiName:a
     |vpiFullName:work@bottom.a
     |vpiNetType:36
@@ -497,13 +509,19 @@ Design: (unnamed)
     \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:11:1, endln:17:10
     |vpiName:TP0
     |vpiFullName:work@mid.TP0
-    |vpiTypespec:
-    \_RefTypespec: (work@mid.TP0), line:11:35, endln:11:40
+  |vpiParamAssign:
+  \_ParamAssign: , line:11:29, endln:11:40
+    |vpiParent:
+    \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:11:1, endln:17:10
+    |vpiLhs:
+    \_TypeParameter: (work@mid.TP0), line:11:29, endln:11:32
+    |vpiRhs:
+    \_RefTypespec: (work@mid), line:11:35, endln:11:40
       |vpiParent:
-      \_TypeParameter: (work@mid.TP0), line:11:29, endln:11:32
-      |vpiFullName:work@mid.TP0
+      \_ParamAssign: , line:11:29, endln:11:40
+      |vpiFullName:work@mid
       |vpiActual:
-      \_LogicTypespec: , line:19:38, endln:19:43
+      \_LogicTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@mid.TP0), line:11:29, endln:11:32
   |vpiTypespec:
@@ -579,11 +597,17 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:2:1, endln:9:10
     |vpiName:TPTOP
     |vpiFullName:work@top.TPTOP
-    |vpiTypespec:
-    \_RefTypespec: (work@top.TPTOP), line:3:24, endln:3:27
+  |vpiParamAssign:
+  \_ParamAssign: , line:3:16, endln:3:27
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:2:1, endln:9:10
+    |vpiLhs:
+    \_TypeParameter: (work@top.TPTOP), line:3:16, endln:3:21
+    |vpiRhs:
+    \_RefTypespec: (work@top), line:3:24, endln:3:27
       |vpiParent:
-      \_TypeParameter: (work@top.TPTOP), line:3:16, endln:3:21
-      |vpiFullName:work@top.TPTOP
+      \_ParamAssign: , line:3:16, endln:3:27
+      |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: 
   |vpiTypespec:
@@ -623,7 +647,7 @@ Design: (unnamed)
     |vpiActual:
     \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:11:1, endln:17:10
 |vpiTypespec:
-\_LogicTypespec: , line:19:38, endln:19:43
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -632,26 +656,26 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:21:5, endln:21:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:21:11, endln:21:19
     |vpiParent:
-    \_LogicTypespec: , line:21:5, endln:21:10
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_RefObj: (SIZE), line:21:12, endln:21:16
       |vpiParent:
       \_Range: , line:21:11, endln:21:19
       |vpiName:SIZE
       |vpiActual:
-      \_Parameter: (work@bottom.SIZE), line:19:55, endln:19:62
+      \_Parameter: (work@bottom.SIZE), line:19:55, endln:19:59
     |vpiRightRange:
     \_Constant: , line:21:17, endln:21:18
       |vpiParent:
       \_Range: , line:21:11, endln:21:19
       |vpiTypespec:
-      \_RefTypespec: , line:21:17, endln:21:18
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:21:17, endln:21:18
         |vpiActual:
@@ -686,7 +710,7 @@ COMMAND: ${SURELOG_DIR}/regression/ParamIndex/slpp_all/surelog.uhdm ${SURELOG_DI
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              50      50       0         0
+Others                              54      54       0         0
 ----------------------------------------------------------------
-                                    50      50       0         0
+                                    54      54       0         0
 ===================== END REDUCTION RESULT =====================

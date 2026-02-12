@@ -191,7 +191,7 @@ BitTypespec                                            4
 Constant                                               6
 ContAssign                                             1
 Design                                                 1
-Identifier                                             5
+Identifier                                             6
 ImportTypespec                                         1
 IntTypespec                                            6
 LogicTypespec                                          2
@@ -215,7 +215,7 @@ TypespecMember                                         2
 UnsupportedTypespec                                    3
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                90
+Total:                                                91
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamTypespec2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -237,13 +237,13 @@ Design: (unnamed)
     \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
     |vpiName:prim_esc_pkg
   |vpiParameter:
-  \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:8:54
+  \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:7:36
     |vpiParent:
     \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
     |vpiTypespec:
     \_RefTypespec: (prim_esc_pkg::ESC_TX_DEFAULT::esc_tx_t), line:7:13, endln:7:21
       |vpiParent:
-      \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:8:54
+      \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:7:36
       |vpiName:esc_tx_t
       |vpiFullName:prim_esc_pkg::ESC_TX_DEFAULT::esc_tx_t
       |vpiActual:
@@ -255,7 +255,7 @@ Design: (unnamed)
     |vpiParent:
     \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
     |vpiLhs:
-    \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:8:54
+    \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:7:36
     |vpiRhs:
     \_Operation: , line:7:39, endln:8:54
       |vpiParent:
@@ -270,7 +270,7 @@ Design: (unnamed)
           |vpiParent:
           \_TaggedPattern: , line:7:41, endln:7:53
           |vpiTypespec:
-          \_RefTypespec: (prim_esc_pkg), line:7:49, endln:7:53
+          \_RefTypespec: (prim_esc_pkg)
             |vpiParent:
             \_Constant: , line:7:49, endln:7:53
             |vpiFullName:prim_esc_pkg
@@ -287,7 +287,7 @@ Design: (unnamed)
           |vpiName:esc_p
           |vpiFullName:prim_esc_pkg::esc_p
           |vpiActual:
-          \_StringTypespec: , line:7:41, endln:7:46
+          \_StringTypespec: 
       |vpiOperand:
       \_TaggedPattern: , line:8:41, endln:8:53
         |vpiParent:
@@ -297,7 +297,7 @@ Design: (unnamed)
           |vpiParent:
           \_TaggedPattern: , line:8:41, endln:8:53
           |vpiTypespec:
-          \_RefTypespec: (prim_esc_pkg), line:8:49, endln:8:53
+          \_RefTypespec: (prim_esc_pkg)
             |vpiParent:
             \_Constant: , line:8:49, endln:8:53
             |vpiFullName:prim_esc_pkg
@@ -314,7 +314,7 @@ Design: (unnamed)
           |vpiName:esc_n
           |vpiFullName:prim_esc_pkg::esc_n
           |vpiActual:
-          \_StringTypespec: , line:7:41, endln:7:46
+          \_StringTypespec: 
   |vpiTypespec:
   \_TypedefTypespec: (prim_esc_pkg::esc_tx_t), line:5:5, endln:5:13
     |vpiParent:
@@ -347,7 +347,7 @@ Design: (unnamed)
         \_TypespecMember: (esc_p), line:3:11, endln:3:16
         |vpiFullName:prim_esc_pkg::esc_p
         |vpiActual:
-        \_LogicTypespec: , line:3:5, endln:3:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (esc_n), line:4:11, endln:4:16
       |vpiParent:
@@ -359,13 +359,17 @@ Design: (unnamed)
         \_TypespecMember: (esc_n), line:4:11, endln:4:16
         |vpiFullName:prim_esc_pkg::esc_n
         |vpiActual:
-        \_LogicTypespec: , line:3:5, endln:3:10
+        \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (prim_esc_pkg::esc_tx_t), line:5:5, endln:5:13
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:5:4
   |vpiDefName:prim_esc_pkg
-  |vpiEndLabel:prim_esc_pkg
+  |vpiEndLabel:
+  \_Identifier: (prim_esc_pkg), line:10:14, endln:10:26
+    |vpiParent:
+    \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
+    |vpiName:prim_esc_pkg
 |vpiAllModules:
 \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
   |vpiParent:
@@ -385,7 +389,7 @@ Design: (unnamed)
       \_Variable: (work@nmi_gen.x), line:16:15, endln:16:16
       |vpiFullName:work@nmi_gen.x
       |vpiActual:
-      \_IntTypespec: , line:18:15, endln:18:18
+      \_IntTypespec: 
     |vpiName:x
     |vpiFullName:work@nmi_gen.x
     |vpiRandType:1
@@ -400,16 +404,16 @@ Design: (unnamed)
       \_ImportTypespec: (prim_esc_pkg), line:13:11, endln:13:26
       |vpiName:prim_esc_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:13:11, endln:13:26
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (prim_esc_pkg), line:13:11, endln:13:26
       |vpiTypespec:
-      \_RefTypespec: (work@nmi_gen.prim_esc_pkg), line:13:11, endln:13:26
+      \_RefTypespec: (work@nmi_gen.prim_esc_pkg)
         |vpiParent:
-        \_Constant: , line:13:11, endln:13:26
+        \_Constant: 
         |vpiFullName:work@nmi_gen.prim_esc_pkg
         |vpiActual:
-        \_StringTypespec: , line:7:41, endln:7:46
+        \_StringTypespec: 
       |vpiConstType:6
       |vpiSize:8
       |vpiDecompile:*
@@ -461,7 +465,7 @@ Design: (unnamed)
       \_Port: (x), line:16:15, endln:16:16
       |vpiFullName:work@nmi_gen.x
       |vpiActual:
-      \_IntTypespec: , line:18:15, endln:18:18
+      \_IntTypespec: 
   |vpiContAssign:
   \_ContAssign: , line:18:11, endln:18:22
     |vpiParent:
@@ -484,7 +488,7 @@ Design: (unnamed)
         \_Operation: , line:18:15, endln:18:22
         |vpiFullName:work@nmi_gen
         |vpiActual:
-        \_IntTypespec: , line:18:15, endln:18:18
+        \_IntTypespec: 
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@nmi_gen.a), line:18:20, endln:18:21
@@ -513,7 +517,7 @@ Design: (unnamed)
       \_Variable: (work@top.o), line:21:23, endln:21:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:18:15, endln:18:18
+      \_IntTypespec: 
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiRandType:1
@@ -540,7 +544,7 @@ Design: (unnamed)
       \_Port: (o), line:21:23, endln:21:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:18:15, endln:18:18
+      \_IntTypespec: 
   |vpiRefModule:
   \_RefModule: work@nmi_gen (u_nmi_gen), line:22:4, endln:22:11
     |vpiParent:
@@ -564,12 +568,12 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:23:10, endln:23:43
           |vpiTypespec:
-          \_RefTypespec: (work@top.u_nmi_gen.a), line:23:11, endln:23:12
+          \_RefTypespec: (work@top.u_nmi_gen.a)
             |vpiParent:
             \_Constant: , line:23:11, endln:23:12
             |vpiFullName:work@top.u_nmi_gen.a
             |vpiActual:
-            \_IntTypespec: , line:18:15, endln:18:18
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:3
@@ -585,7 +589,7 @@ Design: (unnamed)
             \_Operation: , line:23:12, endln:23:42
             |vpiName:prim_esc_pkg::ESC_TX_DEFAULT
             |vpiActual:
-            \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:8:54
+            \_Parameter: (prim_esc_pkg::ESC_TX_DEFAULT), line:7:22, endln:7:36
     |vpiPort:
     \_Port: (x), line:24:8, endln:24:9
       |vpiParent:
@@ -600,7 +604,7 @@ Design: (unnamed)
         |vpiActual:
         \_Variable: (work@top.o), line:21:23, endln:21:24
 |vpiTypespec:
-\_LogicTypespec: , line:3:5, endln:3:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -608,11 +612,11 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_StringTypespec: , line:7:41, endln:7:46
+\_StringTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_IntTypespec: , line:18:15, endln:18:18
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
@@ -640,7 +644,7 @@ COMMAND: ${SURELOG_DIR}/regression/ParamTypespec2/slpp_all/surelog.uhdm ${SURELO
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              64      64       0         0
+Others                              65      65       0         0
 ----------------------------------------------------------------
-                                    64      64       0         0
+                                    65      65       0         0
 ===================== END REDUCTION RESULT =====================

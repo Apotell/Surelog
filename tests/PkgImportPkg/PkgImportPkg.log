@@ -90,7 +90,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               4
 Design                                                 1
-Identifier                                             6
+Identifier                                             9
 ImportTypespec                                         2
 IntTypespec                                            2
 LogicTypespec                                          1
@@ -108,11 +108,11 @@ TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                45
+Total:                                                48
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PkgImportPkg/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:39, type:RefTypespec, name:otp_ast_rsp_t.
-[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:45, type:RefTypespec, name:otp_ast_rsp_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:42, type:RefTypespec, name:otp_ast_rsp_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:48, type:RefTypespec, name:otp_ast_rsp_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -163,13 +163,17 @@ Design: (unnamed)
         \_TypespecMember: (pwr_seq), line:3:17, endln:3:24
         |vpiFullName:otp_ctrl_pkg::pwr_seq
         |vpiActual:
-        \_LogicTypespec: , line:3:5, endln:3:10
+        \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (otp_ctrl_pkg::otp_ast_req_t), line:4:5, endln:4:18
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:4:4
   |vpiDefName:otp_ctrl_pkg
-  |vpiEndLabel:otp_ctrl_pkg
+  |vpiEndLabel:
+  \_Identifier: (otp_ctrl_pkg), line:5:14, endln:5:26
+    |vpiParent:
+    \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
+    |vpiName:otp_ctrl_pkg
 |vpiAllPackages:
 \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:7:1, endln:9:31
   |vpiParent:
@@ -189,13 +193,13 @@ Design: (unnamed)
       \_ImportTypespec: (otp_ctrl_pkg), line:8:10, endln:8:25
       |vpiName:otp_ctrl_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:8:10, endln:8:25
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (otp_ctrl_pkg), line:8:10, endln:8:25
       |vpiTypespec:
-      \_RefTypespec: (otp_ctrl_part_pkg::otp_ctrl_pkg), line:8:10, endln:8:25
+      \_RefTypespec: (otp_ctrl_part_pkg::otp_ctrl_pkg)
         |vpiParent:
-        \_Constant: , line:8:10, endln:8:25
+        \_Constant: 
         |vpiFullName:otp_ctrl_part_pkg::otp_ctrl_pkg
         |vpiActual:
         \_StringTypespec: 
@@ -206,7 +210,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_pkg), line:8:10, endln:8:25
   |vpiDefName:otp_ctrl_part_pkg
-  |vpiEndLabel:otp_ctrl_part_pkg
+  |vpiEndLabel:
+  \_Identifier: (otp_ctrl_part_pkg), line:9:14, endln:9:31
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:7:1, endln:9:31
+    |vpiName:otp_ctrl_part_pkg
 |vpiAllModules:
 \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
   |vpiParent:
@@ -226,13 +234,13 @@ Design: (unnamed)
       \_ImportTypespec: (otp_ctrl_pkg), line:12:10, endln:12:25
       |vpiName:otp_ctrl_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:12:10, endln:12:25
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (otp_ctrl_pkg), line:12:10, endln:12:25
       |vpiTypespec:
-      \_RefTypespec: (work@otp_ctrl.otp_ctrl_pkg), line:12:10, endln:12:25
+      \_RefTypespec: (work@otp_ctrl.otp_ctrl_pkg)
         |vpiParent:
-        \_Constant: , line:12:10, endln:12:25
+        \_Constant: 
         |vpiFullName:work@otp_ctrl.otp_ctrl_pkg
         |vpiActual:
         \_StringTypespec: 
@@ -317,21 +325,25 @@ Design: (unnamed)
       |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i.otp_ast_rsp_t
       |vpiActual:
       \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
-  |vpiEndLabel:otp_ctrl
+  |vpiEndLabel:
+  \_Identifier: (otp_ctrl), line:17:13, endln:17:21
+    |vpiParent:
+    \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
+    |vpiName:otp_ctrl
 |vpiTypespec:
-\_LogicTypespec: , line:3:5, endln:3:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:3:11, endln:3:16
     |vpiParent:
-    \_LogicTypespec: , line:3:5, endln:3:10
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:3:12, endln:3:13
       |vpiParent:
       \_Range: , line:3:11, endln:3:16
       |vpiTypespec:
-      \_RefTypespec: , line:3:12, endln:3:13
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:12, endln:3:13
         |vpiActual:
@@ -345,7 +357,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:3:11, endln:3:16
       |vpiTypespec:
-      \_RefTypespec: , line:3:14, endln:3:15
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:14, endln:3:15
         |vpiActual:
@@ -385,7 +397,7 @@ COMMAND: ${SURELOG_DIR}/regression/PkgImportPkg/slpp_all/surelog.uhdm ${SURELOG_
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              41      41       0         0
+Others                              44      44       0         0
 ----------------------------------------------------------------
-                                    41      41       0         0
+                                    44      44       0         0
 ===================== END REDUCTION RESULT =====================

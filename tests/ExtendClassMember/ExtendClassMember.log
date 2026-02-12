@@ -140,6 +140,7 @@ HierPath                                               1
 Identifier                                             5
 IntTypespec                                            2
 Package                                                1
+ParamAssign                                            3
 RefObj                                                 2
 RefTypespec                                            9
 SourceFile                                             1
@@ -147,12 +148,14 @@ TypeParameter                                          3
 UnsupportedTypespec                                    3
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                43
+Total:                                                46
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExtendClassMember/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:9:48: Unsupported Typespec: id:25, type:RefTypespec, name:uvm_sequence_item.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:9:48: Unsupported Typespec: id:24, type:RefTypespec, name:uvm_sequence_item.
 [ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:12:45: Unsupported Typespec: id:30, type:RefTypespec, name:uvm_sequence_item.
-[ERR:IG0810] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:13:58: Null Typespec: id:35, type:RefTypespec, name:uvm_sequencer_base.
+[ERR:IG0801] Missing location information: id:15, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:15, type:Identifier, name:new.
+[ERR:IG0810] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:13:58: Null Typespec: id:38, type:RefTypespec, name:uvm_sequencer_base.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -191,7 +194,7 @@ Design: (unnamed)
         \_Variable: (pkg::uvm_tlm_fifo::print_enabled), line:5:6, endln:5:19
         |vpiFullName:pkg::uvm_tlm_fifo::print_enabled
         |vpiActual:
-        \_BitTypespec: , line:5:2, endln:5:5
+        \_BitTypespec: 
       |vpiName:print_enabled
       |vpiFullName:pkg::uvm_tlm_fifo::print_enabled
       |vpiAutomatic:1
@@ -202,7 +205,7 @@ Design: (unnamed)
         |vpiParent:
         \_Variable: (pkg::uvm_tlm_fifo::print_enabled), line:5:6, endln:5:19
         |vpiTypespec:
-        \_RefTypespec: (pkg::uvm_tlm_fifo::print_enabled), line:5:22, endln:5:23
+        \_RefTypespec: (pkg::uvm_tlm_fifo::print_enabled)
           |vpiParent:
           \_Constant: , line:5:22, endln:5:23
           |vpiFullName:pkg::uvm_tlm_fifo::print_enabled
@@ -230,12 +233,18 @@ Design: (unnamed)
         \_ClassDefn: (pkg::uvm_sequencer_analysis_fifo), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:9:1, endln:10:9
         |vpiName:RSP
         |vpiFullName:pkg::uvm_sequencer_analysis_fifo::RSP
-        |vpiTypespec:
-        \_RefTypespec: (pkg::uvm_sequencer_analysis_fifo::RSP::uvm_sequence_item), line:9:48, endln:9:65
+      |vpiParamAssign:
+      \_ParamAssign: , line:9:42, endln:9:65
+        |vpiParent:
+        \_ClassDefn: (pkg::uvm_sequencer_analysis_fifo), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:9:1, endln:10:9
+        |vpiLhs:
+        \_TypeParameter: (pkg::uvm_sequencer_analysis_fifo::RSP), line:9:42, endln:9:45
+        |vpiRhs:
+        \_RefTypespec: (pkg::uvm_sequencer_analysis_fifo::uvm_sequence_item), line:9:48, endln:9:65
           |vpiParent:
-          \_TypeParameter: (pkg::uvm_sequencer_analysis_fifo::RSP), line:9:42, endln:9:45
+          \_ParamAssign: , line:9:42, endln:9:65
           |vpiName:uvm_sequence_item
-          |vpiFullName:pkg::uvm_sequencer_analysis_fifo::RSP::uvm_sequence_item
+          |vpiFullName:pkg::uvm_sequencer_analysis_fifo::uvm_sequence_item
           |vpiActual:
           \_UnsupportedTypespec: (uvm_sequence_item), line:9:48, endln:9:65
       |vpiTypespec:
@@ -296,26 +305,38 @@ Design: (unnamed)
       \_ClassDefn: (pkg::uvm_sequencer_param_base), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:12:1, endln:16:9
       |vpiName:REQ
       |vpiFullName:pkg::uvm_sequencer_param_base::REQ
-      |vpiTypespec:
-      \_RefTypespec: (pkg::uvm_sequencer_param_base::REQ::uvm_sequence_item), line:12:45, endln:12:62
-        |vpiParent:
-        \_TypeParameter: (pkg::uvm_sequencer_param_base::REQ), line:12:39, endln:12:42
-        |vpiName:uvm_sequence_item
-        |vpiFullName:pkg::uvm_sequencer_param_base::REQ::uvm_sequence_item
-        |vpiActual:
-        \_UnsupportedTypespec: (uvm_sequence_item), line:12:45, endln:12:62
     |vpiParameter:
     \_TypeParameter: (pkg::uvm_sequencer_param_base::RSP), line:13:39, endln:13:42
       |vpiParent:
       \_ClassDefn: (pkg::uvm_sequencer_param_base), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:12:1, endln:16:9
       |vpiName:RSP
       |vpiFullName:pkg::uvm_sequencer_param_base::RSP
-      |vpiTypespec:
-      \_RefTypespec: (pkg::uvm_sequencer_param_base::RSP::REQ), line:13:45, endln:13:48
+    |vpiParamAssign:
+    \_ParamAssign: , line:12:39, endln:12:62
+      |vpiParent:
+      \_ClassDefn: (pkg::uvm_sequencer_param_base), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:12:1, endln:16:9
+      |vpiLhs:
+      \_TypeParameter: (pkg::uvm_sequencer_param_base::REQ), line:12:39, endln:12:42
+      |vpiRhs:
+      \_RefTypespec: (pkg::uvm_sequencer_param_base::uvm_sequence_item), line:12:45, endln:12:62
         |vpiParent:
-        \_TypeParameter: (pkg::uvm_sequencer_param_base::RSP), line:13:39, endln:13:42
+        \_ParamAssign: , line:12:39, endln:12:62
+        |vpiName:uvm_sequence_item
+        |vpiFullName:pkg::uvm_sequencer_param_base::uvm_sequence_item
+        |vpiActual:
+        \_UnsupportedTypespec: (uvm_sequence_item), line:12:45, endln:12:62
+    |vpiParamAssign:
+    \_ParamAssign: , line:13:39, endln:13:48
+      |vpiParent:
+      \_ClassDefn: (pkg::uvm_sequencer_param_base), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:12:1, endln:16:9
+      |vpiLhs:
+      \_TypeParameter: (pkg::uvm_sequencer_param_base::RSP), line:13:39, endln:13:42
+      |vpiRhs:
+      \_RefTypespec: (pkg::uvm_sequencer_param_base::REQ), line:13:45, endln:13:48
+        |vpiParent:
+        \_ParamAssign: , line:13:39, endln:13:48
         |vpiName:REQ
-        |vpiFullName:pkg::uvm_sequencer_param_base::RSP::REQ
+        |vpiFullName:pkg::uvm_sequencer_param_base::REQ
         |vpiActual:
         \_TypeParameter: (pkg::uvm_sequencer_param_base::REQ), line:12:39, endln:12:42
     |vpiInternalScope:
@@ -359,7 +380,7 @@ Design: (unnamed)
           |vpiParent:
           \_Assignment: , line:21:3, endln:21:42
           |vpiTypespec:
-          \_RefTypespec: (pkg::uvm_sequencer_param_base::new), line:21:41, endln:21:42
+          \_RefTypespec: (pkg::uvm_sequencer_param_base::new)
             |vpiParent:
             \_Constant: , line:21:41, endln:21:42
             |vpiFullName:pkg::uvm_sequencer_param_base::new
@@ -448,13 +469,13 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_BitTypespec: , line:5:2, endln:5:5
+\_BitTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 5
 [WARNING] : 1
 [   NOTE] : 0
 
@@ -466,7 +487,7 @@ COMMAND: ${SURELOG_DIR}/regression/ExtendClassMember/slpp_all/surelog.uhdm ${SUR
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              41      41       0         0
+Others                              44      44       0         0
 ----------------------------------------------------------------
-                                    41      41       0         0
+                                    44      44       0         0
 ===================== END REDUCTION RESULT =====================

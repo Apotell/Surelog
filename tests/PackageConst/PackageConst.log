@@ -60,22 +60,22 @@ AST_DEBUG_END
 [INF:CP0301] ${SURELOG_DIR}/tests/PackageConst/dut.sv:5:1: Compile package "spi_device_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               3
+Constant                                               2
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
-Identifier                                             3
-IntTypespec                                            5
+Identifier                                             4
+IntTypespec                                            4
 Module                                                 2
 Package                                                2
 ParamAssign                                            1
 Parameter                                              1
 RefObj                                                 2
-RefTypespec                                            6
+RefTypespec                                            5
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                30
+Total:                                                28
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -97,16 +97,16 @@ Design: (unnamed)
     \_Package: spi_device_reg_pkg (spi_device_reg_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
     |vpiName:spi_device_reg_pkg
   |vpiParameter:
-  \_Parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:42
+  \_Parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:37
     |vpiParent:
     \_Package: spi_device_reg_pkg (spi_device_reg_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
     |vpiTypespec:
     \_RefTypespec: (spi_device_reg_pkg::NumCmdInfo), line:2:14, endln:2:26
       |vpiParent:
-      \_Parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:42
+      \_Parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:37
       |vpiFullName:spi_device_reg_pkg::NumCmdInfo
       |vpiActual:
-      \_IntTypespec: , line:2:14, endln:2:26
+      \_IntTypespec: 
     |vpiName:NumCmdInfo
     |vpiFullName:spi_device_reg_pkg::NumCmdInfo
   |vpiParamAssign:
@@ -114,13 +114,13 @@ Design: (unnamed)
     |vpiParent:
     \_Package: spi_device_reg_pkg (spi_device_reg_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
     |vpiLhs:
-    \_Parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:42
+    \_Parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:37
     |vpiRhs:
     \_Constant: , line:2:40, endln:2:42
       |vpiParent:
       \_ParamAssign: , line:2:27, endln:2:42
       |vpiTypespec:
-      \_RefTypespec: (spi_device_reg_pkg), line:2:40, endln:2:42
+      \_RefTypespec: (spi_device_reg_pkg)
         |vpiParent:
         \_Constant: , line:2:40, endln:2:42
         |vpiFullName:spi_device_reg_pkg
@@ -150,27 +150,16 @@ Design: (unnamed)
       \_EnumTypespec: , line:6:12, endln:8:22
       |vpiFullName:spi_device_pkg
       |vpiActual:
-      \_IntTypespec: , line:2:14, endln:2:26
+      \_IntTypespec: 
     |vpiEnumConst:
     \_EnumConst: (CmdInfoReserveEnd), line:7:7, endln:7:57
       |vpiParent:
       \_EnumTypespec: , line:6:12, endln:8:22
-      |vpiName:CmdInfoReserveEnd
-      |vpiValue:
-      \_Constant: 
+      |vpiName:
+      \_Identifier: (CmdInfoReserveEnd), line:7:7, endln:7:24
         |vpiParent:
         \_EnumConst: (CmdInfoReserveEnd), line:7:7, endln:7:57
-        |vpiTypespec:
-        \_RefTypespec: (spi_device_pkg::CmdInfoReserveEnd), line:7:27, endln:7:57
-          |vpiParent:
-          \_Constant: 
-          |vpiFullName:spi_device_pkg::CmdInfoReserveEnd
-          |vpiActual:
-          \_IntTypespec: , line:2:14, endln:2:26
-        |vpiConstType:9
-        |vpiSize:32
-        |vpiDecompile:spi_device_reg_pkg::NumCmdInfo
-        |vpiValue:24
+        |vpiName:CmdInfoReserveEnd
   |vpiTypespec:
   \_TypedefTypespec: (spi_device_pkg::cmd_info_index_e), line:8:6, endln:8:22
     |vpiParent:
@@ -193,7 +182,7 @@ Design: (unnamed)
   \_TypedefTypespec: (spi_device_pkg::cmd_info_index_e), line:8:6, endln:8:22
   |vpiDefName:spi_device_pkg
 |vpiTypespec:
-\_IntTypespec: , line:2:14, endln:2:26
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -216,7 +205,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackageConst/slpp_all/surelog.uhdm ${SURELOG_
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              21      21       0         0
+Others                              20      20       0         0
 ----------------------------------------------------------------
-                                    21      21       0         0
+                                    20      20       0         0
 ===================== END REDUCTION RESULT =====================

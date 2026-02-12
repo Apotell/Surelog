@@ -45,6 +45,12 @@ Variable                                               5
 Total:                                               100
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMethodCall/slpp_unit/surelog.uhdm ...
+[ERR:IG0801] Missing location information: id:73, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:73, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:85, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:85, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:20, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:20, type:Identifier, name:new.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -83,7 +89,7 @@ Design: (unnamed)
         \_Variable: (pack::door::state), line:6:9, endln:6:14
         |vpiFullName:pack::door::state
         |vpiActual:
-        \_IntTypespec: , line:6:5, endln:6:8
+        \_IntTypespec: 
       |vpiName:state
       |vpiFullName:pack::door::state
       |vpiAutomatic:1
@@ -99,7 +105,7 @@ Design: (unnamed)
         \_Variable: (pack::door::timer), line:7:9, endln:7:14
         |vpiFullName:pack::door::timer
         |vpiActual:
-        \_IntTypespec: , line:6:5, endln:6:8
+        \_IntTypespec: 
       |vpiName:timer
       |vpiFullName:pack::door::timer
       |vpiAutomatic:1
@@ -154,19 +160,19 @@ Design: (unnamed)
       |vpiRandType:1
       |vpiVisibility:1
     |vpiParameter:
-    \_Parameter: (pack::door::OPENED), line:9:15, endln:9:32
+    \_Parameter: (pack::door::OPENED), line:9:15, endln:9:21
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
       |vpiName:OPENED
       |vpiFullName:pack::door::OPENED
     |vpiParameter:
-    \_Parameter: (pack::door::CLOSED), line:10:8, endln:10:25
+    \_Parameter: (pack::door::CLOSED), line:10:8, endln:10:14
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
       |vpiName:CLOSED
       |vpiFullName:pack::door::CLOSED
     |vpiParameter:
-    \_Parameter: (pack::door::LOCKED), line:11:8, endln:11:25
+    \_Parameter: (pack::door::LOCKED), line:11:8, endln:11:14
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
       |vpiName:LOCKED
@@ -176,13 +182,13 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
       |vpiLhs:
-      \_Parameter: (pack::door::OPENED), line:9:15, endln:9:32
+      \_Parameter: (pack::door::OPENED), line:9:15, endln:9:21
       |vpiRhs:
       \_Constant: , line:9:27, endln:9:32
         |vpiParent:
         \_ParamAssign: , line:9:15, endln:9:32
         |vpiTypespec:
-        \_RefTypespec: (pack::door), line:9:27, endln:9:32
+        \_RefTypespec: (pack::door)
           |vpiParent:
           \_Constant: , line:9:27, endln:9:32
           |vpiFullName:pack::door
@@ -197,13 +203,13 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
       |vpiLhs:
-      \_Parameter: (pack::door::CLOSED), line:10:8, endln:10:25
+      \_Parameter: (pack::door::CLOSED), line:10:8, endln:10:14
       |vpiRhs:
       \_Constant: , line:10:20, endln:10:25
         |vpiParent:
         \_ParamAssign: , line:10:8, endln:10:25
         |vpiTypespec:
-        \_RefTypespec: (pack::door), line:10:20, endln:10:25
+        \_RefTypespec: (pack::door)
           |vpiParent:
           \_Constant: , line:10:20, endln:10:25
           |vpiFullName:pack::door
@@ -218,13 +224,13 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
       |vpiLhs:
-      \_Parameter: (pack::door::LOCKED), line:11:8, endln:11:25
+      \_Parameter: (pack::door::LOCKED), line:11:8, endln:11:14
       |vpiRhs:
       \_Constant: , line:11:20, endln:11:25
         |vpiParent:
         \_ParamAssign: , line:11:8, endln:11:25
         |vpiTypespec:
-        \_RefTypespec: (pack::door), line:11:20, endln:11:25
+        \_RefTypespec: (pack::door)
           |vpiParent:
           \_Constant: , line:11:20, endln:11:25
           |vpiFullName:pack::door
@@ -349,7 +355,7 @@ Design: (unnamed)
             \_IODecl: (a), line:23:30, endln:23:31
             |vpiFullName:pack::doorOpen::new::a
             |vpiActual:
-            \_IntTypespec: , line:6:5, endln:6:8
+            \_IntTypespec: 
       |vpiInternalScope:
       \_Function: (pack::doorOpen::f2), line:25:5, endln:27:16
         |vpiParent:
@@ -426,7 +432,7 @@ Design: (unnamed)
             \_IODecl: (b), line:29:23, endln:29:24
             |vpiFullName:pack::doorOpen::new::b
             |vpiActual:
-            \_IntTypespec: , line:6:5, endln:6:8
+            \_IntTypespec: 
         |vpiStmt:
         \_Begin: (pack::doorOpen::new), line:30:5, endln:32:16
       |vpiInternalScope:
@@ -475,7 +481,7 @@ Design: (unnamed)
               |vpiName:OPENED
               |vpiFullName:pack::doorOpen::door_fsm::OPENED
               |vpiActual:
-              \_Parameter: (pack::door::OPENED), line:9:15, endln:9:32
+              \_Parameter: (pack::door::OPENED), line:9:15, endln:9:21
       |vpiImportTypespec:
       \_Function: (pack::doorOpen::new), line:23:5, endln:23:32
       |vpiImportTypespec:
@@ -630,7 +636,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_IntTypespec: , line:6:5, endln:6:8
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
@@ -644,7 +650,7 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 6
 [WARNING] : 3
 [   NOTE] : 0
 

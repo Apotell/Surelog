@@ -233,14 +233,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/OneImport/dut.sv:11:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              29
+Constant                                              27
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
-Identifier                                             7
+Identifier                                             9
 ImportTypespec                                         4
-IntTypespec                                           26
+IntTypespec                                           24
 IntegerTypespec                                        2
 LogicTypespec                                          7
 Module                                                 2
@@ -253,12 +253,12 @@ Parameter                                              1
 Port                                                   2
 Range                                                  7
 RefObj                                                 3
-RefTypespec                                           40
+RefTypespec                                           38
 SourceFile                                             1
 StringTypespec                                         4
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                               152
+Total:                                               148
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -280,13 +280,13 @@ Design: (unnamed)
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
     |vpiName:my_pkg
   |vpiParameter:
-  \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:37
+  \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:33
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
     |vpiTypespec:
     \_RefTypespec: (my_pkg::PMP_CFG_W), line:7:11, endln:7:23
       |vpiParent:
-      \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:37
+      \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:33
       |vpiFullName:my_pkg::PMP_CFG_W
       |vpiActual:
       \_IntTypespec: 
@@ -297,13 +297,13 @@ Design: (unnamed)
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
     |vpiLhs:
-    \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:37
+    \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:33
     |vpiRhs:
     \_Constant: , line:7:36, endln:7:37
       |vpiParent:
       \_ParamAssign: , line:7:24, endln:7:37
       |vpiTypespec:
-      \_RefTypespec: (my_pkg), line:7:36, endln:7:37
+      \_RefTypespec: (my_pkg)
         |vpiParent:
         \_Constant: , line:7:36, endln:7:37
         |vpiFullName:my_pkg
@@ -323,23 +323,27 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:11, endln:5:13
       |vpiFullName:my_pkg
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (OPCODE_LOAD), line:3:5, endln:3:28
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:5:13
-      |vpiName:OPCODE_LOAD
+      |vpiName:
+      \_Identifier: (OPCODE_LOAD), line:3:5, endln:3:16
+        |vpiParent:
+        \_EnumConst: (OPCODE_LOAD), line:3:5, endln:3:28
+        |vpiName:OPCODE_LOAD
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:23, endln:3:28
         |vpiParent:
         \_EnumConst: (OPCODE_LOAD), line:3:5, endln:3:28
         |vpiTypespec:
-        \_RefTypespec: (my_pkg::OPCODE_LOAD), line:3:23, endln:3:28
+        \_RefTypespec: (my_pkg::OPCODE_LOAD)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:23, endln:3:28
           |vpiFullName:my_pkg::OPCODE_LOAD
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:5
         |vpiSize:6
         |vpiDecompile:6'h03
@@ -348,18 +352,22 @@ Design: (unnamed)
     \_EnumConst: (OPCODE_STORE), line:4:5, endln:4:28
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:5:13
-      |vpiName:OPCODE_STORE
+      |vpiName:
+      \_Identifier: (OPCODE_STORE), line:4:5, endln:4:17
+        |vpiParent:
+        \_EnumConst: (OPCODE_STORE), line:4:5, endln:4:28
+        |vpiName:OPCODE_STORE
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:4:23, endln:4:28
         |vpiParent:
         \_EnumConst: (OPCODE_STORE), line:4:5, endln:4:28
         |vpiTypespec:
-        \_RefTypespec: (my_pkg::OPCODE_STORE), line:4:23, endln:4:28
+        \_RefTypespec: (my_pkg::OPCODE_STORE)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:4:23, endln:4:28
           |vpiFullName:my_pkg::OPCODE_STORE
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:5
         |vpiSize:6
         |vpiDecompile:6'h13
@@ -404,13 +412,13 @@ Design: (unnamed)
       \_ImportTypespec: (my_pkg), line:12:10, endln:12:19
       |vpiName:my_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:12:10, endln:12:19
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (my_pkg), line:12:10, endln:12:19
       |vpiTypespec:
-      \_RefTypespec: (work@dut.my_pkg), line:12:10, endln:12:19
+      \_RefTypespec: (work@dut.my_pkg)
         |vpiParent:
-        \_Constant: , line:12:10, endln:12:19
+        \_Constant: 
         |vpiFullName:work@dut.my_pkg
         |vpiActual:
         \_StringTypespec: 
@@ -432,7 +440,7 @@ Design: (unnamed)
       |vpiParent:
       \_ImportTypespec: (my_pkg), line:13:10, endln:13:26
       |vpiTypespec:
-      \_RefTypespec: (work@dut.my_pkg), line:13:18, endln:13:26
+      \_RefTypespec: (work@dut.my_pkg)
         |vpiParent:
         \_Constant: , line:13:18, endln:13:26
         |vpiFullName:work@dut.my_pkg
@@ -456,7 +464,7 @@ Design: (unnamed)
       |vpiParent:
       \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
       |vpiTypespec:
-      \_RefTypespec: (work@dut.my_pkg), line:13:36, endln:13:47
+      \_RefTypespec: (work@dut.my_pkg)
         |vpiParent:
         \_Constant: , line:13:36, endln:13:47
         |vpiFullName:work@dut.my_pkg
@@ -482,7 +490,7 @@ Design: (unnamed)
       \_Net: (work@dut.a), line:11:13, endln:11:14
       |vpiFullName:work@dut.a
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
     |vpiName:a
     |vpiFullName:work@dut.a
     |vpiNetType:1
@@ -496,7 +504,7 @@ Design: (unnamed)
       \_Net: (work@dut.b), line:11:16, endln:11:17
       |vpiFullName:work@dut.b
       |vpiActual:
-      \_LogicTypespec: , line:15:10, endln:15:15
+      \_LogicTypespec: 
     |vpiName:b
     |vpiFullName:work@dut.b
     |vpiNetType:48
@@ -510,7 +518,7 @@ Design: (unnamed)
       \_Net: (work@dut.a), line:16:14, endln:16:15
       |vpiFullName:work@dut.a
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
     |vpiName:a
     |vpiFullName:work@dut.a
     |vpiNetType:1
@@ -524,7 +532,7 @@ Design: (unnamed)
       \_Net: (work@dut.b), line:17:13, endln:17:14
       |vpiFullName:work@dut.b
       |vpiActual:
-      \_LogicTypespec: , line:15:10, endln:15:15
+      \_LogicTypespec: 
     |vpiName:b
     |vpiFullName:work@dut.b
     |vpiNetType:48
@@ -549,7 +557,7 @@ Design: (unnamed)
       \_Port: (a), line:11:13, endln:11:14
       |vpiFullName:work@dut.a
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
   |vpiPort:
   \_Port: (b), line:11:16, endln:11:17
     |vpiParent:
@@ -562,7 +570,7 @@ Design: (unnamed)
       \_Port: (b), line:11:16, endln:11:17
       |vpiFullName:work@dut.b
       |vpiActual:
-      \_LogicTypespec: , line:15:10, endln:15:15
+      \_LogicTypespec: 
   |vpiContAssign:
   \_ContAssign: , line:18:10, endln:19:35
     |vpiParent:
@@ -590,16 +598,16 @@ Design: (unnamed)
           \_Operation: , line:18:14, endln:18:35
           |vpiFullName:work@dut
           |vpiActual:
-          \_IntegerTypespec: , line:18:14, endln:18:15
+          \_IntegerTypespec: 
         |vpiOpType:67
         |vpiOperand:
-        \_Constant: , line:18:25, endln:18:34
+        \_Constant: , line:18:17, endln:18:34
           |vpiParent:
           \_Operation: , line:18:14, endln:18:35
           |vpiTypespec:
-          \_RefTypespec: (work@dut), line:18:25, endln:18:34
+          \_RefTypespec: (work@dut)
             |vpiParent:
-            \_Constant: , line:18:25, endln:18:34
+            \_Constant: , line:18:17, endln:18:34
             |vpiFullName:work@dut
             |vpiActual:
             \_IntTypespec: 
@@ -617,7 +625,7 @@ Design: (unnamed)
           \_Operation: , line:19:15, endln:19:35
           |vpiFullName:work@dut
           |vpiActual:
-          \_IntegerTypespec: , line:18:14, endln:18:15
+          \_IntegerTypespec: 
         |vpiOpType:67
         |vpiOperand:
         \_Operation: , line:19:18, endln:19:34
@@ -641,19 +649,19 @@ Design: (unnamed)
             |vpiActual:
             \_EnumConst: (OPCODE_LOAD), line:3:5, endln:3:28
 |vpiTypespec:
-\_LogicTypespec: , line:2:16, endln:2:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:22, endln:2:27
     |vpiParent:
-    \_LogicTypespec: , line:2:16, endln:2:21
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:2:23, endln:2:24
       |vpiParent:
       \_Range: , line:2:22, endln:2:27
       |vpiTypespec:
-      \_RefTypespec: , line:2:23, endln:2:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:23, endln:2:24
         |vpiActual:
@@ -667,7 +675,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:22, endln:2:27
       |vpiTypespec:
-      \_RefTypespec: , line:2:25, endln:2:26
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:25, endln:2:26
         |vpiActual:
@@ -690,15 +698,15 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_IntegerTypespec: , line:18:14, endln:18:15
+\_IntegerTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiValue:
   \_Constant: , line:18:14, endln:18:15
     |vpiParent:
-    \_IntegerTypespec: , line:18:14, endln:18:15
+    \_IntegerTypespec: 
     |vpiTypespec:
-    \_RefTypespec: , line:18:14, endln:18:15
+    \_RefTypespec: 
       |vpiParent:
       \_Constant: , line:18:14, endln:18:15
       |vpiActual:
@@ -708,19 +716,19 @@ Design: (unnamed)
     |vpiDecompile:1'd3
     |vpiValue:3
 |vpiTypespec:
-\_LogicTypespec: , line:15:10, endln:15:15
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:15:10, endln:15:15
     |vpiParent:
-    \_LogicTypespec: , line:15:10, endln:15:15
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:15:11, endln:15:12
       |vpiParent:
       \_Range: , line:15:10, endln:15:15
       |vpiTypespec:
-      \_RefTypespec: , line:15:11, endln:15:12
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:15:11, endln:15:12
         |vpiActual:
@@ -734,7 +742,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:15:10, endln:15:15
       |vpiTypespec:
-      \_RefTypespec: , line:15:13, endln:15:14
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:15:13, endln:15:14
         |vpiActual:
@@ -768,7 +776,7 @@ Constant                            12      12       1         1
 Operation                            4       3       0         1
 RefTypespec                         23      21       0         2
 ----------------------------------------------------------------
-Others                              38      38       0         0
+Others                              40      40       0         0
 ----------------------------------------------------------------
-                                    77      74       1         4
+                                    79      76       1         4
 ===================== END REDUCTION RESULT =====================

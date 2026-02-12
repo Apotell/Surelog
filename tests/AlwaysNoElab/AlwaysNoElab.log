@@ -170,7 +170,7 @@ EnumConst                                              5
 EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
-Identifier                                            30
+Identifier                                            35
 IntTypespec                                           28
 LogicTypespec                                          2
 Module                                                 2
@@ -190,7 +190,7 @@ TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               190
+Total:                                               195
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AlwaysNoElab/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/AlwaysNoElab/dut.sv:9:22: Unsupported Typespec: id:36, type:RefTypespec, name:NumBitsDeviceSel.
@@ -294,12 +294,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiTypespec:
-          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+          \_RefTypespec: (builtin::mailbox::new::bound)
             |vpiParent:
             \_Constant: , line:3:31, endln:3:32
             |vpiFullName:builtin::mailbox::new::bound
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
@@ -310,7 +310,7 @@ Design: (unnamed)
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
           |vpiActual:
-          \_IntTypespec: , line:2:13, endln:2:16
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -329,7 +329,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiFullName:builtin::mailbox::num
         |vpiActual:
-        \_IntTypespec: , line:2:13, endln:2:16
+        \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -409,7 +409,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiFullName:builtin::mailbox::try_get
         |vpiActual:
-        \_IntTypespec: , line:2:13, endln:2:16
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -452,7 +452,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiFullName:builtin::mailbox::try_peek
         |vpiActual:
-        \_IntTypespec: , line:2:13, endln:2:16
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -597,18 +597,22 @@ Design: (unnamed)
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:FINISHED
+        |vpiName:
+        \_Identifier: (FINISHED), line:32:20, endln:32:28
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiName:FINISHED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (FINISHED), line:32:20, endln:32:28
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+          \_RefTypespec: (builtin::process::FINISHED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::FINISHED
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:0
@@ -617,18 +621,22 @@ Design: (unnamed)
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:RUNNING
+        |vpiName:
+        \_Identifier: (RUNNING), line:32:30, endln:32:37
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiName:RUNNING
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (RUNNING), line:32:30, endln:32:37
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+          \_RefTypespec: (builtin::process::RUNNING)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::RUNNING
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:1
@@ -637,18 +645,22 @@ Design: (unnamed)
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:WAITING
+        |vpiName:
+        \_Identifier: (WAITING), line:32:39, endln:32:46
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiName:WAITING
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (WAITING), line:32:39, endln:32:46
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+          \_RefTypespec: (builtin::process::WAITING)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::WAITING
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:2
@@ -657,18 +669,22 @@ Design: (unnamed)
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:SUSPENDED
+        |vpiName:
+        \_Identifier: (SUSPENDED), line:32:48, endln:32:57
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiName:SUSPENDED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+          \_RefTypespec: (builtin::process::SUSPENDED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::SUSPENDED
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:3
@@ -677,18 +693,22 @@ Design: (unnamed)
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:KILLED
+        |vpiName:
+        \_Identifier: (KILLED), line:32:59, endln:32:65
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiName:KILLED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (KILLED), line:32:59, endln:32:65
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+          \_RefTypespec: (builtin::process::KILLED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::KILLED
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:4
@@ -769,12 +789,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+          \_RefTypespec: (builtin::semaphore::new::keyCount)
             |vpiParent:
             \_Constant: , line:57:33, endln:57:34
             |vpiFullName:builtin::semaphore::new::keyCount
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
@@ -785,7 +805,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
           |vpiActual:
-          \_IntTypespec: , line:2:13, endln:2:16
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
@@ -809,12 +829,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+          \_RefTypespec: (builtin::semaphore::put::keyCount)
             |vpiParent:
             \_Constant: , line:60:29, endln:60:30
             |vpiFullName:builtin::semaphore::put::keyCount
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
@@ -825,7 +845,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
           |vpiActual:
-          \_IntTypespec: , line:2:13, endln:2:16
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiParent:
@@ -849,12 +869,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+          \_RefTypespec: (builtin::semaphore::get::keyCount)
             |vpiParent:
             \_Constant: , line:63:29, endln:63:30
             |vpiFullName:builtin::semaphore::get::keyCount
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
@@ -865,7 +885,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
           |vpiActual:
-          \_IntTypespec: , line:2:13, endln:2:16
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiParent:
@@ -884,7 +904,7 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiFullName:builtin::semaphore::try_get
         |vpiActual:
-        \_IntTypespec: , line:2:13, endln:2:16
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -896,12 +916,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount)
             |vpiParent:
             \_Constant: , line:66:41, endln:66:42
             |vpiFullName:builtin::semaphore::try_get::keyCount
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
@@ -912,7 +932,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
           |vpiActual:
-          \_IntTypespec: , line:2:13, endln:2:16
+          \_IntTypespec: 
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiImportTypespec:
@@ -1052,7 +1072,7 @@ Design: (unnamed)
       \_Variable: (work@dut.device), line:7:7, endln:7:13
       |vpiFullName:work@dut.device
       |vpiActual:
-      \_IntTypespec: , line:2:13, endln:2:16
+      \_IntTypespec: 
     |vpiName:device
     |vpiFullName:work@dut.device
     |vpiRandType:1
@@ -1062,40 +1082,40 @@ Design: (unnamed)
       |vpiParent:
       \_Variable: (work@dut.device), line:7:7, endln:7:13
       |vpiTypespec:
-      \_RefTypespec: (work@dut.device), line:7:16, endln:7:17
+      \_RefTypespec: (work@dut.device)
         |vpiParent:
         \_Constant: , line:7:16, endln:7:17
         |vpiFullName:work@dut.device
         |vpiActual:
-        \_IntTypespec: , line:2:13, endln:2:16
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:32
       |vpiDecompile:2
       |vpiValue:2
   |vpiParameter:
-  \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:30
+  \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:26
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AlwaysNoElab/dut.sv, line:1:1, endln:12:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.NrDevices), line:2:13, endln:2:16
       |vpiParent:
-      \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:30
+      \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:26
       |vpiFullName:work@dut.NrDevices
       |vpiActual:
-      \_IntTypespec: , line:2:13, endln:2:16
+      \_IntTypespec: 
     |vpiName:NrDevices
     |vpiFullName:work@dut.NrDevices
   |vpiParameter:
-  \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:83
+  \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:43
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AlwaysNoElab/dut.sv, line:1:1, endln:12:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.NumBitsDeviceSel), line:5:14, endln:5:26
       |vpiParent:
-      \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:83
+      \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:43
       |vpiFullName:work@dut.NumBitsDeviceSel
       |vpiActual:
-      \_IntTypespec: , line:5:14, endln:5:26
+      \_IntTypespec: 
     |vpiName:NumBitsDeviceSel
     |vpiFullName:work@dut.NumBitsDeviceSel
     |vpiLocalParam:1
@@ -1104,18 +1124,18 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AlwaysNoElab/dut.sv, line:1:1, endln:12:10
     |vpiLhs:
-    \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:30
+    \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:26
     |vpiRhs:
     \_Constant: , line:2:29, endln:2:30
       |vpiParent:
       \_ParamAssign: , line:2:17, endln:2:30
       |vpiTypespec:
-      \_RefTypespec: (work@dut), line:2:29, endln:2:30
+      \_RefTypespec: (work@dut)
         |vpiParent:
         \_Constant: , line:2:29, endln:2:30
         |vpiFullName:work@dut
         |vpiActual:
-        \_IntTypespec: , line:2:13, endln:2:16
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:1
@@ -1125,7 +1145,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AlwaysNoElab/dut.sv, line:1:1, endln:12:10
     |vpiLhs:
-    \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:83
+    \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:43
     |vpiRhs:
     \_Operation: , line:5:46, endln:5:83
       |vpiParent:
@@ -1143,18 +1163,18 @@ Design: (unnamed)
           |vpiName:NrDevices
           |vpiFullName:work@dut.NrDevices
           |vpiActual:
-          \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:30
+          \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:26
         |vpiOperand:
         \_Constant: , line:5:58, endln:5:59
           |vpiParent:
           \_Operation: , line:5:46, endln:5:59
           |vpiTypespec:
-          \_RefTypespec: (work@dut), line:5:58, endln:5:59
+          \_RefTypespec: (work@dut)
             |vpiParent:
             \_Constant: , line:5:58, endln:5:59
             |vpiFullName:work@dut
             |vpiActual:
-            \_IntTypespec: , line:2:13, endln:2:16
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
@@ -1175,18 +1195,18 @@ Design: (unnamed)
           |vpiName:NrDevices
           |vpiFullName:work@dut.NrDevices
           |vpiActual:
-          \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:30
+          \_Parameter: (work@dut.NrDevices), line:2:17, endln:2:26
       |vpiOperand:
       \_Constant: , line:5:82, endln:5:83
         |vpiParent:
         \_Operation: , line:5:46, endln:5:83
         |vpiTypespec:
-        \_RefTypespec: (work@dut), line:5:82, endln:5:83
+        \_RefTypespec: (work@dut)
           |vpiParent:
           \_Constant: , line:5:82, endln:5:83
           |vpiFullName:work@dut
           |vpiActual:
-          \_IntTypespec: , line:2:13, endln:2:16
+          \_IntTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
@@ -1201,7 +1221,7 @@ Design: (unnamed)
       \_Net: (work@dut.device_sel_req), line:6:32, endln:6:46
       |vpiFullName:work@dut.device_sel_req
       |vpiActual:
-      \_LogicTypespec: , line:6:3, endln:6:8
+      \_LogicTypespec: 
     |vpiName:device_sel_req
     |vpiFullName:work@dut.device_sel_req
     |vpiNetType:36
@@ -1263,22 +1283,22 @@ Design: (unnamed)
             \_Variable: (work@dut.device), line:7:7, endln:7:13
     |vpiAlwaysType:2
 |vpiTypespec:
-\_IntTypespec: , line:2:13, endln:2:16
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_IntTypespec: , line:5:14, endln:5:26
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:6:3, endln:6:8
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:6:9, endln:6:31
     |vpiParent:
-    \_LogicTypespec: , line:6:3, endln:6:8
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Operation: , line:6:10, endln:6:28
       |vpiParent:
@@ -1290,17 +1310,17 @@ Design: (unnamed)
         \_Operation: , line:6:10, endln:6:28
         |vpiName:NumBitsDeviceSel
         |vpiActual:
-        \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:83
+        \_Parameter: (work@dut.NumBitsDeviceSel), line:5:27, endln:5:43
       |vpiOperand:
       \_Constant: , line:6:27, endln:6:28
         |vpiParent:
         \_Operation: , line:6:10, endln:6:28
         |vpiTypespec:
-        \_RefTypespec: , line:6:27, endln:6:28
+        \_RefTypespec: 
           |vpiParent:
           \_Constant: , line:6:27, endln:6:28
           |vpiActual:
-          \_IntTypespec: , line:2:13, endln:2:16
+          \_IntTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
@@ -1310,11 +1330,11 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:6:9, endln:6:31
       |vpiTypespec:
-      \_RefTypespec: , line:6:29, endln:6:30
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:6:29, endln:6:30
         |vpiActual:
-        \_IntTypespec: , line:2:13, endln:2:16
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:0
@@ -1345,7 +1365,7 @@ COMMAND: ${SURELOG_DIR}/regression/AlwaysNoElab/slpp_all/surelog.uhdm ${SURELOG_
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                             162     162       0         0
+Others                             167     167       0         0
 ----------------------------------------------------------------
-                                   162     162       0         0
+                                   167     167       0         0
 ===================== END REDUCTION RESULT =====================

@@ -117,14 +117,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:10:1: Compile module "work@prim_lc_sender".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              12
+Constant                                              10
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
-Identifier                                             4
+Identifier                                             8
 IntTypespec                                            6
-LogicTypespec                                          9
+LogicTypespec                                          7
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
@@ -133,12 +133,12 @@ Package                                                1
 Port                                                   2
 Range                                                  3
 RefObj                                                 2
-RefTypespec                                           20
+RefTypespec                                           18
 SourceFile                                             1
 TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                74
+Total:                                                72
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -169,20 +169,24 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:11, endln:5:12
       |vpiFullName:lc_ctrl_pkg
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (On), line:3:5, endln:3:18
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:5:12
-      |vpiName:On
+      |vpiName:
+      \_Identifier: (On), line:3:5, endln:3:7
+        |vpiParent:
+        \_EnumConst: (On), line:3:5, endln:3:18
+        |vpiName:On
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:11, endln:3:18
         |vpiParent:
         \_EnumConst: (On), line:3:5, endln:3:18
         |vpiTypespec:
-        \_RefTypespec: (lc_ctrl_pkg::On), line:3:11, endln:3:18
+        \_RefTypespec: (lc_ctrl_pkg::On)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:11, endln:3:18
           |vpiFullName:lc_ctrl_pkg::On
           |vpiActual:
           \_LogicTypespec: 
@@ -194,15 +198,19 @@ Design: (unnamed)
     \_EnumConst: (Off), line:4:5, endln:4:18
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:5:12
-      |vpiName:Off
+      |vpiName:
+      \_Identifier: (Off), line:4:5, endln:4:8
+        |vpiParent:
+        \_EnumConst: (Off), line:4:5, endln:4:18
+        |vpiName:Off
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:4:11, endln:4:18
         |vpiParent:
         \_EnumConst: (Off), line:4:5, endln:4:18
         |vpiTypespec:
-        \_RefTypespec: (lc_ctrl_pkg::Off), line:4:11, endln:4:18
+        \_RefTypespec: (lc_ctrl_pkg::Off)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:4:11, endln:4:18
           |vpiFullName:lc_ctrl_pkg::Off
           |vpiActual:
           \_LogicTypespec: 
@@ -250,7 +258,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
   |vpiDefName:lc_ctrl_pkg
-  |vpiEndLabel:lc_ctrl_pkg
+  |vpiEndLabel:
+  \_Identifier: (lc_ctrl_pkg), line:8:14, endln:8:25
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+    |vpiName:lc_ctrl_pkg
 |vpiAllModules:
 \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
   |vpiParent:
@@ -270,7 +282,7 @@ Design: (unnamed)
       \_Net: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
       |vpiFullName:work@prim_lc_sender.lc_en_i
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
     |vpiName:lc_en_i
     |vpiFullName:work@prim_lc_sender.lc_en_i
   |vpiImportTypespec:
@@ -304,7 +316,7 @@ Design: (unnamed)
       \_Port: (lc_en_i), line:11:16, endln:11:23
       |vpiFullName:work@prim_lc_sender.lc_en_i
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
   |vpiPort:
   \_Port: (lc_en_o), line:12:31, endln:12:38
     |vpiParent:
@@ -352,21 +364,25 @@ Design: (unnamed)
         |vpiFullName:work@prim_lc_sender.lc_en_i
         |vpiActual:
         \_Net: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
-  |vpiEndLabel:prim_lc_sender
+  |vpiEndLabel:
+  \_Identifier: (prim_lc_sender), line:15:13, endln:15:27
+    |vpiParent:
+    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
+    |vpiName:prim_lc_sender
 |vpiTypespec:
-\_LogicTypespec: , line:2:16, endln:2:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:22, endln:2:27
     |vpiParent:
-    \_LogicTypespec: , line:2:16, endln:2:21
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:2:23, endln:2:24
       |vpiParent:
       \_Range: , line:2:22, endln:2:27
       |vpiTypespec:
-      \_RefTypespec: , line:2:23, endln:2:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:23, endln:2:24
         |vpiActual:
@@ -380,7 +396,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:22, endln:2:27
       |vpiTypespec:
-      \_RefTypespec: , line:2:25, endln:2:26
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:25, endln:2:26
         |vpiActual:
@@ -420,7 +436,7 @@ COMMAND: ${SURELOG_DIR}/regression/TypedefPack/slpp_all/surelog.uhdm ${SURELOG_D
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              42      42       0         0
+Others                              46      46       0         0
 ----------------------------------------------------------------
-                                    42      42       0         0
+                                    46      46       0         0
 ===================== END REDUCTION RESULT =====================

@@ -119,7 +119,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PackEnumVal/dut.sv:16:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               6
+Constant                                               4
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
@@ -127,8 +127,8 @@ EnumTypespec                                           1
 FuncCall                                               1
 Function                                               1
 IODecl                                                 1
-Identifier                                             5
-IntTypespec                                            6
+Identifier                                             8
+IntTypespec                                            4
 LogicTypespec                                          6
 Module                                                 2
 ModuleTypespec                                         1
@@ -137,13 +137,13 @@ Operation                                              1
 Package                                                1
 Port                                                   2
 RefObj                                                 4
-RefTypespec                                           14
+RefTypespec                                           12
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                62
+Total:                                                59
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackEnumVal/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -182,7 +182,7 @@ Design: (unnamed)
       \_Function: (test_package::test_true), line:9:3, endln:11:26
       |vpiFullName:test_package::test_true
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:21
+      \_LogicTypespec: 
     |vpiIODecl:
     \_IODecl: (val), line:9:46, endln:9:49
       |vpiParent:
@@ -224,6 +224,11 @@ Design: (unnamed)
           \_IODecl: (val), line:9:46, endln:9:49
     |vpiInstance:
     \_Package: test_package (test_package), file:${SURELOG_DIR}/tests/PackEnumVal/dut.sv, line:2:1, endln:13:11
+    |vpiEndLabel:
+    \_Identifier: (test_true), line:11:17, endln:11:26
+      |vpiParent:
+      \_Function: (test_package::test_true), line:9:3, endln:11:26
+      |vpiName:test_true
   |vpiTypespec:
   \_EnumTypespec: , line:4:11, endln:7:12
     |vpiParent:
@@ -234,23 +239,27 @@ Design: (unnamed)
       \_EnumTypespec: , line:4:11, endln:7:12
       |vpiFullName:test_package
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:21
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (On), line:5:5, endln:5:12
       |vpiParent:
       \_EnumTypespec: , line:4:11, endln:7:12
-      |vpiName:On
+      |vpiName:
+      \_Identifier: (On), line:5:5, endln:5:7
+        |vpiParent:
+        \_EnumConst: (On), line:5:5, endln:5:12
+        |vpiName:On
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:5:11, endln:5:12
         |vpiParent:
         \_EnumConst: (On), line:5:5, endln:5:12
         |vpiTypespec:
-        \_RefTypespec: (test_package::On), line:5:11, endln:5:12
+        \_RefTypespec: (test_package::On)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:5:11, endln:5:12
           |vpiFullName:test_package::On
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
@@ -259,18 +268,22 @@ Design: (unnamed)
     \_EnumConst: (Off), line:6:5, endln:6:12
       |vpiParent:
       \_EnumTypespec: , line:4:11, endln:7:12
-      |vpiName:Off
+      |vpiName:
+      \_Identifier: (Off), line:6:5, endln:6:8
+        |vpiParent:
+        \_EnumConst: (Off), line:6:5, endln:6:12
+        |vpiName:Off
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:6:11, endln:6:12
         |vpiParent:
         \_EnumConst: (Off), line:6:5, endln:6:12
         |vpiTypespec:
-        \_RefTypespec: (test_package::Off), line:6:11, endln:6:12
+        \_RefTypespec: (test_package::Off)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:6:11, endln:6:12
           |vpiFullName:test_package::Off
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:0
@@ -319,7 +332,7 @@ Design: (unnamed)
       \_Net: (work@top.i), line:16:24, endln:16:25
       |vpiFullName:work@top.i
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:21
+      \_LogicTypespec: 
     |vpiName:i
     |vpiFullName:work@top.i
     |vpiNetType:36
@@ -333,7 +346,7 @@ Design: (unnamed)
       \_Net: (work@top.o), line:16:40, endln:16:41
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:21
+      \_LogicTypespec: 
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:36
@@ -354,7 +367,7 @@ Design: (unnamed)
       \_Port: (i), line:16:24, endln:16:25
       |vpiFullName:work@top.i
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:21
+      \_LogicTypespec: 
   |vpiPort:
   \_Port: (o), line:16:40, endln:16:41
     |vpiParent:
@@ -367,7 +380,7 @@ Design: (unnamed)
       \_Port: (o), line:16:40, endln:16:41
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:21
+      \_LogicTypespec: 
   |vpiContAssign:
   \_ContAssign: , line:17:10, endln:17:40
     |vpiParent:
@@ -400,7 +413,7 @@ Design: (unnamed)
         |vpiActual:
         \_Net: (work@top.i), line:16:24, endln:16:25
 |vpiTypespec:
-\_LogicTypespec: , line:4:16, endln:4:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -408,10 +421,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
-|vpiTypespec:
-\_IntTypespec: 
-  |vpiParent:
-  \_Design: (unnamed)
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:
@@ -434,7 +443,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackEnumVal/slpp_all/surelog.uhdm ${SURELOG_D
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              43      43       0         0
+Others                              45      45       0         0
 ----------------------------------------------------------------
-                                    43      43       0         0
+                                    45      45       0         0
 ===================== END REDUCTION RESULT =====================

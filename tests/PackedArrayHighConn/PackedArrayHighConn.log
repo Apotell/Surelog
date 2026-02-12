@@ -188,13 +188,13 @@ AST_DEBUG_END
 ArrayTypespec                                          1
 BitSelect                                              2
 BitTypespec                                            1
-Constant                                              17
+Constant                                              16
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
-Identifier                                             7
+Identifier                                            11
 ImportTypespec                                         2
-IntTypespec                                           14
+IntTypespec                                           13
 LogicTypespec                                          3
 Module                                                 3
 ModuleTypespec                                         2
@@ -205,13 +205,13 @@ Parameter                                              1
 Port                                                   2
 Range                                                  5
 RefModule                                              1
-RefTypespec                                           25
+RefTypespec                                           24
 SourceFile                                             1
 StringTypespec                                         2
 TypedefTypespec                                        2
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                               101
+Total:                                               102
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHighConn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -242,23 +242,27 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:11, endln:4:15
       |vpiFullName:prim_pad_wrapper_pkg
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:21
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (BidirStd), line:3:5, endln:3:20
       |vpiParent:
       \_EnumTypespec: , line:2:11, endln:4:15
-      |vpiName:BidirStd
+      |vpiName:
+      \_Identifier: (BidirStd), line:3:5, endln:3:13
+        |vpiParent:
+        \_EnumConst: (BidirStd), line:3:5, endln:3:20
+        |vpiName:BidirStd
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:3:16, endln:3:20
         |vpiParent:
         \_EnumConst: (BidirStd), line:3:5, endln:3:20
         |vpiTypespec:
-        \_RefTypespec: (prim_pad_wrapper_pkg::BidirStd), line:3:16, endln:3:20
+        \_RefTypespec: (prim_pad_wrapper_pkg::BidirStd)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:3:16, endln:3:20
           |vpiFullName:prim_pad_wrapper_pkg::BidirStd
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:5
         |vpiSize:3
         |vpiDecompile:3'h0
@@ -280,29 +284,33 @@ Design: (unnamed)
       |vpiActual:
       \_EnumTypespec: , line:2:11, endln:4:15
   |vpiTypespec:
-  \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
+  \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:32
     |vpiParent:
     \_Package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:1:1, endln:6:34
     |vpiName:
     \_Identifier: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
       |vpiParent:
-      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:32
       |vpiName:prim_pad_wrapper_pkg::pad_pok_t
     |vpiTypedefAlias:
     \_RefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:16
       |vpiParent:
-      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:32
       |vpiFullName:prim_pad_wrapper_pkg::pad_pok_t
       |vpiActual:
-      \_LogicTypespec: , line:5:11, endln:5:16
+      \_LogicTypespec: 
   |vpiImportTypespec:
   \_EnumTypespec: , line:2:11, endln:4:15
   |vpiImportTypespec:
   \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:5, endln:4:15
   |vpiImportTypespec:
-  \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
+  \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:32
   |vpiDefName:prim_pad_wrapper_pkg
-  |vpiEndLabel:prim_pad_wrapper_pkg
+  |vpiEndLabel:
+  \_Identifier: (prim_pad_wrapper_pkg), line:6:14, endln:6:34
+    |vpiParent:
+    \_Package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:1:1, endln:6:34
+    |vpiName:prim_pad_wrapper_pkg
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
   |vpiParent:
@@ -313,16 +321,16 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
     |vpiName:work@dut
   |vpiParameter:
-  \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:79
+  \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:74
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
     |vpiTypespec:
     \_RefTypespec: (work@dut.DioPadBank), line:13:47, endln:13:63
       |vpiParent:
-      \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:79
+      \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:74
       |vpiFullName:work@dut.DioPadBank
       |vpiActual:
-      \_LogicTypespec: , line:13:47, endln:13:52
+      \_LogicTypespec: 
     |vpiName:DioPadBank
     |vpiFullName:work@dut.DioPadBank
   |vpiParamAssign:
@@ -330,13 +338,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
     |vpiLhs:
-    \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:79
+    \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:74
     |vpiRhs:
     \_Constant: , line:13:77, endln:13:79
       |vpiParent:
       \_ParamAssign: , line:13:64, endln:13:79
       |vpiTypespec:
-      \_RefTypespec: (work@dut), line:13:77, endln:13:79
+      \_RefTypespec: (work@dut)
         |vpiParent:
         \_Constant: , line:13:77, endln:13:79
         |vpiFullName:work@dut
@@ -356,13 +364,13 @@ Design: (unnamed)
       \_ImportTypespec: (prim_pad_wrapper_pkg), line:13:10, endln:13:33
       |vpiName:prim_pad_wrapper_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:13:10, endln:13:33
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (prim_pad_wrapper_pkg), line:13:10, endln:13:33
       |vpiTypespec:
-      \_RefTypespec: (work@dut.prim_pad_wrapper_pkg), line:13:10, endln:13:33
+      \_RefTypespec: (work@dut.prim_pad_wrapper_pkg)
         |vpiParent:
-        \_Constant: , line:13:10, endln:13:33
+        \_Constant: 
         |vpiFullName:work@dut.prim_pad_wrapper_pkg
         |vpiActual:
         \_StringTypespec: 
@@ -390,7 +398,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:14:13, endln:14:18
         |vpiTypespec:
-        \_RefTypespec: (work@dut), line:14:14, endln:14:15
+        \_RefTypespec: (work@dut)
           |vpiParent:
           \_Constant: , line:14:14, endln:14:15
           |vpiFullName:work@dut
@@ -405,7 +413,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:14:13, endln:14:18
         |vpiTypespec:
-        \_RefTypespec: (work@dut), line:14:16, endln:14:17
+        \_RefTypespec: (work@dut)
           |vpiParent:
           \_Constant: , line:14:16, endln:14:17
           |vpiFullName:work@dut
@@ -416,13 +424,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiValue:0
     |vpiElemTypespec:
-    \_RefTypespec: (work@dut.pad_pok_t), line:14:3, endln:14:12
+    \_RefTypespec: (work@dut.pad_pok_t), line:14:3, endln:14:18
       |vpiParent:
       \_ArrayTypespec: , line:14:3, endln:14:18
       |vpiName:pad_pok_t
       |vpiFullName:work@dut.pad_pok_t
       |vpiActual:
-      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:32
     |vpiPacked:1
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:13:10, endln:13:33
@@ -472,13 +480,13 @@ Design: (unnamed)
           |vpiName:DioPadBank
           |vpiFullName:work@dut.u_dio_pad.pad_pok.DioPadBank
           |vpiActual:
-          \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:79
+          \_Parameter: (work@dut.DioPadBank), line:13:64, endln:13:74
           |vpiIndex:
           \_Constant: , line:16:38, endln:16:39
             |vpiParent:
             \_BitSelect: (work@dut.u_dio_pad.pad_pok.DioPadBank), line:16:37, endln:16:40
             |vpiTypespec:
-            \_RefTypespec: (work@dut.u_dio_pad.pad_pok.DioPadBank), line:16:38, endln:16:39
+            \_RefTypespec: (work@dut.u_dio_pad.pad_pok.DioPadBank)
               |vpiParent:
               \_Constant: , line:16:38, endln:16:39
               |vpiFullName:work@dut.u_dio_pad.pad_pok.DioPadBank
@@ -488,7 +496,11 @@ Design: (unnamed)
             |vpiSize:64
             |vpiDecompile:0
             |vpiValue:0
-  |vpiEndLabel:dut
+  |vpiEndLabel:
+  \_Identifier: (dut), line:18:13, endln:18:16
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
+    |vpiName:dut
 |vpiAllModules:
 \_Module: work@prim_pad_wrapper (work@prim_pad_wrapper), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:8:1, endln:10:29
   |vpiParent:
@@ -508,13 +520,13 @@ Design: (unnamed)
       \_ImportTypespec: (prim_pad_wrapper_pkg), line:9:10, endln:9:33
       |vpiName:prim_pad_wrapper_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:9:10, endln:9:33
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (prim_pad_wrapper_pkg), line:9:10, endln:9:33
       |vpiTypespec:
-      \_RefTypespec: (work@prim_pad_wrapper.prim_pad_wrapper_pkg), line:9:10, endln:9:33
+      \_RefTypespec: (work@prim_pad_wrapper.prim_pad_wrapper_pkg)
         |vpiParent:
-        \_Constant: , line:9:10, endln:9:33
+        \_Constant: 
         |vpiFullName:work@prim_pad_wrapper.prim_pad_wrapper_pkg
         |vpiActual:
         \_StringTypespec: 
@@ -535,7 +547,7 @@ Design: (unnamed)
       |vpiName:pad_pok_t
       |vpiFullName:work@prim_pad_wrapper.pok_i.pad_pok_t
       |vpiActual:
-      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:32
     |vpiName:pok_i
     |vpiFullName:work@prim_pad_wrapper.pok_i
   |vpiDefName:work@prim_pad_wrapper
@@ -554,22 +566,26 @@ Design: (unnamed)
       |vpiName:pad_pok_t
       |vpiFullName:work@prim_pad_wrapper.pok_i.pad_pok_t
       |vpiActual:
-      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
-  |vpiEndLabel:prim_pad_wrapper
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:32
+  |vpiEndLabel:
+  \_Identifier: (prim_pad_wrapper), line:10:13, endln:10:29
+    |vpiParent:
+    \_Module: work@prim_pad_wrapper (work@prim_pad_wrapper), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:8:1, endln:10:29
+    |vpiName:prim_pad_wrapper
 |vpiTypespec:
-\_LogicTypespec: , line:2:16, endln:2:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:22, endln:2:27
     |vpiParent:
-    \_LogicTypespec: , line:2:16, endln:2:21
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:2:23, endln:2:24
       |vpiParent:
       \_Range: , line:2:22, endln:2:27
       |vpiTypespec:
-      \_RefTypespec: , line:2:23, endln:2:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:23, endln:2:24
         |vpiActual:
@@ -583,7 +599,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:22, endln:2:27
       |vpiTypespec:
-      \_RefTypespec: , line:2:25, endln:2:26
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:25, endln:2:26
         |vpiActual:
@@ -602,19 +618,19 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:5:11, endln:5:16
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:5:17, endln:5:22
     |vpiParent:
-    \_LogicTypespec: , line:5:11, endln:5:16
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:5:18, endln:5:19
       |vpiParent:
       \_Range: , line:5:17, endln:5:22
       |vpiTypespec:
-      \_RefTypespec: , line:5:18, endln:5:19
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:5:18, endln:5:19
         |vpiActual:
@@ -628,7 +644,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:5:17, endln:5:22
       |vpiTypespec:
-      \_RefTypespec: , line:5:20, endln:5:21
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:5:20, endln:5:21
         |vpiActual:
@@ -642,19 +658,19 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:13:47, endln:13:52
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:13:53, endln:13:58
     |vpiParent:
-    \_LogicTypespec: , line:13:47, endln:13:52
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:13:54, endln:13:55
       |vpiParent:
       \_Range: , line:13:53, endln:13:58
       |vpiTypespec:
-      \_RefTypespec: , line:13:54, endln:13:55
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:13:54, endln:13:55
         |vpiActual:
@@ -668,7 +684,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:13:53, endln:13:58
       |vpiTypespec:
-      \_RefTypespec: , line:13:56, endln:13:57
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:13:56, endln:13:57
         |vpiActual:
@@ -680,13 +696,13 @@ Design: (unnamed)
   |vpiRange:
   \_Range: , line:13:58, endln:13:63
     |vpiParent:
-    \_LogicTypespec: , line:13:47, endln:13:52
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:13:59, endln:13:60
       |vpiParent:
       \_Range: , line:13:58, endln:13:63
       |vpiTypespec:
-      \_RefTypespec: , line:13:59, endln:13:60
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:13:59, endln:13:60
         |vpiActual:
@@ -700,7 +716,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:13:58, endln:13:63
       |vpiTypespec:
-      \_RefTypespec: , line:13:61, endln:13:62
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:13:61, endln:13:62
         |vpiActual:
@@ -737,7 +753,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackedArrayHighConn/slpp_all/surelog.uhdm ${S
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              80      80       0         0
+Others                              84      84       0         0
 ----------------------------------------------------------------
-                                    80      80       0         0
+                                    84      84       0         0
 ===================== END REDUCTION RESULT =====================

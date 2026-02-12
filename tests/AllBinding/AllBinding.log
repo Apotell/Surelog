@@ -83,24 +83,24 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/AllBinding/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              11
+Constant                                               8
 Design                                                 1
 EnumConst                                              3
 EnumTypespec                                           1
-Identifier                                             2
+Identifier                                             5
 IntTypespec                                            2
-LogicTypespec                                         10
+LogicTypespec                                          7
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
 Port                                                   1
 Range                                                  1
-RefTypespec                                           16
+RefTypespec                                           13
 SourceFile                                             2
 TypedefTypespec                                        1
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                59
+Total:                                                53
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -182,20 +182,24 @@ Design: (unnamed)
     |vpiParent:
     \_EnumTypespec: , line:1:9, endln:5:23
     |vpiActual:
-    \_LogicTypespec: , line:1:14, endln:1:19
+    \_LogicTypespec: 
   |vpiEnumConst:
   \_EnumConst: (SCR1_MEM_RESP_NOTRDY), line:2:5, endln:2:36
     |vpiParent:
     \_EnumTypespec: , line:1:9, endln:5:23
-    |vpiName:SCR1_MEM_RESP_NOTRDY
+    |vpiName:
+    \_Identifier: (SCR1_MEM_RESP_NOTRDY), line:2:5, endln:2:25
+      |vpiParent:
+      \_EnumConst: (SCR1_MEM_RESP_NOTRDY), line:2:5, endln:2:36
+      |vpiName:SCR1_MEM_RESP_NOTRDY
     |vpiValue:
-    \_Constant: 
+    \_Constant: , line:2:31, endln:2:36
       |vpiParent:
       \_EnumConst: (SCR1_MEM_RESP_NOTRDY), line:2:5, endln:2:36
       |vpiTypespec:
-      \_RefTypespec: (SCR1_MEM_RESP_NOTRDY), line:2:31, endln:2:36
+      \_RefTypespec: (SCR1_MEM_RESP_NOTRDY)
         |vpiParent:
-        \_Constant: 
+        \_Constant: , line:2:31, endln:2:36
         |vpiFullName:SCR1_MEM_RESP_NOTRDY
         |vpiActual:
         \_LogicTypespec: 
@@ -207,15 +211,19 @@ Design: (unnamed)
   \_EnumConst: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:36
     |vpiParent:
     \_EnumTypespec: , line:1:9, endln:5:23
-    |vpiName:SCR1_MEM_RESP_RDY_OK
+    |vpiName:
+    \_Identifier: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:25
+      |vpiParent:
+      \_EnumConst: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:36
+      |vpiName:SCR1_MEM_RESP_RDY_OK
     |vpiValue:
-    \_Constant: 
+    \_Constant: , line:3:31, endln:3:36
       |vpiParent:
       \_EnumConst: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:36
       |vpiTypespec:
-      \_RefTypespec: (SCR1_MEM_RESP_RDY_OK), line:3:31, endln:3:36
+      \_RefTypespec: (SCR1_MEM_RESP_RDY_OK)
         |vpiParent:
-        \_Constant: 
+        \_Constant: , line:3:31, endln:3:36
         |vpiFullName:SCR1_MEM_RESP_RDY_OK
         |vpiActual:
         \_LogicTypespec: 
@@ -227,15 +235,19 @@ Design: (unnamed)
   \_EnumConst: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:36
     |vpiParent:
     \_EnumTypespec: , line:1:9, endln:5:23
-    |vpiName:SCR1_MEM_RESP_RDY_ER
+    |vpiName:
+    \_Identifier: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:25
+      |vpiParent:
+      \_EnumConst: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:36
+      |vpiName:SCR1_MEM_RESP_RDY_ER
     |vpiValue:
-    \_Constant: 
+    \_Constant: , line:4:31, endln:4:36
       |vpiParent:
       \_EnumConst: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:36
       |vpiTypespec:
-      \_RefTypespec: (SCR1_MEM_RESP_RDY_ER), line:4:31, endln:4:36
+      \_RefTypespec: (SCR1_MEM_RESP_RDY_ER)
         |vpiParent:
-        \_Constant: 
+        \_Constant: , line:4:31, endln:4:36
         |vpiFullName:SCR1_MEM_RESP_RDY_ER
         |vpiActual:
         \_LogicTypespec: 
@@ -244,19 +256,19 @@ Design: (unnamed)
       |vpiDecompile:2'b10
       |vpiValue:10
 |vpiTypespec:
-\_LogicTypespec: , line:1:14, endln:1:19
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:1:19, endln:1:24
     |vpiParent:
-    \_LogicTypespec: , line:1:14, endln:1:19
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:1:20, endln:1:21
       |vpiParent:
       \_Range: , line:1:19, endln:1:24
       |vpiTypespec:
-      \_RefTypespec: , line:1:20, endln:1:21
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:1:20, endln:1:21
         |vpiActual:
@@ -270,7 +282,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:1:19, endln:1:24
       |vpiTypespec:
-      \_RefTypespec: , line:1:22, endln:1:23
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:1:22, endln:1:23
         |vpiActual:
@@ -326,7 +338,7 @@ COMMAND: ${SURELOG_DIR}/regression/AllBinding/slpp_all/surelog.uhdm ${SURELOG_DI
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              34      34       0         0
+Others                              37      37       0         0
 ----------------------------------------------------------------
-                                    34      34       0         0
+                                    37      37       0         0
 ===================== END REDUCTION RESULT =====================

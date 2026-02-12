@@ -21,6 +21,7 @@ MethodFuncCall                                         2
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    2
+ParamAssign                                            4
 RefTypespec                                           12
 SourceFile                                             1
 StringTypespec                                         1
@@ -30,9 +31,13 @@ UnsupportedTypespec                                    5
 Variable                                               1
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                59
+Total:                                                63
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParam/slpp_unit/surelog.uhdm ...
+[ERR:IG0801] Missing location information: id:24, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:24, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:29, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:29, type:Identifier, name:new.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -57,26 +62,38 @@ Design: (unnamed)
     \_ClassDefn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
     |vpiName:T
     |vpiFullName:work@uvm_config_db::T
-    |vpiTypespec:
-    \_RefTypespec: (work@uvm_config_db::T), line:16:29, endln:16:32
-      |vpiParent:
-      \_TypeParameter: (work@uvm_config_db::T), line:16:27, endln:16:28
-      |vpiFullName:work@uvm_config_db::T
-      |vpiActual:
-      \_IntTypespec: , line:16:29, endln:16:32
   |vpiParameter:
   \_TypeParameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
     |vpiParent:
     \_ClassDefn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
     |vpiName:T2
     |vpiFullName:work@uvm_config_db::T2
-    |vpiTypespec:
-    \_RefTypespec: (work@uvm_config_db::T2), line:16:42, endln:16:45
+  |vpiParamAssign:
+  \_ParamAssign: , line:16:27, endln:16:32
+    |vpiParent:
+    \_ClassDefn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
+    |vpiLhs:
+    \_TypeParameter: (work@uvm_config_db::T), line:16:27, endln:16:28
+    |vpiRhs:
+    \_RefTypespec: (work@uvm_config_db), line:16:29, endln:16:32
       |vpiParent:
-      \_TypeParameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
-      |vpiFullName:work@uvm_config_db::T2
+      \_ParamAssign: , line:16:27, endln:16:32
+      |vpiFullName:work@uvm_config_db
       |vpiActual:
-      \_IntTypespec: , line:16:29, endln:16:32
+      \_IntTypespec: 
+  |vpiParamAssign:
+  \_ParamAssign: , line:16:39, endln:16:45
+    |vpiParent:
+    \_ClassDefn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
+    |vpiLhs:
+    \_TypeParameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
+    |vpiRhs:
+    \_RefTypespec: (work@uvm_config_db), line:16:42, endln:16:45
+      |vpiParent:
+      \_ParamAssign: , line:16:39, endln:16:45
+      |vpiFullName:work@uvm_config_db
+      |vpiActual:
+      \_IntTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@uvm_config_db::T), line:16:27, endln:16:28
   |vpiTypespec:
@@ -122,13 +139,19 @@ Design: (unnamed)
     \_ClassDefn: (work@uvm_resource), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:4:1, endln:5:9
     |vpiName:T
     |vpiFullName:work@uvm_resource::T
-    |vpiTypespec:
-    \_RefTypespec: (work@uvm_resource::T), line:4:29, endln:4:32
+  |vpiParamAssign:
+  \_ParamAssign: , line:4:27, endln:4:32
+    |vpiParent:
+    \_ClassDefn: (work@uvm_resource), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:4:1, endln:5:9
+    |vpiLhs:
+    \_TypeParameter: (work@uvm_resource::T), line:4:27, endln:4:28
+    |vpiRhs:
+    \_RefTypespec: (work@uvm_resource), line:4:29, endln:4:32
       |vpiParent:
-      \_TypeParameter: (work@uvm_resource::T), line:4:27, endln:4:28
-      |vpiFullName:work@uvm_resource::T
+      \_ParamAssign: , line:4:27, endln:4:32
+      |vpiFullName:work@uvm_resource
       |vpiActual:
-      \_IntTypespec: , line:16:29, endln:16:32
+      \_IntTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@uvm_resource::T), line:4:27, endln:4:28
   |vpiImportTypespec:
@@ -165,13 +188,19 @@ Design: (unnamed)
     \_ClassDefn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
     |vpiName:T
     |vpiFullName:work@uvm_resource_db::T
-    |vpiTypespec:
-    \_RefTypespec: (work@uvm_resource_db::T), line:7:32, endln:7:35
+  |vpiParamAssign:
+  \_ParamAssign: , line:7:30, endln:7:35
+    |vpiParent:
+    \_ClassDefn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
+    |vpiLhs:
+    \_TypeParameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
+    |vpiRhs:
+    \_RefTypespec: (work@uvm_resource_db), line:7:32, endln:7:35
       |vpiParent:
-      \_TypeParameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
-      |vpiFullName:work@uvm_resource_db::T
+      \_ParamAssign: , line:7:30, endln:7:35
+      |vpiFullName:work@uvm_resource_db
       |vpiActual:
-      \_IntTypespec: , line:16:29, endln:16:32
+      \_IntTypespec: 
   |vpiInternalScope:
   \_Function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
     |vpiParent:
@@ -191,7 +220,7 @@ Design: (unnamed)
       \_Function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
       |vpiFullName:work@uvm_resource_db::check_all_sva_passed
       |vpiActual:
-      \_VoidTypespec: , line:11:19, endln:11:23
+      \_VoidTypespec: 
     |vpiIODecl:
     \_IODecl: (a_error_msg), line:11:52, endln:11:63
       |vpiParent:
@@ -204,7 +233,7 @@ Design: (unnamed)
         \_IODecl: (a_error_msg), line:11:52, endln:11:63
         |vpiFullName:work@uvm_resource_db::check_all_sva_passed::a_error_msg
         |vpiActual:
-        \_StringTypespec: , line:11:45, endln:11:51
+        \_StringTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
   |vpiTypespec:
@@ -314,16 +343,16 @@ Design: (unnamed)
     |vpiActual:
     \_ClassTypespec: (work@uvm_config_db)
 |vpiTypespec:
-\_IntTypespec: , line:16:29, endln:16:32
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_VoidTypespec: , line:11:19, endln:11:23
+\_VoidTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_StringTypespec: , line:11:45, endln:11:51
+\_StringTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -364,7 +393,7 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 4
 [WARNING] : 1
 [   NOTE] : 0
 
@@ -376,7 +405,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassTypeParam/slpp_unit/surelog.uhdm ${SUREL
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              51      51       0         0
+Others                              55      55       0         0
 ----------------------------------------------------------------
-                                    51      51       0         0
+                                    55      55       0         0
 ===================== END REDUCTION RESULT =====================

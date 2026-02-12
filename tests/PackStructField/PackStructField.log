@@ -152,7 +152,7 @@ Constant                                               4
 ContAssign                                             2
 Design                                                 1
 HierPath                                               2
-Identifier                                             3
+Identifier                                             5
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
@@ -171,7 +171,7 @@ TaggedPattern                                          4
 TypedefTypespec                                        1
 TypespecMember                                         2
 ------------------------------------------------------------
-Total:                                                65
+Total:                                                67
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructField/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -193,13 +193,13 @@ Design: (unnamed)
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
     |vpiName:my_package
   |vpiParameter:
-  \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
+  \_Parameter: (my_package::my_parameter), line:9:35, endln:9:47
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
     |vpiTypespec:
     \_RefTypespec: (my_package::my_parameter::my_package::my_struct), line:9:13, endln:9:34
       |vpiParent:
-      \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
+      \_Parameter: (my_package::my_parameter), line:9:35, endln:9:47
       |vpiName:my_package::my_struct
       |vpiFullName:my_package::my_parameter::my_package::my_struct
       |vpiActual:
@@ -211,7 +211,7 @@ Design: (unnamed)
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
     |vpiLhs:
-    \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
+    \_Parameter: (my_package::my_parameter), line:9:35, endln:9:47
     |vpiRhs:
     \_Operation: , line:9:50, endln:12:4
       |vpiParent:
@@ -226,7 +226,7 @@ Design: (unnamed)
           |vpiParent:
           \_TaggedPattern: , line:10:5, endln:10:12
           |vpiTypespec:
-          \_RefTypespec: (my_package), line:10:8, endln:10:12
+          \_RefTypespec: (my_package)
             |vpiParent:
             \_Constant: , line:10:8, endln:10:12
             |vpiFullName:my_package
@@ -243,7 +243,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:my_package::a
           |vpiActual:
-          \_StringTypespec: , line:10:5, endln:10:6
+          \_StringTypespec: 
       |vpiOperand:
       \_TaggedPattern: , line:11:5, endln:11:12
         |vpiParent:
@@ -253,7 +253,7 @@ Design: (unnamed)
           |vpiParent:
           \_TaggedPattern: , line:11:5, endln:11:12
           |vpiTypespec:
-          \_RefTypespec: (my_package), line:11:8, endln:11:12
+          \_RefTypespec: (my_package)
             |vpiParent:
             \_Constant: , line:11:8, endln:11:12
             |vpiFullName:my_package
@@ -270,7 +270,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:my_package::b
           |vpiActual:
-          \_StringTypespec: , line:10:5, endln:10:6
+          \_StringTypespec: 
   |vpiTypespec:
   \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
     |vpiParent:
@@ -303,7 +303,7 @@ Design: (unnamed)
         \_TypespecMember: (a), line:5:11, endln:5:12
         |vpiFullName:my_package::a
         |vpiActual:
-        \_LogicTypespec: , line:5:5, endln:5:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (b), line:6:11, endln:6:12
       |vpiParent:
@@ -315,13 +315,17 @@ Design: (unnamed)
         \_TypespecMember: (b), line:6:11, endln:6:12
         |vpiFullName:my_package::b
         |vpiActual:
-        \_LogicTypespec: , line:5:5, endln:5:10
+        \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
   |vpiImportTypespec:
   \_StructTypespec: , line:4:11, endln:7:4
   |vpiDefName:my_package
-  |vpiEndLabel:my_package
+  |vpiEndLabel:
+  \_Identifier: (my_package), line:14:14, endln:14:24
+    |vpiParent:
+    \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
+    |vpiName:my_package
 |vpiAllModules:
 \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
   |vpiParent:
@@ -415,7 +419,7 @@ Design: (unnamed)
         \_HierPath: (work@my_module), line:21:12, endln:21:38
         |vpiName:my_package::my_parameter
         |vpiActual:
-        \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
+        \_Parameter: (my_package::my_parameter), line:9:35, endln:9:47
       |vpiActual:
       \_RefObj: (work@my_module.a), line:21:37, endln:21:38
         |vpiParent:
@@ -447,7 +451,7 @@ Design: (unnamed)
         \_HierPath: (work@my_module), line:22:12, endln:22:38
         |vpiName:my_package::my_parameter
         |vpiActual:
-        \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
+        \_Parameter: (my_package::my_parameter), line:9:35, endln:9:47
       |vpiActual:
       \_RefObj: (work@my_module.b), line:22:37, endln:22:38
         |vpiParent:
@@ -456,9 +460,13 @@ Design: (unnamed)
         |vpiFullName:work@my_module.b
         |vpiActual:
         \_TypespecMember: (b), line:6:11, endln:6:12
-  |vpiEndLabel:my_module
+  |vpiEndLabel:
+  \_Identifier: (my_module), line:24:13, endln:24:22
+    |vpiParent:
+    \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
+    |vpiName:my_module
 |vpiTypespec:
-\_LogicTypespec: , line:5:5, endln:5:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -466,7 +474,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_StringTypespec: , line:10:5, endln:10:6
+\_StringTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -491,7 +499,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackStructField/slpp_all/surelog.uhdm ${SUREL
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              48      48       0         0
+Others                              50      50       0         0
 ----------------------------------------------------------------
-                                    48      48       0         0
+                                    50      50       0         0
 ===================== END REDUCTION RESULT =====================

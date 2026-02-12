@@ -186,6 +186,7 @@ HierPath                                               1
 Identifier                                            13
 MethodFuncCall                                         1
 Package                                                1
+ParamAssign                                            3
 RefObj                                                 1
 RefTypespec                                           11
 SourceFile                                             1
@@ -195,9 +196,11 @@ TypeParameter                                          3
 UnsupportedTypespec                                    1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                60
+Total:                                                63
 === UHDM Object Stats End ===
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:10:24: Illegal implicit net "id:40, name:m_sequencer".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassExtendParam/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:10:24: Null Actual: id:40, type:RefObj, name:m_sequencer.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -232,26 +235,38 @@ Design: (unnamed)
       \_ClassDefn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
       |vpiName:REQ
       |vpiFullName:uvm::uvm_sequence::REQ
-      |vpiTypespec:
-      \_RefTypespec: (uvm::uvm_sequence::REQ::uvm_sequence_item), line:3:41, endln:3:58
-        |vpiParent:
-        \_TypeParameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
-        |vpiName:uvm_sequence_item
-        |vpiFullName:uvm::uvm_sequence::REQ::uvm_sequence_item
-        |vpiActual:
-        \_ClassTypespec: (uvm_sequence_item)
     |vpiParameter:
     \_TypeParameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
       |vpiParent:
       \_ClassDefn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
       |vpiName:RSP
       |vpiFullName:uvm::uvm_sequence::RSP
-      |vpiTypespec:
-      \_RefTypespec: (uvm::uvm_sequence::RSP::REQ), line:4:41, endln:4:44
+    |vpiParamAssign:
+    \_ParamAssign: , line:3:35, endln:3:58
+      |vpiParent:
+      \_ClassDefn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
+      |vpiLhs:
+      \_TypeParameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
+      |vpiRhs:
+      \_RefTypespec: (uvm::uvm_sequence::uvm_sequence_item), line:3:41, endln:3:58
         |vpiParent:
-        \_TypeParameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
+        \_ParamAssign: , line:3:35, endln:3:58
+        |vpiName:uvm_sequence_item
+        |vpiFullName:uvm::uvm_sequence::uvm_sequence_item
+        |vpiActual:
+        \_ClassTypespec: (uvm_sequence_item)
+    |vpiParamAssign:
+    \_ParamAssign: , line:4:35, endln:4:44
+      |vpiParent:
+      \_ClassDefn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
+      |vpiLhs:
+      \_TypeParameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
+      |vpiRhs:
+      \_RefTypespec: (uvm::uvm_sequence::REQ), line:4:41, endln:4:44
+        |vpiParent:
+        \_ParamAssign: , line:4:35, endln:4:44
         |vpiName:REQ
-        |vpiFullName:uvm::uvm_sequence::RSP::REQ
+        |vpiFullName:uvm::uvm_sequence::REQ
         |vpiActual:
         \_TypeParameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
     |vpiTypespec:
@@ -291,12 +306,18 @@ Design: (unnamed)
       \_ClassDefn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
       |vpiName:BASE
       |vpiFullName:uvm::uvm_reg_sequence::BASE
-      |vpiTypespec:
-      \_RefTypespec: (uvm::uvm_reg_sequence::BASE::uvm_sequence), line:7:36, endln:7:48
+    |vpiParamAssign:
+    \_ParamAssign: , line:7:31, endln:7:64
+      |vpiParent:
+      \_ClassDefn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
+      |vpiLhs:
+      \_TypeParameter: (uvm::uvm_reg_sequence::BASE), line:7:31, endln:7:35
+      |vpiRhs:
+      \_RefTypespec: (uvm::uvm_reg_sequence::uvm_sequence), line:7:36, endln:7:48
         |vpiParent:
-        \_TypeParameter: (uvm::uvm_reg_sequence::BASE), line:7:31, endln:7:35
+        \_ParamAssign: , line:7:31, endln:7:64
         |vpiName:uvm_sequence
-        |vpiFullName:uvm::uvm_reg_sequence::BASE::uvm_sequence
+        |vpiFullName:uvm::uvm_reg_sequence::uvm_sequence
         |vpiActual:
         \_ClassTypespec: (uvm_sequence)
     |vpiInternalScope:
@@ -333,8 +354,6 @@ Design: (unnamed)
               |vpiParent:
               \_HierPath: (m_sequencer.get_full_name), line:10:24, endln:10:51
               |vpiName:m_sequencer
-              |vpiActual:
-              \_Variable: (uvm::uvm_sequence_item::m_sequencer), line:26:31, endln:26:42
             |vpiActual:
             \_MethodFuncCall: (get_full_name), line:10:36, endln:10:51
               |vpiParent:
@@ -399,7 +418,7 @@ Design: (unnamed)
         \_Function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
         |vpiFullName:uvm::uvm_component::get_full_name
         |vpiActual:
-        \_StringTypespec: , line:16:25, endln:16:31
+        \_StringTypespec: 
     |vpiImportTypespec:
     \_Function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
     |vpiVirtual:1
@@ -528,7 +547,7 @@ Design: (unnamed)
         \_Function: (uvm::uvm_sequence_item::get_full_name), line:28:1, endln:29:12
         |vpiFullName:uvm::uvm_sequence_item::get_full_name
         |vpiActual:
-        \_StringTypespec: , line:16:25, endln:16:31
+        \_StringTypespec: 
     |vpiImportTypespec:
     \_Function: (uvm::uvm_sequence_item::get_full_name), line:28:1, endln:29:12
     |vpiImportTypespec:
@@ -619,13 +638,13 @@ Design: (unnamed)
   |vpiClassDefn:
   \_ClassDefn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
 |vpiTypespec:
-\_StringTypespec: , line:16:25, endln:16:31
+\_StringTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0
 
@@ -637,7 +656,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassExtendParam/slpp_all/surelog.uhdm ${SURE
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              58      58       0         0
+Others                              61      61       0         0
 ----------------------------------------------------------------
-                                    58      58       0         0
+                                    61      61       0         0
 ===================== END REDUCTION RESULT =====================

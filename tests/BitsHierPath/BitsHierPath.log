@@ -254,7 +254,7 @@ AST_DEBUG_END
 Constant                                               3
 Design                                                 1
 HierPath                                               1
-Identifier                                             5
+Identifier                                             6
 IntTypespec                                            5
 LogicTypespec                                          2
 Module                                                 2
@@ -275,7 +275,7 @@ SysFuncCall                                            1
 TypedefTypespec                                        1
 TypespecMember                                         2
 ------------------------------------------------------------
-Total:                                                53
+Total:                                                54
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -328,7 +328,7 @@ Design: (unnamed)
         \_TypespecMember: (x), line:3:16, endln:3:17
         |vpiFullName:pkg::x
         |vpiActual:
-        \_LogicTypespec: , line:3:5, endln:3:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (z), line:4:16, endln:4:17
       |vpiParent:
@@ -340,13 +340,17 @@ Design: (unnamed)
         \_TypespecMember: (z), line:4:16, endln:4:17
         |vpiFullName:pkg::z
         |vpiActual:
-        \_LogicTypespec: , line:4:5, endln:4:10
+        \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::struct_t), line:5:5, endln:5:13
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:5:4
   |vpiDefName:pkg
-  |vpiEndLabel:pkg
+  |vpiEndLabel:
+  \_Identifier: (pkg), line:6:14, endln:6:17
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
+    |vpiName:pkg
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
   |vpiParent:
@@ -357,13 +361,13 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
     |vpiName:work@dut
   |vpiParameter:
-  \_Parameter: (work@dut.Width), line:8:28, endln:8:37
+  \_Parameter: (work@dut.Width), line:8:28, endln:8:33
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.Width), line:8:24, endln:8:27
       |vpiParent:
-      \_Parameter: (work@dut.Width), line:8:28, endln:8:37
+      \_Parameter: (work@dut.Width), line:8:28, endln:8:33
       |vpiFullName:work@dut.Width
       |vpiActual:
       \_IntTypespec: 
@@ -374,13 +378,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
     |vpiLhs:
-    \_Parameter: (work@dut.Width), line:8:28, endln:8:37
+    \_Parameter: (work@dut.Width), line:8:28, endln:8:33
     |vpiRhs:
     \_Constant: , line:8:36, endln:8:37
       |vpiParent:
       \_ParamAssign: , line:8:28, endln:8:37
       |vpiTypespec:
-      \_RefTypespec: (work@dut), line:8:36, endln:8:37
+      \_RefTypespec: (work@dut)
         |vpiParent:
         \_Constant: , line:8:36, endln:8:37
         |vpiFullName:work@dut
@@ -401,13 +405,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:work@top
   |vpiParameter:
-  \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:47
+  \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiTypespec:
     \_RefTypespec: (work@top.SyncWidth), line:12:15, endln:12:18
       |vpiParent:
-      \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:47
+      \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:28
       |vpiFullName:work@top.SyncWidth
       |vpiActual:
       \_IntTypespec: 
@@ -419,7 +423,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiLhs:
-    \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:47
+    \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:28
     |vpiRhs:
     \_SysFuncCall: ($bits), line:12:31, endln:12:47
       |vpiParent:
@@ -533,19 +537,19 @@ Design: (unnamed)
     |vpiActual:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
 |vpiTypespec:
-\_LogicTypespec: , line:3:5, endln:3:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:3:10, endln:3:15
     |vpiParent:
-    \_LogicTypespec: , line:3:5, endln:3:10
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:3:11, endln:3:12
       |vpiParent:
       \_Range: , line:3:10, endln:3:15
       |vpiTypespec:
-      \_RefTypespec: , line:3:11, endln:3:12
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:11, endln:3:12
         |vpiActual:
@@ -559,7 +563,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:3:10, endln:3:15
       |vpiTypespec:
-      \_RefTypespec: , line:3:13, endln:3:14
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:13, endln:3:14
         |vpiActual:
@@ -574,7 +578,7 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:4:5, endln:4:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -601,7 +605,7 @@ COMMAND: ${SURELOG_DIR}/regression/BitsHierPath/slpp_all/surelog.uhdm ${SURELOG_
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              49      49       0         0
+Others                              50      50       0         0
 ----------------------------------------------------------------
-                                    49      49       0         0
+                                    50      50       0         0
 ===================== END REDUCTION RESULT =====================

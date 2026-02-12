@@ -329,7 +329,7 @@ Constant                                               8
 Design                                                 1
 ForkStmt                                               4
 FuncCall                                               3
-Identifier                                            22
+Identifier                                            34
 IfStmt                                                 1
 Initial                                                3
 IntTypespec                                            4
@@ -348,7 +348,7 @@ StringTypespec                                         4
 SysFuncCall                                            1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                99
+Total:                                               111
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BadLabel/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -370,7 +370,11 @@ Design: (unnamed)
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:1:1, endln:2:22
     |vpiName:pack
   |vpiDefName:pack
-  |vpiEndLabel:bad_pack
+  |vpiEndLabel:
+  \_Identifier: (bad_pack), line:2:14, endln:2:22
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:1:1, endln:2:22
+    |vpiName:bad_pack
 |vpiAllClasses:
 \_ClassDefn: (work@c), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:4:1, endln:5:17
   |vpiParent:
@@ -380,7 +384,11 @@ Design: (unnamed)
     |vpiParent:
     \_ClassDefn: (work@c), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:4:1, endln:5:17
     |vpiName:work@c
-  |vpiEndLabel:bad_c
+  |vpiEndLabel:
+  \_Identifier: (bad_c), line:5:12, endln:5:17
+    |vpiParent:
+    \_ClassDefn: (work@c), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:4:1, endln:5:17
+    |vpiName:bad_c
 |vpiAllInterfaces:
 \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:7:1, endln:8:23
   |vpiParent:
@@ -391,7 +399,11 @@ Design: (unnamed)
     \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:7:1, endln:8:23
     |vpiName:work@intf
   |vpiDefName:work@intf
-  |vpiEndLabel:bad_int
+  |vpiEndLabel:
+  \_Identifier: (bad_int), line:8:16, endln:8:23
+    |vpiParent:
+    \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:7:1, endln:8:23
+    |vpiName:bad_int
 |vpiAllInterfaces:
 \_Interface: work@itf (work@itf), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:12:22, endln:20:13
   |vpiParent:
@@ -422,7 +434,11 @@ Design: (unnamed)
     \_Interface: work@itf2 (work@itf2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:14:25, endln:15:22
     |vpiName:test_interface2
   |vpiDefName:work@itf2
-  |vpiEndLabel:itf2
+  |vpiEndLabel:
+  \_Identifier: (itf2), line:15:18, endln:15:22
+    |vpiParent:
+    \_Interface: work@itf2 (work@itf2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:14:25, endln:15:22
+    |vpiName:itf2
 |vpiAllInterfaces:
 \_Interface: work@itf3 (work@itf3), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:17:25, endln:18:26
   |vpiParent:
@@ -438,7 +454,11 @@ Design: (unnamed)
     \_Interface: work@itf3 (work@itf3), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:17:25, endln:18:26
     |vpiName:test_interface2
   |vpiDefName:work@itf3
-  |vpiEndLabel:bad_itf3
+  |vpiEndLabel:
+  \_Identifier: (bad_itf3), line:18:18, endln:18:26
+    |vpiParent:
+    \_Interface: work@itf3 (work@itf3), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:17:25, endln:18:26
+    |vpiName:bad_itf3
 |vpiAllModules:
 \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:60:1, endln:66:10
   |vpiParent:
@@ -477,7 +497,7 @@ Design: (unnamed)
         |vpiParent:
         \_Assignment: , line:64:4, endln:64:9
         |vpiTypespec:
-        \_RefTypespec: (work@block_tb.name1), line:64:8, endln:64:9
+        \_RefTypespec: (work@block_tb.name1)
           |vpiParent:
           \_Constant: , line:64:8, endln:64:9
           |vpiFullName:work@block_tb.name1
@@ -487,7 +507,11 @@ Design: (unnamed)
         |vpiSize:64
         |vpiDecompile:1
         |vpiValue:1
-    |vpiEndLabel:name1
+    |vpiEndLabel:
+    \_Identifier: (name1), line:65:9, endln:65:14
+      |vpiParent:
+      \_ForkStmt: (work@block_tb.name1), line:63:17, endln:65:14
+      |vpiName:name1
   |vpiImportTypespec:
   \_Net: (work@block_tb.a), line:61:6, endln:61:7
     |vpiParent:
@@ -498,7 +522,7 @@ Design: (unnamed)
       \_Net: (work@block_tb.a), line:61:6, endln:61:7
       |vpiFullName:work@block_tb.a
       |vpiActual:
-      \_LogicTypespec: , line:61:2, endln:61:5
+      \_LogicTypespec: 
     |vpiName:a
     |vpiFullName:work@block_tb.a
     |vpiNetType:48
@@ -507,7 +531,7 @@ Design: (unnamed)
       |vpiParent:
       \_Net: (work@block_tb.a), line:61:6, endln:61:7
       |vpiTypespec:
-      \_RefTypespec: (work@block_tb.a), line:61:10, endln:61:11
+      \_RefTypespec: (work@block_tb.a)
         |vpiParent:
         \_Constant: , line:61:10, endln:61:11
         |vpiFullName:work@block_tb.a
@@ -545,7 +569,7 @@ Design: (unnamed)
       \_Variable: (work@test.err), line:27:8, endln:27:11
       |vpiFullName:work@test.err
       |vpiActual:
-      \_BitTypespec: , line:27:4, endln:27:7
+      \_BitTypespec: 
     |vpiName:err
     |vpiFullName:work@test.err
     |vpiRandType:1
@@ -555,7 +579,7 @@ Design: (unnamed)
       |vpiParent:
       \_Variable: (work@test.err), line:27:8, endln:27:11
       |vpiTypespec:
-      \_RefTypespec: (work@test.err), line:27:14, endln:27:15
+      \_RefTypespec: (work@test.err)
         |vpiParent:
         \_Constant: , line:27:14, endln:27:15
         |vpiFullName:work@test.err
@@ -575,7 +599,11 @@ Design: (unnamed)
       \_Module: work@test::sub (work@test::sub), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:34:4, endln:35:19
       |vpiName:work@test::sub
     |vpiDefName:work@test::sub
-    |vpiEndLabel:sub
+    |vpiEndLabel:
+    \_Identifier: (sub), line:35:16, endln:35:19
+      |vpiParent:
+      \_Module: work@test::sub (work@test::sub), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:34:4, endln:35:19
+      |vpiName:sub
   |vpiInternalScope:
   \_Module: work@test::sub2 (work@test::sub2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:37:4, endln:38:24
     |vpiParent:
@@ -586,7 +614,11 @@ Design: (unnamed)
       \_Module: work@test::sub2 (work@test::sub2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:37:4, endln:38:24
       |vpiName:work@test::sub2
     |vpiDefName:work@test::sub2
-    |vpiEndLabel:bad_sub2
+    |vpiEndLabel:
+    \_Identifier: (bad_sub2), line:38:16, endln:38:24
+      |vpiParent:
+      \_Module: work@test::sub2 (work@test::sub2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:37:4, endln:38:24
+      |vpiName:bad_sub2
   |vpiTypespec:
   \_ModuleTypespec: (work@test::sub)
     |vpiParent:
@@ -653,7 +685,7 @@ Design: (unnamed)
             |vpiParent:
             \_SysFuncCall: ($display), line:31:17, endln:31:35
             |vpiTypespec:
-            \_RefTypespec: (work@test.dummy_label), line:31:26, endln:31:34
+            \_RefTypespec: (work@test.dummy_label)
               |vpiParent:
               \_Constant: , line:31:26, endln:31:34
               |vpiFullName:work@test.dummy_label
@@ -663,7 +695,11 @@ Design: (unnamed)
             |vpiSize:48
             |vpiDecompile:"PASSED"
             |vpiValue:PASSED
-      |vpiEndLabel:dummy_label_bad
+      |vpiEndLabel:
+      \_Identifier: (dummy_label_bad), line:32:10, endln:32:25
+        |vpiParent:
+        \_Begin: (work@test.dummy_label), line:30:4, endln:32:25
+        |vpiName:dummy_label_bad
   |vpiProcess:
   \_Initial: , line:40:1, endln:54:6
     |vpiParent:
@@ -697,7 +733,7 @@ Design: (unnamed)
             |vpiParent:
             \_FuncCall: (print), line:43:6, endln:43:15
             |vpiTypespec:
-            \_RefTypespec: (work@test.n1), line:43:12, endln:43:14
+            \_RefTypespec: (work@test.n1)
               |vpiParent:
               \_Constant: , line:43:12, endln:43:14
               |vpiFullName:work@test.n1
@@ -706,7 +742,11 @@ Design: (unnamed)
             |vpiConstType:6
             |vpiDecompile:""
             |vpiValue:
-        |vpiEndLabel:n2
+        |vpiEndLabel:
+        \_Identifier: (n2), line:44:11, endln:44:13
+          |vpiParent:
+          \_ForkStmt: (work@test.n1), line:42:4, endln:44:13
+          |vpiName:n2
       |vpiInternalScope:
       \_ForkStmt: (work@test), line:46:4, endln:48:13
         |vpiParent:
@@ -726,7 +766,7 @@ Design: (unnamed)
             |vpiParent:
             \_FuncCall: (print), line:47:6, endln:47:15
             |vpiTypespec:
-            \_RefTypespec: (work@test), line:47:12, endln:47:14
+            \_RefTypespec: (work@test)
               |vpiParent:
               \_Constant: , line:47:12, endln:47:14
               |vpiFullName:work@test
@@ -735,7 +775,11 @@ Design: (unnamed)
             |vpiConstType:6
             |vpiDecompile:""
             |vpiValue:
-        |vpiEndLabel:n2
+        |vpiEndLabel:
+        \_Identifier: (n2), line:48:11, endln:48:13
+          |vpiParent:
+          \_ForkStmt: (work@test), line:46:4, endln:48:13
+          |vpiName:n2
       |vpiInternalScope:
       \_ForkStmt: (work@test.n1), line:50:3, endln:52:7
         |vpiParent:
@@ -760,7 +804,7 @@ Design: (unnamed)
             |vpiParent:
             \_FuncCall: (print), line:51:5, endln:51:14
             |vpiTypespec:
-            \_RefTypespec: (work@test.n1), line:51:11, endln:51:13
+            \_RefTypespec: (work@test.n1)
               |vpiParent:
               \_Constant: , line:51:11, endln:51:13
               |vpiFullName:work@test.n1
@@ -779,14 +823,18 @@ Design: (unnamed)
   \_Module: work@test::sub (work@test::sub), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:34:4, endln:35:19
   |vpiModules:
   \_Module: work@test::sub2 (work@test::sub2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:37:4, endln:38:24
-  |vpiEndLabel:bad_test
+  |vpiEndLabel:
+  \_Identifier: (bad_test), line:57:13, endln:57:21
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
+    |vpiName:bad_test
 |vpiTypespec:
 \_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:61:2, endln:61:5
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -794,7 +842,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_BitTypespec: , line:27:4, endln:27:7
+\_BitTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -877,7 +925,7 @@ COMMAND: ${SURELOG_DIR}/regression/BadLabel/slpp_all/surelog.uhdm ${SURELOG_DIR}
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              86      86       0         0
+Others                              98      98       0         0
 ----------------------------------------------------------------
-                                    86      86       0         0
+                                    98      98       0         0
 ===================== END REDUCTION RESULT =====================

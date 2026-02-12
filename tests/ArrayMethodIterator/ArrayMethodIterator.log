@@ -181,6 +181,7 @@ Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Package                                                1
+ParamAssign                                            2
 Range                                                  2
 RefObj                                                 5
 RefTypespec                                           13
@@ -191,11 +192,11 @@ UnsupportedTypespec                                    4
 Variable                                               5
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                67
+Total:                                                69
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:67, name:get_inst_id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:69, name:get_inst_id".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Null Actual: id:67, type:RefObj, name:get_inst_id.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Null Actual: id:69, type:RefObj, name:get_inst_id.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -244,7 +245,7 @@ Design: (unnamed)
         \_Variable: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
         |vpiFullName:pkg::uvm_callback::get_inst_id
         |vpiActual:
-        \_IntTypespec: , line:7:4, endln:7:7
+        \_IntTypespec: 
       |vpiName:get_inst_id
       |vpiFullName:pkg::uvm_callback::get_inst_id
       |vpiAutomatic:1
@@ -268,26 +269,38 @@ Design: (unnamed)
       \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
       |vpiName:T
       |vpiFullName:pkg::uvm_callbacks::T
-      |vpiTypespec:
-      \_RefTypespec: (pkg::uvm_callbacks::T::uvm_object), line:10:30, endln:10:40
-        |vpiParent:
-        \_TypeParameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
-        |vpiName:uvm_object
-        |vpiFullName:pkg::uvm_callbacks::T::uvm_object
-        |vpiActual:
-        \_ClassTypespec: (uvm_object)
     |vpiParameter:
     \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
       |vpiParent:
       \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
       |vpiName:CB
       |vpiFullName:pkg::uvm_callbacks::CB
-      |vpiTypespec:
-      \_RefTypespec: (pkg::uvm_callbacks::CB::uvm_callback), line:10:50, endln:10:62
+    |vpiParamAssign:
+    \_ParamAssign: , line:10:28, endln:10:40
+      |vpiParent:
+      \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+      |vpiLhs:
+      \_TypeParameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
+      |vpiRhs:
+      \_RefTypespec: (pkg::uvm_callbacks::uvm_object), line:10:30, endln:10:40
         |vpiParent:
-        \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+        \_ParamAssign: , line:10:28, endln:10:40
+        |vpiName:uvm_object
+        |vpiFullName:pkg::uvm_callbacks::uvm_object
+        |vpiActual:
+        \_ClassTypespec: (uvm_object)
+    |vpiParamAssign:
+    \_ParamAssign: , line:10:47, endln:10:62
+      |vpiParent:
+      \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+      |vpiLhs:
+      \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+      |vpiRhs:
+      \_RefTypespec: (pkg::uvm_callbacks::uvm_callback), line:10:50, endln:10:62
+        |vpiParent:
+        \_ParamAssign: , line:10:47, endln:10:62
         |vpiName:uvm_callback
-        |vpiFullName:pkg::uvm_callbacks::CB::uvm_callback
+        |vpiFullName:pkg::uvm_callbacks::uvm_callback
         |vpiActual:
         \_ClassTypespec: (uvm_callback)
     |vpiInternalScope:
@@ -459,7 +472,7 @@ Design: (unnamed)
         \_Function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
         |vpiFullName:pkg::uvm_callbacks::get_all
         |vpiActual:
-        \_VoidTypespec: , line:12:11, endln:12:15
+        \_VoidTypespec: 
       |vpiStmt:
       \_Begin: (pkg::uvm_callbacks::get_all)
     |vpiTypespec:
@@ -541,12 +554,12 @@ Design: (unnamed)
   |vpiNet:
   \_Net: (work@top.c1), line:29:20, endln:29:22
 |vpiTypespec:
-\_IntTypespec: , line:7:4, endln:7:7
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_VoidTypespec: , line:12:11, endln:12:15
+\_VoidTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -575,7 +588,7 @@ COMMAND: ${SURELOG_DIR}/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ${S
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              52      52       0         0
+Others                              54      54       0         0
 ----------------------------------------------------------------
-                                    52      52       0         0
+                                    54      54       0         0
 ===================== END REDUCTION RESULT =====================

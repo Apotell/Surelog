@@ -20,12 +20,12 @@
 [WARNING] : 1
 [   NOTE] : 0
 [INF:CM0023] Creating log file "${SURELOG_DIR}/tests/TestSepCompNoHash/slpp_all/surelog.log".
+PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
 PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv
 PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv
-PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
+[WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv:1:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv:1:1: No timescale set for "pkg1".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv:1:1: No timescale set for "pkg2".
-[WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0301] ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv:1:1: Compile package "pkg1".
 [INF:CP0301] ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv:1:1: Compile package "pkg2".
@@ -53,13 +53,17 @@ Design: (unnamed)
     \_EnumConst: (HERE), line:4:5, endln:4:9
       |vpiParent:
       \_EnumTypespec: , line:3:11, endln:5:10
-      |vpiName:HERE
+      |vpiName:
+      \_Identifier: (HERE), line:4:5, endln:4:9
+        |vpiParent:
+        \_EnumConst: (HERE), line:4:5, endln:4:9
+        |vpiName:HERE
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (HERE), line:4:5, endln:4:9
         |vpiTypespec:
-        \_RefTypespec: (pkg1::HERE), line:4:5, endln:4:9
+        \_RefTypespec: (pkg1::HERE)
           |vpiParent:
           \_Constant: 
           |vpiFullName:pkg1::HERE
@@ -100,13 +104,13 @@ Design: (unnamed)
     \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv, line:1:1, endln:16:11
     |vpiName:pkg2
   |vpiParameter:
-  \_Parameter: (pkg2::P1), line:4:18, endln:4:33
+  \_Parameter: (pkg2::P1), line:4:18, endln:4:20
     |vpiParent:
     \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv, line:1:1, endln:16:11
     |vpiTypespec:
     \_RefTypespec: (pkg2::P1::enum2), line:4:12, endln:4:17
       |vpiParent:
-      \_Parameter: (pkg2::P1), line:4:18, endln:4:33
+      \_Parameter: (pkg2::P1), line:4:18, endln:4:20
       |vpiName:enum2
       |vpiFullName:pkg2::P1::enum2
       |vpiActual:
@@ -118,7 +122,7 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv, line:1:1, endln:16:11
     |vpiLhs:
-    \_Parameter: (pkg2::P1), line:4:18, endln:4:33
+    \_Parameter: (pkg2::P1), line:4:18, endln:4:20
     |vpiRhs:
     \_RefObj: (pkg2::pkg1::HERE), line:4:23, endln:4:33
       |vpiParent:
@@ -166,13 +170,13 @@ Design: (unnamed)
       \_ImportTypespec: (pkg2), line:2:11, endln:2:18
       |vpiName:pkg2
     |vpiImportTypespecItem:
-    \_Constant: , line:2:11, endln:2:18
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (pkg2), line:2:11, endln:2:18
       |vpiTypespec:
-      \_RefTypespec: (work@top.pkg2), line:2:11, endln:2:18
+      \_RefTypespec: (work@top.pkg2)
         |vpiParent:
-        \_Constant: , line:2:11, endln:2:18
+        \_Constant: 
         |vpiFullName:work@top.pkg2
         |vpiActual:
         \_StringTypespec: 
@@ -214,7 +218,7 @@ COMMAND: ${SURELOG_DIR}/regression/TestSepCompNoHash/slpp_all/surelog.uhdm ${SUR
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              28      28       0         0
+Others                              29      29       0         0
 ----------------------------------------------------------------
-                                    28      28       0         0
+                                    29      29       0         0
 ===================== END REDUCTION RESULT =====================

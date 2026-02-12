@@ -566,7 +566,7 @@ EnumTypespec                                           1
 Function                                              13
 HierPath                                              12
 IODecl                                                15
-Identifier                                            56
+Identifier                                            61
 ImportTypespec                                         2
 Initial                                                1
 IntTypespec                                           22
@@ -590,10 +590,26 @@ UnsupportedTypespec                                    4
 VarSelect                                              5
 Variable                                               5
 ------------------------------------------------------------
-Total:                                               334
+Total:                                               339
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassCons/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassCons/top.sv:55:4: Unsupported Typespec: id:334, type:RefTypespec, name:D_PKG_UNDEF.
+[ERR:IG0801] Missing location information: id:249, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:249, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:274, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:274, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:234, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:234, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:219, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:219, type:Identifier, name:new.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassCons/top.sv:55:4: Unsupported Typespec: id:339, type:RefTypespec, name:D_PKG_UNDEF.
+[ERR:IG0801] Missing location information: id:47, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:47, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:52, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:52, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:60, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:60, type:Identifier, name:new.
+[ERR:IG0801] Missing location information: id:65, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:65, type:Identifier, name:new.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -664,7 +680,7 @@ Design: (unnamed)
             |vpiParent:
             \_SysFuncCall: ($write), line:5:13, endln:5:46
             |vpiTypespec:
-            \_RefTypespec: (work@class_t::A::print), line:5:20, endln:5:35
+            \_RefTypespec: (work@class_t::A::print)
               |vpiParent:
               \_Constant: , line:5:20, endln:5:35
               |vpiFullName:work@class_t::A::print
@@ -707,8 +723,6 @@ Design: (unnamed)
     \_Identifier: ($write), line:5:14, endln:5:19
     |vpiObject:
     \_Constant: , line:5:20, endln:5:35
-    |vpiObject:
-    \_RefTypespec: (work@class_t::A::print), line:5:20, endln:5:35
     |vpiObject:
     \_RefObj: (this), line:5:36, endln:5:40
     |vpiObject:
@@ -757,7 +771,7 @@ Design: (unnamed)
             |vpiParent:
             \_SysFuncCall: ($write), line:5:13, endln:5:46
             |vpiTypespec:
-            \_RefTypespec: (work@class_t::B::print), line:5:20, endln:5:35
+            \_RefTypespec: (work@class_t::B::print)
               |vpiParent:
               \_Constant: , line:5:20, endln:5:35
               |vpiFullName:work@class_t::B::print
@@ -800,8 +814,6 @@ Design: (unnamed)
     \_Identifier: ($write), line:5:14, endln:5:19
     |vpiObject:
     \_Constant: , line:5:20, endln:5:35
-    |vpiObject:
-    \_RefTypespec: (work@class_t::B::print), line:5:20, endln:5:35
     |vpiObject:
     \_RefObj: (this), line:5:36, endln:5:40
     |vpiObject:
@@ -850,7 +862,7 @@ Design: (unnamed)
             |vpiParent:
             \_SysFuncCall: ($write), line:5:13, endln:5:46
             |vpiTypespec:
-            \_RefTypespec: (work@class_t::C::print), line:5:20, endln:5:35
+            \_RefTypespec: (work@class_t::C::print)
               |vpiParent:
               \_Constant: , line:5:20, endln:5:35
               |vpiFullName:work@class_t::C::print
@@ -893,8 +905,6 @@ Design: (unnamed)
     \_Identifier: ($write), line:5:14, endln:5:19
     |vpiObject:
     \_Constant: , line:5:20, endln:5:35
-    |vpiObject:
-    \_RefTypespec: (work@class_t::C::print), line:5:20, endln:5:35
     |vpiObject:
     \_RefObj: (this), line:5:36, endln:5:40
     |vpiObject:
@@ -990,7 +1000,7 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiTypespec:
-          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+          \_RefTypespec: (builtin::mailbox::new::bound)
             |vpiParent:
             \_Constant: , line:3:31, endln:3:32
             |vpiFullName:builtin::mailbox::new::bound
@@ -1293,13 +1303,17 @@ Design: (unnamed)
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:FINISHED
+        |vpiName:
+        \_Identifier: (FINISHED), line:32:20, endln:32:28
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiName:FINISHED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (FINISHED), line:32:20, endln:32:28
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+          \_RefTypespec: (builtin::process::FINISHED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::FINISHED
@@ -1313,13 +1327,17 @@ Design: (unnamed)
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:RUNNING
+        |vpiName:
+        \_Identifier: (RUNNING), line:32:30, endln:32:37
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiName:RUNNING
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (RUNNING), line:32:30, endln:32:37
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+          \_RefTypespec: (builtin::process::RUNNING)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::RUNNING
@@ -1333,13 +1351,17 @@ Design: (unnamed)
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:WAITING
+        |vpiName:
+        \_Identifier: (WAITING), line:32:39, endln:32:46
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiName:WAITING
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (WAITING), line:32:39, endln:32:46
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+          \_RefTypespec: (builtin::process::WAITING)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::WAITING
@@ -1353,13 +1375,17 @@ Design: (unnamed)
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:SUSPENDED
+        |vpiName:
+        \_Identifier: (SUSPENDED), line:32:48, endln:32:57
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiName:SUSPENDED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+          \_RefTypespec: (builtin::process::SUSPENDED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::SUSPENDED
@@ -1373,13 +1399,17 @@ Design: (unnamed)
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:KILLED
+        |vpiName:
+        \_Identifier: (KILLED), line:32:59, endln:32:65
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiName:KILLED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (KILLED), line:32:59, endln:32:65
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+          \_RefTypespec: (builtin::process::KILLED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::KILLED
@@ -1465,7 +1495,7 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+          \_RefTypespec: (builtin::semaphore::new::keyCount)
             |vpiParent:
             \_Constant: , line:57:33, endln:57:34
             |vpiFullName:builtin::semaphore::new::keyCount
@@ -1505,7 +1535,7 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+          \_RefTypespec: (builtin::semaphore::put::keyCount)
             |vpiParent:
             \_Constant: , line:60:29, endln:60:30
             |vpiFullName:builtin::semaphore::put::keyCount
@@ -1545,7 +1575,7 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+          \_RefTypespec: (builtin::semaphore::get::keyCount)
             |vpiParent:
             \_Constant: , line:63:29, endln:63:30
             |vpiFullName:builtin::semaphore::get::keyCount
@@ -1592,7 +1622,7 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount)
             |vpiParent:
             \_Constant: , line:66:41, endln:66:42
             |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1758,7 +1788,7 @@ Design: (unnamed)
         \_Variable: (definesPkg_1::D_PKG1::size), line:7:14, endln:7:18
         |vpiFullName:definesPkg_1::D_PKG1::size
         |vpiActual:
-        \_IntegerTypespec: , line:9:20, endln:9:27
+        \_IntegerTypespec: 
       |vpiName:size
       |vpiFullName:definesPkg_1::D_PKG1::size
       |vpiAutomatic:1
@@ -1826,7 +1856,7 @@ Design: (unnamed)
           \_IODecl: (size), line:9:28, endln:9:32
           |vpiFullName:definesPkg_1::D_PKG1::new::size
           |vpiActual:
-          \_IntegerTypespec: , line:9:20, endln:9:27
+          \_IntegerTypespec: 
       |vpiStmt:
       \_Begin: (definesPkg_1::D_PKG1::new), line:10:8, endln:12:11
     |vpiImportTypespec:
@@ -1878,7 +1908,7 @@ Design: (unnamed)
         \_Variable: (definesPkg::D_PKG::size), line:7:14, endln:7:18
         |vpiFullName:definesPkg::D_PKG::size
         |vpiActual:
-        \_IntegerTypespec: , line:9:20, endln:9:27
+        \_IntegerTypespec: 
       |vpiName:size
       |vpiFullName:definesPkg::D_PKG::size
       |vpiAutomatic:1
@@ -1946,7 +1976,7 @@ Design: (unnamed)
           \_IODecl: (size), line:9:28, endln:9:32
           |vpiFullName:definesPkg::D_PKG::new::size
           |vpiActual:
-          \_IntegerTypespec: , line:9:20, endln:9:27
+          \_IntegerTypespec: 
       |vpiStmt:
       \_Begin: (definesPkg::D_PKG::new), line:10:8, endln:12:11
     |vpiImportTypespec:
@@ -1998,7 +2028,7 @@ Design: (unnamed)
         \_Variable: (work@class_t::A::size), line:15:14, endln:15:18
         |vpiFullName:work@class_t::A::size
         |vpiActual:
-        \_IntegerTypespec: , line:9:20, endln:9:27
+        \_IntegerTypespec: 
       |vpiName:size
       |vpiFullName:work@class_t::A::size
       |vpiAutomatic:1
@@ -2050,7 +2080,7 @@ Design: (unnamed)
             |vpiParent:
             \_Assignment: , line:19:10, endln:19:23
             |vpiTypespec:
-            \_RefTypespec: (work@class_t::A::new), line:19:22, endln:19:23
+            \_RefTypespec: (work@class_t::A::new)
               |vpiParent:
               \_Constant: , line:19:22, endln:19:23
               |vpiFullName:work@class_t::A::new
@@ -2095,7 +2125,7 @@ Design: (unnamed)
         \_Variable: (work@class_t::B::size), line:27:14, endln:27:18
         |vpiFullName:work@class_t::B::size
         |vpiActual:
-        \_IntegerTypespec: , line:9:20, endln:9:27
+        \_IntegerTypespec: 
       |vpiName:size
       |vpiFullName:work@class_t::B::size
       |vpiAutomatic:1
@@ -2163,7 +2193,7 @@ Design: (unnamed)
           \_IODecl: (size), line:29:28, endln:29:32
           |vpiFullName:work@class_t::B::new::size
           |vpiActual:
-          \_IntegerTypespec: , line:9:20, endln:9:27
+          \_IntegerTypespec: 
       |vpiStmt:
       \_Begin: (work@class_t::B::new), line:30:8, endln:32:11
     |vpiInternalScope:
@@ -2198,7 +2228,7 @@ Design: (unnamed)
         \_Variable: (work@class_t::C::size), line:40:14, endln:40:18
         |vpiFullName:work@class_t::C::size
         |vpiActual:
-        \_IntegerTypespec: , line:9:20, endln:9:27
+        \_IntegerTypespec: 
       |vpiName:size
       |vpiFullName:work@class_t::C::size
       |vpiAutomatic:1
@@ -2267,7 +2297,7 @@ Design: (unnamed)
           \_IODecl: (size), line:41:28, endln:41:32
           |vpiFullName:work@class_t::C::set_size::size
           |vpiActual:
-          \_IntegerTypespec: , line:9:20, endln:9:27
+          \_IntegerTypespec: 
       |vpiStmt:
       \_Begin: (work@class_t::C::set_size), line:42:8, endln:44:11
     |vpiInternalScope:
@@ -2313,13 +2343,13 @@ Design: (unnamed)
       \_ImportTypespec: (definesPkg), line:11:10, endln:11:23
       |vpiName:definesPkg
     |vpiImportTypespecItem:
-    \_Constant: , line:11:10, endln:11:23
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (definesPkg), line:11:10, endln:11:23
       |vpiTypespec:
-      \_RefTypespec: (work@class_t.definesPkg), line:11:10, endln:11:23
+      \_RefTypespec: (work@class_t.definesPkg)
         |vpiParent:
-        \_Constant: , line:11:10, endln:11:23
+        \_Constant: 
         |vpiFullName:work@class_t.definesPkg
         |vpiActual:
         \_StringTypespec: 
@@ -2511,7 +2541,7 @@ Design: (unnamed)
             |vpiParent:
             \_MethodFuncCall: (new), line:58:10, endln:58:16
             |vpiTypespec:
-            \_RefTypespec: (work@class_t), line:58:14, endln:58:15
+            \_RefTypespec: (work@class_t)
               |vpiParent:
               \_Constant: , line:58:14, endln:58:15
               |vpiFullName:work@class_t
@@ -2572,7 +2602,7 @@ Design: (unnamed)
             |vpiParent:
             \_MethodFuncCall: (new), line:60:10, endln:60:16
             |vpiTypespec:
-            \_RefTypespec: (work@class_t), line:60:14, endln:60:15
+            \_RefTypespec: (work@class_t)
               |vpiParent:
               \_Constant: , line:60:14, endln:60:15
               |vpiFullName:work@class_t
@@ -2643,13 +2673,13 @@ Design: (unnamed)
     \_ImportTypespec: (definesPkg_1), line:1:8, endln:1:23
     |vpiName:definesPkg_1
   |vpiImportTypespecItem:
-  \_Constant: , line:1:8, endln:1:23
+  \_Constant: 
     |vpiParent:
     \_ImportTypespec: (definesPkg_1), line:1:8, endln:1:23
     |vpiTypespec:
-    \_RefTypespec: (definesPkg_1), line:1:8, endln:1:23
+    \_RefTypespec: (definesPkg_1)
       |vpiParent:
-      \_Constant: , line:1:8, endln:1:23
+      \_Constant: 
       |vpiFullName:definesPkg_1
       |vpiActual:
       \_StringTypespec: 
@@ -2671,7 +2701,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_IntegerTypespec: , line:9:20, endln:9:27
+\_IntegerTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
@@ -2685,7 +2715,7 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 17
 [WARNING] : 1
 [   NOTE] : 2
 
@@ -2697,7 +2727,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassCons/slpp_unit/surelog.uhdm ${SURELOG_DI
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                             289     289       0         0
+Others                             294     294       0         0
 ----------------------------------------------------------------
-                                   289     289       0         0
+                                   294     294       0         0
 ===================== END REDUCTION RESULT =====================

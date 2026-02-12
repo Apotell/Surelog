@@ -18,6 +18,7 @@ Module                                                 2
 ModuleTypespec                                         2
 Net                                                    1
 Operation                                              1
+ParamAssign                                            1
 Range                                                  2
 RefModule                                              1
 RefObj                                                 1
@@ -29,7 +30,7 @@ TypedefTypespec                                        1
 TypespecMember                                         3
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                44
+Total:                                                45
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParam2/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -56,13 +57,19 @@ Design: (unnamed)
     \_Module: work@rr_arb_tree (work@rr_arb_tree), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:1:1, endln:5:10
     |vpiName:DataType
     |vpiFullName:work@rr_arb_tree.DataType
-    |vpiTypespec:
-    \_RefTypespec: (work@rr_arb_tree.DataType), line:2:39, endln:2:60
+  |vpiParamAssign:
+  \_ParamAssign: , line:2:26, endln:2:60
+    |vpiParent:
+    \_Module: work@rr_arb_tree (work@rr_arb_tree), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:1:1, endln:5:10
+    |vpiLhs:
+    \_TypeParameter: (work@rr_arb_tree.DataType), line:2:26, endln:2:34
+    |vpiRhs:
+    \_RefTypespec: (work@rr_arb_tree), line:2:39, endln:2:60
       |vpiParent:
-      \_TypeParameter: (work@rr_arb_tree.DataType), line:2:26, endln:2:34
-      |vpiFullName:work@rr_arb_tree.DataType
+      \_ParamAssign: , line:2:26, endln:2:60
+      |vpiFullName:work@rr_arb_tree
       |vpiActual:
-      \_LogicTypespec: , line:2:39, endln:2:44
+      \_LogicTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@rr_arb_tree.DataType), line:2:26, endln:2:34
   |vpiImportTypespec:
@@ -134,7 +141,7 @@ Design: (unnamed)
         \_TypespecMember: (result), line:10:19, endln:10:25
         |vpiFullName:work@top.result
         |vpiActual:
-        \_LogicTypespec: , line:10:5, endln:10:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (status), line:11:11, endln:11:17
       |vpiParent:
@@ -146,7 +153,7 @@ Design: (unnamed)
         \_TypespecMember: (status), line:11:11, endln:11:17
         |vpiFullName:work@top.status
         |vpiActual:
-        \_LogicTypespec: , line:11:5, endln:11:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (tag), line:12:22, endln:12:25
       |vpiParent:
@@ -158,7 +165,7 @@ Design: (unnamed)
         \_TypespecMember: (tag), line:12:22, endln:12:25
         |vpiFullName:work@top.tag
         |vpiActual:
-        \_LogicTypespec: , line:11:5, endln:11:10
+        \_LogicTypespec: 
   |vpiTypespec:
   \_ModuleTypespec: (work@rr_arb_tree)
     |vpiParent:
@@ -180,13 +187,13 @@ Design: (unnamed)
     |vpiActual:
     \_Module: work@rr_arb_tree (work@rr_arb_tree), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:1:1, endln:5:10
 |vpiTypespec:
-\_LogicTypespec: , line:2:39, endln:2:44
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:45, endln:2:60
     |vpiParent:
-    \_LogicTypespec: , line:2:39, endln:2:44
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Operation: , line:2:46, endln:2:57
       |vpiParent:
@@ -204,7 +211,7 @@ Design: (unnamed)
         |vpiParent:
         \_Operation: , line:2:46, endln:2:57
         |vpiTypespec:
-        \_RefTypespec: , line:2:56, endln:2:57
+        \_RefTypespec: 
           |vpiParent:
           \_Constant: , line:2:56, endln:2:57
           |vpiActual:
@@ -218,7 +225,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:45, endln:2:60
       |vpiTypespec:
-      \_RefTypespec: , line:2:58, endln:2:59
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:58, endln:2:59
         |vpiActual:
@@ -233,19 +240,19 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:10:5, endln:10:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:10:11, endln:10:16
     |vpiParent:
-    \_LogicTypespec: , line:10:5, endln:10:10
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:10:12, endln:10:13
       |vpiParent:
       \_Range: , line:10:11, endln:10:16
       |vpiTypespec:
-      \_RefTypespec: , line:10:12, endln:10:13
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:10:12, endln:10:13
         |vpiActual:
@@ -259,7 +266,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:10:11, endln:10:16
       |vpiTypespec:
-      \_RefTypespec: , line:10:14, endln:10:15
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:10:14, endln:10:15
         |vpiActual:
@@ -269,7 +276,7 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiValue:0
 |vpiTypespec:
-\_LogicTypespec: , line:11:5, endln:11:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -296,7 +303,7 @@ COMMAND: ${SURELOG_DIR}/regression/TypeParam2/slpp_unit/surelog.uhdm ${SURELOG_D
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              40      40       0         0
+Others                              41      41       0         0
 ----------------------------------------------------------------
-                                    40      40       0         0
+                                    41      41       0         0
 ===================== END REDUCTION RESULT =====================

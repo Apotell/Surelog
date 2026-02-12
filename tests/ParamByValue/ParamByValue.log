@@ -235,14 +235,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamByValue/dut.sv:20:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              18
+Constant                                              17
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
-Identifier                                             6
+Identifier                                             7
 ImportTypespec                                         1
 IntTypespec                                           12
-LogicTypespec                                         10
+LogicTypespec                                          9
 Module                                                 4
 ModuleTypespec                                         3
 Operation                                              2
@@ -252,12 +252,12 @@ Parameter                                              4
 Range                                                  5
 RefModule                                              2
 RefObj                                                 4
-RefTypespec                                           24
+RefTypespec                                           23
 SourceFile                                             1
 StringTypespec                                         1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                               106
+Total:                                               104
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamByValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -279,29 +279,29 @@ Design: (unnamed)
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
     |vpiName:lc_ctrl_state_pkg
   |vpiParameter:
-  \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:51
+  \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:28
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
     |vpiTypespec:
     \_RefTypespec: (lc_ctrl_state_pkg::B0), line:2:13, endln:2:25
       |vpiParent:
-      \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:51
+      \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:28
       |vpiFullName:lc_ctrl_state_pkg::B0
       |vpiActual:
-      \_LogicTypespec: , line:2:13, endln:2:18
+      \_LogicTypespec: 
     |vpiName:B0
     |vpiFullName:lc_ctrl_state_pkg::B0
   |vpiParameter:
-  \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:51
+  \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:28
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
     |vpiTypespec:
     \_RefTypespec: (lc_ctrl_state_pkg::B1), line:3:13, endln:3:25
       |vpiParent:
-      \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:51
+      \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:28
       |vpiFullName:lc_ctrl_state_pkg::B1
       |vpiActual:
-      \_LogicTypespec: , line:2:13, endln:2:18
+      \_LogicTypespec: 
     |vpiName:B1
     |vpiFullName:lc_ctrl_state_pkg::B1
   |vpiParamAssign:
@@ -309,13 +309,13 @@ Design: (unnamed)
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
     |vpiLhs:
-    \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:51
+    \_Parameter: (lc_ctrl_state_pkg::B0), line:2:26, endln:2:28
     |vpiRhs:
     \_Constant: , line:2:31, endln:2:51
       |vpiParent:
       \_ParamAssign: , line:2:26, endln:2:51
       |vpiTypespec:
-      \_RefTypespec: (lc_ctrl_state_pkg), line:2:31, endln:2:51
+      \_RefTypespec: (lc_ctrl_state_pkg)
         |vpiParent:
         \_Constant: , line:2:31, endln:2:51
         |vpiFullName:lc_ctrl_state_pkg
@@ -330,13 +330,13 @@ Design: (unnamed)
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
     |vpiLhs:
-    \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:51
+    \_Parameter: (lc_ctrl_state_pkg::B1), line:3:26, endln:3:28
     |vpiRhs:
     \_Constant: , line:3:31, endln:3:51
       |vpiParent:
       \_ParamAssign: , line:3:26, endln:3:51
       |vpiTypespec:
-      \_RefTypespec: (lc_ctrl_state_pkg), line:3:31, endln:3:51
+      \_RefTypespec: (lc_ctrl_state_pkg)
         |vpiParent:
         \_Constant: , line:3:31, endln:3:51
         |vpiFullName:lc_ctrl_state_pkg
@@ -356,27 +356,16 @@ Design: (unnamed)
       \_EnumTypespec: , line:4:11, endln:6:15
       |vpiFullName:lc_ctrl_state_pkg
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:21
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (LcStScrap), line:5:5, endln:5:34
       |vpiParent:
       \_EnumTypespec: , line:4:11, endln:6:15
-      |vpiName:LcStScrap
-      |vpiValue:
-      \_Constant: 
+      |vpiName:
+      \_Identifier: (LcStScrap), line:5:5, endln:5:14
         |vpiParent:
         \_EnumConst: (LcStScrap), line:5:5, endln:5:34
-        |vpiTypespec:
-        \_RefTypespec: (lc_ctrl_state_pkg::LcStScrap), line:5:25, endln:5:34
-          |vpiParent:
-          \_Constant: 
-          |vpiFullName:lc_ctrl_state_pkg::LcStScrap
-          |vpiActual:
-          \_LogicTypespec: 
-        |vpiConstType:3
-        |vpiSize:32
-        |vpiDecompile:{B1, B0}
-        |vpiValue:11011111011011101110011001111001
+        |vpiName:LcStScrap
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_state_pkg::lc_state_e), line:6:5, endln:6:15
     |vpiParent:
@@ -408,16 +397,16 @@ Design: (unnamed)
     \_Module: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:9:1, endln:10:10
     |vpiName:work@generic_flop
   |vpiParameter:
-  \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:60
+  \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:56
     |vpiParent:
     \_Module: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:9:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@generic_flop.ResetValue), line:9:33, endln:9:45
       |vpiParent:
-      \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:60
+      \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:56
       |vpiFullName:work@generic_flop.ResetValue
       |vpiActual:
-      \_LogicTypespec: , line:2:13, endln:2:18
+      \_LogicTypespec: 
     |vpiName:ResetValue
     |vpiFullName:work@generic_flop.ResetValue
   |vpiParamAssign:
@@ -425,13 +414,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:9:1, endln:10:10
     |vpiLhs:
-    \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:60
+    \_Parameter: (work@generic_flop.ResetValue), line:9:46, endln:9:56
     |vpiRhs:
     \_Constant: , line:9:59, endln:9:60
       |vpiParent:
       \_ParamAssign: , line:9:46, endln:9:60
       |vpiTypespec:
-      \_RefTypespec: (work@generic_flop), line:9:59, endln:9:60
+      \_RefTypespec: (work@generic_flop)
         |vpiParent:
         \_Constant: , line:9:59, endln:9:60
         |vpiFullName:work@generic_flop
@@ -452,16 +441,16 @@ Design: (unnamed)
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:12:1, endln:18:10
     |vpiName:work@prim_flop
   |vpiParameter:
-  \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:58
+  \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:54
     |vpiParent:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:12:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@prim_flop.ResetValue), line:12:31, endln:12:43
       |vpiParent:
-      \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:58
+      \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:54
       |vpiFullName:work@prim_flop.ResetValue
       |vpiActual:
-      \_LogicTypespec: , line:2:13, endln:2:18
+      \_LogicTypespec: 
     |vpiName:ResetValue
     |vpiFullName:work@prim_flop.ResetValue
   |vpiParamAssign:
@@ -469,13 +458,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:12:1, endln:18:10
     |vpiLhs:
-    \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:58
+    \_Parameter: (work@prim_flop.ResetValue), line:12:44, endln:12:54
     |vpiRhs:
     \_Constant: , line:12:57, endln:12:58
       |vpiParent:
       \_ParamAssign: , line:12:44, endln:12:58
       |vpiTypespec:
-      \_RefTypespec: (work@prim_flop), line:12:57, endln:12:58
+      \_RefTypespec: (work@prim_flop)
         |vpiParent:
         \_Constant: , line:12:57, endln:12:58
         |vpiFullName:work@prim_flop
@@ -520,13 +509,13 @@ Design: (unnamed)
       \_ImportTypespec: (lc_ctrl_state_pkg), line:21:10, endln:21:30
       |vpiName:lc_ctrl_state_pkg
     |vpiImportTypespecItem:
-    \_Constant: , line:21:10, endln:21:30
+    \_Constant: 
       |vpiParent:
       \_ImportTypespec: (lc_ctrl_state_pkg), line:21:10, endln:21:30
       |vpiTypespec:
-      \_RefTypespec: (work@top.lc_ctrl_state_pkg), line:21:10, endln:21:30
+      \_RefTypespec: (work@top.lc_ctrl_state_pkg)
         |vpiParent:
-        \_Constant: , line:21:10, endln:21:30
+        \_Constant: 
         |vpiFullName:work@top.lc_ctrl_state_pkg
         |vpiActual:
         \_StringTypespec: 
@@ -553,19 +542,19 @@ Design: (unnamed)
     |vpiActual:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:12:1, endln:18:10
 |vpiTypespec:
-\_LogicTypespec: , line:2:13, endln:2:18
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:19, endln:2:25
     |vpiParent:
-    \_LogicTypespec: , line:2:13, endln:2:18
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:2:20, endln:2:22
       |vpiParent:
       \_Range: , line:2:19, endln:2:25
       |vpiTypespec:
-      \_RefTypespec: , line:2:20, endln:2:22
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:20, endln:2:22
         |vpiActual:
@@ -579,7 +568,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:19, endln:2:25
       |vpiTypespec:
-      \_RefTypespec: , line:2:23, endln:2:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:23, endln:2:24
         |vpiActual:
@@ -598,19 +587,19 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:4:16, endln:4:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:4:22, endln:4:28
     |vpiParent:
-    \_LogicTypespec: , line:4:16, endln:4:21
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:4:23, endln:4:25
       |vpiParent:
       \_Range: , line:4:22, endln:4:28
       |vpiTypespec:
-      \_RefTypespec: , line:4:23, endln:4:25
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:4:23, endln:4:25
         |vpiActual:
@@ -624,7 +613,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:4:22, endln:4:28
       |vpiTypespec:
-      \_RefTypespec: , line:4:26, endln:4:27
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:4:26, endln:4:27
         |vpiActual:
@@ -663,7 +652,7 @@ COMMAND: ${SURELOG_DIR}/regression/ParamByValue/slpp_all/surelog.uhdm ${SURELOG_
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              62      62       0         0
+Others                              61      61       0         0
 ----------------------------------------------------------------
-                                    62      62       0         0
+                                    61      61       0         0
 ===================== END REDUCTION RESULT =====================

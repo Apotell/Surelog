@@ -96,25 +96,25 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
 BitTypespec                                            2
-Constant                                               8
+Constant                                               7
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
 GenIf                                                  1
-Identifier                                             3
+Identifier                                             4
 IntTypespec                                            4
-LogicTypespec                                          3
+LogicTypespec                                          2
 Module                                                 3
 ModuleTypespec                                         2
 Operation                                              3
 Range                                                  1
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                           10
+RefTypespec                                            9
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                48
+Total:                                                46
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -175,27 +175,16 @@ Design: (unnamed)
       \_EnumTypespec: , line:7:9, endln:9:14
       |vpiFullName:work@dut
       |vpiActual:
-      \_LogicTypespec: , line:7:14, endln:7:19
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (EXC_CAUSE_IRQ_SOFTWARE_M), line:8:3, endln:8:47
       |vpiParent:
       \_EnumTypespec: , line:7:9, endln:9:14
-      |vpiName:EXC_CAUSE_IRQ_SOFTWARE_M
-      |vpiValue:
-      \_Constant: 
+      |vpiName:
+      \_Identifier: (EXC_CAUSE_IRQ_SOFTWARE_M), line:8:3, endln:8:27
         |vpiParent:
         \_EnumConst: (EXC_CAUSE_IRQ_SOFTWARE_M), line:8:3, endln:8:47
-        |vpiTypespec:
-        \_RefTypespec: (work@dut.EXC_CAUSE_IRQ_SOFTWARE_M), line:8:34, endln:8:47
-          |vpiParent:
-          \_Constant: 
-          |vpiFullName:work@dut.EXC_CAUSE_IRQ_SOFTWARE_M
-          |vpiActual:
-          \_LogicTypespec: 
-        |vpiConstType:3
-        |vpiSize:6
-        |vpiDecompile:{1'b1, 5'd03}
-        |vpiValue:100011
+        |vpiName:EXC_CAUSE_IRQ_SOFTWARE_M
   |vpiTypespec:
   \_TypedefTypespec: (exc_cause_e), line:9:3, endln:9:14
     |vpiParent:
@@ -239,7 +228,7 @@ Design: (unnamed)
         |vpiParent:
         \_Operation: , line:11:7, endln:11:44
         |vpiTypespec:
-        \_RefTypespec: (work@dut), line:11:35, endln:11:44
+        \_RefTypespec: (work@dut)
           |vpiParent:
           \_Constant: , line:11:35, endln:11:44
           |vpiFullName:work@dut
@@ -252,19 +241,19 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@dut), line:11:46, endln:13:6
 |vpiTypespec:
-\_LogicTypespec: , line:7:14, endln:7:19
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:7:20, endln:7:25
     |vpiParent:
-    \_LogicTypespec: , line:7:14, endln:7:19
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:7:21, endln:7:22
       |vpiParent:
       \_Range: , line:7:20, endln:7:25
       |vpiTypespec:
-      \_RefTypespec: , line:7:21, endln:7:22
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:7:21, endln:7:22
         |vpiActual:
@@ -278,7 +267,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:7:20, endln:7:25
       |vpiTypespec:
-      \_RefTypespec: , line:7:23, endln:7:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:7:23, endln:7:24
         |vpiActual:
@@ -324,7 +313,7 @@ COMMAND: ${SURELOG_DIR}/regression/EnumConcat/slpp_all/surelog.uhdm ${SURELOG_DI
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              32      32       0         0
+Others                              31      31       0         0
 ----------------------------------------------------------------
-                                    32      32       0         0
+                                    31      31       0         0
 ===================== END REDUCTION RESULT =====================

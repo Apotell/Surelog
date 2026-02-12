@@ -292,7 +292,7 @@ Design                                                 1
 EnumConst                                              8
 EnumTypespec                                           2
 IODecl                                                 4
-Identifier                                            14
+Identifier                                            22
 IntTypespec                                           15
 Interface                                              2
 InterfaceTypespec                                      2
@@ -313,11 +313,11 @@ TypedefTypespec                                        3
 UnsupportedTypespec                                   11
 Variable                                               3
 ------------------------------------------------------------
-Total:                                               151
+Total:                                               159
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortTest/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:132, type:RefTypespec, name:id_t1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:126, type:RefTypespec, name:DD.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:140, type:RefTypespec, name:id_t1.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:134, type:RefTypespec, name:DD.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -369,7 +369,7 @@ Design: (unnamed)
     |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
-  \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:31
+  \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:24
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiName:AXI_ID_WIDTH
@@ -379,7 +379,7 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiLhs:
-    \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:31
+    \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:24
     |vpiRhs:
     \_Operation: , line:9:29, endln:9:31
       |vpiParent:
@@ -390,7 +390,7 @@ Design: (unnamed)
         |vpiParent:
         \_Operation: , line:9:29, endln:9:31
         |vpiTypespec:
-        \_RefTypespec: (work@AXI_BUS), line:9:30, endln:9:31
+        \_RefTypespec: (work@AXI_BUS)
           |vpiParent:
           \_Constant: , line:9:30, endln:9:31
           |vpiFullName:work@AXI_BUS
@@ -417,7 +417,7 @@ Design: (unnamed)
       \_TypedefTypespec: (id_t), line:12:38, endln:12:42
       |vpiFullName:work@AXI_BUS.id_t
       |vpiActual:
-      \_LogicTypespec: , line:12:11, endln:12:16
+      \_LogicTypespec: 
   |vpiTypespec:
   \_UnsupportedTypespec: (id_t1), line:14:3, endln:14:8
     |vpiParent:
@@ -524,7 +524,7 @@ Design: (unnamed)
       \_Variable: (work@mem_if.clk), line:29:30, endln:29:33
       |vpiFullName:work@mem_if.clk
       |vpiActual:
-      \_LogicTypespec: , line:4:3, endln:4:6
+      \_LogicTypespec: 
     |vpiName:clk
     |vpiFullName:work@mem_if.clk
     |vpiRandType:1
@@ -595,7 +595,7 @@ Design: (unnamed)
       \_Port: (clk), line:29:30, endln:29:33
       |vpiFullName:work@mem_if.clk
       |vpiActual:
-      \_LogicTypespec: , line:4:3, endln:4:6
+      \_LogicTypespec: 
 |vpiAllModules:
 \_Module: work@dff0_test (work@dff0_test), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:1:1, endln:5:10
   |vpiParent:
@@ -619,7 +619,7 @@ Design: (unnamed)
         |vpiParent:
         \_Attribute: (init), line:2:6, endln:2:18
         |vpiTypespec:
-        \_RefTypespec: (work@dff0_test.n1.init), line:2:13, endln:2:18
+        \_RefTypespec: (work@dff0_test.n1.init)
           |vpiParent:
           \_Constant: , line:2:13, endln:2:18
           |vpiFullName:work@dff0_test.n1.init
@@ -642,7 +642,7 @@ Design: (unnamed)
       \_Net: (work@dff0_test.n1), line:4:7, endln:4:9
       |vpiFullName:work@dff0_test.n1
       |vpiActual:
-      \_LogicTypespec: , line:4:3, endln:4:6
+      \_LogicTypespec: 
     |vpiName:n1
     |vpiFullName:work@dff0_test.n1
     |vpiNetType:48
@@ -651,7 +651,7 @@ Design: (unnamed)
       |vpiParent:
       \_Net: (work@dff0_test.n1), line:4:7, endln:4:9
       |vpiTypespec:
-      \_RefTypespec: (work@dff0_test.n1), line:4:12, endln:4:17
+      \_RefTypespec: (work@dff0_test.n1)
         |vpiParent:
         \_Constant: , line:4:12, endln:4:17
         |vpiFullName:work@dff0_test.n1
@@ -691,13 +691,17 @@ Design: (unnamed)
     \_EnumConst: (IDLE), line:38:16, endln:38:20
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
-      |vpiName:IDLE
+      |vpiName:
+      \_Identifier: (IDLE), line:38:16, endln:38:20
+        |vpiParent:
+        \_EnumConst: (IDLE), line:38:16, endln:38:20
+        |vpiName:IDLE
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (IDLE), line:38:16, endln:38:20
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl1.IDLE), line:38:16, endln:38:20
+        \_RefTypespec: (work@memory_ctrl1.IDLE)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl1.IDLE
@@ -711,13 +715,17 @@ Design: (unnamed)
     \_EnumConst: (WRITE), line:38:21, endln:38:26
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
-      |vpiName:WRITE
+      |vpiName:
+      \_Identifier: (WRITE), line:38:21, endln:38:26
+        |vpiParent:
+        \_EnumConst: (WRITE), line:38:21, endln:38:26
+        |vpiName:WRITE
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (WRITE), line:38:21, endln:38:26
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl1.WRITE), line:38:21, endln:38:26
+        \_RefTypespec: (work@memory_ctrl1.WRITE)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl1.WRITE
@@ -731,13 +739,17 @@ Design: (unnamed)
     \_EnumConst: (READ), line:38:27, endln:38:31
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
-      |vpiName:READ
+      |vpiName:
+      \_Identifier: (READ), line:38:27, endln:38:31
+        |vpiParent:
+        \_EnumConst: (READ), line:38:27, endln:38:31
+        |vpiName:READ
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (READ), line:38:27, endln:38:31
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl1.READ), line:38:27, endln:38:31
+        \_RefTypespec: (work@memory_ctrl1.READ)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl1.READ
@@ -751,13 +763,17 @@ Design: (unnamed)
     \_EnumConst: (DONE), line:38:32, endln:38:36
       |vpiParent:
       \_EnumTypespec: , line:38:10, endln:38:43
-      |vpiName:DONE
+      |vpiName:
+      \_Identifier: (DONE), line:38:32, endln:38:36
+        |vpiParent:
+        \_EnumConst: (DONE), line:38:32, endln:38:36
+        |vpiName:DONE
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (DONE), line:38:32, endln:38:36
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl1.DONE), line:38:32, endln:38:36
+        \_RefTypespec: (work@memory_ctrl1.DONE)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl1.DONE
@@ -851,13 +867,17 @@ Design: (unnamed)
     \_EnumConst: (IDLE), line:47:16, endln:47:20
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
-      |vpiName:IDLE
+      |vpiName:
+      \_Identifier: (IDLE), line:47:16, endln:47:20
+        |vpiParent:
+        \_EnumConst: (IDLE), line:47:16, endln:47:20
+        |vpiName:IDLE
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (IDLE), line:47:16, endln:47:20
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl2.IDLE), line:47:16, endln:47:20
+        \_RefTypespec: (work@memory_ctrl2.IDLE)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl2.IDLE
@@ -871,13 +891,17 @@ Design: (unnamed)
     \_EnumConst: (WRITE), line:47:21, endln:47:26
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
-      |vpiName:WRITE
+      |vpiName:
+      \_Identifier: (WRITE), line:47:21, endln:47:26
+        |vpiParent:
+        \_EnumConst: (WRITE), line:47:21, endln:47:26
+        |vpiName:WRITE
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (WRITE), line:47:21, endln:47:26
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl2.WRITE), line:47:21, endln:47:26
+        \_RefTypespec: (work@memory_ctrl2.WRITE)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl2.WRITE
@@ -891,13 +915,17 @@ Design: (unnamed)
     \_EnumConst: (READ), line:47:27, endln:47:31
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
-      |vpiName:READ
+      |vpiName:
+      \_Identifier: (READ), line:47:27, endln:47:31
+        |vpiParent:
+        \_EnumConst: (READ), line:47:27, endln:47:31
+        |vpiName:READ
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (READ), line:47:27, endln:47:31
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl2.READ), line:47:27, endln:47:31
+        \_RefTypespec: (work@memory_ctrl2.READ)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl2.READ
@@ -911,13 +939,17 @@ Design: (unnamed)
     \_EnumConst: (DONE), line:47:32, endln:47:36
       |vpiParent:
       \_EnumTypespec: , line:47:10, endln:47:43
-      |vpiName:DONE
+      |vpiName:
+      \_Identifier: (DONE), line:47:32, endln:47:36
+        |vpiParent:
+        \_EnumConst: (DONE), line:47:32, endln:47:36
+        |vpiName:DONE
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (DONE), line:47:32, endln:47:36
         |vpiTypespec:
-        \_RefTypespec: (work@memory_ctrl2.DONE), line:47:32, endln:47:36
+        \_RefTypespec: (work@memory_ctrl2.DONE)
           |vpiParent:
           \_Constant: 
           |vpiFullName:work@memory_ctrl2.DONE
@@ -1023,13 +1055,13 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:12:11, endln:12:16
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:12:17, endln:12:35
     |vpiParent:
-    \_LogicTypespec: , line:12:11, endln:12:16
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Operation: , line:12:18, endln:12:32
       |vpiParent:
@@ -1041,13 +1073,13 @@ Design: (unnamed)
         \_Operation: , line:12:18, endln:12:32
         |vpiName:AXI_ID_WIDTH
         |vpiActual:
-        \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:31
+        \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:24
       |vpiOperand:
       \_Constant: , line:12:31, endln:12:32
         |vpiParent:
         \_Operation: , line:12:18, endln:12:32
         |vpiTypespec:
-        \_RefTypespec: , line:12:31, endln:12:32
+        \_RefTypespec: 
           |vpiParent:
           \_Constant: , line:12:31, endln:12:32
           |vpiActual:
@@ -1061,7 +1093,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:12:17, endln:12:35
       |vpiTypespec:
-      \_RefTypespec: , line:12:33, endln:12:34
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:12:33, endln:12:34
         |vpiActual:
@@ -1071,7 +1103,7 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiValue:0
 |vpiTypespec:
-\_LogicTypespec: , line:4:3, endln:4:6
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -1135,7 +1167,7 @@ Constant                            13      13       1         1
 Operation                            2       1       0         1
 RefTypespec                         30      30       1         1
 ----------------------------------------------------------------
-Others                              76      76       0         0
+Others                              84      84       0         0
 ----------------------------------------------------------------
-                                   121     120       2         3
+                                   129     128       2         3
 ===================== END REDUCTION RESULT =====================

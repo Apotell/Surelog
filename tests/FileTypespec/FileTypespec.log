@@ -155,7 +155,7 @@ ContAssign                                             1
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
-Identifier                                             7
+Identifier                                            10
 IntTypespec                                            3
 LogicTypespec                                          2
 Module                                                 2
@@ -173,7 +173,7 @@ TypespecMember                                         4
 UnionTypespec                                          1
 UnsupportedTypespec                                    7
 ------------------------------------------------------------
-Total:                                                66
+Total:                                                69
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -226,13 +226,17 @@ Design: (unnamed)
         \_TypespecMember: (a), line:3:11, endln:3:12
         |vpiFullName:foo_flags::a
         |vpiActual:
-        \_LogicTypespec: , line:3:5, endln:3:10
+        \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (foo_flags::common_flags_t), line:4:5, endln:4:19
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:4:4
   |vpiDefName:foo_flags
-  |vpiEndLabel:foo_flags
+  |vpiEndLabel:
+  \_Identifier: (foo_flags), line:5:14, endln:5:23
+    |vpiParent:
+    \_Package: foo_flags (foo_flags), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:1:1, endln:5:23
+    |vpiName:foo_flags
 |vpiAllPackages:
 \_Package: fooes (fooes), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:8:1, endln:14:19
   |vpiParent:
@@ -252,23 +256,27 @@ Design: (unnamed)
       \_EnumTypespec: , line:10:11, endln:12:12
       |vpiFullName:fooes
       |vpiActual:
-      \_LogicTypespec: , line:10:16, endln:10:21
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (a), line:11:5, endln:11:6
       |vpiParent:
       \_EnumTypespec: , line:10:11, endln:12:12
-      |vpiName:a
+      |vpiName:
+      \_Identifier: (a), line:11:5, endln:11:6
+        |vpiParent:
+        \_EnumConst: (a), line:11:5, endln:11:6
+        |vpiName:a
       |vpiValue:
       \_Constant: 
         |vpiParent:
         \_EnumConst: (a), line:11:5, endln:11:6
         |vpiTypespec:
-        \_RefTypespec: (fooes::a), line:11:5, endln:11:6
+        \_RefTypespec: (fooes::a)
           |vpiParent:
           \_Constant: 
           |vpiFullName:fooes::a
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:7
         |vpiSize:2
         |vpiDecompile:0
@@ -294,7 +302,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (fooes::classes), line:12:5, endln:12:12
   |vpiDefName:fooes
-  |vpiEndLabel:fooes
+  |vpiEndLabel:
+  \_Identifier: (fooes), line:14:14, endln:14:19
+    |vpiParent:
+    \_Package: fooes (fooes), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:8:1, endln:14:19
+    |vpiName:fooes
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:25:1, endln:27:10
   |vpiParent:
@@ -467,23 +479,23 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (padded_fooes_t), line:18:3, endln:18:17
 |vpiTypespec:
-\_LogicTypespec: , line:3:5, endln:3:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:10:16, endln:10:21
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:10:22, endln:10:27
     |vpiParent:
-    \_LogicTypespec: , line:10:16, endln:10:21
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:10:23, endln:10:24
       |vpiParent:
       \_Range: , line:10:22, endln:10:27
       |vpiTypespec:
-      \_RefTypespec: , line:10:23, endln:10:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:10:23, endln:10:24
         |vpiActual:
@@ -497,7 +509,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:10:22, endln:10:27
       |vpiTypespec:
-      \_RefTypespec: , line:10:25, endln:10:26
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:10:25, endln:10:26
         |vpiActual:
@@ -533,7 +545,7 @@ COMMAND: ${SURELOG_DIR}/regression/FileTypespec/slpp_all/surelog.uhdm ${SURELOG_
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              56      56       0         0
+Others                              59      59       0         0
 ----------------------------------------------------------------
-                                    56      56       0         0
+                                    59      59       0         0
 ===================== END REDUCTION RESULT =====================

@@ -82,23 +82,23 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/FileParam/dut.sv:12:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              10
+Constant                                               8
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
-Identifier                                             2
-IntTypespec                                           11
+Identifier                                             4
+IntTypespec                                            9
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              4
 ParamAssign                                            2
 Parameter                                              2
 RefObj                                                 4
-RefTypespec                                           13
+RefTypespec                                           11
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                57
+Total:                                                53
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -134,23 +134,27 @@ Design: (unnamed)
     |vpiParent:
     \_EnumTypespec: , line:5:9, endln:9:34
     |vpiActual:
-    \_IntTypespec: , line:5:14, endln:5:26
+    \_IntTypespec: 
   |vpiEnumConst:
   \_EnumConst: (SCR1_SCU_DR_SYSCTRL_OP_BIT_R), line:6:5, endln:6:56
     |vpiParent:
     \_EnumTypespec: , line:5:9, endln:9:34
-    |vpiName:SCR1_SCU_DR_SYSCTRL_OP_BIT_R
+    |vpiName:
+    \_Identifier: (SCR1_SCU_DR_SYSCTRL_OP_BIT_R), line:6:5, endln:6:33
+      |vpiParent:
+      \_EnumConst: (SCR1_SCU_DR_SYSCTRL_OP_BIT_R), line:6:5, endln:6:56
+      |vpiName:SCR1_SCU_DR_SYSCTRL_OP_BIT_R
     |vpiValue:
-    \_Constant: 
+    \_Constant: , line:6:53, endln:6:56
       |vpiParent:
       \_EnumConst: (SCR1_SCU_DR_SYSCTRL_OP_BIT_R), line:6:5, endln:6:56
       |vpiTypespec:
-      \_RefTypespec: (SCR1_SCU_DR_SYSCTRL_OP_BIT_R), line:6:53, endln:6:56
+      \_RefTypespec: (SCR1_SCU_DR_SYSCTRL_OP_BIT_R)
         |vpiParent:
-        \_Constant: 
+        \_Constant: , line:6:53, endln:6:56
         |vpiFullName:SCR1_SCU_DR_SYSCTRL_OP_BIT_R
         |vpiActual:
-        \_IntTypespec: , line:5:14, endln:5:26
+        \_IntTypespec: 
       |vpiConstType:5
       |vpiSize:-1
       |vpiDecompile:'h0
@@ -159,23 +163,13 @@ Design: (unnamed)
   \_EnumConst: (SCR1_SCU_DR_SYSCTRL_OP_BIT_L), line:7:5, endln:7:57
     |vpiParent:
     \_EnumTypespec: , line:5:9, endln:9:34
-    |vpiName:SCR1_SCU_DR_SYSCTRL_OP_BIT_L
-    |vpiValue:
-    \_Constant: 
+    |vpiName:
+    \_Identifier: (SCR1_SCU_DR_SYSCTRL_OP_BIT_L), line:7:5, endln:7:33
       |vpiParent:
       \_EnumConst: (SCR1_SCU_DR_SYSCTRL_OP_BIT_L), line:7:5, endln:7:57
-      |vpiTypespec:
-      \_RefTypespec: (SCR1_SCU_DR_SYSCTRL_OP_BIT_L), line:7:53, endln:7:57
-        |vpiParent:
-        \_Constant: 
-        |vpiFullName:SCR1_SCU_DR_SYSCTRL_OP_BIT_L
-        |vpiActual:
-        \_IntTypespec: , line:5:14, endln:5:26
-      |vpiConstType:9
-      |vpiDecompile:P2 + 4
-      |vpiValue:0
+      |vpiName:SCR1_SCU_DR_SYSCTRL_OP_BIT_L
 |vpiTypespec:
-\_IntTypespec: , line:5:14, endln:5:26
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -202,13 +196,13 @@ Design: (unnamed)
   |vpiModule:
   \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FileParam/dut.sv, line:12:1, endln:13:10
 |vpiParameter:
-\_Parameter: (P1), line:1:12, endln:1:18
+\_Parameter: (P1), line:1:12, endln:1:14
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:P1
   |vpiLocalParam:1
 |vpiParameter:
-\_Parameter: (P2), line:3:12, endln:3:23
+\_Parameter: (P2), line:3:12, endln:3:14
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:P2
@@ -218,13 +212,13 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiLhs:
-  \_Parameter: (P1), line:1:12, endln:1:18
+  \_Parameter: (P1), line:1:12, endln:1:14
   |vpiRhs:
   \_Constant: , line:1:17, endln:1:18
     |vpiParent:
     \_ParamAssign: , line:1:12, endln:1:18
     |vpiTypespec:
-    \_RefTypespec: , line:1:17, endln:1:18
+    \_RefTypespec: 
       |vpiParent:
       \_Constant: , line:1:17, endln:1:18
       |vpiActual:
@@ -238,7 +232,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiLhs:
-  \_Parameter: (P2), line:3:12, endln:3:23
+  \_Parameter: (P2), line:3:12, endln:3:14
   |vpiRhs:
   \_Operation: , line:3:17, endln:3:23
     |vpiParent:
@@ -250,13 +244,13 @@ Design: (unnamed)
       \_Operation: , line:3:17, endln:3:23
       |vpiName:P1
       |vpiActual:
-      \_Parameter: (P1), line:1:12, endln:1:18
+      \_Parameter: (P1), line:1:12, endln:1:14
     |vpiOperand:
     \_Constant: , line:3:22, endln:3:23
       |vpiParent:
       \_Operation: , line:3:17, endln:3:23
       |vpiTypespec:
-      \_RefTypespec: , line:3:22, endln:3:23
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:22, endln:3:23
         |vpiActual:

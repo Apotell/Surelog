@@ -97,7 +97,7 @@ Constant                                               2
 Design                                                 1
 ForStmt                                                1
 Function                                               1
-Identifier                                             2
+Identifier                                             4
 IntTypespec                                            4
 LogicTypespec                                          3
 Module                                                 1
@@ -110,7 +110,7 @@ RefTypespec                                            7
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                35
+Total:                                                37
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarDecl/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -151,7 +151,7 @@ Design: (unnamed)
         \_Variable: (work@top.theta.x), line:3:16, endln:3:17
         |vpiFullName:work@top.theta.x
         |vpiActual:
-        \_IntTypespec: , line:3:12, endln:3:15
+        \_IntTypespec: 
       |vpiName:x
       |vpiFullName:work@top.theta.x
     |vpiInternalScope:
@@ -174,7 +174,7 @@ Design: (unnamed)
             \_Variable: (work@top.theta.a), line:4:12, endln:4:13
             |vpiFullName:work@top.theta.a
             |vpiActual:
-            \_IntTypespec: , line:3:12, endln:3:15
+            \_IntTypespec: 
           |vpiName:a
           |vpiFullName:work@top.theta.a
         |vpiImportTypespec:
@@ -190,12 +190,12 @@ Design: (unnamed)
           |vpiParent:
           \_Assignment: , line:3:12, endln:3:21
           |vpiTypespec:
-          \_RefTypespec: (work@top.theta), line:3:20, endln:3:21
+          \_RefTypespec: (work@top.theta)
             |vpiParent:
             \_Constant: , line:3:20, endln:3:21
             |vpiFullName:work@top.theta
             |vpiActual:
-            \_IntTypespec: , line:3:12, endln:3:15
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
@@ -231,12 +231,12 @@ Design: (unnamed)
           |vpiParent:
           \_Operation: , line:3:24, endln:3:29
           |vpiTypespec:
-          \_RefTypespec: (work@top.theta), line:3:28, endln:3:29
+          \_RefTypespec: (work@top.theta)
             |vpiParent:
             \_Constant: , line:3:28, endln:3:29
             |vpiFullName:work@top.theta
             |vpiActual:
-            \_IntTypespec: , line:3:12, endln:3:15
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:5
@@ -253,9 +253,14 @@ Design: (unnamed)
       \_Function: (work@top.theta), line:2:4, endln:6:23
       |vpiFullName:work@top.theta
       |vpiActual:
-      \_LogicTypespec: , line:2:23, endln:2:28
+      \_LogicTypespec: 
     |vpiStmt:
     \_ForStmt: (work@top.theta), line:3:7, endln:5:10
+    |vpiEndLabel:
+    \_Identifier: (theta), line:6:18, endln:6:23
+      |vpiParent:
+      \_Function: (work@top.theta), line:2:4, endln:6:23
+      |vpiName:theta
   |vpiImportTypespec:
   \_Function: (work@top.theta), line:2:4, endln:6:23
   |vpiImportTypespec:
@@ -268,7 +273,7 @@ Design: (unnamed)
       \_Net: (work@top.o), line:1:25, endln:1:26
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:2:23, endln:2:28
+      \_LogicTypespec: 
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:36
@@ -289,14 +294,18 @@ Design: (unnamed)
       \_Port: (o), line:1:25, endln:1:26
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:2:23, endln:2:28
-  |vpiEndLabel:top
+      \_LogicTypespec: 
+  |vpiEndLabel:
+  \_Identifier: (top), line:7:13, endln:7:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/VarDecl/dut.sv, line:1:1, endln:7:16
+    |vpiName:top
 |vpiTypespec:
-\_LogicTypespec: , line:2:23, endln:2:28
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_IntTypespec: , line:3:12, endln:3:15
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
@@ -322,7 +331,7 @@ COMMAND: ${SURELOG_DIR}/regression/VarDecl/slpp_all/surelog.uhdm ${SURELOG_DIR}/
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              29      29       0         0
+Others                              31      31       0         0
 ----------------------------------------------------------------
-                                    29      29       0         0
+                                    31      31       0         0
 ===================== END REDUCTION RESULT =====================

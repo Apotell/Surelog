@@ -181,7 +181,7 @@ GenFor                                                 1
 GenRegion                                              1
 HierPath                                               1
 IODecl                                                 1
-Identifier                                             5
+Identifier                                             6
 IntTypespec                                           10
 Interface                                              1
 InterfaceTypespec                                      1
@@ -201,7 +201,7 @@ SourceFile                                             1
 UnsupportedTypespec                                    2
 Variable                                               3
 ------------------------------------------------------------
-Total:                                                94
+Total:                                                95
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -232,7 +232,7 @@ Design: (unnamed)
       \_Variable: (work@r5p_bus_if.vld), line:4:17, endln:4:20
       |vpiFullName:work@r5p_bus_if.vld
       |vpiActual:
-      \_LogicTypespec: , line:4:2, endln:4:7
+      \_LogicTypespec: 
     |vpiName:vld
     |vpiFullName:work@r5p_bus_if.vld
     |vpiRandType:1
@@ -249,7 +249,7 @@ Design: (unnamed)
       \_Net: (work@r5p_bus_if.vld), line:4:17, endln:4:20
       |vpiFullName:work@r5p_bus_if.vld
       |vpiActual:
-      \_LogicTypespec: , line:4:2, endln:4:7
+      \_LogicTypespec: 
     |vpiName:vld
     |vpiFullName:work@r5p_bus_if.vld
     |vpiNetType:36
@@ -273,7 +273,11 @@ Design: (unnamed)
       |vpiDirection:2
     |vpiInterface:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:2:1, endln:10:25
-  |vpiEndLabel:r5p_bus_if
+  |vpiEndLabel:
+  \_Identifier: (r5p_bus_if), line:10:15, endln:10:25
+    |vpiParent:
+    \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:2:1, endln:10:25
+    |vpiName:r5p_bus_if
 |vpiAllModules:
 \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
   |vpiParent:
@@ -290,16 +294,16 @@ Design: (unnamed)
     |vpiName:i
     |vpiFullName:work@r5p_bus_dec.i
   |vpiParameter:
-  \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
+  \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:18
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_dec.BN), line:13:3, endln:13:6
       |vpiParent:
-      \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
+      \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:18
       |vpiFullName:work@r5p_bus_dec.BN
       |vpiActual:
-      \_IntTypespec: , line:13:3, endln:13:15
+      \_IntTypespec: 
     |vpiName:BN
     |vpiFullName:work@r5p_bus_dec.BN
   |vpiParamAssign:
@@ -307,13 +311,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
     |vpiLhs:
-    \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
+    \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:18
     |vpiRhs:
     \_Constant: , line:13:21, endln:13:22
       |vpiParent:
       \_ParamAssign: , line:13:16, endln:13:22
       |vpiTypespec:
-      \_RefTypespec: (work@r5p_bus_dec), line:13:21, endln:13:22
+      \_RefTypespec: (work@r5p_bus_dec)
         |vpiParent:
         \_Constant: , line:13:21, endln:13:22
         |vpiFullName:work@r5p_bus_dec
@@ -420,7 +424,7 @@ Design: (unnamed)
                 |vpiParent:
                 \_Operation: , line:23:21, endln:23:38
                 |vpiTypespec:
-                \_RefTypespec: (work@r5p_bus_dec.gen_loop), line:23:32, endln:23:33
+                \_RefTypespec: (work@r5p_bus_dec.gen_loop)
                   |vpiParent:
                   \_Constant: , line:23:32, endln:23:33
                   |vpiFullName:work@r5p_bus_dec.gen_loop
@@ -435,7 +439,7 @@ Design: (unnamed)
                 |vpiParent:
                 \_Operation: , line:23:21, endln:23:38
                 |vpiTypespec:
-                \_RefTypespec: (work@r5p_bus_dec.gen_loop), line:23:36, endln:23:38
+                \_RefTypespec: (work@r5p_bus_dec.gen_loop)
                   |vpiParent:
                   \_Constant: , line:23:36, endln:23:38
                   |vpiFullName:work@r5p_bus_dec.gen_loop
@@ -458,7 +462,7 @@ Design: (unnamed)
             |vpiParent:
             \_Assignment: , line:21:6, endln:21:9
             |vpiTypespec:
-            \_RefTypespec: (work@r5p_bus_dec), line:21:8, endln:21:9
+            \_RefTypespec: (work@r5p_bus_dec)
               |vpiParent:
               \_Constant: , line:21:8, endln:21:9
               |vpiFullName:work@r5p_bus_dec
@@ -488,7 +492,7 @@ Design: (unnamed)
             |vpiName:BN
             |vpiFullName:work@r5p_bus_dec.BN
             |vpiActual:
-            \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
+            \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:18
         |vpiForIncStmt:
         \_Operation: , line:21:17, endln:21:20
           |vpiParent:
@@ -529,13 +533,13 @@ Design: (unnamed)
           |vpiName:BN
           |vpiFullName:work@r5p_bus_dec.BN
           |vpiActual:
-          \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
+          \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:18
         |vpiOperand:
         \_Constant: , line:15:23, endln:15:24
           |vpiParent:
           \_Operation: , line:15:20, endln:15:24
           |vpiTypespec:
-          \_RefTypespec: (work@r5p_bus_dec), line:15:23, endln:15:24
+          \_RefTypespec: (work@r5p_bus_dec)
             |vpiParent:
             \_Constant: , line:15:23, endln:15:24
             |vpiFullName:work@r5p_bus_dec
@@ -550,7 +554,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:15:19, endln:15:27
         |vpiTypespec:
-        \_RefTypespec: (work@r5p_bus_dec), line:15:25, endln:15:26
+        \_RefTypespec: (work@r5p_bus_dec)
           |vpiParent:
           \_Constant: , line:15:25, endln:15:26
           |vpiFullName:work@r5p_bus_dec
@@ -589,13 +593,13 @@ Design: (unnamed)
           |vpiName:BN
           |vpiFullName:work@r5p_bus_dec.BN
           |vpiActual:
-          \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
+          \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:18
         |vpiOperand:
         \_Constant: , line:15:23, endln:15:24
           |vpiParent:
           \_Operation: , line:15:20, endln:15:24
           |vpiTypespec:
-          \_RefTypespec: (work@r5p_bus_dec), line:15:23, endln:15:24
+          \_RefTypespec: (work@r5p_bus_dec)
             |vpiParent:
             \_Constant: , line:15:23, endln:15:24
             |vpiFullName:work@r5p_bus_dec
@@ -610,7 +614,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:15:19, endln:15:27
         |vpiTypespec:
-        \_RefTypespec: (work@r5p_bus_dec), line:15:25, endln:15:26
+        \_RefTypespec: (work@r5p_bus_dec)
           |vpiParent:
           \_Constant: , line:15:25, endln:15:26
           |vpiFullName:work@r5p_bus_dec
@@ -663,7 +667,7 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:15:19, endln:15:27
 |vpiTypespec:
-\_IntTypespec: , line:13:3, endln:13:15
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -676,7 +680,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:4:2, endln:4:7
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -712,7 +716,7 @@ COMMAND: ${SURELOG_DIR}/regression/ModPortArrayBind/slpp_all/surelog.uhdm ${SURE
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              75      75       0         0
+Others                              76      76       0         0
 ----------------------------------------------------------------
-                                    75      75       0         0
+                                    76      76       0         0
 ===================== END REDUCTION RESULT =====================

@@ -165,14 +165,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
-Constant                                              16
+Constant                                              13
 Design                                                 1
 EnumConst                                              3
 EnumTypespec                                           2
 GenIf                                                  1
-Identifier                                             6
-IntTypespec                                           14
-LogicTypespec                                          5
+Identifier                                             9
+IntTypespec                                           12
+LogicTypespec                                          4
 Module                                                 4
 ModuleTypespec                                         2
 Operation                                              4
@@ -182,11 +182,11 @@ Parameter                                              1
 Range                                                  2
 RefModule                                              1
 RefObj                                                 4
-RefTypespec                                           21
+RefTypespec                                           18
 SourceFile                                             1
 TypedefTypespec                                        2
 ------------------------------------------------------------
-Total:                                                94
+Total:                                                88
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -208,16 +208,16 @@ Design: (unnamed)
     \_Package: prim_mubi_pkg (prim_mubi_pkg), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
     |vpiName:prim_mubi_pkg
   |vpiParameter:
-  \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
+  \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
     |vpiParent:
     \_Package: prim_mubi_pkg (prim_mubi_pkg), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
     |vpiTypespec:
     \_RefTypespec: (prim_mubi_pkg::MuBi4Width), line:3:11, endln:3:14
       |vpiParent:
-      \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
+      \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
       |vpiFullName:prim_mubi_pkg::MuBi4Width
       |vpiActual:
-      \_IntTypespec: , line:3:11, endln:3:14
+      \_IntTypespec: 
     |vpiName:MuBi4Width
     |vpiFullName:prim_mubi_pkg::MuBi4Width
   |vpiParamAssign:
@@ -225,18 +225,18 @@ Design: (unnamed)
     |vpiParent:
     \_Package: prim_mubi_pkg (prim_mubi_pkg), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
     |vpiLhs:
-    \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
+    \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
     |vpiRhs:
     \_Constant: , line:3:28, endln:3:29
       |vpiParent:
       \_ParamAssign: , line:3:15, endln:3:29
       |vpiTypespec:
-      \_RefTypespec: (prim_mubi_pkg), line:3:28, endln:3:29
+      \_RefTypespec: (prim_mubi_pkg)
         |vpiParent:
         \_Constant: , line:3:28, endln:3:29
         |vpiFullName:prim_mubi_pkg
         |vpiActual:
-        \_IntTypespec: , line:3:11, endln:3:14
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:4
@@ -251,23 +251,27 @@ Design: (unnamed)
       \_EnumTypespec: , line:4:9, endln:7:10
       |vpiFullName:prim_mubi_pkg
       |vpiActual:
-      \_LogicTypespec: , line:4:14, endln:4:19
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (MuBi4True), line:5:3, endln:5:19
       |vpiParent:
       \_EnumTypespec: , line:4:9, endln:7:10
-      |vpiName:MuBi4True
+      |vpiName:
+      \_Identifier: (MuBi4True), line:5:3, endln:5:12
+        |vpiParent:
+        \_EnumConst: (MuBi4True), line:5:3, endln:5:19
+        |vpiName:MuBi4True
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:5:15, endln:5:19
         |vpiParent:
         \_EnumConst: (MuBi4True), line:5:3, endln:5:19
         |vpiTypespec:
-        \_RefTypespec: (prim_mubi_pkg::MuBi4True), line:5:15, endln:5:19
+        \_RefTypespec: (prim_mubi_pkg::MuBi4True)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:5:15, endln:5:19
           |vpiFullName:prim_mubi_pkg::MuBi4True
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:5
         |vpiSize:4
         |vpiDecompile:4'hA
@@ -276,18 +280,22 @@ Design: (unnamed)
     \_EnumConst: (MuBi4False), line:6:3, endln:6:20
       |vpiParent:
       \_EnumTypespec: , line:4:9, endln:7:10
-      |vpiName:MuBi4False
+      |vpiName:
+      \_Identifier: (MuBi4False), line:6:3, endln:6:13
+        |vpiParent:
+        \_EnumConst: (MuBi4False), line:6:3, endln:6:20
+        |vpiName:MuBi4False
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:6:16, endln:6:20
         |vpiParent:
         \_EnumConst: (MuBi4False), line:6:3, endln:6:20
         |vpiTypespec:
-        \_RefTypespec: (prim_mubi_pkg::MuBi4False), line:6:16, endln:6:20
+        \_RefTypespec: (prim_mubi_pkg::MuBi4False)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:6:16, endln:6:20
           |vpiFullName:prim_mubi_pkg::MuBi4False
           |vpiActual:
-          \_IntTypespec: 
+          \_LogicTypespec: 
         |vpiConstType:5
         |vpiSize:4
         |vpiDecompile:4'h5
@@ -332,27 +340,16 @@ Design: (unnamed)
       \_EnumTypespec: , line:13:9, endln:15:14
       |vpiFullName:pkg
       |vpiActual:
-      \_LogicTypespec: , line:13:14, endln:13:19
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (ReadingLow), line:14:3, endln:14:55
       |vpiParent:
       \_EnumTypespec: , line:13:9, endln:15:14
-      |vpiName:ReadingLow
-      |vpiValue:
-      \_Constant: 
+      |vpiName:
+      \_Identifier: (ReadingLow), line:14:3, endln:14:13
         |vpiParent:
         \_EnumConst: (ReadingLow), line:14:3, endln:14:55
-        |vpiTypespec:
-        \_RefTypespec: (pkg::ReadingLow), line:14:17, endln:14:55
-          |vpiParent:
-          \_Constant: 
-          |vpiFullName:pkg::ReadingLow
-          |vpiActual:
-          \_LogicTypespec: 
-        |vpiConstType:3
-        |vpiSize:10
-        |vpiDecompile:{6'b001100, prim_mubi_pkg::MuBi4False}
-        |vpiValue:0011000101
+        |vpiName:ReadingLow
   |vpiTypespec:
   \_TypedefTypespec: (pkg::fsm_state_e), line:15:3, endln:15:14
     |vpiParent:
@@ -436,12 +433,12 @@ Design: (unnamed)
         |vpiParent:
         \_Operation: , line:24:8, endln:24:30
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:24:27, endln:24:30
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:24:27, endln:24:30
           |vpiFullName:work@top
           |vpiActual:
-          \_IntTypespec: , line:3:11, endln:3:14
+          \_IntTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:197
@@ -449,18 +446,18 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@top), line:24:32, endln:26:7
 |vpiTypespec:
-\_IntTypespec: , line:3:11, endln:3:14
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:4:14, endln:4:19
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:4:20, endln:4:36
     |vpiParent:
-    \_LogicTypespec: , line:4:14, endln:4:19
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Operation: , line:4:21, endln:4:33
       |vpiParent:
@@ -472,17 +469,17 @@ Design: (unnamed)
         \_Operation: , line:4:21, endln:4:33
         |vpiName:MuBi4Width
         |vpiActual:
-        \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
+        \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
       |vpiOperand:
       \_Constant: , line:4:32, endln:4:33
         |vpiParent:
         \_Operation: , line:4:21, endln:4:33
         |vpiTypespec:
-        \_RefTypespec: , line:4:32, endln:4:33
+        \_RefTypespec: 
           |vpiParent:
           \_Constant: , line:4:32, endln:4:33
           |vpiActual:
-          \_IntTypespec: , line:3:11, endln:3:14
+          \_IntTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
@@ -492,11 +489,11 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:4:20, endln:4:36
       |vpiTypespec:
-      \_RefTypespec: , line:4:34, endln:4:35
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:4:34, endln:4:35
         |vpiActual:
-        \_IntTypespec: , line:3:11, endln:3:14
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:0
@@ -506,23 +503,23 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:13:14, endln:13:19
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:13:20, endln:13:25
     |vpiParent:
-    \_LogicTypespec: , line:13:14, endln:13:19
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:13:21, endln:13:22
       |vpiParent:
       \_Range: , line:13:20, endln:13:25
       |vpiTypespec:
-      \_RefTypespec: , line:13:21, endln:13:22
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:13:21, endln:13:22
         |vpiActual:
-        \_IntTypespec: , line:3:11, endln:3:14
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:9
@@ -532,11 +529,11 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:13:20, endln:13:25
       |vpiTypespec:
-      \_RefTypespec: , line:13:23, endln:13:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:13:23, endln:13:24
         |vpiActual:
-        \_IntTypespec: , line:3:11, endln:3:14
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:0
@@ -569,7 +566,7 @@ COMMAND: ${SURELOG_DIR}/regression/EnumConstConcat/slpp_all/surelog.uhdm ${SUREL
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              60      60       0         0
+Others                              61      61       0         0
 ----------------------------------------------------------------
-                                    60      60       0         0
+                                    61      61       0         0
 ===================== END REDUCTION RESULT =====================

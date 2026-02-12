@@ -174,7 +174,7 @@ Begin                                                  1
 Constant                                               4
 Design                                                 1
 EventControl                                           1
-Identifier                                             3
+Identifier                                             5
 IntTypespec                                            4
 LogicTypespec                                          5
 Module                                                 1
@@ -182,6 +182,7 @@ ModuleTypespec                                         1
 Net                                                    3
 Operation                                              1
 Package                                                1
+ParamAssign                                            1
 Port                                                   3
 Range                                                  2
 RefObj                                                 4
@@ -193,7 +194,7 @@ TypedefTypespec                                        1
 TypespecMember                                         5
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                65
+Total:                                                68
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageTypeParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -246,7 +247,7 @@ Design: (unnamed)
         \_TypespecMember: (a), line:3:19, endln:3:20
         |vpiFullName:new_package::a
         |vpiActual:
-        \_LogicTypespec: , line:3:5, endln:3:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (b), line:4:19, endln:4:20
       |vpiParent:
@@ -258,7 +259,7 @@ Design: (unnamed)
         \_TypespecMember: (b), line:4:19, endln:4:20
         |vpiFullName:new_package::b
         |vpiActual:
-        \_LogicTypespec: , line:4:5, endln:4:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (c), line:5:19, endln:5:20
       |vpiParent:
@@ -270,7 +271,7 @@ Design: (unnamed)
         \_TypespecMember: (c), line:5:19, endln:5:20
         |vpiFullName:new_package::c
         |vpiActual:
-        \_LogicTypespec: , line:5:5, endln:5:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (d), line:6:19, endln:6:20
       |vpiParent:
@@ -282,7 +283,7 @@ Design: (unnamed)
         \_TypespecMember: (d), line:6:19, endln:6:20
         |vpiFullName:new_package::d
         |vpiActual:
-        \_LogicTypespec: , line:5:5, endln:5:10
+        \_LogicTypespec: 
     |vpiTypespecMember:
     \_TypespecMember: (e), line:7:19, endln:7:20
       |vpiParent:
@@ -294,13 +295,17 @@ Design: (unnamed)
         \_TypespecMember: (e), line:7:19, endln:7:20
         |vpiFullName:new_package::e
         |vpiActual:
-        \_LogicTypespec: , line:5:5, endln:5:10
+        \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (new_package::zzz), line:8:3, endln:8:6
   |vpiImportTypespec:
   \_StructTypespec: , line:2:9, endln:8:2
   |vpiDefName:new_package
-  |vpiEndLabel:new_package
+  |vpiEndLabel:
+  \_Identifier: (new_package), line:9:14, endln:9:25
+    |vpiParent:
+    \_Package: new_package (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
+    |vpiName:new_package
 |vpiAllModules:
 \_Module: work@module_a (work@module_a), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:12:1, endln:28:21
   |vpiParent:
@@ -316,12 +321,18 @@ Design: (unnamed)
     \_Module: work@module_a (work@module_a), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:12:1, endln:28:21
     |vpiName:TYPE_PARAMETER
     |vpiFullName:work@module_a.TYPE_PARAMETER
-    |vpiTypespec:
-    \_RefTypespec: (work@module_a.TYPE_PARAMETER.new_package::zzz), line:14:37, endln:14:53
+  |vpiParamAssign:
+  \_ParamAssign: , line:14:20, endln:14:53
+    |vpiParent:
+    \_Module: work@module_a (work@module_a), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:12:1, endln:28:21
+    |vpiLhs:
+    \_TypeParameter: (work@module_a.TYPE_PARAMETER), line:14:20, endln:14:34
+    |vpiRhs:
+    \_RefTypespec: (work@module_a.new_package::zzz), line:14:37, endln:14:53
       |vpiParent:
-      \_TypeParameter: (work@module_a.TYPE_PARAMETER), line:14:20, endln:14:34
+      \_ParamAssign: , line:14:20, endln:14:53
       |vpiName:new_package::zzz
-      |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz
+      |vpiFullName:work@module_a.new_package::zzz
       |vpiActual:
       \_TypedefTypespec: (new_package::zzz), line:8:3, endln:8:6
   |vpiTypespec:
@@ -451,21 +462,25 @@ Design: (unnamed)
             |vpiActual:
             \_Net: (work@module_a.input_struct), line:17:25, endln:17:37
     |vpiAlwaysType:3
-  |vpiEndLabel:module_a
+  |vpiEndLabel:
+  \_Identifier: (module_a), line:28:13, endln:28:21
+    |vpiParent:
+    \_Module: work@module_a (work@module_a), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:12:1, endln:28:21
+    |vpiName:module_a
 |vpiTypespec:
-\_LogicTypespec: , line:3:5, endln:3:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:3:11, endln:3:18
     |vpiParent:
-    \_LogicTypespec: , line:3:5, endln:3:10
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:3:12, endln:3:15
       |vpiParent:
       \_Range: , line:3:11, endln:3:18
       |vpiTypespec:
-      \_RefTypespec: , line:3:12, endln:3:15
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:12, endln:3:15
         |vpiActual:
@@ -479,7 +494,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:3:11, endln:3:18
       |vpiTypespec:
-      \_RefTypespec: , line:3:16, endln:3:17
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:16, endln:3:17
         |vpiActual:
@@ -494,19 +509,19 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:4:5, endln:4:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:4:11, endln:4:16
     |vpiParent:
-    \_LogicTypespec: , line:4:5, endln:4:10
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:4:12, endln:4:13
       |vpiParent:
       \_Range: , line:4:11, endln:4:16
       |vpiTypespec:
-      \_RefTypespec: , line:4:12, endln:4:13
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:4:12, endln:4:13
         |vpiActual:
@@ -520,7 +535,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:4:11, endln:4:16
       |vpiTypespec:
-      \_RefTypespec: , line:4:14, endln:4:15
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:4:14, endln:4:15
         |vpiActual:
@@ -530,7 +545,7 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiValue:0
 |vpiTypespec:
-\_LogicTypespec: , line:5:5, endln:5:10
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -555,7 +570,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackageTypeParam/slpp_all/surelog.uhdm ${SURE
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              55      55       0         0
+Others                              58      58       0         0
 ----------------------------------------------------------------
-                                    55      55       0         0
+                                    58      58       0         0
 ===================== END REDUCTION RESULT =====================

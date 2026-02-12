@@ -190,30 +190,30 @@ Design: (unnamed)
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiName:work@submodule
   |vpiParameter:
-  \_Parameter: (work@submodule.X), line:2:18, endln:2:24
+  \_Parameter: (work@submodule.X), line:2:18, endln:2:19
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiTypespec:
     \_RefTypespec: (work@submodule.X), line:2:14, endln:2:17
       |vpiParent:
-      \_Parameter: (work@submodule.X), line:2:18, endln:2:24
+      \_Parameter: (work@submodule.X), line:2:18, endln:2:19
       |vpiFullName:work@submodule.X
       |vpiActual:
-      \_IntTypespec: , line:2:14, endln:2:17
+      \_IntTypespec: 
     |vpiName:X
     |vpiFullName:work@submodule.X
   |vpiParameter:
-  \_Parameter: (work@submodule.Y), line:4:24, endln:4:30
+  \_Parameter: (work@submodule.Y), line:4:24, endln:4:25
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiTypespec:
     \_RefTypespec: (work@submodule.Y.my_type_t), line:4:14, endln:4:23
       |vpiParent:
-      \_Parameter: (work@submodule.Y), line:4:24, endln:4:30
+      \_Parameter: (work@submodule.Y), line:4:24, endln:4:25
       |vpiName:my_type_t
       |vpiFullName:work@submodule.Y.my_type_t
       |vpiActual:
-      \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
+      \_TypedefTypespec: (my_type_t), line:3:12, endln:3:35
     |vpiName:Y
     |vpiFullName:work@submodule.Y
   |vpiParamAssign:
@@ -221,18 +221,18 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiLhs:
-    \_Parameter: (work@submodule.X), line:2:18, endln:2:24
+    \_Parameter: (work@submodule.X), line:2:18, endln:2:19
     |vpiRhs:
     \_Constant: , line:2:22, endln:2:24
       |vpiParent:
       \_ParamAssign: , line:2:18, endln:2:24
       |vpiTypespec:
-      \_RefTypespec: (work@submodule), line:2:22, endln:2:24
+      \_RefTypespec: (work@submodule)
         |vpiParent:
         \_Constant: , line:2:22, endln:2:24
         |vpiFullName:work@submodule
         |vpiActual:
-        \_IntTypespec: , line:2:14, endln:2:17
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:20
@@ -242,13 +242,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiLhs:
-    \_Parameter: (work@submodule.Y), line:4:24, endln:4:30
+    \_Parameter: (work@submodule.Y), line:4:24, endln:4:25
     |vpiRhs:
     \_Constant: , line:4:28, endln:4:30
       |vpiParent:
       \_ParamAssign: , line:4:24, endln:4:30
       |vpiTypespec:
-      \_RefTypespec: (work@submodule), line:4:28, endln:4:30
+      \_RefTypespec: (work@submodule)
         |vpiParent:
         \_Constant: , line:4:28, endln:4:30
         |vpiFullName:work@submodule
@@ -259,23 +259,23 @@ Design: (unnamed)
       |vpiDecompile:'1
       |vpiValue:1
   |vpiTypespec:
-  \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
+  \_TypedefTypespec: (my_type_t), line:3:12, endln:3:35
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiName:
     \_Identifier: (my_type_t), line:3:26, endln:3:35
       |vpiParent:
-      \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
+      \_TypedefTypespec: (my_type_t), line:3:12, endln:3:35
       |vpiName:my_type_t
     |vpiTypedefAlias:
     \_RefTypespec: (work@submodule.my_type_t), line:3:12, endln:3:17
       |vpiParent:
-      \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
+      \_TypedefTypespec: (my_type_t), line:3:12, endln:3:35
       |vpiFullName:work@submodule.my_type_t
       |vpiActual:
-      \_LogicTypespec: , line:3:12, endln:3:17
+      \_LogicTypespec: 
   |vpiImportTypespec:
-  \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
+  \_TypedefTypespec: (my_type_t), line:3:12, endln:3:35
   |vpiImportTypespec:
   \_Net: (work@submodule.a), line:5:11, endln:5:12
     |vpiParent:
@@ -308,7 +308,7 @@ Design: (unnamed)
         \_Operation: , line:5:15, endln:5:22
         |vpiFullName:work@submodule
         |vpiActual:
-        \_IntTypespec: , line:2:14, endln:2:17
+        \_IntTypespec: 
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@submodule.Y), line:5:20, endln:5:21
@@ -317,7 +317,7 @@ Design: (unnamed)
         |vpiName:Y
         |vpiFullName:work@submodule.Y
         |vpiActual:
-        \_Parameter: (work@submodule.Y), line:4:24, endln:4:30
+        \_Parameter: (work@submodule.Y), line:4:24, endln:4:25
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:8:1, endln:11:10
   |vpiParent:
@@ -352,18 +352,18 @@ Design: (unnamed)
     |vpiActual:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
 |vpiTypespec:
-\_IntTypespec: , line:2:14, endln:2:17
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypespec:
-\_LogicTypespec: , line:3:12, endln:3:17
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:3:18, endln:3:25
     |vpiParent:
-    \_LogicTypespec: , line:3:12, endln:3:17
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Operation: , line:3:19, endln:3:22
       |vpiParent:
@@ -375,17 +375,17 @@ Design: (unnamed)
         \_Operation: , line:3:19, endln:3:22
         |vpiName:X
         |vpiActual:
-        \_Parameter: (work@submodule.X), line:2:18, endln:2:24
+        \_Parameter: (work@submodule.X), line:2:18, endln:2:19
       |vpiOperand:
       \_Constant: , line:3:21, endln:3:22
         |vpiParent:
         \_Operation: , line:3:19, endln:3:22
         |vpiTypespec:
-        \_RefTypespec: , line:3:21, endln:3:22
+        \_RefTypespec: 
           |vpiParent:
           \_Constant: , line:3:21, endln:3:22
           |vpiActual:
-          \_IntTypespec: , line:2:14, endln:2:17
+          \_IntTypespec: 
         |vpiConstType:9
         |vpiSize:64
         |vpiDecompile:1
@@ -395,11 +395,11 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:3:18, endln:3:25
       |vpiTypespec:
-      \_RefTypespec: , line:3:23, endln:3:24
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:23, endln:3:24
         |vpiActual:
-        \_IntTypespec: , line:2:14, endln:2:17
+        \_IntTypespec: 
       |vpiConstType:9
       |vpiSize:64
       |vpiDecompile:0

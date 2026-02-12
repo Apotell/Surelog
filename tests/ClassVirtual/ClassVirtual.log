@@ -15,11 +15,12 @@ Design                                                 1
 Extends                                                2
 Identifier                                             5
 Package                                                1
+ParamAssign                                            2
 RefTypespec                                            4
 SourceFile                                             1
 TypeParameter                                          2
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                26
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassVirtual/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -76,12 +77,18 @@ Design: (unnamed)
         \_ClassDefn: (pack::uvm_port_base2), file:${SURELOG_DIR}/tests/ClassVirtual/dut.sv, line:12:1, endln:13:9
         |vpiName:IF
         |vpiFullName:pack::uvm_port_base2::IF
-        |vpiTypespec:
-        \_RefTypespec: (pack::uvm_port_base2::IF::uvm_void), line:12:32, endln:12:40
+      |vpiParamAssign:
+      \_ParamAssign: , line:12:29, endln:12:40
+        |vpiParent:
+        \_ClassDefn: (pack::uvm_port_base2), file:${SURELOG_DIR}/tests/ClassVirtual/dut.sv, line:12:1, endln:13:9
+        |vpiLhs:
+        \_TypeParameter: (pack::uvm_port_base2::IF), line:12:29, endln:12:31
+        |vpiRhs:
+        \_RefTypespec: (pack::uvm_port_base2::uvm_void), line:12:32, endln:12:40
           |vpiParent:
-          \_TypeParameter: (pack::uvm_port_base2::IF), line:12:29, endln:12:31
+          \_ParamAssign: , line:12:29, endln:12:40
           |vpiName:uvm_void
-          |vpiFullName:pack::uvm_port_base2::IF::uvm_void
+          |vpiFullName:pack::uvm_port_base2::uvm_void
           |vpiActual:
           \_ClassTypespec: (uvm_void)
       |vpiTypespec:
@@ -116,12 +123,18 @@ Design: (unnamed)
       \_ClassDefn: (pack::uvm_port_base1), file:${SURELOG_DIR}/tests/ClassVirtual/dut.sv, line:9:9, endln:10:9
       |vpiName:IF
       |vpiFullName:pack::uvm_port_base1::IF
-      |vpiTypespec:
-      \_RefTypespec: (pack::uvm_port_base1::IF::uvm_void), line:9:40, endln:9:48
+    |vpiParamAssign:
+    \_ParamAssign: , line:9:37, endln:9:48
+      |vpiParent:
+      \_ClassDefn: (pack::uvm_port_base1), file:${SURELOG_DIR}/tests/ClassVirtual/dut.sv, line:9:9, endln:10:9
+      |vpiLhs:
+      \_TypeParameter: (pack::uvm_port_base1::IF), line:9:37, endln:9:39
+      |vpiRhs:
+      \_RefTypespec: (pack::uvm_port_base1::uvm_void), line:9:40, endln:9:48
         |vpiParent:
-        \_TypeParameter: (pack::uvm_port_base1::IF), line:9:37, endln:9:39
+        \_ParamAssign: , line:9:37, endln:9:48
         |vpiName:uvm_void
-        |vpiFullName:pack::uvm_port_base1::IF::uvm_void
+        |vpiFullName:pack::uvm_port_base1::uvm_void
         |vpiActual:
         \_ClassTypespec: (uvm_void)
     |vpiTypespec:
@@ -211,7 +224,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassVirtual/slpp_unit/surelog.uhdm ${SURELOG
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              24      24       0         0
+Others                              26      26       0         0
 ----------------------------------------------------------------
-                                    24      24       0         0
+                                    26      26       0         0
 ===================== END REDUCTION RESULT =====================

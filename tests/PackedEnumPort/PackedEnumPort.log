@@ -152,13 +152,13 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
 BitSelect                                              1
-Constant                                               8
+Constant                                               7
 Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
-Identifier                                             5
+Identifier                                             9
 IntTypespec                                            9
-LogicTypespec                                          6
+LogicTypespec                                          5
 Module                                                 3
 ModuleTypespec                                         2
 Net                                                    2
@@ -166,13 +166,13 @@ Package                                                1
 Port                                                   4
 Range                                                  2
 RefModule                                              1
-RefTypespec                                           19
+RefTypespec                                           18
 SourceFile                                             1
 TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                73
+Total:                                                74
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnumPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -203,20 +203,24 @@ Design: (unnamed)
       \_EnumTypespec: , line:3:12, endln:5:13
       |vpiFullName:lc_ctrl_pkg
       |vpiActual:
-      \_LogicTypespec: , line:3:17, endln:3:22
+      \_LogicTypespec: 
     |vpiEnumConst:
     \_EnumConst: (On), line:4:7, endln:4:19
       |vpiParent:
       \_EnumTypespec: , line:3:12, endln:5:13
-      |vpiName:On
+      |vpiName:
+      \_Identifier: (On), line:4:7, endln:4:9
+        |vpiParent:
+        \_EnumConst: (On), line:4:7, endln:4:19
+        |vpiName:On
       |vpiValue:
-      \_Constant: 
+      \_Constant: , line:4:12, endln:4:19
         |vpiParent:
         \_EnumConst: (On), line:4:7, endln:4:19
         |vpiTypespec:
-        \_RefTypespec: (lc_ctrl_pkg::On), line:4:12, endln:4:19
+        \_RefTypespec: (lc_ctrl_pkg::On)
           |vpiParent:
-          \_Constant: 
+          \_Constant: , line:4:12, endln:4:19
           |vpiFullName:lc_ctrl_pkg::On
           |vpiActual:
           \_LogicTypespec: 
@@ -264,7 +268,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:20, endln:7:27
   |vpiDefName:lc_ctrl_pkg
-  |vpiEndLabel:lc_ctrl_pkg
+  |vpiEndLabel:
+  \_Identifier: (lc_ctrl_pkg), line:8:14, endln:8:25
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:2:1, endln:8:25
+    |vpiName:lc_ctrl_pkg
 |vpiAllModules:
 \_Module: work@lc_ctrl_fsm (work@lc_ctrl_fsm), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:11:1, endln:16:24
   |vpiParent:
@@ -304,7 +312,11 @@ Design: (unnamed)
       |vpiFullName:work@lc_ctrl_fsm.lc_clk_byp_ack_i
       |vpiActual:
       \_LogicTypespec: 
-  |vpiEndLabel:lc_ctrl_fsm
+  |vpiEndLabel:
+  \_Identifier: (lc_ctrl_fsm), line:16:13, endln:16:24
+    |vpiParent:
+    \_Module: work@lc_ctrl_fsm (work@lc_ctrl_fsm), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:11:1, endln:16:24
+    |vpiName:lc_ctrl_fsm
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:24:1, endln:37:16
   |vpiParent:
@@ -364,7 +376,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:25:24, endln:25:29
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:25:25, endln:25:26
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:25:25, endln:25:26
           |vpiFullName:work@top
@@ -379,7 +391,7 @@ Design: (unnamed)
         |vpiParent:
         \_Range: , line:25:24, endln:25:29
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:25:27, endln:25:28
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:25:27, endln:25:28
           |vpiFullName:work@top
@@ -390,7 +402,7 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiValue:0
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.lc_ctrl_pkg::lc_tx_t), line:7:20, endln:7:27
+    \_RefTypespec: (work@top.lc_ctrl_pkg::lc_tx_t), line:25:3, endln:25:29
       |vpiParent:
       \_ArrayTypespec: , line:25:3, endln:25:29
       |vpiName:lc_ctrl_pkg::lc_tx_t
@@ -472,7 +484,7 @@ Design: (unnamed)
           |vpiParent:
           \_BitSelect: (work@top.u_lc_ctrl_fsm.lc_clk_byp_ack), line:35:40, endln:35:43
           |vpiTypespec:
-          \_RefTypespec: (work@top.u_lc_ctrl_fsm.lc_clk_byp_ack), line:35:41, endln:35:42
+          \_RefTypespec: (work@top.u_lc_ctrl_fsm.lc_clk_byp_ack)
             |vpiParent:
             \_Constant: , line:35:41, endln:35:42
             |vpiFullName:work@top.u_lc_ctrl_fsm.lc_clk_byp_ack
@@ -482,21 +494,25 @@ Design: (unnamed)
           |vpiSize:64
           |vpiDecompile:0
           |vpiValue:0
-  |vpiEndLabel:top
+  |vpiEndLabel:
+  \_Identifier: (top), line:37:13, endln:37:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:24:1, endln:37:16
+    |vpiName:top
 |vpiTypespec:
-\_LogicTypespec: , line:3:17, endln:3:22
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:3:23, endln:3:28
     |vpiParent:
-    \_LogicTypespec: , line:3:17, endln:3:22
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:3:24, endln:3:25
       |vpiParent:
       \_Range: , line:3:23, endln:3:28
       |vpiTypespec:
-      \_RefTypespec: , line:3:24, endln:3:25
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:24, endln:3:25
         |vpiActual:
@@ -510,7 +526,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:3:23, endln:3:28
       |vpiTypespec:
-      \_RefTypespec: , line:3:26, endln:3:27
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:3:26, endln:3:27
         |vpiActual:
@@ -552,7 +568,7 @@ COMMAND: ${SURELOG_DIR}/regression/PackedEnumPort/slpp_all/surelog.uhdm ${SURELO
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              55      55       0         0
+Others                              59      59       0         0
 ----------------------------------------------------------------
-                                    55      55       0         0
+                                    59      59       0         0
 ===================== END REDUCTION RESULT =====================

@@ -19,6 +19,7 @@ MethodFuncCall                                         1
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
+ParamAssign                                            4
 RefTypespec                                            8
 SourceFile                                             1
 TypeParameter                                          4
@@ -26,9 +27,11 @@ TypedefTypespec                                        1
 UnsupportedTypespec                                    3
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                43
+Total:                                                47
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassParamAsParam/slpp_unit/surelog.uhdm ...
+[ERR:IG0801] Missing location information: id:20, type:Identifier, name:new.
+[ERR:IG0804] Missing file: id:20, type:Identifier, name:new.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -53,13 +56,19 @@ Design: (unnamed)
     \_ClassDefn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
     |vpiName:T
     |vpiFullName:work@config_db::T
-    |vpiTypespec:
-    \_RefTypespec: (work@config_db::T), line:14:25, endln:14:28
+  |vpiParamAssign:
+  \_ParamAssign: , line:14:23, endln:14:28
+    |vpiParent:
+    \_ClassDefn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
+    |vpiLhs:
+    \_TypeParameter: (work@config_db::T), line:14:23, endln:14:24
+    |vpiRhs:
+    \_RefTypespec: (work@config_db), line:14:25, endln:14:28
       |vpiParent:
-      \_TypeParameter: (work@config_db::T), line:14:23, endln:14:24
-      |vpiFullName:work@config_db::T
+      \_ParamAssign: , line:14:23, endln:14:28
+      |vpiFullName:work@config_db
       |vpiActual:
-      \_IntTypespec: , line:14:25, endln:14:28
+      \_IntTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@config_db::T), line:14:23, endln:14:24
   |vpiImportTypespec:
@@ -91,13 +100,19 @@ Design: (unnamed)
     \_ClassDefn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:9, endln:2:9
     |vpiName:T
     |vpiFullName:work@object::T
-    |vpiTypespec:
-    \_RefTypespec: (work@object::T), line:1:30, endln:1:33
+  |vpiParamAssign:
+  \_ParamAssign: , line:1:28, endln:1:33
+    |vpiParent:
+    \_ClassDefn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:9, endln:2:9
+    |vpiLhs:
+    \_TypeParameter: (work@object::T), line:1:28, endln:1:29
+    |vpiRhs:
+    \_RefTypespec: (work@object), line:1:30, endln:1:33
       |vpiParent:
-      \_TypeParameter: (work@object::T), line:1:28, endln:1:29
-      |vpiFullName:work@object::T
+      \_ParamAssign: , line:1:28, endln:1:33
+      |vpiFullName:work@object
       |vpiActual:
-      \_IntTypespec: , line:14:25, endln:14:28
+      \_IntTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@object::T), line:1:28, endln:1:29
   |vpiImportTypespec:
@@ -118,13 +133,19 @@ Design: (unnamed)
     \_ClassDefn: (work@resource), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:4:1, endln:5:9
     |vpiName:T
     |vpiFullName:work@resource::T
-    |vpiTypespec:
-    \_RefTypespec: (work@resource::T), line:4:25, endln:4:28
+  |vpiParamAssign:
+  \_ParamAssign: , line:4:23, endln:4:28
+    |vpiParent:
+    \_ClassDefn: (work@resource), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:4:1, endln:5:9
+    |vpiLhs:
+    \_TypeParameter: (work@resource::T), line:4:23, endln:4:24
+    |vpiRhs:
+    \_RefTypespec: (work@resource), line:4:25, endln:4:28
       |vpiParent:
-      \_TypeParameter: (work@resource::T), line:4:23, endln:4:24
-      |vpiFullName:work@resource::T
+      \_ParamAssign: , line:4:23, endln:4:28
+      |vpiFullName:work@resource
       |vpiActual:
-      \_IntTypespec: , line:14:25, endln:14:28
+      \_IntTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@resource::T), line:4:23, endln:4:24
   |vpiImportTypespec:
@@ -161,13 +182,19 @@ Design: (unnamed)
     \_ClassDefn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
     |vpiName:T
     |vpiFullName:work@resource_db::T
-    |vpiTypespec:
-    \_RefTypespec: (work@resource_db::T), line:7:28, endln:7:31
+  |vpiParamAssign:
+  \_ParamAssign: , line:7:26, endln:7:31
+    |vpiParent:
+    \_ClassDefn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
+    |vpiLhs:
+    \_TypeParameter: (work@resource_db::T), line:7:26, endln:7:27
+    |vpiRhs:
+    \_RefTypespec: (work@resource_db), line:7:28, endln:7:31
       |vpiParent:
-      \_TypeParameter: (work@resource_db::T), line:7:26, endln:7:27
-      |vpiFullName:work@resource_db::T
+      \_ParamAssign: , line:7:26, endln:7:31
+      |vpiFullName:work@resource_db
       |vpiActual:
-      \_IntTypespec: , line:14:25, endln:14:28
+      \_IntTypespec: 
   |vpiTypespec:
   \_TypeParameter: (work@resource_db::T), line:7:26, endln:7:27
   |vpiTypespec:
@@ -231,7 +258,7 @@ Design: (unnamed)
       \_MethodFuncCall: (new), line:18:40, endln:18:43
       |vpiName:new
 |vpiTypespec:
-\_IntTypespec: , line:14:25, endln:14:28
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
@@ -273,7 +300,7 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0
 
@@ -285,7 +312,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassParamAsParam/slpp_unit/surelog.uhdm ${SU
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              37      37       0         0
+Others                              41      41       0         0
 ----------------------------------------------------------------
-                                    37      37       0         0
+                                    41      41       0         0
 ===================== END REDUCTION RESULT =====================

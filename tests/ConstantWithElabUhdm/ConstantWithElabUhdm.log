@@ -89,7 +89,7 @@ BitTypespec                                            1
 Constant                                               3
 ContAssign                                             1
 Design                                                 1
-Identifier                                             2
+Identifier                                             3
 IntTypespec                                            2
 LogicTypespec                                          3
 Module                                                 1
@@ -106,7 +106,7 @@ TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                38
+Total:                                                39
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantWithElabUhdm/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -151,7 +151,7 @@ Design: (unnamed)
       \_Net: (work@top.out4), line:5:17, endln:5:21
       |vpiFullName:work@top.out4
       |vpiActual:
-      \_LogicTypespec: , line:5:12, endln:5:16
+      \_LogicTypespec: 
     |vpiName:out4
     |vpiFullName:work@top.out4
     |vpiNetType:1
@@ -186,7 +186,7 @@ Design: (unnamed)
       \_Port: (out4), line:5:17, endln:5:21
       |vpiFullName:work@top.out4
       |vpiActual:
-      \_LogicTypespec: , line:5:12, endln:5:16
+      \_LogicTypespec: 
   |vpiContAssign:
   \_ContAssign: , line:7:10, endln:7:32
     |vpiParent:
@@ -217,7 +217,7 @@ Design: (unnamed)
         |vpiParent:
         \_Operation: , line:7:21, endln:7:31
         |vpiTypespec:
-        \_RefTypespec: (work@top), line:7:29, endln:7:31
+        \_RefTypespec: (work@top)
           |vpiParent:
           \_Constant: , line:7:29, endln:7:31
           |vpiFullName:work@top
@@ -227,7 +227,11 @@ Design: (unnamed)
         |vpiSize:-1
         |vpiDecompile:'1
         |vpiValue:1
-  |vpiEndLabel:top
+  |vpiEndLabel:
+  \_Identifier: (top), line:8:13, endln:8:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
+    |vpiName:top
 |vpiTypespec:
 \_TypedefTypespec: (my_struct_packed_t), line:2:40, endln:2:58
   |vpiParent:
@@ -260,21 +264,21 @@ Design: (unnamed)
       \_TypespecMember: (a), line:2:36, endln:2:37
       |vpiFullName:a
       |vpiActual:
-      \_LogicTypespec: , line:2:24, endln:2:29
+      \_LogicTypespec: 
 |vpiTypespec:
-\_LogicTypespec: , line:2:24, endln:2:29
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:30, endln:2:35
     |vpiParent:
-    \_LogicTypespec: , line:2:24, endln:2:29
+    \_LogicTypespec: 
     |vpiLeftRange:
     \_Constant: , line:2:31, endln:2:32
       |vpiParent:
       \_Range: , line:2:30, endln:2:35
       |vpiTypespec:
-      \_RefTypespec: , line:2:31, endln:2:32
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:31, endln:2:32
         |vpiActual:
@@ -288,7 +292,7 @@ Design: (unnamed)
       |vpiParent:
       \_Range: , line:2:30, endln:2:35
       |vpiTypespec:
-      \_RefTypespec: , line:2:33, endln:2:34
+      \_RefTypespec: 
         |vpiParent:
         \_Constant: , line:2:33, endln:2:34
         |vpiActual:
@@ -307,7 +311,7 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
-\_LogicTypespec: , line:5:12, endln:5:16
+\_LogicTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -332,7 +336,7 @@ COMMAND: ${SURELOG_DIR}/regression/ConstantWithElabUhdm/slpp_all/surelog.uhdm ${
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              34      34       0         0
+Others                              35      35       0         0
 ----------------------------------------------------------------
-                                    34      34       0         0
+                                    35      35       0         0
 ===================== END REDUCTION RESULT =====================

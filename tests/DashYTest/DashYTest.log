@@ -27,23 +27,6 @@ n<> u<22> t<Top_level_rule> c<1> l<1:1> el<4:1>
   n<// top> u<21> t<LINE_COMMENT> p<22> l<3:11> el<3:17>
 AST_DEBUG_END
 AST_DEBUG_BEGIN
-Count: 13
-LIB: work
-FILE: ${SURELOG_DIR}/tests/DashYTest/lib/AND.v
-n<> u<12> t<Top_level_rule> c<1> l<1:1> el<3:1>
-  n<> u<1> t<Null_rule> p<12> s<10> l<1:1>
-  n<> u<10> t<Source_text> p<12> c<9> s<11> l<1:1> el<2:10>
-    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
-      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
-        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:14>
-          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
-          n<AND> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:11>
-          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:11> el<1:11>
-          n<> u<5> t<Port_list> p<6> l<1:11> el<1:13>
-        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
-  n<// AND> u<11> t<LINE_COMMENT> p<12> l<2:11> el<2:17>
-AST_DEBUG_END
-AST_DEBUG_BEGIN
 Count: 31
 LIB: work
 FILE: ${SURELOG_DIR}/tests/DashYTest/lib/SIM.v
@@ -95,6 +78,23 @@ n<> u<12> t<Top_level_rule> c<1> l<1:1> el<3:1>
         n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
   n<// OR> u<11> t<LINE_COMMENT> p<12> l<2:11> el<2:16>
 AST_DEBUG_END
+AST_DEBUG_BEGIN
+Count: 13
+LIB: work
+FILE: ${SURELOG_DIR}/tests/DashYTest/lib/AND.v
+n<> u<12> t<Top_level_rule> c<1> l<1:1> el<3:1>
+  n<> u<1> t<Null_rule> p<12> s<10> l<1:1>
+  n<> u<10> t<Source_text> p<12> c<9> s<11> l<1:1> el<2:10>
+    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
+      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
+        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:14>
+          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
+          n<AND> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:11>
+          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:11> el<1:11>
+          n<> u<5> t<Port_list> p<6> l<1:11> el<1:13>
+        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
+  n<// AND> u<11> t<LINE_COMMENT> p<12> l<2:11> el<2:17>
+AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/DashYTest/lib/AND.v:1:1: Compile module "work@AND".
 [INF:CP0303] ${SURELOG_DIR}/tests/DashYTest/lib/OR.v:1:1: Compile module "work@OR".
@@ -125,11 +125,6 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:dut.sv
 |vpiSourceFiles:
-\_SourceFile: (AND.v), file:${SURELOG_DIR}/tests/DashYTest/lib/AND.v
-  |vpiParent:
-  \_Design: (unnamed)
-  |vpiName:AND.v
-|vpiSourceFiles:
 \_SourceFile: (SIM.v), file:${SURELOG_DIR}/tests/DashYTest/lib/SIM.v
   |vpiParent:
   \_Design: (unnamed)
@@ -139,6 +134,11 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:OR.v
+|vpiSourceFiles:
+\_SourceFile: (AND.v), file:${SURELOG_DIR}/tests/DashYTest/lib/AND.v
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:AND.v
 |vpiAllModules:
 \_Module: work@AND (work@AND), file:${SURELOG_DIR}/tests/DashYTest/lib/AND.v, line:1:1, endln:2:10
   |vpiParent:

@@ -120,10 +120,11 @@ EnumConst                                              5
 EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
-Identifier                                            30
+Identifier                                            35
 IntTypespec                                           19
 LogicTypespec                                          2
 Package                                                1
+ParamAssign                                            8
 RefObj                                                 4
 RefTypespec                                           29
 SourceFile                                             1
@@ -132,13 +133,13 @@ TypeParameter                                          8
 TypedefTypespec                                        2
 UnsupportedTypespec                                    6
 ------------------------------------------------------------
-Total:                                               166
+Total:                                               179
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParamAlias/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:7:24: Unsupported Typespec: id:153, type:RefTypespec, name:Ctype1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:7:38: Unsupported Typespec: id:157, type:RefTypespec, name:Ctype2.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:8:24: Unsupported Typespec: id:161, type:RefTypespec, name:mypkg::GlueType.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:9:30: Unsupported Typespec: id:166, type:RefTypespec, name:mypkg::ModuleType.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:7:24: Unsupported Typespec: id:158, type:RefTypespec, name:Ctype1.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:7:38: Unsupported Typespec: id:163, type:RefTypespec, name:Ctype2.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:8:24: Unsupported Typespec: id:168, type:RefTypespec, name:mypkg::GlueType.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:9:30: Unsupported Typespec: id:177, type:RefTypespec, name:mypkg::ModuleType.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -239,12 +240,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiTypespec:
-          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+          \_RefTypespec: (builtin::mailbox::new::bound)
             |vpiParent:
             \_Constant: , line:3:31, endln:3:32
             |vpiFullName:builtin::mailbox::new::bound
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
@@ -255,7 +256,7 @@ Design: (unnamed)
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
           |vpiActual:
-          \_IntTypespec: , line:3:19, endln:3:22
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -274,7 +275,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiFullName:builtin::mailbox::num
         |vpiActual:
-        \_IntTypespec: , line:3:19, endln:3:22
+        \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -354,7 +355,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiFullName:builtin::mailbox::try_get
         |vpiActual:
-        \_IntTypespec: , line:3:19, endln:3:22
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -397,7 +398,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiFullName:builtin::mailbox::try_peek
         |vpiActual:
-        \_IntTypespec: , line:3:19, endln:3:22
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -542,18 +543,22 @@ Design: (unnamed)
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:FINISHED
+        |vpiName:
+        \_Identifier: (FINISHED), line:32:20, endln:32:28
+          |vpiParent:
+          \_EnumConst: (FINISHED), line:32:20, endln:32:28
+          |vpiName:FINISHED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (FINISHED), line:32:20, endln:32:28
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::FINISHED), line:32:20, endln:32:28
+          \_RefTypespec: (builtin::process::FINISHED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::FINISHED
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:0
@@ -562,18 +567,22 @@ Design: (unnamed)
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:RUNNING
+        |vpiName:
+        \_Identifier: (RUNNING), line:32:30, endln:32:37
+          |vpiParent:
+          \_EnumConst: (RUNNING), line:32:30, endln:32:37
+          |vpiName:RUNNING
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (RUNNING), line:32:30, endln:32:37
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::RUNNING), line:32:30, endln:32:37
+          \_RefTypespec: (builtin::process::RUNNING)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::RUNNING
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:1
@@ -582,18 +591,22 @@ Design: (unnamed)
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:WAITING
+        |vpiName:
+        \_Identifier: (WAITING), line:32:39, endln:32:46
+          |vpiParent:
+          \_EnumConst: (WAITING), line:32:39, endln:32:46
+          |vpiName:WAITING
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (WAITING), line:32:39, endln:32:46
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::WAITING), line:32:39, endln:32:46
+          \_RefTypespec: (builtin::process::WAITING)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::WAITING
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:2
@@ -602,18 +615,22 @@ Design: (unnamed)
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:SUSPENDED
+        |vpiName:
+        \_Identifier: (SUSPENDED), line:32:48, endln:32:57
+          |vpiParent:
+          \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
+          |vpiName:SUSPENDED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::SUSPENDED), line:32:48, endln:32:57
+          \_RefTypespec: (builtin::process::SUSPENDED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::SUSPENDED
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:3
@@ -622,18 +639,22 @@ Design: (unnamed)
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
         \_EnumTypespec: , line:32:13, endln:32:73
-        |vpiName:KILLED
+        |vpiName:
+        \_Identifier: (KILLED), line:32:59, endln:32:65
+          |vpiParent:
+          \_EnumConst: (KILLED), line:32:59, endln:32:65
+          |vpiName:KILLED
         |vpiValue:
         \_Constant: 
           |vpiParent:
           \_EnumConst: (KILLED), line:32:59, endln:32:65
           |vpiTypespec:
-          \_RefTypespec: (builtin::process::KILLED), line:32:59, endln:32:65
+          \_RefTypespec: (builtin::process::KILLED)
             |vpiParent:
             \_Constant: 
             |vpiFullName:builtin::process::KILLED
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:7
           |vpiSize:64
           |vpiDecompile:4
@@ -714,12 +735,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+          \_RefTypespec: (builtin::semaphore::new::keyCount)
             |vpiParent:
             \_Constant: , line:57:33, endln:57:34
             |vpiFullName:builtin::semaphore::new::keyCount
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:0
@@ -730,7 +751,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
           |vpiActual:
-          \_IntTypespec: , line:3:19, endln:3:22
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
@@ -754,12 +775,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+          \_RefTypespec: (builtin::semaphore::put::keyCount)
             |vpiParent:
             \_Constant: , line:60:29, endln:60:30
             |vpiFullName:builtin::semaphore::put::keyCount
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
@@ -770,7 +791,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
           |vpiActual:
-          \_IntTypespec: , line:3:19, endln:3:22
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiParent:
@@ -794,12 +815,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+          \_RefTypespec: (builtin::semaphore::get::keyCount)
             |vpiParent:
             \_Constant: , line:63:29, endln:63:30
             |vpiFullName:builtin::semaphore::get::keyCount
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
@@ -810,7 +831,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
           |vpiActual:
-          \_IntTypespec: , line:3:19, endln:3:22
+          \_IntTypespec: 
     |vpiInternalScope:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiParent:
@@ -829,7 +850,7 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiFullName:builtin::semaphore::try_get
         |vpiActual:
-        \_IntTypespec: , line:3:19, endln:3:22
+        \_IntTypespec: 
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -841,12 +862,12 @@ Design: (unnamed)
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiTypespec:
-          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount)
             |vpiParent:
             \_Constant: , line:66:41, endln:66:42
             |vpiFullName:builtin::semaphore::try_get::keyCount
             |vpiActual:
-            \_IntTypespec: , line:3:19, endln:3:22
+            \_IntTypespec: 
           |vpiConstType:9
           |vpiSize:64
           |vpiDecompile:1
@@ -857,7 +878,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
           |vpiActual:
-          \_IntTypespec: , line:3:19, endln:3:22
+          \_IntTypespec: 
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiImportTypespec:
@@ -999,42 +1020,18 @@ Design: (unnamed)
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:BT
     |vpiFullName:work@param_types_as_class_item::BT
-    |vpiTypespec:
-    \_RefTypespec: (work@param_types_as_class_item::BT::BrickType), line:6:23, endln:6:32
-      |vpiParent:
-      \_TypeParameter: (work@param_types_as_class_item::BT), line:6:18, endln:6:20
-      |vpiName:BrickType
-      |vpiFullName:work@param_types_as_class_item::BT::BrickType
-      |vpiActual:
-      \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
   |vpiParameter:
   \_TypeParameter: (work@param_types_as_class_item::CT1), line:7:18, endln:7:21
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:CT1
     |vpiFullName:work@param_types_as_class_item::CT1
-    |vpiTypespec:
-    \_RefTypespec: (work@param_types_as_class_item::CT1::Ctype1), line:7:24, endln:7:30
-      |vpiParent:
-      \_TypeParameter: (work@param_types_as_class_item::CT1), line:7:18, endln:7:21
-      |vpiName:Ctype1
-      |vpiFullName:work@param_types_as_class_item::CT1::Ctype1
-      |vpiActual:
-      \_UnsupportedTypespec: (Ctype1), line:7:24, endln:7:30
   |vpiParameter:
   \_TypeParameter: (work@param_types_as_class_item::CT2), line:7:32, endln:7:35
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:CT2
     |vpiFullName:work@param_types_as_class_item::CT2
-    |vpiTypespec:
-    \_RefTypespec: (work@param_types_as_class_item::CT2::Ctype2), line:7:38, endln:7:44
-      |vpiParent:
-      \_TypeParameter: (work@param_types_as_class_item::CT2), line:7:32, endln:7:35
-      |vpiName:Ctype2
-      |vpiFullName:work@param_types_as_class_item::CT2::Ctype2
-      |vpiActual:
-      \_UnsupportedTypespec: (Ctype2), line:7:38, endln:7:44
   |vpiParameter:
   \_TypeParameter: (work@param_types_as_class_item::GT), line:8:19, endln:8:21
     |vpiParent:
@@ -1042,14 +1039,6 @@ Design: (unnamed)
     |vpiName:GT
     |vpiFullName:work@param_types_as_class_item::GT
     |vpiLocalParam:1
-    |vpiTypespec:
-    \_RefTypespec: (work@param_types_as_class_item::GT::mypkg::GlueType), line:8:24, endln:8:39
-      |vpiParent:
-      \_TypeParameter: (work@param_types_as_class_item::GT), line:8:19, endln:8:21
-      |vpiName:mypkg::GlueType
-      |vpiFullName:work@param_types_as_class_item::GT::mypkg::GlueType
-      |vpiActual:
-      \_UnsupportedTypespec: (mypkg::GlueType), line:8:24, endln:8:31
   |vpiParameter:
   \_TypeParameter: (work@param_types_as_class_item::GT2), line:8:41, endln:8:44
     |vpiParent:
@@ -1071,29 +1060,109 @@ Design: (unnamed)
     |vpiName:HT2
     |vpiFullName:work@param_types_as_class_item::HT2
     |vpiLocalParam:1
-    |vpiTypespec:
-    \_RefTypespec: (work@param_types_as_class_item::HT2::mypkg::ModuleType), line:9:30, endln:9:53
+  |vpiParamAssign:
+  \_ParamAssign: , line:4:18, endln:4:20
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::AT), line:4:18, endln:4:20
+  |vpiParamAssign:
+  \_ParamAssign: , line:6:18, endln:6:32
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::BT), line:6:18, endln:6:20
+    |vpiRhs:
+    \_RefTypespec: (work@param_types_as_class_item::BrickType), line:6:23, endln:6:32
       |vpiParent:
-      \_TypeParameter: (work@param_types_as_class_item::HT2), line:9:24, endln:9:27
+      \_ParamAssign: , line:6:18, endln:6:32
+      |vpiName:BrickType
+      |vpiFullName:work@param_types_as_class_item::BrickType
+      |vpiActual:
+      \_TypedefTypespec: (BrickType), line:5:11, endln:5:26
+  |vpiParamAssign:
+  \_ParamAssign: , line:7:18, endln:7:30
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::CT1), line:7:18, endln:7:21
+    |vpiRhs:
+    \_RefTypespec: (work@param_types_as_class_item::Ctype1), line:7:24, endln:7:30
+      |vpiParent:
+      \_ParamAssign: , line:7:18, endln:7:30
+      |vpiName:Ctype1
+      |vpiFullName:work@param_types_as_class_item::Ctype1
+      |vpiActual:
+      \_UnsupportedTypespec: (Ctype1), line:7:24, endln:7:30
+  |vpiParamAssign:
+  \_ParamAssign: , line:7:32, endln:7:44
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::CT2), line:7:32, endln:7:35
+    |vpiRhs:
+    \_RefTypespec: (work@param_types_as_class_item::Ctype2), line:7:38, endln:7:44
+      |vpiParent:
+      \_ParamAssign: , line:7:32, endln:7:44
+      |vpiName:Ctype2
+      |vpiFullName:work@param_types_as_class_item::Ctype2
+      |vpiActual:
+      \_UnsupportedTypespec: (Ctype2), line:7:38, endln:7:44
+  |vpiParamAssign:
+  \_ParamAssign: , line:8:19, endln:8:39
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::GT), line:8:19, endln:8:21
+    |vpiRhs:
+    \_RefTypespec: (work@param_types_as_class_item::mypkg::GlueType), line:8:24, endln:8:39
+      |vpiParent:
+      \_ParamAssign: , line:8:19, endln:8:39
+      |vpiName:mypkg::GlueType
+      |vpiFullName:work@param_types_as_class_item::mypkg::GlueType
+      |vpiActual:
+      \_UnsupportedTypespec: (mypkg::GlueType), line:8:24, endln:8:31
+  |vpiParamAssign:
+  \_ParamAssign: , line:8:41, endln:8:44
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::GT2), line:8:41, endln:8:44
+  |vpiParamAssign:
+  \_ParamAssign: , line:9:19, endln:9:22
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::HT1), line:9:19, endln:9:22
+  |vpiParamAssign:
+  \_ParamAssign: , line:9:24, endln:9:53
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiLhs:
+    \_TypeParameter: (work@param_types_as_class_item::HT2), line:9:24, endln:9:27
+    |vpiRhs:
+    \_RefTypespec: (work@param_types_as_class_item::mypkg::ModuleType), line:9:30, endln:9:53
+      |vpiParent:
+      \_ParamAssign: , line:9:24, endln:9:53
       |vpiName:mypkg::ModuleType
-      |vpiFullName:work@param_types_as_class_item::HT2::mypkg::ModuleType
+      |vpiFullName:work@param_types_as_class_item::mypkg::ModuleType
       |vpiActual:
       \_UnsupportedTypespec: (mypkg::ModuleType), line:9:30, endln:9:53
   |vpiTypespec:
   \_TypeParameter: (work@param_types_as_class_item::AT), line:4:18, endln:4:20
   |vpiTypespec:
-  \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
+  \_TypedefTypespec: (BrickType), line:5:11, endln:5:26
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:
     \_Identifier: (BrickType), line:5:17, endln:5:26
       |vpiParent:
-      \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
+      \_TypedefTypespec: (BrickType), line:5:11, endln:5:26
       |vpiName:BrickType
     |vpiTypedefAlias:
     \_RefTypespec: (work@param_types_as_class_item::BrickType), line:5:11, endln:5:16
       |vpiParent:
-      \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
+      \_TypedefTypespec: (BrickType), line:5:11, endln:5:26
       |vpiFullName:work@param_types_as_class_item::BrickType
       |vpiActual:
       \_LogicTypespec: 
@@ -1134,7 +1203,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypeParameter: (work@param_types_as_class_item::AT), line:4:18, endln:4:20
   |vpiImportTypespec:
-  \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
+  \_TypedefTypespec: (BrickType), line:5:11, endln:5:26
   |vpiImportTypespec:
   \_TypeParameter: (work@param_types_as_class_item::BT), line:6:18, endln:6:20
   |vpiImportTypespec:
@@ -1158,7 +1227,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (mypkg::ModuleType), line:9:30, endln:9:53
 |vpiTypespec:
-\_IntTypespec: , line:3:19, endln:3:22
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
@@ -1188,7 +1257,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassTypeParamAlias/slpp_all/surelog.uhdm ${S
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                             141     141       0         0
+Others                             154     154       0         0
 ----------------------------------------------------------------
-                                   141     141       0         0
+                                   154     154       0         0
 ===================== END REDUCTION RESULT =====================

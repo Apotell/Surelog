@@ -98,8 +98,8 @@ set(ANTLR_BUILD_CPP_TESTS OFF CACHE BOOL "Skip ANTLR tests")
 if(SURELOG_USE_HOST_ANTLR)
   find_package(ANTLR REQUIRED)
 else()
-  add_subdirectory(third_party/antlr4/runtime/Cpp)
-  set(ANTLR_JAR_LOCATION ${PROJECT_SOURCE_DIR}/third_party/antlr4_bin/antlr-4.13.2-complete.jar)
+  add_subdirectory(third_party/antlr4/runtime/Cpp EXCLUDE_FROM_ALL)
+  set(ANTLR_JAR_LOCATION ${PROJECT_SOURCE_DIR}/third_party/antlr4_bin/antlr-4.12.0-complete.jar)
   set(ANTLR_LIBRARY antlr4_static)
   set(ANTLR_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/third_party/antlr4/runtime/Cpp/runtime/src)
 endif()
@@ -120,7 +120,7 @@ endif()
 if (SURELOG_BUILD_TESTS)
   if(SURELOG_USE_HOST_GTEST)
     find_package(GTest REQUIRED)
-  else()
+  elseif(NOT UHDM_BUILD_TESTS)
     add_subdirectory(third_party/googletest EXCLUDE_FROM_ALL)
     set(GTEST_INCLUDE_DIRS third_party/googletest/googletest/include third_party/googletest/googlemock/include)
   endif()
@@ -962,15 +962,15 @@ if (WIN32)
       FILES ${Python3_RUNTIME_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}$<$<CONFIG:Debug>:_d>.dll
       DESTINATION ${CMAKE_INSTALL_BINDIR})
   endif()
-  install(
-    FILES $<TARGET_PDB_FILE:roundtrip>
-          $<TARGET_PDB_FILE:surelog-bin>
-          ${UHDM_BINARY_DIR}/bin/uhdm-cmp.pdb
-          ${UHDM_BINARY_DIR}/bin/uhdm-dump.pdb
-          ${UHDM_BINARY_DIR}/bin/uhdm-hier.pdb
-    CONFIGURATIONS Debug RelWithDebInfo
-    DESTINATION ${CMAKE_INSTALL_BINDIR})
   if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    install(
+      FILES $<TARGET_PDB_FILE:roundtrip>
+            $<TARGET_PDB_FILE:surelog-bin>
+            ${UHDM_BINARY_DIR}/bin/uhdm-cmp.pdb
+            ${UHDM_BINARY_DIR}/bin/uhdm-dump.pdb
+            ${UHDM_BINARY_DIR}/bin/uhdm-hier.pdb
+      CONFIGURATIONS Debug RelWithDebInfo
+      DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(
       FILES ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/surelog.dir/surelog.pdb
             ${LIBANTLR4_BINARY_DIR}/runtime/$<TARGET_FILE_BASE_NAME:antlr4_static>.pdb

@@ -4,9 +4,6 @@ from pathlib import Path
 RED_START = "==================== REDUCTION START ====================="
 RED_END   = "===================== REDUCTION END ======================"
 
-OBJ_WIDTH = 32
-ID_WIDTH  = 8
-SPAN_WIDTH = 15   # start/end width
 
 def extract_table(log_path):
     rows = []
@@ -18,7 +15,7 @@ def extract_table(log_path):
 
             if RED_START in line:
                 inside = True
-                skip = 2  # skip header + dashed line
+                skip = 2
                 continue
 
             if RED_END in line:
@@ -36,31 +33,19 @@ def extract_table(log_path):
     return rows
 
 
-def format_row(testcase, row, tc_width):
+def format_row(folder_name, row):
     parts = row.split()
 
-    # Expect:
-    # in_type in_id start end out_type out_id status
-    if len(parts) < 6:
+    if len(parts) <= 1:
         return None
 
-    in_type  = parts[0]
-    in_id    = parts[1]
-    start    = parts[2]
-    end      = parts[3]
-    out_type = parts[4]
-    out_id   = parts[5]
-    # status removed
+    # drop last column
+    parts = parts[:-1]
 
-    return (
-        f"{testcase.ljust(tc_width)} "
-        f"{in_type.ljust(OBJ_WIDTH)} "
-        f"{in_id.ljust(ID_WIDTH)} "
-        f"{start.ljust(SPAN_WIDTH)} "
-        f"{end.ljust(SPAN_WIDTH)} "
-        f"{out_type.ljust(OBJ_WIDTH)} "
-        f"{out_id.ljust(ID_WIDTH)}"
-    )
+    # prepend folder name
+    parts.insert(0, folder_name)
+
+    return " | ".join(parts)
 
 
 def main(root):
@@ -70,8 +55,6 @@ def main(root):
     if not folders:
         print("No folders found")
         return
-
-    tc_width = max(len(p.name) for p in folders)
 
     output_lines = []
 
@@ -83,7 +66,7 @@ def main(root):
         rows = extract_table(log_file)
 
         for r in rows:
-            formatted = format_row(folder.name, r, tc_width)
+            formatted = format_row(folder.name, r)
             if formatted:
                 output_lines.append(formatted)
 

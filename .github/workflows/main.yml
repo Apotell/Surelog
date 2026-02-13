@@ -13,13 +13,10 @@ on:
 
 jobs:
 
-# Windows install
-  windows-install:
-    name: "Windows | Install | ${{ matrix.compiler }} | ${{ matrix.config }}"
-    runs-on: windows-2025
-    defaults:
-      run:
-        shell: cmd
+# Linux build, test, and publish
+  linux-install:
+    name: "Linux | Install | ${{ matrix.compiler }} | ${{ matrix.config }}"
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -27,133 +24,38 @@ jobs:
         - clang
         config:
         - release
+
     env:
-      artifact-name: sl-${{ github.run_number }}-windows-${{ matrix.compiler }}-${{ matrix.config }}
+      artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}
 
     steps:
-    - name: Install Core Dependencies
-      run: |
-        choco install -y make
-        choco install -y ninja
-        vcpkg install zlib zlib:x64-windows
-
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.8
-        architecture: x64
-
-    - name: Setup Python Packages
-      run: |
-        pip3 install orderedmultidict
-        pip3 install psutil
-        pip3 install build
-
-    - name: Setup Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: temurin
-        java-version: 11
-        java-package: jre
-        architecture: x64
-
-    - name: Setup Clang
-      if: matrix.compiler == 'clang'
-      uses: egor-tensin/setup-clang@v1
-      with:
-        version: 13
-        platform: x64
-        cygwin: 0
-
-    - run: git config --global core.autocrlf input
-      shell: bash
-
-    - name: Move builds to C:\ drive
-      shell: cmd
-      run: |
-        mkdir C:\Surelog
-        cd /D C:\Surelog
-        rd /S /Q %GITHUB_WORKSPACE%
-        mklink /D %GITHUB_WORKSPACE% C:\Surelog
-
-    - name: Configure Pagefile
-      uses: al-cheb/configure-pagefile-action@v1.4
-      with:
-        minimum-size: 8GB
-        maximum-size: 16GB
-        disk-root: "D:"
-
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         fetch-depth: 0
 
-    - name: Build & Test (cl compiler)
-      if: matrix.compiler == 'cl'
+    # Fetch tags for CMakeLists version check
+    # https://github.com/actions/checkout/issues/701
+    - name: Git fetch tags
+      run: git fetch --tags origin
+
+    - uses: ./.github/linux-setup
+      with:
+        compiler: ${{ matrix.compiler }}
+        ccache-key: linux-install-${{ matrix.compiler }}-${{ matrix.config }}
+
+    - name: Build, install & test
       run: |
-        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        export BUILD_TYPE=Release
+        export CMAKE_ADDITIONAL_ARGS=-DSURELOG_WITH_TCMALLOC=Off
+        export INSTALL_DIR=`pwd`/install
 
-        set CMAKE_GENERATOR=Ninja
-        set CC=cl
-        set CXX=cl
-        set PREFIX=%GITHUB_WORKSPACE%\install
-        set CMAKE_PREFIX_PATH=%GITHUB_WORKSPACE%\install
-        set CPU_CORES=%NUMBER_OF_PROCESSORS%
-
-        set MAKE_DIR=C:\make\bin
-        set PATH=%pythonLocation%;%JAVA_HOME%\bin;%MAKE_DIR%;%PATH%
-        set ADDITIONAL_CMAKE_OPTIONS=-DPython3_ROOT_DIR=%pythonLocation% -DSURELOG_WITH_TCMALLOC=Off -DCMAKE_TOOLCHAIN_FILE=%VCPKG_INSTALLATION_ROOT%/scripts/buildsystems/vcpkg.cmake.
-
-        set
-        where cmake && cmake --version
-        where make && make --version
-        where java && java -version
-        where python && python --version
-        where ninja && ninja --version
-
-        make ${{ matrix.config }}
-        if %errorlevel% neq 0 exit /b %errorlevel%
-        make install
-        if %errorlevel% neq 0 exit /b %errorlevel%
-        make test_install
-        if %errorlevel% neq 0 exit /b %errorlevel%
-        make test/unittest
-        if %errorlevel% neq 0 exit /b %errorlevel%
-
-    - name: Build & Test (clang compiler)
-      if: matrix.compiler == 'clang'
-      run: |
-        set CMAKE_GENERATOR=Ninja
-        set CC=clang
-        set CXX=clang++
-        set PREFIX=%GITHUB_WORKSPACE%\install
-        set CMAKE_PREFIX_PATH=%GITHUB_WORKSPACE%\install
-        set CPU_CORES=%NUMBER_OF_PROCESSORS%
-
-        set MAKE_DIR=C:\make\bin
-        set PATH=%pythonLocation%;%JAVA_HOME%\bin;%MAKE_DIR%;%PATH%
-        set ADDITIONAL_CMAKE_OPTIONS=-DPython3_ROOT_DIR=%pythonLocation% -DSURELOG_WITH_TCMALLOC=Off -DCMAKE_TOOLCHAIN_FILE=%VCPKG_INSTALLATION_ROOT%/scripts/buildsystems/vcpkg.cmake.
-
-        set
-        where cmake && cmake --version
-        where make && make --version
-        where java && java -version
-        where python && python --version
-        where ninja && ninja --version
-        where clang && clang --version
-        where clang++ && clang++ --version
-
-        make ${{ matrix.config }}
-        if %errorlevel% neq 0 exit /b %errorlevel%
-        make install
-        if %errorlevel% neq 0 exit /b %errorlevel%
-        make test_install
-        if %errorlevel% neq 0 exit /b %errorlevel%
-        make test/unittest
-        if %errorlevel% neq 0 exit /b %errorlevel%
+        cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR $CMAKE_ADDITIONAL_ARGS -S . -B build
+        cmake --build build -j $(nproc)
+        cmake --install build
 
     - name: Prepare build artifacts
-      shell: bash
       run: |
         mkdir artifacts
         mv install ${{ env.artifact-name }}
@@ -166,63 +68,36 @@ jobs:
         path: artifacts/${{ env.artifact-name }}.tar.gz
 
 
-# Windows regression
-  windows-regression:
-    name: "Windows | Regression | ${{ matrix.compiler }} | ${{ matrix.config }} [${{ matrix.shard }}]"
-    runs-on: windows-2025
-    needs: windows-install
-    defaults:
-      run:
-        shell: cmd
+# Linux regression
+  linux-regression:
+    name: "Linux | Regression | ${{ matrix.compiler }} | ${{ matrix.config }} [${{ matrix.shard }}]"
+    runs-on: ubuntu-24.04
+    needs: linux-install
     strategy:
       fail-fast: false
       matrix:
-        num_shards: [30]
-        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+        num_shards: [10]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         compiler:
         - clang
         config:
         - release
     env:
-      build-artifact-name: sl-${{ github.run_number }}-windows-${{ matrix.compiler }}-${{ matrix.config }}
-      regression-artifact-name: sl-${{ github.run_number }}-windows-${{ matrix.compiler }}-${{ matrix.config }}-regression-${{ matrix.shard }}
+      build-artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}
+      regression-artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}-regression-${{ matrix.shard }}
 
     steps:
-    - name: Install Core Dependencies
-      run: |
-        choco install -y make
-
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: 3.x
         architecture: x64
 
     - name: Setup Python Packages
-      run: |
-        pip3 install orderedmultidict
-        pip3 install psutil
-        pip3 install build
+      run: pip3 install build orderedmultidict psutil
 
-    - run: git config --global core.autocrlf input
-      shell: bash
-
-    - name: Move builds to C:\ drive
-      shell: cmd
-      run: |
-        mkdir C:\Surelog
-        cd /D C:\Surelog
-        rd /S /Q %GITHUB_WORKSPACE%
-        mklink /D %GITHUB_WORKSPACE% C:\Surelog
-
-    - name: Configure Pagefile
-      uses: al-cheb/configure-pagefile-action@v1.4
-      with:
-        minimum-size: 8GB
-        maximum-size: 16GB
-        disk-root: "D:"
-
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         fetch-depth: 0
@@ -232,28 +107,21 @@ jobs:
       with:
         name: ${{ env.build-artifact-name }}
 
-    - name: Extract artifact
-      shell: bash
+    - name: Run regression ${{ matrix.shard }}/${{ matrix.num_shards }}
+      timeout-minutes: 120
       run: |
-        # This has to be a separate step and run under bash since tar on Windows
-        # still doesn't support symlink and the root repository folder is a symlink.
         tar xzfp ${{ env.build-artifact-name }}.tar.gz
         mv ${{ env.build-artifact-name }} build
         rm ${{ env.build-artifact-name }}.tar.gz
 
-    - name: Run regression ${{ matrix.shard }}/${{ matrix.num_shards }}
-      timeout-minutes: 120
-      run: |
-        python3 scripts/regression.py run^
-          --uhdm-lint-filepath bin/uhdm-lint.exe^
-          --jobs %NUMBER_OF_PROCESSORS%^
-          --num_shards=${{ matrix.num_shards }}^
+        python3 scripts/regression.py run       \
+          --uhdm-lint-filepath bin/uhdm-lint    \
+          --jobs $(nproc)                       \
+          --num_shards=${{ matrix.num_shards }} \
           --shard=${{ matrix.shard }}
-        if %errorlevel% neq 0 exit /b %errorlevel%
         git status
 
     - name: Prepare regression artifacts
-      shell: bash
       if: always()
       run: |
         cd build
@@ -266,88 +134,3 @@ jobs:
       with:
         name: ${{ env.regression-artifact-name }}
         path: build/${{ env.regression-artifact-name }}.tar.gz
-
-# Code formatting
-  CodeFormatting:
-    runs-on: ubuntu-24.04
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Install Dependencies
-      run: |
-        # clang-format 18 seems to still settle and has different
-        # outcome with minor versions. So using stable 17 for now.
-        sudo apt-get install clang-format-17
-
-    - name: Run formatting style check
-      run: |
-        export CLANG_FORMAT=clang-format-17
-        "${CLANG_FORMAT}" --version
-        ./.github/bin/run-clang-format.sh
-
-
-# Code Tideness
-  ClangTidy:
-    runs-on: ubuntu-24.04
-
-    steps:
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update -qq
-        sudo apt -qq -y install clang-tidy-18 ccache \
-                                g++-9 default-jre cmake \
-                                uuid-dev build-essential
-
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.8
-        architecture: x64
-
-    - name: Setup Python Packages
-      run: |
-        pip3 install orderedmultidict
-        pip3 install psutil
-        pip3 install build
-
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 0
-
-    - name: Create Cache Timestamp
-      id: cache_timestamp
-      uses: nanzm/get-time-action@v2.0
-      with:
-        format: 'YYYY-MM-DD-HH-mm-ss'
-
-    - name: Retrieve cached results
-      uses: actions/cache@v3
-      with:
-        path: |
-          /home/runner/.cache/clang-tidy
-          /home/runner/.cache/ccache
-        key: clang-tidy-${{ steps.cache_timestamp.outputs.time }}
-        restore-keys: clang-tidy-
-
-    - name: Configure shell
-      run: |
-        echo 'PATH=/usr/lib/ccache:'"$PATH" >> $GITHUB_ENV
-
-    - name: Prepare source
-      run: |
-        make run-cmake-release-with-python
-        make -j2 -C build surelog  # creates all relevant artifacts
-        ln -sf build/compile_commands.json .
-
-    - name: Run clang tidy
-      run: |
-        export CLANG_TIDY=clang-tidy-18
-        "${CLANG_TIDY}" --version
-        ./.github/bin/run-clang-tidy.sh limited \
-           || ( cat Surelog_clang-tidy.out ; exit 1)

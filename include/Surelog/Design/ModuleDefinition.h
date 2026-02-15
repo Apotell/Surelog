@@ -94,12 +94,6 @@ class ModuleDefinition final : public DesignComponent, public ClockingBlockHolde
 
   uhdm::UdpDefn* getUdpDefn() { return m_udpDefn; }
 
-  uhdm::AttributeCollection* getAttributes() const { return m_attributes; }
-
-  bool setAttributes(uhdm::AttributeCollection* data) {
-    m_attributes = data;
-    return true;
-  }
   std::vector<uhdm::ModuleArray*>* getModuleArrays() { return m_moduleArrays; }
   void setModuleArrays(std::vector<uhdm::ModuleArray*>* modules) { m_moduleArrays = modules; }
 
@@ -127,7 +121,6 @@ class ModuleDefinition final : public DesignComponent, public ClockingBlockHolde
   ClassNameClassDefinitionMultiMap m_classDefinitions;
   uhdm::UdpDefn* m_udpDefn = nullptr;
 
-  uhdm::AttributeCollection* m_attributes = nullptr;
   std::vector<uhdm::ModuleArray*>* m_moduleArrays = nullptr;
   std::vector<uhdm::RefModule*>* m_refModules = nullptr;
   uhdm::PrimitiveCollection* m_subPrimitives = nullptr;

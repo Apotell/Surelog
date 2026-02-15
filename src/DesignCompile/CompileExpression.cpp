@@ -1460,6 +1460,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component, const Fi
       sys->setName("new");
       sys->setParent(pexpr);
       fC->populateCoreMembers(parent, parent, sys);
+      sys->getNameObj()->setFile(fC->getName());
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(component, fC, child, sys, instance, muteErrors)) {
         sys->setArguments(arguments);
       }

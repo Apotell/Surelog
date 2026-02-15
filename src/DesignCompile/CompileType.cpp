@@ -1014,6 +1014,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component, const
   if (pstmt == nullptr) pstmt = component->getUhdmModel();
   if (pstmt == nullptr) pstmt = design->getUhdmDesign();
 
+  const uhdm::ScopedScope scopedScope(pstmt);
+
   NodeId iDataType = InvalidNodeId;
   if (fC->Type(id) != VObjectType::paData_type) {
     iDataType = fC->sl_get(id, VObjectType::paData_type);

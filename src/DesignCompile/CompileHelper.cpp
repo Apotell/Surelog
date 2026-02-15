@@ -2368,6 +2368,7 @@ std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>> Compil
 
     if (NodeId unpackedDimId = fC->Sibling(identifierId)) {
       uhdm::ModuleArray* mod_array = s.make<uhdm::ModuleArray>();
+      mod_array->setParent(pexpr);
       int32_t unpackedSize = 0;
       if (std::vector<uhdm::Range*>* unpackedDimensions =
               compileRanges(mod, fC, unpackedDimId, mod_array, instance, unpackedSize, false)) {
@@ -2433,7 +2434,7 @@ uint32_t CompileHelper::getBuiltinType(VObjectType type) {
   }
 }
 
-void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod, const FileContent* fC, NodeId id,
+void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod, const FileContent* fC, uhdm::Any* pscope, NodeId id,
                                             ValuedComponentI* instance) {
   VObjectTypeUnorderedSet insttypes = {VObjectType::paUdp_instance};
   uhdm::Serializer& s = m_compileDesign->getSerializer();
@@ -2456,6 +2457,7 @@ void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod, const FileCon
     NodeId unpackedDimId;
     if (identifierId) unpackedDimId = fC->Sibling(identifierId);
     uhdm::Udp* udp = s.make<uhdm::Udp>();
+    udp->setParent(pscope);
     uhdm::Primitive* gate = udp;
     if (unpackedDimId && (fC->Type(unpackedDimId) == VObjectType::paUnpacked_dimension)) {
       uhdm::PrimitiveArray* gate_array = s.make<uhdm::UdpArray>();
@@ -2525,7 +2527,7 @@ void CompileHelper::writePrimTerms(ModuleDefinition* mod, const FileContent* fC,
   }
 }
 
-void CompileHelper::compileGateInstantiation(ModuleDefinition* mod, const FileContent* fC, NodeId id,
+void CompileHelper::compileGateInstantiation(ModuleDefinition* mod, const FileContent* fC, uhdm::Any* pscope, NodeId id,
                                              ValuedComponentI* instance) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::Primitive* gate = nullptr;
@@ -2563,6 +2565,7 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod, const FileCo
     if (fC->Type(Unpacked_dimension) == VObjectType::paUnpacked_dimension) {
       gate_array = s.make<uhdm::GateArray>();
       gate_array->setName(fC->SymName(Name));
+      gate_array->setParent(pscope);
       fC->populateCoreMembers(id, id, gate_array);
       int32_t size;
       if (uhdm::RangeCollection* ranges =
@@ -2586,6 +2589,7 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod, const FileCo
   }
   if (gate) {
     gate->setName(fC->SymName(Name));
+    gate->setParent(pscope);
     gate->setDefName(UhdmWriter::builtinGateName(gatetype));
     fC->populateCoreMembers(id, id, gate);
   }
@@ -4193,8 +4197,9 @@ uhdm::Assignment* CompileHelper::compileBlockingAssignment(DesignComponent* comp
     if (fC->Type(Delay_or_event_control) == VObjectType::paDynamic_array_new) {
       uhdm::MethodFuncCall* fcall = s.make<uhdm::MethodFuncCall>();
       fcall->setParent(assign);
-      fC->populateCoreMembers(Delay_or_event_control, Delay_or_event_control, fcall);
       fcall->setName("new");
+      fC->populateCoreMembers(Delay_or_event_control, Delay_or_event_control, fcall);
+      fcall->getNameObj()->setFile(fC->getName());
       NodeId List_of_arguments = fC->Child(Delay_or_event_control);
       if (List_of_arguments) {
         if (uhdm::AnyCollection* arguments =
@@ -4241,6 +4246,7 @@ uhdm::Assignment* CompileHelper::compileBlockingAssignment(DesignComponent* comp
     fcall->setName("new");
     fcall->setParent(assign);
     fC->populateCoreMembers(Hierarchical_identifier, Hierarchical_identifier, fcall);
+    fcall->getNameObj()->setFile(fC->getName());
     if (List_of_arguments) {
       if (uhdm::AnyCollection* arguments =
               compileTfCallArguments(component, fC, List_of_arguments, fcall, nullptr, false)) {
@@ -4310,7 +4316,13 @@ uhdm::ClockingBlock* CompileHelper::compileClockingBlock(DesignComponent* compon
   NodeId clocking_block_name;
   std::string name;
   if (fC->Type(clocking_block_type) == VObjectType::DEFAULT) {
+    if (uhdm::Module* const module = any_cast<uhdm::Module>(pstmt)) {
+      module->setDefaultClocking(cblock);
+    }
   } else if (fC->Type(clocking_block_type) == VObjectType::GLOBAL) {
+    if (uhdm::Module* const module = any_cast<uhdm::Module>(pstmt)) {
+      module->setGlobalClocking(cblock);
+    }
   } else if (fC->Type(clocking_block_type) == VObjectType::STRING_CONST) {
     clocking_block_name = clocking_block_type;
   }
@@ -4324,6 +4336,7 @@ uhdm::ClockingBlock* CompileHelper::compileClockingBlock(DesignComponent* compon
   else
     name = "unnamed_clocking_block";
   cblock->setName(name);
+  cblock->setParent(pstmt);
   if (const NodeId nameId = clocking_block_name ? clocking_block_name : nodeId) {
     fC->populateCoreMembers(nameId, nameId, cblock->getNameObj());
   }

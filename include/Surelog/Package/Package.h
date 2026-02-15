@@ -71,13 +71,6 @@ class Package final : public DesignComponent {
   const ClassDefinition* getClassDefinition(std::string_view name) const;
   ExprBuilder* getExprBuilder() { return &m_exprBuilder; }
 
-  uhdm::AttributeCollection* getAttributes() const { return m_attributes; }
-
-  bool setAttributes(uhdm::AttributeCollection* data) {
-    m_attributes = data;
-    return true;
-  }
-
   std::string_view getEndLabel() const { return m_endLabel; }
   void setEndLabel(std::string_view endLabel) { m_endLabel = endLabel; }
 
@@ -87,7 +80,6 @@ class Package final : public DesignComponent {
   Library* m_library = nullptr;
   ExprBuilder m_exprBuilder;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
-  uhdm::AttributeCollection* m_attributes = nullptr;
 };
 
 };  // namespace SURELOG

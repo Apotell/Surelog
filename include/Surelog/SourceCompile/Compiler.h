@@ -96,6 +96,7 @@ class Compiler {
   ErrorContainer::Stats getErrorStats() const;
   bool isLibraryFile(PathId id) const;
   const PPFileMap& getPPFileMap() { return m_ppFileMap; }
+  Library* getLibrary(std::string_view name) const;
 
 #ifdef USETBB
   tbb::task_group& getTaskGroup() { return m_taskGroup; }

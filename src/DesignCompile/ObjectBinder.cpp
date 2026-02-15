@@ -184,6 +184,26 @@ const uhdm::Interface* ObjectBinder::getInterface(std::string_view defname, cons
   return nullptr;
 }
 
+const uhdm::Program* ObjectBinder::getProgram(std::string_view defname, const uhdm::Any* object) const {
+  if (const uhdm::Program* const p = uhdm::getParent<uhdm::Program>(object)) {
+    if (p->getDefName() == defname) {
+      return p;
+    }
+  }
+
+  if (const uhdm::Design* d = uhdm::getParent<uhdm::Design>(object)) {
+    if (const uhdm::ProgramCollection* const programs = d->getAllPrograms()) {
+      for (const uhdm::Program* p : *programs) {
+        if (p->getDefName() == defname) {
+          return p;
+        }
+      }
+    }
+  }
+
+  return nullptr;
+}
+
 const uhdm::ClassDefn* ObjectBinder::getClassDefn(const uhdm::ClassDefnCollection* collection, std::string_view name) {
   if (collection != nullptr) {
     for (const uhdm::ClassDefn* c : *collection) {
@@ -907,6 +927,9 @@ void ObjectBinder::visitRefModule(const uhdm::RefModule* object) {
     const_cast<uhdm::RefModule*>(object)->setActual(const_cast<uhdm::Instance*>(any_cast<uhdm::Instance>(actual)),
                                                     true);
   } else if (const uhdm::Any* const actual = getInterface(object->getDefName(), object)) {
+    const_cast<uhdm::RefModule*>(object)->setActual(const_cast<uhdm::Instance*>(any_cast<uhdm::Instance>(actual)),
+                                                    true);
+  } else if (const uhdm::Any* const actual = getProgram(object->getDefName(), object)) {
     const_cast<uhdm::RefModule*>(object)->setActual(const_cast<uhdm::Instance*>(any_cast<uhdm::Instance>(actual)),
                                                     true);
   }

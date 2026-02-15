@@ -131,7 +131,7 @@ bool CompileClass::compile() {
     classId = fC->Child(classId);
     if (fC->Type(classId) == VObjectType::paAttribute_instance) {
       if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_class, fC, classId, defn)) {
-        m_class->setAttributes(attributes);
+        defn->setAttributes(attributes);
       }
     }
   }
@@ -300,7 +300,8 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
   ErrorContainer* const errors = m_session->getErrorContainer();
 
   NodeId data_declaration = fC->Child(id);
-  m_helper.compileDataDeclaration(m_class, fC, data_declaration, false, m_attributes);
+  uhdm::AttributeCollection* attributes = nullptr;
+  m_helper.compileDataDeclaration(m_class, fC, data_declaration, false, attributes);
 
   NodeId var_decl = fC->Child(data_declaration);
   VObjectType type = fC->Type(data_declaration);

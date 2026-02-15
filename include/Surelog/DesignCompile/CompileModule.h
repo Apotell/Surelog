@@ -88,7 +88,6 @@ class CompileModule final {
   ValuedComponentI* const m_instance = nullptr;
   uint32_t m_nbPorts = 0;
   bool m_hasNonNullPort = false;
-  uhdm::AttributeCollection* m_attributes = nullptr;
 };
 
 }  // namespace SURELOG

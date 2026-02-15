@@ -43,8 +43,6 @@
 #include "Surelog/Common/FileSystem.h"
 #include "Surelog/Common/NodeId.h"
 #include "Surelog/Common/Session.h"
-#include "Surelog/Design/ClockingBlock.h"
-#include "Surelog/Design/DataType.h"
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/Design/Modport.h"
 #include "Surelog/Design/ModuleDefinition.h"
@@ -68,7 +66,6 @@
 #include "Surelog/Utils/StringUtils.h"
 
 // UHDM
-#include <uhdm/ExprEval.h>
 #include <uhdm/Serializer.h>
 #include <uhdm/UhdmVisitor.h>
 #include <uhdm/sv_vpi_user.h>
@@ -80,52 +77,6 @@
 namespace SURELOG {
 namespace fs = std::filesystem;
 using namespace uhdm;  // NOLINT (we're using a whole bunch of these)
-
-static uhdm::Typespec* replace(const uhdm::Typespec* orig,
-                               std::map<const uhdm::Typespec*, const uhdm::Typespec*>& typespecSwapMap) {
-  if (orig && (orig->getUhdmType() == uhdm::UhdmType::UnsupportedTypespec)) {
-    std::map<const uhdm::Typespec*, const uhdm::Typespec*>::const_iterator itr = typespecSwapMap.find(orig);
-    if (itr != typespecSwapMap.end()) {
-      const uhdm::Typespec* tps = (*itr).second;
-      return (uhdm::Typespec*)tps;
-    }
-  }
-  return (uhdm::Typespec*)orig;
-}
-
-std::string UhdmWriter::builtinGateName(VObjectType type) {
-  std::string modName;
-  switch (type) {
-    case VObjectType::paNInpGate_And: modName = "work@and"; break;
-    case VObjectType::paNInpGate_Or: modName = "work@or"; break;
-    case VObjectType::paNInpGate_Nand: modName = "work@nand"; break;
-    case VObjectType::paNInpGate_Nor: modName = "work@nor"; break;
-    case VObjectType::paNInpGate_Xor: modName = "work@xor"; break;
-    case VObjectType::paNInpGate_Xnor: modName = "work@xnor"; break;
-    case VObjectType::paNOutGate_Buf: modName = "work@buf"; break;
-    case VObjectType::paNOutGate_Not: modName = "work@not"; break;
-    case VObjectType::paPassEnSwitch_Tranif0: modName = "work@tranif0"; break;
-    case VObjectType::paPassEnSwitch_Tranif1: modName = "work@tranif1"; break;
-    case VObjectType::paPassEnSwitch_RTranif1: modName = "work@rtranif1"; break;
-    case VObjectType::paPassEnSwitch_RTranif0: modName = "work@rtranif0"; break;
-    case VObjectType::paPassSwitch_Tran: modName = "work@tran"; break;
-    case VObjectType::paPassSwitch_RTran: modName = "work@rtran"; break;
-    case VObjectType::paCmosSwitchType_Cmos: modName = "work@cmos"; break;
-    case VObjectType::paCmosSwitchType_RCmos: modName = "work@rcmos"; break;
-    case VObjectType::paEnableGateType_Bufif0: modName = "work@bufif0"; break;
-    case VObjectType::paEnableGateType_Bufif1: modName = "work@bufif1"; break;
-    case VObjectType::paEnableGateType_Notif0: modName = "work@notif0"; break;
-    case VObjectType::paEnableGateType_Notif1: modName = "work@notif1"; break;
-    case VObjectType::paMosSwitchType_NMos: modName = "work@nmos"; break;
-    case VObjectType::paMosSwitchType_PMos: modName = "work@pmos"; break;
-    case VObjectType::paMosSwitchType_RNMos: modName = "work@rnmos"; break;
-    case VObjectType::paMosSwitchType_RPMos: modName = "work@rpmos"; break;
-    case VObjectType::PULLUP: modName = "work@pullup"; break;
-    case VObjectType::PULLDOWN: modName = "work@pulldown"; break;
-    default: modName = "work@UnsupportedPrimitive"; break;
-  }
-  return modName;
-}
 
 UhdmWriter::UhdmWriter(Session* session, CompileDesign* compileDesign, Design* design)
     : m_session(session), m_compileDesign(compileDesign), m_design(design), m_helper(session, compileDesign) {}
@@ -248,23 +199,6 @@ uint32_t UhdmWriter::getVpiOpType(VObjectType type) {
   }
 }
 
-bool isMultidimensional(const uhdm::Typespec* ts) {
-  bool isMultiDimension = false;
-  if (ts) {
-    if (ts->getUhdmType() == uhdm::UhdmType::LogicTypespec) {
-      uhdm::LogicTypespec* lts = (uhdm::LogicTypespec*)ts;
-      if (lts->getRanges() && lts->getRanges()->size() > 1) isMultiDimension = true;
-    } else if (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec) {
-      uhdm::ArrayTypespec* lts = (uhdm::ArrayTypespec*)ts;
-      if (lts->getRanges() && lts->getRanges()->size() > 1) isMultiDimension = true;
-    } else if (ts->getUhdmType() == uhdm::UhdmType::BitTypespec) {
-      uhdm::BitTypespec* lts = (uhdm::BitTypespec*)ts;
-      if (lts->getRanges() && lts->getRanges()->size() > 1) isMultiDimension = true;
-    }
-  }
-  return isMultiDimension;
-}
-
 uint32_t UhdmWriter::getVpiDirection(VObjectType type) {
   uint32_t direction = vpiInout;
   if (type == VObjectType::paPortDir_Inp || type == VObjectType::paTfPortDir_Inp)
@@ -302,6 +236,40 @@ uint32_t UhdmWriter::getVpiNetType(VObjectType type) {
     default: break;
   }
   return nettype;
+}
+
+std::string UhdmWriter::builtinGateName(VObjectType type) {
+  std::string modName;
+  switch (type) {
+    case VObjectType::paNInpGate_And: modName = "work@and"; break;
+    case VObjectType::paNInpGate_Or: modName = "work@or"; break;
+    case VObjectType::paNInpGate_Nand: modName = "work@nand"; break;
+    case VObjectType::paNInpGate_Nor: modName = "work@nor"; break;
+    case VObjectType::paNInpGate_Xor: modName = "work@xor"; break;
+    case VObjectType::paNInpGate_Xnor: modName = "work@xnor"; break;
+    case VObjectType::paNOutGate_Buf: modName = "work@buf"; break;
+    case VObjectType::paNOutGate_Not: modName = "work@not"; break;
+    case VObjectType::paPassEnSwitch_Tranif0: modName = "work@tranif0"; break;
+    case VObjectType::paPassEnSwitch_Tranif1: modName = "work@tranif1"; break;
+    case VObjectType::paPassEnSwitch_RTranif1: modName = "work@rtranif1"; break;
+    case VObjectType::paPassEnSwitch_RTranif0: modName = "work@rtranif0"; break;
+    case VObjectType::paPassSwitch_Tran: modName = "work@tran"; break;
+    case VObjectType::paPassSwitch_RTran: modName = "work@rtran"; break;
+    case VObjectType::paCmosSwitchType_Cmos: modName = "work@cmos"; break;
+    case VObjectType::paCmosSwitchType_RCmos: modName = "work@rcmos"; break;
+    case VObjectType::paEnableGateType_Bufif0: modName = "work@bufif0"; break;
+    case VObjectType::paEnableGateType_Bufif1: modName = "work@bufif1"; break;
+    case VObjectType::paEnableGateType_Notif0: modName = "work@notif0"; break;
+    case VObjectType::paEnableGateType_Notif1: modName = "work@notif1"; break;
+    case VObjectType::paMosSwitchType_NMos: modName = "work@nmos"; break;
+    case VObjectType::paMosSwitchType_PMos: modName = "work@pmos"; break;
+    case VObjectType::paMosSwitchType_RNMos: modName = "work@rnmos"; break;
+    case VObjectType::paMosSwitchType_RPMos: modName = "work@rpmos"; break;
+    case VObjectType::PULLUP: modName = "work@pullup"; break;
+    case VObjectType::PULLDOWN: modName = "work@pulldown"; break;
+    default: modName = "work@UnsupportedPrimitive"; break;
+  }
+  return modName;
 }
 
 void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports, uhdm::BaseClass* parent, uhdm::Serializer& s,
@@ -430,43 +398,6 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports, uhdm::BaseCl
   }
 }
 
-void UhdmWriter::writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap, uhdm::BaseClass* parent,
-                                uhdm::TypespecCollection* dest_typespecs, uhdm::Serializer& s, bool setParent) {
-  std::set<uint64_t> ids;
-  for (const uhdm::Typespec* t : *dest_typespecs) ids.emplace(t->getUhdmId());
-  for (const auto& entry : datatypeMap) {
-    const DataType* dtype = entry.second;
-    if (dtype->getCategory() == DataType::Category::REF) {
-      dtype = dtype->getDefinition();
-    }
-    if (dtype->getCategory() == DataType::Category::TYPEDEF) {
-      if (dtype->getTypespec() == nullptr) dtype = dtype->getDefinition();
-    }
-    uhdm::Typespec* tps = dtype->getTypespec();
-    tps = replace(tps, m_compileDesign->getSwapedObjects());
-    if (parent->getUhdmType() == uhdm::UhdmType::Package) {
-      if (tps && (tps->getName().find("::") == std::string::npos)) {
-        const std::string newName = StrCat(parent->getName(), "::", tps->getName());
-        if (uhdm::TypedefTypespec* tt = any_cast<uhdm::TypedefTypespec>(tps)) {
-          tt->setName(newName);
-        }
-      }
-    }
-
-    if (tps) {
-      if (!tps->getInstance()) {
-        if (parent->getUhdmType() != uhdm::UhdmType::ClassDefn) tps->setInstance((uhdm::Instance*)parent);
-      }
-      if (setParent && (tps->getParent() == nullptr)) {
-        tps->setParent(parent);
-        ids.emplace(tps->getUhdmId());
-      } else if (ids.emplace(tps->getUhdmId()).second) {
-        tps->setParent(parent);
-      }
-    }
-  }
-}
-
 void UhdmWriter::writeNets(DesignComponent* mod, const std::vector<Signal*>& orig_nets, uhdm::BaseClass* parent,
                            uhdm::Serializer& s, SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
                            SignalMap& portMap, ModuleInstance* instance /* = nullptr */) {
@@ -559,429 +490,8 @@ void mapLowConns(const std::vector<Signal*>& orig_ports, uhdm::Serializer& s,
   }
 }
 
-void UhdmWriter::writeClass(ClassDefinition* classDef, uhdm::Serializer& s, uhdm::BaseClass* parent) {
-  if (!classDef->getFileContents().empty() && classDef->getType() == VObjectType::paClass_declaration) {
-    const FileContent* fC = classDef->getFileContents()[0];
-    uhdm::ClassDefn* c = classDef->getUhdmModel<uhdm::ClassDefn>();
-    m_componentMap.emplace(classDef, c);
-    c->setParent(parent);
-    classDef->getUhdmTypespecModel()->setParent(parent);
-    c->setTaskFuncDecls(classDef->getTaskFuncDecls());
-
-    // Typepecs
-    uhdm::TypespecCollection* typespecs = c->getTypespecs(true);
-    writeDataTypes(classDef->getDataTypeMap(), c, typespecs, s, true);
-
-    // Variables
-    // Already bound in TestbenchElaboration
-
-    // Extends, fix late binding
-    if (const uhdm::Extends* ext = c->getExtends()) {
-      if (const uhdm::RefTypespec* ext_rt = ext->getClassTypespec()) {
-        if (const uhdm::ClassTypespec* tps = ext_rt->getActual<uhdm::ClassTypespec>()) {
-          if (tps->getClassDefn() == nullptr) {
-            const std::string_view tpsName = tps->getName();
-            if (c->getParameters()) {
-              for (auto ps : *c->getParameters()) {
-                if (ps->getName() == tpsName) {
-                  if (ps->getUhdmType() == uhdm::UhdmType::TypeParameter) {
-                    uhdm::TypeParameter* tp = (uhdm::TypeParameter*)ps;
-                    if (const uhdm::RefTypespec* tp_rt = tp->getTypespec()) {
-                      if (const uhdm::ClassTypespec* cptp = tp_rt->getActual<uhdm::ClassTypespec>()) {
-                        ((uhdm::ClassTypespec*)tps)->setClassDefn((uhdm::ClassDefn*)cptp->getClassDefn());
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // Param_assigns
-    if (classDef->getParamAssigns()) {
-      c->setParamAssigns(classDef->getParamAssigns());
-      for (auto ps : *c->getParamAssigns()) {
-        ps->setParent(c);
-      }
-    }
-    c->setParent(parent);
-
-    const std::string_view name = classDef->getName();
-    if (c->getName().empty()) c->setName(name);
-    if (c->getFullName().empty()) c->setFullName(name);
-    if (classDef->getAttributes() != nullptr) {
-      c->setAttributes(classDef->getAttributes());
-      for (auto a : *c->getAttributes()) {
-        a->setParent(c);
-      }
-    }
-    if (fC) {
-      // Builtin classes have no file
-      const NodeId modId = classDef->getNodeIds()[0];
-      const NodeId startId = fC->sl_collect(modId, VObjectType::CLASS);
-      fC->populateCoreMembers(startId, modId, c);
-    }
-    // Activate when hier_path is better supported
-    // lateTypedefBinding(s, classDef, c);
-    // lateBinding(s, classDef, c);
-
-    for (auto& nested : classDef->getClassMap()) {
-      writeClass(nested.second, s, c);
-    }
-  }
-}
-
-void UhdmWriter::writeClasses(ClassNameClassDefinitionMultiMap& orig_classes, uhdm::Serializer& s,
-                              uhdm::BaseClass* parent) {
-  for (auto& orig_class : orig_classes) {
-    writeClass(orig_class.second, s, parent);
-  }
-}
-
-void UhdmWriter::writeVariables(const DesignComponent::VariableMap& orig_vars, uhdm::BaseClass* parent,
-                                uhdm::Serializer& s) {
-  for (auto& orig_var : orig_vars) {
-    Variable* var = orig_var.second;
-    const DataType* dtype = var->getDataType();
-    const ClassDefinition* classdef = datatype_cast<ClassDefinition>(dtype);
-    if (classdef) {
-      uhdm::Variable* cvar = s.make<uhdm::Variable>();
-      cvar->setName(var->getName());
-      var->getFileContent()->populateCoreMembers(var->getNodeId(), var->getNodeId(), cvar);
-      cvar->setParent(parent);
-      const auto& found = m_componentMap.find(classdef);
-      if (found != m_componentMap.end()) {
-        // TODO: Bind Class type,
-        // class_var -> class_typespec -> class_defn
-      }
-    }
-  }
-}
-
-class ReInstanceTypespec final : public UhdmVisitor {
- public:
-  explicit ReInstanceTypespec(uhdm::Package* p) : m_package(p) {}
-  ~ReInstanceTypespec() override = default;
-
-  void visitAny(const uhdm::Any* object) final {
-    if (any_cast<uhdm::Typespec>(object) != nullptr) {
-      if ((object->getUhdmType() != uhdm::UhdmType::EventTypespec) &&
-          (object->getUhdmType() != uhdm::UhdmType::ImportTypespec) &&
-          (object->getUhdmType() != uhdm::UhdmType::TypeParameter)) {
-        reInstance(object);
-      }
-    }
-  }
-
-  void visitFunction(const uhdm::Function* object) final { reInstance(object); }
-  void visitTask(const uhdm::Task* object) final { reInstance(object); }
-
-  void reInstance(const uhdm::Any* cobject) {
-    if (cobject == nullptr) return;
-    uhdm::Any* object = (uhdm::Any*)cobject;
-    const uhdm::Instance* inst = nullptr;
-    if (uhdm::Typespec* tps = any_cast<uhdm::Typespec>(object)) {
-      inst = (uhdm::Instance*)tps->getInstance();
-    } else if (uhdm::Function* tps = any_cast<uhdm::Function>(object)) {
-      inst = (uhdm::Instance*)tps->getInstance();
-    } else if (uhdm::Task* tps = any_cast<uhdm::Task>(object)) {
-      inst = (uhdm::Instance*)tps->getInstance();
-    }
-    if (inst) {
-      const std::string_view name = inst->getName();
-      uhdm::Design* d = (uhdm::Design*)m_package->getParent();
-      if (d->getAllPackages() != nullptr) {
-        for (auto pack : *d->getAllPackages()) {
-          if (pack->getName() == name) {
-            if (uhdm::Typespec* tps = any_cast<uhdm::Typespec>(object)) {
-              tps->setInstance(pack);
-              if (const uhdm::EnumTypespec* et = any_cast<uhdm::EnumTypespec>(cobject)) {
-                reInstance(et->getBaseTypespec());
-              }
-            } else if (uhdm::Function* tps = any_cast<uhdm::Function>(object)) {
-              tps->setInstance(pack);
-            } else if (uhdm::Task* tps = any_cast<uhdm::Task>(object)) {
-              tps->setInstance(pack);
-            }
-            break;
-          }
-        }
-      }
-    }
-  }
-
- private:
-  uhdm::Package* m_package = nullptr;
-};
-
-// Non-elaborated package typespec Instance relation need to point to
-// non-elablarated package
-void reInstanceTypespec(Serializer& serializer, uhdm::Any* root, uhdm::Package* p) {
-  ReInstanceTypespec(p).visit(root);
-}
-
-void UhdmWriter::writePackage(Package* pack, uhdm::Package* p, uhdm::Serializer& s) {
-  const uhdm::ScopedScope scopedScope(p);
-
-  // Classes
-  ClassNameClassDefinitionMultiMap& orig_classes = pack->getClassDefinitions();
-  writeClasses(orig_classes, s, p);
-
-  // Parameters
-  if (p->getParameters()) {
-    for (auto ps : *p->getParameters()) {
-      if (ps->getUhdmType() == uhdm::UhdmType::Parameter) {
-        ((uhdm::Parameter*)ps)->setFullName(StrCat(pack->getName(), "::", ps->getName()));
-      } else {
-        ((uhdm::TypeParameter*)ps)->setFullName(StrCat(pack->getName(), "::", ps->getName()));
-      }
-    }
-  }
-
-  // Param_assigns
-
-  if (pack->getParamAssigns()) {
-    p->setParamAssigns(pack->getParamAssigns());
-    for (auto ps : *p->getParamAssigns()) {
-      ps->setParent(p);
-      reInstanceTypespec(s, ps, p);
-    }
-  }
-
-  if (p->getTypespecs()) {
-    for (auto t : *p->getTypespecs()) {
-      reInstanceTypespec(s, t, p);
-    }
-  }
-
-  if (p->getVariables()) {
-    for (auto v : *p->getVariables()) {
-      reInstanceTypespec(s, v, p);
-    }
-  }
-
-  // Function and tasks
-  if (pack->getTaskFuncs()) {
-    for (auto tf : *pack->getTaskFuncs()) {
-      const std::string_view funcName = tf->getName();
-      if (funcName.find("::") != std::string::npos) {
-        std::vector<std::string_view> res;
-        StringUtils::tokenizeMulti(funcName, "::", res);
-        const std::string_view className = res[0];
-        const std::string_view funcName = res[1];
-        bool foundParentClass = false;
-        if (p->getClassDefns()) {
-          for (auto cl : *p->getClassDefns()) {
-            if (cl->getName() == className) {
-              tf->setParent(cl, true);
-              tf->setInstance(p);
-              foundParentClass = true;
-              break;
-            }
-          }
-        }
-        if (foundParentClass) {
-          tf->setName(funcName);
-          ((uhdm::TaskFunc*)tf)->setFullName(StrCat(pack->getName(), "::", className, "::", tf->getName()));
-        } else {
-          tf->setParent(p);
-          tf->setInstance(p);
-          ((uhdm::TaskFunc*)tf)->setFullName(StrCat(pack->getName(), "::", tf->getName()));
-        }
-      } else {
-        tf->setParent(p);
-        tf->setInstance(p);
-        ((uhdm::TaskFunc*)tf)->setFullName(StrCat(pack->getName(), "::", tf->getName()));
-      }
-    }
-  }
-  // Nets
-  SignalBaseClassMap signalBaseMap;
-  SignalMap portMap;
-  SignalMap netMap;
-  const std::vector<Signal*>& orig_nets = pack->getSignals();
-  writeNets(pack, orig_nets, p, s, signalBaseMap, netMap, portMap, nullptr);
-}
-
-void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m, uhdm::Serializer& s,
-                             InstanceDefinitionMap& instanceDefinitionMap, ModportMap& modPortMap,
-                             ModuleInstance* instance) {
-  const uhdm::ScopedScope scopedScope(m);
-  SignalBaseClassMap signalBaseMap;
-  SignalMap portMap;
-  SignalMap netMap;
-
-  // Let decls
-  if (!mod->getLetStmts().empty()) {
-    for (auto& stmt : mod->getLetStmts()) {
-      const_cast<uhdm::LetDecl*>(stmt.second->getDecl())->setParent(m);
-    }
-  }
-  // Gen vars
-  if (mod->getGenVars()) {
-    for (auto var : *mod->getGenVars()) {
-      var->setParent(m);
-    }
-  }
-  // Gen stmts
-  if (mod->getGenStmts()) {
-    for (auto stmt : *mod->getGenStmts()) {
-      stmt->setParent(m);
-    }
-  }
-  if (!mod->getPropertyDecls().empty()) {
-    for (auto decl : mod->getPropertyDecls()) {
-      decl->setParent(m);
-    }
-  }
-  if (!mod->getSequenceDecls().empty()) {
-    for (auto decl : mod->getSequenceDecls()) {
-      decl->setParent(m);
-    }
-  }
-
-  // Ports
-  const std::vector<Signal*>& orig_ports = mod->getPorts();
-  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance, mod);
-  // Nets
-  mapLowConns(orig_ports, s, signalBaseMap);
-  // Classes
-  ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
-  writeClasses(orig_classes, s, m);
-
-  // ClockingBlocks
-  for (auto& ctupple : mod->getClockingBlockMap()) {
-    ClockingBlock& cblock = ctupple.second;
-    cblock.getUhdmModel()->setParent(m);
-    switch (cblock.getType()) {
-      case ClockingBlock::Type::Default: {
-        m->setDefaultClocking(cblock.getUhdmModel());
-        break;
-      }
-      case ClockingBlock::Type::Global: {
-        m->setGlobalClocking(cblock.getUhdmModel());
-        break;
-      }
-      default: break;
-    }
-  }
-
-  // Assertions
-  if (mod->getAssertions()) {
-    for (auto ps : *mod->getAssertions()) {
-      ps->setParent(m);
-    }
-  }
-  // Module Instantiation
-  if (std::vector<uhdm::RefModule*>* subModules = mod->getRefModules()) {
-    for (auto subModArr : *subModules) {
-      subModArr->setParent(m);
-    }
-  }
-  if (uhdm::ModuleArrayCollection* subModuleArrays = mod->getModuleArrays()) {
-    for (auto subModArr : *subModuleArrays) {
-      subModArr->setParent(m);
-    }
-  }
-  if (uhdm::PrimitiveCollection* subModules = mod->getPrimitives()) {
-    for (auto subModArr : *subModules) {
-      subModArr->setParent(m);
-    }
-  }
-  if (uhdm::PrimitiveArrayCollection* subModules = mod->getPrimitiveArrays()) {
-    for (auto subModArr : *subModules) {
-      subModArr->setParent(m);
-    }
-  }
-  // Interface instantiation
-  const std::vector<Signal*>& signals = mod->getSignals();
-  if (!signals.empty()) {
-    uhdm::InterfaceArrayCollection* subInterfaceArrays = m->getInterfaceArrays(true);
-    for (Signal* sig : signals) {
-      NodeId unpackedDimension = sig->getUnpackedDimension();
-      if (unpackedDimension && sig->getInterfaceDef()) {
-        uhdm::InterfaceArray* smarray = s.make<uhdm::InterfaceArray>();
-        int32_t unpackedSize = 0;
-        const FileContent* fC = sig->getFileContent();
-        if (std::vector<uhdm::Range*>* unpackedDimensions =
-                m_helper.compileRanges(mod, fC, unpackedDimension, smarray, instance, unpackedSize, false)) {
-          NodeId id = sig->getNodeId();
-          const std::string typeName = sig->getInterfaceTypeName();
-          smarray->setRanges(unpackedDimensions);
-          for (auto d : *unpackedDimensions) d->setParent(smarray);
-          if (fC->Type(sig->getNameId()) == VObjectType::STRING_CONST) {
-            smarray->setName(sig->getName());
-          }
-          smarray->setFullName(typeName);
-          smarray->setParent(m);
-          fC->populateCoreMembers(id, id, smarray);
-
-          NodeId typespecStart = sig->getInterfaceTypeNameId();
-          NodeId typespecEnd = typespecStart;
-          while (fC->Sibling(typespecEnd)) {
-            typespecEnd = fC->Sibling(typespecEnd);
-          }
-          if (smarray->getElemTypespec() == nullptr) {
-            uhdm::RefTypespec* tps_rt = s.make<uhdm::RefTypespec>();
-            tps_rt->setParent(smarray);
-            smarray->setElemTypespec(tps_rt);
-          }
-          ModuleDefinition* intefacedef = m_design->getModuleDefinition(typeName);
-          smarray->getElemTypespec()->setActual(intefacedef->getUhdmTypespecModel());
-
-          subInterfaceArrays->emplace_back(smarray);
-        }
-      }
-    }
-  }
-}
-
-void UhdmWriter::writeInterface(ModuleDefinition* mod, uhdm::Interface* m, uhdm::Serializer& s, ModportMap& modPortMap,
-                                ModuleInstance* instance) {
-  const uhdm::ScopedScope scopedScope(m);
-
-  SignalBaseClassMap signalBaseMap;
-  SignalMap portMap;
-  SignalMap netMap;
-
-  // Let decls
-  if (!mod->getLetStmts().empty()) {
-    uhdm::LetDeclCollection* decls = m->getLetDecls(true);
-    for (auto stmt : mod->getLetStmts()) {
-      decls->emplace_back((uhdm::LetDecl*)stmt.second->getDecl());
-    }
-  }
-  // Gen stmts
-  if (mod->getGenStmts()) {
-    for (auto stmt : *mod->getGenStmts()) {
-      stmt->setParent(m);
-    }
-  }
-  if (!mod->getPropertyDecls().empty()) {
-    for (auto decl : mod->getPropertyDecls()) {
-      decl->setParent(m);
-    }
-  }
-  if (!mod->getSequenceDecls().empty()) {
-    for (auto decl : mod->getSequenceDecls()) {
-      decl->setParent(m);
-    }
-  }
-
-  // Typepecs
-  uhdm::TypespecCollection* typespecs = m->getTypespecs(true);
-  writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
-
-  // Ports
-  const std::vector<Signal*>& orig_ports = mod->getPorts();
-  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance, mod);
-  const std::vector<Signal*>& orig_nets = mod->getSignals();
-  writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
-
-  // Modports
+void UhdmWriter::writeModPorts(ModuleDefinition* mod, uhdm::Serializer& s, ModportMap& modPortMap,
+                               ModuleInstance* instance) {
   ModuleDefinition::ModportSignalMap& orig_modports = mod->getModportSignalMap();
   for (auto& orig_modport : orig_modports) {
     uhdm::Modport* dest_modport = orig_modport.second.getUhdmModel();
@@ -1003,132 +513,7 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, uhdm::Interface* m, uhdm:
       io->setParent(dest_modport);
     }
   }
-
-  // Cont assigns
-  if (mod->getContAssigns()) {
-    for (auto ps : *mod->getContAssigns()) {
-      ps->setParent(m);
-    }
-  }
-
-  // Assertions
-  if (mod->getAssertions()) {
-    for (auto ps : *mod->getAssertions()) {
-      ps->setParent(m);
-    }
-  }
-
-  // Processes
-  if (mod->getProcesses()) {
-    for (auto ps : *mod->getProcesses()) {
-      ps->setParent(m);
-    }
-  }
-
-  // ClockingBlocks
-  for (auto& ctupple : mod->getClockingBlockMap()) {
-    ClockingBlock& cblock = ctupple.second;
-    cblock.getUhdmModel()->setParent(m);
-    switch (cblock.getType()) {
-      case ClockingBlock::Type::Default: {
-        m->setDefaultClocking(cblock.getUhdmModel());
-        break;
-      }
-      case ClockingBlock::Type::Global: {
-        m->setGlobalClocking(cblock.getUhdmModel());
-        break;
-      }
-      default: break;
-    }
-  }
 }
-
-void UhdmWriter::writeProgram(Program* mod, uhdm::Program* m, uhdm::Serializer& s, ModportMap& modPortMap,
-                              ModuleInstance* instance) {
-  const uhdm::ScopedScope scopedScope(m);
-
-  SignalBaseClassMap signalBaseMap;
-  SignalMap portMap;
-  SignalMap netMap;
-
-  // Typepecs
-  uhdm::TypespecCollection* typespecs = m->getTypespecs(true);
-  writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
-
-  // Ports
-  const std::vector<Signal*>& orig_ports = mod->getPorts();
-  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance, mod);
-
-  // Nets
-  const std::vector<Signal*>& orig_nets = mod->getSignals();
-  writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
-  mapLowConns(orig_ports, s, signalBaseMap);
-
-  // Assertions
-  if (mod->getAssertions()) {
-    for (auto ps : *mod->getAssertions()) {
-      ps->setParent(m);
-    }
-  }
-
-  // Classes
-  ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
-  writeClasses(orig_classes, s, m);
-
-  // Variables
-  const DesignComponent::VariableMap& orig_vars = mod->getVariables();
-  writeVariables(orig_vars, m, s);
-
-  // Cont assigns
-  if (mod->getContAssigns()) {
-    for (auto ps : *mod->getContAssigns()) {
-      ps->setParent(m);
-    }
-  }
-  // Processes
-  if (mod->getProcesses()) {
-    for (auto ps : *mod->getProcesses()) {
-      ps->setParent(m);
-    }
-  }
-  if (mod->getTaskFuncs()) {
-    for (auto tf : *mod->getTaskFuncs()) {
-      tf->setParent(m);
-    }
-  }
-
-  // ClockingBlocks
-  for (auto& ctupple : mod->getClockingBlockMap()) {
-    ClockingBlock& cblock = ctupple.second;
-    cblock.getUhdmModel()->setParent(m);
-    switch (cblock.getType()) {
-      case ClockingBlock::Type::Default: {
-        m->setDefaultClocking(cblock.getUhdmModel());
-        break;
-      }
-      case ClockingBlock::Type::Global: {
-        // m->Global_clocking(cblock.getUhdmModel());
-        break;
-      }
-      default: break;
-    }
-  }
-}
-
-class DetectUnsizedConstant final : public UhdmVisitor {
- public:
-  DetectUnsizedConstant() = default;
-  bool unsizedDetected() const { return m_unsized; }
-
- private:
-  void visitConstant(const uhdm::Constant* object) final {
-    if (object->getSize() == -1) {
-      m_unsized = true;
-      requestAbort();
-    }
-  }
-  bool m_unsized = false;
-};
 
 void UhdmWriter::bind(uhdm::Serializer& s, const std::vector<vpiHandle>& designs) {
   CommandLineParser* commandLineParser = m_session->getCommandLineParser();
@@ -1141,145 +526,21 @@ void UhdmWriter::bind(uhdm::Serializer& s, const std::vector<vpiHandle>& designs
   }
 }
 
-class AlwaysWithForLoop final : public UhdmVisitor {
- public:
-  explicit AlwaysWithForLoop() = default;
-  void visitForStmt(const uhdm::ForStmt* object) final {
-    containtsForStmt = true;
-    requestAbort();
-  }
-  bool containtsForStmt = false;
-};
-
-bool alwaysContainsForLoop(Serializer& serializer, uhdm::Any* root) {
-  AlwaysWithForLoop listener;
-  listener.visit(root);
-  return listener.containtsForStmt;
-}
-
-// synlig has a major problem processing always blocks.
-// They are processed mainly in the allModules section which is incorrect in
-// some case. They should be processed from the topModules section. Here we try
-// to fix temporarily this by filtering out the always blocks containing
-// for-loops from the allModules, and those without from the topModules
-void filterAlwaysBlocks(Serializer& s, uhdm::Design* d) {
-  if (d->getAllModules()) {
-    for (auto module : *d->getAllModules()) {
-      if (module->getProcesses()) {
-        bool more = true;
-        while (more) {
-          more = false;
-          for (std::vector<uhdm::Process*>::iterator itr = module->getProcesses()->begin();
-               itr != module->getProcesses()->end(); itr++) {
-            if ((*itr)->getUhdmType() == uhdm::UhdmType::Always) {
-              if (alwaysContainsForLoop(s, (*itr))) {
-                more = true;
-                module->getProcesses()->erase(itr);
-                break;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  std::queue<uhdm::Scope*> instances;
-  if (d->getTopModules()) {
-    for (auto mod : *d->getTopModules()) {
-      instances.push(mod);
-    }
-  }
-  while (!instances.empty()) {
-    uhdm::Scope* current = instances.front();
-    instances.pop();
-    if (current->getUhdmType() == uhdm::UhdmType::Module) {
-      uhdm::Module* mod = (uhdm::Module*)current;
-      if (mod->getProcesses()) {
-        bool more = true;
-        while (more) {
-          more = false;
-          for (std::vector<uhdm::Process*>::iterator itr = mod->getProcesses()->begin();
-               itr != mod->getProcesses()->end(); itr++) {
-            if ((*itr)->getUhdmType() == uhdm::UhdmType::Always) {
-              if (!alwaysContainsForLoop(s, (*itr))) {
-                more = true;
-                mod->getProcesses()->erase(itr);
-                break;
-              }
-            }
-          }
-        }
-      }
-      if (mod->getModules()) {
-        for (auto m : *mod->getModules()) {
-          instances.push(m);
-        }
-      }
-      if (mod->getGenScopeArrays()) {
-        for (auto m : *mod->getGenScopeArrays()) {
-          instances.push(m->getGenScopes()->at(0));
-        }
-      }
-    } else if (current->getUhdmType() == uhdm::UhdmType::GenScope) {
-      uhdm::GenScope* sc = (uhdm::GenScope*)current;
-      if (sc->getModules()) {
-        for (auto m : *sc->getModules()) {
-          instances.push(m);
-        }
-      }
-      if (sc->getGenScopeArrays()) {
-        for (auto m : *sc->getGenScopeArrays()) {
-          instances.push(m->getGenScopes()->at(0));
-        }
-      }
-    }
-  }
-}
-
 bool UhdmWriter::write(PathId uhdmFileId) {
-  Compiler* const compiler = m_compileDesign->getCompiler();
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
+
   ModportMap modPortMap;
   InstanceDefinitionMap instanceDefinitionMap;
   ModuleInstanceMap moduleInstanceMap;
-  uhdm::Serializer& s = m_compileDesign->getSerializer();
-  ExprBuilder exprBuilder(m_session);
 
   Location loc(uhdmFileId);
   Error err(ErrorDefinition::UHDM_CREATING_MODEL, loc);
   errors->addError(err);
   errors->printMessages(clp->muteStdout());
-
-  // Compute list of design components that are part of the instance tree
-  std::set<DesignComponent*> designComponents;
-  {
-    std::queue<ModuleInstance*> queue;
-    for (const auto& pack : m_design->getPackageDefinitions()) {
-      if (!pack.second->getFileContents().empty()) {
-        if (pack.second->getFileContents()[0] != nullptr) designComponents.insert(pack.second);
-      }
-    }
-    for (auto instance : m_design->getTopLevelModuleInstances()) {
-      queue.push(instance);
-    }
-
-    while (!queue.empty()) {
-      ModuleInstance* current = queue.front();
-      DesignComponent* def = current->getDefinition();
-      queue.pop();
-      if (current == nullptr) continue;
-      for (ModuleInstance* sub : current->getAllSubInstances()) {
-        queue.push(sub);
-      }
-      const FileContent* fC = current->getFileContent();
-      if (fC) {
-        designComponents.insert(def);
-      }
-    }
-  }
 
   std::vector<vpiHandle> designs;
   uhdm::Design* d = nullptr;
@@ -1295,183 +556,194 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     d->setName(designName);
     designs.emplace_back(designHandle);
 
-    // -------------------------------
-    // Non-Elaborated Model
-
     // Packages
     SURELOG::PackageDefinitionVec packages = m_design->getOrderedPackageDefinitions();
     for (auto& pack : m_design->getPackageDefinitions()) {
-      if (pack.first == "builtin") {
-        pack.second->getUhdmModel()->setParent(d);
-        if (Typespec* const ts = pack.second->getUhdmTypespecModel()) {
-          ts->setParent(d);
+      if ((pack.first == "builtin") && (pack.second != nullptr)) {
+        if (uhdm::Package* const p = pack.second->getUhdmModel<uhdm::Package>()) {
+          p->setDefName(pack.second->getName());
+          p->setParent(d);
+          m_componentMap.emplace(pack.second, p);
         }
-        if (pack.second) packages.insert(packages.begin(), pack.second);
         break;
       }
     }
 
     for (Package* pack : packages) {
-      if (!pack) continue;
-      if (!pack->getFileContents().empty() && pack->getType() == VObjectType::paPackage_declaration) {
-        const FileContent* fC = pack->getFileContents()[0];
-        uhdm::Package* p = pack->getUhdmModel<uhdm::Package>();
-        m_componentMap.emplace(pack, p);
-        p->setName(pack->getName());
-        p->setParent(d);
+      if (uhdm::Package* const p = pack->getUhdmModel<uhdm::Package>()) {
         p->setDefName(pack->getName());
-        if (pack->getAttributes() != nullptr) {
-          p->setAttributes(pack->getAttributes());
-          for (auto a : *p->getAttributes()) {
-            a->setParent(p);
-          }
-        }
-        writePackage(pack, p, s);
-        if (fC) {
-          // Builtin package has no file
-          const NodeId modId = pack->getNodeIds()[0];
-          const NodeId startId = fC->sl_collect(modId, VObjectType::PACKAGE);
-          fC->populateCoreMembers(startId, modId, p);
-        }
-      }
-    }
-
-    // Programs
-    const auto& programs = m_design->getProgramDefinitions();
-    for (const auto& progNamePair : programs) {
-      Program* prog = progNamePair.second;
-      if (!prog->getFileContents().empty() && prog->getType() == VObjectType::paProgram_declaration) {
-        const FileContent* fC = prog->getFileContents()[0];
-        uhdm::Program* p = prog->getUhdmModel<uhdm::Program>();
-        m_componentMap.emplace(prog, p);
-        instanceDefinitionMap.emplace(prog->getName(), p);
         p->setParent(d);
-        prog->getUhdmTypespecModel()->setParent(d);
-        p->setDefName(prog->getName());
-        const NodeId modId = prog->getNodeIds()[0];
-        const NodeId startId = fC->sl_collect(modId, VObjectType::PROGRAM);
-        fC->populateCoreMembers(startId, modId, p);
-        if (prog->getAttributes() != nullptr) {
-          p->setAttributes(prog->getAttributes());
-          for (auto a : *p->getAttributes()) {
-            a->setParent(p);
-          }
-        }
-        writeProgram(prog, p, s, modPortMap);
+        m_componentMap.emplace(pack, p);
+
+        SignalBaseClassMap signalBaseMap;
+        SignalMap portMap;
+        SignalMap netMap;
+        const std::vector<Signal*>& orig_nets = pack->getSignals();
+        writeNets(pack, orig_nets, p, s, signalBaseMap, netMap, portMap, nullptr);
+
+        // if (uhdm::AttributeCollection* const collection = pack->getAttributes()) {
+        //   for (uhdm::Attribute* a : *collection) {
+        //     a->setParent(p);
+        //     p->getAttributes(true)->emplace_back(a);  // TODO(HS): Fix the parenting issue
+        //   }
+        // }
       }
     }
 
-    // Interfaces
+    const auto& programs = m_design->getProgramDefinitions();
+    for (const auto& [name, program] : programs) {
+      if (uhdm::Program* const p = program->getUhdmModel<uhdm::Program>()) {
+        p->setDefName(program->getName());
+        p->setParent(d);
+        m_componentMap.emplace(program, p);
+
+        SignalBaseClassMap signalBaseMap;
+        SignalMap portMap;
+        SignalMap netMap;
+
+        const std::vector<Signal*>& orig_ports = program->getPorts();
+        writePorts(orig_ports, p, s, modPortMap, signalBaseMap, portMap, nullptr, program);
+        mapLowConns(orig_ports, s, signalBaseMap);
+
+        const std::vector<Signal*>& orig_nets = program->getSignals();
+        writeNets(program, orig_nets, p, s, signalBaseMap, netMap, portMap, nullptr);
+
+        // if (uhdm::AttributeCollection* const collection = program->getAttributes()) {
+        //   for (uhdm::Attribute* a : *collection) {
+        //     a->setParent(p);
+        //     p->getAttributes(true)->emplace_back(a);  // TODO(HS): Fix the parenting issue
+        //   }
+        // }
+      }
+      if (uhdm::Typespec* const t = program->getUhdmTypespecModel()) {
+        t->setParent(d);
+      }
+    }
+
+    // Interfaces, Modules & Udps
     const auto& modules = m_design->getModuleDefinitions();
-    for (const auto& modNamePair : modules) {
-      ModuleDefinition* mod = modNamePair.second;
-      if (mod->getFileContents().empty()) {
-        // Built-in primitive
-      } else if (mod->getType() == VObjectType::paInterface_declaration) {
-        const FileContent* fC = mod->getFileContents()[0];
-        uhdm::Interface* m = mod->getUhdmModel<uhdm::Interface>();
-        m_componentMap.emplace(mod, m);
-        instanceDefinitionMap.emplace(mod->getName(), m);
-        m->setParent(d);
-        mod->getUhdmTypespecModel()->setParent(d);
-        m->setDefName(mod->getName());
-        const NodeId modId = mod->getNodeIds()[0];
-        const NodeId startId = fC->sl_collect(modId, VObjectType::INTERFACE);
-        fC->populateCoreMembers(startId, modId, m);
-        if (mod->getAttributes() != nullptr) {
-          m->setAttributes(mod->getAttributes());
-          for (auto a : *m->getAttributes()) {
-            a->setParent(m);
-          }
-        }
-        writeInterface(mod, m, s, modPortMap);
+    for (const auto& [name, md] : modules) {
+      if (!md->getFileContents().empty()) {
+        m_componentMap.emplace(md, md->getUhdmModel());
+        instanceDefinitionMap.emplace(md->getName(), md->getUhdmModel<uhdm::Instance>());
       }
     }
 
-    // Modules & Udps
-    for (const auto& modNamePair : modules) {
-      ModuleDefinition* mod = modNamePair.second;
-      if (mod->getFileContents().empty()) {
+    for (const auto& [name, md] : modules) {
+      if (md->getFileContents().empty()) {
         // Built-in primitive
-      } else if (mod->getType() == VObjectType::paModule_declaration) {
-        uhdm::Module* m = mod->getUhdmModel<uhdm::Module>();
-        if (clp->getElabUhdm() && compiler->isLibraryFile(mod->getFileContents()[0]->getFileId())) {
-          m->setCellInstance(true);
-          // Don't list library cells unused in the design
-          if (mod && (designComponents.find(mod) == designComponents.end())) continue;
-        }
-        m_componentMap.emplace(mod, m);
-        std::string_view modName = mod->getName();
-        instanceDefinitionMap.emplace(modName, m);
-        m->setDefName(modName);
-        uhdm::Typespec* mtps = mod->getUhdmTypespecModel();
-        if (modName.find("::") == std::string_view::npos) {
-          m->setParent(d);
-          mtps->setParent(d);
-          mod->getUhdmTypespecModel()->setParent(d);
-        } else {
+      } else {
+        Any* parent = d;
+        std::string_view modName = md->getName();
+        if (modName.find("::") != std::string_view::npos) {
           modName = StringUtils::rtrim_until(modName, ':');
           modName.remove_suffix(1);
           InstanceDefinitionMap::const_iterator pmodIt = instanceDefinitionMap.find(modName);
-          if (pmodIt == instanceDefinitionMap.end()) {
+          if (pmodIt != instanceDefinitionMap.cend()) {
+            parent = pmodIt->second;
+          }
+        }
+
+        if (md->getType() == VObjectType::paModule_declaration) {
+          if (uhdm::Module* const m = md->getUhdmModel<uhdm::Module>()) {
+            m->setParent(parent);
+            m->setDefName(md->getName());
             m->setParent(d);
-            mtps->setParent(d);
-            mod->getUhdmTypespecModel()->setParent(d);
-          } else {
-            m->setParent(pmodIt->second);
-            mtps->setParent(pmodIt->second);
-            mod->getUhdmTypespecModel()->setParent(pmodIt->second);
+
+            const uhdm::ScopedScope scopedScope(m);
+            SignalBaseClassMap signalBaseMap;
+            SignalMap portMap;
+            SignalMap netMap;
+
+            const std::vector<Signal*>& orig_ports = md->getPorts();
+            writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, nullptr, md);
+            mapLowConns(orig_ports, s, signalBaseMap);
+
+            // if (uhdm::AttributeCollection* const collection = md->getAttributes()) {
+            //   for (uhdm::Attribute* a : *collection) {
+            //     a->setParent(m);
+            //     m->getAttributes(true)->emplace_back(a);  // TODO(HS): Fix the parenting issue
+            //   }
+            // }
           }
-        }
-        if (mod->getAttributes() != nullptr) {
-          m->setAttributes(mod->getAttributes());
-          for (auto a : *m->getAttributes()) {
-            a->setParent(m);
+          if (uhdm::Typespec* const t = md->getUhdmTypespecModel()) {
+            t->setParent(parent);
           }
-        }
-        writeModule(mod, m, s, instanceDefinitionMap, modPortMap);
-      } else if (mod->getType() == VObjectType::paUdp_declaration) {
-        const FileContent* fC = mod->getFileContents()[0];
-        if (uhdm::UdpDefn* defn = mod->getUhdmModel<uhdm::UdpDefn>()) {
-          m_componentMap.emplace(mod, defn);
-          defn->setParent(d);
-          mod->getUhdmTypespecModel()->setParent(d);
-          defn->setDefName(mod->getName());
-          const NodeId modId = mod->getNodeIds()[0];
-          const NodeId startId = fC->sl_collect(modId, VObjectType::PRIMITIVE);
-          fC->populateCoreMembers(startId, modId, defn);
-          if (mod->getAttributes() != nullptr) {
-            defn->setAttributes(mod->getAttributes());
-            for (auto a : *defn->getAttributes()) {
-              a->setParent(defn);
-            }
+        } else if (md->getType() == VObjectType::paInterface_declaration) {
+          if (uhdm::Interface* const i = md->getUhdmModel<uhdm::Interface>()) {
+            i->setDefName(md->getName());
+            i->setParent(d);
+
+            const uhdm::ScopedScope scopedScope(i);
+            SignalBaseClassMap signalBaseMap;
+            SignalMap portMap;
+            SignalMap netMap;
+
+            const std::vector<Signal*>& orig_ports = md->getPorts();
+            writePorts(orig_ports, i, s, modPortMap, signalBaseMap, portMap, nullptr, md);
+            mapLowConns(orig_ports, s, signalBaseMap);
+
+            const std::vector<Signal*>& orig_nets = md->getSignals();
+            writeNets(md, orig_nets, i, s, signalBaseMap, netMap, portMap, nullptr);
+            mapLowConns(orig_ports, s, signalBaseMap);
+
+            writeModPorts(md, s, modPortMap, nullptr);
+
+            // if (uhdm::AttributeCollection* const collection = md->getAttributes()) {
+            //   for (uhdm::Attribute* a : *collection) {
+            //     a->setParent(i);
+            //     i->getAttributes(true)->emplace_back(a);  // TODO(HS): Fix the parenting issue
+            //   }
+            // }
+          }
+          if (uhdm::Typespec* const t = md->getUhdmTypespecModel()) {
+            t->setParent(d);
+          }
+        } else if (md->getType() == VObjectType::paUdp_declaration) {
+          if (uhdm::UdpDefn* const ud = md->getUhdmModel<uhdm::UdpDefn>()) {
+            ud->setDefName(md->getName());
+            ud->setParent(d);
+
+            const uhdm::ScopedScope scopedScope(ud);
+            SignalBaseClassMap signalBaseMap;
+            SignalMap portMap;
+            SignalMap netMap;
+
+            const std::vector<Signal*>& orig_ports = md->getPorts();
+            writePorts(orig_ports, ud, s, modPortMap, signalBaseMap, portMap, nullptr, md);
+            const std::vector<Signal*>& orig_nets = md->getSignals();
+            writeNets(md, orig_nets, ud, s, signalBaseMap, netMap, portMap, nullptr);
+            mapLowConns(orig_ports, s, signalBaseMap);
+
+            // if (uhdm::AttributeCollection* const collection = md->getAttributes()) {
+            //   for (uhdm::Attribute* a : *collection) {
+            //     a->setParent(ud);
+            //     ud->getAttributes(true)->emplace_back(a);  // TODO(HS): Fix the parenting issue
+            //   }
+            // }
+          }
+          if (uhdm::Typespec* const t = md->getUhdmTypespecModel()) {
+            t->setParent(d);
           }
         }
       }
     }
 
-    if (uhdm::ModuleCollection* uhdm_modules = d->getAllModules()) {
-      for (uhdm::Module* mod : *uhdm_modules) {
-        if (mod->getRefModules()) {
-          for (auto subMod : *mod->getRefModules()) {
-            InstanceDefinitionMap::iterator itr = instanceDefinitionMap.find(std::string(subMod->getDefName()));
-            if (itr != instanceDefinitionMap.end()) {
-              subMod->setActual(itr->second);
-            }
-          }
-        }
-      }
-    }
-
-    // Classes
     const auto& classes = m_design->getClassDefinitions();
-    for (const auto& classNamePair : classes) {
-      ClassDefinition* classDef = classNamePair.second;
-      if (!classDef->getFileContents().empty() && classDef->getType() == VObjectType::paClass_declaration) {
-        uhdm::ClassDefn* c = classDef->getUhdmModel<uhdm::ClassDefn>();
-        if (!c->getParent()) {
-          writeClass(classDef, s, d);
-        }
+    for (const auto& [name, definition] : classes) {
+      if (uhdm::ClassDefn* const cd = definition->getUhdmModel<uhdm::ClassDefn>()) {
+        cd->setParent(d);
+        m_componentMap.emplace(definition, cd);
+
+        // if (uhdm::AttributeCollection* const collection = definition->getAttributes()) {
+        //   for (uhdm::Attribute* a : *collection) {
+        //     a->setParent(cd);
+        //     cd->getAttributes(true)->emplace_back(a);  // TODO(HS): Fix the parenting issue
+        //   }
+        // }
+      }
+      if (uhdm::Typespec* const t = definition->getUhdmTypespecModel()) {
+        t->setParent(d);
       }
     }
   }
@@ -1480,13 +752,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
   }
 
   bind(s, designs);
-
-  // Purge obsolete typespecs
-  for (auto o : m_compileDesign->getSwapedObjects()) {
-    const uhdm::Typespec* orig = o.first;
-    const uhdm::Typespec* tps = o.second;
-    if (tps != orig) s.erase(orig);
-  }
 
   const fs::path uhdmFile = fileSystem->toPlatformAbsPath(uhdmFileId);
   if (clp->writeUhdm()) {

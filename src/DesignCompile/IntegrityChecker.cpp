@@ -1122,8 +1122,20 @@ void IntegrityChecker::visitIdentifier(const uhdm::Identifier* object) {
   // TODO(HS): Do typespecs really need a location? Especially, since RefTypespec
   // are the ones that are actually the location provider.
   if (object->getParent<uhdm::Typespec>() != nullptr) return;
-  if (object->getName().empty()) reportMissingName(object);
-  if (!isBuiltInMember(object) && !isValidLocation(object)) reportMissingLocation(object);
+  const std::string_view name = object->getName();
+  if (name.empty()) reportMissingName(object);
+  bool missingLocation = false;
+  if (name == "new") {
+    // Location for "new" is ambiguous as it doesn't exist in the AST explicitly.
+    const uhdm::FuncCall* const parentAsFuncCall = object->getParent<uhdm::FuncCall>();
+    const uhdm::TaskFunc* const parentAsTaskFunc = object->getParent<uhdm::TaskFunc>();
+    if ((parentAsFuncCall != nullptr) || (parentAsTaskFunc != nullptr)) {
+      missingLocation = isValidLocation(object);
+    }
+  } else {
+    missingLocation = !isBuiltInMember(object) && !isValidLocation(object);
+  }
+  if (missingLocation) reportMissingLocation(object);
   if (!isBuiltInMember(object) && !isValidFile(object)) reportMissingFile(object);
 }
 void IntegrityChecker::visitIfElse(const uhdm::IfElse* object) {}

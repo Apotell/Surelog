@@ -118,13 +118,6 @@ class ClassDefinition final : public DesignComponent, public DataType {
 
   bool hasCompleteBaseSpecification() const;
 
-  uhdm::AttributeCollection* getAttributes() const { return m_attributes; }
-
-  bool setAttributes(uhdm::AttributeCollection* data) {
-    m_attributes = data;
-    return true;
-  }
-
   std::string_view getEndLabel() const { return m_endLabel; }
   void setEndLabel(std::string_view endLabel) { m_endLabel = endLabel; }
 
@@ -140,7 +133,6 @@ class ClassDefinition final : public DesignComponent, public DataType {
   ClassMap m_classes;
   CoverGroupMap m_coverGroups;
   BaseClassMap m_baseClasses;
-  uhdm::AttributeCollection* m_attributes = nullptr;
 };
 
 }  // namespace SURELOG

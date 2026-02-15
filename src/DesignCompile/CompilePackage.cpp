@@ -93,8 +93,9 @@ bool CompilePackage::compile() {
     packId = fC->Child(packId);
   } while (packId && (fC->Type(packId) != VObjectType::paAttribute_instance));
   if (packId) {
-    if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_package, fC, packId, nullptr)) {
-      m_package->setAttributes(attributes);
+    if (uhdm::AttributeCollection* attributes =
+            m_helper.compileAttributes(m_package, fC, packId, m_package->getUhdmModel())) {
+      m_package->getUhdmModel<uhdm::Package>()->setAttributes(attributes);
     }
   }
 
@@ -107,6 +108,7 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
   std::vector<VObjectType> stopPoints = {VObjectType::paClass_declaration, VObjectType::paFunction_body_declaration,
                                          VObjectType::paTask_body_declaration,
                                          VObjectType::paInterface_class_declaration};
+  uhdm::AttributeCollection* attributes = nullptr;
   m_helper.setDesign(m_compileDesign->getCompiler()->getDesign());
   for (uint32_t i = 0; i < m_package->m_fileContents.size(); i++) {
     const FileContent* fC = m_package->m_fileContents[i];
@@ -202,9 +204,7 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
           m_package->addObject(type, fnid);
 
           std::string completeName = StrCat(m_package->getName(), "::", name);
-
           DesignComponent* comp = fC->getComponentDefinition(completeName);
-
           m_package->addNamedObject(name, fnid, comp);
           break;
         }
@@ -215,19 +215,19 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
         }
         case VObjectType::paNet_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileNetDeclaration(m_package, fC, id, false, m_attributes);
-          m_attributes = nullptr;
+          m_helper.compileNetDeclaration(m_package, fC, id, false, attributes);
+          attributes = nullptr;
           break;
         }
         case VObjectType::paData_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileDataDeclaration(m_package, fC, id, false, m_attributes);
-          m_attributes = nullptr;
+          m_helper.compileDataDeclaration(m_package, fC, id, false, attributes);
+          attributes = nullptr;
           break;
         }
         case VObjectType::paAttribute_instance: {
           if (collectType != CollectType::DEFINITION) break;
-          m_attributes = m_helper.compileAttributes(m_package, fC, id, nullptr);
+          attributes = m_helper.compileAttributes(m_package, fC, id, nullptr);
           break;
         }
         case VObjectType::paProperty_declaration: {

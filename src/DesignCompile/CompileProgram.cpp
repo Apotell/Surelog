@@ -106,8 +106,9 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
     programId = fC->Child(programId);
   } while (programId && (fC->Type(programId) != VObjectType::paAttribute_instance));
   if (programId) {
-    if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_program, fC, programId, nullptr)) {
-      m_program->setAttributes(attributes);
+    if (uhdm::AttributeCollection* attributes =
+            m_helper.compileAttributes(m_program, fC, programId, m_program->getUhdmModel())) {
+      m_program->getUhdmModel<uhdm::Program>()->setAttributes(attributes);
     }
   }
 
@@ -135,6 +136,8 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
   NodeId ParameterPortListId;
   std::stack<NodeId> stack;
   stack.emplace(startId);
+
+  uhdm::AttributeCollection* attributes = nullptr;
   VObjectType port_direction = VObjectType::NO_TYPE;
   while (!stack.empty()) {
     const NodeId id = stack.top();
@@ -271,19 +274,19 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paNet_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compileNetDeclaration(m_program, fC, id, false, m_attributes);
-        m_attributes = nullptr;
+        m_helper.compileNetDeclaration(m_program, fC, id, false, attributes);
+        attributes = nullptr;
         break;
       }
       case VObjectType::paData_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compileDataDeclaration(m_program, fC, id, false, m_attributes);
-        m_attributes = nullptr;
+        m_helper.compileDataDeclaration(m_program, fC, id, false, attributes);
+        attributes = nullptr;
         break;
       }
       case VObjectType::paAttribute_instance: {
         if (collectType != CollectType::DEFINITION) break;
-        m_attributes = m_helper.compileAttributes(m_program, fC, id, nullptr);
+        attributes = m_helper.compileAttributes(m_program, fC, id, nullptr);
         break;
       }
       case VObjectType::paInitial_construct: {

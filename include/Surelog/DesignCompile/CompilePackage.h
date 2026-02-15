@@ -70,7 +70,6 @@ class CompilePackage final {
   Package* const m_package;
   Design* const m_design;
   CompileHelper m_helper;
-  uhdm::AttributeCollection* m_attributes = nullptr;
 };
 
 }  // namespace SURELOG

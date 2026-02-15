@@ -45,7 +45,8 @@ bool CompileHelper::compileAssertionItem(DesignComponent* component, const FileC
   NodeId item = fC->Child(nodeId);
   if (fC->Type(item) == VObjectType::paConcurrent_assertion_item) {
     NodeId Concurrent_assertion_statement = fC->Child(item);
-    if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Concurrent_assertion_statement, nullptr)) {
+    if (uhdm::AnyCollection* stmts =
+            compileStmt(component, fC, Concurrent_assertion_statement, component->getUhdmModel())) {
       uhdm::AnyCollection* assertions = component->getAssertions();
       if (assertions == nullptr) {
         component->setAssertions(s.makeCollection<uhdm::Any>());
@@ -104,6 +105,33 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(DesignComponent* component,
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   NodeId Property_spec = fC->Child(the_stmt);
 
+  uhdm::Any* stmt = nullptr;
+  switch (fC->Type(the_stmt)) {
+    case VObjectType::paAssert_property_statement: {
+      stmt = s.make<uhdm::Assert>();
+    } break;
+
+    case VObjectType::paAssume_property_statement: {
+      stmt = s.make<uhdm::Assume>();
+    } break;
+
+    case VObjectType::paCover_property_statement: {
+      stmt = s.make<uhdm::Cover>();
+    } break;
+
+    case VObjectType::paCover_sequence_statement: {
+      stmt = s.make<uhdm::Cover>();
+    } break;
+
+    case VObjectType::paRestrict_property_statement: {
+      stmt = s.make<uhdm::Restrict>();
+    } break;
+
+    default: break;
+  };
+  if (stmt == nullptr) return nullptr;
+  stmt->setParent(pstmt);
+
   NodeId Action_block = fC->Sibling(Property_spec);
   uhdm::Any* if_stmt = nullptr;
   uhdm::Any* else_stmt = nullptr;
@@ -117,29 +145,28 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(DesignComponent* component,
       else_stmt_id = fC->Sibling(else_keyword);
     }
     if (if_stmt_id) {
-      if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, if_stmt_id, pstmt)) {
+      if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, if_stmt_id, stmt)) {
         if_stmt = (*if_stmts)[0];
       }
     }
     if (else_stmt_id) {
-      if (uhdm::AnyCollection* else_stmts = compileStmt(component, fC, else_stmt_id, pstmt)) {
+      if (uhdm::AnyCollection* else_stmts = compileStmt(component, fC, else_stmt_id, stmt)) {
         else_stmt = (*else_stmts)[0];
       }
     }
   }
 
-  uhdm::Any* stmt = nullptr;
   switch (fC->Type(the_stmt)) {
     case VObjectType::paAssert_property_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
+      prop_spec->setParent(stmt);
       if (uhdm::Any* property_expr = compileExpression(component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
       fC->populateCoreMembers(Property_spec, Property_spec, prop_spec);
-      uhdm::Assert* assert_stmt = s.make<uhdm::Assert>();
-      prop_spec->setParent(assert_stmt);
+      uhdm::Assert* assert_stmt = any_cast<uhdm::Assert>(stmt);
       assert_stmt->setProperty(prop_spec);
       if (if_stmt) {
         assert_stmt->setStmt(if_stmt);
@@ -148,15 +175,15 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(DesignComponent* component,
         assert_stmt->setStmt(else_stmt);
         else_stmt->setParent(assert_stmt);
       }
-      stmt = assert_stmt;
       break;
     }
     case VObjectType::paAssume_property_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
+      prop_spec->setParent(stmt);
       if (fC->Type(Property_expr) == VObjectType::paClocking_event) {
         if (uhdm::Expr* clocking_event =
-                (uhdm::Expr*)compileExpression(component, fC, Property_expr, prop_spec, instance)) {
+                any_cast<uhdm::Expr>(compileExpression(component, fC, Property_expr, prop_spec, instance))) {
           prop_spec->setClockingEvent(clocking_event);
         }
         Property_expr = fC->Sibling(Property_expr);
@@ -166,9 +193,8 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(DesignComponent* component,
         prop_spec->setPropertyExpr(property_expr);
       }
       fC->populateCoreMembers(Property_spec, Property_spec, prop_spec);
-      uhdm::Assume* assume_stmt = s.make<uhdm::Assume>();
+      uhdm::Assume* assume_stmt = any_cast<uhdm::Assume>(stmt);
       assume_stmt->setProperty(prop_spec);
-      prop_spec->setParent(assume_stmt);
       if (if_stmt) {
         assume_stmt->setStmt(if_stmt);
         if_stmt->setParent(assume_stmt);
@@ -176,62 +202,58 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(DesignComponent* component,
         assume_stmt->setStmt(else_stmt);
         else_stmt->setParent(assume_stmt);
       }
-      stmt = assume_stmt;
       break;
     }
     case VObjectType::paCover_property_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
+      prop_spec->setParent(stmt);
       if (uhdm::Any* property_expr = compileExpression(component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
       fC->populateCoreMembers(Property_spec, Property_spec, prop_spec);
-      uhdm::Cover* cover_stmt = s.make<uhdm::Cover>();
-      prop_spec->setParent(cover_stmt);
+      uhdm::Cover* cover_stmt = any_cast<uhdm::Cover>(stmt);
       cover_stmt->setProperty(prop_spec);
       if (if_stmt != nullptr) {
         cover_stmt->setStmt(if_stmt);
         if_stmt->setParent(cover_stmt);
       }
-      stmt = cover_stmt;
       break;
     }
     case VObjectType::paCover_sequence_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
+      prop_spec->setParent(stmt);
       if (uhdm::Any* property_expr = compileExpression(component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
       fC->populateCoreMembers(Property_expr, Property_expr, prop_spec);
-      uhdm::Cover* cover_stmt = s.make<uhdm::Cover>();
+      uhdm::Cover* cover_stmt = any_cast<uhdm::Cover>(stmt);
       cover_stmt->setIsCoverSequence(true);
-      prop_spec->setParent(cover_stmt);
       cover_stmt->setProperty(prop_spec);
       if (if_stmt != nullptr) {
         cover_stmt->setStmt(if_stmt);
         if_stmt->setParent(cover_stmt);
       }
-      stmt = cover_stmt;
       break;
     }
     case VObjectType::paRestrict_property_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
+      prop_spec->setParent(stmt);
       if (uhdm::Any* property_expr = compileExpression(component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
       fC->populateCoreMembers(Property_spec, Property_spec, prop_spec);
-      uhdm::Restrict* restrict_stmt = s.make<uhdm::Restrict>();
-      prop_spec->setParent(restrict_stmt);
+      uhdm::Restrict* restrict_stmt = any_cast<uhdm::Restrict>(stmt);
       restrict_stmt->setProperty(prop_spec);
       if (if_stmt != nullptr) {
         restrict_stmt->setStmt(if_stmt);
         if_stmt->setParent(restrict_stmt);
       }
-      stmt = restrict_stmt;
       break;
     }
     default: break;

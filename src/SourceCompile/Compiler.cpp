@@ -1238,4 +1238,8 @@ vpiHandle Compiler::getVpiDesign() const {
   return (uhdmDesign != nullptr) ? uhdmDesign->getSerializer()->makeUhdmHandle(uhdmDesign->getUhdmType(), uhdmDesign)
                                  : nullptr;
 }
+
+Library* Compiler::getLibrary(std::string_view name) const {
+  return (m_librarySet != nullptr) ? m_librarySet->getLibrary(name) : nullptr;
+}
 }  // namespace SURELOG

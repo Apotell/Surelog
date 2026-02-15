@@ -41,6 +41,7 @@
 #include "Surelog/ErrorReporting/ErrorDefinition.h"
 #include "Surelog/ErrorReporting/Location.h"
 #include "Surelog/Library/Library.h"
+#include "Surelog/Package/Package.h"
 #include "Surelog/SourceCompile/Compiler.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
@@ -1691,15 +1692,7 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId
 bool CompileHelper::compileTask(DesignComponent* component, const FileContent* fC, NodeId id,
                                 ValuedComponentI* instance, bool isMethod) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
-  std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
-  if (task_funcs == nullptr) {
-    component->setTaskFuncs(s.makeCollection<uhdm::TaskFunc>());
-    task_funcs = component->getTaskFuncs();
-  }
-  uhdm::Any* pscope = component->getUhdmModel();
-  if (pscope == nullptr) pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   NodeId nodeId = (fC->Type(id) == VObjectType::paTask_declaration) ? id : fC->Child(id);
-  std::string name;
   NodeId task_decl = setFuncTaskQualifiers(fC, nodeId, nullptr);
   NodeId Task_body_declaration;
   if (fC->Type(task_decl) == VObjectType::paTask_body_declaration)
@@ -1707,18 +1700,34 @@ bool CompileHelper::compileTask(DesignComponent* component, const FileContent* f
   else
     Task_body_declaration = fC->Child(task_decl);
   NodeId task_name = fC->Child(Task_body_declaration);
-  if (fC->Type(task_name) == VObjectType::STRING_CONST)
-    name = fC->SymName(task_name);
-  else if (fC->Type(task_name) == VObjectType::paClass_scope) {
+  std::string_view name = fC->SymName(task_name);
+  if (fC->Type(task_name) == VObjectType::paClass_scope) {
     NodeId Class_type = fC->Child(task_name);
-    name.assign(fC->SymName(fC->Child(Class_type))).append("::").append(fC->SymName(fC->Sibling(task_name)));
+    std::string_view className = fC->SymName(fC->Child(Class_type));
+    std::string fullClassName;
+    if (Package* const p = valuedcomponenti_cast<Package>(component)) {
+      fullClassName = StrCat(p->getName(), "::", className);
+    } else {
+      fullClassName = StrCat(fC->getLibrary()->getName(), "@", className);
+    }
+    if (ClassDefinition* const cd = m_compileDesign->getCompiler()->getDesign()->getClassDefinition(fullClassName)) {
+      // Change component so that functions get looked up and added to the correct component
+      component = cd;
+    }
     task_name = fC->Sibling(task_name);
+    name = fC->SymName(task_name);
   }
-
+  uhdm::Any* pscope = component->getUhdmModel();
+  if (pscope == nullptr) pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
+  std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
+  if (task_funcs == nullptr) {
+    component->setTaskFuncs(s.makeCollection<uhdm::TaskFunc>());
+    task_funcs = component->getTaskFuncs();
+  }
   uhdm::Task* task = nullptr;
-  for (auto f : *component->getTaskFuncs()) {
+  for (auto f : *task_funcs) {
     if (f->getName() == name) {
-      task = reinterpret_cast<uhdm::Task*>(f);
+      task = any_cast<uhdm::Task>(f);
       break;
     }
   }
@@ -1726,8 +1735,8 @@ bool CompileHelper::compileTask(DesignComponent* component, const FileContent* f
     // make placeholder first
     task = s.make<uhdm::Task>();
     task->setName(name);
-    fC->populateCoreMembers(id, id, task);
     task->setParent(pscope);
+    fC->populateCoreMembers(id, id, task);
     fC->populateCoreMembers(task_name, task_name, task->getNameObj());
     task_funcs->emplace_back(task);
     return true;
@@ -1820,31 +1829,40 @@ bool CompileHelper::compileTask(DesignComponent* component, const FileContent* f
 bool CompileHelper::compileClassConstructorDeclaration(DesignComponent* component, const FileContent* fC,
                                                        NodeId nodeId) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
+  NodeId Tf_port_list = fC->Child(nodeId);
+  if (fC->Type(Tf_port_list) == VObjectType::paClass_scope) {
+    NodeId Class_scope = Tf_port_list;
+    NodeId Class_type = fC->Child(Class_scope);
+    NodeId Class_name = fC->Child(Class_type);
+    std::string_view className = fC->SymName(Class_name);
+    Tf_port_list = fC->Sibling(Tf_port_list);
+    std::string fullClassName;
+    if (Package* const pkg = valuedcomponenti_cast<Package*>(component)) {
+      fullClassName = StrCat(pkg->getName(), "::", className);
+    } else {
+      fullClassName = StrCat(fC->getLibrary()->getName(), "@", className);
+    }
+    if (ClassDefinition* const cd = m_compileDesign->getCompiler()->getDesign()->getClassDefinition(fullClassName)) {
+      component = cd;
+    }
+  }
+  uhdm::Any* pscope = component->getUhdmModel();
+  if (pscope == nullptr) pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
   if (task_funcs == nullptr) {
     component->setTaskFuncs(s.makeCollection<uhdm::TaskFunc>());
     task_funcs = component->getTaskFuncs();
   }
-  uhdm::Function* func = s.make<uhdm::Function>();
-  func->setParent(component->getUhdmModel());
-  func->setMethod(true);
-  task_funcs->emplace_back(func);
-  fC->populateCoreMembers(nodeId, nodeId, func);
-  const uhdm::ScopedScope scopedScope(func);
-  std::string name = "new";
-  std::string className;
-  NodeId Tf_port_list;
-  Tf_port_list = fC->Child(nodeId);
-  if (fC->Type(Tf_port_list) == VObjectType::paClass_scope) {
-    NodeId Class_scope = Tf_port_list;
-    NodeId Class_type = fC->Child(Class_scope);
-    NodeId Class_name = fC->Child(Class_type);
-    className = fC->SymName(Class_name);
-    name = className + "::new";
-    Tf_port_list = fC->Sibling(Tf_port_list);
-  }
 
-  func->setName(name);
+  uhdm::Function* func = s.make<uhdm::Function>();
+  func->setMethod(true);
+  func->setName("new");
+  func->getNameObj()->setFile(fC->getName());
+  func->setParent(pscope);
+  fC->populateCoreMembers(nodeId, nodeId, func);
+  task_funcs->emplace_back(func);
+
+  const uhdm::ScopedScope scopedScope(func);
   func->setIODecls(compileTfPortList(component, func, fC, Tf_port_list));
 
   NodeId Stmt;
@@ -1943,14 +1961,7 @@ bool CompileHelper::compileClassConstructorDeclaration(DesignComponent* componen
 bool CompileHelper::compileFunction(DesignComponent* component, const FileContent* fC, NodeId id,
                                     ValuedComponentI* instance, bool isMethod) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
-  std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
-  if (task_funcs == nullptr) {
-    component->setTaskFuncs(s.makeCollection<uhdm::TaskFunc>());
-    task_funcs = component->getTaskFuncs();
-  }
   NodeId nodeId = (fC->Type(id) == VObjectType::paFunction_declaration) ? id : fC->Child(id);
-  uhdm::Any* pscope = component->getUhdmModel();
-  if (pscope == nullptr) pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::string name;
   std::string className;
   NodeId func_decl = setFuncTaskQualifiers(fC, nodeId, nullptr);
@@ -1992,16 +2003,34 @@ bool CompileHelper::compileFunction(DesignComponent* component, const FileConten
       NodeId Class_type = fC->Child(beginNameId);
       endNameId = fC->Sibling(beginNameId);
       className = fC->SymName(fC->Child(Class_type));
-      name = StrCat(className, "::", fC->SymName(endNameId));
+      name = fC->SymName(endNameId);
       Tf_port_list = fC->Sibling(endNameId);
     } else {
       beginNameId = endNameId = InvalidNodeId;
     }
   }
+  std::string fullClassName;
+  if (Package* const pkg = valuedcomponenti_cast<Package*>(component)) {
+    fullClassName = StrCat(pkg->getName(), "::", className);
+  } else {
+    fullClassName = StrCat(fC->getLibrary()->getName(), "@", className);
+  }
+  if (ClassDefinition* const cd = m_compileDesign->getCompiler()->getDesign()->getClassDefinition(fullClassName)) {
+    // Change component so that functions get looked up and added to the correct component
+    component = cd;
+  }
+  uhdm::Any* pscope = component->getUhdmModel();
+  if (pscope == nullptr) pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
+  std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
+  if (task_funcs == nullptr) {
+    component->setTaskFuncs(s.makeCollection<uhdm::TaskFunc>());
+    task_funcs = component->getTaskFuncs();
+  }
+
   uhdm::Function* func = nullptr;
-  for (auto f : *component->getTaskFuncs()) {
+  for (auto f : *task_funcs) {
     if (f->getName() == name) {
-      func = any_cast<uhdm::Function*>(f);
+      func = any_cast<uhdm::Function>(f);
       break;
     }
   }
@@ -2009,20 +2038,15 @@ bool CompileHelper::compileFunction(DesignComponent* component, const FileConten
     // make placeholder first
     func = s.make<uhdm::Function>();
     func->setName(name);
+    func->setParent(pscope);
     if (beginNameId && endNameId) {
       fC->populateCoreMembers(beginNameId, endNameId, func->getNameObj());
+    } else {
+      func->getNameObj()->setFile(fC->getName());
     }
     if (endLabelId) {
       func->setEndLabel(fC->SymName(endLabelId));
       fC->populateCoreMembers(endLabelId, endLabelId, func->getEndLabelObj());
-    }
-    if (className.empty()) {
-      func->setParent(pscope);
-    } else if (ClassDefinition* const cd = m_compileDesign->getCompiler()->getDesign()->getClassDefinition(
-                   StrCat(fC->getLibrary()->getName(), "@", className))) {
-      func->setParent(cd->getUhdmModel());
-    } else {
-      func->setParent(pscope);
     }
     fC->populateCoreMembers(id, id, func);
     task_funcs->emplace_back(func);

@@ -81,7 +81,6 @@ class CompileClass final {
   ClassDefinition* const m_class = nullptr;
   Design* const m_design = nullptr;
   CompileHelper m_helper;
-  uhdm::AttributeCollection* m_attributes = nullptr;
   const std::set<std::string> m_builtins;
 };
 

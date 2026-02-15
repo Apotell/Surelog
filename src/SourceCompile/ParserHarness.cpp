@@ -87,11 +87,11 @@ FileContent* ParserHarness::parse(std::string_view content, Compiler* compiler, 
     m_session = new Session;
   }
 
+  Library* const lib = compiler->getLibrary("work");
   std::unique_ptr<CompilationUnit> unit(new CompilationUnit(false));
-  std::unique_ptr<Library> lib(new Library(m_session, "work"));
-  std::unique_ptr<CompileSourceFile> csf(new CompileSourceFile(m_session, fileId, compiler, unit.get(), lib.get()));
-  std::unique_ptr<ParseFile> pf(new ParseFile(m_session, content, csf.get(), unit.get(), lib.get()));
-  FileContent* file_content_result = new FileContent(m_session, fileId, lib.get(), nullptr, BadPathId);
+  std::unique_ptr<CompileSourceFile> csf(new CompileSourceFile(m_session, fileId, compiler, unit.get(), lib));
+  std::unique_ptr<ParseFile> pf(new ParseFile(m_session, content, csf.get(), unit.get(), lib));
+  FileContent* file_content_result = new FileContent(m_session, fileId, lib, nullptr, BadPathId);
   pf->setFileContent(file_content_result);
   if (!pf->parse()) file_content_result = nullptr;
   return file_content_result;

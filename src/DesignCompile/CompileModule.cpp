@@ -212,14 +212,17 @@ bool CompileModule::compile() {
   switch (moduleType) {
     case VObjectType::paModule_declaration:
     case VObjectType::paInterface_declaration:
-    case VObjectType::paUdp_declaration: do { nodeId = fC->Child(nodeId);
+    case VObjectType::paUdp_declaration: {
+      do {
+        nodeId = fC->Child(nodeId);
       } while (nodeId && (fC->Type(nodeId) != VObjectType::paAttribute_instance));
       if (nodeId) {
-        if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_module, fC, nodeId, nullptr)) {
-          m_module->setAttributes(attributes);
+        if (uhdm::AttributeCollection* attributes =
+                m_helper.compileAttributes(m_module, fC, nodeId, m_module->getUhdmModel())) {
+          m_module->getUhdmModel<uhdm::Scope>()->setAttributes(attributes);
         }
       }
-      break;
+    } break;
     default: break;
   }
 
@@ -559,7 +562,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
   } else {
     stopPoints.emplace_back(VObjectType::paGenerate_region);
   }
-
+  uhdm::AttributeCollection* attributes = nullptr;
   const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
@@ -605,7 +608,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paAnsi_port_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compileAnsiPortDeclaration(m_module, fC, id, port_direction);
-          m_attributes = nullptr;
+          attributes = nullptr;
           break;
         }
         case VObjectType::paPort: {
@@ -615,7 +618,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (collectType == CollectType::FUNCTION) m_nbPorts++;
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort || (m_nbPorts > 1));
-          m_attributes = nullptr;
+          attributes = nullptr;
           break;
         }
         case VObjectType::paElaboration_system_task: {
@@ -628,7 +631,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paInout_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort);
-          m_attributes = nullptr;
+          attributes = nullptr;
           break;
         }
         case VObjectType::paClocking_declaration: {
@@ -638,19 +641,19 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paNet_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileNetDeclaration(m_module, fC, id, false, m_attributes);
-          m_attributes = nullptr;
+          m_helper.compileNetDeclaration(m_module, fC, id, false, attributes);
+          attributes = nullptr;
           break;
         }
         case VObjectType::paData_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileDataDeclaration(m_module, fC, id, false, m_attributes);
-          m_attributes = nullptr;
+          m_helper.compileDataDeclaration(m_module, fC, id, false, attributes);
+          attributes = nullptr;
           break;
         }
         case VObjectType::paAttribute_instance: {
           if (collectType != CollectType::DEFINITION) break;
-          m_attributes = m_helper.compileAttributes(m_module, fC, id, nullptr);
+          attributes = m_helper.compileAttributes(m_module, fC, id, nullptr);
           break;
         }
         case VObjectType::paGenerate_begin_end_block: {
@@ -660,7 +663,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paPort_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort);
-          m_attributes = nullptr;
+          attributes = nullptr;
           break;
         }
         case VObjectType::paContinuous_assign: {
@@ -827,7 +830,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (collectType != CollectType::OTHER) break;
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
-          m_helper.compileUdpInstantiation(m_module, fC, id, m_instance);
+          m_helper.compileUdpInstantiation(m_module, fC, m_module->getUhdmModel(), id, m_instance);
           break;
         }
         case VObjectType::paN_input_gate_instance:
@@ -835,7 +838,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (collectType != CollectType::OTHER) break;
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
-          m_helper.compileGateInstantiation(m_module, fC, id, m_instance);
+          m_helper.compileGateInstantiation(m_module, fC, m_module->getUhdmModel(), id, m_instance);
           break;
         }
         case VObjectType::paInterface_instantiation:
@@ -1001,6 +1004,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
     stopPoints.emplace_back(VObjectType::paGenerate_region);
   }
 
+  uhdm::AttributeCollection* attributes = nullptr;
   const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
@@ -1062,19 +1066,19 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         case VObjectType::paPort_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort);
-          m_attributes = nullptr;
+          attributes = nullptr;
           break;
         }
         case VObjectType::paAnsi_port_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compileAnsiPortDeclaration(m_module, fC, id, port_direction);
-          m_attributes = nullptr;
+          attributes = nullptr;
           break;
         }
         case VObjectType::paNet_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileNetDeclaration(m_module, fC, id, true, m_attributes);
-          m_attributes = nullptr;
+          m_helper.compileNetDeclaration(m_module, fC, id, true, attributes);
+          attributes = nullptr;
           break;
         }
         case VObjectType::paGenerate_begin_end_block: {
@@ -1083,13 +1087,13 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paData_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileDataDeclaration(m_module, fC, id, true, m_attributes);
-          m_attributes = nullptr;
+          m_helper.compileDataDeclaration(m_module, fC, id, true, attributes);
+          attributes = nullptr;
           break;
         }
         case VObjectType::paAttribute_instance: {
           if (collectType != CollectType::DEFINITION) break;
-          m_attributes = m_helper.compileAttributes(m_module, fC, id, nullptr);
+          attributes = m_helper.compileAttributes(m_module, fC, id, nullptr);
           break;
         }
         case VObjectType::paContinuous_assign: {
@@ -1555,7 +1559,7 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
     clocking_block_symbol = symbols->registerSymbol(fC->SymName(clocking_block_name));
   else
     clocking_block_symbol = symbols->registerSymbol("unnamed_clocking_block");
-  uhdm::ClockingBlock* cblock = m_helper.compileClockingBlock(m_module, fC, id, nullptr, m_instance);
+  uhdm::ClockingBlock* cblock = m_helper.compileClockingBlock(m_module, fC, id, m_module->getUhdmModel(), m_instance);
   ClockingBlock cb(fC, clocking_block_type, clocking_event, type, cblock);
   m_module->addClockingBlock(clocking_block_symbol, cb);
 }

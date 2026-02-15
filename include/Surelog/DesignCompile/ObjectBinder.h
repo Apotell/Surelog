@@ -93,6 +93,7 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
   const uhdm::Package* getPackage(std::string_view name, const uhdm::Any* object) const;
   const uhdm::Module* getModule(std::string_view defname, const uhdm::Any* object) const;
   const uhdm::Interface* getInterface(std::string_view defname, const uhdm::Any* object) const;
+  const uhdm::Program* getProgram(std::string_view defname, const uhdm::Any* object) const;
 
   const uhdm::ClassDefn* getClassDefn(const uhdm::ClassDefnCollection* collection, std::string_view name);
   const uhdm::ClassDefn* getClassDefn(std::string_view name, const uhdm::Any* object);

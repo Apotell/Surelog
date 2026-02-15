@@ -70,13 +70,6 @@ class Program final : public DesignComponent, public ClockingBlockHolder {
   }
   ClassDefinition* getClassDefinition(std::string_view name);
 
-  uhdm::AttributeCollection* getAttributes() { return m_attributes; }
-
-  bool setAttributes(uhdm::AttributeCollection* data) {
-    m_attributes = data;
-    return true;
-  }
-
   std::string_view getEndLabel() const { return m_endLabel; }
   void setEndLabel(std::string_view endLabel) { m_endLabel = endLabel; }
 
@@ -85,7 +78,6 @@ class Program final : public DesignComponent, public ClockingBlockHolder {
   std::string m_endLabel;
   Library* m_library = nullptr;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
-  uhdm::AttributeCollection* m_attributes = nullptr;
 };
 
 };  // namespace SURELOG

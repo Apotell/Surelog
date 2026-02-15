@@ -335,9 +335,11 @@ class CompileHelper final {
   void writePrimTerms(ModuleDefinition* mod, const FileContent* fC, NodeId id, uhdm::Primitive* prim,
                       int32_t vpiGateType, ValuedComponentI* instance);
 
-  void compileUdpInstantiation(ModuleDefinition* mod, const FileContent* fC, NodeId id, ValuedComponentI* instance);
+  void compileUdpInstantiation(ModuleDefinition* mod, const FileContent* fC, uhdm::Any* pscope, NodeId id,
+                               ValuedComponentI* instance);
 
-  void compileGateInstantiation(ModuleDefinition* mod, const FileContent* fC, NodeId id, ValuedComponentI* instance);
+  void compileGateInstantiation(ModuleDefinition* mod, const FileContent* fC, uhdm::Any* pscope, NodeId id,
+                                ValuedComponentI* instance);
 
   void compileHighConn(DesignComponent* component, const FileContent* fC, NodeId id, uhdm::PortCollection* ports,
                        uhdm::Any* pexpr);

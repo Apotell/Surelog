@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import threading
 import time
 import traceback
 import zipfile
@@ -37,7 +38,7 @@ _default_test_dirpaths = [ 'tests', os.path.join('third_party', 'tests') ]
 _default_build_dirpath = 'build'
 
 if not _is_ci_build():
-  # _default_build_dirpath = os.path.join('out', 'build', 'x64-Debug')
+  _default_build_dirpath = os.path.join('out', 'build', 'x64-Debug')
   # _default_build_dirpath = os.path.join('out', 'build', 'x64-Release')
   # _default_build_dirpath = os.path.join('out', 'build', 'x64-Clang-Debug')
   # _default_build_dirpath = os.path.join('out', 'build', 'x64-Clang-Release')
@@ -396,6 +397,94 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
   return args, tool_log_filepath
 
 
+CORE_RE = re.compile(r"(.+):.*?(?:\((.+)\))?,.*?\bid:(\d+)")
+LOC_RE = re.compile(r"line:(\d+):(\d+),\s*endln:(\d+):(\d+)")
+OPTYPE_RE = re.compile(r"vpiOpType:(\d+)")
+
+def _read_surelog_log_strm(instrm, log_filepath):
+  log_filepath = Path(log_filepath)
+  tsv_filepath = log_filepath.parent / f'{log_filepath.stem}.tsv'
+  stack = []
+
+  k_depth = 0
+  k_func_name = 1
+  k_input_type = 2
+  k_input_ctx = 3
+  k_input_id = 4
+  k_sl = 5
+  k_sc = 6
+  k_el = 7
+  k_ec = 8
+  k_output_type = 9
+  k_output_id = 10
+
+  count = 100000
+  with log_filepath.open('w') as logstrm, tsv_filepath.open('w') as tsvstrm:
+    for line in instrm:
+      line = line.decode('utf-8').rstrip('\r\n')
+
+      if '<<<<<<<<<<' in line:
+        count += 1
+        stack.append({
+          k_depth: f'{count}/{len(stack) + 1:06}',
+          k_func_name: line.replace('<<<<<<<<<<', '').strip(),
+          'parsing_input': False,
+          'parsing_output': False,
+        })
+
+      elif '>>>>>>>>>>' in line:
+        values = stack.pop()
+        line = '\t'.join(str(values.get(i, '')) for i in range(11))
+        tsvstrm.write(line)
+        tsvstrm.write('\n')
+
+      elif stack:
+        if not stack[-1]['parsing_input'] and k_input_type not in stack[-1] and \
+          line in ['>> object: decompile:', '>> typespec: decompile:', '>> expr: decompile:']:
+          stack[-1]['parsing_input'] = True
+        elif not stack[-1]['parsing_output'] and k_output_type not in stack[-1] and \
+          line in ['>> result: decompile:']:
+          stack[-1]['parsing_input'] = False
+          stack[-1]['parsing_output'] = True
+        elif stack[-1]['parsing_input'] and line.startswith('>> '):
+          stack[-1]['parsing_input'] = False
+          stack[-1]['parsing_output'] = False
+
+        r = CORE_RE.search(line)
+        if r:
+          type, ctx, id = r.groups()
+          if stack[-1]['parsing_input'] and k_input_type not in stack[-1]:
+            stack[-1][k_input_type] = type
+            stack[-1][k_input_id] = id
+            if ctx:
+              stack[-1][k_input_ctx] = ctx
+          elif stack[-1]['parsing_output'] and k_output_type not in stack[-1]:
+            stack[-1][k_output_type] = type
+            stack[-1][k_output_id] = id
+
+        if stack[-1]['parsing_input']:
+          if stack[-1].get(k_input_type) and not stack[-1].get(k_input_ctx):
+            r = OPTYPE_RE.search(line)
+            if r:
+              stack[-1][k_input_ctx] = r.group(1)
+
+          if k_sl not in stack[-1]:
+            r = LOC_RE.search(line)
+            if r:
+              sl, sc, el, ec = r.groups()
+              stack[-1][k_sl] = sl
+              stack[-1][k_sc] = sc
+              stack[-1][k_el] = el
+              stack[-1][k_ec] = ec
+
+      else:
+        logstrm.write(line)
+        logstrm.write('\n')
+
+    logstrm.flush()
+    tsvstrm.flush()
+
+
 def _run_surelog(
     name, filepath, dirpath, surelog_filepath,
     surelog_log_filepath, uvm_reldirpath, mp, mt, tool, output_dirpath):
@@ -416,57 +505,60 @@ def _run_surelog(
   max_cpu_time = 0
   max_vms_memory = 0
   max_rss_memory = 0
-  with open(surelog_log_filepath, 'wt', encoding='cp850') as surelog_log_strm:
-    surelog_start_dt = datetime.now()
-    try:
-      process = subprocess.Popen(
-          args,
-          stdout=surelog_log_strm,
-          stderr=subprocess.STDOUT,
-          cwd=dirpath)
 
-      while psutil.pid_exists(process.pid) and process.poll() == None:
-        cpu_time = 0
-        rss_memory = 0
-        vms_memory = 0
-        try:
-          pp = psutil.Process(process.pid)
+  surelog_start_dt = datetime.now()
+  try:
+    process = subprocess.Popen(
+        args,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        cwd=dirpath)
 
-          descendants = list(pp.children(recursive=True))
-          descendants = [pp] + descendants
+    thread = threading.Thread(target=_read_surelog_log_strm, args=(process.stdout, surelog_log_filepath))
+    thread.start();
 
-          for descendant in descendants:
-            try:
-              cpu_time += descendant.cpu_times().user
+    while psutil.pid_exists(process.pid) and process.poll() == None:
+      cpu_time = 0
+      rss_memory = 0
+      vms_memory = 0
+      try:
+        pp = psutil.Process(process.pid)
 
-              mem_info = descendant.memory_info()
-              rss_memory += mem_info.rss
-              vms_memory += mem_info.vms
-            except (psutil.NoSuchProcess, psutil.AccessDenied):
-              # sometimes a subprocess descendant will have terminated between the time
-              # we obtain a list of descendants, and the time we actually poll this
-              # descendant's memory usage.
-              pass
+        descendants = list(pp.children(recursive=True))
+        descendants = [pp] + descendants
 
-        except (psutil.NoSuchProcess, psutil.AccessDenied):
-          pass
+        for descendant in descendants:
+          try:
+            cpu_time += descendant.cpu_times().user
 
-        max_cpu_time = max(max_cpu_time, cpu_time)
-        max_vms_memory = max(max_vms_memory, vms_memory)
-        max_rss_memory = max(max_rss_memory, rss_memory)
+            mem_info = descendant.memory_info()
+            rss_memory += mem_info.rss
+            vms_memory += mem_info.vms
+          except (psutil.NoSuchProcess, psutil.AccessDenied):
+            # sometimes a subprocess descendant will have terminated between the time
+            # we obtain a list of descendants, and the time we actually poll this
+            # descendant's memory usage.
+            pass
 
-        time.sleep(0.25)
+      except (psutil.NoSuchProcess, psutil.AccessDenied):
+        pass
 
-      returncode = process.poll()
-      surelog_timedelta = datetime.now() - surelog_start_dt
-      print(f'Surelog terminated with exit code: {returncode} in {str(surelog_timedelta)}')
-    except:
-      status = Status.FAIL
-      surelog_timedelta = datetime.now() - surelog_start_dt
-      print(f'Surelog threw an exception')
-      traceback.print_exc()
+      max_cpu_time = max(max_cpu_time, cpu_time)
+      max_vms_memory = max(max_vms_memory, vms_memory)
+      max_rss_memory = max(max_rss_memory, rss_memory)
 
-    surelog_log_strm.flush()
+      time.sleep(0.25)
+
+    returncode = process.poll()
+    surelog_timedelta = datetime.now() - surelog_start_dt
+    print(f'Surelog terminated with exit code: {returncode} in {str(surelog_timedelta)}')
+  except:
+    status = Status.FAIL
+    surelog_timedelta = datetime.now() - surelog_start_dt
+    print(f'Surelog threw an exception')
+    traceback.print_exc()
+
+  thread.join()
 
   if status == Status.PASS and tool_log_filepath and os.path.isfile(tool_log_filepath):
     content = open(tool_log_filepath, 'rt').read()

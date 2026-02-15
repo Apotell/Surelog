@@ -96,6 +96,7 @@ jobs:
       run: pip3 install pathlibutil psutil tabulate
 
     - name: Run reduction
+      timeout-minutes: 30
       run: |
         python3 scripts/reducer.py                                                                    \
           --build-dirpath build/bin/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} \

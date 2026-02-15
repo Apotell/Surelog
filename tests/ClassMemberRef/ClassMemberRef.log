@@ -161,16 +161,16 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  1
-BitTypespec                                            3
+BitTypespec                                            2
 ClassDefn                                              2
 ClassTypespec                                          2
 Constant                                               1
 Design                                                 1
-Function                                               2
+Function                                               1
 FunctionDecl                                           1
 HierPath                                               2
-IODecl                                                 2
-Identifier                                             9
+IODecl                                                 1
+Identifier                                             8
 Initial                                                1
 IntTypespec                                            1
 MethodFuncCall                                         2
@@ -179,17 +179,15 @@ ModuleTypespec                                         1
 Net                                                    1
 Package                                                1
 RefObj                                                 6
-RefTypespec                                            8
+RefTypespec                                            6
 SourceFile                                             1
 UnsupportedTypespec                                    1
 Variable                                               2
-VoidTypespec                                           2
+VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                56
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberRef/slpp_all/surelog.uhdm ...
-[ERR:IG0801] Missing location information: id:32, type:Identifier, name:new.
-[ERR:IG0804] Missing file: id:32, type:Identifier, name:new.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -279,40 +277,6 @@ Design: (unnamed)
       |vpiRandType:1
       |vpiVisibility:1
     |vpiInternalScope:
-    \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-      |vpiParent:
-      \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
-      |vpiName:
-      \_Identifier: (set_name_enabled), line:11:32, endln:11:48
-        |vpiParent:
-        \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-        |vpiName:set_name_enabled
-      |vpiFullName:pkg::uvm_printer::set_name_enabled
-      |vpiMethod:1
-      |vpiAccessType:2
-      |vpiVisibility:1
-      |vpiVirtual:1
-      |vpiReturn:
-      \_RefTypespec: (pkg::uvm_printer::set_name_enabled)
-        |vpiParent:
-        \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-        |vpiFullName:pkg::uvm_printer::set_name_enabled
-        |vpiActual:
-        \_VoidTypespec: 
-      |vpiIODecl:
-      \_IODecl: (enabled), line:11:54, endln:11:61
-        |vpiParent:
-        \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-        |vpiName:enabled
-        |vpiDirection:1
-        |vpiTypespec:
-        \_RefTypespec: (pkg::uvm_printer::set_name_enabled::enabled), line:11:50, endln:11:53
-          |vpiParent:
-          \_IODecl: (enabled), line:11:54, endln:11:61
-          |vpiFullName:pkg::uvm_printer::set_name_enabled::enabled
-          |vpiActual:
-          \_BitTypespec: 
-    |vpiInternalScope:
     \_Function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
       |vpiParent:
       \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
@@ -376,16 +340,10 @@ Design: (unnamed)
           |vpiFullName:pkg::uvm_printer::set_name_enabled::enabled
           |vpiActual:
           \_IODecl: (enabled), line:16:50, endln:16:57
-      |vpiInstance:
-      \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
-    |vpiImportTypespec:
-    \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-    |vpiImportTypespec:
-    \_Variable: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
     |vpiImportTypespec:
     \_Function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
-    |vpiMethod:
-    \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
+    |vpiImportTypespec:
+    \_Variable: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
     |vpiMethod:
     \_Function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
     |vpiTaskFuncDecl:
@@ -399,7 +357,7 @@ Design: (unnamed)
         |vpiName:set_name_enabled
       |vpiFullName:pkg::uvm_printer::set_name_enabled
       |vpiTaskFunc:
-      \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
+      \_Function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
   |vpiTypespec:
   \_ClassTypespec: (m_uvm_printer_knobs)
     |vpiParent:
@@ -540,7 +498,7 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
 
@@ -552,7 +510,7 @@ COMMAND: ${SURELOG_DIR}/regression/ClassMemberRef/slpp_all/surelog.uhdm ${SURELO
 Name                            Before   After   Added   Removed
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Others                              52      52       0         0
+Others                              47      47       0         0
 ----------------------------------------------------------------
-                                    52      52       0         0
+                                    47      47       0         0
 ===================== END REDUCTION RESULT =====================

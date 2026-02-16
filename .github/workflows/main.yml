@@ -108,7 +108,7 @@ jobs:
         name: ${{ env.build-artifact-name }}
 
     - name: Run regression ${{ matrix.shard }}/${{ matrix.num_shards }}
-      timeout-minutes: 120
+      timeout-minutes: 60
       run: |
         tar xzfp ${{ env.build-artifact-name }}.tar.gz
         mv ${{ env.build-artifact-name }} build

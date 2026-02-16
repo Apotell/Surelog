@@ -397,9 +397,9 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
   return args, tool_log_filepath
 
 
-CORE_RE = re.compile(r"(.+):.*?(?:\((.+)\))?,.*?\bid:(\d+)")
-LOC_RE = re.compile(r"line:(\d+):(\d+),\s*endln:(\d+):(\d+)")
-OPTYPE_RE = re.compile(r"vpiOpType:(\d+)")
+CORE_RE = re.compile(r"([^:]+):.*?(?:\((.+)\))?,.*?\bid:(\d+)")
+LOC_RE = re.compile(r"\bline:(\d+):(\d+),\s*\bendln:(\d+):(\d+)")
+OPTYPE_RE = re.compile(r"\bvpiOpType:(\d+)")
 
 def _read_surelog_log_strm(instrm, log_filepath):
   log_filepath = Path(log_filepath)
@@ -424,7 +424,8 @@ def _read_surelog_log_strm(instrm, log_filepath):
       line = line.decode('utf-8').rstrip('\r\n')
 
       if '<<<<<<<<<<' in line:
-        count += 1
+        if not stack:
+          count += 1
         stack.append({
           k_depth: f'{count}/{len(stack) + 1:06}',
           k_func_name: line.replace('<<<<<<<<<<', '').strip(),

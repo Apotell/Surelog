@@ -22,12 +22,80 @@ env:
   python3_version: '3.x'
 
 jobs:
+  build:
+    name: "Build"
+    runs-on: ubuntu-24.04
+
+    env:
+      artifact-name: uhdm-reduce_ubuntu-gcc_release
+
+    steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+
+    - name: Install Core Dependencies
+      run: |
+        sudo apt-get update -qq
+        sudo apt install -y g++-11
+        sudo apt install -y build-essential
+        sudo apt install -y cmake
+        sudo apt install -y ninja-build
+
+        python -m pip install orderedmultidict
+
+    - name: Git pull
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: CMakeLists.txt
+        sparse-checkout-cone-mode: false
+
+    - name: Update UHDM submodule
+      shell: bash
+      run: git submodule update --init --recursive -- third_party/UHDM
+
+    - name: Build UHDM submodule
+      shell: bash
+      env:
+        CC: gcc-11
+        CXX: g++-11
+      run: |
+        env
+        which cmake && cmake --version
+        which ninja && ninja --version
+        which $CC && $CC --version
+        which $CXX && $CXX --version
+        which python && python --version
+
+        cd third_party/UHDM
+        cmake -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
+        cmake --build build -j `nproc` --target uhdm-reduce
+
+    - name: Build compressed artifacts
+      if: always()
+      shell: bash
+      run: |
+        cd third_party/UHDM/build/bin
+        tar czfp ${{ env.artifact-name }}.tar.gz uhdm-reduce
+
+    - name: Archive artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.artifact-name }}
+        path: third_party/UHDM/build/bin/${{ env.artifact-name }}.tar.gz
+
+
   reduction:
     name: "Reducer | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
     runs-on: ${{ matrix.config.os }}
+    needs: build
 
     env:
-      build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.event.inputs.run_number }}
+      uhdm-reduce-build-artifact-name: uhdm-reduce_ubuntu-gcc_release
+      surelog-build-artifact-name: Surelog_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.event.inputs.run_number }}
       regression-artifact-name: Surelog_regression_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.event.inputs.run_number }}_${{ matrix.shard }}
       reducer-artifact-name: Reducer_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_${{ github.run_number }}_${{ matrix.shard }}
 
@@ -50,12 +118,10 @@ jobs:
           third_party/tests
         lfs: true
 
-    - name: Download build artifact
+    - name: Download uhdm-reduce build artifact
       uses: actions/download-artifact@v6
       with:
-        name: ${{ env.build-artifact-name }}
-        run-id: ${{ github.event.inputs.run_id }}
-        github-token: ${{ secrets.GHA_DAVENCHE_CI_TOKEN }}
+        name: ${{ env.uhdm-reduce-build-artifact-name }}
 
     - name: Download regression artifact
       uses: actions/download-artifact@v6
@@ -67,11 +133,12 @@ jobs:
     - name: Extract artifacts
       shell: bash
       run: |
-        # This has to be a separate step and run under bash since tar on Windows
-        # still doesn't support symlink and the root repository folder is a symlink.
-        tar xzfp ${{ env.build-artifact-name }}.tar.gz
-        rm ${{ env.build-artifact-name }}.tar.gz
-        mv ${{ env.build-artifact-name }} build
+        mkdir -p build
+
+        mv ${{ env.uhdm-reduce-build-artifact-name }}.tar.gz build/.
+        pushd build
+          tar xzfp ${{ env.uhdm-reduce-build-artifact-name }}.tar.gz
+        popd
 
         tar xzfp ${{ env.regression-artifact-name }}.tar.gz
         rm ${{ env.regression-artifact-name }}.tar.gz
@@ -98,11 +165,11 @@ jobs:
     - name: Run reduction
       timeout-minutes: 30
       run: |
-        python3 scripts/reducer.py                                                                    \
-          --build-dirpath build/bin/${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }} \
-          --reducer-filepath uhdm-reduce                                                              \
-          --source-dirpath regression                                                                 \
-          --jobs $(nproc)                                                                             \
+        python3 scripts/reducer.py        \
+          --build-dirpath build           \
+          --reducer-filepath uhdm-reduce  \
+          --source-dirpath regression     \
+          --jobs $(nproc)                 \
           --verbose
 
     - name: Prepare regression artifacts

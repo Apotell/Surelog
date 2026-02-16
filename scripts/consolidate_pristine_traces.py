@@ -104,24 +104,51 @@ VPI_OP_MAP = {
 }
 
 TYPE_MAP = {
+  "array_net" : "Net",
+  "array_var": "Variable",
   "bit_select": "BitSelect",
+  "bit_var": "Variable",
+  "byte_var": "Variable",
+  "chandle_var": "Variable",
   "class_var": "Variable",
   "constant":"Constant",
   "enum_const": "EnumConst",
+  "enum_net" : "Net",
+  "enum_var": "Variable",
   "func_call": "FuncCall",
   "hier_path": "HierPath",
   "indexed_part_select": "IndexedPartSelect",
   "int_var": "Variable",
+  "integer_net" : "Net",
   "integer_var": "Variable",
   "io_decl": "IODecl",
   "logic_net": "Net",
   "logic_var": "Variable",
+  "long_int_var": "Variable",
+  "method_func_call": "MethodFuncCall",
+  "method_task_call": "MethodTaskCall",
+  "net_bit" : "Net",
   "operation": "Operation",
+  "packed_array_net" : "Net",
+  "packed_array_var": "Variable",
   "part_select": "PartSelect",
+  "real_var": "Variable",
   "ref_obj": "RefObj",
   "ref_var": "Variable",
+  "short_int_var": "Variable",
+  "short_real_var": "Variable",
+  "string_var": "Variable",
+  "struct_net" : "Net",
+  "struct_var": "Variable",
   "sys_func_call": "SysFuncCall",
+  "sys_task_call": "SysTaskCall",
+  "task_call": "TaskCall",
+  "time_net" : "Net",
+  "time_var": "Variable",
+  "union_var": "Variable",
+  "var_bit": "Variable",
   "var_select": "VarSelect",
+  "virtual_interface_var": "VirtualInterfaceVar",
 }
 
 DETAIL_TYPES = set({
@@ -155,15 +182,15 @@ def _load_tsv(tsv_filepath):
       iec = int(iec) if iec else 0
 
       # normalize types
-      itype = TYPE_MAP.get(itype, itype) if itype else None
-      otype = TYPE_MAP.get(otype, otype) if otype else None
+      itype = TYPE_MAP.get(itype, itype) if itype else ''
+      otype = TYPE_MAP.get(otype, otype) if otype else ''
 
       # append operation name
       if ictx:
         if itype == "Operation":
           ictx = VPI_OP_MAP.get(int(ictx))
 
-        if ictx:
+        if ictx and itype != 'RefObj':
           itype = f"{itype}:{ictx}"
 
       rows.append((itype, iid, isl, isc, iel, iec, otype, oid))
@@ -174,9 +201,6 @@ def _load_tsv(tsv_filepath):
 def _sort_and_dedup_comparer(lhs, rhs):
   itype0, iid0, _, _, _, _, otype0, oid0 = lhs
   itype1, iid1, _, _, _, _, otype1, oid1 = rhs
-
-  if not itype0:
-    print("lhs: ", lhs)
 
   if itype0 != itype1:
     return -1 if itype0 < itype1 else 1

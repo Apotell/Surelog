@@ -425,11 +425,16 @@ std::filesystem::path PlatformFileSystem::getPrecompiledDir(SymbolTable *symbolT
   return toPath(getPrecompiledDir(programId, symbolTable));
 }
 
+std::filesystem::path PlatformFileSystem::getCompilationDir(bool isUnitCompilation) const {
+  std::filesystem::path compileDir = m_outputDir;
+  static_cast<void>(isUnitCompilation);
+  return compileDir;
+}
+
 PathId PlatformFileSystem::getLogFile(bool isUnitCompilation, std::string_view filename, SymbolTable *symbolTable) {
   if (filename.empty()) return BadPathId;
 
-  std::filesystem::path logFile = m_outputDir;
-  logFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path logFile = getCompilationDir(isUnitCompilation);
   logFile /= filename;
   PathId logFileId = toPathId(logFile.string(), symbolTable);
   if (kEnableLogs) {
@@ -441,8 +446,7 @@ PathId PlatformFileSystem::getLogFile(bool isUnitCompilation, std::string_view f
 PathId PlatformFileSystem::getCacheDir(bool isUnitCompilation, std::string_view dirname, SymbolTable *symbolTable) {
   if (dirname.empty()) return BadPathId;
 
-  std::filesystem::path cacheDir = m_outputDir;
-  cacheDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path cacheDir = getCompilationDir(isUnitCompilation);
   cacheDir /= dirname;
   PathId cacheDirId = toPathId(cacheDir.string(), symbolTable);
   if (kEnableLogs) {
@@ -452,8 +456,7 @@ PathId PlatformFileSystem::getCacheDir(bool isUnitCompilation, std::string_view 
 }
 
 PathId PlatformFileSystem::getCompileDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path cacheDir = m_outputDir;
-  cacheDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path cacheDir = getCompilationDir(isUnitCompilation);
   PathId compileDirId = toPathId(cacheDir.string(), symbolTable);
   if (kEnableLogs) {
     std::cerr << "getCompileDir: " << PathIdPP(compileDirId, this) << std::endl;
@@ -465,8 +468,7 @@ PathId PlatformFileSystem::getPpOutputFile(bool isUnitCompilation, PathId source
                                            SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
-  std::filesystem::path ppOutputFilepath = m_outputDir;
-  ppOutputFilepath /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path ppOutputFilepath = getCompilationDir(isUnitCompilation);
   ppOutputFilepath /= kPreprocessLibraryDirName;
   ppOutputFilepath /= libraryName;
   ppOutputFilepath /= toPlatformRelPath(sourceFileId);
@@ -487,8 +489,7 @@ PathId PlatformFileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceF
     ppCacheFile /= libraryName;
     ppCacheFile /= toPlatformAbsPath(sourceFileId).filename();
   } else {
-    ppCacheFile = m_outputDir;
-    ppCacheFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+    ppCacheFile = getCompilationDir(isUnitCompilation);
     ppCacheFile /= kPreprocessCacheDirName;
     ppCacheFile /= libraryName;
     ppCacheFile /= toPlatformRelPath(sourceFileId);
@@ -514,12 +515,10 @@ PathId PlatformFileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFi
     parseCacheFile /= libraryName;
     parseCacheFile /= ppFile.filename();
   } else {
-    std::filesystem::path ppOutputDir = m_outputDir;
-    ppOutputDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+    std::filesystem::path ppOutputDir = getCompilationDir(isUnitCompilation);
     ppOutputDir /= kPreprocessLibraryDirName;
 
-    parseCacheFile = m_outputDir;
-    parseCacheFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+    parseCacheFile = getCompilationDir(isUnitCompilation);
     parseCacheFile /= kParserCacheDirName;
     parseCacheFile /= ppFile.lexically_relative(ppOutputDir);
   }
@@ -536,8 +535,7 @@ PathId PlatformFileSystem::getPythonCacheFile(bool isUnitCompilation, PathId sou
                                               SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
-  std::filesystem::path pythonCacheFile = m_outputDir;
-  pythonCacheFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path pythonCacheFile = getCompilationDir(isUnitCompilation);
   pythonCacheFile /= kPythonCacheDirName;
   pythonCacheFile /= libraryName;
   pythonCacheFile /= toPlatformRelPath(sourceFileId);
@@ -551,8 +549,7 @@ PathId PlatformFileSystem::getPythonCacheFile(bool isUnitCompilation, PathId sou
 }
 
 PathId PlatformFileSystem::getPpMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path ppMultiprocessingDir = m_outputDir;
-  ppMultiprocessingDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path ppMultiprocessingDir = getCompilationDir(isUnitCompilation);
   ppMultiprocessingDir /= kMultiprocessingPpDirName;
   PathId ppMultiprocessingDirId = toPathId(ppMultiprocessingDir.string(), symbolTable);
   if (kEnableLogs) {
@@ -562,8 +559,7 @@ PathId PlatformFileSystem::getPpMultiprocessingDir(bool isUnitCompilation, Symbo
 }
 
 PathId PlatformFileSystem::getParserMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path parserMultiprocessingDir = m_outputDir;
-  parserMultiprocessingDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path parserMultiprocessingDir = getCompilationDir(isUnitCompilation);
   parserMultiprocessingDir /= kMultiprocessingParserDirName;
   return toPathId(parserMultiprocessingDir.string(), symbolTable);
 }
@@ -589,8 +585,7 @@ PathId PlatformFileSystem::getChunkFile(PathId ppFileId, int32_t chunkIndex, Sym
 }
 
 PathId PlatformFileSystem::getCheckerDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path checkerDir = m_outputDir;
-  checkerDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path checkerDir = getCompilationDir(isUnitCompilation);
   checkerDir /= kCheckerDirName;
   PathId checkerDirId = toPathId(checkerDir.string(), symbolTable);
   if (kEnableLogs) {
@@ -653,8 +648,7 @@ PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId, int32_t index, 
 }
 
 PathId PlatformFileSystem::getOutputUhdmFile(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path uhdmFile = m_outputDir;
-  uhdmFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  std::filesystem::path uhdmFile = getCompilationDir(isUnitCompilation);
   uhdmFile /= "surelog.uhdm";
   PathId uhdmFileId = toPathId(uhdmFile.string(), symbolTable);
   if (kEnableLogs) {

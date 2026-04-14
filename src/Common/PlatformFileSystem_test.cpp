@@ -67,6 +67,10 @@
 #include <string>
 #include <vector>
 
+#ifdef SURELOG_WITH_ZLIB
+#include <zlib.h>
+#endif
+
 namespace SURELOG {
 
 namespace fs = std::filesystem;
@@ -213,6 +217,39 @@ TEST(PlatformFileSystemTest, BasicFileOperations) {
   EXPECT_TRUE(fileSystem->rmtree(dirId));
   EXPECT_FALSE(fileSystem->exists(dirId));
 }
+
+#ifdef SURELOG_WITH_ZLIB
+TEST(PlatformFileSystemTest, ReadCompressedContent) {
+  const fs::path testdir = testing::TempDir();
+  const fs::path filepath = testdir / getUniqueTempFileName();
+  const std::string_view content =
+      "module foo(\n"
+      "  input logic clk\n"
+      ");\n"
+      "logic value;\n"
+      "endmodule\n";
+
+  ASSERT_TRUE(filepath.has_filename());
+  const fs::path compressedPath = filepath.string() + ".sv.gz";
+
+  gzFile zippedFile = gzopen(compressedPath.string().c_str(), "wb");
+  ASSERT_NE(zippedFile, nullptr);
+  ASSERT_GT(gzwrite(zippedFile, content.data(), content.size()), 0);
+  ASSERT_EQ(gzclose(zippedFile), Z_OK);
+
+  std::unique_ptr<TestFileSystem> fileSystem(new TestFileSystem(testdir));
+  std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
+  const PathId fileId = fileSystem->toPathId(compressedPath.string(), symbolTable.get());
+
+  std::streamsize size = 0;
+  EXPECT_TRUE(fileSystem->filesize(fileId, &size));
+  EXPECT_EQ(size, static_cast<std::streamsize>(content.size()));
+
+  std::string actualContent;
+  EXPECT_TRUE(fileSystem->readContent(fileId, actualContent));
+  EXPECT_EQ(actualContent, content);
+}
+#endif
 
 TEST(PlatformFileSystemTest, LocateFile) {
   // GTEST_SKIP() << "Temporarily skipped";

@@ -149,22 +149,29 @@ enum COMP_MODE {
 int32_t batchCompilation(SURELOG::Session* session, const char* argv0, const fs::path& batchFile,
                          const fs::path& outputDir, bool nostdout) {
   int32_t returnCode = 0;
+  SURELOG::FileSystem* const fileSystem = session->getFileSystem();
+  SURELOG::SymbolTable* const symbols = session->getSymbolTable();
 
   std::error_code ec;
   const fs::path cwd = fs::current_path(ec);
   if (ec) returnCode |= 1;
 
-  std::ifstream stream;
-  stream.open(batchFile);
-  if (!stream.good()) {
+  const fs::path batchFilePath = batchFile.is_relative() ? (fileSystem->getWorkingDir() / batchFile) : batchFile;
+  const SURELOG::PathId batchFileId = fileSystem->toPathId(batchFilePath.string(), symbols);
+  if (!batchFileId) {
     returnCode |= 1;
     return returnCode;
   }
 
-  std::string line;
+  std::vector<std::string> batchLines;
+  if (!fileSystem->readLines(batchFileId, batchLines)) {
+    returnCode |= 1;
+    return returnCode;
+  }
+
   int32_t count = 0;
   SURELOG::ErrorContainer::Stats overallStats;
-  while (std::getline(stream, line)) {
+  for (const std::string& line : batchLines) {
     if (line.empty()) continue;
     if (!nostdout) std::cout << "Processing: " << line << std::endl << std::flush;
 
@@ -221,7 +228,6 @@ int32_t batchCompilation(SURELOG::Session* session, const char* argv0, const fs:
   if (!nostdout) std::cout << "Processed " << count << " tests." << std::endl << std::flush;
 
   if (!nostdout) session->getErrorContainer()->printStats(overallStats);
-  stream.close();
   return returnCode;
 }
 

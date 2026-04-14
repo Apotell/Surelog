@@ -22,7 +22,7 @@
  */
 
 #include <Surelog/CommandLine/CommandLineParser.h>
-#include <Surelog/Common/PlatformFileSystem.h>
+#include <Surelog/Common/AvfsFileSystem.h>
 #include <Surelog/Common/Session.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/ErrorReporting/LogListener.h>
@@ -36,7 +36,7 @@ namespace fs = std::filesystem;
 namespace SURELOG {
 Session::Session(FileSystem *fileSystem, SymbolTable *symbolTable, LogListener *logListener,
                  ErrorContainer *errorContainer, CommandLineParser *commandLineParser, Precompiled *precompiled)
-    : m_fileSystem(fileSystem == nullptr ? new PlatformFileSystem(fs::current_path()) : fileSystem),
+    : m_fileSystem(fileSystem == nullptr ? new AvfsFileSystem(fs::current_path()) : fileSystem),
       m_symbolTable(symbolTable == nullptr ? new SymbolTable : symbolTable),
       m_logListener(logListener == nullptr ? new LogListener(this) : logListener),
       m_precompiled(precompiled == nullptr ? new Precompiled(this) : precompiled),

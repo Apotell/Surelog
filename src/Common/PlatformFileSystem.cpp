@@ -808,6 +808,29 @@ bool PlatformFileSystem::filesize(PathId fileId, std::streamsize *result) {
   const std::filesystem::path filepath = toPath(fileId);
   if (filepath.empty()) return false;
 
+#ifdef SURELOG_WITH_ZLIB
+  if (filepath.extension() == ".gz") {
+    const std::string file_path = filepath.string();
+    gzFile zipped_file = gzopen(file_path.c_str(), "rb");
+    if (zipped_file == nullptr) return false;
+
+    unsigned char unzipBuffer[8192];
+    std::streamsize length = 0;
+    int unzippedBytes = 0;
+    while ((unzippedBytes = gzread(zipped_file, unzipBuffer, sizeof(unzipBuffer))) > 0) {
+      length += unzippedBytes;
+    }
+
+    const int closeStatus = gzclose(zipped_file);
+    if ((unzippedBytes < 0) || (closeStatus != Z_OK)) return false;
+
+    if (result != nullptr) {
+      *result = length;
+    }
+    return true;
+  }
+#endif
+
   std::error_code ec;
   std::streamsize length = std::filesystem::file_size(filepath, ec);
   if (!ec) {

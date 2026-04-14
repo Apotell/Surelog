@@ -145,6 +145,20 @@ else()
   set(JSON_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/third_party/json/single_include)
 endif()
 
+set(AVFS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../AVFS)
+if(NOT EXISTS ${AVFS_SOURCE_DIR}/CMakeLists.txt)
+  message(FATAL_ERROR "AVFS is required at ${AVFS_SOURCE_DIR}")
+endif()
+find_package(OpenSSL REQUIRED)
+find_package(ZLIB REQUIRED)
+add_library(surelog_avfs STATIC
+  ${AVFS_SOURCE_DIR}/src/Discovery.cpp
+  ${AVFS_SOURCE_DIR}/src/Vfs.cpp)
+target_include_directories(surelog_avfs PUBLIC
+  $<BUILD_INTERFACE:${AVFS_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_link_libraries(surelog_avfs PUBLIC OpenSSL::Crypto ZLIB::ZLIB)
+
 #  _   _  ____ _______ ______
 # | \ | |/ __ \__   __|  ____|
 # |  \| | |  | | | |  | |__
@@ -480,6 +494,7 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/Cache/ParseCache.cpp
   ${PROJECT_SOURCE_DIR}/src/Cache/PPCache.cpp
   ${PROJECT_SOURCE_DIR}/src/CommandLine/CommandLineParser.cpp
+  ${PROJECT_SOURCE_DIR}/src/Common/AvfsFileSystem.cpp
   ${PROJECT_SOURCE_DIR}/src/Common/ClockingBlockHolder.cpp
   ${PROJECT_SOURCE_DIR}/src/Common/FileSystem.cpp
   ${PROJECT_SOURCE_DIR}/src/Common/PathId.cpp
@@ -680,6 +695,7 @@ if (MSVC OR WIN32)
 endif()
 
 target_link_libraries(surelog-bin PUBLIC surelog)
+target_link_libraries(surelog PRIVATE surelog_avfs)
 target_link_libraries(surelog PUBLIC ${ANTLR_LIBRARY})
 target_link_libraries(surelog PUBLIC ${UHDM_LIBRARY})
 
@@ -777,6 +793,7 @@ if (SURELOG_BUILD_TESTS)
   endfunction()
 
   register_gtests(
+    src/Common/AvfsFileSystem_test.cpp
     src/Cache/PPCache_test.cpp
     src/CommandLine/CommandLineParser_test.cpp
     src/Common/PathId_test.cpp
@@ -889,6 +906,12 @@ install(
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Surelog)
 
+install(
+  TARGETS surelog_avfs
+  EXPORT Surelog
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
 if(NOT SURELOG_USE_HOST_ANTLR)
   install(
     TARGETS antlr4_static
@@ -951,6 +974,7 @@ install(
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Surelog/API)
 install(
   FILES ${PROJECT_SOURCE_DIR}/include/Surelog/Common/ClockingBlockHolder.h
+        ${PROJECT_SOURCE_DIR}/include/Surelog/Common/AvfsFileSystem.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Common/Containers.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Common/FileSystem.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Common/NodeId.h

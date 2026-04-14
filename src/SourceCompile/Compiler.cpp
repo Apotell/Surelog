@@ -203,27 +203,24 @@ bool Compiler::ppinit_() {
                      if (sourceFiles.find(libFileId) == sourceFiles.end()) {
                        bool fileContainsModuleOfSameName = false;
                        std::filesystem::path dir_entry = fileSystem->toPath(libFileId);
-                       std::ifstream ifs(dir_entry.string());
-                       if (ifs.good()) {
-                         std::stringstream buffer;
-                         buffer << ifs.rdbuf();
+                       std::string buffer;
+                       if (fileSystem->readContent(libFileId, buffer)) {
                          std::string moduleName = dir_entry.stem().string();
                          const std::regex regexpMod{"(module)[ \t]+(" + moduleName + ")"};
-                         if (std::regex_search(buffer.str(), regexpMod)) {
+                         if (std::regex_search(buffer, regexpMod)) {
                            fileContainsModuleOfSameName = true;
                          }
                          const std::regex regexpPrim{"(primitive)[ \t]+(" + moduleName + ")"};
-                         if (std::regex_search(buffer.str(), regexpPrim)) {
+                         if (std::regex_search(buffer, regexpPrim)) {
                            fileContainsModuleOfSameName = true;
                          }
                          const std::regex regexpPack{"(package)[ \t]"};
-                         if (std::regex_search(buffer.str(), regexpPack)) {
+                         if (std::regex_search(buffer, regexpPack)) {
                            // Files containing packages cannot be imported with
                            // -y
                            fileContainsModuleOfSameName = false;
                          }
                        }
-                       ifs.close();
                        return fileContainsModuleOfSameName;
                      } else {
                        return false;

@@ -809,6 +809,10 @@ bool PlatformFileSystem::filesize(PathId fileId, std::streamsize *result) {
   if (filepath.empty()) return false;
 
 #ifdef SURELOG_WITH_ZLIB
+  // NOTE(HS): This needs to be part of an independent class that implements all zlib
+  // specific operations. That implementation is compiled in the library conditionally
+  // and the VFS can mount it on user demand.
+  // We don't want to pollute native file system with compressed file logic.
   if (filepath.extension() == ".gz") {
     const std::string file_path = filepath.string();
     gzFile zipped_file = gzopen(file_path.c_str(), "rb");

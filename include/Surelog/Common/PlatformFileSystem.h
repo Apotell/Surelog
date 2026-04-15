@@ -51,6 +51,10 @@ class SymbolTable;
  * to make it simpler for users to override and change, keeping
  * it overridable.
  */
+
+// TODO(HS): We just need to get rid of isUnitCompilation arg alltogether.
+// No point in carrying baggage forward.
+
 class PlatformFileSystem /*final*/ : public FileSystem {
  public:
   struct Configuration final {

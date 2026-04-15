@@ -32,6 +32,10 @@ class VfsRuntime;
 namespace SURELOG {
 class SymbolTable;
 
+// NOTE(HS): You are assuming all requested files are on disk.
+// That is NOT true. This class needs to derive FileSystem and provide
+// all the APIs which are primarily just redirection to other registered
+// filesystems/mounts.
 class AvfsFileSystem final : public PlatformFileSystem {
  public:
   explicit AvfsFileSystem(const std::filesystem::path& workingDir);

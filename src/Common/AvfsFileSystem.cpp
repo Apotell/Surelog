@@ -28,6 +28,21 @@
 
 namespace SURELOG {
 
+// NOTE(HS): All this is doing is putting a wrapper around platformfilesystem.
+// This is not the intended use.
+// Assume we have 4 totally independent file system subclasses
+// 1. NativeFileSystem
+// 2. ZipFileSystem
+// 3. NetworkFileSystem
+// 4. AzureFileSystem
+//
+// Each of those implementations are specialized to deal only that specific type.
+// VFS keeps a map<mount-handle, FileSystem*>
+// Given a request to find a file "$<mount-handle>/abc.txt", VFS has to resolve that
+// to a one or many registered file systems and ask for that file. The first one to
+// return success wins (or optionally, we could also introduce a priority in case of
+// multiple filesystems of the same type).
+
 AvfsFileSystem::AvfsFileSystem(const std::filesystem::path& workingDir)
     : PlatformFileSystem(workingDir), m_runtime(std::make_unique<avfs::VfsRuntime>()) {
   registerMount(workingDir);

@@ -40,7 +40,7 @@ namespace fs = std::filesystem;
 namespace {
 
 TEST(AvfsFileSystemTest, ReadWriteOperationsGoThroughFilesystemAbstraction) {
-  const fs::path testdir = FileSystem::normalize(fs::path(testing::TempDir()) / "avfs-fs");
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-fs");
   const fs::path filepath = testdir / "nested" / "file.sv";
 
   std::error_code ec;
@@ -73,7 +73,7 @@ TEST(AvfsFileSystemTest, SessionDefaultsToAvfsFileSystem) {
 
 #ifdef SURELOG_WITH_ZLIB
 TEST(AvfsFileSystemTest, ReadCompressedContent) {
-  const fs::path testdir = FileSystem::normalize(fs::path(testing::TempDir()) / "avfs-gz-fs");
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-gz-fs");
   const fs::path filepath = testdir / "nested" / "file.sv.gz";
   constexpr std::string_view kContent = "module top;\n  logic value;\nendmodule\n";
 

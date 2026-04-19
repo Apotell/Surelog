@@ -247,7 +247,7 @@ bool CompileSourceFile::postPreprocess_() {
   m_ppResultFileId = clp->writePpOutputFileId();
   if (!m_ppResultFileId) {
     const std::string_view libraryName = m_library->getName();
-    m_ppResultFileId = fileSystem->getPpOutputFile(clp->fileUnit(), m_fileId, libraryName, symbols);
+    m_ppResultFileId = fileSystem->getPpOutputFile(m_fileId, libraryName, symbols);
   }
 
   if (clp->lowMem() || clp->link()) {

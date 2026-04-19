@@ -71,8 +71,8 @@ TEST(CommandLineParserTest, WorkingDirectories1) {
   //       file.sv
 
   std::error_code ec;
-  const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path testdir = FileSystem::normalize(testing::TempDir()) / "wd1";
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir()) / "wd1";
 
   const std::vector<fs::path> dirs{
       testdir / "dira" / "dirb1" / "dirc",
@@ -170,8 +170,8 @@ TEST(CommandLineParserTest, WorkingDirectories2) {
   //       file.sv
 
   std::error_code ec;
-  const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path testdir = FileSystem::normalize(testing::TempDir()) / "wd2";
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir()) / "wd2";
 
   const std::vector<fs::path> dirs{
       testdir / "dira" / "dirb1" / "dirc",
@@ -284,8 +284,8 @@ TEST(CommandLineParserTest, WorkingDirectories3) {
   //        uvm_b.sv
 
   std::error_code ec;
-  const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws3");
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path wsdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "ws3");
   const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{
@@ -379,8 +379,8 @@ TEST(CommandLineParserTest, WorkingDirectories4) {
   //        uvm_b.sv
 
   std::error_code ec;
-  const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws4");
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path wsdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "ws4");
   const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{

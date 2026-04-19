@@ -219,7 +219,7 @@ TEST(PlatformFileSystemTest, BasicFileOperations) {
 }
 
 #ifdef SURELOG_WITH_ZLIB
-TEST(PlatformFileSystemTest, ReadCompressedContent) {
+TEST(PlatformFileSystemTest, DoesNotHandleCompressedContent) {
   const fs::path testdir = testing::TempDir();
   const fs::path filepath = testdir / getUniqueTempFileName();
   const std::string_view content =
@@ -241,13 +241,8 @@ TEST(PlatformFileSystemTest, ReadCompressedContent) {
   std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
   const PathId fileId = fileSystem->toPathId(compressedPath.string(), symbolTable.get());
 
-  std::streamsize size = 0;
-  EXPECT_TRUE(fileSystem->filesize(fileId, &size));
-  EXPECT_EQ(size, static_cast<std::streamsize>(content.size()));
-
   std::string actualContent;
-  EXPECT_TRUE(fileSystem->readContent(fileId, actualContent));
-  EXPECT_EQ(actualContent, content);
+  EXPECT_FALSE(fileSystem->readContent(fileId, actualContent));
 }
 #endif
 
@@ -255,7 +250,7 @@ TEST(PlatformFileSystemTest, LocateFile) {
   // GTEST_SKIP() << "Temporarily skipped";
   const std::string search_file = "search-file.txt";
 
-  const fs::path testdir = FileSystem::normalize(testing::TempDir());
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir());
   const fs::path basedir = testdir / "locate-file-test";
   const fs::path path1 = basedir / "dir1";
   const fs::path path2 = basedir / "dir2";
@@ -285,7 +280,7 @@ TEST(PlatformFileSystemTest, LocateFile) {
   const PathId not_exists = fileSystem->locate(search_file, directories, symbolTable.get());
   EXPECT_EQ(not_exists, BadPathId);
 
-  const fs::path actual_loc_1 = FileSystem::normalize(actual_dir_1 / search_file);
+  const fs::path actual_loc_1 = PlatformFileSystem::normalize(actual_dir_1 / search_file);
   std::ofstream(actual_loc_1).close();
 
   PathId now_exists = fileSystem->locate(search_file, directories, symbolTable.get());
@@ -314,12 +309,12 @@ TEST(PlatformFileSystemTest, LocateFile) {
 
 TEST(PlatformFileSystemTest, PathRelations) {
   // GTEST_SKIP() << "Temporarily skipped";
-  const fs::path testdir = FileSystem::normalize(testing::TempDir());
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir());
 
   std::unique_ptr<TestFileSystem> fileSystem(new TestFileSystem(testdir));
   std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
 
-  const fs::path base = FileSystem::normalize(testing::TempDir());
+  const fs::path base = PlatformFileSystem::normalize(testing::TempDir());
   PathId fileId = fileSystem->toPathId((base / "abc.txt").string(), symbolTable.get());
   PathId fileDirId = fileSystem->getParent(fileId, symbolTable.get());
   EXPECT_EQ(base, fileSystem->toPlatformAbsPath(fileDirId));
@@ -363,8 +358,8 @@ TEST(PlatformFileSystemTest, WorkingDirs_NonIdeal) {
   //        uvm_b.sv
 
   std::error_code ec;
-  const fs::path programPath = FileSystem::getProgramPath();
-  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws_nonideal");
+  const fs::path programPath = PlatformFileSystem::getProgramPath();
+  const fs::path wsdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "ws_nonideal");
   const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{
@@ -415,8 +410,8 @@ TEST(PlatformFileSystemTest, WorkingDirs_NonIdeal) {
   EXPECT_FALSE(ec) << ec;
 
   const std::set<std::string> expectedFsWorkingDirs = {
-      FileSystem::normalize(programPath.parent_path()).string(),
-      FileSystem::normalize(wsdir).string(),
+      PlatformFileSystem::normalize(programPath.parent_path()).string(),
+      PlatformFileSystem::normalize(wsdir).string(),
   };
   const std::set<std::string> actualFsWorkingDirs = fileSystem->getWorkingDirs();
   EXPECT_EQ(expectedFsWorkingDirs, actualFsWorkingDirs);
@@ -463,8 +458,8 @@ TEST(PlatformFileSystemTest, WorkingDirs_Ideal) {
   //        uvm_b.sv
 
   std::error_code ec;
-  const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws_ideal");
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path wsdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "ws_ideal");
   const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{
@@ -973,7 +968,7 @@ TEST(PlatformFileSystemTest, InMemoryTest) {
   const fs::path outputdir = "/a/b/c/output";
 #endif
 
-  const fs::path programPath = FileSystem::getProgramPath();
+  const fs::path programPath = PlatformFileSystem::getProgramPath();
 
   InMemoryFileSystem *const fileSystem = new InMemoryFileSystem(inputdir);
   SymbolTable *const symbolTable = new SymbolTable;
@@ -1079,7 +1074,7 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
   const fs::path kInputDir_run2 = kBaseDir / "input2";
   const fs::path kOutputDir_run1 = kBaseDir / "output1";
   const fs::path kOutputDir_run2 = kBaseDir / "output2";
-  const fs::path kProgramPath = FileSystem::getProgramPath();
+  const fs::path kProgramPath = PlatformFileSystem::getProgramPath();
   const std::string_view kHeadersDirName = "headers";
   const std::string_view kHeaderFileName = "header.sv";
   const std::string_view kSourceFileName = "source.sv";
@@ -1093,8 +1088,6 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
     Session session(new TestFileSystem(kInputDir_run1), nullptr, nullptr, nullptr, nullptr, nullptr);
     FileSystem *const fileSystem = session.getFileSystem();
     SymbolTable *const symbolTable = session.getSymbolTable();
-    CommandLineParser *const clp = session.getCommandLineParser();
-
     const PathId inputDirId = fileSystem->toPathId(kInputDir_run1.string(), symbolTable);
     EXPECT_TRUE(fileSystem->mkdirs(inputDirId));
 
@@ -1138,7 +1131,7 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
     std::unique_ptr<Compiler> compiler(new Compiler(&session));
     compiler->compile();
 
-    PathId cacheDirId = fileSystem->getCacheDir(clp->fileUnit(), symbolTable);
+    PathId cacheDirId = fileSystem->getCacheDir(symbolTable);
     EXPECT_TRUE(cacheDirId);
     EXPECT_TRUE(fileSystem->isDirectory(cacheDirId));
 
@@ -1150,12 +1143,12 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
       EXPECT_TRUE(libraryNameId);
 
       PathId ppCacheFileId =
-          fileSystem->getPpCacheFile(clp->fileUnit(), csf->getFileId(), libraryNameId, false, symbolTable);
+          fileSystem->getPpCacheFile(csf->getFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(ppCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(ppCacheFileId));
 
       PathId parseCacheFileId =
-          fileSystem->getParseCacheFile(clp->fileUnit(), csf->getPpOutputFileId(), libraryNameId, false, symbolTable);
+          fileSystem->getParseCacheFile(csf->getPpOutputFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(parseCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(parseCacheFileId));
 
@@ -1178,8 +1171,6 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
     Session session(new TestFileSystem(kInputDir_run2), nullptr, nullptr, nullptr, nullptr, nullptr);
     FileSystem *const fileSystem = session.getFileSystem();
     SymbolTable *const symbolTable = session.getSymbolTable();
-    CommandLineParser *const clp = session.getCommandLineParser();
-
     const PathId headerDirId = fileSystem->toPathId((kInputDir_run2 / kHeadersDirName).string(), symbolTable);
     EXPECT_TRUE(fileSystem->isDirectory(headerDirId));
 
@@ -1193,7 +1184,7 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
 
     EXPECT_TRUE(fileSystem->addMapping(kInputDir_run1.string(), kInputDir_run2.string()));
 
-    const std::vector<std::string> args{FileSystem::getProgramPath().string(),
+    const std::vector<std::string> args{PlatformFileSystem::getProgramPath().string(),
                                         "-nostdout",
                                         "-parse",
                                         "-nobuiltin",
@@ -1210,7 +1201,7 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
     std::unique_ptr<Compiler> compiler(new Compiler(&session));
     compiler->compile();
 
-    PathId cacheDirId = fileSystem->getCacheDir(clp->fileUnit(), symbolTable);
+    PathId cacheDirId = fileSystem->getCacheDir(symbolTable);
     EXPECT_TRUE(cacheDirId);
     EXPECT_TRUE(fileSystem->isDirectory(cacheDirId));
 
@@ -1222,12 +1213,12 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
       EXPECT_TRUE(libraryNameId);
 
       PathId ppCacheFileId =
-          fileSystem->getPpCacheFile(clp->fileUnit(), csf->getFileId(), libraryNameId, false, symbolTable);
+          fileSystem->getPpCacheFile(csf->getFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(ppCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(ppCacheFileId));
 
       PathId parseCacheFileId =
-          fileSystem->getParseCacheFile(clp->fileUnit(), csf->getPpOutputFileId(), libraryNameId, false, symbolTable);
+          fileSystem->getParseCacheFile(csf->getPpOutputFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(parseCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(parseCacheFileId));
 

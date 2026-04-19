@@ -98,8 +98,8 @@ std::pair<bool, bool> Report::makeDiffCompUnitReport() {
   FileSystem* const fileSystem = m_session->getFileSystem();
   CommandLineParser* const clp = m_session->getCommandLineParser();
   const PathId outputDirId = clp->getOutputDirId();
-  const PathId allLogFileId = fileSystem->getLogFile(false, st);
-  const PathId unitLogFileId = fileSystem->getLogFile(true, st);
+  const PathId allLogFileId = fileSystem->getLogFile(st);
+  const PathId unitLogFileId = fileSystem->getLogFile(st);
   const PathId diffFileId = fileSystem->getChild(outputDirId, kDiffLogFileName, st);
 
   bool readAll = false;
@@ -137,8 +137,8 @@ std::pair<bool, bool> Report::makeDiffCompUnitReport() {
   std::cout << "FILE UNIT LOG: " << PathIdPP(unitLogFileId, fileSystem) << std::endl;
   std::cout << "ALL FILES LOG: " << PathIdPP(allLogFileId, fileSystem) << std::endl;
 
-  const PathId allCompileDirId = fileSystem->getCompileDir(false, st);
-  const PathId unitCompileDirId = fileSystem->getCompileDir(true, st);
+  const PathId allCompileDirId = fileSystem->getCompileDir(st);
+  const PathId unitCompileDirId = fileSystem->getCompileDir(st);
   const fs::path allCompileDir = fileSystem->toPlatformAbsPath(allCompileDirId);
   const fs::path unitCompileDir = fileSystem->toPlatformAbsPath(unitCompileDirId);
   const fs::path diffFile = fileSystem->toPlatformAbsPath(diffFileId);

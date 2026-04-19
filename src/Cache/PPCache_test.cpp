@@ -79,7 +79,7 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
 
   const fs::path kTestDir = fs::path(testing::TempDir()) / "change_tolerance";
   const fs::path kBaseDir = kTestDir / "PrecompileLoadsSuccessfully";
-  const fs::path kProgramFile = FileSystem::getProgramPath();
+  const fs::path kProgramFile = PlatformFileSystem::getProgramPath();
 
   const fs::path kInputDir = kBaseDir / "input";
   const fs::path kOutputDir = kBaseDir / "output";

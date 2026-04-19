@@ -474,7 +474,7 @@ bool Compiler::createMultiProcessParser_() {
     }
   }
 
-  const PathId dirId = fileSystem->getPpMultiprocessingDir(clp->fileUnit(), symbols);
+  const PathId dirId = fileSystem->getPpMultiprocessingDir(symbols);
   fileSystem->mkdirs(dirId);
 
   if (nbProcesses == 1) {
@@ -593,7 +593,7 @@ bool Compiler::createMultiProcessPreProcessor_() {
     StrAppend(&batchCmd, " -wd ", wd);
   }
 
-  const PathId dirId = fileSystem->getParserMultiprocessingDir(clp->fileUnit(), symbols);
+  const PathId dirId = fileSystem->getParserMultiprocessingDir(symbols);
   fileSystem->mkdirs(dirId);
 
   if (nbProcesses == 1) {
@@ -1185,7 +1185,7 @@ bool Compiler::compile() {
     writePreprocMacroInstances();
     m_compileDesign->purgeParsers();
 
-    PathId uhdmFileId = fileSystem->getOutputUhdmFile(clp->fileUnit(), symbols);
+    PathId uhdmFileId = fileSystem->getOutputUhdmFile(symbols);
     m_compileDesign->writeUHDM(uhdmFileId);
     // Do not delete as now UHDM has to live past the compilation step
     // delete compileDesign;

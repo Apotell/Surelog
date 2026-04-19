@@ -92,10 +92,6 @@ class SymbolTable;
  *   different target.
  *
  */
-
-// NOTE(HS): All APIs dealing with std::filesystem needs to move down into PlatformFileSystem.
-// FileSystem shouldn't know anything about std::filesystem.
-
 class FileSystem {
  public:
   static constexpr std::string_view kCacheDirName = "cache";
@@ -114,30 +110,15 @@ class FileSystem {
   using filepath_to_working_directories_cache_t = std::map<std::string, std::string, std::less<>>;
 
  public:
-  // Returns the executing binary's path by querying the OS
-  // NOTE(HS): This needs to move down to PlatformFileSystem
-  static std::filesystem::path getProgramPath();
-
-  // Normalizes the input path
-  //   Standardizes the directory separator based on platform
-  //   No trailing slash regardless of whether the path exists or not
-  //   Shortens the path by removing any '.' and '..'
-  // NOTE(HS): This needs to move down to PlatformFileSystem
-  static std::filesystem::path normalize(const std::filesystem::path &p);
-  static bool is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child);
-
- public:
   // Convert a native filesystem path to PathId
   virtual PathId toPathId(std::string_view path, SymbolTable *symbolTable) = 0;
   // Returns the string/printable representation of the input id
   virtual std::string_view toPath(PathId id);
-  // Returns platform specific path i.e. a path that can be mapped on disk
-  // and can be used for, say, system commands.
-  // NOTE(HS): These needs to be deprecated!
+  // Returns a host-platform path that can be used with OS/file APIs.
+  // These adapters remain part of the common interface for existing callers.
   virtual std::filesystem::path toPlatformAbsPath(PathId id) = 0;
   virtual std::filesystem::path toPlatformRelPath(PathId id) = 0;
   // Returns base and relative paths
-  // NOTE(HS): This need to move down to PlatformFileSystem
   virtual std::pair<std::filesystem::path, std::filesystem::path> toSplitPlatformPath(PathId id) = 0;
 
   // Returns the current working directory as either the native filesystem
@@ -145,7 +126,6 @@ class FileSystem {
   virtual std::string getWorkingDir() = 0;
   virtual PathId getWorkingDir(SymbolTable *symbolTable);
 
-  // NOTE(HS): This needs to be deprecated!
   // Returns all accumulated working directories (including
   // the externally registered ones)
   virtual std::set<std::string> getWorkingDirs() = 0;
@@ -191,14 +171,12 @@ class FileSystem {
   bool saveContent(PathId fileId, const std::vector<char> &data, bool useTemp);
   bool saveContent(PathId fileId, const std::vector<char> &data);
 
-  // NOTE(HS): This needs to be deprecated!
   // Register a path remapping entry and call to remap a path
   // These can be used to make caches portable and to reconnect sources
   // after relocation.
   virtual bool addMapping(std::string_view what, std::string_view with) = 0;
   virtual std::string remap(std::string_view what) = 0;
 
-  // NOTE(HS): This needs to be deprecated!
   // Adds a working directory cache entry
   // This is used primarily for use with _sepcmd_ command.
   virtual bool addWorkingDirectoryCacheEntry(std::string_view prefix, std::string_view suffix) = 0;
@@ -208,57 +186,42 @@ class FileSystem {
 
   virtual PathId getWorkingDir(std::string_view dir, SymbolTable *symbolTable) = 0;
 
-  // NOTE(HS): These needs to be deprecated!
+  // Legacy path helpers retained for compatibility with the current compile/cache layout.
   virtual PathId getOutputDir(std::string_view dir, SymbolTable *symbolTable) = 0;
   virtual PathId getPrecompiledDir(PathId programId, SymbolTable *symbolTable) = 0;
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getLogFile(bool isUnitCompilation, std::string_view filename, SymbolTable *symbolTable) = 0;
-  PathId getLogFile(bool isUnitCompilation, SymbolTable *symbolTable);
+  virtual PathId getLogFile(std::string_view filename, SymbolTable *symbolTable) = 0;
+  PathId getLogFile(SymbolTable *symbolTable);
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getCacheDir(bool isUnitCompilation, std::string_view dirname, SymbolTable *symbolTable) = 0;
-  PathId getCacheDir(bool isUnitCompilation, SymbolTable *symbolTable);
+  virtual PathId getCacheDir(std::string_view dirname, SymbolTable *symbolTable) = 0;
+  PathId getCacheDir(SymbolTable *symbolTable);
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getCompileDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
+  virtual PathId getCompileDir(SymbolTable *symbolTable) = 0;
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
-                                 SymbolTable *symbolTable) = 0;
-  PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId, SymbolTable *symbolTable);
+  virtual PathId getPpOutputFile(PathId sourceFileId, std::string_view libraryName, SymbolTable *symbolTable) = 0;
+  PathId getPpOutputFile(PathId sourceFileId, SymbolId libraryNameId, SymbolTable *symbolTable);
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
-                                bool isPrecompiled, SymbolTable *symbolTable) = 0;
-  PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId, bool isPrecompiled,
-                        SymbolTable *symbolTable);
+  virtual PathId getPpCacheFile(PathId sourceFileId, std::string_view libraryName, bool isPrecompiled,
+                                SymbolTable *symbolTable) = 0;
+  PathId getPpCacheFile(PathId sourceFileId, SymbolId libraryNameId, bool isPrecompiled, SymbolTable *symbolTable);
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId, std::string_view libraryName,
-                                   bool isPrecompiled, SymbolTable *symbolTable) = 0;
-  PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId, SymbolId libraryNameId, bool isPrecompiled,
-                           SymbolTable *symbolTable);
+  virtual PathId getParseCacheFile(PathId ppFileId, std::string_view libraryName, bool isPrecompiled,
+                                   SymbolTable *symbolTable) = 0;
+  PathId getParseCacheFile(PathId ppFileId, SymbolId libraryNameId, bool isPrecompiled, SymbolTable *symbolTable);
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
-                                    SymbolTable *symbolTable) = 0;
-  virtual PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
-                                    SymbolTable *symbolTable);
+  virtual PathId getPythonCacheFile(PathId sourceFileId, std::string_view libraryName, SymbolTable *symbolTable) = 0;
+  virtual PathId getPythonCacheFile(PathId sourceFileId, SymbolId libraryNameId, SymbolTable *symbolTable);
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getPpMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
-  virtual PathId getParserMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
+  virtual PathId getPpMultiprocessingDir(SymbolTable *symbolTable) = 0;
+  virtual PathId getParserMultiprocessingDir(SymbolTable *symbolTable) = 0;
 
-  // NOTE(HS): These needs to be deprecated!
   virtual PathId getChunkFile(PathId ppFileId, int32_t chunkIndex, SymbolTable *symbolTable) = 0;
 
-  // NOTE(HS): These needs to be deprecated!
-  virtual PathId getCheckerDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
+  virtual PathId getCheckerDir(SymbolTable *symbolTable) = 0;
   virtual PathId getCheckerFile(PathId uhdmFileId, SymbolTable *symbolTable) = 0;
   virtual PathId getCheckerHtmlFile(PathId uhdmFileId, SymbolTable *symbolTable) = 0;
   virtual PathId getCheckerHtmlFile(PathId uhdmFileId, int32_t index, SymbolTable *symbolTable) = 0;
-  virtual PathId getOutputUhdmFile(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
+  virtual PathId getOutputUhdmFile(SymbolTable *symbolTable) = 0;
 
   // Rename directory/file represented by 'whatId' to 'toId'
   virtual bool rename(PathId whatId, PathId toId) = 0;

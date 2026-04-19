@@ -41,12 +41,62 @@
 #include "Surelog/Common/SymbolId.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
 #include "Surelog/Utils/StringUtils.h"
-#ifdef SURELOG_WITH_ZLIB
-#include <zlib.h>
+
+#if defined(_WIN32)
+#define NOMINMAX
+#include <Windows.h>
+#elif defined(__APPLE__)
+#include <mach-o/dyld.h>
+#include <sys/param.h>
+#include <unistd.h>
+#else
+#include <limits.h>
+#include <unistd.h>
 #endif
 
 namespace SURELOG {
 static constexpr bool kEnableLogs = false;
+
+std::filesystem::path PlatformFileSystem::getProgramPath() {
+#if defined(_WIN32)
+  char result[MAX_PATH + 1] = {'\0'};
+  auto count = GetModuleFileNameA(NULL, result, MAX_PATH);
+#elif defined(__APPLE__)
+  char result[MAXPATHLEN + 1] = {'\0'};
+  uint32_t count = MAXPATHLEN;
+  if (_NSGetExecutablePath(result, &count) != 0) {
+    count = readlink("/proc/self/exe", result, MAXPATHLEN);
+  }
+#else
+  char result[PATH_MAX + 1] = {'\0'};
+  ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+#endif
+  return (count > 0) ? std::filesystem::path(result) : std::filesystem::path();
+}
+
+std::filesystem::path PlatformFileSystem::normalize(const std::filesystem::path &p) {
+  std::filesystem::path norm = p.lexically_normal();
+  if (norm != norm.root_path()) {
+    std::string s = norm.string();
+    while (!s.empty() && ((s.back() == '\\') || (s.back() == '/'))) s.pop_back();
+    norm = s;
+  }
+  return norm;
+}
+
+bool PlatformFileSystem::is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child) {
+  std::filesystem::path np = normalize(parent);
+  std::filesystem::path nc = normalize(child);
+
+  if (np.root_path() == nc.root_path()) {
+    std::filesystem::path c = nc;
+    while ((np != c) && (c != nc.root_path())) {
+      c = c.parent_path();
+    }
+    return np == c;
+  }
+  return false;
+}
 
 PlatformFileSystem::PlatformFileSystem(const std::filesystem::path &workingDir)
     : m_workingDir(normalize(workingDir)), m_configurations{Configuration()} {
@@ -142,37 +192,6 @@ std::istream &PlatformFileSystem::openInput(const std::filesystem::path &filepat
   if (!filepath.is_absolute()) return m_nullInputStream;
 
   std::scoped_lock<std::mutex> lock(m_inputStreamsMutex);
-#ifdef SURELOG_WITH_ZLIB
-  if (filepath.extension() == ".gz") {
-    std::pair<InputStreams::iterator, bool> it = m_inputStreams.emplace(new std::istringstream);
-    std::istringstream &strm = *static_cast<std::istringstream *>(it.first->get());
-
-    const std::string file_path = filepath.string();
-
-    gzFile zipped_file = gzopen(file_path.c_str(), "rb");
-    if (zipped_file != nullptr) {
-      unsigned char unzipBuffer[8192];
-      unsigned int unzippedBytes;
-      std::vector<unsigned char> unzippedData;
-      while (true) {
-        unzippedBytes = gzread(zipped_file, unzipBuffer, 8192);
-        if (unzippedBytes > 0) {
-          unzippedData.insert(unzippedData.end(), unzipBuffer, unzipBuffer + unzippedBytes);
-        } else {
-          break;
-        }
-      }
-      gzclose(zipped_file);
-      const std::string unzippedContent(unzippedData.begin(), unzippedData.end());
-      strm.str(unzippedContent);
-    } else {
-      strm.setstate(std::istringstream::badbit);
-    }
-
-    return strm;
-  }
-#endif
-
   std::pair<InputStreams::iterator, bool> it = m_inputStreams.emplace(new std::ifstream);
 
   std::ifstream &strm = *static_cast<std::ifstream *>(it.first->get());
@@ -425,16 +444,15 @@ std::filesystem::path PlatformFileSystem::getPrecompiledDir(SymbolTable *symbolT
   return toPath(getPrecompiledDir(programId, symbolTable));
 }
 
-std::filesystem::path PlatformFileSystem::getCompilationDir(bool isUnitCompilation) const {
+std::filesystem::path PlatformFileSystem::getCompilationDir() const {
   std::filesystem::path compileDir = m_outputDir;
-  static_cast<void>(isUnitCompilation);
   return compileDir;
 }
 
-PathId PlatformFileSystem::getLogFile(bool isUnitCompilation, std::string_view filename, SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getLogFile(std::string_view filename, SymbolTable *symbolTable) {
   if (filename.empty()) return BadPathId;
 
-  std::filesystem::path logFile = getCompilationDir(isUnitCompilation);
+  std::filesystem::path logFile = getCompilationDir();
   logFile /= filename;
   PathId logFileId = toPathId(logFile.string(), symbolTable);
   if (kEnableLogs) {
@@ -443,10 +461,10 @@ PathId PlatformFileSystem::getLogFile(bool isUnitCompilation, std::string_view f
   return logFileId;
 }
 
-PathId PlatformFileSystem::getCacheDir(bool isUnitCompilation, std::string_view dirname, SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getCacheDir(std::string_view dirname, SymbolTable *symbolTable) {
   if (dirname.empty()) return BadPathId;
 
-  std::filesystem::path cacheDir = getCompilationDir(isUnitCompilation);
+  std::filesystem::path cacheDir = getCompilationDir();
   cacheDir /= dirname;
   PathId cacheDirId = toPathId(cacheDir.string(), symbolTable);
   if (kEnableLogs) {
@@ -455,8 +473,8 @@ PathId PlatformFileSystem::getCacheDir(bool isUnitCompilation, std::string_view 
   return cacheDirId;
 }
 
-PathId PlatformFileSystem::getCompileDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path cacheDir = getCompilationDir(isUnitCompilation);
+PathId PlatformFileSystem::getCompileDir(SymbolTable *symbolTable) {
+  std::filesystem::path cacheDir = getCompilationDir();
   PathId compileDirId = toPathId(cacheDir.string(), symbolTable);
   if (kEnableLogs) {
     std::cerr << "getCompileDir: " << PathIdPP(compileDirId, this) << std::endl;
@@ -464,11 +482,11 @@ PathId PlatformFileSystem::getCompileDir(bool isUnitCompilation, SymbolTable *sy
   return compileDirId;
 }
 
-PathId PlatformFileSystem::getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
+PathId PlatformFileSystem::getPpOutputFile(PathId sourceFileId, std::string_view libraryName,
                                            SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
-  std::filesystem::path ppOutputFilepath = getCompilationDir(isUnitCompilation);
+  std::filesystem::path ppOutputFilepath = getCompilationDir();
   ppOutputFilepath /= kPreprocessLibraryDirName;
   ppOutputFilepath /= libraryName;
   ppOutputFilepath /= toPlatformRelPath(sourceFileId);
@@ -479,8 +497,8 @@ PathId PlatformFileSystem::getPpOutputFile(bool isUnitCompilation, PathId source
   return ppFileId;
 }
 
-PathId PlatformFileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
-                                          bool isPrecompiled, SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getPpCacheFile(PathId sourceFileId, std::string_view libraryName, bool isPrecompiled,
+                                          SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
   std::filesystem::path ppCacheFile;
@@ -489,7 +507,7 @@ PathId PlatformFileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceF
     ppCacheFile /= libraryName;
     ppCacheFile /= toPlatformAbsPath(sourceFileId).filename();
   } else {
-    ppCacheFile = getCompilationDir(isUnitCompilation);
+    ppCacheFile = getCompilationDir();
     ppCacheFile /= kPreprocessCacheDirName;
     ppCacheFile /= libraryName;
     ppCacheFile /= toPlatformRelPath(sourceFileId);
@@ -503,8 +521,8 @@ PathId PlatformFileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceF
   return ppCacheFileId;
 }
 
-PathId PlatformFileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFileId, std::string_view libraryName,
-                                             bool isPrecompiled, SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getParseCacheFile(PathId ppFileId, std::string_view libraryName, bool isPrecompiled,
+                                             SymbolTable *symbolTable) {
   if (!ppFileId || libraryName.empty()) return BadPathId;
 
   const std::filesystem::path ppFile = toPath(ppFileId);
@@ -515,10 +533,10 @@ PathId PlatformFileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFi
     parseCacheFile /= libraryName;
     parseCacheFile /= ppFile.filename();
   } else {
-    std::filesystem::path ppOutputDir = getCompilationDir(isUnitCompilation);
+    std::filesystem::path ppOutputDir = getCompilationDir();
     ppOutputDir /= kPreprocessLibraryDirName;
 
-    parseCacheFile = getCompilationDir(isUnitCompilation);
+    parseCacheFile = getCompilationDir();
     parseCacheFile /= kParserCacheDirName;
     parseCacheFile /= ppFile.lexically_relative(ppOutputDir);
   }
@@ -531,11 +549,11 @@ PathId PlatformFileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFi
   return parseCacheFileId;
 }
 
-PathId PlatformFileSystem::getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
+PathId PlatformFileSystem::getPythonCacheFile(PathId sourceFileId, std::string_view libraryName,
                                               SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
-  std::filesystem::path pythonCacheFile = getCompilationDir(isUnitCompilation);
+  std::filesystem::path pythonCacheFile = getCompilationDir();
   pythonCacheFile /= kPythonCacheDirName;
   pythonCacheFile /= libraryName;
   pythonCacheFile /= toPlatformRelPath(sourceFileId);
@@ -548,8 +566,8 @@ PathId PlatformFileSystem::getPythonCacheFile(bool isUnitCompilation, PathId sou
   return pyCacheFileId;
 }
 
-PathId PlatformFileSystem::getPpMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path ppMultiprocessingDir = getCompilationDir(isUnitCompilation);
+PathId PlatformFileSystem::getPpMultiprocessingDir(SymbolTable *symbolTable) {
+  std::filesystem::path ppMultiprocessingDir = getCompilationDir();
   ppMultiprocessingDir /= kMultiprocessingPpDirName;
   PathId ppMultiprocessingDirId = toPathId(ppMultiprocessingDir.string(), symbolTable);
   if (kEnableLogs) {
@@ -558,8 +576,8 @@ PathId PlatformFileSystem::getPpMultiprocessingDir(bool isUnitCompilation, Symbo
   return ppMultiprocessingDirId;
 }
 
-PathId PlatformFileSystem::getParserMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path parserMultiprocessingDir = getCompilationDir(isUnitCompilation);
+PathId PlatformFileSystem::getParserMultiprocessingDir(SymbolTable *symbolTable) {
+  std::filesystem::path parserMultiprocessingDir = getCompilationDir();
   parserMultiprocessingDir /= kMultiprocessingParserDirName;
   return toPathId(parserMultiprocessingDir.string(), symbolTable);
 }
@@ -584,8 +602,8 @@ PathId PlatformFileSystem::getChunkFile(PathId ppFileId, int32_t chunkIndex, Sym
   return chunkFileId;
 }
 
-PathId PlatformFileSystem::getCheckerDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path checkerDir = getCompilationDir(isUnitCompilation);
+PathId PlatformFileSystem::getCheckerDir(SymbolTable *symbolTable) {
+  std::filesystem::path checkerDir = getCompilationDir();
   checkerDir /= kCheckerDirName;
   PathId checkerDirId = toPathId(checkerDir.string(), symbolTable);
   if (kEnableLogs) {
@@ -647,8 +665,8 @@ PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId, int32_t index, 
   return checkerHtmlFileId;
 }
 
-PathId PlatformFileSystem::getOutputUhdmFile(bool isUnitCompilation, SymbolTable *symbolTable) {
-  std::filesystem::path uhdmFile = getCompilationDir(isUnitCompilation);
+PathId PlatformFileSystem::getOutputUhdmFile(SymbolTable *symbolTable) {
+  std::filesystem::path uhdmFile = getCompilationDir();
   uhdmFile /= "surelog.uhdm";
   PathId uhdmFileId = toPathId(uhdmFile.string(), symbolTable);
   if (kEnableLogs) {
@@ -807,33 +825,6 @@ bool PlatformFileSystem::filesize(PathId fileId, std::streamsize *result) {
 
   const std::filesystem::path filepath = toPath(fileId);
   if (filepath.empty()) return false;
-
-#ifdef SURELOG_WITH_ZLIB
-  // NOTE(HS): This needs to be part of an independent class that implements all zlib
-  // specific operations. That implementation is compiled in the library conditionally
-  // and the VFS can mount it on user demand.
-  // We don't want to pollute native file system with compressed file logic.
-  if (filepath.extension() == ".gz") {
-    const std::string file_path = filepath.string();
-    gzFile zipped_file = gzopen(file_path.c_str(), "rb");
-    if (zipped_file == nullptr) return false;
-
-    unsigned char unzipBuffer[8192];
-    std::streamsize length = 0;
-    int unzippedBytes = 0;
-    while ((unzippedBytes = gzread(zipped_file, unzipBuffer, sizeof(unzipBuffer))) > 0) {
-      length += unzippedBytes;
-    }
-
-    const int closeStatus = gzclose(zipped_file);
-    if ((unzippedBytes < 0) || (closeStatus != Z_OK)) return false;
-
-    if (result != nullptr) {
-      *result = length;
-    }
-    return true;
-  }
-#endif
 
   std::error_code ec;
   std::streamsize length = std::filesystem::file_size(filepath, ec);

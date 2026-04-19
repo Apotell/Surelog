@@ -454,7 +454,7 @@ std::pair<PathId, fs::path> CommandLineParser::addWorkingDirectory_(const fs::pa
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbols = m_session->getSymbolTable();
 
-  const fs::path cwd = FileSystem::normalize(rcd.is_relative() ? wd / rcd : rcd);
+  const fs::path cwd = PlatformFileSystem::normalize(rcd.is_relative() ? wd / rcd : rcd);
 
   if (rcd.is_absolute()) {
     fileSystem->getWorkingDir(rcd.string(), symbols);
@@ -698,7 +698,7 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args, fs::p
       m_elaborate = true;
       m_writePpOutput = true;
       m_link = true;
-      PathId compileDirId = fileSystem->getCompileDir(m_fileUnit, symbols);
+      PathId compileDirId = fileSystem->getCompileDir(symbols);
       PathIdVector fileList;
       fileSystem->collect(compileDirId, ".sepcmd.json", symbols, fileList);
       for (const auto& fileId : fileList) {
@@ -778,7 +778,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
     // When surelog is embedded as a plugin in yosys, the program name is
     // "read_systemverilog", which breaks the -lowmem option
     pname = "surelog";
-    std::filesystem::path programPath = FileSystem::getProgramPath();
+    std::filesystem::path programPath = PlatformFileSystem::getProgramPath();
     programPath = programPath.parent_path();
     programPath = programPath / pname;
     m_programId = fileSystem->toPathId(programPath.string(), symbols);
@@ -831,8 +831,8 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
     m_outputDirId = fileSystem->getOutputDir(fileSystem->getWorkingDir(), symbols);
   }
   m_precompiledDirId = fileSystem->getPrecompiledDir(m_programId, symbols);
-  m_compileUnitDirId = fileSystem->getCompileDir(true, symbols);
-  m_compileAllDirId = fileSystem->getCompileDir(false, symbols);
+  m_compileUnitDirId = fileSystem->getCompileDir(symbols);
+  m_compileAllDirId = m_compileUnitDirId;
 
   fs::path wd = fileSystem->getWorkingDir();
   fs::path cd = wd;
@@ -876,7 +876,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         errors->addError(ErrorDefinition::CMD_WD_MISSING_DIR, loc);
         break;
       }
-      fs::path dir = FileSystem::normalize(all_arguments[++i]);
+      fs::path dir = PlatformFileSystem::normalize(all_arguments[++i]);
       if (dir.is_relative()) dir = fileSystem->getWorkingDir() / dir;
       PathId dirId = fileSystem->getWorkingDir(dir.string(), symbols);
       m_workingDirs.emplace_back(dirId);
@@ -894,8 +894,8 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         errors->addError(ErrorDefinition::CMD_REMAP_MISSING_DIRS, loc);
         break;
       }
-      const fs::path what = FileSystem::normalize(all_arguments[++i]);
-      const fs::path with = FileSystem::normalize(all_arguments[++i]);
+      const fs::path what = PlatformFileSystem::normalize(all_arguments[++i]);
+      const fs::path with = PlatformFileSystem::normalize(all_arguments[++i]);
       if (!what.is_absolute() || !with.is_absolute()) {
         errors->addError(ErrorDefinition::CMD_REMAP_MISSING_DIRS, loc);
         break;
@@ -1145,7 +1145,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         errors->addError(ErrorDefinition::CMD_LIBRARY_FILE_MISSING_FILE, loc);
         break;
       }
-      fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
       m_libraryFiles.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
@@ -1159,17 +1159,17 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
     } else if (all_arguments[i] == "-l") {
       ++i;
     } else if (all_arguments[i] == "-L") {
-      fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
       m_orderedLibraries.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
     } else if (all_arguments[i] == "-map") {
-      fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
       m_libraryMapFiles.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
     } else if (all_arguments[i] == "-cfgfile") {
-      fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
       m_configFiles.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
@@ -1182,7 +1182,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         errors->addError(ErrorDefinition::CMD_PP_FILE_MISSING_FILE, loc);
         break;
       }
-      fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
       if (filepath.is_relative()) {
         m_writePpOutputFileId = fileSystem->getChild(m_outputDirId, filepath.string(), symbols);
       } else {
@@ -1196,7 +1196,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         errors->addError(ErrorDefinition::CMD_PP_FILE_MISSING_FILE, loc);
         break;
       }
-      fs::path dirpath = FileSystem::normalize(all_arguments[++i]);
+      fs::path dirpath = PlatformFileSystem::normalize(all_arguments[++i]);
       if (dirpath.is_relative()) {
         m_cacheDirId = fileSystem->getChild(m_outputDirId, dirpath.string(), symbols);
       } else {
@@ -1347,7 +1347,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
       m_compile = true;
       m_elaborate = true;
       m_pythonListener = true;
-      fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
       m_pythonListenerFileId = fileSystem->toPathId(filepath.string(), symbols);
@@ -1363,7 +1363,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
       m_compile = true;
       m_elaborate = true;
       m_pythonEvalScript = true;
-      fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
       m_pythonEvalScriptId = fileSystem->toPathId(filepath.string(), symbols);
@@ -1379,7 +1379,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
       m_precompiledCacheAllowed = false;
     } else if (all_arguments[i] == "-sv") {
       if (((i + 1) < all_arguments.size()) && (all_arguments[i + 1][0] != '-')) {
-        fs::path filepath = FileSystem::normalize(all_arguments[++i]);
+        fs::path filepath = PlatformFileSystem::normalize(all_arguments[++i]);
         addWorkingDirectory_(cd, filepath.parent_path());
         if (filepath.is_relative()) filepath = cd / filepath;
         const PathId fileId = fileSystem->toPathId(filepath.string(), symbols);
@@ -1415,7 +1415,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
       Location loc(symbols->registerSymbol(all_arguments[i]));
       errors->addError(ErrorDefinition::CMD_PLUS_ARG_IGNORED, loc);
     } else {
-      fs::path filepath = FileSystem::normalize(all_arguments[i]);
+      fs::path filepath = PlatformFileSystem::normalize(all_arguments[i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
       const PathId fileId = fileSystem->toPathId(filepath.string(), symbols);
@@ -1500,7 +1500,7 @@ bool CommandLineParser::prepareCompilation_(int32_t argc, const char** argv) {
   }
 
   if (!m_logFileId) {
-    m_logFileId = fileSystem->getLogFile(m_fileUnit, symbols->getSymbol(m_logFileNameId), symbols);
+    m_logFileId = fileSystem->getLogFile(symbols->getSymbol(m_logFileNameId), symbols);
   }
 
   if (!fileSystem->mkdirs(m_outputDirId)) {
@@ -1542,7 +1542,7 @@ bool CommandLineParser::setupCache_() {
   bool noError = true;
 
   if (!m_cacheDirId) {
-    m_cacheDirId = fileSystem->getCacheDir(m_fileUnit, symbols);
+    m_cacheDirId = fileSystem->getCacheDir(symbols);
   }
 
   if (m_cacheAllowed) {
@@ -1565,7 +1565,7 @@ bool CommandLineParser::cleanCache() {
   bool noError = true;
 
   if (!m_cacheDirId) {
-    m_cacheDirId = fileSystem->getCacheDir(m_fileUnit, symbols);
+    m_cacheDirId = fileSystem->getCacheDir(symbols);
   }
 
   if (!m_cacheAllowed && !fileSystem->rmtree(m_cacheDirId)) {

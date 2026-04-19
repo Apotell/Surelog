@@ -25,7 +25,6 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <filesystem>
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -36,61 +35,7 @@
 #include "Surelog/Common/SymbolId.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
 
-#if defined(_WIN32)
-#define NOMINMAX
-#include <Windows.h>
-#elif defined(__APPLE__)
-#include <mach-o/dyld.h>
-#include <sys/param.h>
-#include <unistd.h>
-#else
-#include <limits.h>
-#include <unistd.h>
-#endif
-
 namespace SURELOG {
-
-std::filesystem::path FileSystem::getProgramPath() {
-#if defined(_WIN32)
-  char result[MAX_PATH + 1] = {'\0'};
-  auto count = GetModuleFileNameA(NULL, result, MAX_PATH);
-#elif defined(__APPLE__)
-  char result[MAXPATHLEN + 1] = {'\0'};
-  uint32_t count = MAXPATHLEN;
-  if (_NSGetExecutablePath(result, &count) != 0) {
-    count = readlink("/proc/self/exe", result, MAXPATHLEN);
-  }
-#else
-  char result[PATH_MAX + 1] = {'\0'};
-  ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
-#endif
-  return (count > 0) ? std::filesystem::path(result) : std::filesystem::path();
-}
-
-std::filesystem::path FileSystem::normalize(const std::filesystem::path &p) {
-  std::filesystem::path norm = p.lexically_normal();
-  // Remove the trailing slash, if any!
-  if (norm != norm.root_path()) {
-    std::string s = norm.string();
-    while ((s.back() == '\\') || (s.back() == '/')) s.pop_back();
-    norm = s;
-  }
-  return norm;
-}
-
-bool FileSystem::is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child) {
-  std::filesystem::path np = normalize(parent);
-  std::filesystem::path nc = normalize(child);
-
-  if (np.root_path() == nc.root_path()) {
-    std::filesystem::path c = nc;
-    while ((np != c) && (c != nc.root_path())) {
-      c = c.parent_path();
-    }
-    return np == c;
-  }
-  return false;
-}
 
 std::string_view FileSystem::toPath(PathId id) {
   static constexpr std::string_view kEmpty;
@@ -274,52 +219,46 @@ bool FileSystem::saveContent(PathId fileId, const std::vector<char> &content, bo
 
 bool FileSystem::saveContent(PathId fileId, const std::vector<char> &data) { return saveContent(fileId, data, false); }
 
-PathId FileSystem::getLogFile(bool isUnitCompilation, SymbolTable *symbolTable) {
-  return getLogFile(isUnitCompilation, kLogFileName, symbolTable);
-}
+PathId FileSystem::getLogFile(SymbolTable *symbolTable) { return getLogFile(kLogFileName, symbolTable); }
 
-PathId FileSystem::getCacheDir(bool isUnitCompilation, SymbolTable *symbolTable) {
-  return getCacheDir(isUnitCompilation, kCacheDirName, symbolTable);
-}
+PathId FileSystem::getCacheDir(SymbolTable *symbolTable) { return getCacheDir(kCacheDirName, symbolTable); }
 
-PathId FileSystem::getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
-                                   SymbolTable *symbolTable) {
+PathId FileSystem::getPpOutputFile(PathId sourceFileId, SymbolId libraryNameId, SymbolTable *symbolTable) {
   if (!sourceFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getPpOutputFile(isUnitCompilation, sourceFileId, libraryName, symbolTable);
+  return getPpOutputFile(sourceFileId, libraryName, symbolTable);
 }
 
-PathId FileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
-                                  bool isPrecompiled, SymbolTable *symbolTable) {
+PathId FileSystem::getPpCacheFile(PathId sourceFileId, SymbolId libraryNameId, bool isPrecompiled,
+                                  SymbolTable *symbolTable) {
   if (!sourceFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getPpCacheFile(isUnitCompilation, sourceFileId, libraryName, isPrecompiled, symbolTable);
+  return getPpCacheFile(sourceFileId, libraryName, isPrecompiled, symbolTable);
 }
 
-PathId FileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFileId, SymbolId libraryNameId,
-                                     bool isPrecompiled, SymbolTable *symbolTable) {
+PathId FileSystem::getParseCacheFile(PathId ppFileId, SymbolId libraryNameId, bool isPrecompiled,
+                                     SymbolTable *symbolTable) {
   if (!ppFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getParseCacheFile(isUnitCompilation, ppFileId, libraryName, isPrecompiled, symbolTable);
+  return getParseCacheFile(ppFileId, libraryName, isPrecompiled, symbolTable);
 }
 
-PathId FileSystem::getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
-                                      SymbolTable *symbolTable) {
+PathId FileSystem::getPythonCacheFile(PathId sourceFileId, SymbolId libraryNameId, SymbolTable *symbolTable) {
   if (!sourceFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getPythonCacheFile(isUnitCompilation, sourceFileId, libraryName, symbolTable);
+  return getPythonCacheFile(sourceFileId, libraryName, symbolTable);
 }
 
 std::filesystem::file_time_type FileSystem::modtime(PathId fileId) {

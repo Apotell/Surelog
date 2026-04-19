@@ -52,11 +52,14 @@ class SymbolTable;
  * it overridable.
  */
 
-// TODO(HS): We just need to get rid of isUnitCompilation arg alltogether.
-// No point in carrying baggage forward.
-
 class PlatformFileSystem /*final*/ : public FileSystem {
  public:
+  static std::filesystem::path getProgramPath();
+  static std::filesystem::path normalize(const std::filesystem::path &p);
+  static bool is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child);
+  virtual std::pair<std::filesystem::path, std::filesystem::path> toSplitPlatformPath(PathId id) = 0;
+
+
   struct Configuration final {
     std::filesystem::path m_sourceDir;
     std::filesystem::path m_cacheDir;
@@ -102,38 +105,42 @@ class PlatformFileSystem /*final*/ : public FileSystem {
   PathId getPrecompiledDir(PathId programId, SymbolTable *symbolTable) override;
 
   using FileSystem::getLogFile;
-  PathId getLogFile(bool isUnitCompilation, std::string_view filename, SymbolTable *symbolTable) override;
+  PathId getLogFile(std::string_view filename, SymbolTable *symbolTable) override;
 
-  PathId getCacheDir(bool isUnitCompilation, std::string_view dirname, SymbolTable *symbolTable) override;
+  using FileSystem::getCacheDir;
+  PathId getCacheDir(std::string_view dirname, SymbolTable *symbolTable) override;
 
-  PathId getCompileDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
+  using FileSystem::getCompileDir;
+  PathId getCompileDir(SymbolTable *symbolTable) override;
 
   using FileSystem::getPpOutputFile;
-  PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
-                         SymbolTable *symbolTable) override;
+  PathId getPpOutputFile(PathId sourceFileId, std::string_view libraryName, SymbolTable *symbolTable) override;
 
   using FileSystem::getPpCacheFile;
-  PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName, bool isPrecompiled,
+  PathId getPpCacheFile(PathId sourceFileId, std::string_view libraryName, bool isPrecompiled,
                         SymbolTable *symbolTable) override;
 
   using FileSystem::getParseCacheFile;
-  PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId, std::string_view libraryName, bool isPrecompiled,
+  PathId getParseCacheFile(PathId ppFileId, std::string_view libraryName, bool isPrecompiled,
                            SymbolTable *symbolTable) override;
 
   using FileSystem::getPythonCacheFile;
-  PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
-                            SymbolTable *symbolTable) override;
+  PathId getPythonCacheFile(PathId sourceFileId, std::string_view libraryName, SymbolTable *symbolTable) override;
 
-  PathId getPpMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
-  PathId getParserMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
+  using FileSystem::getPpMultiprocessingDir;
+  PathId getPpMultiprocessingDir(SymbolTable *symbolTable) override;
+  using FileSystem::getParserMultiprocessingDir;
+  PathId getParserMultiprocessingDir(SymbolTable *symbolTable) override;
 
   PathId getChunkFile(PathId ppFileId, int32_t chunkIndex, SymbolTable *symbolTable) override;
 
-  PathId getCheckerDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
+  using FileSystem::getCheckerDir;
+  PathId getCheckerDir(SymbolTable *symbolTable) override;
   PathId getCheckerFile(PathId uhdmFileId, SymbolTable *symbolTable) override;
   PathId getCheckerHtmlFile(PathId uhdmFileId, SymbolTable *symbolTable) override;
   PathId getCheckerHtmlFile(PathId uhdmFileId, int32_t index, SymbolTable *symbolTable) override;
-  PathId getOutputUhdmFile(bool isUnitCompilation, SymbolTable *symbolTable) override;
+  using FileSystem::getOutputUhdmFile;
+  PathId getOutputUhdmFile(SymbolTable *symbolTable) override;
 
   bool rename(PathId whatId, PathId toId) override;
   bool remove(PathId fileId) override;
@@ -173,7 +180,7 @@ class PlatformFileSystem /*final*/ : public FileSystem {
   // Internal helpers
   void addConfiguration(const std::filesystem::path &sourceDir);
   std::filesystem::path getPrecompiledDir(SymbolTable *symbolTable);
-  std::filesystem::path getCompilationDir(bool isUnitCompilation) const;
+  std::filesystem::path getCompilationDir() const;
 
   virtual std::istream &openInput(const std::filesystem::path &filepath, std::ios_base::openmode mode);
   virtual std::ostream &openOutput(const std::filesystem::path &filepath, std::ios_base::openmode mode);

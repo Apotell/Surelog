@@ -90,13 +90,13 @@ PathId ParseCache::getCacheFileId(PathId ppFileId) const {
     // an output file. Instead it uses the source itself i.e. from the original
     // source location. Compute the "potential" Preprocessor output file so the
     // cache file location would be correct.
-    ppFileId = fileSystem->getPpOutputFile(clp->fileUnit(), ppFileId, libName, symbols);
+    ppFileId = fileSystem->getPpOutputFile(ppFileId, libName, symbols);
   }
 
   Precompiled* const precompiled = m_session->getPrecompiled();
   const bool isPrecompiled = precompiled->isFilePrecompiled(ppFileId);
 
-  return fileSystem->getParseCacheFile(clp->fileUnit(), ppFileId, libName, isPrecompiled, symbols);
+  return fileSystem->getParseCacheFile(ppFileId, libName, isPrecompiled, symbols);
 }
 
 bool ParseCache::checkCacheIsValid(PathId cacheFileId, const ::ParseCache::Reader& root) const {

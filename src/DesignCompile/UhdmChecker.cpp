@@ -622,7 +622,7 @@ bool UhdmChecker::check(PathId uhdmFileId) {
 
   mergeColumnCoverage();
 
-  if (!fileSystem->mkdirs(fileSystem->getCheckerDir(clp->fileUnit(), symbols))) {
+  if (!fileSystem->mkdirs(fileSystem->getCheckerDir(symbols))) {
     return false;
   }
 

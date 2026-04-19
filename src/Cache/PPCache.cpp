@@ -89,13 +89,13 @@ PathId PPCache::getCacheFileId(PathId sourceFileId) const {
     // an output file. Instead it uses the source itself i.e. from the original
     // source location. Compute the "potential" Preprocessor output file so the
     // cache file location would be correct.
-    sourceFileId = fileSystem->getPpOutputFile(clp->fileUnit(), sourceFileId, libName, symbols);
+    sourceFileId = fileSystem->getPpOutputFile(sourceFileId, libName, symbols);
   }
 
   Precompiled* const precompiled = m_session->getPrecompiled();
   const bool isPrecompiled = precompiled->isFilePrecompiled(sourceFileId);
 
-  return fileSystem->getPpCacheFile(clp->fileUnit(), sourceFileId, libName, isPrecompiled, symbols);
+  return fileSystem->getPpCacheFile(sourceFileId, libName, isPrecompiled, symbols);
 }
 
 void PPCache::cacheSymbols(::PPCache::Builder builder, SymbolTable& sourceSymbols) {

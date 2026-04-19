@@ -74,7 +74,7 @@ PathId PythonAPICache::getCacheFileId(PathId sourceFileId) const {
   SymbolTable* symbolTable = m_session->getSymbolTable();
 
   const std::string_view libName = m_listener->getCompileSourceFile()->getLibrary()->getName();
-  return m_fileSystem->getPythonCacheFile(m_session->fileunit(), sourceFileId, libName, symbolTable);
+  return m_fileSystem->getPythonCacheFile(sourceFileId, libName, symbolTable);
 }
 
 bool PythonAPICache::checkCacheIsValid(PathId cacheFileId, const ::PythonAPICache::Reader& root) const {

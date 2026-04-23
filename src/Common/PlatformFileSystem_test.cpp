@@ -178,6 +178,17 @@ TEST(PlatformFileSystemTest, LoadSaveOperations) {
   EXPECT_EQ(actualContent, expectedContent);
 }
 
+#if defined(_WIN32)
+TEST(PlatformFileSystemTest, IsSubpathIgnoresWindowsDriveLetterCase) {
+  const fs::path parent = "C:/Work/Proj";
+  const fs::path child = "c:\\work\\proj\\rtl\\dut.sv";
+  const fs::path outside = "D:/work/proj/rtl/dut.sv";
+
+  EXPECT_TRUE(PlatformFileSystem::is_subpath(parent, child));
+  EXPECT_FALSE(PlatformFileSystem::is_subpath(parent, outside));
+}
+#endif
+
 TEST(PlatformFileSystemTest, BasicFileOperations) {
   // GTEST_SKIP() << "Temporarily skipped";
   const fs::path testdir = fs::path(testing::TempDir()) / getUniqueTempFileName();

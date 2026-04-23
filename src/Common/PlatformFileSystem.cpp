@@ -24,6 +24,7 @@
 #include "Surelog/Common/PlatformFileSystem.h"
 
 #include <algorithm>
+#include <cctype>
 #include <cstddef>
 #include <cstdint>
 #include <filesystem>
@@ -84,9 +85,21 @@ std::filesystem::path PlatformFileSystem::normalize(const std::filesystem::path 
   return norm;
 }
 
+std::filesystem::path PlatformFileSystem::normalizeForComparison(const std::filesystem::path &p) {
+  std::filesystem::path normalized = normalize(p);
+#if defined(_WIN32)
+  normalized.make_preferred();
+  std::string text = normalized.string();
+  std::transform(text.begin(), text.end(), text.begin(),
+                 [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
+  normalized = text;
+#endif
+  return normalized;
+}
+
 bool PlatformFileSystem::is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child) {
-  std::filesystem::path np = normalize(parent);
-  std::filesystem::path nc = normalize(child);
+  std::filesystem::path np = normalizeForComparison(parent);
+  std::filesystem::path nc = normalizeForComparison(child);
 
   if (np.root_path() == nc.root_path()) {
     std::filesystem::path c = nc;

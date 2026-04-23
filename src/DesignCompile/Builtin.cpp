@@ -252,9 +252,6 @@ void Builtin::addBuiltinTypes() const {
 }
 
 void Builtin::addBuiltinMacros(CompilationUnit* compUnit) const {
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  SymbolTable* const symbolTable = m_session->getSymbolTable();
-  PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(symbolTable), "builtin.sv", symbolTable);
   PreprocessHarness ppharness(m_session);
   ppharness.preprocess(R"(`define SV_COV_START 0
 `define SV_COV_STOP 1
@@ -273,16 +270,12 @@ void Builtin::addBuiltinMacros(CompilationUnit* compUnit) const {
 `define SV_COV_PARTIAL 2
 `define SURELOG 1
 )",
-                       compUnit, fileId);
+                       compUnit, BadPathId);
 }
 
 void Builtin::addBuiltinClasses() const {
   // builtin.sv compilation
-  FileSystem* const fileSystem = m_session->getFileSystem();
   uhdm::Serializer& s = m_compileDesign->getSerializer();
-  // A fake path to keep the API simple!
-  SymbolTable* const symbolTable = m_session->getSymbolTable();
-  PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(symbolTable), "builtin.sv", symbolTable);
   ParserHarness pharness(m_session);
   CompilerHarness charness(m_session);
   FileContent* fC1 = pharness.parse(
@@ -357,7 +350,7 @@ void Builtin::addBuiltinClasses() const {
   endclass
 
         )",
-      m_compileDesign->getCompiler(), fileId);
+      m_compileDesign->getCompiler(), BadPathId);
 
   Package* const builtinPackage = m_design->getPackage("builtin");
 

@@ -40,6 +40,7 @@
 #include <vector>
 
 #include "Surelog/CommandLine/CommandLineParser.h"
+#include "Surelog/Common/AvfsFileSystem.h"
 #include "Surelog/Common/Containers.h"
 #include "Surelog/Common/FileSystem.h"
 #include "Surelog/Common/PathId.h"
@@ -78,6 +79,19 @@ const std::string_view kSystemCommandSeparator = "; ";
 #endif
 
 namespace fs = std::filesystem;
+
+namespace {
+
+void appendMountArguments(FileSystem* fileSystem, std::string* command) {
+  const AvfsFileSystem* const avfs = dynamic_cast<const AvfsFileSystem*>(fileSystem);
+  if (avfs == nullptr) return;
+
+  for (const AvfsFileSystem::MountInfo& mount : avfs->getMounts()) {
+    StrAppend(command, " -mount ", mount.m_variableName, " ", mount.m_root);
+  }
+}
+
+}  // namespace
 
 Compiler::Compiler(Session* session)
     : m_session(session),
@@ -427,9 +441,11 @@ bool Compiler::createMultiProcessParser_() {
     std::string targetname =
         StrCat(absoluteIndex, "_", std::get<1>(fileSystem->getLeaf(compiler->getPpOutputFileId(), symbols)));
     std::string_view svFile = clp->isSVFile(compiler->getFileId()) ? " -sv " : " ";
+    const fs::path ppOutputFile = fileSystem->toPlatformAbsPath(compiler->getPpOutputFileId());
     std::string batchCmd =
         StrCat(profile, fileUnit, sverilog, synth, noHash, " -parseonly -nostdout -nobuiltin -mt 0 -mp 0 -l ",
-               targetname + ".log ", svFile, fileSystem->toPath(compiler->getPpOutputFileId()));
+               targetname + ".log ", svFile, ppOutputFile);
+    appendMountArguments(fileSystem, &batchCmd);
     for (const std::string& wd : fileSystem->getWorkingDirs()) {
       StrAppend(&batchCmd, " -wd ", wd);
     }
@@ -461,6 +477,7 @@ bool Compiler::createMultiProcessParser_() {
 
       std::string batchCmd = StrCat(profile, fileUnit, sverilog, synth, noHash,
                                     " -parseonly -nostdout -nobuiltin -mt 0 -mp 0 -l ", targetname + ".log ", fileList);
+      appendMountArguments(fileSystem, &batchCmd);
       for (const std::string& wd : fileSystem->getWorkingDirs()) {
         StrAppend(&batchCmd, " -wd ", wd);
       }
@@ -485,8 +502,9 @@ bool Compiler::createMultiProcessParser_() {
       return false;
     }
 
+    const fs::path batchFile = fileSystem->toPlatformAbsPath(fileId);
     const std::string command = StrCat("cd ", workingDir, kSystemCommandSeparator, programPath, " -o ", outputDir,
-                                       " -nostdout -batch ", fileSystem->toPath(fileId));
+                                       " -nostdout -batch ", batchFile);
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog parsing status: " << result << std::endl;
@@ -521,8 +539,8 @@ bool Compiler::createMultiProcessParser_() {
       return false;
     }
 
-    const std::string command =
-        StrCat("cd ", fileSystem->toPath(dirId), "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
+    const fs::path cmakeDir = fileSystem->toPlatformAbsPath(dirId);
+    const std::string command = StrCat("cd ", cmakeDir, "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog parsing status: " << result << std::endl;
@@ -565,15 +583,15 @@ bool Compiler::createMultiProcessPreProcessor_() {
   // Source files (.v, .sv on the command line)
   for (const PathId& id : clp->getSourceFiles()) {
     std::string_view svFile = clp->isSVFile(id) ? " -sv " : " ";
-    StrAppend(&fileList, svFile, fileSystem->toPath(id));
+    StrAppend(&fileList, svFile, fileSystem->toPlatformAbsPath(id));
   }
   // Library files (-v <file>)
   for (const PathId& id : clp->getLibraryFiles()) {
-    StrAppend(&fileList, " -v ", fileSystem->toPath(id));
+    StrAppend(&fileList, " -v ", fileSystem->toPlatformAbsPath(id));
   }
   // (-y <path> +libext+<ext>)
   for (const PathId& id : clp->getLibraryPaths()) {
-    StrAppend(&fileList, " -y ", fileSystem->toPath(id));
+    StrAppend(&fileList, " -y ", fileSystem->toPlatformAbsPath(id));
   }
   // +libext+
   for (const SymbolId& id : clp->getLibraryExtensions()) {
@@ -582,13 +600,14 @@ bool Compiler::createMultiProcessPreProcessor_() {
   }
   // Include dirs
   for (const PathId& id : clp->getIncludePaths()) {
-    StrAppend(&fileList, " -I", fileSystem->toPath(id));
+    StrAppend(&fileList, " -I", fileSystem->toPlatformAbsPath(id));
   }
 
   std::string batchCmd = StrCat(profile, fileUnit, sverilog, synth, noHash,
                                 " -writepp -mt 0 -mp 0 -nobuiltin -noparse "
                                 "-nostdout -l preprocessing.log -cd ",
                                 workingDir, fileList);
+  appendMountArguments(fileSystem, &batchCmd);
   for (const std::string& wd : fileSystem->getWorkingDirs()) {
     StrAppend(&batchCmd, " -wd ", wd);
   }
@@ -603,8 +622,9 @@ bool Compiler::createMultiProcessPreProcessor_() {
       std::cerr << "FATAL: Could not create file: " << PathIdPP(fileId, fileSystem) << std::endl;
       return false;
     }
-    std::string command = StrCat("cd ", workingDir, kSystemCommandSeparator, programPath, " -o ", outputDir,
-                                 " -nostdout -batch ", fileSystem->toPath(fileId));
+    const fs::path batchFile = fileSystem->toPlatformAbsPath(fileId);
+    std::string command =
+        StrCat("cd ", workingDir, kSystemCommandSeparator, programPath, " -o ", outputDir, " -nostdout -batch ", batchFile);
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog preproc status: " << result << std::endl;
@@ -631,8 +651,8 @@ bool Compiler::createMultiProcessPreProcessor_() {
       return false;
     }
 
-    std::string command =
-        StrCat("cd ", fileSystem->toPath(dirId), "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
+    const fs::path cmakeDir = fileSystem->toPlatformAbsPath(dirId);
+    std::string command = StrCat("cd ", cmakeDir, "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog preproc status: " << result << std::endl;

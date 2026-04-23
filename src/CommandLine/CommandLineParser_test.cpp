@@ -36,6 +36,7 @@
 #include <vector>
 
 #include "Surelog/Common/FileSystem.h"
+#include "Surelog/Common/AvfsFileSystem.h"
 #include "Surelog/Common/PathId.h"
 #include "Surelog/Common/PlatformFileSystem.h"
 #include "Surelog/Common/Session.h"
@@ -52,6 +53,77 @@ class TestFileSystem final : public PlatformFileSystem {
   explicit TestFileSystem(const fs::path& wd) : PlatformFileSystem(wd) {}
   TestFileSystem() : TestFileSystem(fs::current_path()) {}
 };
+
+TEST(CommandLineParserTest, AvfsMountCanonicalizesSourceFiles) {
+  std::error_code ec;
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir()) / "avfs-mount-clp";
+  const fs::path filepath = testdir / "dut.sv";
+
+  fs::remove_all(testdir, ec);
+  fs::create_directories(testdir, ec);
+  ASSERT_FALSE(ec) << ec;
+
+  std::ofstream strm(filepath);
+  ASSERT_TRUE(strm.is_open());
+  strm << "module top; endmodule\n";
+  strm.close();
+
+  const std::vector<std::string> args{programPath.string(), "-nostdout", "-mount", "DataDir", ".", "dut.sv"};
+  std::vector<const char*> cargs;
+  cargs.reserve(args.size());
+  std::transform(args.begin(), args.end(), std::back_inserter(cargs),
+                 [](const std::string& arg) { return arg.c_str(); });
+
+  Session session(new AvfsFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
+  FileSystem* const fileSystem = session.getFileSystem();
+  CommandLineParser* const clp = session.getCommandLineParser();
+
+  ASSERT_TRUE(session.parseCommandLine(cargs.size(), cargs.data(), false, false));
+  ASSERT_EQ(clp->getSourceFiles().size(), 1);
+  EXPECT_EQ(fileSystem->toPath(clp->getSourceFiles().front()), "$DataDir/dut.sv");
+
+  fs::remove_all(testdir, ec);
+  EXPECT_FALSE(ec) << ec;
+}
+
+TEST(CommandLineParserTest, AvfsMountResolvesPlatformPathsForSourceAndIncludeIds) {
+  std::error_code ec;
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir()) / "avfs-mount-platform-paths";
+  const fs::path filepath = testdir / "dut.sv";
+
+  fs::remove_all(testdir, ec);
+  fs::create_directories(testdir, ec);
+  ASSERT_FALSE(ec) << ec;
+
+  std::ofstream strm(filepath);
+  ASSERT_TRUE(strm.is_open());
+  strm << "module top; endmodule\n";
+  strm.close();
+
+  const std::vector<std::string> args{
+      programPath.string(), "-nostdout", "-mount", "DataDir", ".", std::string("-I") + ".", "dut.sv"};
+  std::vector<const char*> cargs;
+  cargs.reserve(args.size());
+  std::transform(args.begin(), args.end(), std::back_inserter(cargs),
+                 [](const std::string& arg) { return arg.c_str(); });
+
+  Session session(new AvfsFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
+  FileSystem* const fileSystem = session.getFileSystem();
+  CommandLineParser* const clp = session.getCommandLineParser();
+
+  ASSERT_TRUE(session.parseCommandLine(cargs.size(), cargs.data(), false, false));
+  ASSERT_EQ(clp->getSourceFiles().size(), 1);
+  ASSERT_EQ(clp->getIncludePaths().size(), 1);
+  EXPECT_EQ(fileSystem->toPath(clp->getSourceFiles().front()), "$DataDir/dut.sv");
+  EXPECT_EQ(fileSystem->toPath(clp->getIncludePaths().front()), "$DataDir");
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getSourceFiles().front()), filepath);
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getIncludePaths().front()), testdir);
+
+  fs::remove_all(testdir, ec);
+  EXPECT_FALSE(ec) << ec;
+}
 
 TEST(CommandLineParserTest, WorkingDirectories1) {
   // Trivial case: One root working directory and many relative sub directories

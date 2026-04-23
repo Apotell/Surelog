@@ -45,6 +45,8 @@ TEST(AvfsFileSystemTest, ReadWriteOperationsGoThroughFilesystemAbstraction) {
 
   std::error_code ec;
   fs::remove_all(testdir, ec);
+  fs::create_directories(filepath.parent_path(), ec);
+  ASSERT_FALSE(ec);
 
   std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
   std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
@@ -65,6 +67,75 @@ TEST(AvfsFileSystemTest, ReadWriteOperationsGoThroughFilesystemAbstraction) {
 
   fs::remove_all(testdir, ec);
 }
+
+TEST(AvfsFileSystemTest, RegisteredMountStoresPathsUsingVariables) {
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-mounted-fs");
+  const fs::path filepath = testdir / "logs" / "abc.log";
+
+  std::error_code ec;
+  fs::remove_all(testdir, ec);
+
+  std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
+  std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
+
+  ASSERT_TRUE(fileSystem->registerMount("DataDir", testdir));
+
+  const PathId dirId = fileSystem->getOutputDir(testdir.string(), symbolTable.get());
+  ASSERT_NE(dirId, BadPathId);
+  EXPECT_EQ(fileSystem->toPath(dirId), "$DataDir");
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(dirId), testdir);
+
+  const PathId fileId = fileSystem->toPathId(filepath.string(), symbolTable.get());
+  ASSERT_NE(fileId, BadPathId);
+  EXPECT_EQ(fileSystem->toPath(fileId), "$DataDir/logs/abc.log");
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(fileId), filepath);
+}
+
+TEST(AvfsFileSystemTest, RegisteredMountUsesVariablePathsForIo) {
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-variable-io");
+  const fs::path filepath = testdir / "nested" / "file.sv";
+
+  std::error_code ec;
+  fs::remove_all(testdir, ec);
+
+  std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
+  std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
+
+  ASSERT_TRUE(fileSystem->registerMount("DataDir", testdir));
+
+  const PathId fileId = fileSystem->toPathId(filepath.string(), symbolTable.get());
+  ASSERT_NE(fileId, BadPathId);
+  ASSERT_EQ(fileSystem->toPath(fileId), "$DataDir/nested/file.sv");
+
+  constexpr std::string_view kContent = "module top; endmodule\n";
+  EXPECT_TRUE(fileSystem->writeContent(fileId, kContent));
+
+  std::string content;
+  EXPECT_TRUE(fileSystem->readContent(fileId, content));
+  EXPECT_EQ(content, kContent);
+  EXPECT_TRUE(fileSystem->exists(fileId));
+  EXPECT_TRUE(fs::exists(filepath));
+
+  fs::remove_all(testdir, ec);
+}
+
+#if defined(_WIN32)
+TEST(AvfsFileSystemTest, RegisteredMountMatchesWindowsPathsCaseInsensitively) {
+  const fs::path testdir = "C:/Work/Proj";
+  const fs::path filepath = "c:\\work\\proj\\rtl\\dut.sv";
+  const fs::path expectedResolvedPath = PlatformFileSystem::normalize(testdir / "rtl" / "dut.sv");
+
+  std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
+  std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
+
+  ASSERT_TRUE(fileSystem->registerMount("DataDir", testdir));
+
+  const PathId fileId = fileSystem->toPathId(filepath.string(), symbolTable.get());
+  ASSERT_NE(fileId, BadPathId);
+  EXPECT_EQ(fileSystem->toPath(fileId), "$DataDir/rtl/dut.sv");
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(fileId), expectedResolvedPath);
+}
+#endif
 
 TEST(AvfsFileSystemTest, SessionDefaultsToAvfsFileSystem) {
   Session session;

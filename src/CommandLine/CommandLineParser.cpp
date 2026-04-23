@@ -35,6 +35,7 @@
 #include <vector>
 
 #include "Surelog/API/PythonAPI.h"
+#include "Surelog/Common/AvfsFileSystem.h"
 #include "Surelog/Common/FileSystem.h"
 #include "Surelog/Common/PathId.h"
 #include "Surelog/Common/PlatformFileSystem.h"
@@ -126,6 +127,7 @@ static const std::initializer_list<std::string_view> helpText = {
     "  -Pparameter=value     Top level parameter override",
     "  -pvalue+parameter=value",
     "                        Top level parameter override",
+    "  -mount <var> <dir>    Registers an AVFS mount variable before path parsing",
     "  -sverilog/-sv         Forces all files to be parsed as SystemVerilog",
     "                        files",
     "  -sv <file>            Forces the following file to be parsed as",
@@ -824,6 +826,49 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
   }
 
   std::vector<std::string> all_arguments;
+  if (AvfsFileSystem* const avfs = dynamic_cast<AvfsFileSystem*>(fileSystem)) {
+    fs::path mountWd = fileSystem->getWorkingDir();
+    fs::path mountCd = mountWd;
+
+    for (size_t i = 0; i < cmd_line.size(); ++i) {
+      const std::string& argument = cmd_line[i];
+      if (argument == "-wd") {
+        if (i == (cmd_line.size() - 1)) {
+          Location loc(symbols->registerSymbol(argument));
+          errors->addError(ErrorDefinition::CMD_WD_MISSING_DIR, loc);
+          break;
+        }
+
+        fs::path dir = PlatformFileSystem::normalize(cmd_line[++i]);
+        if (dir.is_relative()) dir = mountWd / dir;
+        mountWd = mountCd = dir;
+      } else if (argument == "-cd") {
+        if (i == (cmd_line.size() - 1)) {
+          Location loc(symbols->registerSymbol(argument));
+          errors->addError(ErrorDefinition::CMD_CD_MISSING_DIR, loc);
+          break;
+        }
+
+        fs::path dir = PlatformFileSystem::normalize(cmd_line[++i]);
+        mountCd = dir.is_relative() ? PlatformFileSystem::normalize(mountCd / dir) : dir;
+      } else if (argument == "-mount") {
+        Location loc(symbols->registerSymbol(argument));
+        if ((i + 2) >= cmd_line.size()) {
+          errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);
+          break;
+        }
+
+        const std::string variableName = cmd_line[++i];
+        fs::path root = PlatformFileSystem::normalize(cmd_line[++i]);
+        if (root.is_relative()) root = PlatformFileSystem::normalize(mountCd / root);
+        if (!root.is_absolute() || !avfs->registerMount(variableName, root)) {
+          errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);
+          break;
+        }
+      }
+    }
+  }
+
   processOutputDirectory_(cmd_line);
 
   // Setup a few dependent input & output directories
@@ -901,6 +946,13 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         break;
       }
       fileSystem->addMapping(what.string(), with.string());
+    } else if (all_arguments[i] == "-mount") {
+      Location loc(symbols->registerSymbol(all_arguments[i]));
+      if ((i + 2) >= all_arguments.size()) {
+        errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);
+        break;
+      }
+      i += 2;
     } else if (all_arguments[i] == "-d") {
       if (i == all_arguments.size() - 1) {
         Location loc(symbols->registerSymbol(all_arguments[i]));

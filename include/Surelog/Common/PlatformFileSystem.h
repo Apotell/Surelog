@@ -56,9 +56,8 @@ class PlatformFileSystem /*final*/ : public FileSystem {
  public:
   static std::filesystem::path getProgramPath();
   static std::filesystem::path normalize(const std::filesystem::path &p);
+  static std::filesystem::path normalizeForComparison(const std::filesystem::path &p);
   static bool is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child);
-  virtual std::pair<std::filesystem::path, std::filesystem::path> toSplitPlatformPath(PathId id) = 0;
-
 
   struct Configuration final {
     std::filesystem::path m_sourceDir;

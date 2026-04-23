@@ -24,6 +24,7 @@
 #include <filesystem>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -36,8 +37,16 @@ class SymbolTable;
 
 class AvfsFileSystem final : public FileSystem {
  public:
+  struct MountInfo final {
+    std::string m_variableName;
+    std::filesystem::path m_root;
+  };
+
   explicit AvfsFileSystem(const std::filesystem::path& workingDir);
   ~AvfsFileSystem() override;
+
+  bool registerMount(std::string_view variableName, const std::filesystem::path& root);
+  std::vector<MountInfo> getMounts() const;
 
   PathId toPathId(std::string_view path, SymbolTable* symbolTable) override;
   std::string_view toPath(PathId id) override;
@@ -127,19 +136,35 @@ class AvfsFileSystem final : public FileSystem {
   void printConfiguration(std::ostream& out) override;
 
  private:
+  struct MountRegistration final {
+    std::string m_variableName;
+    std::string m_variablePrefix;
+    std::string m_logicalMountPoint;
+    std::filesystem::path m_root;
+  };
+
+  using MountRegistrations = std::vector<MountRegistration>;
   using InputStreams = std::vector<std::unique_ptr<std::istream>>;
   using OutputStreams = std::vector<std::unique_ptr<std::ostream>>;
 
-  std::istream& openManagedInput(const std::filesystem::path& filepath, std::ios_base::openmode mode);
-  std::ostream& openManagedOutput(const std::filesystem::path& filepath, std::ios_base::openmode mode);
-  void registerPathMount(PathId id, bool useParentPath);
-  void registerMount(const std::filesystem::path& root);
-  bool isManagedByAvfs(const std::filesystem::path& path) const;
+  static std::string normalizeVariablePath(std::string_view path);
+  static std::string normalizeVariableName(std::string_view variableName);
+  static bool isManagedPath(std::string_view path);
+
+  std::filesystem::path resolveManagedPath(std::string_view path) const;
+  PathId translateToPlatformPathId(PathId id) const;
+  PathId translateFromPlatformPathId(PathId id, SymbolTable* symbolTable) const;
+  const MountRegistration* findMountByVariable(std::string_view variableName) const;
+  const MountRegistration* findMountForPlatformPath(const std::filesystem::path& path) const;
+  std::string makeManagedPath(const MountRegistration& mount, const std::filesystem::path& path) const;
+  std::istream& openManagedInput(std::string_view filepath, std::ios_base::openmode mode);
+  std::ostream& openManagedOutput(std::string_view filepath, std::ios_base::openmode mode);
+  std::filesystem::path resolveInputPath(std::string_view path) const;
 
   std::unique_ptr<PlatformFileSystem> m_platform;
   std::unique_ptr<avfs::VfsRuntime> m_runtime;
   mutable std::mutex m_mountsMutex;
-  std::vector<std::filesystem::path> m_mountedRoots;
+  MountRegistrations m_mounts;
   std::mutex m_inputStreamsMutex;
   std::mutex m_outputStreamsMutex;
   InputStreams m_inputStreams;

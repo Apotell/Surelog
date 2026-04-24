@@ -825,6 +825,15 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
     }
   }
 
+  // REVIEW(HS): How would "-mount <var> <path>" allow for different mount targets?
+  // How would I configure a compressed file or a webserver?
+  // Basically, mount targets can have more than just the "path" as a value.
+  // For a compressed file, I could have a password or certificate to go with it
+  // For a webserver, I have address, port, and other server configuration like local proxy server
+  // I would suggest accepting the mount point targets as json file.
+  //   -mount <mount-config.json>
+  // and parse the json file to initialize the different backends.
+
   std::vector<std::string> all_arguments;
   if (AvfsFileSystem* const avfs = dynamic_cast<AvfsFileSystem*>(fileSystem)) {
     fs::path mountWd = fileSystem->getWorkingDir();
@@ -840,6 +849,8 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         }
 
         fs::path dir = PlatformFileSystem::normalize(cmd_line[++i]);
+        // REVIEW(HS): Shouldn't the following be ```dir = fileSystem->getWorkingDir() / dir```
+        // Since, all -wd options are relative to the FileSystem's working directory.
         if (dir.is_relative()) dir = mountWd / dir;
         mountWd = mountCd = dir;
       } else if (argument == "-cd") {
@@ -850,6 +861,8 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         }
 
         fs::path dir = PlatformFileSystem::normalize(cmd_line[++i]);
+        // REVIEW(HS): Shouldn't the following be ```... PlatformFileSystem::normalize(mountWd / dir) ...```
+        // Since, all -cd options are relative to the last -wd directory.
         mountCd = dir.is_relative() ? PlatformFileSystem::normalize(mountCd / dir) : dir;
       } else if (argument == "-mount") {
         Location loc(symbols->registerSymbol(argument));
@@ -860,6 +873,9 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
 
         const std::string variableName = cmd_line[++i];
         fs::path root = PlatformFileSystem::normalize(cmd_line[++i]);
+        // REVIEW(HS): Shouldn't the following be ```... PlatformFileSystem::normalize(mountWd / root) ...```
+        // Since, all -cd options are relative to the last -wd directory.
+        // A mount argument is much like -cd option.
         if (root.is_relative()) root = PlatformFileSystem::normalize(mountCd / root);
         if (!root.is_absolute() || !avfs->registerMount(variableName, root)) {
           errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);

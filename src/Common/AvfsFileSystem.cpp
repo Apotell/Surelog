@@ -38,6 +38,8 @@ namespace {
 std::string_view getMountVariableName(std::string_view path) {
   if (path.empty() || (path.front() != '$')) return {};
 
+  // REVIEW(HS): Use std::string::find_first_of("\\\/") ??
+
   size_t separator = 1;
   while ((separator < path.size()) && (path[separator] != '/') && (path[separator] != '\\')) {
     ++separator;
@@ -131,8 +133,11 @@ std::string AvfsFileSystem::normalizeVariableName(std::string_view variableName)
   return variableName.empty() ? std::string() : std::string(variableName);
 }
 
+// REVIEW(HS): We should enforce that all paths are managed. There shouldn't be anything that uses native paths.
 bool AvfsFileSystem::isManagedPath(std::string_view path) { return !path.empty() && (path.front() == '$'); }
 
+// REVIEW(HS): It is expected that all mount points will be added at the start of the process. We don't support
+// changing configuration during processing. This would avoid need for mutex/lock in every API call.
 const AvfsFileSystem::MountRegistration* AvfsFileSystem::findMountByVariable(std::string_view variableName) const {
   const std::string normalized = normalizeVariableName(variableName);
   std::scoped_lock<std::mutex> lock(m_mountsMutex);
@@ -142,6 +147,7 @@ const AvfsFileSystem::MountRegistration* AvfsFileSystem::findMountByVariable(std
   return nullptr;
 }
 
+// REVIEW(HS): With this change there is no concept of platformpath. All use-cases will only be virtual path.
 const AvfsFileSystem::MountRegistration* AvfsFileSystem::findMountForPlatformPath(
     const std::filesystem::path& path) const {
   const std::filesystem::path normalized = PlatformFileSystem::normalize(path);
@@ -212,6 +218,7 @@ PathId AvfsFileSystem::translateFromPlatformPathId(PathId id, SymbolTable* symbo
                           : const_cast<AvfsFileSystem*>(this)->toPathId(resolved.string(), targetSymbols);
 }
 
+// REVIEW(HS): PlatformFileSystem will get entirely deprecated with this change. Don't depend on it.
 PathId AvfsFileSystem::toPathId(std::string_view path, SymbolTable* symbolTable) {
   if (path.empty()) return BadPathId;
 
@@ -226,6 +233,9 @@ PathId AvfsFileSystem::toPathId(std::string_view path, SymbolTable* symbolTable)
       storedPath = makeManagedPath(*mount, normalized);
     } else {
       storedPath = normalized.string();
+      // REVIEW(HS): Above statement would make a path like "$DataDir\abc.xyz".
+      // We want to enforce/support only forward slashes. All paths should use only forward slashes,
+      // expect for communication between AVFS and NativeFileSystem.
     }
   }
 
@@ -237,12 +247,16 @@ PathId AvfsFileSystem::toPathId(std::string_view path, SymbolTable* symbolTable)
 
 std::string_view AvfsFileSystem::toPath(PathId id) { return FileSystem::toPath(id); }
 
+// REVIEW(HS): Remove this API! Nothing outside of the AVFS system should be going
+// directly to the native platform. There shouldn't be a need to resolve any id to
+// platform specific path.
 std::filesystem::path AvfsFileSystem::toPlatformAbsPath(PathId id) {
   const std::string_view storedPath = toPath(id);
   if (storedPath.empty()) return {};
   return isManagedPath(storedPath) ? resolveManagedPath(storedPath) : m_platform->toPlatformAbsPath(id);
 }
 
+// REVIEW(HS): Unnecessary API. There won't be a notion of "Platform Path"
 std::filesystem::path AvfsFileSystem::toPlatformRelPath(PathId id) { return toSplitPlatformPath(id).second; }
 
 std::pair<std::filesystem::path, std::filesystem::path> AvfsFileSystem::toSplitPlatformPath(PathId id) {
@@ -250,6 +264,9 @@ std::pair<std::filesystem::path, std::filesystem::path> AvfsFileSystem::toSplitP
   return platformId ? m_platform->toSplitPlatformPath(platformId) : std::pair<std::filesystem::path, std::filesystem::path>();
 }
 
+// REVIEW(HS): Unnecessary API. There won't be a notion of "Platform Path"
+// Even it did exist, it can't get it from m_platform.
+// It has to be a virtual path.
 std::string AvfsFileSystem::getWorkingDir() { return m_platform->getWorkingDir(); }
 
 std::set<std::string> AvfsFileSystem::getWorkingDirs() { return m_platform->getWorkingDirs(); }
@@ -300,6 +317,7 @@ std::istream& AvfsFileSystem::openInput(PathId fileId, std::ios_base::openmode m
   const std::string_view filepath = toPath(fileId);
   if (filepath.empty()) return m_nullInputStream;
 
+  // REVIEW(HS): This will never happen. All paths are managed or virtual.
   if (!isManagedPath(filepath)) {
     const PathId platformId = translateToPlatformPathId(fileId);
     return platformId ? m_platform->openInput(platformId, mode) : m_nullInputStream;
@@ -325,6 +343,7 @@ std::ostream& AvfsFileSystem::openOutput(PathId fileId, std::ios_base::openmode 
   const std::string_view filepath = toPath(fileId);
   if (filepath.empty()) return m_nullOutputStream;
 
+  // REVIEW(HS): This will never happen. All paths are managed or virtual.
   if (!isManagedPath(filepath)) {
     const PathId platformId = translateToPlatformPathId(fileId);
     return platformId ? m_platform->openOutput(platformId, mode) : m_nullOutputStream;

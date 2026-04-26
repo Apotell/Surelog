@@ -33,6 +33,7 @@
 #include <sys/types.h>
 
 #include <cstdint>
+#include <kj/io.h>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -104,22 +105,19 @@ bool PythonAPICache::checkCacheIsValid(PathId cacheFileId, const ::PythonAPICach
 bool PythonAPICache::checkCacheIsValid(PathId cacheFileId) const {
   if (!cacheFileId) return false;
 
-  const std::string filepath = m_fileSystem->toPlatformAbsPath(cacheFileId).string();
-
-  const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
-  if (fd < 0) return false;
+  std::vector<char> packedBytes;
+  if (!m_fileSystem->loadContent(cacheFileId, packedBytes)) return false;
 
   bool result = false;
   do {
     ::capnp::ReaderOptions options;
     options.traversalLimitInWords = std::numeric_limits<uint64_t>::max();
     options.nestingLimit = 1024;
-    ::capnp::PackedFdMessageReader message(fd, options);
+    kj::ArrayInputStream input(kj::arrayPtr(reinterpret_cast<const kj::byte*>(packedBytes.data()), packedBytes.size()));
+    ::capnp::PackedMessageReader message(input, options);
     const ::PythonAPICache::Reader& root = message.getRoot<::PythonAPICache>();
     result = checkCacheIsValid(cacheFileId, root);
   } while (false);
-
-  ::close(fd);
   return result;
 }
 
@@ -157,17 +155,16 @@ bool PythonAPICache::restore() {
   PathId cacheFileId = getCacheFileId(BadPathId);
   if (!cacheFileId) return false;
 
-  const std::string filepath = m_fileSystem->toPlatformAbsPath(cacheFileId).string();
-
-  const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
-  if (fd < 0) return false;
+  std::vector<char> packedBytes;
+  if (!m_fileSystem->loadContent(cacheFileId, packedBytes)) return false;
 
   bool result = true;
   do {
     ::capnp::ReaderOptions options;
     options.traversalLimitInWords = std::numeric_limits<uint64_t>::max();
     options.nestingLimit = 1024;
-    ::capnp::PackedFdMessageReader message(fd, options);
+    kj::ArrayInputStream input(kj::arrayPtr(reinterpret_cast<const kj::byte*>(packedBytes.data()), packedBytes.size()));
+    ::capnp::PackedMessageReader message(input, options);
     const ::PythonAPICache::Reader& root = message.getRoot<::PythonAPICache>();
 
     if (!checkCacheIsValid(cacheFileId, root)) {
@@ -181,8 +178,6 @@ bool PythonAPICache::restore() {
     restoreSymbols(sourceSymbols, root.getSymbols());
     restoreErrors(m_session->getErrorContainer(), *targetSymbols, root.getErrors(), sourceSymbols);
   } while (false);
-
-  ::close(fd);
   return result;
 }
 
@@ -219,14 +214,11 @@ bool PythonAPICache::save() {
   PathId cacheDirId = m_fileSystem->getParent(cacheFileId, sourceSymbols);
   if (!m_fileSystem->mkdirs(cacheDirId)) return false;
 
-  const std::string filepath = m_fileSystem->toPlatformAbsPath(cacheFileId).string();
-
-  const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
-  if (fd < 0) return false;
-
-  writePackedMessageToFd(fd, message);
-  ::close(fd);
-  return true;
+  kj::VectorOutputStream output;
+  writePackedMessage(output, message);
+  const kj::ArrayPtr<const kj::byte> packedBytes = output.getArray();
+  return m_fileSystem->saveContent(cacheFileId, reinterpret_cast<const char*>(packedBytes.begin()),
+                                   static_cast<std::streamsize>(packedBytes.size()), false);
 }
 }  // namespace SURELOG
 

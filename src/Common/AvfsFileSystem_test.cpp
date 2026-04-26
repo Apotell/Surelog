@@ -119,6 +119,36 @@ TEST(AvfsFileSystemTest, RegisteredMountUsesVariablePathsForIo) {
   fs::remove_all(testdir, ec);
 }
 
+TEST(AvfsFileSystemTest, ManagedPathsUseForwardSlashes) {
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-forward-slashes");
+  std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
+  std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
+
+  ASSERT_TRUE(fileSystem->registerMount("DataDir", testdir));
+
+  const PathId fileId = fileSystem->toPathId("$DataDir\\nested\\file.sv", symbolTable.get());
+  ASSERT_NE(fileId, BadPathId);
+  EXPECT_EQ(fileSystem->toPath(fileId), "$DataDir/nested/file.sv");
+}
+
+TEST(AvfsFileSystemTest, GenericBackendMountRegistrationPreservesConfiguration) {
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-memory-backend");
+  std::error_code ec;
+  fs::remove_all(testdir, ec);
+
+  std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
+
+  ASSERT_TRUE(fileSystem->registerMount("Memory", "memory", ""));
+  const auto mounts = fileSystem->getMounts();
+  ASSERT_EQ(mounts.size(), 1);
+  EXPECT_EQ(mounts.front().m_variableName, "Memory");
+  EXPECT_EQ(mounts.front().m_backendType, "memory");
+  EXPECT_TRUE(mounts.front().m_root.empty());
+  EXPECT_TRUE(mounts.front().m_configPath.empty());
+
+  fs::remove_all(testdir, ec);
+}
+
 #if defined(_WIN32)
 TEST(AvfsFileSystemTest, RegisteredMountMatchesWindowsPathsCaseInsensitively) {
   const fs::path testdir = "C:/Work/Proj";

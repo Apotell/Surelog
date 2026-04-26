@@ -144,6 +144,8 @@ PathId PlatformFileSystem::toPathId(std::string_view path, SymbolTable *symbolTa
   return PathId(symbolTable, (RawSymbolId)symbolId, symbol);
 }
 
+bool PlatformFileSystem::canResolveToPlatformPath(PathId id) { return id && !toPath(id).empty(); }
+
 std::filesystem::path PlatformFileSystem::toPlatformAbsPath(PathId id) { return toPath(id); }
 
 std::pair<std::filesystem::path, std::filesystem::path> PlatformFileSystem::toSplitPlatformPath(PathId id) {

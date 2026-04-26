@@ -753,8 +753,15 @@ bool UhdmWriter::write(PathId uhdmFileId) {
 
   bind(s, designs);
 
-  const fs::path uhdmFile = fileSystem->toPlatformAbsPath(uhdmFileId);
   if (clp->writeUhdm()) {
+    if (!fileSystem->canResolveToPlatformPath(uhdmFileId)) {
+      Error err(ErrorDefinition::CMD_CANNOT_OPEN_FILE_FOR_WRITE, loc);
+      errors->addError(err);
+      errors->printMessages(clp->muteStdout());
+      return false;
+    }
+
+    const fs::path uhdmFile = fileSystem->toPlatformAbsPath(uhdmFileId);
     Error err(ErrorDefinition::UHDM_WRITE_DB, loc);
     errors->addError(err);
     errors->printMessages(clp->muteStdout());

@@ -31,6 +31,7 @@
 #include <string>
 #include <string_view>
 #include <system_error>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -66,6 +67,87 @@ static std::unordered_map<std::string, int32_t> cmd_ignore;  // commands with an
                                                              // args to drop
 static std::unordered_map<std::string, std::string> cmd_rename;  // commands to be renamed (no args)
 static std::unordered_map<std::string, std::string> cmd_merge;   // commands to be merged into 1 argument
+
+bool isMountConfigArgument(std::string_view argument) {
+  return !argument.empty() && (fs::path(std::string(argument)).extension() == ".json");
+}
+
+size_t getMountArgumentCount(const std::vector<std::string>& args, size_t index) {
+  if ((index + 1) >= args.size()) return 0;
+  return isMountConfigArgument(args[index + 1]) ? 1 : ((index + 2) < args.size() ? 2 : 0);
+}
+
+std::string jsonStringValue(const nlohmann::json& value) {
+  return value.is_string() ? value.get<std::string>() : value.dump();
+}
+
+bool registerMountConfig(AvfsFileSystem* avfs, const fs::path& configPath, const fs::path& mountCd) {
+  fs::path resolvedConfigPath = PlatformFileSystem::normalize(configPath);
+  if (resolvedConfigPath.is_relative()) resolvedConfigPath = PlatformFileSystem::normalize(mountCd / resolvedConfigPath);
+
+  std::ifstream strm(resolvedConfigPath);
+  if (!strm.is_open()) return false;
+
+  nlohmann::json config;
+  try {
+    strm >> config;
+  } catch (...) {
+    return false;
+  }
+
+  nlohmann::json mounts;
+  if (config.is_array()) {
+    mounts = std::move(config);
+  } else if (config.is_object() && config.contains("mounts")) {
+    mounts = config["mounts"];
+  } else if (config.is_object()) {
+    mounts = nlohmann::json::array({config});
+  } else {
+    return false;
+  }
+
+  if (!mounts.is_array()) return false;
+
+  const fs::path configDir = resolvedConfigPath.parent_path();
+  try {
+    for (const nlohmann::json& mount : mounts) {
+      if (!mount.is_object()) return false;
+
+      const auto variableIt = mount.find("variable");
+      if ((variableIt == mount.end()) || !variableIt->is_string()) return false;
+
+      const std::string variableName = variableIt->get<std::string>();
+      const std::string backendType = mount.value("backend", "platform");
+
+      std::string root;
+      if (const auto rootIt = mount.find("root"); (rootIt != mount.end()) && rootIt->is_string()) {
+        root = rootIt->get<std::string>();
+      } else if (const auto pathIt = mount.find("path"); (pathIt != mount.end()) && pathIt->is_string()) {
+        root = pathIt->get<std::string>();
+      }
+
+      if (!root.empty() && (root.find("://") == std::string::npos)) {
+        fs::path resolvedRoot = PlatformFileSystem::normalize(fs::path(root));
+        if (resolvedRoot.is_relative()) resolvedRoot = PlatformFileSystem::normalize(configDir / resolvedRoot);
+        root = resolvedRoot.string();
+      }
+
+      std::unordered_map<std::string, std::string> properties;
+      if (const auto propertiesIt = mount.find("properties");
+          (propertiesIt != mount.end()) && propertiesIt->is_object()) {
+        for (auto it = propertiesIt->begin(); it != propertiesIt->end(); ++it) {
+          properties.emplace(it.key(), jsonStringValue(it.value()));
+        }
+      }
+
+      if (!avfs->registerMount(variableName, backendType, root, properties, resolvedConfigPath)) return false;
+    }
+  } catch (...) {
+    return false;
+  }
+
+  return true;
+}
 
 // !!! Update this number when the grammar changes !!!
 //         Or when the cache schema changes
@@ -127,7 +209,8 @@ static const std::initializer_list<std::string_view> helpText = {
     "  -Pparameter=value     Top level parameter override",
     "  -pvalue+parameter=value",
     "                        Top level parameter override",
-    "  -mount <var> <dir>    Registers an AVFS mount variable before path parsing",
+    "  -mount <var> <dir>    Registers an AVFS platform mount before path parsing",
+    "  -mount <config.json>  Loads AVFS mount definitions from a JSON config file",
     "  -sverilog/-sv         Forces all files to be parsed as SystemVerilog",
     "                        files",
     "  -sv <file>            Forces the following file to be parsed as",
@@ -672,6 +755,17 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args, fs::p
       container.emplace_back(arg);
       container.emplace_back(rcd);
       cd = wd / rcd;
+    } else if (arg == "-mount") {
+      Location loc(symbols->registerSymbol(args[i]));
+      const size_t mountArgCount = getMountArgumentCount(args, i);
+      if (mountArgCount == 0) {
+        errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);
+        break;
+      }
+      container.emplace_back(arg);
+      for (size_t mountIndex = 0; mountIndex < mountArgCount; ++mountIndex) {
+        container.emplace_back(args[++i]);
+      }
     } else if (arg == "-f") {
       if (i == args.size() - 1) {
         Location loc(symbols->registerSymbol(args[i]));
@@ -825,18 +919,10 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
     }
   }
 
-  // REVIEW(HS): How would "-mount <var> <path>" allow for different mount targets?
-  // How would I configure a compressed file or a webserver?
-  // Basically, mount targets can have more than just the "path" as a value.
-  // For a compressed file, I could have a password or certificate to go with it
-  // For a webserver, I have address, port, and other server configuration like local proxy server
-  // I would suggest accepting the mount point targets as json file.
-  //   -mount <mount-config.json>
-  // and parse the json file to initialize the different backends.
-
   std::vector<std::string> all_arguments;
   if (AvfsFileSystem* const avfs = dynamic_cast<AvfsFileSystem*>(fileSystem)) {
-    fs::path mountWd = fileSystem->getWorkingDir();
+    const fs::path baseMountWd = fileSystem->getWorkingDir();
+    fs::path mountWd = baseMountWd;
     fs::path mountCd = mountWd;
 
     for (size_t i = 0; i < cmd_line.size(); ++i) {
@@ -849,9 +935,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         }
 
         fs::path dir = PlatformFileSystem::normalize(cmd_line[++i]);
-        // REVIEW(HS): Shouldn't the following be ```dir = fileSystem->getWorkingDir() / dir```
-        // Since, all -wd options are relative to the FileSystem's working directory.
-        if (dir.is_relative()) dir = mountWd / dir;
+        if (dir.is_relative()) dir = PlatformFileSystem::normalize(baseMountWd / dir);
         mountWd = mountCd = dir;
       } else if (argument == "-cd") {
         if (i == (cmd_line.size() - 1)) {
@@ -861,23 +945,25 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         }
 
         fs::path dir = PlatformFileSystem::normalize(cmd_line[++i]);
-        // REVIEW(HS): Shouldn't the following be ```... PlatformFileSystem::normalize(mountWd / dir) ...```
-        // Since, all -cd options are relative to the last -wd directory.
         mountCd = dir.is_relative() ? PlatformFileSystem::normalize(mountCd / dir) : dir;
       } else if (argument == "-mount") {
         Location loc(symbols->registerSymbol(argument));
-        if ((i + 2) >= cmd_line.size()) {
+        const size_t mountArgCount = getMountArgumentCount(cmd_line, i);
+        if (mountArgCount == 0) {
           errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);
           break;
         }
 
-        const std::string variableName = cmd_line[++i];
-        fs::path root = PlatformFileSystem::normalize(cmd_line[++i]);
-        // REVIEW(HS): Shouldn't the following be ```... PlatformFileSystem::normalize(mountWd / root) ...```
-        // Since, all -cd options are relative to the last -wd directory.
-        // A mount argument is much like -cd option.
-        if (root.is_relative()) root = PlatformFileSystem::normalize(mountCd / root);
-        if (!root.is_absolute() || !avfs->registerMount(variableName, root)) {
+        bool mounted = false;
+        if (mountArgCount == 1) {
+          mounted = registerMountConfig(avfs, cmd_line[++i], mountCd);
+        } else {
+          const std::string variableName = cmd_line[++i];
+          fs::path root = PlatformFileSystem::normalize(cmd_line[++i]);
+          if (root.is_relative()) root = PlatformFileSystem::normalize(mountCd / root);
+          mounted = root.is_absolute() && avfs->registerMount(variableName, root);
+        }
+        if (!mounted) {
           errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);
           break;
         }
@@ -964,11 +1050,12 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
       fileSystem->addMapping(what.string(), with.string());
     } else if (all_arguments[i] == "-mount") {
       Location loc(symbols->registerSymbol(all_arguments[i]));
-      if ((i + 2) >= all_arguments.size()) {
+      const size_t mountArgCount = getMountArgumentCount(all_arguments, i);
+      if (mountArgCount == 0) {
         errors->addError(ErrorDefinition::CMD_MOUNT_MISSING_ENTRIES, loc);
         break;
       }
-      i += 2;
+      i += mountArgCount;
     } else if (all_arguments[i] == "-d") {
       if (i == all_arguments.size() - 1) {
         Location loc(symbols->registerSymbol(all_arguments[i]));

@@ -73,6 +73,7 @@ class PlatformFileSystem /*final*/ : public FileSystem {
 
  public:
   PathId toPathId(std::string_view path, SymbolTable *symbolTable) override;
+  bool canResolveToPlatformPath(PathId id) override;
   std::filesystem::path toPlatformAbsPath(PathId id) override;
   std::filesystem::path toPlatformRelPath(PathId id) override;
 

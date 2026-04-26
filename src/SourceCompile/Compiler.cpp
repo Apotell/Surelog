@@ -35,6 +35,7 @@
 #include <iostream>
 #include <map>
 #include <nlohmann/json.hpp>
+#include <set>
 #include <string>
 #include <thread>
 #include <vector>
@@ -86,7 +87,15 @@ void appendMountArguments(FileSystem* fileSystem, std::string* command) {
   const AvfsFileSystem* const avfs = dynamic_cast<const AvfsFileSystem*>(fileSystem);
   if (avfs == nullptr) return;
 
+  std::set<std::filesystem::path> configPaths;
   for (const AvfsFileSystem::MountInfo& mount : avfs->getMounts()) {
+    if (!mount.m_configPath.empty()) {
+      if (configPaths.emplace(mount.m_configPath).second) {
+        StrAppend(command, " -mount ", mount.m_configPath.string());
+      }
+      continue;
+    }
+
     StrAppend(command, " -mount ", mount.m_variableName, " ", mount.m_root);
   }
 }

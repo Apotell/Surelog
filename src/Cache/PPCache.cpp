@@ -32,6 +32,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <kj/io.h>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -218,22 +219,19 @@ bool PPCache::checkCacheIsValid(PathId cacheFileId) const {
   if (m_pp->isMacroBody()) return false;
 
   FileSystem* const fileSystem = m_session->getFileSystem();
-  const std::string filepath = fileSystem->toPlatformAbsPath(cacheFileId).string();
-
-  const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
-  if (fd < 0) return false;
+  std::vector<char> packedBytes;
+  if (!fileSystem->loadContent(cacheFileId, packedBytes)) return false;
 
   bool result = false;
   do {
     ::capnp::ReaderOptions options;
     options.traversalLimitInWords = std::numeric_limits<uint64_t>::max();
     options.nestingLimit = 1024;
-    ::capnp::PackedFdMessageReader message(fd, options);
+    kj::ArrayInputStream input(kj::arrayPtr(reinterpret_cast<const kj::byte*>(packedBytes.data()), packedBytes.size()));
+    ::capnp::PackedMessageReader message(input, options);
     const ::PPCache::Reader& root = message.getRoot<::PPCache>();
     result = checkCacheIsValid(cacheFileId, root);
   } while (false);
-
-  ::close(fd);
   return result;
 }
 
@@ -567,10 +565,8 @@ bool PPCache::restore(PathId cacheFileId, bool errorsOnly, int32_t recursionDept
   if (!cacheFileId) return false;
 
   FileSystem* const fileSystem = m_session->getFileSystem();
-  const std::string filepath = fileSystem->toPlatformAbsPath(cacheFileId).string();
-
-  const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
-  if (fd < 0) return false;
+  std::vector<char> packedBytes;
+  if (!fileSystem->loadContent(cacheFileId, packedBytes)) return false;
 
   SymbolTable* const targetSymbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
@@ -580,7 +576,8 @@ bool PPCache::restore(PathId cacheFileId, bool errorsOnly, int32_t recursionDept
     ::capnp::ReaderOptions options;
     options.traversalLimitInWords = std::numeric_limits<uint64_t>::max();
     options.nestingLimit = 1024;
-    ::capnp::PackedFdMessageReader message(fd, options);
+    kj::ArrayInputStream input(kj::arrayPtr(reinterpret_cast<const kj::byte*>(packedBytes.data()), packedBytes.size()));
+    ::capnp::PackedMessageReader message(input, options);
     const ::PPCache::Reader& root = message.getRoot<::PPCache>();
 
     if (!checkCacheIsValid(cacheFileId, root)) {
@@ -629,8 +626,6 @@ bool PPCache::restore(PathId cacheFileId, bool errorsOnly, int32_t recursionDept
       restoreVObjects(*fC->mutableVObjects(), *targetSymbols, root.getObjects(), sourceSymbols);
     }
   } while (false);
-
-  ::close(fd);
   return result;
 }
 
@@ -721,12 +716,10 @@ bool PPCache::save() {
   PathId cacheDirId = fileSystem->getParent(cacheFileId, sourceSymbols);
   if (!fileSystem->mkdirs(cacheDirId)) return false;
 
-  const std::string filepath = fileSystem->toPlatformAbsPath(cacheFileId).string();
-  const int32_t fd = ::open(filepath.c_str(), O_CREAT | O_WRONLY | O_BINARY, S_IRWXU);
-  if (fd < 0) return false;
-
-  writePackedMessageToFd(fd, message);
-  ::close(fd);
-  return true;
+  kj::VectorOutputStream output;
+  writePackedMessage(output, message);
+  const kj::ArrayPtr<const kj::byte> packedBytes = output.getArray();
+  return fileSystem->saveContent(cacheFileId, reinterpret_cast<const char*>(packedBytes.begin()),
+                                 static_cast<std::streamsize>(packedBytes.size()), false);
 }
 }  // namespace SURELOG

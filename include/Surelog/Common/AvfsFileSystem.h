@@ -26,6 +26,7 @@
 #include <mutex>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <vector>
 
 namespace avfs {
@@ -39,17 +40,24 @@ class AvfsFileSystem final : public FileSystem {
  public:
   struct MountInfo final {
     std::string m_variableName;
-    std::filesystem::path m_root;
+    std::string m_backendType;
+    std::string m_root;
+    std::unordered_map<std::string, std::string> m_properties;
+    std::filesystem::path m_configPath;
   };
 
   explicit AvfsFileSystem(const std::filesystem::path& workingDir);
   ~AvfsFileSystem() override;
 
   bool registerMount(std::string_view variableName, const std::filesystem::path& root);
+  bool registerMount(std::string_view variableName, std::string_view backendType, std::string_view root,
+                     const std::unordered_map<std::string, std::string>& properties = {},
+                     const std::filesystem::path& configPath = {});
   std::vector<MountInfo> getMounts() const;
 
   PathId toPathId(std::string_view path, SymbolTable* symbolTable) override;
   std::string_view toPath(PathId id) override;
+  bool canResolveToPlatformPath(PathId id) override;
   std::filesystem::path toPlatformAbsPath(PathId id) override;
   std::filesystem::path toPlatformRelPath(PathId id) override;
   std::pair<std::filesystem::path, std::filesystem::path> toSplitPlatformPath(PathId id) override;
@@ -136,21 +144,15 @@ class AvfsFileSystem final : public FileSystem {
   void printConfiguration(std::ostream& out) override;
 
  private:
-   // REVIEW(HS): There seems to be some duplication.
-   // If you are managing the mount points using MountRegistration than why do you need instance of VfsRuntime.
-   // Looks like VfsRuntime does the same thing what you are trying to do here.
-   // VfsRuntime already has a registry for mount-variable to any filesystem.
-   // It also implements the "registration" (see my comment in CommandLineParser).
-   // Backend registration allows for settings properties per filesystem.
   struct MountRegistration final {
-    // REVIEW(HS): Any compelling reason to keep both "variable" and "prefix"?
-    // Same for mount point and root.
-    // A short description for what each member is would help understand the code.
-    // Also, don't you need to hold the mounted file system also?
+    // The AVFS variable name exposed to Surelog paths, e.g. "$DataDir".
     std::string m_variableName;
-    std::string m_variablePrefix;
-    std::string m_logicalMountPoint;
-    std::filesystem::path m_root;
+    std::string m_backendType;
+    std::string m_root;
+    std::unordered_map<std::string, std::string> m_properties;
+    std::filesystem::path m_configPath;
+    // The host path used for platform-backed path translation.
+    std::filesystem::path m_platformRoot;
   };
 
   using MountRegistrations = std::vector<MountRegistration>;
@@ -171,8 +173,7 @@ class AvfsFileSystem final : public FileSystem {
   std::ostream& openManagedOutput(std::string_view filepath, std::ios_base::openmode mode);
   std::filesystem::path resolveInputPath(std::string_view path) const;
 
-  // REVIEW(HS): You are still assuming that there's a valid platform file system.
-  // Why do we need m_platform?
+  // AVFS still adapts legacy FileSystem APIs that require host-visible paths.
   std::unique_ptr<PlatformFileSystem> m_platform;
   std::unique_ptr<avfs::VfsRuntime> m_runtime;
   mutable std::mutex m_mountsMutex;

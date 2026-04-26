@@ -115,7 +115,9 @@ class FileSystem {
   // Returns the string/printable representation of the input id
   virtual std::string_view toPath(PathId id);
   // Returns a host-platform path that can be used with OS/file APIs.
-  // These adapters remain part of the common interface for existing callers.
+  // These adapters remain part of the common interface for callers that truly
+  // need an OS-visible path, but not every backend can provide one.
+  virtual bool canResolveToPlatformPath(PathId id) = 0;
   virtual std::filesystem::path toPlatformAbsPath(PathId id) = 0;
   virtual std::filesystem::path toPlatformRelPath(PathId id) = 0;
   // Returns base and relative paths

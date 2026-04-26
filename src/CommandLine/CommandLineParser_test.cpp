@@ -24,6 +24,7 @@
 #include "Surelog/CommandLine/CommandLineParser.h"
 
 #include <gtest/gtest.h>
+#include <nlohmann/json.hpp>
 
 #include <algorithm>
 #include <filesystem>
@@ -120,6 +121,107 @@ TEST(CommandLineParserTest, AvfsMountResolvesPlatformPathsForSourceAndIncludeIds
   EXPECT_EQ(fileSystem->toPath(clp->getIncludePaths().front()), "$DataDir");
   EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getSourceFiles().front()), filepath);
   EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getIncludePaths().front()), testdir);
+
+  fs::remove_all(testdir, ec);
+  EXPECT_FALSE(ec) << ec;
+}
+
+TEST(CommandLineParserTest, AvfsMountLoadsJsonConfig) {
+  std::error_code ec;
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir()) / "avfs-mount-json-config";
+  const fs::path rtlDir = testdir / "rtl";
+  const fs::path filepath = rtlDir / "dut.sv";
+  const fs::path configPath = testdir / "mounts.json";
+
+  fs::remove_all(testdir, ec);
+  fs::create_directories(rtlDir, ec);
+  ASSERT_FALSE(ec) << ec;
+
+  {
+    std::ofstream strm(filepath);
+    ASSERT_TRUE(strm.is_open());
+    strm << "module top; endmodule\n";
+  }
+
+  {
+    std::ofstream strm(configPath);
+    ASSERT_TRUE(strm.is_open());
+    nlohmann::json config = {{"mounts",
+                              {{{"variable", "RTL"},
+                                {"backend", "platform"},
+                                {"root", "rtl"},
+                                {"properties", {{"description", "test mount"}}}}}}};
+    strm << config.dump(2);
+  }
+
+  const std::vector<std::string> args{
+      programPath.string(), "-nostdout", "-mount", configPath.string(), "rtl/dut.sv", std::string("-I") + "rtl"};
+  std::vector<const char*> cargs;
+  cargs.reserve(args.size());
+  std::transform(args.begin(), args.end(), std::back_inserter(cargs),
+                 [](const std::string& arg) { return arg.c_str(); });
+
+  Session session(new AvfsFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
+  FileSystem* const fileSystem = session.getFileSystem();
+  CommandLineParser* const clp = session.getCommandLineParser();
+
+  ASSERT_TRUE(session.parseCommandLine(cargs.size(), cargs.data(), false, false));
+  ASSERT_EQ(clp->getSourceFiles().size(), 1);
+  ASSERT_EQ(clp->getIncludePaths().size(), 1);
+  EXPECT_EQ(fileSystem->toPath(clp->getSourceFiles().front()), "$RTL/dut.sv");
+  EXPECT_EQ(fileSystem->toPath(clp->getIncludePaths().front()), "$RTL");
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getSourceFiles().front()), filepath);
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getIncludePaths().front()), rtlDir);
+
+  fs::remove_all(testdir, ec);
+  EXPECT_FALSE(ec) << ec;
+}
+
+TEST(CommandLineParserTest, AvfsRelativeWdResolvesFromFilesystemWorkingDir) {
+  std::error_code ec;
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir()) / "avfs-relative-wd";
+  const fs::path rtlDir = testdir / "rtl";
+  const fs::path tbDir = testdir / "tb";
+  const fs::path rtlFile = rtlDir / "dut.sv";
+  const fs::path tbFile = tbDir / "tb.sv";
+
+  fs::remove_all(testdir, ec);
+  fs::create_directories(rtlDir, ec);
+  ASSERT_FALSE(ec) << ec;
+  fs::create_directories(tbDir, ec);
+  ASSERT_FALSE(ec) << ec;
+
+  {
+    std::ofstream strm(rtlFile);
+    ASSERT_TRUE(strm.is_open());
+    strm << "module dut; endmodule\n";
+  }
+  {
+    std::ofstream strm(tbFile);
+    ASSERT_TRUE(strm.is_open());
+    strm << "module tb; endmodule\n";
+  }
+
+  const std::vector<std::string> args{
+      programPath.string(), "-nostdout", "-wd", "rtl", "-mount", "RTL", ".", "dut.sv",
+      "-wd",               "tb",         "-mount", "TB",  ".", "tb.sv"};
+  std::vector<const char*> cargs;
+  cargs.reserve(args.size());
+  std::transform(args.begin(), args.end(), std::back_inserter(cargs),
+                 [](const std::string& arg) { return arg.c_str(); });
+
+  Session session(new AvfsFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
+  FileSystem* const fileSystem = session.getFileSystem();
+  CommandLineParser* const clp = session.getCommandLineParser();
+
+  ASSERT_TRUE(session.parseCommandLine(cargs.size(), cargs.data(), false, false));
+  ASSERT_EQ(clp->getSourceFiles().size(), 2);
+  EXPECT_EQ(fileSystem->toPath(clp->getSourceFiles()[0]), "$RTL/dut.sv");
+  EXPECT_EQ(fileSystem->toPath(clp->getSourceFiles()[1]), "$TB/tb.sv");
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getSourceFiles()[0]), rtlFile);
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getSourceFiles()[1]), tbFile);
 
   fs::remove_all(testdir, ec);
   EXPECT_FALSE(ec) << ec;

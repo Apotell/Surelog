@@ -24,6 +24,7 @@
 #include <istream>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <ostream>
 #include <regex>
 #include <set>
@@ -34,6 +35,10 @@
 namespace SURELOG {
 
 namespace {
+
+constexpr std::string_view kInternalPlatformRootVariable = "__sl_root";
+
+bool isInternalMountVariable(std::string_view variableName) { return variableName == kInternalPlatformRootVariable; }
 
 std::string getMountVariablePrefix(std::string_view variableName) { return std::string("$").append(variableName); }
 
@@ -51,7 +56,13 @@ std::string_view getMountVariableName(std::string_view path) {
 }  // namespace
 
 AvfsFileSystem::AvfsFileSystem(const std::filesystem::path& workingDir)
-    : m_platform(std::make_unique<PlatformFileSystem>(workingDir)), m_runtime(std::make_unique<avfs::VfsRuntime>()) {}
+    : m_platform(std::make_unique<PlatformFileSystem>(workingDir)), m_runtime(std::make_unique<avfs::VfsRuntime>()) {
+  const std::filesystem::path normalizedWorkingDir = PlatformFileSystem::normalize(workingDir);
+  const std::filesystem::path rootPath = normalizedWorkingDir.root_path();
+  if (!rootPath.empty() && rootPath.is_absolute()) {
+    m_runtime->mountVariable(std::string(kInternalPlatformRootVariable), "/", "platform", {.root = rootPath.string()});
+  }
+}
 
 AvfsFileSystem::~AvfsFileSystem() {
   {
@@ -87,50 +98,35 @@ bool AvfsFileSystem::registerMount(std::string_view variableName, std::string_vi
     return false;
   }
 
-  MountRegistration mount{normalizedVariableName, normalizedBackendType, normalizedRoot, properties, configPath,
-                          normalizedPlatformRoot};
-  {
-    std::scoped_lock<std::mutex> lock(m_mountsMutex);
-    for (const MountRegistration& current : m_mounts) {
-      if (current.m_variableName == mount.m_variableName) {
-        return (current.m_backendType == mount.m_backendType) && (current.m_root == mount.m_root) &&
-               (current.m_properties == mount.m_properties);
-      }
-      if (!comparableRoot.empty() && !current.m_platformRoot.empty()) {
-        const std::filesystem::path comparableCurrentRoot =
-            PlatformFileSystem::normalizeForComparison(current.m_platformRoot);
-        if (comparableCurrentRoot == comparableRoot) return current.m_variableName == mount.m_variableName;
+  for (const avfs::MountDescriptor& current : m_runtime->listMounts()) {
+    if (current.variableName == normalizedVariableName) {
+      return (current.backendType == normalizedBackendType) && (current.options.root == normalizedRoot) &&
+             (current.options.properties == properties);
+    }
+    if (!comparableRoot.empty() && (current.backendType == "platform") && !current.options.root.empty()) {
+      const std::filesystem::path comparableCurrentRoot =
+          PlatformFileSystem::normalizeForComparison(std::filesystem::path(current.options.root));
+      if ((comparableCurrentRoot == comparableRoot) && !isInternalMountVariable(current.variableName)) {
+        return current.variableName == normalizedVariableName;
       }
     }
-    m_mounts.emplace_back(mount);
   }
 
   try {
-    avfs::BackendOptions options;
-    options.root = normalizedRoot;
-    options.properties = properties;
-    m_runtime->mountVariable(mount.m_variableName, getMountLogicalPath(mount.m_variableName), mount.m_backendType,
-                             options);
+    m_runtime->mountVariable(normalizedVariableName, getMountLogicalPath(normalizedVariableName), normalizedBackendType,
+                             {.root = normalizedRoot, .properties = properties}, configPath.string());
+    return true;
   } catch (...) {
-    std::scoped_lock<std::mutex> lock(m_mountsMutex);
-    auto it = std::find_if(m_mounts.begin(), m_mounts.end(), [&](const MountRegistration& current) {
-      return (current.m_variableName == mount.m_variableName) && (current.m_backendType == mount.m_backendType) &&
-             (current.m_root == mount.m_root);
-    });
-    if (it != m_mounts.end()) m_mounts.erase(it);
     return false;
   }
-
-  return true;
 }
 
 std::vector<AvfsFileSystem::MountInfo> AvfsFileSystem::getMounts() const {
   std::vector<MountInfo> mounts;
-  std::scoped_lock<std::mutex> lock(m_mountsMutex);
-  mounts.reserve(m_mounts.size());
-  for (const MountRegistration& mount : m_mounts) {
-    mounts.emplace_back(
-        MountInfo{mount.m_variableName, mount.m_backendType, mount.m_root, mount.m_properties, mount.m_configPath});
+  for (const avfs::MountDescriptor& mount : m_runtime->listMounts()) {
+    if (mount.variableName.empty() || isInternalMountVariable(mount.variableName)) continue;
+    mounts.emplace_back(MountInfo{mount.variableName, mount.backendType, mount.options.root, mount.options.properties,
+                                  std::filesystem::path(mount.configPath)});
   }
   return mounts;
 }
@@ -162,40 +158,44 @@ std::string AvfsFileSystem::normalizeVariableName(std::string_view variableName)
 
 bool AvfsFileSystem::isManagedPath(std::string_view path) { return !path.empty() && (path.front() == '$'); }
 
-const AvfsFileSystem::MountRegistration* AvfsFileSystem::findMountByVariable(std::string_view variableName) const {
+std::optional<AvfsFileSystem::MountInfo> AvfsFileSystem::findMountByVariable(std::string_view variableName) const {
   const std::string normalized = normalizeVariableName(variableName);
-  std::scoped_lock<std::mutex> lock(m_mountsMutex);
-  for (const MountRegistration& mount : m_mounts) {
-    if (mount.m_variableName == normalized) return &mount;
-  }
-  return nullptr;
-}
-
-const AvfsFileSystem::MountRegistration* AvfsFileSystem::findMountForPlatformPath(
-    const std::filesystem::path& path) const {
-  const std::filesystem::path normalized = PlatformFileSystem::normalize(path);
-
-  std::scoped_lock<std::mutex> lock(m_mountsMutex);
-  const MountRegistration* best = nullptr;
-  for (const MountRegistration& mount : m_mounts) {
-    if (mount.m_platformRoot.empty() || !PlatformFileSystem::is_subpath(mount.m_platformRoot, normalized)) continue;
-    const std::filesystem::path comparableRoot = PlatformFileSystem::normalizeForComparison(mount.m_platformRoot);
-    if ((best == nullptr) ||
-        (comparableRoot.string().size() >
-         PlatformFileSystem::normalizeForComparison(best->m_platformRoot).string().size())) {
-      best = &mount;
+  for (const avfs::MountDescriptor& mount : m_runtime->listMounts()) {
+    if (mount.variableName == normalized) {
+      return MountInfo{mount.variableName, mount.backendType, mount.options.root, mount.options.properties,
+                       std::filesystem::path(mount.configPath)};
     }
   }
+  return std::nullopt;
+}
 
+std::optional<AvfsFileSystem::MountInfo> AvfsFileSystem::findMountForPlatformPath(const std::filesystem::path& path) const {
+  const std::filesystem::path normalized = PlatformFileSystem::normalize(path);
+
+  std::optional<MountInfo> best;
+  for (const avfs::MountDescriptor& mount : m_runtime->listMounts()) {
+    if (mount.variableName.empty() || (mount.backendType != "platform") || mount.options.root.empty()) continue;
+
+    const std::filesystem::path platformRoot = PlatformFileSystem::normalize(std::filesystem::path(mount.options.root));
+    if (platformRoot.empty() || !PlatformFileSystem::is_subpath(platformRoot, normalized)) continue;
+
+    const std::filesystem::path comparableRoot = PlatformFileSystem::normalizeForComparison(platformRoot);
+    if (!best.has_value() || (comparableRoot.string().size() >
+                              PlatformFileSystem::normalizeForComparison(getPlatformRoot(*best)).string().size())) {
+      best = MountInfo{mount.variableName, mount.backendType, mount.options.root, mount.options.properties,
+                       std::filesystem::path(mount.configPath)};
+    }
+  }
   return best;
 }
 
-std::string AvfsFileSystem::makeManagedPath(const MountRegistration& mount, const std::filesystem::path& path) const {
+std::string AvfsFileSystem::makeManagedPath(const MountInfo& mount, const std::filesystem::path& path) const {
   const std::filesystem::path normalized = PlatformFileSystem::normalize(path);
+  const std::filesystem::path platformRoot = getPlatformRoot(mount);
   std::string variablePrefix = getMountVariablePrefix(mount.m_variableName);
-  if (normalized == mount.m_platformRoot) return variablePrefix;
+  if (normalized == platformRoot) return variablePrefix;
 
-  const std::filesystem::path relative = normalized.lexically_relative(mount.m_platformRoot);
+  const std::filesystem::path relative = normalized.lexically_relative(platformRoot);
   const std::string suffix = relative.generic_string();
   return suffix.empty() || (suffix == ".") ? variablePrefix : variablePrefix.append("/").append(suffix);
 }
@@ -205,13 +205,16 @@ std::filesystem::path AvfsFileSystem::resolveManagedPath(std::string_view path) 
 
   const std::string normalized = normalizeVariablePath(path);
   const std::string_view variableName = getMountVariableName(normalized);
-  const MountRegistration* mount = findMountByVariable(variableName);
-  if ((mount == nullptr) || mount->m_platformRoot.empty()) return {};
+  const std::optional<MountInfo> mount = findMountByVariable(variableName);
+  if (!mount.has_value()) return {};
 
-  std::filesystem::path resolved = mount->m_platformRoot;
+  const std::filesystem::path platformRoot = getPlatformRoot(*mount);
+  if (platformRoot.empty()) return {};
+
+  std::filesystem::path resolved = platformRoot;
   const size_t separator = 1 + variableName.size();
   if (separator < normalized.size()) {
-    const std::string_view suffix = normalized.substr(separator + 1);
+    const std::string_view suffix = std::string_view(normalized).substr(separator + 1);
     if (!suffix.empty()) resolved /= std::filesystem::path(std::string(suffix));
   }
 
@@ -249,15 +252,19 @@ PathId AvfsFileSystem::toPathId(std::string_view path, SymbolTable* symbolTable)
   std::string storedPath;
   if (isManagedPath(path)) {
     storedPath = normalizeVariablePath(path);
+    const std::filesystem::path resolved = resolveManagedPath(storedPath);
+    if (!resolved.empty()) {
+      if (const std::optional<MountInfo> mount = findMountForPlatformPath(resolved); mount.has_value()) {
+        storedPath = makeManagedPath(*mount, resolved);
+      }
+    }
   } else {
     const std::filesystem::path normalized = PlatformFileSystem::normalize(std::filesystem::path(path));
     if (normalized.empty() || normalized.is_relative()) return BadPathId;
 
-    if (const MountRegistration* mount = findMountForPlatformPath(normalized)) {
-      storedPath = makeManagedPath(*mount, normalized);
-    } else {
-      storedPath = normalized.generic_string();
-    }
+    const std::optional<MountInfo> mount = findMountForPlatformPath(normalized);
+    if (!mount.has_value()) return BadPathId;
+    storedPath = makeManagedPath(*mount, normalized);
   }
 
   if (storedPath.empty()) return BadPathId;
@@ -274,20 +281,20 @@ bool AvfsFileSystem::canResolveToPlatformPath(PathId id) {
   return isManagedPath(storedPath) ? !resolveManagedPath(storedPath).empty() : m_platform->canResolveToPlatformPath(id);
 }
 
-std::filesystem::path AvfsFileSystem::toPlatformAbsPath(PathId id) {
-  const std::string_view storedPath = toPath(id);
-  if (storedPath.empty()) return {};
-  return isManagedPath(storedPath) ? resolveManagedPath(storedPath) : m_platform->toPlatformAbsPath(id);
-}
+// std::filesystem::path AvfsFileSystem::toPlatformAbsPath(PathId id) {
+//   const std::string_view storedPath = toPath(id);
+//   if (storedPath.empty()) return {};
+//   return isManagedPath(storedPath) ? resolveManagedPath(storedPath) : m_platform->toPlatformAbsPath(id);
+// }
 
-std::filesystem::path AvfsFileSystem::toPlatformRelPath(PathId id) { return toSplitPlatformPath(id).second; }
+// std::filesystem::path AvfsFileSystem::toPlatformRelPath(PathId id) { return toSplitPlatformPath(id).second; }
 
 std::pair<std::filesystem::path, std::filesystem::path> AvfsFileSystem::toSplitPlatformPath(PathId id) {
   const PathId platformId = translateToPlatformPathId(id);
   return platformId ? m_platform->toSplitPlatformPath(platformId) : std::pair<std::filesystem::path, std::filesystem::path>();
 }
 
-std::string AvfsFileSystem::getWorkingDir() { return m_platform->getWorkingDir(); }
+// std::string AvfsFileSystem::getWorkingDir() { return m_platform->getWorkingDir(); }
 
 std::set<std::string> AvfsFileSystem::getWorkingDirs() { return m_platform->getWorkingDirs(); }
 
@@ -337,10 +344,10 @@ std::istream& AvfsFileSystem::openInput(PathId fileId, std::ios_base::openmode m
   const std::string_view filepath = toPath(fileId);
   if (filepath.empty()) return m_nullInputStream;
 
-  if (!isManagedPath(filepath)) {
-    const PathId platformId = translateToPlatformPathId(fileId);
-    return platformId ? m_platform->openInput(platformId, mode) : m_nullInputStream;
-  }
+  // if (!isManagedPath(filepath)) {
+  //   const PathId platformId = translateToPlatformPathId(fileId);
+  //   return platformId ? m_platform->openInput(platformId, mode) : m_nullInputStream;
+  // }
 
   return openManagedInput(filepath, mode);
 }
@@ -708,16 +715,16 @@ void AvfsFileSystem::printConfiguration(std::ostream& out) {
   m_platform->printConfiguration(out);
   out << "avfs mounts:" << std::endl;
 
-  std::vector<MountRegistration> mounts;
-  {
-    std::scoped_lock<std::mutex> lock(m_mountsMutex);
-    mounts = m_mounts;
+  for (const avfs::MountDescriptor& mount : m_runtime->listMounts()) {
+    if (mount.variableName.empty() || isInternalMountVariable(mount.variableName)) continue;
+    out << "  " << getMountVariablePrefix(mount.variableName) << " => [" << mount.backendType
+        << "] " << mount.options.root << std::endl;
   }
+}
 
-  for (const MountRegistration& mount : mounts) {
-    out << "  " << getMountVariablePrefix(mount.m_variableName) << " => [" << mount.m_backendType
-        << "] " << mount.m_root << std::endl;
-  }
+std::filesystem::path AvfsFileSystem::getPlatformRoot(const MountInfo& mount) const {
+  if ((mount.m_backendType != "platform") || mount.m_root.empty()) return {};
+  return PlatformFileSystem::normalize(std::filesystem::path(mount.m_root));
 }
 
 }  // namespace SURELOG

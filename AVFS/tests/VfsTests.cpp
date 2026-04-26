@@ -388,6 +388,21 @@ void testLegacyVariableExpansion() {
   assertTrue(runtime.expandPath("$Input") == "/input", "expected bare variable expansion to produce the mount point");
 }
 
+void testRuntimeListsMountMetadata() {
+  avfs::VfsRuntime runtime;
+  runtime.mountVariable("Input", "/input", "platform", {.root = "/tmp/runtime-input", .properties = {{"mode", "rw"}}},
+                        "mounts.json");
+
+  const auto mounts = runtime.listMounts();
+  assertTrue(mounts.size() == 1, "expected runtime to retain one registered mount descriptor");
+  assertTrue(mounts.front().variableName == "Input", "expected variable name to be preserved in mount metadata");
+  assertTrue(mounts.front().mountPoint == "/input", "expected logical mount point to be preserved");
+  assertTrue(mounts.front().backendType == "platform", "expected backend type to be preserved");
+  assertTrue(mounts.front().options.root == "/tmp/runtime-input", "expected backend root to be preserved");
+  assertTrue(mounts.front().options.properties.at("mode") == "rw", "expected backend properties to be preserved");
+  assertTrue(mounts.front().configPath == "mounts.json", "expected config path to be preserved");
+}
+
 void testUnboundVariableFails() {
   avfs::VfsRuntime runtime;
   assertThrowsRuntime([&]() { (void)runtime.expandPath("$Input/dut.sv"); },
@@ -793,6 +808,7 @@ int main() {
   testPlatformFileSystemRoundTrip();
   testMissingMountFails();
   testLegacyVariableExpansion();
+  testRuntimeListsMountMetadata();
   testUnboundVariableFails();
   testBackendRegistryMounting();
   testCustomBackendRegistration();

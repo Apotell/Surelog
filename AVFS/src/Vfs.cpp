@@ -893,6 +893,9 @@ bool VirtualFileSystem::isMountMatch(const std::string& logicalPath, const std::
   if (logicalPath == mountPoint) {
     return true;
   }
+  if (mountPoint == "/") {
+    return !logicalPath.empty() && (logicalPath.front() == '/');
+  }
   if (logicalPath.size() <= mountPoint.size()) {
     return false;
   }
@@ -948,24 +951,25 @@ std::string LegacyPathResolver::expand(const std::string& path) const {
   return VirtualFileSystem::normalizeLogicalPath(it->second + suffix);
 }
 
-void VfsRuntime::mount(std::string mountPoint, std::shared_ptr<IFileSystem> fileSystem) {
-  vfs_.mount(std::move(mountPoint), std::move(fileSystem));
+void VfsRuntime::mount(std::string mountPoint, std::shared_ptr<IFileSystem> fileSystem, std::string configPath) {
+  registerMount({}, std::move(mountPoint), {}, {}, std::move(configPath), std::move(fileSystem));
 }
 
-void VfsRuntime::mount(std::string mountPoint, const std::string& backendType, const BackendOptions& options) {
-  vfs_.mount(std::move(mountPoint), backends_.create(backendType, options));
+void VfsRuntime::mount(std::string mountPoint, const std::string& backendType, const BackendOptions& options,
+                       std::string configPath) {
+  registerMount({}, std::move(mountPoint), backendType, options, std::move(configPath),
+                backends_.create(backendType, options));
 }
 
 void VfsRuntime::mountVariable(std::string variableName, std::string mountPoint,
-                               std::shared_ptr<IFileSystem> fileSystem) {
-  resolver_.bind(variableName, mountPoint);
-  vfs_.mount(std::move(mountPoint), std::move(fileSystem));
+                               std::shared_ptr<IFileSystem> fileSystem, std::string configPath) {
+  registerMount(std::move(variableName), std::move(mountPoint), {}, {}, std::move(configPath), std::move(fileSystem));
 }
 
 void VfsRuntime::mountVariable(std::string variableName, std::string mountPoint, const std::string& backendType,
-                               const BackendOptions& options) {
-  resolver_.bind(variableName, mountPoint);
-  vfs_.mount(std::move(mountPoint), backends_.create(backendType, options));
+                               const BackendOptions& options, std::string configPath) {
+  registerMount(std::move(variableName), std::move(mountPoint), backendType, options, std::move(configPath),
+                backends_.create(backendType, options));
 }
 
 void VfsRuntime::bindVariable(std::string variableName, std::string logicalMountPoint) {
@@ -986,6 +990,29 @@ std::unique_ptr<std::ostream> VfsRuntime::openWrite(const std::string& path) {
 
 bool VfsRuntime::exists(const std::string& path) const {
   return vfs_.exists(resolver_.expand(path));
+}
+
+std::vector<MountDescriptor> VfsRuntime::listMounts() const {
+  std::lock_guard<std::mutex> lock(*mountsMutex_);
+  return mounts_;
+}
+
+void VfsRuntime::registerMount(std::string variableName, std::string mountPoint, std::string backendType,
+                               BackendOptions options, std::string configPath,
+                               std::shared_ptr<IFileSystem> fileSystem) {
+  const std::string normalizedMountPoint = VirtualFileSystem::normalizeLogicalPath(mountPoint);
+  const std::string normalizedVariableName =
+      variableName.empty() ? std::string() : normalizeVariableName(variableName);
+
+  if (!normalizedVariableName.empty()) {
+    resolver_.bind(normalizedVariableName, normalizedMountPoint);
+  }
+  vfs_.mount(normalizedMountPoint, fileSystem);
+
+  std::lock_guard<std::mutex> lock(*mountsMutex_);
+  mounts_.push_back(
+      MountDescriptor{normalizedVariableName, normalizedMountPoint, std::move(backendType), std::move(options),
+                      std::move(configPath), std::move(fileSystem)});
 }
 
 }  // namespace avfs

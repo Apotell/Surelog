@@ -24,6 +24,7 @@
 #include <filesystem>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <unordered_map>
@@ -37,12 +38,22 @@ namespace SURELOG {
 class SymbolTable;
 
 class AvfsFileSystem final : public FileSystem {
+  // AVFS owns mount registration and managed file I/O.
+  // PlatformFileSystem remains required to satisfy the wider legacy FileSystem
+  // contract for host-path translation, working-directory handling, directory
+  // traversal, and filesystem mutations outside the current VfsRuntime API.
  public:
   struct MountInfo final {
+    // Bare AVFS variable name without the leading '$', e.g. "DataDir".
+    // AvfsFileSystem derives the logical mount point as "/<m_variableName>".
     std::string m_variableName;
+    // Backend registry key, e.g. "platform", "memory", or "tar".
     std::string m_backendType;
+    // Backend root option passed to AVFS. For platform mounts this is the host root.
     std::string m_root;
+    // Backend-specific properties forwarded to the AVFS backend factory.
     std::unordered_map<std::string, std::string> m_properties;
+    // Source JSON config that registered this mount, if any.
     std::filesystem::path m_configPath;
   };
 
@@ -144,18 +155,6 @@ class AvfsFileSystem final : public FileSystem {
   void printConfiguration(std::ostream& out) override;
 
  private:
-  struct MountRegistration final {
-    // The AVFS variable name exposed to Surelog paths, e.g. "$DataDir".
-    std::string m_variableName;
-    std::string m_backendType;
-    std::string m_root;
-    std::unordered_map<std::string, std::string> m_properties;
-    std::filesystem::path m_configPath;
-    // The host path used for platform-backed path translation.
-    std::filesystem::path m_platformRoot;
-  };
-
-  using MountRegistrations = std::vector<MountRegistration>;
   using InputStreams = std::vector<std::unique_ptr<std::istream>>;
   using OutputStreams = std::vector<std::unique_ptr<std::ostream>>;
 
@@ -166,18 +165,17 @@ class AvfsFileSystem final : public FileSystem {
   std::filesystem::path resolveManagedPath(std::string_view path) const;
   PathId translateToPlatformPathId(PathId id) const;
   PathId translateFromPlatformPathId(PathId id, SymbolTable* symbolTable) const;
-  const MountRegistration* findMountByVariable(std::string_view variableName) const;
-  const MountRegistration* findMountForPlatformPath(const std::filesystem::path& path) const;
-  std::string makeManagedPath(const MountRegistration& mount, const std::filesystem::path& path) const;
+  std::optional<MountInfo> findMountByVariable(std::string_view variableName) const;
+  std::optional<MountInfo> findMountForPlatformPath(const std::filesystem::path& path) const;
+  std::string makeManagedPath(const MountInfo& mount, const std::filesystem::path& path) const;
   std::istream& openManagedInput(std::string_view filepath, std::ios_base::openmode mode);
   std::ostream& openManagedOutput(std::string_view filepath, std::ios_base::openmode mode);
   std::filesystem::path resolveInputPath(std::string_view path) const;
+  std::filesystem::path getPlatformRoot(const MountInfo& mount) const;
 
   // AVFS still adapts legacy FileSystem APIs that require host-visible paths.
   std::unique_ptr<PlatformFileSystem> m_platform;
   std::unique_ptr<avfs::VfsRuntime> m_runtime;
-  mutable std::mutex m_mountsMutex;
-  MountRegistrations m_mounts;
   std::mutex m_inputStreamsMutex;
   std::mutex m_outputStreamsMutex;
   InputStreams m_inputStreams;

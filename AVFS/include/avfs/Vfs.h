@@ -140,6 +140,15 @@ struct BackendOptions {
   std::unordered_map<std::string, std::string> properties;
 };
 
+struct MountDescriptor final {
+  std::string variableName;
+  std::string mountPoint;
+  std::string backendType;
+  BackendOptions options;
+  std::string configPath;
+  std::shared_ptr<IFileSystem> fileSystem;
+};
+
 class BackendRegistry final {
  public:
   using Factory = std::function<std::shared_ptr<IFileSystem>(const BackendOptions&)>;
@@ -191,12 +200,14 @@ class LegacyPathResolver final {
 
 class VfsRuntime final {
  public:
-  void mount(std::string mountPoint, std::shared_ptr<IFileSystem> fileSystem);
-  void mount(std::string mountPoint, const std::string& backendType, const BackendOptions& options);
+  void mount(std::string mountPoint, std::shared_ptr<IFileSystem> fileSystem, std::string configPath = {});
+  void mount(std::string mountPoint, const std::string& backendType, const BackendOptions& options,
+             std::string configPath = {});
 
-  void mountVariable(std::string variableName, std::string mountPoint, std::shared_ptr<IFileSystem> fileSystem);
+  void mountVariable(std::string variableName, std::string mountPoint, std::shared_ptr<IFileSystem> fileSystem,
+                     std::string configPath = {});
   void mountVariable(std::string variableName, std::string mountPoint, const std::string& backendType,
-                     const BackendOptions& options);
+                     const BackendOptions& options, std::string configPath = {});
 
   void bindVariable(std::string variableName, std::string logicalMountPoint);
   std::string expandPath(const std::string& path) const;
@@ -204,6 +215,7 @@ class VfsRuntime final {
   std::unique_ptr<std::istream> openRead(const std::string& path) const;
   std::unique_ptr<std::ostream> openWrite(const std::string& path);
   bool exists(const std::string& path) const;
+  std::vector<MountDescriptor> listMounts() const;
 
   BackendRegistry& backends() { return backends_; }
   const BackendRegistry& backends() const { return backends_; }
@@ -212,9 +224,14 @@ class VfsRuntime final {
   const VirtualFileSystem& vfs() const { return vfs_; }
 
  private:
+  void registerMount(std::string variableName, std::string mountPoint, std::string backendType, BackendOptions options,
+                     std::string configPath, std::shared_ptr<IFileSystem> fileSystem);
+
   BackendRegistry backends_ = BackendRegistry::withDefaults();
   VirtualFileSystem vfs_;
   LegacyPathResolver resolver_;
+  std::vector<MountDescriptor> mounts_;
+  std::shared_ptr<std::mutex> mountsMutex_ = std::make_shared<std::mutex>();
 };
 
 }  // namespace avfs

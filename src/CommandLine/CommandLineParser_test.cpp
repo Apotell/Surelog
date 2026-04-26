@@ -227,6 +227,44 @@ TEST(CommandLineParserTest, AvfsRelativeWdResolvesFromFilesystemWorkingDir) {
   EXPECT_FALSE(ec) << ec;
 }
 
+TEST(CommandLineParserTest, AvfsMountCdResolvesRelativeToLastWd) {
+  std::error_code ec;
+  const fs::path programPath = PlatformFileSystem::getProgramPath().string();
+  const fs::path testdir = PlatformFileSystem::normalize(testing::TempDir()) / "avfs-mount-relative-cd";
+  const fs::path rtlDir = testdir / "rtl";
+  const fs::path nestedDir = rtlDir / "nested";
+  const fs::path filepath = nestedDir / "dut.sv";
+
+  fs::remove_all(testdir, ec);
+  fs::create_directories(nestedDir, ec);
+  ASSERT_FALSE(ec) << ec;
+
+  {
+    std::ofstream strm(filepath);
+    ASSERT_TRUE(strm.is_open());
+    strm << "module top; endmodule\n";
+  }
+
+  const std::vector<std::string> args{
+      programPath.string(), "-nostdout", "-wd", "rtl", "-cd", "inc", "-cd", "nested", "-mount", "RTL", ".", "dut.sv"};
+  std::vector<const char*> cargs;
+  cargs.reserve(args.size());
+  std::transform(args.begin(), args.end(), std::back_inserter(cargs),
+                 [](const std::string& arg) { return arg.c_str(); });
+
+  Session session(new AvfsFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
+  FileSystem* const fileSystem = session.getFileSystem();
+  CommandLineParser* const clp = session.getCommandLineParser();
+
+  ASSERT_TRUE(session.parseCommandLine(cargs.size(), cargs.data(), false, false));
+  ASSERT_EQ(clp->getSourceFiles().size(), 1);
+  EXPECT_EQ(fileSystem->toPath(clp->getSourceFiles().front()), "$RTL/dut.sv");
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(clp->getSourceFiles().front()), filepath);
+
+  fs::remove_all(testdir, ec);
+  EXPECT_FALSE(ec) << ec;
+}
+
 TEST(CommandLineParserTest, WorkingDirectories1) {
   // Trivial case: One root working directory and many relative sub directories
   //

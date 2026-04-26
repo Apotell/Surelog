@@ -945,7 +945,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode
         }
 
         fs::path dir = PlatformFileSystem::normalize(cmd_line[++i]);
-        mountCd = dir.is_relative() ? PlatformFileSystem::normalize(mountCd / dir) : dir;
+        mountCd = dir.is_relative() ? PlatformFileSystem::normalize(mountWd / dir) : dir;
       } else if (argument == "-mount") {
         Location loc(symbols->registerSymbol(argument));
         const size_t mountArgCount = getMountArgumentCount(cmd_line, i);

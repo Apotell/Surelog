@@ -68,6 +68,24 @@ TEST(AvfsFileSystemTest, ReadWriteOperationsGoThroughFilesystemAbstraction) {
   fs::remove_all(testdir, ec);
 }
 
+TEST(AvfsFileSystemTest, AbsoluteNativePathsAreCanonicalizedToManagedPaths) {
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-managed-only");
+  const fs::path filepath = testdir / "nested" / "file.sv";
+
+  std::error_code ec;
+  fs::remove_all(testdir, ec);
+
+  std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
+  std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
+
+  const PathId fileId = fileSystem->toPathId(filepath.string(), symbolTable.get());
+  ASSERT_NE(fileId, BadPathId);
+  EXPECT_FALSE(fileSystem->toPath(fileId).empty());
+  EXPECT_EQ(fileSystem->toPath(fileId).front(), '$');
+  EXPECT_NE(fileSystem->toPath(fileId), filepath.string());
+  EXPECT_EQ(fileSystem->toPlatformAbsPath(fileId), filepath);
+}
+
 TEST(AvfsFileSystemTest, RegisteredMountStoresPathsUsingVariables) {
   const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-mounted-fs");
   const fs::path filepath = testdir / "logs" / "abc.log";
@@ -145,6 +163,27 @@ TEST(AvfsFileSystemTest, GenericBackendMountRegistrationPreservesConfiguration) 
   EXPECT_EQ(mounts.front().m_backendType, "memory");
   EXPECT_TRUE(mounts.front().m_root.empty());
   EXPECT_TRUE(mounts.front().m_configPath.empty());
+
+  fs::remove_all(testdir, ec);
+}
+
+TEST(AvfsFileSystemTest, ConfigBackedMountPreservesConfigPathInRuntimeMetadata) {
+  const fs::path testdir = PlatformFileSystem::normalize(fs::path(testing::TempDir()) / "avfs-config-backed");
+  const fs::path configPath = testdir / "mounts.json";
+  std::error_code ec;
+  fs::remove_all(testdir, ec);
+  fs::create_directories(testdir, ec);
+  ASSERT_FALSE(ec);
+
+  std::unique_ptr<AvfsFileSystem> fileSystem(new AvfsFileSystem(testdir));
+
+  ASSERT_TRUE(fileSystem->registerMount("DataDir", "platform", testdir.string(), {}, configPath));
+  const auto mounts = fileSystem->getMounts();
+  ASSERT_EQ(mounts.size(), 1);
+  EXPECT_EQ(mounts.front().m_variableName, "DataDir");
+  EXPECT_EQ(mounts.front().m_backendType, "platform");
+  EXPECT_EQ(mounts.front().m_root, testdir.string());
+  EXPECT_EQ(mounts.front().m_configPath, configPath);
 
   fs::remove_all(testdir, ec);
 }

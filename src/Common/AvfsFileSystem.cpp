@@ -36,6 +36,12 @@ namespace SURELOG {
 
 namespace {
 
+// HS: You re making your life too hard with these many different ways of representing paths.
+// There should be one and only one rule. All paths start with "$prefix". Any other way is an error.
+// Backends are registerd as a map of "$prefix" ==> specific backend.
+// Regardless, of the platform, all paths elements are separated by "/", not "\\". If you find a
+// backslash, it's an error.
+
 constexpr std::string_view kInternalPlatformRootVariable = "__sl_root";
 
 bool isInternalMountVariable(std::string_view variableName) { return variableName == kInternalPlatformRootVariable; }

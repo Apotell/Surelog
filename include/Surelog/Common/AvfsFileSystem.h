@@ -46,20 +46,37 @@ class AvfsFileSystem final : public FileSystem {
   struct MountInfo final {
     // Bare AVFS variable name without the leading '$', e.g. "DataDir".
     // AvfsFileSystem derives the logical mount point as "/<m_variableName>".
+    // HS: Why does this not include the "$" prefix. Paths are not /variable-name.
+    // They should be $variable-name/. The virtual paths are not rooted with "/".
+    // The "$variable-name" is the root.
     std::string m_variableName;
     // Backend registry key, e.g. "platform", "memory", or "tar".
     std::string m_backendType;
     // Backend root option passed to AVFS. For platform mounts this is the host root.
     std::string m_root;
     // Backend-specific properties forwarded to the AVFS backend factory.
+    // HS: Assuming this is content loaded from m_configPath. If it is not then
+    // what does this hold, and if it is then this should be std::map<std::string, std::any>
+    // to keep it flexible.
     std::unordered_map<std::string, std::string> m_properties;
     // Source JSON config that registered this mount, if any.
+    // HS: VFS shouldn't be responsible for loading this configuraiton.
+    // With filesystem::path object here you are once again assuming that VFS
+    // has access to such a local/platform/native filesystem. Instead Accept the
+    // configuration as a dictionary/map. Use std::map<string, std::any> to make it
+    // generic.
     std::filesystem::path m_configPath;
   };
 
   explicit AvfsFileSystem(const std::filesystem::path& workingDir);
   ~AvfsFileSystem() override;
 
+  // HS: What's the difference between variableName & root. If root is filesystem::path then it
+  // should be sent down to the appropriate backend type as part of the properties. Why a separate
+  // arg? Ideally, there should be one registration path -
+  // bool mount(std::string type, std::string_view name, cons std::map<std::string_view, std::any> &config);
+  // As part of the implementation, you create an instance of the backend based on type and pass
+  // both name and config to initialize.
   bool registerMount(std::string_view variableName, const std::filesystem::path& root);
   bool registerMount(std::string_view variableName, std::string_view backendType, std::string_view root,
                      const std::unordered_map<std::string, std::string>& properties = {},
@@ -174,6 +191,13 @@ class AvfsFileSystem final : public FileSystem {
   std::filesystem::path getPlatformRoot(const MountInfo& mount) const;
 
   // AVFS still adapts legacy FileSystem APIs that require host-visible paths.
+  // HS: What API are we talking about here? All available APIs should be
+  // updated to use VFS. If either case, if absolutely needed, the platform
+  // system should one of the registered backend system, and not an explicit
+  // instance maintained by the VFS. If the configuraiton dictates a platform
+  // specific filesystem, you don't want to end up with two instances of the
+  // same filesystem (nothing wrong with having two platform specific filesystems
+  // but this specific use-case seems to be wrong).
   std::unique_ptr<PlatformFileSystem> m_platform;
   std::unique_ptr<avfs::VfsRuntime> m_runtime;
   std::mutex m_inputStreamsMutex;

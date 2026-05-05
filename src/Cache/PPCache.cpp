@@ -218,6 +218,25 @@ bool PPCache::checkCacheIsValid(PathId cacheFileId) const {
   if (clp->parseOnly() || clp->lowMem()) return true;
   if (m_pp->isMacroBody()) return false;
 
+  // HS: Previous implementation was bad. You made is worse!
+  // Old implementation was using "fd" style API - old and clunky with reported
+  // security and buffer overflow issues and most importantly assuming that it can
+  // read a file from disk.
+  // Your solution is load the entire file content in a buffer, making fragmentation
+  // a serious concern. For large design files, this is a very bad solution.
+  // An optimal solution is to implement a subclass of kj::InputStream that uses
+  // the VFS system to read the file. Then you can pass an instance of the subclass
+  // to kj::BufferedInputStreamWrapper and take advantage of buffering also. With this
+  // solution, you don't need to know whether the file is on disk or being wired in
+  // from a remote server because that detail is hidden away in VFS implementation.
+  //
+  // Also, this function loads the file purely for the purpose of checking its validity.
+  // We don't need to load the entire file at all. We just need a handful of bytes to
+  // decide whether it is valid or not. The backend kj/capnp has number of APIs to prevent
+  // having to load the entire file.
+  //
+  // This comment applies to all changes to read/write the content in this file and other
+  // cache related files.
   FileSystem* const fileSystem = m_session->getFileSystem();
   std::vector<char> packedBytes;
   if (!fileSystem->loadContent(cacheFileId, packedBytes)) return false;

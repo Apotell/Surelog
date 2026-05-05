@@ -117,6 +117,11 @@ class FileSystem {
   // Returns a host-platform path that can be used with OS/file APIs.
   // These adapters remain part of the common interface for callers that truly
   // need an OS-visible path, but not every backend can provide one.
+  // HS: Like what? Any dependency on platform specific path (except executable path)
+  // in rest of the source code is WRONG and should be fixed. Nothing in the reset of the
+  // source code should assme that there's a native filesystem and it has access to
+  // access to read/write to it. Think of a launch on a server-less machine with no
+  // absolutely no hard-drive and access restricted to tmp folder only.
   virtual bool canResolveToPlatformPath(PathId id) = 0;
   virtual std::filesystem::path toPlatformAbsPath(PathId id) = 0;
   virtual std::filesystem::path toPlatformRelPath(PathId id) = 0;
